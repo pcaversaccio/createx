@@ -1,0 +1,39 @@
+name: 🕵️‍♂️ Test smart contracts
+
+on: [push, pull_request]
+
+concurrency:
+  group: ${{github.workflow}}-${{github.ref}}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Show the Foundry default config
+        run: forge config
+        env:
+          FOUNDRY_PROFILE: default
+
+      - name: Foundry tests
+        run: forge test
+
+      - name: Run snapshot
+        run: NO_COLOR=1 forge snapshot >> $GITHUB_STEP_SUMMARY
+        env:
+          FOUNDRY_PROFILE: default
