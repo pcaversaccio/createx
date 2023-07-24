@@ -324,16 +324,17 @@ contract CreateXDeployer {
     /**
      * @dev Returns the address where a contract will be stored if deployed via `deployer`
      * using the `CREATE2` opcode. Any change in the `initCodeHash` or `salt` values will
-     * result in a new destination address.
+     * result in a new destination address. This implementation is based on OpenZeppelin:
+     * https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Create2.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCodeHash The 32-byte bytecode digest of the contract creation bytecode.
      * @param deployer The 20-byte deployer address.
-     * @return newContract The 20-byte address where a contract will be stored.
+     * @return computedAddress The 20-byte address where a contract will be stored.
      */
     function computeCreate2Address(bytes32 salt, bytes32 initCodeHash, address deployer)
         public
         pure
-        returns (address newContract)
+        returns (address computedAddress)
     {
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
@@ -342,7 +343,7 @@ contract CreateXDeployer {
             mstore(add(ptr, 0x20), salt)
             mstore(ptr, deployer)
             let start := add(ptr, 0x0b)
-            newContract := keccak256(start, 85)
+            computedAddress := keccak256(start, 85)
         }
     }
 
@@ -352,9 +353,9 @@ contract CreateXDeployer {
      * result in a new destination address.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCodeHash The 32-byte bytecode digest of the contract creation bytecode.
-     * @return newContract The 20-byte address where a contract will be stored.
+     * @return computedAddress The 20-byte address where a contract will be stored.
      */
-    function computeCreate2Address(bytes32 salt, bytes32 initCodeHash) public view returns (address newContract) {
+    function computeCreate2Address(bytes32 salt, bytes32 initCodeHash) public view returns (address computedAddress) {
         return computeCreate2Address(salt, initCodeHash, address(this));
     }
 
@@ -363,7 +364,7 @@ contract CreateXDeployer {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
-     * @dev Deploys using a frontrun guard a new contract via using the `CREATE3` pattern
+     * @dev Deploys, using a frontrun guard, a new contract via employing the `CREATE3` pattern
      * (i.e. without an initcode factor) and using the salt value `salt`, the creation
      * bytecode `initCode`, and `msg.value` as inputs. In order to save deployment costs,
      * we do not sanity check the `initCode` length. Note that if `msg.value` is non-zero,
@@ -374,7 +375,7 @@ contract CreateXDeployer {
      * @return newContract The 20-byte address where the contract was deployed.
      */
     function deployCreate3(bytes32 salt, bytes calldata initCode)
-        external
+        public
         payable
         onlyMsgSender(salt)
         returns (address newContract)
@@ -390,12 +391,12 @@ contract CreateXDeployer {
 
         newContract = computeCreate3Address(salt);
         (bool success,) = proxy.call{value: msg.value}(initCode);
-        if (!success && newContract.code.length != 0) revert FailedContractCreation(address(this));
+        if (!success || newContract.code.length != 0) revert FailedContractCreation(address(this));
         emit ContractCreation(newContract);
     }
 
     /**
-     * @dev Deploys and initialises using a frontrun guard a new contract via using the
+     * @dev Deploys and initialises, using a frontrun guard, a new contract via employing the
      * `CREATE3` pattern (i.e. without an initcode factor) and using the salt value `salt`,
      * the creation bytecode `initCode`, `msg.value`, and initialisation code `data` as inputs.
      * In order to save deployment costs, we do not sanity check the `initCode` length. Note
@@ -411,7 +412,7 @@ contract CreateXDeployer {
      * level that potentially malicious reentrant calls do not affect your smart contract system.
      */
     function deployCreate3AndInit(bytes32 salt, bytes calldata initCode, bytes calldata data)
-        external
+        public
         payable
         onlyMsgSender(salt)
         returns (address newContract)
@@ -427,7 +428,7 @@ contract CreateXDeployer {
 
         newContract = computeCreate3Address(salt);
         (bool success,) = proxy.call{value: msg.value}(initCode);
-        if (!success && newContract.code.length != 0) revert FailedContractCreation(address(this));
+        if (!success || newContract.code.length != 0) revert FailedContractCreation(address(this));
         emit ContractCreation(newContract);
 
         // solhint-disable-next-line avoid-low-level-calls
@@ -442,32 +443,32 @@ contract CreateXDeployer {
      * https://github.com/Vectorized/solady/blob/main/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param deployer The 20-byte deployer address.
-     * @return newContract The 20-byte address where a contract will be stored.
+     * @return computedAddress The 20-byte address where a contract will be stored.
      */
-    function computeCreate3Address(bytes32 salt, address deployer) public pure returns (address newContract) {
+    function computeCreate3Address(bytes32 salt, address deployer) public pure returns (address computedAddress) {
         assembly ("memory-safe") {
-            let m := mload(0x40)
+            let ptr := mload(0x40)
             mstore(0x00, deployer)
             mstore8(0x0b, 0xff)
             mstore(0x20, salt)
             mstore(0x40, hex"21c35dbe1b344a2488cf3321d6ce542f8e9f305544ff09e4993a62319a497c1f")
             mstore(0x14, keccak256(0x0b, 0x55))
-            mstore(0x40, m)
+            mstore(0x40, ptr)
             mstore(0x00, 0xd694)
             mstore8(0x34, 0x01)
-            newContract := keccak256(0x1e, 0x17)
+            computedAddress := keccak256(0x1e, 0x17)
         }
     }
 
     /**
-     * @dev Returns the address where a contract will be stored if deployed via `deployer`
+     * @dev Returns the address where a contract will be stored if deployed via this contract
      * using the `CREATE3` pattern (i.e. without an initcode factor). Any change in the `salt`
      * value will result in a new destination address. This implementation is based on Solady:
      * https://github.com/Vectorized/solady/blob/main/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
-     * @return newContract The 20-byte address where a contract will be stored.
+     * @return computedAddress The 20-byte address where a contract will be stored.
      */
-    function computeCreate3Address(bytes32 salt) public view returns (address newContract) {
+    function computeCreate3Address(bytes32 salt) public view returns (address computedAddress) {
         return computeCreate3Address(salt, address(this));
     }
 }
