@@ -391,7 +391,7 @@ contract CreateXDeployer {
 
         newContract = computeCreate3Address(salt);
         (bool success,) = proxy.call{value: msg.value}(initCode);
-        if (!success || newContract.code.length != 0) revert FailedContractCreation(address(this));
+        if (!success || newContract.code.length == 0) revert FailedContractCreation(address(this));
         emit ContractCreation(newContract);
     }
 
@@ -428,7 +428,7 @@ contract CreateXDeployer {
 
         newContract = computeCreate3Address(salt);
         (bool success,) = proxy.call{value: msg.value}(initCode);
-        if (!success || newContract.code.length != 0) revert FailedContractCreation(address(this));
+        if (!success || newContract.code.length == 0) revert FailedContractCreation(address(this));
         emit ContractCreation(newContract);
 
         // solhint-disable-next-line avoid-low-level-calls
