@@ -1,12 +1,29 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity 0.8.20;
 
+/**
+ * @title CreateXDeployer Factory Smart Contract
+ * @author pcaversaccio (https://pcaversaccio.com)
+ * @dev Factory smart contract to make easier and safer usage of the
+ * `CREATE` (https://www.evm.codes/#f0?fork=shanghai) and `CREATE2`
+ * (https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of
+ * `CREATE3`-based (https://github.com/ethereum/EIPs/pull/3171) contract creations.
+ * @custom:security-contact See https://github.com/pcaversaccio/createx-deployer/security/policy.
+ */
 contract CreateXDeployer {
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                           EVENTS                           */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
     /**
      * @dev Event that is emitted when a contract is successfully created.
      * @param newContract The address of the new contract.
      */
     event ContractCreation(address newContract);
+
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                        CUSTOM ERRORS                       */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
      * @dev Error that occurs when the contract creation failed.
@@ -32,6 +49,10 @@ contract CreateXDeployer {
      */
     error InvalidSalt(address emitter);
 
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                           MODIFIERS                        */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
     /**
      * @dev Modifier that prevents redeploying a specific contract to another chain at the same address.
      * @param salt The 32-byte random value used to create the contract address.
@@ -50,9 +71,9 @@ contract CreateXDeployer {
         _;
     }
 
-    /*//////////////////////////////////////////////////////////////
-                                 CREATE
-    //////////////////////////////////////////////////////////////*/
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                           CREATE                           */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
      * @dev Deploys a new contract via calling the `CREATE` opcode and using
@@ -190,9 +211,9 @@ contract CreateXDeployer {
         return computeCreateAddress(address(this), nonce);
     }
 
-    /*//////////////////////////////////////////////////////////////
-                                 CREATE2
-    //////////////////////////////////////////////////////////////*/
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                           CREATE2                          */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
      * @dev Deploys a new contract via calling the `CREATE2` opcode and using
@@ -337,9 +358,9 @@ contract CreateXDeployer {
         return computeCreate2Address(salt, initCodeHash, address(this));
     }
 
-    /*//////////////////////////////////////////////////////////////
-                                 CREATE3
-    //////////////////////////////////////////////////////////////*/
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                           CREATE3                          */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
      * @dev Deploys using a frontrun guard a new contract via using the `CREATE3` pattern

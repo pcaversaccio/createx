@@ -80,4 +80,4 @@ jobs:
       - name: Validate URLs
         run: |
           awesome_bot ./*.md src/*.sol test/*.sol --allow-dupe --request-delay 0.4 \
-          --white-list https://github.com/pcaversaccio/createx-deployer/actions/workflows/test-contracts.yml/badge.svg,https://github.com/pcaversaccio/createx-deployer/actions/workflows/test-contracts.yml
+          --white-list https://github.com/pcaversaccio/createx-deployer/actions/workflows/test-contracts.yml/badge.svg,https://github.com/pcaversaccio/createx-deployer/actions/workflows/test-contracts.yml,https://github.com/pcaversaccio/createx-deployer/security/policy
