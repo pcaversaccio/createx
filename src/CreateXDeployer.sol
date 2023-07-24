@@ -346,7 +346,8 @@ contract CreateXDeployer {
      * (i.e. without an initcode factor) and using the salt value `salt`, the creation
      * bytecode `initCode`, and `msg.value` as inputs. In order to save deployment costs,
      * we do not sanity check the `initCode` length. Note that if `msg.value` is non-zero,
-     * `initCode` must have a `payable` constructor.
+     * `initCode` must have a `payable` constructor. This implementation is based on Solmate:
+     * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
@@ -377,7 +378,9 @@ contract CreateXDeployer {
      * `CREATE3` pattern (i.e. without an initcode factor) and using the salt value `salt`,
      * the creation bytecode `initCode`, `msg.value`, and initialisation code `data` as inputs.
      * In order to save deployment costs, we do not sanity check the `initCode` length. Note
-     * that if `msg.value` is non-zero, `initCode` must have a `payable` constructor.
+     * that if `msg.value` is non-zero, `initCode` must have a `payable` constructor. This
+     * implementation is based on Solmate:
+     * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
