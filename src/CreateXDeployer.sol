@@ -3,6 +3,12 @@ pragma solidity 0.8.20;
 
 contract CreateXDeployer {
     /**
+     * @dev Event that is emitted when a contract is successfully created.
+     * @param newContract The address of the new contract.
+     */
+    event ContractCreation(address newContract);
+
+    /**
      * @dev Error that occurs when the contract creation failed.
      * @param emitter The contract that emits the error.
      */
@@ -21,10 +27,28 @@ contract CreateXDeployer {
     error InvalidNonceValue(address emitter);
 
     /**
-     * @dev Event that is emitted when a contract is successfully created.
-     * @param newContract The address of the new contract.
+     * @dev Error that occurs when the salt value is invalid.
+     * @param emitter The contract that emits the error.
      */
-    event ContractCreation(address newContract);
+    error InvalidSalt(address emitter);
+
+    /**
+     * @dev Modifier that prevents redeploying a specific contract to another chain at the same address.
+     * @param salt The 32-byte random value used to create the contract address.
+     */
+    modifier guard(bytes32 salt) {
+        salt = keccak256(abi.encode(msg.sender, block.chainid, salt));
+        _;
+    }
+
+    /**
+     * @dev Modifier that ensures that the first 20 bytes of a submitted salt match those of the calling account.
+     * @param salt The 32-byte random value used to create the contract address.
+     */
+    modifier onlyMsgSender(bytes32 salt) {
+        if (address(bytes20(salt)) != msg.sender) revert InvalidSalt(address(this));
+        _;
+    }
 
     /*//////////////////////////////////////////////////////////////
                                  CREATE
@@ -38,7 +62,7 @@ contract CreateXDeployer {
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
      */
-    function deployCreate(bytes memory initCode) external payable returns (address newContract) {
+    function deployCreate(bytes memory initCode) public payable returns (address newContract) {
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             newContract := create(callvalue(), add(initCode, 0x20), mload(initCode))
@@ -49,9 +73,10 @@ contract CreateXDeployer {
 
     /**
      * @dev Deploys and initialises a new contract via calling the `CREATE` opcode and
-     * using the creation bytecode `initCode`, `msg.value`, and `data` as inputs. In order
-     * to save deployment costs, we do not sanity check the `initCode` length. Note that
-     * if `msg.value` is non-zero, `initCode` must have a `payable` constructor.
+     * using the creation bytecode `initCode`, `msg.value`, and the initialisation code
+     * `data` as inputs. In order to save deployment costs, we do not sanity check the
+     * `initCode` length. Note that if `msg.value` is non-zero, `initCode` must have a
+     * `payable` constructor.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
      * @return newContract The 20-byte address where the contract was deployed.
@@ -60,7 +85,7 @@ contract CreateXDeployer {
      * level that potentially malicious reentrant calls do not affect your smart contract system.
      */
     function deployCreateAndInit(bytes memory initCode, bytes calldata data)
-        external
+        public
         payable
         returns (address newContract)
     {
@@ -164,4 +189,155 @@ contract CreateXDeployer {
     function computeCreateAddress(uint256 nonce) public view returns (address computedAddress) {
         return computeCreateAddress(address(this), nonce);
     }
+
+    /*//////////////////////////////////////////////////////////////
+                                 CREATE2
+    //////////////////////////////////////////////////////////////*/
+
+    /**
+     * @dev Deploys a new contract via calling the `CREATE2` opcode and using
+     * the salt value `salt`, the creation bytecode `initCode`, and `msg.value` as
+     * inputs. In order to save deployment costs, we do not sanity check the `initCode`
+     * length. Note that if `msg.value` is non-zero, `initCode` must have a `payable`
+     * constructor.
+     * @param salt The 32-byte random value used to create the contract address.
+     * @param initCode The creation bytecode.
+     * @return newContract The 20-byte address where the contract was deployed.
+     */
+    function deployCreate2(bytes32 salt, bytes memory initCode) public payable returns (address newContract) {
+        // solhint-disable-next-line no-inline-assembly
+        assembly ("memory-safe") {
+            newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
+        }
+        if (newContract == address(0)) revert FailedContractCreation(address(this));
+        emit ContractCreation(newContract);
+    }
+
+    /**
+     * @dev Deploys and initialises a new contract via calling the `CREATE2` opcode and
+     * using the salt value `salt`, the creation bytecode `initCode`, `msg.value`, and
+     * initialisation code `data` as inputs. In order to save deployment costs, we do not
+     * sanity check the `initCode` length. Note that if `msg.value` is non-zero, `initCode`
+     * must have a `payable` constructor.
+     * @param salt The 32-byte random value used to create the contract address.
+     * @param initCode The creation bytecode.
+     * @param data The initialisation code that is passed to the deployed contract.
+     * @return newContract The 20-byte address where the contract was deployed.
+     * @custom:security This function allows for reentrancy, however we refrain from adding
+     * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
+     * level that potentially malicious reentrant calls do not affect your smart contract system.
+     */
+    function deployCreate2AndInit(bytes32 salt, bytes memory initCode, bytes calldata data)
+        public
+        payable
+        returns (address newContract)
+    {
+        // solhint-disable-next-line no-inline-assembly
+        assembly ("memory-safe") {
+            newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
+        }
+        if (newContract == address(0)) revert FailedContractCreation(address(this));
+        emit ContractCreation(newContract);
+
+        // solhint-disable-next-line avoid-low-level-calls
+        (bool success,) = newContract.call(data);
+        if (!success) revert FailedContractInitialisation(address(this));
+    }
+
+    /**
+     * @dev Deploys a guarded (i.e. prevents the redeployment to other chains) new contract
+     * via calling the `CREATE2` opcode and using the salt value `salt`, the creation bytecode
+     * `initCode`, and `msg.value` as inputs. In order to save deployment costs, we do not sanity
+     * check the `initCode` length. Note that if `msg.value` is non-zero, `initCode` must have
+     * a `payable` constructor.
+     * @param salt The 32-byte random value used to create the contract address.
+     * @param initCode The creation bytecode.
+     * @return newContract The 20-byte address where the contract was deployed.
+     */
+    function deployCreate2Guarded(bytes32 salt, bytes memory initCode)
+        public
+        payable
+        guard(salt)
+        returns (address newContract)
+    {
+        // solhint-disable-next-line no-inline-assembly
+        assembly ("memory-safe") {
+            newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
+        }
+        if (newContract == address(0)) revert FailedContractCreation(address(this));
+        emit ContractCreation(newContract);
+    }
+
+    /**
+     * @dev Deploys and initialises a guarded (i.e. prevents the redeployment to other chains)
+     * new contract via calling the `CREATE2` opcode and using the salt value `salt`, the creation
+     * bytecode `initCode`, `msg.value`, and initialisation code `data` as inputs. In order to save
+     * deployment costs, we do not sanity check the `initCode` length. Note that if `msg.value` is
+     * non-zero, `initCode` must have a `payable` constructor.
+     * @param salt The 32-byte random value used to create the contract address.
+     * @param initCode The creation bytecode.
+     * @param data The initialisation code that is passed to the deployed contract.
+     * @return newContract The 20-byte address where the contract was deployed.
+     * @custom:security This function allows for reentrancy, however we refrain from adding
+     * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
+     * level that potentially malicious reentrant calls do not affect your smart contract system.
+     */
+    function deployCreate2AndInitGuarded(bytes32 salt, bytes memory initCode, bytes memory data)
+        public
+        payable
+        guard(salt)
+        returns (address newContract)
+    {
+        // solhint-disable-next-line no-inline-assembly
+        assembly ("memory-safe") {
+            newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
+        }
+        if (newContract == address(0)) revert FailedContractCreation(address(this));
+        emit ContractCreation(newContract);
+
+        // solhint-disable-next-line avoid-low-level-calls
+        (bool success,) = newContract.call(data);
+        if (!success) revert FailedContractInitialisation(address(this));
+    }
+
+    /**
+     * @dev Returns the address where a contract will be stored if deployed via `deployer`
+     * using the `CREATE2` opcode. Any change in the `initCodeHash` or `salt` values will
+     * result in a new destination address.
+     * @param salt The 32-byte random value used to create the contract address.
+     * @param initCodeHash The 32-byte bytecode digest of the contract creation bytecode.
+     * @param deployer The 20-byte deployer address.
+     * @return newContract The 20-byte address where the contract was deployed.
+     */
+    function computeCreate2Address(bytes32 salt, bytes32 initCodeHash, address deployer)
+        public
+        pure
+        returns (address newContract)
+    {
+        // solhint-disable-next-line no-inline-assembly
+        assembly ("memory-safe") {
+            let ptr := mload(0x40)
+            mstore(add(ptr, 0x40), initCodeHash)
+            mstore(add(ptr, 0x20), salt)
+            mstore(ptr, deployer)
+            let start := add(ptr, 0x0b)
+            newContract := keccak256(start, 85)
+        }
+    }
+
+    /**
+     * @dev Returns the address where a contract will be stored if deployed via this contract
+     * using the `CREATE2` opcode. Any change in the `initCodeHash` or `salt` values will
+     * result in a new destination address.
+     * @param salt The 32-byte random value used to create the contract address.
+     * @param initCodeHash The 32-byte bytecode digest of the contract creation bytecode.
+     * @return newContract The 20-byte address where the contract was deployed.
+     */
+    function computeCreate2Address(bytes32 salt, bytes32 initCodeHash) public view returns (address newContract) {
+        return computeCreate2Address(salt, initCodeHash, address(this));
+    }
+
+    /*//////////////////////////////////////////////////////////////
+                                 CREATE3
+    //////////////////////////////////////////////////////////////*/
 }
