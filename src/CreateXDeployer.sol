@@ -50,11 +50,12 @@ contract CreateXDeployer {
     error InvalidSalt(address emitter);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
-    /*                           MODIFIERS                        */
+    /*                          MODIFIERS                         */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
-     * @dev Modifier that prevents redeploying a specific contract to another chain at the same address.
+     * @dev Modifier that prevents redeploying a specific contract to another chain
+     * at the same address.
      * @param salt The 32-byte random value used to create the contract address.
      */
     modifier guard(bytes32 salt) {
@@ -63,7 +64,8 @@ contract CreateXDeployer {
     }
 
     /**
-     * @dev Modifier that ensures that the first 20 bytes of a submitted salt match those of the calling account.
+     * @dev Modifier that ensures that the first 20 bytes of a submitted salt match
+     * those of the calling account.
      * @param salt The 32-byte random value used to create the contract address.
      */
     modifier onlyMsgSender(bytes32 salt) {
