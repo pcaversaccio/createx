@@ -11,6 +11,14 @@ pragma solidity 0.8.21;
  * @custom:security-contact See https://github.com/pcaversaccio/createx-deployer/security/policy.
  */
 contract CreateXDeployer {
+    /**
+     * @dev Struct for the `payable` amounts in a deploy-and-initialise call.
+     */
+    struct Values {
+        uint256 constructorAmount;
+        uint256 initCallAmount;
+    }
+
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                           EVENTS                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
@@ -48,6 +56,12 @@ contract CreateXDeployer {
      * @param emitter The contract that emits the error.
      */
     error InvalidSalt(address emitter);
+
+    /**
+     * @dev Error that occurs when transferring ether has failed.
+     * @param emitter The contract that emits the error.
+     */
+    error EtherTransferFail(address emitter);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                          MODIFIERS                         */
@@ -102,26 +116,38 @@ contract CreateXDeployer {
      * `payable` constructor.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
+     * @param values The specific `payable` amounts for the deployment and initialisation call.
      * @return newContract The 20-byte address where the contract was deployed.
      * @custom:security This function allows for reentrancy, however we refrain from adding
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
      * level that potentially malicious reentrant calls do not affect your smart contract system.
      */
-    function deployCreateAndInit(bytes memory initCode, bytes calldata data)
+    function deployCreateAndInit(bytes memory initCode, bytes calldata data, Values memory values)
         public
         payable
         returns (address newContract)
     {
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
-            newContract := create(callvalue(), add(initCode, 0x20), mload(initCode))
+            newContract := create(mload(values), add(initCode, 0x20), mload(initCode))
         }
         if (newContract == address(0)) revert FailedContractCreation(address(this));
         emit ContractCreation(newContract);
 
         // solhint-disable-next-line avoid-low-level-calls
-        (bool success,) = newContract.call(data);
+        (bool success,) = newContract.call{value: values.initCallAmount}(data);
         if (!success) revert FailedContractInitialisation(address(this));
+
+        uint256 balance = address(this).balance;
+        if (balance != 0) {
+            /**
+             * @dev Any wei amount previously forced into this contract (e.g. by
+             * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
+             */
+            // solhint-disable-next-line avoid-low-level-calls
+            (bool refunded,) = msg.sender.call{value: balance}("");
+            if (!refunded) revert EtherTransferFail(address(this));
+        }
     }
 
     /**
@@ -244,26 +270,38 @@ contract CreateXDeployer {
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
+     * @param values The specific `payable` amounts for the deployment and initialisation call.
      * @return newContract The 20-byte address where the contract was deployed.
      * @custom:security This function allows for reentrancy, however we refrain from adding
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
      * level that potentially malicious reentrant calls do not affect your smart contract system.
      */
-    function deployCreate2AndInit(bytes32 salt, bytes memory initCode, bytes calldata data)
+    function deployCreate2AndInit(bytes32 salt, bytes memory initCode, bytes calldata data, Values memory values)
         public
         payable
         returns (address newContract)
     {
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
-            newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
+            newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
         }
         if (newContract == address(0)) revert FailedContractCreation(address(this));
         emit ContractCreation(newContract);
 
         // solhint-disable-next-line avoid-low-level-calls
-        (bool success,) = newContract.call(data);
+        (bool success,) = newContract.call{value: values.initCallAmount}(data);
         if (!success) revert FailedContractInitialisation(address(this));
+
+        uint256 balance = address(this).balance;
+        if (balance != 0) {
+            /**
+             * @dev Any wei amount previously forced into this contract (e.g. by
+             * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
+             */
+            // solhint-disable-next-line avoid-low-level-calls
+            (bool refunded,) = msg.sender.call{value: balance}("");
+            if (!refunded) revert EtherTransferFail(address(this));
+        }
     }
 
     /**
@@ -299,12 +337,13 @@ contract CreateXDeployer {
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
+     * @param values The specific `payable` amounts for the deployment and initialisation call.
      * @return newContract The 20-byte address where the contract was deployed.
      * @custom:security This function allows for reentrancy, however we refrain from adding
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
      * level that potentially malicious reentrant calls do not affect your smart contract system.
      */
-    function deployCreate2AndInitGuarded(bytes32 salt, bytes memory initCode, bytes memory data)
+    function deployCreate2AndInitGuarded(bytes32 salt, bytes memory initCode, bytes memory data, Values memory values)
         public
         payable
         guard(salt)
@@ -312,14 +351,25 @@ contract CreateXDeployer {
     {
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
-            newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
+            newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
         }
         if (newContract == address(0)) revert FailedContractCreation(address(this));
         emit ContractCreation(newContract);
 
         // solhint-disable-next-line avoid-low-level-calls
-        (bool success,) = newContract.call(data);
+        (bool success,) = newContract.call{value: values.initCallAmount}(data);
         if (!success) revert FailedContractInitialisation(address(this));
+
+        uint256 balance = address(this).balance;
+        if (balance != 0) {
+            /**
+             * @dev Any wei amount previously forced into this contract (e.g. by
+             * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
+             */
+            // solhint-disable-next-line avoid-low-level-calls
+            (bool refunded,) = msg.sender.call{value: balance}("");
+            if (!refunded) revert EtherTransferFail(address(this));
+        }
     }
 
     /**
@@ -407,12 +457,13 @@ contract CreateXDeployer {
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
+     * @param values The specific `payable` amounts for the deployment and initialisation call.
      * @return newContract The 20-byte address where the contract was deployed.
      * @custom:security This function allows for reentrancy, however we refrain from adding
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
      * level that potentially malicious reentrant calls do not affect your smart contract system.
      */
-    function deployCreate3AndInit(bytes32 salt, bytes calldata initCode, bytes calldata data)
+    function deployCreate3AndInit(bytes32 salt, bytes calldata initCode, bytes calldata data, Values memory values)
         public
         payable
         onlyMsgSender(salt)
@@ -428,13 +479,24 @@ contract CreateXDeployer {
         emit ContractCreation(proxy);
 
         newContract = computeCreate3Address(salt);
-        (bool success,) = proxy.call{value: msg.value}(initCode);
+        (bool success,) = proxy.call{value: values.constructorAmount}(initCode);
         if (!success || newContract.code.length == 0) revert FailedContractCreation(address(this));
         emit ContractCreation(newContract);
 
         // solhint-disable-next-line avoid-low-level-calls
-        (success,) = newContract.call(data);
+        (success,) = newContract.call{value: values.initCallAmount}(data);
         if (!success) revert FailedContractInitialisation(address(this));
+
+        uint256 balance = address(this).balance;
+        if (balance != 0) {
+            /**
+             * @dev Any wei amount previously forced into this contract (e.g. by
+             * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
+             */
+            // solhint-disable-next-line avoid-low-level-calls
+            (bool refunded,) = msg.sender.call{value: balance}("");
+            if (!refunded) revert EtherTransferFail(address(this));
+        }
     }
 
     /**
