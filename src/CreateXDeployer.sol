@@ -155,6 +155,34 @@ contract CreateXDeployer {
     }
 
     /**
+     * @dev Deploys a new EIP-1167 minimal proxy contract using the `CREATE` opcode and initialises the
+     * implementation contract using `msg.value` and the implementation address `implementation` as inputs.
+     * Note that if `msg.value` is non-zero, the initialiser function `initializer` must be `payable`.
+     * @param implementation The 20-byte implementation contract address.
+     * @return proxy The 20-byte address where the clone was deployed.
+     * @custom:security This function allows for reentrancy, however we refrain from adding
+     * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
+     * level that potentially malicious reentrant calls do not affect your smart contract system.
+     */
+    function deployCreateClone(address implementation) public payable returns (address proxy) {
+        bytes20 implementationInBytes = bytes20(implementation);
+        // solhint-disable-next-line no-inline-assembly
+        assembly ("memory-safe") {
+            let clone := mload(0x40)
+            mstore(clone, hex"3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000")
+            mstore(add(clone, 0x14), implementationInBytes)
+            mstore(add(clone, 0x28), hex"5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000")
+            proxy := create(0, clone, 0x37)
+        }
+        if (proxy == address(0)) revert FailedContractCreation(address(this));
+        emit ContractCreation(proxy);
+
+        // solhint-disable-next-line avoid-low-level-calls
+        (bool success,) = implementation.call{value: msg.value}(abi.encodeWithSignature("initializer()"));
+        if (!success || implementation.code.length != 0) revert FailedContractInitialisation(address(this));
+    }
+
+    /**
      * @dev Returns the address where a contract will be stored if deployed via
      * `deployer` using the `CREATE` opcode. For the specification of the Recursive
      * Length Prefix (RLP) encoding scheme, please refer to p. 19 of the Ethereum
@@ -276,13 +304,7 @@ contract CreateXDeployer {
      * @return newContract The 20-byte address where the contract was deployed.
      */
     function deployCreate2(bytes memory initCode) public payable returns (address newContract) {
-        // solhint-disable-next-line no-inline-assembly
-        assembly ("memory-safe") {
-            newContract :=
-                create2(callvalue(), add(initCode, 0x20), mload(initCode), keccak256(timestamp(), blockhash(number())))
-        }
-        if (newContract == address(0)) revert FailedContractCreation(address(this));
-        emit ContractCreation(newContract);
+        return deployCreate2(keccak256(abi.encode(block.timestamp, blockhash(block.number))), initCode);
     }
 
     /**
@@ -349,28 +371,9 @@ contract CreateXDeployer {
         payable
         returns (address newContract)
     {
-        // solhint-disable-next-line no-inline-assembly
-        assembly ("memory-safe") {
-            newContract :=
-                create2(mload(values), add(initCode, 0x20), mload(initCode), keccak256(timestamp(), blockhash(number())))
-        }
-        if (newContract == address(0)) revert FailedContractCreation(address(this));
-        emit ContractCreation(newContract);
-
-        // solhint-disable-next-line avoid-low-level-calls
-        (bool success,) = newContract.call{value: values.initCallAmount}(data);
-        if (!success) revert FailedContractInitialisation(address(this));
-
-        uint256 balance = address(this).balance;
-        if (balance != 0) {
-            /**
-             * @dev Any wei amount previously forced into this contract (e.g. by
-             * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
-             */
-            // solhint-disable-next-line avoid-low-level-calls
-            (bool refunded,) = msg.sender.call{value: balance}("");
-            if (!refunded) revert EtherTransferFail(address(this));
-        }
+        return deployCreate2AndInit(
+            keccak256(abi.encode(block.timestamp, blockhash(block.number))), initCode, data, values
+        );
     }
 
     /**
@@ -440,6 +443,51 @@ contract CreateXDeployer {
             (bool refunded,) = msg.sender.call{value: balance}("");
             if (!refunded) revert EtherTransferFail(address(this));
         }
+    }
+
+    /**
+     * @dev Deploys a new EIP-1167 minimal proxy contract using the `CREATE2` opcode and the salt
+     * value `salt` and initialises the implementation contract using `msg.value` and the implementation
+     * address `implementation` as inputs. Note that if `msg.value` is non-zero, the initialiser function
+     * `initializer` must be `payable`.
+     * @param implementation The 20-byte implementation contract address.
+     * @return proxy The 20-byte address where the clone was deployed.
+     * @custom:security This function allows for reentrancy, however we refrain from adding
+     * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
+     * level that potentially malicious reentrant calls do not affect your smart contract system.
+     */
+    function deployCreate2Clone(bytes32 salt, address implementation) public payable returns (address proxy) {
+        bytes20 implementationInBytes = bytes20(implementation);
+        // solhint-disable-next-line no-inline-assembly
+        assembly ("memory-safe") {
+            let clone := mload(0x40)
+            mstore(clone, hex"3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000")
+            mstore(add(clone, 0x14), implementationInBytes)
+            mstore(add(clone, 0x28), hex"5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000")
+            proxy := create2(0, clone, 0x37, salt)
+        }
+        if (proxy == address(0)) revert FailedContractCreation(address(this));
+        emit ContractCreation(proxy);
+
+        // solhint-disable-next-line avoid-low-level-calls
+        (bool success,) = implementation.call{value: msg.value}(abi.encodeWithSignature("initializer()"));
+        if (!success || implementation.code.length != 0) revert FailedContractInitialisation(address(this));
+    }
+
+    /**
+     * @dev Deploys a new EIP-1167 minimal proxy contract using the `CREATE2` opcode and the salt
+     * value `salt` and initialises the implementation contract using `msg.value` and the implementation
+     * address `implementation` as inputs. The salt value is calculated pseudo-randomly using the block
+     * timestamp and the block hash of the current block. This approach does not guarantee true randomness!
+     * Note that if `msg.value` is non-zero, the initialiser function `initializer` must be `payable`.
+     * @param implementation The 20-byte implementation contract address.
+     * @return proxy The 20-byte address where the clone was deployed.
+     * @custom:security This function allows for reentrancy, however we refrain from adding
+     * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
+     * level that potentially malicious reentrant calls do not affect your smart contract system.
+     */
+    function deployCreate2Clone(address implementation) public payable returns (address proxy) {
+        return deployCreate2Clone(keccak256(abi.encode(block.timestamp, blockhash(block.number))), implementation);
     }
 
     /**
