@@ -19,7 +19,7 @@ contract CreateXDeployer {
      * @dev Event that is emitted when a contract is successfully created.
      * @param newContract The address of the new contract.
      */
-    event ContractCreation(address newContract);
+    event ContractCreation(address indexed newContract);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                        CUSTOM ERRORS                       */
