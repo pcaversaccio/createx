@@ -1,0 +1,8 @@
+CreateXDeployerTest:testDeployCreateNonPayable() (gas: 774029)
+CreateXDeployerTest:testDeployCreatePayable() (gas: 780912)
+CreateXDeployerTest:testDeployCreateRevertNonPayable() (gas: 8937393460516730053)
+CreateXDeployerTest:testDeployCreateRevertPayable() (gas: 8937393460516730298)
+CreateXDeployerTest:testDeployCreateZeroBytesNonPayable() (gas: 47106)
+CreateXDeployerTest:testDeployCreateZeroBytesPayable() (gas: 53978)
+CreateXDeployerTest:testFuzzDeployCreateNonPayable(uint64) (runs: 256, μ: 772692, ~: 772669)
+CreateXDeployerTest:testFuzzDeployCreatePayable(uint64,uint64) (runs: 256, μ: 780029, ~: 780015)
