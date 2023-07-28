@@ -96,7 +96,7 @@ contract CreateXDeployerTest is Test {
     }
 
     function testFuzzDeployCreateNonPayable(uint64 nonce) public {
-        vm.assume(nonce > 0 && nonce < type(uint64).max);
+        vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXDeployerAddr, nonce);
 
         string memory arg1 = "MyToken";
@@ -120,7 +120,7 @@ contract CreateXDeployerTest is Test {
     }
 
     function testFuzzDeployCreatePayable(uint64 nonce, uint64 value) public {
-        vm.assume(nonce > 0 && nonce < type(uint64).max && value > 0);
+        vm.assume(nonce != 0 && nonce < type(uint64).max && value != 0);
         vm.setNonce(createXDeployerAddr, nonce);
         vm.deal(address(this), value);
 
