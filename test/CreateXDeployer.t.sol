@@ -87,12 +87,12 @@ contract CreateXDeployerTest is Test {
 
     function testDeployCreateRevertNonPayable() public {
         vm.expectRevert(abi.encodeWithSelector(CreateXDeployer.FailedContractCreation.selector, createXDeployerAddr));
-        createXDeployer.deployCreate(bytes.concat(keccak256(abi.encode("wagmi"))));
+        createXDeployer.deployCreate(hex"01");
     }
 
     function testDeployCreateRevertPayable() public {
         vm.expectRevert(abi.encodeWithSelector(CreateXDeployer.FailedContractCreation.selector, createXDeployerAddr));
-        createXDeployer.deployCreate{value: 1 wei}(bytes.concat(keccak256(abi.encode("wagmi"))));
+        createXDeployer.deployCreate{value: 1 wei}(hex"01");
     }
 
     function testFuzzDeployCreateNonPayable(uint64 nonce) public {
