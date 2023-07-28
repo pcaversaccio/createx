@@ -25,13 +25,18 @@ jobs:
         with:
           version: nightly
 
+      - name: Show the Foundry CI config
+        run: forge config
+        env:
+          FOUNDRY_PROFILE: ci
+
+      - name: Foundry tests
+        run: forge test
+
       - name: Show the Foundry default config
         run: forge config
         env:
           FOUNDRY_PROFILE: default
-
-      - name: Foundry tests
-        run: forge test
 
       - name: Run snapshot
         run: NO_COLOR=1 forge snapshot >> $GITHUB_STEP_SUMMARY

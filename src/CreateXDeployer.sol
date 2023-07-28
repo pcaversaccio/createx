@@ -208,7 +208,6 @@ contract CreateXDeployer {
      * @param nonce The next 32-byte nonce of this contract.
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
-    // prettier-ignore
     function computeCreateAddress(uint256 nonce) public view returns (address computedAddress) {
         return computeCreateAddress(address(this), nonce);
     }
