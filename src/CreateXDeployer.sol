@@ -11,6 +11,10 @@ pragma solidity 0.8.21;
  * @custom:security-contact See https://github.com/pcaversaccio/createx-deployer/security/policy.
  */
 contract CreateXDeployer {
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                            TYPES                           */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
     /**
      * @dev Struct for the `payable` amounts in a deploy-and-initialise call.
      */
@@ -110,10 +114,10 @@ contract CreateXDeployer {
 
     /**
      * @dev Deploys and initialises a new contract via calling the `CREATE` opcode and
-     * using the creation bytecode `initCode`, `msg.value`, and the initialisation code
-     * `data` as inputs. In order to save deployment costs, we do not sanity check the
-     * `initCode` length. Note that if `msg.value` is non-zero, `initCode` must have a
-     * `payable` constructor.
+     * using the creation bytecode `initCode`, `msg.value`, the initialisation code `data`,
+     * and the struct for the `payable` amounts `values` as inputs. In order to save deployment
+     * costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount`
+     * is non-zero, `initCode` must have a `payable` constructor.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
      * @param values The specific `payable` amounts for the deployment and initialisation call.
@@ -262,11 +266,31 @@ contract CreateXDeployer {
     }
 
     /**
+     * @dev Deploys a new contract via calling the `CREATE2` opcode and using
+     * the creation bytecode `initCode` and `msg.value` as inputs. The salt value is
+     * calculated pseudo-randomly using the block timestamp and the block hash of the
+     * current block. This approach does not guarantee true randomness! In order to save
+     * deployment costs, we do not sanity check the `initCode` length. Note that if `msg.value`
+     * is non-zero, `initCode` must have a `payable` constructor.
+     * @param initCode The creation bytecode.
+     * @return newContract The 20-byte address where the contract was deployed.
+     */
+    function deployCreate2(bytes memory initCode) public payable returns (address newContract) {
+        // solhint-disable-next-line no-inline-assembly
+        assembly ("memory-safe") {
+            newContract :=
+                create2(callvalue(), add(initCode, 0x20), mload(initCode), keccak256(timestamp(), blockhash(number())))
+        }
+        if (newContract == address(0)) revert FailedContractCreation(address(this));
+        emit ContractCreation(newContract);
+    }
+
+    /**
      * @dev Deploys and initialises a new contract via calling the `CREATE2` opcode and
-     * using the salt value `salt`, the creation bytecode `initCode`, `msg.value`, and
-     * initialisation code `data` as inputs. In order to save deployment costs, we do not
-     * sanity check the `initCode` length. Note that if `msg.value` is non-zero, `initCode`
-     * must have a `payable` constructor.
+     * using the salt value `salt`, the creation bytecode `initCode`, `msg.value`, the initialisation
+     * code `data`, and the struct for the `payable` amounts `values` as inputs. In order to save
+     * deployment costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount`
+     * is non-zero, `initCode` must have a `payable` constructor.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
@@ -284,6 +308,51 @@ contract CreateXDeployer {
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
+        }
+        if (newContract == address(0)) revert FailedContractCreation(address(this));
+        emit ContractCreation(newContract);
+
+        // solhint-disable-next-line avoid-low-level-calls
+        (bool success,) = newContract.call{value: values.initCallAmount}(data);
+        if (!success) revert FailedContractInitialisation(address(this));
+
+        uint256 balance = address(this).balance;
+        if (balance != 0) {
+            /**
+             * @dev Any wei amount previously forced into this contract (e.g. by
+             * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
+             */
+            // solhint-disable-next-line avoid-low-level-calls
+            (bool refunded,) = msg.sender.call{value: balance}("");
+            if (!refunded) revert EtherTransferFail(address(this));
+        }
+    }
+
+    /**
+     * @dev Deploys and initialises a new contract via calling the `CREATE2` opcode and
+     * using the creation bytecode `initCode`, `msg.value`, the initialisation code `data`,
+     * and the struct for the `payable` amounts `values` as inputs. The salt value is calculated
+     * pseudo-randomly using the block timestamp and the block hash of the current block. This
+     * approach does not guarantee true randomness! In order to save deployment costs, we do not
+     * sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero,
+     * `initCode` must have a `payable` constructor.
+     * @param initCode The creation bytecode.
+     * @param data The initialisation code that is passed to the deployed contract.
+     * @param values The specific `payable` amounts for the deployment and initialisation call.
+     * @return newContract The 20-byte address where the contract was deployed.
+     * @custom:security This function allows for reentrancy, however we refrain from adding
+     * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
+     * level that potentially malicious reentrant calls do not affect your smart contract system.
+     */
+    function deployCreate2AndInit(bytes memory initCode, bytes calldata data, Values memory values)
+        public
+        payable
+        returns (address newContract)
+    {
+        // solhint-disable-next-line no-inline-assembly
+        assembly ("memory-safe") {
+            newContract :=
+                create2(mload(values), add(initCode, 0x20), mload(initCode), keccak256(timestamp(), blockhash(number())))
         }
         if (newContract == address(0)) revert FailedContractCreation(address(this));
         emit ContractCreation(newContract);
@@ -331,9 +400,10 @@ contract CreateXDeployer {
     /**
      * @dev Deploys and initialises a guarded (i.e. prevents the redeployment to other chains)
      * new contract via calling the `CREATE2` opcode and using the salt value `salt`, the creation
-     * bytecode `initCode`, `msg.value`, and initialisation code `data` as inputs. In order to save
-     * deployment costs, we do not sanity check the `initCode` length. Note that if `msg.value` is
-     * non-zero, `initCode` must have a `payable` constructor.
+     * bytecode `initCode`, `msg.value`, the initialisation code `data`, and the struct for the `payable`
+     * amounts `values` as inputs. In order to save deployment costs, we do not sanity check the
+     * `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must have
+     * a `payable` constructor.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
@@ -449,10 +519,10 @@ contract CreateXDeployer {
     /**
      * @dev Deploys and initialises, using a frontrun guard, a new contract via employing the
      * `CREATE3` pattern (i.e. without an initcode factor) and using the salt value `salt`,
-     * the creation bytecode `initCode`, `msg.value`, and initialisation code `data` as inputs.
-     * In order to save deployment costs, we do not sanity check the `initCode` length. Note
-     * that if `msg.value` is non-zero, `initCode` must have a `payable` constructor. This
-     * implementation is based on Solmate:
+     * the creation bytecode `initCode`, `msg.value`, the initialisation code `data`, and the struct
+     * for the `payable` amounts `values` as inputs. In order to save deployment costs, we do not sanity
+     * check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode`
+     * must have a `payable` constructor. This implementation is based on Solmate:
      * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
