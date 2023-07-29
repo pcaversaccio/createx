@@ -5,6 +5,10 @@
 
 Factory smart contract to make easier and safer usage of the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) and [`CREATE2`](https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171)-based contract creations.
 
+## Features
+
+TBD (elaborate here what is all possible)
+
 ## Unit Tests
 
 TBD
