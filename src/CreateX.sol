@@ -2,15 +2,16 @@
 pragma solidity 0.8.21;
 
 /**
- * @title CreateXDeployer Factory Smart Contract
+ * @title CreateX Factory Smart Contract
  * @author pcaversaccio (https://pcaversaccio.com)
+ * @custom:coauthor Matt Solomon (https://mattsolomon.dev)
  * @dev Factory smart contract to make easier and safer usage of the
  * `CREATE` (https://www.evm.codes/#f0?fork=shanghai) and `CREATE2`
  * (https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of
  * `CREATE3`-based (https://github.com/ethereum/EIPs/pull/3171) contract creations.
- * @custom:security-contact See https://github.com/pcaversaccio/createx-deployer/security/policy.
+ * @custom:security-contact See https://github.com/pcaversaccio/createx/security/policy.
  */
-contract CreateXDeployer {
+contract CreateX {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            TYPES                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
