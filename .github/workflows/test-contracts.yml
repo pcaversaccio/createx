@@ -13,6 +13,8 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
+        node_version:
+          - 18
 
     steps:
       - name: Checkout
@@ -42,3 +44,9 @@ jobs:
         run: NO_COLOR=1 forge snapshot >> $GITHUB_STEP_SUMMARY
         env:
           FOUNDRY_PROFILE: default
+
+      - name: Slither static analyser
+        uses: crytic/slither-action@v0.3.0
+        continue-on-error: true
+        with:
+          node-version: ${{ matrix.node_version }}

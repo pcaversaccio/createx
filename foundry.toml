@@ -1,19 +1,20 @@
 ## defaults for all profiles
 [profile.default]
-src = 'src'                   # the source directory
-test = 'test'                 # the test directory
-out = 'out'                   # the output directory (for artifacts)
-libs = ['lib']                # a list of library directories
-cache = true                  # cache the builds
-cache_path = 'cache'          # where the cache is stored
-solc_version = '0.8.21'       # override for the solc version
-optimizer = true              # enable the solc optimiser
-optimizer_runs = 999999       # the number of optimiser runs
-verbosity = 3                 # the verbosity of tests
-evm_version = 'paris'         # set the EVM target version (prevent using the `PUSH0` opcode)
+src = 'src'                                                 # the source directory
+test = 'test'                                               # the test directory
+out = 'out'                                                 # the output directory (for artifacts)
+libs = ['lib']                                              # a list of library directories
+cache = true                                                # cache the builds
+cache_path = 'cache'                                        # where the cache is stored
+solc_version = '0.8.21'                                     # override for the solc version
+evm_version = 'paris'                                       # set the EVM target version (prevent using the `PUSH0` opcode)
+optimizer = true                                            # enable the solc optimiser
+optimizer_runs = 999999                                     # the number of optimiser runs
+verbosity = 3                                               # the verbosity of tests
+fs_permissions = [{ access = "read-write", path = "./"}]    # set read-write access to project root
 
 ## default overrides for the CI runs
 [profile.ci]
-force = true                  # always perform a clean build
-fuzz = { runs = 1_000 }       # increase the number of fuzz runs
-verbosity = 4                 # increase the verbosity of tests
+force = true                                                # always perform a clean build
+fuzz = { runs = 1_000 }                                     # increase the number of fuzz runs
+verbosity = 4                                               # increase the verbosity of tests

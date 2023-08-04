@@ -26,7 +26,10 @@ contract CreateXTest is Test {
         address arg3 = makeAddr("initialAccount");
         uint256 arg4 = 100;
         bytes memory args = abi.encode(arg1, arg2, arg3, arg4);
-        bytes memory bytecode = abi.encodePacked(vm.getCode("ERC20Mock.sol:ERC20Mock"), args);
+        bytes memory bytecode = abi.encodePacked(
+            vm.getCode("ERC20Mock.sol:ERC20Mock"),
+            args
+        );
 
         address computedAddress = createX.computeCreateAddress(createXAddr, 1);
         vm.expectEmit(true, true, false, true, computedAddress);
@@ -47,7 +50,10 @@ contract CreateXTest is Test {
         address arg3 = makeAddr("initialAccount");
         uint256 arg4 = 100;
         bytes memory args = abi.encode(arg1, arg2, arg3, arg4);
-        bytes memory bytecode = abi.encodePacked(vm.getCode("ERC20Mock.sol:ERC20Mock"), args);
+        bytes memory bytecode = abi.encodePacked(
+            vm.getCode("ERC20Mock.sol:ERC20Mock"),
+            args
+        );
 
         address computedAddress = createX.computeCreateAddress(createXAddr, 1);
         vm.expectEmit(true, true, false, true, computedAddress);
@@ -86,12 +92,22 @@ contract CreateXTest is Test {
     }
 
     function testDeployCreateRevertNonPayable() public {
-        vm.expectRevert(abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr));
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                CreateX.FailedContractCreation.selector,
+                createXAddr
+            )
+        );
         createX.deployCreate(hex"01");
     }
 
     function testDeployCreateRevertPayable() public {
-        vm.expectRevert(abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr));
+        vm.expectRevert(
+            abi.encodeWithSelector(
+                CreateX.FailedContractCreation.selector,
+                createXAddr
+            )
+        );
         createX.deployCreate{value: 1 wei}(hex"01");
     }
 
@@ -104,9 +120,15 @@ contract CreateXTest is Test {
         address arg3 = makeAddr("initialAccount");
         uint256 arg4 = 100;
         bytes memory args = abi.encode(arg1, arg2, arg3, arg4);
-        bytes memory bytecode = abi.encodePacked(vm.getCode("ERC20Mock.sol:ERC20Mock"), args);
+        bytes memory bytecode = abi.encodePacked(
+            vm.getCode("ERC20Mock.sol:ERC20Mock"),
+            args
+        );
 
-        address computedAddress = createX.computeCreateAddress(createXAddr, nonce);
+        address computedAddress = createX.computeCreateAddress(
+            createXAddr,
+            nonce
+        );
         vm.expectEmit(true, true, false, true, computedAddress);
         emit Transfer(zeroAddress, arg3, arg4);
         vm.expectEmit(true, false, false, false, createXAddr);
@@ -129,9 +151,15 @@ contract CreateXTest is Test {
         address arg3 = makeAddr("initialAccount");
         uint256 arg4 = 100;
         bytes memory args = abi.encode(arg1, arg2, arg3, arg4);
-        bytes memory bytecode = abi.encodePacked(vm.getCode("ERC20Mock.sol:ERC20Mock"), args);
+        bytes memory bytecode = abi.encodePacked(
+            vm.getCode("ERC20Mock.sol:ERC20Mock"),
+            args
+        );
 
-        address computedAddress = createX.computeCreateAddress(createXAddr, nonce);
+        address computedAddress = createX.computeCreateAddress(
+            createXAddr,
+            nonce
+        );
         vm.expectEmit(true, true, false, true, computedAddress);
         emit Transfer(zeroAddress, arg3, arg4);
         vm.expectEmit(true, false, false, false, createXAddr);
