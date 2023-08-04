@@ -10,3 +10,4 @@ trim_trailing_whitespace = true
 
 [*.sol]
 indent_size = 4
+max_line_length = 120
