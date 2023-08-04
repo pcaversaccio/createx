@@ -59,7 +59,7 @@ jobs:
         uses: codespell-project/actions-codespell@v2.0
         with:
           check_filenames: true
-          skip: ./.git
+          skip: ./.git,yarn.lock
 
   validate-links:
     runs-on: ${{ matrix.os }}
