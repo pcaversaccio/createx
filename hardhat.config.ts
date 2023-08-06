@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 
-import { HardhatUserConfig } from "hardhat/config";
+import { HardhatUserConfig, task } from "hardhat/config";
 import "@nomicfoundation/hardhat-ethers";
 import "@nomicfoundation/hardhat-chai-matchers";
 import "@nomicfoundation/hardhat-verify";
@@ -11,6 +11,10 @@ import "hardhat-contract-sizer";
 import "hardhat-abi-exporter";
 
 dotenv.config();
+
+task("evm", "Prints the configured EVM version", async (_, hre) => {
+  console.log(hre.config.solidity.compilers[0].settings.evmVersion);
+});
 
 const config: HardhatUserConfig = {
   paths: {
