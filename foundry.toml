@@ -16,5 +16,5 @@ fs_permissions = [{ access = "read-write", path = "./"}]    # set read-write acc
 ## default overrides for the CI runs
 [profile.ci]
 force = true                                                # always perform a clean build
-fuzz = { runs = 1_000 }                                     # increase the number of fuzz runs
+fuzz = { runs = 10_000 }                                    # increase the number of fuzz runs
 verbosity = 4                                               # increase the verbosity of tests
