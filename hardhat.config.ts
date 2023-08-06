@@ -34,7 +34,7 @@ const config: HardhatUserConfig = {
     hardhat: {
       initialBaseFeePerGas: 0,
       chainId: 31337,
-      hardfork: "shanghai",
+      hardfork: "paris",
       forking: {
         url: process.env.ETH_MAINNET_URL || "",
         // The Hardhat network will by default fork from the latest mainnet block
