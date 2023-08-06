@@ -63,7 +63,7 @@ jobs:
         run: |
           version_foundry=$(forge config --json | jq -r ".evm_version")
           version_hh=$(npx hardhat evm)
-          if [[ $version_foundry != "paris" ]] || [[ $version_foundry != $version_hh ]]; then exit 1; fi
+          if [[ $version_foundry != "pariss" ]] || [[ $version_foundry != $version_hh ]]; then exit 1; fi
 
       - name: Foundry tests
         run: pnpm test
