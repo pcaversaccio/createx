@@ -19,24 +19,36 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
         with:
-          submodules: recursive
+          version: latest
+          run_install: false
+
+      - name: Get pnpm cache directory path
+        id: pnpm-cache-dir-path
+        run: echo "dir=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+
+      - name: Restore pnpm cache
+        uses: actions/cache@v3
+        id: pnpm-cache
+        with:
+          path: ${{ steps.pnpm-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node_version }}
 
-      - name: Run Prettier
-        run: npx prettier -c '**/*.{md,yml,yaml}'
+      - name: Install pnpm project with a clean slate
+        run: pnpm install --prefer-offline --frozen-lockfile
 
-      - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@v1
-        with:
-          version: nightly
-
-      - name: Prettify Solidity files
-        run: forge fmt --check
+      - name: Prettier and lint
+        run: pnpm lint:check
 
   codespell:
     runs-on: ${{ matrix.os }}
@@ -53,7 +65,7 @@ jobs:
         uses: codespell-project/actions-codespell@v2.0
         with:
           check_filenames: true
-          skip: ./.git
+          skip: ./.git,pnpm-lock.yaml
 
   validate-links:
     runs-on: ${{ matrix.os }}

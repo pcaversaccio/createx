@@ -11,11 +11,13 @@ import {ERC20} from "openzeppelin/token/ERC20/ERC20.sol";
  * @dev Allows to mock a simple ERC-20 implementation.
  */
 contract ERC20Mock is ERC20 {
-    constructor(string memory name_, string memory symbol_, address initialAccount_, uint256 initialBalance_)
-        payable
-        ERC20(name_, symbol_)
-    {
-        _mint(initialAccount_, initialBalance_);
+    constructor(
+        string memory name_,
+        string memory symbol_,
+        address initialAccount_,
+        uint256 initialBalance_
+    ) payable ERC20(name_, symbol_) {
+        _mint({account: initialAccount_, value: initialBalance_});
     }
 
     /**
@@ -24,7 +26,7 @@ contract ERC20Mock is ERC20 {
      * @param amount The 32-byte token amount to be created.
      */
     function mint(address account, uint256 amount) public {
-        _mint(account, amount);
+        _mint({account: account, value: amount});
     }
 
     /**
@@ -33,6 +35,6 @@ contract ERC20Mock is ERC20 {
      * @param amount The 32-byte token amount to be destroyed.
      */
     function burn(address account, uint256 amount) public {
-        _burn(account, amount);
+        _burn({account: account, value: amount});
     }
 }

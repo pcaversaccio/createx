@@ -13,12 +13,41 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
+        node_version:
+          - 18
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           submodules: recursive
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: false
+
+      - name: Get pnpm cache directory path
+        id: pnpm-cache-dir-path
+        run: echo "dir=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+
+      - name: Restore pnpm cache
+        uses: actions/cache@v3
+        id: pnpm-cache
+        with:
+          path: ${{ steps.pnpm-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install pnpm project with a clean slate
+        run: pnpm install --prefer-offline --frozen-lockfile
 
       - name: Install Foundry
         uses: foundry-rs/foundry-toolchain@v1
@@ -30,8 +59,14 @@ jobs:
         env:
           FOUNDRY_PROFILE: ci
 
+      - name: Ensure `paris` as EVM version
+        run: |
+          version_foundry=$(forge config --json | jq -r ".evm_version")
+          version_hh=$(npx hardhat evm)
+          if [[ $version_foundry != "paris" ]] || [[ $version_foundry != $version_hh ]]; then exit 1; fi
+
       - name: Foundry tests
-        run: forge test
+        run: pnpm test
 
       - name: Show the Foundry default config
         run: forge config
@@ -42,3 +77,9 @@ jobs:
         run: NO_COLOR=1 forge snapshot >> $GITHUB_STEP_SUMMARY
         env:
           FOUNDRY_PROFILE: default
+
+      - name: Slither static analyser
+        uses: crytic/slither-action@v0.3.0
+        continue-on-error: true
+        with:
+          node-version: ${{ matrix.node_version }}

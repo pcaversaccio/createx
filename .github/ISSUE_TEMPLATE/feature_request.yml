@@ -1,0 +1,26 @@
+name: Feature Request
+description: Suggest an idea for CreateX.
+title: "[Feature-Request]: "
+labels:
+  - feature 💥
+assignees:
+  - pcaversaccio
+body:
+  - attributes:
+      value: |
+        Please check the [issues tab](https://github.com/pcaversaccio/createx/issues) to avoid duplicates.
+        Thanks for taking the time to provide feedback on CreateX!
+    type: markdown
+  - attributes:
+      label: "Describe the desired feature:"
+      description: Explain what the feature solves/improves.
+    id: feature-request
+    type: textarea
+    validations:
+      required: true
+  - attributes:
+      label: "Code example that solves the feature:"
+      description: "It can be a GitHub repository/gist or a simple code snippet."
+      placeholder: "```solidity\npragma solidity 0.8.21;\n```"
+    id: reproduce
+    type: textarea

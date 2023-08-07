@@ -23,52 +23,64 @@ contract CreateXTest is Test {
     function testDeployCreateNonPayable() public {
         string memory arg1 = "MyToken";
         string memory arg2 = "MTKN";
-        address arg3 = makeAddr("initialAccount");
+        address arg3 = makeAddr({name: "initialAccount"});
         uint256 arg4 = 100;
         bytes memory args = abi.encode(arg1, arg2, arg3, arg4);
-        bytes memory bytecode = abi.encodePacked(vm.getCode("ERC20Mock.sol:ERC20Mock"), args);
+        bytes memory bytecode = abi.encodePacked(vm.getCode({artifactPath: "ERC20Mock.sol:ERC20Mock"}), args);
 
-        address computedAddress = createX.computeCreateAddress(createXAddr, 1);
-        vm.expectEmit(true, true, false, true, computedAddress);
-        emit Transfer(zeroAddress, arg3, arg4);
-        vm.expectEmit(true, false, false, false, createXAddr);
-        emit ContractCreation(computedAddress);
-        createX.deployCreate(bytecode);
+        address computedAddress = createX.computeCreateAddress({deployer: createXAddr, nonce: 1});
+        vm.expectEmit({
+            checkTopic1: true,
+            checkTopic2: true,
+            checkTopic3: true,
+            checkData: true,
+            emitter: computedAddress
+        });
+        emit Transfer({from: zeroAddress, to: arg3, value: arg4});
+        vm.expectEmit({checkTopic1: true, checkTopic2: true, checkTopic3: true, checkData: true, emitter: createXAddr});
+        emit ContractCreation({newContract: computedAddress});
+        createX.deployCreate({initCode: bytecode});
 
-        assertTrue(computedAddress.code.length != 0);
-        assertEq(ERC20Mock(computedAddress).name(), arg1);
-        assertEq(ERC20Mock(computedAddress).symbol(), arg2);
-        assertEq(ERC20Mock(computedAddress).balanceOf(arg3), arg4);
+        assertTrue({condition: computedAddress.code.length != 0});
+        assertEq({a: ERC20Mock(computedAddress).name(), b: arg1});
+        assertEq({a: ERC20Mock(computedAddress).symbol(), b: arg2});
+        assertEq({a: ERC20Mock(computedAddress).balanceOf({account: arg3}), b: arg4});
     }
 
     function testDeployCreatePayable() public {
         string memory arg1 = "MyToken";
         string memory arg2 = "MTKN";
-        address arg3 = makeAddr("initialAccount");
+        address arg3 = makeAddr({name: "initialAccount"});
         uint256 arg4 = 100;
         bytes memory args = abi.encode(arg1, arg2, arg3, arg4);
-        bytes memory bytecode = abi.encodePacked(vm.getCode("ERC20Mock.sol:ERC20Mock"), args);
+        bytes memory bytecode = abi.encodePacked(vm.getCode({artifactPath: "ERC20Mock.sol:ERC20Mock"}), args);
 
-        address computedAddress = createX.computeCreateAddress(createXAddr, 1);
-        vm.expectEmit(true, true, false, true, computedAddress);
-        emit Transfer(zeroAddress, arg3, arg4);
-        vm.expectEmit(true, false, false, false, createXAddr);
-        emit ContractCreation(computedAddress);
-        createX.deployCreate{value: 1 ether}(bytecode);
+        address computedAddress = createX.computeCreateAddress({deployer: createXAddr, nonce: 1});
+        vm.expectEmit({
+            checkTopic1: true,
+            checkTopic2: true,
+            checkTopic3: true,
+            checkData: true,
+            emitter: computedAddress
+        });
+        emit Transfer({from: zeroAddress, to: arg3, value: arg4});
+        vm.expectEmit({checkTopic1: true, checkTopic2: true, checkTopic3: true, checkData: true, emitter: createXAddr});
+        emit ContractCreation({newContract: computedAddress});
+        createX.deployCreate{value: 1 ether}({initCode: bytecode});
 
-        assertTrue(computedAddress.code.length != 0);
-        assertEq(ERC20Mock(computedAddress).name(), arg1);
-        assertEq(ERC20Mock(computedAddress).symbol(), arg2);
-        assertEq(ERC20Mock(computedAddress).balanceOf(arg3), arg4);
-        assertEq(computedAddress.balance, 1 ether);
+        assertTrue({condition: computedAddress.code.length != 0});
+        assertEq({a: ERC20Mock(computedAddress).name(), b: arg1});
+        assertEq({a: ERC20Mock(computedAddress).symbol(), b: arg2});
+        assertEq({a: ERC20Mock(computedAddress).balanceOf({account: arg3}), b: arg4});
+        assertEq({a: computedAddress.balance, b: 1 ether});
     }
 
     function testDeployCreateZeroBytesNonPayable() public {
-        address computedAddress = createX.computeCreateAddress(createXAddr, 1);
-        vm.expectEmit(true, false, false, false, createXAddr);
-        emit ContractCreation(computedAddress);
-        createX.deployCreate(new bytes(0));
-        assertEq(computedAddress.code.length, 0);
+        address computedAddress = createX.computeCreateAddress({deployer: createXAddr, nonce: 1});
+        vm.expectEmit({checkTopic1: true, checkTopic2: true, checkTopic3: true, checkData: true, emitter: createXAddr});
+        emit ContractCreation({newContract: computedAddress});
+        createX.deployCreate({initCode: new bytes(0)});
+        assertEq({a: computedAddress.code.length, b: 0});
     }
 
     /**
@@ -77,71 +89,83 @@ contract CreateXTest is Test {
      * `receive`/`payable fallback` function.
      */
     function testDeployCreateZeroBytesPayable() public {
-        address computedAddress = createX.computeCreateAddress(createXAddr, 1);
-        vm.expectEmit(true, false, false, false, createXAddr);
-        emit ContractCreation(computedAddress);
-        createX.deployCreate{value: 1 wei}(new bytes(0));
-        assertEq(computedAddress.code.length, 0);
-        assertEq(computedAddress.balance, 1 wei);
+        address computedAddress = createX.computeCreateAddress({deployer: createXAddr, nonce: 1});
+        vm.expectEmit({checkTopic1: true, checkTopic2: true, checkTopic3: true, checkData: true, emitter: createXAddr});
+        emit ContractCreation({newContract: computedAddress});
+        createX.deployCreate{value: 1 wei}({initCode: new bytes(0)});
+        assertEq({a: computedAddress.code.length, b: 0});
+        assertEq({a: computedAddress.balance, b: 1 wei});
     }
 
     function testDeployCreateRevertNonPayable() public {
-        vm.expectRevert(abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr));
-        createX.deployCreate(hex"01");
+        vm.expectRevert({revertData: abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr)});
+        createX.deployCreate({initCode: hex"01"});
     }
 
     function testDeployCreateRevertPayable() public {
-        vm.expectRevert(abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr));
-        createX.deployCreate{value: 1 wei}(hex"01");
+        vm.expectRevert({revertData: abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr)});
+        createX.deployCreate{value: 1 wei}({initCode: hex"01"});
     }
 
     function testFuzzDeployCreateNonPayable(uint64 nonce) public {
-        vm.assume(nonce != 0 && nonce < type(uint64).max);
-        vm.setNonce(createXAddr, nonce);
+        vm.assume({condition: nonce != 0 && nonce < type(uint64).max});
+        vm.setNonce({account: createXAddr, newNonce: nonce});
 
         string memory arg1 = "MyToken";
         string memory arg2 = "MTKN";
-        address arg3 = makeAddr("initialAccount");
+        address arg3 = makeAddr({name: "initialAccount"});
         uint256 arg4 = 100;
         bytes memory args = abi.encode(arg1, arg2, arg3, arg4);
-        bytes memory bytecode = abi.encodePacked(vm.getCode("ERC20Mock.sol:ERC20Mock"), args);
+        bytes memory bytecode = abi.encodePacked(vm.getCode({artifactPath: "ERC20Mock.sol:ERC20Mock"}), args);
 
-        address computedAddress = createX.computeCreateAddress(createXAddr, nonce);
-        vm.expectEmit(true, true, false, true, computedAddress);
-        emit Transfer(zeroAddress, arg3, arg4);
-        vm.expectEmit(true, false, false, false, createXAddr);
-        emit ContractCreation(computedAddress);
-        createX.deployCreate(bytecode);
+        address computedAddress = createX.computeCreateAddress({deployer: createXAddr, nonce: nonce});
+        vm.expectEmit({
+            checkTopic1: true,
+            checkTopic2: true,
+            checkTopic3: true,
+            checkData: true,
+            emitter: computedAddress
+        });
+        emit Transfer({from: zeroAddress, to: arg3, value: arg4});
+        vm.expectEmit({checkTopic1: true, checkTopic2: true, checkTopic3: true, checkData: true, emitter: createXAddr});
+        emit ContractCreation({newContract: computedAddress});
+        createX.deployCreate({initCode: bytecode});
 
-        assertTrue(computedAddress.code.length != 0);
-        assertEq(ERC20Mock(computedAddress).name(), arg1);
-        assertEq(ERC20Mock(computedAddress).symbol(), arg2);
-        assertEq(ERC20Mock(computedAddress).balanceOf(arg3), arg4);
+        assertTrue({condition: computedAddress.code.length != 0});
+        assertEq({a: ERC20Mock(computedAddress).name(), b: arg1});
+        assertEq({a: ERC20Mock(computedAddress).symbol(), b: arg2});
+        assertEq({a: ERC20Mock(computedAddress).balanceOf({account: arg3}), b: arg4});
     }
 
     function testFuzzDeployCreatePayable(uint64 nonce, uint64 value) public {
-        vm.assume(nonce != 0 && nonce < type(uint64).max && value != 0);
-        vm.setNonce(createXAddr, nonce);
-        vm.deal(address(this), value);
+        vm.assume({condition: nonce != 0 && nonce < type(uint64).max && value != 0});
+        vm.setNonce({account: createXAddr, newNonce: nonce});
+        vm.deal({account: address(this), newBalance: value});
 
         string memory arg1 = "MyToken";
         string memory arg2 = "MTKN";
-        address arg3 = makeAddr("initialAccount");
+        address arg3 = makeAddr({name: "initialAccount"});
         uint256 arg4 = 100;
         bytes memory args = abi.encode(arg1, arg2, arg3, arg4);
-        bytes memory bytecode = abi.encodePacked(vm.getCode("ERC20Mock.sol:ERC20Mock"), args);
+        bytes memory bytecode = abi.encodePacked(vm.getCode({artifactPath: "ERC20Mock.sol:ERC20Mock"}), args);
 
-        address computedAddress = createX.computeCreateAddress(createXAddr, nonce);
-        vm.expectEmit(true, true, false, true, computedAddress);
-        emit Transfer(zeroAddress, arg3, arg4);
-        vm.expectEmit(true, false, false, false, createXAddr);
-        emit ContractCreation(computedAddress);
-        createX.deployCreate{value: value}(bytecode);
+        address computedAddress = createX.computeCreateAddress({deployer: createXAddr, nonce: nonce});
+        vm.expectEmit({
+            checkTopic1: true,
+            checkTopic2: true,
+            checkTopic3: true,
+            checkData: true,
+            emitter: computedAddress
+        });
+        emit Transfer({from: zeroAddress, to: arg3, value: arg4});
+        vm.expectEmit({checkTopic1: true, checkTopic2: true, checkTopic3: true, checkData: true, emitter: createXAddr});
+        emit ContractCreation({newContract: computedAddress});
+        createX.deployCreate{value: value}({initCode: bytecode});
 
-        assertTrue(computedAddress.code.length != 0);
-        assertEq(ERC20Mock(computedAddress).name(), arg1);
-        assertEq(ERC20Mock(computedAddress).symbol(), arg2);
-        assertEq(ERC20Mock(computedAddress).balanceOf(arg3), arg4);
-        assertEq(computedAddress.balance, value);
+        assertTrue({condition: computedAddress.code.length != 0});
+        assertEq({a: ERC20Mock(computedAddress).name(), b: arg1});
+        assertEq({a: ERC20Mock(computedAddress).symbol(), b: arg2});
+        assertEq({a: ERC20Mock(computedAddress).balanceOf({account: arg3}), b: arg4});
+        assertEq({a: computedAddress.balance, b: value});
     }
 }
