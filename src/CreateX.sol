@@ -291,10 +291,10 @@ contract CreateX {
     /**
      * @dev Deploys a new contract via calling the `CREATE2` opcode and using
      * the creation bytecode `initCode` and `msg.value` as inputs. The salt value is
-     * calculated pseudo-randomly using the block timestamp and the block hash of the
-     * current block. This approach does not guarantee true randomness! In order to save
-     * deployment costs, we do not sanity check the `initCode` length. Note that if `msg.value`
-     * is non-zero, `initCode` must have a `payable` constructor.
+     * calculated pseudo-randomly using a diverse selection of block and transaction properties.
+     * This approach does not guarantee true randomness! In order to save deployment costs,
+     * we do not sanity check the `initCode` length. Note that if `msg.value` is non-zero,
+     * `initCode` must have a `payable` constructor.
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
      */
@@ -365,10 +365,10 @@ contract CreateX {
      * @dev Deploys and initialises a new contract via calling the `CREATE2` opcode and
      * using the creation bytecode `initCode`, `msg.value`, the initialisation code `data`,
      * and the struct for the `payable` amounts `values` as inputs. The salt value is calculated
-     * pseudo-randomly using the block timestamp and the block hash of the current block. This
-     * approach does not guarantee true randomness! In order to save deployment costs, we do not
-     * sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero,
-     * `initCode` must have a `payable` constructor.
+     * pseudo-randomly using a diverse selection of block and transaction properties. This approach
+     * does not guarantee true randomness! In order to save deployment costs, we do not sanity
+     * check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode`
+     * must have a `payable` constructor.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
      * @param values The specific `payable` amounts for the deployment and initialisation call.
@@ -507,8 +507,8 @@ contract CreateX {
     /**
      * @dev Deploys a new EIP-1167 minimal proxy contract using the `CREATE2` opcode and the salt
      * value `salt` and initialises the implementation contract using `msg.value` and the implementation
-     * address `implementation` as inputs. The salt value is calculated pseudo-randomly using the block
-     * timestamp and the block hash of the current block. This approach does not guarantee true randomness!
+     * address `implementation` as inputs. The salt value is calculated pseudo-randomly using a diverse
+     * selection of block and transaction properties. This approach does not guarantee true randomness!
      * Note that if `msg.value` is non-zero, the initialiser function called via `data` must be `payable`.
      * @param implementation The 20-byte implementation contract address.
      * @param data The initialisation code that is passed to the deployed proxy contract.
