@@ -17,7 +17,7 @@ contract ERC20Mock is ERC20 {
         address initialAccount_,
         uint256 initialBalance_
     ) payable ERC20(name_, symbol_) {
-        _mint(initialAccount_, initialBalance_);
+        _mint({account: initialAccount_, value: initialBalance_});
     }
 
     /**
@@ -26,7 +26,7 @@ contract ERC20Mock is ERC20 {
      * @param amount The 32-byte token amount to be created.
      */
     function mint(address account, uint256 amount) public {
-        _mint(account, amount);
+        _mint({account: account, value: amount});
     }
 
     /**
@@ -35,6 +35,6 @@ contract ERC20Mock is ERC20 {
      * @param amount The 32-byte token amount to be destroyed.
      */
     function burn(address account, uint256 amount) public {
-        _burn(account, amount);
+        _burn({account: account, value: amount});
     }
 }

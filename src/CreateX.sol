@@ -88,7 +88,7 @@ contract CreateX {
      * @param salt The 32-byte random value used to create the contract address.
      */
     modifier onlyMsgSender(bytes32 salt) {
-        if (address(bytes20(salt)) != msg.sender) revert InvalidSalt(address(this));
+        if (address(bytes20(salt)) != msg.sender) revert InvalidSalt({emitter: address(this)});
         _;
     }
 
@@ -109,8 +109,8 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create(callvalue(), add(initCode, 0x20), mload(initCode))
         }
-        if (newContract == address(0)) revert FailedContractCreation(address(this));
-        emit ContractCreation(newContract);
+        if (newContract == address(0)) revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: newContract});
     }
 
     /**
@@ -136,12 +136,12 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create(mload(values), add(initCode, 0x20), mload(initCode))
         }
-        if (newContract == address(0)) revert FailedContractCreation(address(this));
-        emit ContractCreation(newContract);
+        if (newContract == address(0)) revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: newContract});
 
         // solhint-disable-next-line avoid-low-level-calls
         (bool success, ) = newContract.call{value: values.initCallAmount}(data);
-        if (!success) revert FailedContractInitialisation(address(this));
+        if (!success) revert FailedContractInitialisation({emitter: address(this)});
 
         uint256 balance = address(this).balance;
         if (balance != 0) {
@@ -151,7 +151,7 @@ contract CreateX {
              */
             // solhint-disable-next-line avoid-low-level-calls
             (bool refunded, ) = msg.sender.call{value: balance}("");
-            if (!refunded) revert EtherTransferFail(address(this));
+            if (!refunded) revert EtherTransferFail({emitter: address(this)});
         }
     }
 
@@ -175,12 +175,12 @@ contract CreateX {
             mstore(add(clone, 0x28), hex"5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000")
             proxy := create(0, clone, 0x37)
         }
-        if (proxy == address(0)) revert FailedContractCreation(address(this));
-        emit ContractCreation(proxy);
+        if (proxy == address(0)) revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: proxy});
 
         // solhint-disable-next-line avoid-low-level-calls
         (bool success, ) = implementation.call{value: msg.value}(abi.encodeWithSignature("initializer()"));
-        if (!success || implementation.code.length != 0) revert FailedContractInitialisation(address(this));
+        if (!success || implementation.code.length != 0) revert FailedContractInitialisation({emitter: address(this)});
     }
 
     /**
@@ -207,7 +207,7 @@ contract CreateX {
          * @dev The theoretical allowed limit, based on EIP-2681, for an account nonce is 2**64-2:
          * https://eips.ethereum.org/EIPS/eip-2681.
          */
-        if (nonce > type(uint64).max - 1) revert InvalidNonceValue(address(this));
+        if (nonce > type(uint64).max - 1) revert InvalidNonceValue({emitter: address(this)});
 
         /**
          * @dev The integer zero is treated as an empty byte string and therefore has only one
@@ -267,7 +267,7 @@ contract CreateX {
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
     function computeCreateAddress(uint256 nonce) public view returns (address computedAddress) {
-        return computeCreateAddress(address(this), nonce);
+        return computeCreateAddress({deployer: address(this), nonce: nonce});
     }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -289,8 +289,8 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
         }
-        if (newContract == address(0)) revert FailedContractCreation(address(this));
-        emit ContractCreation(newContract);
+        if (newContract == address(0)) revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: newContract});
     }
 
     /**
@@ -305,11 +305,11 @@ contract CreateX {
      */
     function deployCreate2(bytes memory initCode) public payable returns (address newContract) {
         return
-            deployCreate2(
+            deployCreate2({
                 // solhint-disable-next-line not-rely-on-time
-                keccak256(abi.encode(block.timestamp, blockhash(block.number))),
-                initCode
-            );
+                salt: keccak256(abi.encode(block.timestamp, blockhash(block.number))),
+                initCode: initCode
+            });
     }
 
     /**
@@ -337,12 +337,12 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
         }
-        if (newContract == address(0)) revert FailedContractCreation(address(this));
-        emit ContractCreation(newContract);
+        if (newContract == address(0)) revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: newContract});
 
         // solhint-disable-next-line avoid-low-level-calls
         (bool success, ) = newContract.call{value: values.initCallAmount}(data);
-        if (!success) revert FailedContractInitialisation(address(this));
+        if (!success) revert FailedContractInitialisation({emitter: address(this)});
 
         uint256 balance = address(this).balance;
         if (balance != 0) {
@@ -352,7 +352,7 @@ contract CreateX {
              */
             // solhint-disable-next-line avoid-low-level-calls
             (bool refunded, ) = msg.sender.call{value: balance}("");
-            if (!refunded) revert EtherTransferFail(address(this));
+            if (!refunded) revert EtherTransferFail({emitter: address(this)});
         }
     }
 
@@ -378,13 +378,13 @@ contract CreateX {
         Values memory values
     ) public payable returns (address newContract) {
         return
-            deployCreate2AndInit(
+            deployCreate2AndInit({
                 // solhint-disable-next-line not-rely-on-time
-                keccak256(abi.encode(block.timestamp, blockhash(block.number))),
-                initCode,
-                data,
-                values
-            );
+                salt: keccak256(abi.encode(block.timestamp, blockhash(block.number))),
+                initCode: initCode,
+                data: data,
+                values: values
+            });
     }
 
     /**
@@ -405,8 +405,8 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
         }
-        if (newContract == address(0)) revert FailedContractCreation(address(this));
-        emit ContractCreation(newContract);
+        if (newContract == address(0)) revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: newContract});
     }
 
     /**
@@ -435,12 +435,12 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
         }
-        if (newContract == address(0)) revert FailedContractCreation(address(this));
-        emit ContractCreation(newContract);
+        if (newContract == address(0)) revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: newContract});
 
         // solhint-disable-next-line avoid-low-level-calls
         (bool success, ) = newContract.call{value: values.initCallAmount}(data);
-        if (!success) revert FailedContractInitialisation(address(this));
+        if (!success) revert FailedContractInitialisation({emitter: address(this)});
 
         uint256 balance = address(this).balance;
         if (balance != 0) {
@@ -450,7 +450,7 @@ contract CreateX {
              */
             // solhint-disable-next-line avoid-low-level-calls
             (bool refunded, ) = msg.sender.call{value: balance}("");
-            if (!refunded) revert EtherTransferFail(address(this));
+            if (!refunded) revert EtherTransferFail({emitter: address(this)});
         }
     }
 
@@ -475,12 +475,12 @@ contract CreateX {
             mstore(add(clone, 0x28), hex"5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000")
             proxy := create2(0, clone, 0x37, salt)
         }
-        if (proxy == address(0)) revert FailedContractCreation(address(this));
-        emit ContractCreation(proxy);
+        if (proxy == address(0)) revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: proxy});
 
         // solhint-disable-next-line avoid-low-level-calls
         (bool success, ) = implementation.call{value: msg.value}(abi.encodeWithSignature("initializer()"));
-        if (!success || implementation.code.length != 0) revert FailedContractInitialisation(address(this));
+        if (!success || implementation.code.length != 0) revert FailedContractInitialisation({emitter: address(this)});
     }
 
     /**
@@ -497,11 +497,11 @@ contract CreateX {
      */
     function deployCreate2Clone(address implementation) public payable returns (address proxy) {
         return
-            deployCreate2Clone(
+            deployCreate2Clone({
                 // solhint-disable-next-line not-rely-on-time
-                keccak256(abi.encode(block.timestamp, blockhash(block.number))),
-                implementation
-            );
+                salt: keccak256(abi.encode(block.timestamp, blockhash(block.number))),
+                implementation: implementation
+            });
     }
 
     /**
@@ -539,7 +539,7 @@ contract CreateX {
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
     function computeCreate2Address(bytes32 salt, bytes32 initCodeHash) public view returns (address computedAddress) {
-        return computeCreate2Address(salt, initCodeHash, address(this));
+        return computeCreate2Address({salt: salt, initCodeHash: initCodeHash, deployer: address(this)});
     }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -567,13 +567,13 @@ contract CreateX {
         assembly ("memory-safe") {
             proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), salt)
         }
-        if (proxy == address(0)) revert FailedContractCreation(address(this));
-        emit ContractCreation(proxy);
+        if (proxy == address(0)) revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: proxy});
 
-        newContract = computeCreate3Address(salt);
+        newContract = computeCreate3Address({salt: salt});
         (bool success, ) = proxy.call{value: msg.value}(initCode);
-        if (!success || newContract.code.length == 0) revert FailedContractCreation(address(this));
-        emit ContractCreation(newContract);
+        if (!success || newContract.code.length == 0) revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: newContract});
     }
 
     /**
@@ -605,17 +605,17 @@ contract CreateX {
         assembly ("memory-safe") {
             proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), salt)
         }
-        if (proxy == address(0)) revert FailedContractCreation(address(this));
-        emit ContractCreation(proxy);
+        if (proxy == address(0)) revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: proxy});
 
-        newContract = computeCreate3Address(salt);
+        newContract = computeCreate3Address({salt: salt});
         (bool success, ) = proxy.call{value: values.constructorAmount}(initCode);
-        if (!success || newContract.code.length == 0) revert FailedContractCreation(address(this));
-        emit ContractCreation(newContract);
+        if (!success || newContract.code.length == 0) revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: newContract});
 
         // solhint-disable-next-line avoid-low-level-calls
         (success, ) = newContract.call{value: values.initCallAmount}(data);
-        if (!success) revert FailedContractInitialisation(address(this));
+        if (!success) revert FailedContractInitialisation({emitter: address(this)});
 
         uint256 balance = address(this).balance;
         if (balance != 0) {
@@ -625,7 +625,7 @@ contract CreateX {
              */
             // solhint-disable-next-line avoid-low-level-calls
             (bool refunded, ) = msg.sender.call{value: balance}("");
-            if (!refunded) revert EtherTransferFail(address(this));
+            if (!refunded) revert EtherTransferFail({emitter: address(this)});
         }
     }
 
@@ -663,6 +663,6 @@ contract CreateX {
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
     function computeCreate3Address(bytes32 salt) public view returns (address computedAddress) {
-        return computeCreate3Address(salt, address(this));
+        return computeCreate3Address({salt: salt, deployer: address(this)});
     }
 }
