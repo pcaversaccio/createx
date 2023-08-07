@@ -77,7 +77,7 @@ contract CreateX {
      * at the same address.
      * @param salt The 32-byte random value used to create the contract address.
      */
-    modifier guard(bytes32 salt) {
+    modifier xChainRedeployGuard(bytes32 salt) {
         salt = keccak256(abi.encode(msg.sender, block.chainid, salt));
         _;
     }
@@ -400,7 +400,7 @@ contract CreateX {
     function deployCreate2Guarded(
         bytes32 salt,
         bytes memory initCode
-    ) public payable guard(salt) returns (address newContract) {
+    ) public payable xChainRedeployGuard(salt) returns (address newContract) {
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
@@ -430,7 +430,7 @@ contract CreateX {
         bytes memory initCode,
         bytes memory data,
         Values memory values
-    ) public payable guard(salt) returns (address newContract) {
+    ) public payable xChainRedeployGuard(salt) returns (address newContract) {
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
