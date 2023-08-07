@@ -482,7 +482,11 @@ contract CreateX {
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
      * level that potentially malicious reentrant calls do not affect your smart contract system.
      */
-    function deployCreate2Clone(bytes32 salt, address implementation, bytes memory data) public payable returns (address proxy) {
+    function deployCreate2Clone(
+        bytes32 salt,
+        address implementation,
+        bytes memory data
+    ) public payable returns (address proxy) {
         bytes20 implementationInBytes = bytes20(implementation);
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
