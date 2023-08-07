@@ -129,7 +129,7 @@ contract CreateX {
      */
     function deployCreateAndInit(
         bytes memory initCode,
-        bytes calldata data,
+        bytes memory data,
         Values memory values
     ) public payable returns (address newContract) {
         // solhint-disable-next-line no-inline-assembly
@@ -330,7 +330,7 @@ contract CreateX {
     function deployCreate2AndInit(
         bytes32 salt,
         bytes memory initCode,
-        bytes calldata data,
+        bytes memory data,
         Values memory values
     ) public payable returns (address newContract) {
         // solhint-disable-next-line no-inline-assembly
@@ -374,7 +374,7 @@ contract CreateX {
      */
     function deployCreate2AndInit(
         bytes memory initCode,
-        bytes calldata data,
+        bytes memory data,
         Values memory values
     ) public payable returns (address newContract) {
         return
@@ -559,7 +559,7 @@ contract CreateX {
      */
     function deployCreate3(
         bytes32 salt,
-        bytes calldata initCode
+        bytes memory initCode
     ) public payable onlyMsgSender(salt) returns (address newContract) {
         bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
         address proxy;
@@ -595,8 +595,8 @@ contract CreateX {
      */
     function deployCreate3AndInit(
         bytes32 salt,
-        bytes calldata initCode,
-        bytes calldata data,
+        bytes memory initCode,
+        bytes memory data,
         Values memory values
     ) public payable onlyMsgSender(salt) returns (address newContract) {
         bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
