@@ -57,12 +57,6 @@ contract CreateX {
     error InvalidNonceValue(address emitter);
 
     /**
-     * @dev Error that occurs when the salt value is invalid.
-     * @param emitter The contract that emits the error.
-     */
-    error InvalidSalt(address emitter);
-
-    /**
      * @dev Error that occurs when transferring ether has failed.
      * @param emitter The contract that emits the error.
      */
@@ -83,12 +77,12 @@ contract CreateX {
     }
 
     /**
-     * @dev Modifier that ensures that the first 20 bytes of a submitted salt match
-     * those of the calling account.
+     * @dev Modifier that prevents frontrunning a specific contract creation by an
+     * account other than `msg.sender`.
      * @param salt The 32-byte random value used to create the contract address.
      */
     modifier onlyMsgSender(bytes32 salt) {
-        if (address(bytes20(salt)) != msg.sender) revert InvalidSalt({emitter: address(this)});
+        salt = keccak256(abi.encode(msg.sender, salt));
         _;
     }
 
