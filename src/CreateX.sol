@@ -500,7 +500,7 @@ contract CreateX {
         emit ContractCreation({newContract: proxy});
 
         // solhint-disable-next-line avoid-low-level-calls
-        (bool success, ) = implementation.call{value: msg.value}(data);
+        (bool success, ) = proxy.call{value: msg.value}(data);
         if (!success || implementation.code.length != 0) revert FailedContractInitialisation({emitter: address(this)});
     }
 
