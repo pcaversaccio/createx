@@ -152,14 +152,15 @@ contract CreateX {
     /**
      * @dev Deploys a new EIP-1167 minimal proxy contract using the `CREATE` opcode and initialises the
      * implementation contract using `msg.value` and the implementation address `implementation` as inputs.
-     * Note that if `msg.value` is non-zero, the initialiser function `initializer` must be `payable`.
+     * Note that if `msg.value` is non-zero, the initialiser function called via `data` must be `payable`.
      * @param implementation The 20-byte implementation contract address.
+     * @param data The initialisation code that is passed to the deployed proxy contract.
      * @return proxy The 20-byte address where the clone was deployed.
      * @custom:security This function allows for reentrancy, however we refrain from adding
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
      * level that potentially malicious reentrant calls do not affect your smart contract system.
      */
-    function deployCreateClone(address implementation) public payable returns (address proxy) {
+    function deployCreateClone(address implementation, bytes memory data) public payable returns (address proxy) {
         bytes20 implementationInBytes = bytes20(implementation);
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
@@ -173,7 +174,7 @@ contract CreateX {
         emit ContractCreation({newContract: proxy});
 
         // solhint-disable-next-line avoid-low-level-calls
-        (bool success, ) = implementation.call{value: msg.value}(abi.encodeWithSignature("initializer()"));
+        (bool success, ) = proxy.call{value: msg.value}(data);
         if (!success || implementation.code.length != 0) revert FailedContractInitialisation({emitter: address(this)});
     }
 
@@ -472,14 +473,16 @@ contract CreateX {
      * @dev Deploys a new EIP-1167 minimal proxy contract using the `CREATE2` opcode and the salt
      * value `salt` and initialises the implementation contract using `msg.value` and the implementation
      * address `implementation` as inputs. Note that if `msg.value` is non-zero, the initialiser function
-     * `initializer` must be `payable`.
+     * called via `data` must be `payable`.
+     * @param salt The 32-byte random value used to create the proxy contract address.
      * @param implementation The 20-byte implementation contract address.
+     * @param data The initialisation code that is passed to the deployed proxy contract.
      * @return proxy The 20-byte address where the clone was deployed.
      * @custom:security This function allows for reentrancy, however we refrain from adding
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
      * level that potentially malicious reentrant calls do not affect your smart contract system.
      */
-    function deployCreate2Clone(bytes32 salt, address implementation) public payable returns (address proxy) {
+    function deployCreate2Clone(bytes32 salt, address implementation, bytes memory data) public payable returns (address proxy) {
         bytes20 implementationInBytes = bytes20(implementation);
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
@@ -493,7 +496,7 @@ contract CreateX {
         emit ContractCreation({newContract: proxy});
 
         // solhint-disable-next-line avoid-low-level-calls
-        (bool success, ) = implementation.call{value: msg.value}(abi.encodeWithSignature("initializer()"));
+        (bool success, ) = implementation.call{value: msg.value}(data);
         if (!success || implementation.code.length != 0) revert FailedContractInitialisation({emitter: address(this)});
     }
 
@@ -502,14 +505,15 @@ contract CreateX {
      * value `salt` and initialises the implementation contract using `msg.value` and the implementation
      * address `implementation` as inputs. The salt value is calculated pseudo-randomly using the block
      * timestamp and the block hash of the current block. This approach does not guarantee true randomness!
-     * Note that if `msg.value` is non-zero, the initialiser function `initializer` must be `payable`.
+     * Note that if `msg.value` is non-zero, the initialiser function called via `data` must be `payable`.
      * @param implementation The 20-byte implementation contract address.
+     * @param data The initialisation code that is passed to the deployed proxy contract.
      * @return proxy The 20-byte address where the clone was deployed.
      * @custom:security This function allows for reentrancy, however we refrain from adding
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
      * level that potentially malicious reentrant calls do not affect your smart contract system.
      */
-    function deployCreate2Clone(address implementation) public payable returns (address proxy) {
+    function deployCreate2Clone(address implementation, bytes memory data) public payable returns (address proxy) {
         return
             deployCreate2Clone({
                 salt: keccak256(
@@ -524,7 +528,8 @@ contract CreateX {
                         msg.sender
                     )
                 ),
-                implementation: implementation
+                implementation: implementation,
+                data: data
             });
     }
 
