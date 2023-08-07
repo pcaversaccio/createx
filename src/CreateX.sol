@@ -306,8 +306,18 @@ contract CreateX {
     function deployCreate2(bytes memory initCode) public payable returns (address newContract) {
         return
             deployCreate2({
-                // solhint-disable-next-line not-rely-on-time
-                salt: keccak256(abi.encode(block.timestamp, blockhash(block.number))),
+                salt: keccak256(
+                    abi.encode(
+                        blockhash(block.number),
+                        block.coinbase,
+                        block.number,
+                        // solhint-disable-next-line not-rely-on-time
+                        block.timestamp,
+                        block.prevrandao,
+                        block.chainid,
+                        msg.sender
+                    )
+                ),
                 initCode: initCode
             });
     }
@@ -379,8 +389,18 @@ contract CreateX {
     ) public payable returns (address newContract) {
         return
             deployCreate2AndInit({
-                // solhint-disable-next-line not-rely-on-time
-                salt: keccak256(abi.encode(block.timestamp, blockhash(block.number))),
+                salt: keccak256(
+                    abi.encode(
+                        blockhash(block.number),
+                        block.coinbase,
+                        block.number,
+                        // solhint-disable-next-line not-rely-on-time
+                        block.timestamp,
+                        block.prevrandao,
+                        block.chainid,
+                        msg.sender
+                    )
+                ),
                 initCode: initCode,
                 data: data,
                 values: values
@@ -498,8 +518,18 @@ contract CreateX {
     function deployCreate2Clone(address implementation) public payable returns (address proxy) {
         return
             deployCreate2Clone({
-                // solhint-disable-next-line not-rely-on-time
-                salt: keccak256(abi.encode(block.timestamp, blockhash(block.number))),
+                salt: keccak256(
+                    abi.encode(
+                        blockhash(block.number),
+                        block.coinbase,
+                        block.number,
+                        // solhint-disable-next-line not-rely-on-time
+                        block.timestamp,
+                        block.prevrandao,
+                        block.chainid,
+                        msg.sender
+                    )
+                ),
                 implementation: implementation
             });
     }
