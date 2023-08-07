@@ -32,16 +32,16 @@ contract CreateXTest is Test {
         vm.expectEmit({
             checkTopic1: true,
             checkTopic2: true,
-            checkTopic3: false,
+            checkTopic3: true,
             checkData: true,
             emitter: computedAddress
         });
         emit Transfer({from: zeroAddress, to: arg3, value: arg4});
         vm.expectEmit({
             checkTopic1: true,
-            checkTopic2: false,
-            checkTopic3: false,
-            checkData: false,
+            checkTopic2: true,
+            checkTopic3: true,
+            checkData: true,
             emitter: createXAddr
         });
         emit ContractCreation({newContract: computedAddress});
@@ -65,16 +65,16 @@ contract CreateXTest is Test {
         vm.expectEmit({
             checkTopic1: true,
             checkTopic2: true,
-            checkTopic3: false,
+            checkTopic3: true,
             checkData: true,
             emitter: computedAddress
         });
         emit Transfer({from: zeroAddress, to: arg3, value: arg4});
         vm.expectEmit({
             checkTopic1: true,
-            checkTopic2: false,
-            checkTopic3: false,
-            checkData: false,
+            checkTopic2: true,
+            checkTopic3: true,
+            checkData: true,
             emitter: createXAddr
         });
         emit ContractCreation({newContract: computedAddress});
@@ -91,9 +91,9 @@ contract CreateXTest is Test {
         address computedAddress = createX.computeCreateAddress({deployer: createXAddr, nonce: 1});
         vm.expectEmit({
             checkTopic1: true,
-            checkTopic2: false,
-            checkTopic3: false,
-            checkData: false,
+            checkTopic2: true,
+            checkTopic3: true,
+            checkData: true,
             emitter: createXAddr
         });
         emit ContractCreation({newContract: computedAddress});
@@ -110,9 +110,9 @@ contract CreateXTest is Test {
         address computedAddress = createX.computeCreateAddress({deployer: createXAddr, nonce: 1});
         vm.expectEmit({
             checkTopic1: true,
-            checkTopic2: false,
-            checkTopic3: false,
-            checkData: false,
+            checkTopic2: true,
+            checkTopic3: true,
+            checkData: true,
             emitter: createXAddr
         });
         emit ContractCreation({newContract: computedAddress});
@@ -146,16 +146,16 @@ contract CreateXTest is Test {
         vm.expectEmit({
             checkTopic1: true,
             checkTopic2: true,
-            checkTopic3: false,
+            checkTopic3: true,
             checkData: true,
             emitter: computedAddress
         });
         emit Transfer({from: zeroAddress, to: arg3, value: arg4});
         vm.expectEmit({
             checkTopic1: true,
-            checkTopic2: false,
-            checkTopic3: false,
-            checkData: false,
+            checkTopic2: true,
+            checkTopic3: true,
+            checkData: true,
             emitter: createXAddr
         });
         emit ContractCreation({newContract: computedAddress});
@@ -183,16 +183,16 @@ contract CreateXTest is Test {
         vm.expectEmit({
             checkTopic1: true,
             checkTopic2: true,
-            checkTopic3: false,
+            checkTopic3: true,
             checkData: true,
             emitter: computedAddress
         });
         emit Transfer({from: zeroAddress, to: arg3, value: arg4});
         vm.expectEmit({
             checkTopic1: true,
-            checkTopic2: false,
-            checkTopic3: false,
-            checkData: false,
+            checkTopic2: true,
+            checkTopic3: true,
+            checkData: true,
             emitter: createXAddr
         });
         emit ContractCreation({newContract: computedAddress});
