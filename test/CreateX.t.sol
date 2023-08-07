@@ -37,13 +37,7 @@ contract CreateXTest is Test {
             emitter: computedAddress
         });
         emit Transfer({from: zeroAddress, to: arg3, value: arg4});
-        vm.expectEmit({
-            checkTopic1: true,
-            checkTopic2: true,
-            checkTopic3: true,
-            checkData: true,
-            emitter: createXAddr
-        });
+        vm.expectEmit({checkTopic1: true, checkTopic2: true, checkTopic3: true, checkData: true, emitter: createXAddr});
         emit ContractCreation({newContract: computedAddress});
         createX.deployCreate({initCode: bytecode});
 
@@ -70,13 +64,7 @@ contract CreateXTest is Test {
             emitter: computedAddress
         });
         emit Transfer({from: zeroAddress, to: arg3, value: arg4});
-        vm.expectEmit({
-            checkTopic1: true,
-            checkTopic2: true,
-            checkTopic3: true,
-            checkData: true,
-            emitter: createXAddr
-        });
+        vm.expectEmit({checkTopic1: true, checkTopic2: true, checkTopic3: true, checkData: true, emitter: createXAddr});
         emit ContractCreation({newContract: computedAddress});
         createX.deployCreate{value: 1 ether}({initCode: bytecode});
 
@@ -89,13 +77,7 @@ contract CreateXTest is Test {
 
     function testDeployCreateZeroBytesNonPayable() public {
         address computedAddress = createX.computeCreateAddress({deployer: createXAddr, nonce: 1});
-        vm.expectEmit({
-            checkTopic1: true,
-            checkTopic2: true,
-            checkTopic3: true,
-            checkData: true,
-            emitter: createXAddr
-        });
+        vm.expectEmit({checkTopic1: true, checkTopic2: true, checkTopic3: true, checkData: true, emitter: createXAddr});
         emit ContractCreation({newContract: computedAddress});
         createX.deployCreate({initCode: new bytes(0)});
         assertEq({a: computedAddress.code.length, b: 0});
@@ -108,13 +90,7 @@ contract CreateXTest is Test {
      */
     function testDeployCreateZeroBytesPayable() public {
         address computedAddress = createX.computeCreateAddress({deployer: createXAddr, nonce: 1});
-        vm.expectEmit({
-            checkTopic1: true,
-            checkTopic2: true,
-            checkTopic3: true,
-            checkData: true,
-            emitter: createXAddr
-        });
+        vm.expectEmit({checkTopic1: true, checkTopic2: true, checkTopic3: true, checkData: true, emitter: createXAddr});
         emit ContractCreation({newContract: computedAddress});
         createX.deployCreate{value: 1 wei}({initCode: new bytes(0)});
         assertEq({a: computedAddress.code.length, b: 0});
@@ -151,13 +127,7 @@ contract CreateXTest is Test {
             emitter: computedAddress
         });
         emit Transfer({from: zeroAddress, to: arg3, value: arg4});
-        vm.expectEmit({
-            checkTopic1: true,
-            checkTopic2: true,
-            checkTopic3: true,
-            checkData: true,
-            emitter: createXAddr
-        });
+        vm.expectEmit({checkTopic1: true, checkTopic2: true, checkTopic3: true, checkData: true, emitter: createXAddr});
         emit ContractCreation({newContract: computedAddress});
         createX.deployCreate({initCode: bytecode});
 
@@ -188,13 +158,7 @@ contract CreateXTest is Test {
             emitter: computedAddress
         });
         emit Transfer({from: zeroAddress, to: arg3, value: arg4});
-        vm.expectEmit({
-            checkTopic1: true,
-            checkTopic2: true,
-            checkTopic3: true,
-            checkData: true,
-            emitter: createXAddr
-        });
+        vm.expectEmit({checkTopic1: true, checkTopic2: true, checkTopic3: true, checkData: true, emitter: createXAddr});
         emit ContractCreation({newContract: computedAddress});
         createX.deployCreate{value: value}({initCode: bytecode});
 
