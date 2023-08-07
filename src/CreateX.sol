@@ -78,7 +78,7 @@ contract CreateX {
      * @param salt The 32-byte random value used to create the contract address.
      */
     modifier xChainRedeployGuard(bytes32 salt) {
-        salt = keccak256(abi.encode(msg.sender, block.chainid, salt));
+        salt = keccak256(abi.encode(block.chainid, salt));
         _;
     }
 
