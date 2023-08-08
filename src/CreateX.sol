@@ -106,7 +106,7 @@ contract CreateX {
         /**
          * @dev We ensure that `newContract` is a non-zero byte contract.
          */
-        if (newContract == address(0) || newContract.code.length != 0)
+        if (newContract == address(0) || newContract.code.length == 0)
             revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: newContract});
     }
@@ -139,7 +139,7 @@ contract CreateX {
         /**
          * @dev We ensure that `newContract` is a non-zero byte contract.
          */
-        if (newContract == address(0) || newContract.code.length != 0)
+        if (newContract == address(0) || newContract.code.length == 0)
             revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: newContract});
 
@@ -211,7 +211,7 @@ contract CreateX {
         /**
          * @dev We ensure that `implementation` is a non-zero byte contract.
          */
-        if (!success || implementation.code.length != 0) revert FailedContractInitialisation({emitter: address(this)});
+        if (!success || implementation.code.length == 0) revert FailedContractInitialisation({emitter: address(this)});
     }
 
     /**
@@ -318,7 +318,7 @@ contract CreateX {
         /**
          * @dev We ensure that `newContract` is a non-zero byte contract.
          */
-        if (newContract == address(0) || newContract.code.length != 0)
+        if (newContract == address(0) || newContract.code.length == 0)
             revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: newContract});
     }
@@ -381,7 +381,7 @@ contract CreateX {
         /**
          * @dev We ensure that `newContract` is a non-zero byte contract.
          */
-        if (newContract == address(0) || newContract.code.length != 0)
+        if (newContract == address(0) || newContract.code.length == 0)
             revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: newContract});
 
@@ -508,7 +508,7 @@ contract CreateX {
         /**
          * @dev We ensure that `newContract` is a non-zero byte contract.
          */
-        if (newContract == address(0) || newContract.code.length != 0)
+        if (newContract == address(0) || newContract.code.length == 0)
             revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: newContract});
     }
@@ -544,7 +544,7 @@ contract CreateX {
         /**
          * @dev We ensure that `newContract` is a non-zero byte contract.
          */
-        if (newContract == address(0) || newContract.code.length != 0)
+        if (newContract == address(0) || newContract.code.length == 0)
             revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: newContract});
 
@@ -635,7 +635,7 @@ contract CreateX {
         /**
          * @dev We ensure that `implementation` is a non-zero byte contract.
          */
-        if (!success || implementation.code.length != 0) revert FailedContractInitialisation({emitter: address(this)});
+        if (!success || implementation.code.length == 0) revert FailedContractInitialisation({emitter: address(this)});
     }
 
     /**

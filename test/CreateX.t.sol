@@ -76,25 +76,13 @@ contract CreateXTest is Test {
     }
 
     function testDeployCreateZeroBytesNonPayable() public {
-        address computedAddress = createX.computeCreateAddress({deployer: createXAddr, nonce: 1});
-        vm.expectEmit({checkTopic1: true, checkTopic2: true, checkTopic3: true, checkData: true, emitter: createXAddr});
-        emit ContractCreation({newContract: computedAddress});
+        vm.expectRevert({revertData: abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr)});
         createX.deployCreate({initCode: new bytes(0)});
-        assertEq({a: computedAddress.code.length, b: 0});
     }
 
-    /**
-     * @dev If you deploy a zero-byte contract, it gets treated like an EOA
-     * in the sense that it can receive Ether without having a `payable` constructor or
-     * `receive`/`payable fallback` function.
-     */
     function testDeployCreateZeroBytesPayable() public {
-        address computedAddress = createX.computeCreateAddress({deployer: createXAddr, nonce: 1});
-        vm.expectEmit({checkTopic1: true, checkTopic2: true, checkTopic3: true, checkData: true, emitter: createXAddr});
-        emit ContractCreation({newContract: computedAddress});
+        vm.expectRevert({revertData: abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr)});
         createX.deployCreate{value: 1 wei}({initCode: new bytes(0)});
-        assertEq({a: computedAddress.code.length, b: 0});
-        assertEq({a: computedAddress.balance, b: 1 wei});
     }
 
     function testDeployCreateRevertNonPayable() public {
