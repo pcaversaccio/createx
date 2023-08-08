@@ -67,22 +67,25 @@ contract CreateX {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
-     * @dev Modifier that prevents redeploying a specific contract to another chain at
-     * the same address.
+     * @dev Modifier that implements different safeguarding mechanisms depending on the encoded
+     * values in the salt:
+     * => salt (32 bytes) = 0xbebebebebebebebebebebebebebebebebebebebeaa1212121212121212121212
+     * - The first 20 bytes (i.e. `bebebebebebebebebebebebebebebebebebebebe`) may be used to implement
+     *   a permissioned deploy protection by setting them equal to `msg.sender`,
+     * - The 21st byte (i.e. `aa`) may be used to implement a cross-chain redeploy protection by setting
+     *   it equal to `0x01`,
+     * - The last random 11 bytes (i.e. `1212121212121212121212`) do generate 2**88 bits of entropy for
+     *   the salt mining.
      * @param salt The 32-byte random value used to create the contract address.
      */
-    modifier xChainRedeployGuard(bytes32 salt) {
-        salt = keccak256(abi.encode(block.chainid, salt));
-        _;
-    }
-
-    /**
-     * @dev Modifier that prevents frontrunning a specific contract creation by an account
-     * other than `msg.sender`.
-     * @param salt The 32-byte random value used to create the contract address.
-     */
-    modifier onlyMsgSender(bytes32 salt) {
-        salt = keccak256(abi.encode(msg.sender, salt));
+    modifier guard(bytes32 salt) {
+        if (address(bytes20(salt)) == msg.sender && bytes1(bytes16(uint128(uint256(salt)))) == hex"01") {
+            salt = keccak256(abi.encode(msg.sender, salt, block.chainid));
+        } else if (address(bytes20(salt)) == msg.sender && bytes1(bytes16(uint128(uint256(salt)))) == hex"00") {
+            salt = _efficientHash(bytes32(bytes20(uint160(msg.sender))), salt);
+        } else if (address(bytes20(salt)) == address(0) && bytes1(bytes16(uint128(uint256(salt)))) == hex"01") {
+            salt = _efficientHash(salt, bytes32(block.chainid));
+        }
         _;
     }
 
@@ -310,7 +313,10 @@ contract CreateX {
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
      */
-    function deployCreate2(bytes32 salt, bytes memory initCode) public payable returns (address newContract) {
+    function deployCreate2(
+        bytes32 salt,
+        bytes memory initCode
+    ) public payable guard(salt) returns (address newContract) {
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
@@ -333,6 +339,11 @@ contract CreateX {
      * @return newContract The 20-byte address where the contract was deployed.
      */
     function deployCreate2(bytes memory initCode) public payable returns (address newContract) {
+        /**
+         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate2`.
+         * There is a tiny probability that the 21st bit of the salt value is `0x01` and thus introduces
+         * cross-chain redeployment protection. If you want to avoid such a situation, do not use this function.
+         */
         return
             deployCreate2({
                 salt: keccak256(
@@ -373,7 +384,7 @@ contract CreateX {
         bytes memory data,
         Values memory values,
         address refundAddress
-    ) public payable returns (address newContract) {
+    ) public payable guard(salt) returns (address newContract) {
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
@@ -424,6 +435,11 @@ contract CreateX {
         Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
+        /**
+         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate2AndInit`.
+         * There is a tiny probability that the 21st bit of the salt value is `0x01` and thus introduces
+         * cross-chain redeployment protection. If you want to avoid such a situation, do not use this function.
+         */
         return
             deployCreate2AndInit({
                 salt: keccak256(
@@ -466,6 +482,11 @@ contract CreateX {
         bytes memory data,
         Values memory values
     ) public payable returns (address newContract) {
+        /**
+         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate2AndInit`.
+         * There is a tiny probability that the 21st bit of the salt value is `0x01` and thus introduces
+         * cross-chain redeployment protection. If you want to avoid such a situation, do not use this function.
+         */
         return
             deployCreate2AndInit({
                 salt: keccak256(
@@ -480,119 +501,6 @@ contract CreateX {
                         msg.sender
                     )
                 ),
-                initCode: initCode,
-                data: data,
-                values: values,
-                refundAddress: msg.sender
-            });
-    }
-
-    /**
-     * @dev Deploys a guarded (i.e. prevents the redeployment to other chains) new contract via
-     * calling the `CREATE2` opcode and using the salt value `salt`, the creation bytecode `initCode`,
-     * and `msg.value` as inputs. In order to save deployment costs, we do not sanity check the
-     * `initCode` length. Note that if `msg.value` is non-zero, `initCode` must have a `payable`
-     * constructor.
-     * @param salt The 32-byte random value used to create the contract address.
-     * @param initCode The creation bytecode.
-     * @return newContract The 20-byte address where the contract was deployed.
-     */
-    function deployCreate2Guarded(
-        bytes32 salt,
-        bytes memory initCode
-    ) public payable xChainRedeployGuard(salt) returns (address newContract) {
-        // solhint-disable-next-line no-inline-assembly
-        assembly ("memory-safe") {
-            newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
-        }
-        /**
-         * @dev We ensure that `newContract` is a non-zero byte contract.
-         */
-        if (newContract == address(0) || newContract.code.length == 0)
-            revert FailedContractCreation({emitter: address(this)});
-        emit ContractCreation({newContract: newContract});
-    }
-
-    /**
-     * @dev Deploys and initialises a guarded (i.e. prevents the redeployment to other chains) new
-     * contract via calling the `CREATE2` opcode and using the salt value `salt`, the creation bytecode
-     * `initCode`, `msg.value`, the initialisation code `data`, the struct for the `payable` amounts
-     * `values`, and the refund address `refundAddress` as inputs. In order to save deployment costs,
-     * we do not sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero,
-     * `initCode` must have a `payable` constructor.
-     * @param salt The 32-byte random value used to create the contract address.
-     * @param initCode The creation bytecode.
-     * @param data The initialisation code that is passed to the deployed contract.
-     * @param values The specific `payable` amounts for the deployment and initialisation call.
-     * @param refundAddress The 20-byte address where any excess ether is returned to.
-     * @return newContract The 20-byte address where the contract was deployed.
-     * @custom:security This function allows for reentrancy, however we refrain from adding
-     * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
-     * level that potentially malicious reentrant calls do not affect your smart contract system.
-     */
-    function deployCreate2AndInitGuarded(
-        bytes32 salt,
-        bytes memory initCode,
-        bytes memory data,
-        Values memory values,
-        address refundAddress
-    ) public payable xChainRedeployGuard(salt) returns (address newContract) {
-        // solhint-disable-next-line no-inline-assembly
-        assembly ("memory-safe") {
-            newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
-        }
-        /**
-         * @dev We ensure that `newContract` is a non-zero byte contract.
-         */
-        if (newContract == address(0) || newContract.code.length == 0)
-            revert FailedContractCreation({emitter: address(this)});
-        emit ContractCreation({newContract: newContract});
-
-        // solhint-disable-next-line avoid-low-level-calls
-        (bool success, ) = newContract.call{value: values.initCallAmount}(data);
-        if (!success) revert FailedContractInitialisation({emitter: address(this)});
-
-        uint256 balance = address(this).balance;
-        if (balance != 0) {
-            /**
-             * @dev Any wei amount previously forced into this contract (e.g. by
-             * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
-             */
-            // solhint-disable-next-line avoid-low-level-calls
-            (bool refunded, ) = refundAddress.call{value: balance}("");
-            if (!refunded) revert EtherTransferFail({emitter: address(this)});
-        }
-    }
-
-    /**
-     * @dev Deploys and initialises a guarded (i.e. prevents the redeployment to other chains) new
-     * contract via calling the `CREATE2` opcode and using the salt value `salt`, the creation bytecode
-     * `initCode`, `msg.value`, the initialisation code `data`, and the struct for the `payable` amounts
-     * `values` as inputs. In order to save deployment costs, we do not sanity check the `initCode`
-     * length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable`
-     * constructor, and any excess ether is returned to `msg.sender`.
-     * @param salt The 32-byte random value used to create the contract address.
-     * @param initCode The creation bytecode.
-     * @param data The initialisation code that is passed to the deployed contract.
-     * @param values The specific `payable` amounts for the deployment and initialisation call.
-     * @return newContract The 20-byte address where the contract was deployed.
-     * @custom:security This function allows for reentrancy, however we refrain from adding
-     * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
-     * level that potentially malicious reentrant calls do not affect your smart contract system.
-     */
-    function deployCreate2AndInitGuarded(
-        bytes32 salt,
-        bytes memory initCode,
-        bytes memory data,
-        Values memory values
-    ) public payable returns (address newContract) {
-        /**
-         * @dev Note that the modifier `xChainRedeployGuard` is called as part of the overloaded
-         * function `deployCreate2AndInitGuarded`.
-         */
-        return
-            deployCreate2AndInitGuarded({
-                salt: salt,
                 initCode: initCode,
                 data: data,
                 values: values,
@@ -727,7 +635,7 @@ contract CreateX {
     function deployCreate3(
         bytes32 salt,
         bytes memory initCode
-    ) public payable onlyMsgSender(salt) returns (address newContract) {
+    ) public payable guard(salt) returns (address newContract) {
         bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
         address proxy;
         // solhint-disable-next-line no-inline-assembly
@@ -771,7 +679,7 @@ contract CreateX {
         bytes memory data,
         Values memory values,
         address refundAddress
-    ) public payable onlyMsgSender(salt) returns (address newContract) {
+    ) public payable guard(salt) returns (address newContract) {
         bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
         address proxy;
         // solhint-disable-next-line no-inline-assembly
@@ -828,10 +736,11 @@ contract CreateX {
         bytes memory initCode,
         bytes memory data,
         Values memory values
-    ) public payable onlyMsgSender(salt) returns (address newContract) {
+    ) public payable returns (address newContract) {
         /**
-         * @dev Note that the modifier `onlyMsgSender` is called as part of the overloaded
-         * function `deployCreate3AndInit`.
+         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate3AndInit`.
+         * There is a tiny probability that the 21st bit of the salt value is `0x01` and thus introduces
+         * cross-chain redeployment protection. If you want to avoid such a situation, do not use this function.
          */
         return
             deployCreate3AndInit({
@@ -878,5 +787,24 @@ contract CreateX {
      */
     function computeCreate3Address(bytes32 salt) public view returns (address computedAddress) {
         return computeCreate3Address({salt: salt, deployer: address(this)});
+    }
+
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                      HELPER FUNCTIONS                      */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
+    /**
+     * @dev Returns the `keccak256` hash of `a` and `b` after concatenation.
+     * @param a The first 32-byte value to be concatenated and hashed.
+     * @param b The second 32-byte value to be concatenated and hashed.
+     * @return value The 32-byte `keccak256` hash of `a` and `b`.
+     */
+    function _efficientHash(bytes32 a, bytes32 b) private pure returns (bytes32 value) {
+        // solhint-disable-next-line no-inline-assembly
+        assembly ("memory-safe") {
+            mstore(0x00, a)
+            mstore(0x20, b)
+            value := keccak256(0x00, 0x40)
+        }
     }
 }
