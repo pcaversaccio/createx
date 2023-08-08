@@ -67,8 +67,8 @@ contract CreateX {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
-     * @dev Modifier that prevents redeploying a specific contract to another chain
-     * at the same address.
+     * @dev Modifier that prevents redeploying a specific contract to another chain at
+     * the same address.
      * @param salt The 32-byte random value used to create the contract address.
      */
     modifier xChainRedeployGuard(bytes32 salt) {
@@ -77,8 +77,8 @@ contract CreateX {
     }
 
     /**
-     * @dev Modifier that prevents frontrunning a specific contract creation by an
-     * account other than `msg.sender`.
+     * @dev Modifier that prevents frontrunning a specific contract creation by an account
+     * other than `msg.sender`.
      * @param salt The 32-byte random value used to create the contract address.
      */
     modifier onlyMsgSender(bytes32 salt) {
@@ -91,10 +91,10 @@ contract CreateX {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
-     * @dev Deploys a new contract via calling the `CREATE` opcode and using
-     * the creation bytecode `initCode` and `msg.value` as inputs. In order to save
-     * deployment costs, we do not sanity check the `initCode` length. Note that
-     * if `msg.value` is non-zero, `initCode` must have a `payable` constructor.
+     * @dev Deploys a new contract via calling the `CREATE` opcode and using the creation
+     * bytecode `initCode` and `msg.value` as inputs. In order to save deployment costs,
+     * we do not sanity check the `initCode` length. Note that if `msg.value` is non-zero,
+     * `initCode` must have a `payable` constructor.
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
      */
@@ -103,19 +103,24 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create(callvalue(), add(initCode, 0x20), mload(initCode))
         }
-        if (newContract == address(0)) revert FailedContractCreation({emitter: address(this)});
+        /**
+         * @dev We ensure that `newContract` is a non-zero byte contract.
+         */
+        if (newContract == address(0) || newContract.code.length != 0)
+            revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: newContract});
     }
 
     /**
-     * @dev Deploys and initialises a new contract via calling the `CREATE` opcode and
-     * using the creation bytecode `initCode`, `msg.value`, the initialisation code `data`,
-     * and the struct for the `payable` amounts `values` as inputs. In order to save deployment
-     * costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount`
-     * is non-zero, `initCode` must have a `payable` constructor.
+     * @dev Deploys and initialises a new contract via calling the `CREATE` opcode and using
+     * the creation bytecode `initCode`, `msg.value`, the initialisation code `data`, the struct
+     * for the `payable` amounts `values`, and the refund address `refundAddress` as inputs.
+     * In order to save deployment costs, we do not sanity check the `initCode` length. Note
+     * that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
      * @param values The specific `payable` amounts for the deployment and initialisation call.
+     * @param refundAddress The 20-byte address where any excess ether is returned to.
      * @return newContract The 20-byte address where the contract was deployed.
      * @custom:security This function allows for reentrancy, however we refrain from adding
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
@@ -124,13 +129,18 @@ contract CreateX {
     function deployCreateAndInit(
         bytes memory initCode,
         bytes memory data,
-        Values memory values
+        Values memory values,
+        address refundAddress
     ) public payable returns (address newContract) {
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             newContract := create(mload(values), add(initCode, 0x20), mload(initCode))
         }
-        if (newContract == address(0)) revert FailedContractCreation({emitter: address(this)});
+        /**
+         * @dev We ensure that `newContract` is a non-zero byte contract.
+         */
+        if (newContract == address(0) || newContract.code.length != 0)
+            revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: newContract});
 
         // solhint-disable-next-line avoid-low-level-calls
@@ -144,15 +154,38 @@ contract CreateX {
              * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
              */
             // solhint-disable-next-line avoid-low-level-calls
-            (bool refunded, ) = msg.sender.call{value: balance}("");
+            (bool refunded, ) = refundAddress.call{value: balance}("");
             if (!refunded) revert EtherTransferFail({emitter: address(this)});
         }
     }
 
     /**
-     * @dev Deploys a new EIP-1167 minimal proxy contract using the `CREATE` opcode and initialises the
-     * implementation contract using `msg.value` and the implementation address `implementation` as inputs.
-     * Note that if `msg.value` is non-zero, the initialiser function called via `data` must be `payable`.
+     * @dev Deploys and initialises a new contract via calling the `CREATE` opcode and using
+     * the creation bytecode `initCode`, `msg.value`, the initialisation code `data`, and the
+     * struct for the `payable` amounts `values`. In order to save deployment costs, we do not
+     * sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero,
+     * `initCode` must have a `payable` constructor, and any excess ether is returned to `msg.sender`.
+     * @param initCode The creation bytecode.
+     * @param data The initialisation code that is passed to the deployed contract.
+     * @param values The specific `payable` amounts for the deployment and initialisation call.
+     * @return newContract The 20-byte address where the contract was deployed.
+     * @custom:security This function allows for reentrancy, however we refrain from adding
+     * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
+     * level that potentially malicious reentrant calls do not affect your smart contract system.
+     */
+    function deployCreateAndInit(
+        bytes memory initCode,
+        bytes memory data,
+        Values memory values
+    ) public payable returns (address newContract) {
+        return deployCreateAndInit({initCode: initCode, data: data, values: values, refundAddress: msg.sender});
+    }
+
+    /**
+     * @dev Deploys a new EIP-1167 minimal proxy contract using the `CREATE` opcode and initialises
+     * the implementation contract using `msg.value` and the implementation address `implementation`
+     * as inputs. Note that if `msg.value` is non-zero, the initialiser function called via `data`
+     * must be `payable`.
      * @param implementation The 20-byte implementation contract address.
      * @param data The initialisation code that is passed to the deployed proxy contract.
      * @return proxy The 20-byte address where the clone was deployed.
@@ -175,21 +208,22 @@ contract CreateX {
 
         // solhint-disable-next-line avoid-low-level-calls
         (bool success, ) = proxy.call{value: msg.value}(data);
+        /**
+         * @dev We ensure that `implementation` is a non-zero byte contract.
+         */
         if (!success || implementation.code.length != 0) revert FailedContractInitialisation({emitter: address(this)});
     }
 
     /**
-     * @dev Returns the address where a contract will be stored if deployed via
-     * `deployer` using the `CREATE` opcode. For the specification of the Recursive
-     * Length Prefix (RLP) encoding scheme, please refer to p. 19 of the Ethereum
-     * Yellow Paper (https://ethereum.github.io/yellowpaper/paper.pdf) and the Ethereum
-     * Wiki (https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/).
+     * @dev Returns the address where a contract will be stored if deployed via `deployer` using
+     * the `CREATE` opcode. For the specification of the Recursive Length Prefix (RLP) encoding
+     * scheme, please refer to p. 19 of the Ethereum Yellow Paper (https://ethereum.github.io/yellowpaper/paper.pdf)
+     * and the Ethereum Wiki (https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/).
      * For further insights also, see the following issue: https://github.com/transmissions11/solmate/issues/207.
      *
-     * Based on the EIP-161 (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md)
-     * specification, all contract accounts on the Ethereum mainnet are initiated with
-     * `nonce = 1`. Thus, the first contract address created by another contract is calculated
-     * with a non-zero nonce.
+     * Based on the EIP-161 (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md) specification,
+     * all contract accounts on the Ethereum mainnet are initiated with `nonce = 1`. Thus, the
+     * first contract address created by another contract is calculated with a non-zero nonce.
      * @param deployer The 20-byte deployer address.
      * @param nonce The next 32-byte nonce of the deployer address.
      * @return computedAddress The 20-byte address where a contract will be stored.
@@ -247,17 +281,15 @@ contract CreateX {
     }
 
     /**
-     * @dev Returns the address where a contract will be stored if deployed via
-     * this contract using the `CREATE` opcode. For the specification of the Recursive
-     * Length Prefix (RLP) encoding scheme, please refer to p. 19 of the Ethereum
-     * Yellow Paper (https://ethereum.github.io/yellowpaper/paper.pdf) and the Ethereum
-     * Wiki (https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/).
+     * @dev Returns the address where a contract will be stored if deployed via this contract
+     * using the `CREATE` opcode. For the specification of the Recursive Length Prefix (RLP)
+     * encoding scheme, please refer to p. 19 of the Ethereum Yellow Paper (https://ethereum.github.io/yellowpaper/paper.pdf)
+     * and the Ethereum Wiki (https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/).
      * For further insights also, see the following issue: https://github.com/transmissions11/solmate/issues/207.
      *
-     * Based on the EIP-161 (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md)
-     * specification, all contract accounts on the Ethereum mainnet are initiated with
-     * `nonce = 1`. Thus, the first contract address created by another contract is calculated
-     * with a non-zero nonce.
+     * Based on the EIP-161 (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md) specification,
+     * all contract accounts on the Ethereum mainnet are initiated with `nonce = 1`. Thus, the
+     * first contract address created by another contract is calculated with a non-zero nonce.
      * @param nonce The next 32-byte nonce of this contract.
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
@@ -270,11 +302,10 @@ contract CreateX {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
-     * @dev Deploys a new contract via calling the `CREATE2` opcode and using
-     * the salt value `salt`, the creation bytecode `initCode`, and `msg.value` as
-     * inputs. In order to save deployment costs, we do not sanity check the `initCode`
-     * length. Note that if `msg.value` is non-zero, `initCode` must have a `payable`
-     * constructor.
+     * @dev Deploys a new contract via calling the `CREATE2` opcode and using the salt value `salt`,
+     * the creation bytecode `initCode`, and `msg.value` as inputs. In order to save deployment costs,
+     * we do not sanity check the `initCode` length. Note that if `msg.value` is non-zero, `initCode`
+     * must have a `payable` constructor.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
@@ -284,17 +315,20 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
         }
-        if (newContract == address(0)) revert FailedContractCreation({emitter: address(this)});
+        /**
+         * @dev We ensure that `newContract` is a non-zero byte contract.
+         */
+        if (newContract == address(0) || newContract.code.length != 0)
+            revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: newContract});
     }
 
     /**
-     * @dev Deploys a new contract via calling the `CREATE2` opcode and using
-     * the creation bytecode `initCode` and `msg.value` as inputs. The salt value is
-     * calculated pseudo-randomly using a diverse selection of block and transaction properties.
-     * This approach does not guarantee true randomness! In order to save deployment costs,
-     * we do not sanity check the `initCode` length. Note that if `msg.value` is non-zero,
-     * `initCode` must have a `payable` constructor.
+     * @dev Deploys a new contract via calling the `CREATE2` opcode and using the creation bytecode
+     * `initCode` and `msg.value` as inputs. The salt value is calculated pseudo-randomly using a
+     * diverse selection of block and transaction properties. This approach does not guarantee true
+     * randomness! In order to save deployment costs, we do not sanity check the `initCode` length.
+     * Note that if `msg.value` is non-zero, `initCode` must have a `payable` constructor.
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
      */
@@ -318,15 +352,16 @@ contract CreateX {
     }
 
     /**
-     * @dev Deploys and initialises a new contract via calling the `CREATE2` opcode and
-     * using the salt value `salt`, the creation bytecode `initCode`, `msg.value`, the initialisation
-     * code `data`, and the struct for the `payable` amounts `values` as inputs. In order to save
-     * deployment costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount`
-     * is non-zero, `initCode` must have a `payable` constructor.
+     * @dev Deploys and initialises a new contract via calling the `CREATE2` opcode and using the
+     * salt value `salt`, the creation bytecode `initCode`, `msg.value`, the initialisation code
+     * `data`, the struct for the `payable` amounts `values`, and the refund address `refundAddress`
+     * as inputs. In order to save deployment costs, we do not sanity check the `initCode` length.
+     * Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
      * @param values The specific `payable` amounts for the deployment and initialisation call.
+     * @param refundAddress The 20-byte address where any excess ether is returned to.
      * @return newContract The 20-byte address where the contract was deployed.
      * @custom:security This function allows for reentrancy, however we refrain from adding
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
@@ -336,13 +371,18 @@ contract CreateX {
         bytes32 salt,
         bytes memory initCode,
         bytes memory data,
-        Values memory values
+        Values memory values,
+        address refundAddress
     ) public payable returns (address newContract) {
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
         }
-        if (newContract == address(0)) revert FailedContractCreation({emitter: address(this)});
+        /**
+         * @dev We ensure that `newContract` is a non-zero byte contract.
+         */
+        if (newContract == address(0) || newContract.code.length != 0)
+            revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: newContract});
 
         // solhint-disable-next-line avoid-low-level-calls
@@ -356,19 +396,63 @@ contract CreateX {
              * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
              */
             // solhint-disable-next-line avoid-low-level-calls
-            (bool refunded, ) = msg.sender.call{value: balance}("");
+            (bool refunded, ) = refundAddress.call{value: balance}("");
             if (!refunded) revert EtherTransferFail({emitter: address(this)});
         }
     }
 
     /**
-     * @dev Deploys and initialises a new contract via calling the `CREATE2` opcode and
-     * using the creation bytecode `initCode`, `msg.value`, the initialisation code `data`,
-     * and the struct for the `payable` amounts `values` as inputs. The salt value is calculated
-     * pseudo-randomly using a diverse selection of block and transaction properties. This approach
-     * does not guarantee true randomness! In order to save deployment costs, we do not sanity
+     * @dev Deploys and initialises a new contract via calling the `CREATE2` opcode and using the
+     * creation bytecode `initCode`, `msg.value`, the initialisation code `data`, the struct for the
+     * `payable` amounts `values`, and the refund address `refundAddress` as inputs. The salt value is
+     * calculated pseudo-randomly using a diverse selection of block and transaction properties. This
+     * approach does not guarantee true randomness! In order to save deployment costs, we do not sanity
      * check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode`
      * must have a `payable` constructor.
+     * @param initCode The creation bytecode.
+     * @param data The initialisation code that is passed to the deployed contract.
+     * @param values The specific `payable` amounts for the deployment and initialisation call.
+     * @param refundAddress The 20-byte address where any excess ether is returned to.
+     * @return newContract The 20-byte address where the contract was deployed.
+     * @custom:security This function allows for reentrancy, however we refrain from adding
+     * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
+     * level that potentially malicious reentrant calls do not affect your smart contract system.
+     */
+    function deployCreate2AndInit(
+        bytes memory initCode,
+        bytes memory data,
+        Values memory values,
+        address refundAddress
+    ) public payable returns (address newContract) {
+        return
+            deployCreate2AndInit({
+                salt: keccak256(
+                    abi.encode(
+                        blockhash(block.number),
+                        block.coinbase,
+                        block.number,
+                        // solhint-disable-next-line not-rely-on-time
+                        block.timestamp,
+                        block.prevrandao,
+                        block.chainid,
+                        msg.sender
+                    )
+                ),
+                initCode: initCode,
+                data: data,
+                values: values,
+                refundAddress: refundAddress
+            });
+    }
+
+    /**
+     * @dev Deploys and initialises a new contract via calling the `CREATE2` opcode and using the
+     * creation bytecode `initCode`, `msg.value`, the initialisation code `data`, and the struct for
+     * the `payable` amounts `values` as inputs. The salt value is calculated pseudo-randomly using a
+     * diverse selection of block and transaction properties. This approach does not guarantee true
+     * randomness! In order to save deployment costs, we do not sanity check the `initCode` length.
+     * Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor,
+     * and any excess ether is returned to `msg.sender`.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
      * @param values The specific `payable` amounts for the deployment and initialisation call.
@@ -398,16 +482,17 @@ contract CreateX {
                 ),
                 initCode: initCode,
                 data: data,
-                values: values
+                values: values,
+                refundAddress: msg.sender
             });
     }
 
     /**
-     * @dev Deploys a guarded (i.e. prevents the redeployment to other chains) new contract
-     * via calling the `CREATE2` opcode and using the salt value `salt`, the creation bytecode
-     * `initCode`, and `msg.value` as inputs. In order to save deployment costs, we do not sanity
-     * check the `initCode` length. Note that if `msg.value` is non-zero, `initCode` must have
-     * a `payable` constructor.
+     * @dev Deploys a guarded (i.e. prevents the redeployment to other chains) new contract via
+     * calling the `CREATE2` opcode and using the salt value `salt`, the creation bytecode `initCode`,
+     * and `msg.value` as inputs. In order to save deployment costs, we do not sanity check the
+     * `initCode` length. Note that if `msg.value` is non-zero, `initCode` must have a `payable`
+     * constructor.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
@@ -420,17 +505,72 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
         }
-        if (newContract == address(0)) revert FailedContractCreation({emitter: address(this)});
+        /**
+         * @dev We ensure that `newContract` is a non-zero byte contract.
+         */
+        if (newContract == address(0) || newContract.code.length != 0)
+            revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: newContract});
     }
 
     /**
-     * @dev Deploys and initialises a guarded (i.e. prevents the redeployment to other chains)
-     * new contract via calling the `CREATE2` opcode and using the salt value `salt`, the creation
-     * bytecode `initCode`, `msg.value`, the initialisation code `data`, and the struct for the `payable`
-     * amounts `values` as inputs. In order to save deployment costs, we do not sanity check the
-     * `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must have
-     * a `payable` constructor.
+     * @dev Deploys and initialises a guarded (i.e. prevents the redeployment to other chains) new
+     * contract via calling the `CREATE2` opcode and using the salt value `salt`, the creation bytecode
+     * `initCode`, `msg.value`, the initialisation code `data`, the struct for the `payable` amounts
+     * `values`, and the refund address `refundAddress` as inputs. In order to save deployment costs,
+     * we do not sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero,
+     * `initCode` must have a `payable` constructor.
+     * @param salt The 32-byte random value used to create the contract address.
+     * @param initCode The creation bytecode.
+     * @param data The initialisation code that is passed to the deployed contract.
+     * @param values The specific `payable` amounts for the deployment and initialisation call.
+     * @param refundAddress The 20-byte address where any excess ether is returned to.
+     * @return newContract The 20-byte address where the contract was deployed.
+     * @custom:security This function allows for reentrancy, however we refrain from adding
+     * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
+     * level that potentially malicious reentrant calls do not affect your smart contract system.
+     */
+    function deployCreate2AndInitGuarded(
+        bytes32 salt,
+        bytes memory initCode,
+        bytes memory data,
+        Values memory values,
+        address refundAddress
+    ) public payable xChainRedeployGuard(salt) returns (address newContract) {
+        // solhint-disable-next-line no-inline-assembly
+        assembly ("memory-safe") {
+            newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
+        }
+        /**
+         * @dev We ensure that `newContract` is a non-zero byte contract.
+         */
+        if (newContract == address(0) || newContract.code.length != 0)
+            revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: newContract});
+
+        // solhint-disable-next-line avoid-low-level-calls
+        (bool success, ) = newContract.call{value: values.initCallAmount}(data);
+        if (!success) revert FailedContractInitialisation({emitter: address(this)});
+
+        uint256 balance = address(this).balance;
+        if (balance != 0) {
+            /**
+             * @dev Any wei amount previously forced into this contract (e.g. by
+             * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
+             */
+            // solhint-disable-next-line avoid-low-level-calls
+            (bool refunded, ) = refundAddress.call{value: balance}("");
+            if (!refunded) revert EtherTransferFail({emitter: address(this)});
+        }
+    }
+
+    /**
+     * @dev Deploys and initialises a guarded (i.e. prevents the redeployment to other chains) new
+     * contract via calling the `CREATE2` opcode and using the salt value `salt`, the creation bytecode
+     * `initCode`, `msg.value`, the initialisation code `data`, and the struct for the `payable` amounts
+     * `values` as inputs. In order to save deployment costs, we do not sanity check the `initCode`
+     * length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable`
+     * constructor, and any excess ether is returned to `msg.sender`.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
@@ -445,28 +585,19 @@ contract CreateX {
         bytes memory initCode,
         bytes memory data,
         Values memory values
-    ) public payable xChainRedeployGuard(salt) returns (address newContract) {
-        // solhint-disable-next-line no-inline-assembly
-        assembly ("memory-safe") {
-            newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
-        }
-        if (newContract == address(0)) revert FailedContractCreation({emitter: address(this)});
-        emit ContractCreation({newContract: newContract});
-
-        // solhint-disable-next-line avoid-low-level-calls
-        (bool success, ) = newContract.call{value: values.initCallAmount}(data);
-        if (!success) revert FailedContractInitialisation({emitter: address(this)});
-
-        uint256 balance = address(this).balance;
-        if (balance != 0) {
-            /**
-             * @dev Any wei amount previously forced into this contract (e.g. by
-             * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
-             */
-            // solhint-disable-next-line avoid-low-level-calls
-            (bool refunded, ) = msg.sender.call{value: balance}("");
-            if (!refunded) revert EtherTransferFail({emitter: address(this)});
-        }
+    ) public payable returns (address newContract) {
+        /**
+         * @dev Note that the modifier `xChainRedeployGuard` is called as part of the overloaded
+         * function `deployCreate2AndInitGuarded`.
+         */
+        return
+            deployCreate2AndInitGuarded({
+                salt: salt,
+                initCode: initCode,
+                data: data,
+                values: values,
+                refundAddress: msg.sender
+            });
     }
 
     /**
@@ -501,6 +632,9 @@ contract CreateX {
 
         // solhint-disable-next-line avoid-low-level-calls
         (bool success, ) = proxy.call{value: msg.value}(data);
+        /**
+         * @dev We ensure that `implementation` is a non-zero byte contract.
+         */
         if (!success || implementation.code.length != 0) revert FailedContractInitialisation({emitter: address(this)});
     }
 
@@ -538,9 +672,9 @@ contract CreateX {
     }
 
     /**
-     * @dev Returns the address where a contract will be stored if deployed via `deployer`
-     * using the `CREATE2` opcode. Any change in the `initCodeHash` or `salt` values will
-     * result in a new destination address. This implementation is based on OpenZeppelin:
+     * @dev Returns the address where a contract will be stored if deployed via `deployer` using
+     * the `CREATE2` opcode. Any change in the `initCodeHash` or `salt` values will result in a new
+     * destination address. This implementation is based on OpenZeppelin:
      * https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Create2.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCodeHash The 32-byte bytecode digest of the contract creation bytecode.
@@ -564,9 +698,9 @@ contract CreateX {
     }
 
     /**
-     * @dev Returns the address where a contract will be stored if deployed via this contract
-     * using the `CREATE2` opcode. Any change in the `initCodeHash` or `salt` values will
-     * result in a new destination address.
+     * @dev Returns the address where a contract will be stored if deployed via this contract using
+     * the `CREATE2` opcode. Any change in the `initCodeHash` or `salt` values will result in a new
+     * destination address.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCodeHash The 32-byte bytecode digest of the contract creation bytecode.
      * @return computedAddress The 20-byte address where a contract will be stored.
@@ -581,10 +715,10 @@ contract CreateX {
 
     /**
      * @dev Deploys, using a frontrun guard, a new contract via employing the `CREATE3` pattern
-     * (i.e. without an initcode factor) and using the salt value `salt`, the creation
-     * bytecode `initCode`, and `msg.value` as inputs. In order to save deployment costs,
-     * we do not sanity check the `initCode` length. Note that if `msg.value` is non-zero,
-     * `initCode` must have a `payable` constructor. This implementation is based on Solmate:
+     * (i.e. without an initcode factor) and using the salt value `salt`, the creation bytecode
+     * `initCode`, and `msg.value` as inputs. In order to save deployment costs, we do not sanity
+     * check the `initCode` length. Note that if `msg.value` is non-zero, `initCode` must have a
+     * `payable` constructor. This implementation is based on Solmate:
      * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
@@ -605,17 +739,80 @@ contract CreateX {
 
         newContract = computeCreate3Address({salt: salt});
         (bool success, ) = proxy.call{value: msg.value}(initCode);
+        /**
+         * @dev We ensure that `newContract` is a non-zero byte contract.
+         */
         if (!success || newContract.code.length == 0) revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: newContract});
     }
 
     /**
      * @dev Deploys and initialises, using a frontrun guard, a new contract via employing the
-     * `CREATE3` pattern (i.e. without an initcode factor) and using the salt value `salt`,
-     * the creation bytecode `initCode`, `msg.value`, the initialisation code `data`, and the struct
-     * for the `payable` amounts `values` as inputs. In order to save deployment costs, we do not sanity
-     * check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode`
-     * must have a `payable` constructor. This implementation is based on Solmate:
+     * `CREATE3` pattern (i.e. without an initcode factor) and using the salt value `salt`, the
+     * creation bytecode `initCode`, `msg.value`, the initialisation code `data`, the struct for
+     * the `payable` amounts `values`, and the refund address `refundAddress` as inputs. In order
+     * to save deployment costs, we do not sanity check the `initCode` length. Note that if
+     * `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor. This
+     * implementation is based on Solmate:
+     * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
+     * @param salt The 32-byte random value used to create the contract address.
+     * @param initCode The creation bytecode.
+     * @param data The initialisation code that is passed to the deployed contract.
+     * @param values The specific `payable` amounts for the deployment and initialisation call.
+     * @param refundAddress The 20-byte address where any excess ether is returned to.
+     * @return newContract The 20-byte address where the contract was deployed.
+     * @custom:security This function allows for reentrancy, however we refrain from adding
+     * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
+     * level that potentially malicious reentrant calls do not affect your smart contract system.
+     */
+    function deployCreate3AndInit(
+        bytes32 salt,
+        bytes memory initCode,
+        bytes memory data,
+        Values memory values,
+        address refundAddress
+    ) public payable onlyMsgSender(salt) returns (address newContract) {
+        bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
+        address proxy;
+        // solhint-disable-next-line no-inline-assembly
+        assembly ("memory-safe") {
+            proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), salt)
+        }
+        if (proxy == address(0)) revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: proxy});
+
+        newContract = computeCreate3Address({salt: salt});
+        (bool success, ) = proxy.call{value: values.constructorAmount}(initCode);
+        /**
+         * @dev We ensure that `newContract` is a non-zero byte contract.
+         */
+        if (!success || newContract.code.length == 0) revert FailedContractCreation({emitter: address(this)});
+        emit ContractCreation({newContract: newContract});
+
+        // solhint-disable-next-line avoid-low-level-calls
+        (success, ) = newContract.call{value: values.initCallAmount}(data);
+        if (!success) revert FailedContractInitialisation({emitter: address(this)});
+
+        uint256 balance = address(this).balance;
+        if (balance != 0) {
+            /**
+             * @dev Any wei amount previously forced into this contract (e.g. by
+             * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
+             */
+            // solhint-disable-next-line avoid-low-level-calls
+            (bool refunded, ) = refundAddress.call{value: balance}("");
+            if (!refunded) revert EtherTransferFail({emitter: address(this)});
+        }
+    }
+
+    /**
+     * @dev Deploys and initialises, using a frontrun guard, a new contract via employing the
+     * `CREATE3` pattern (i.e. without an initcode factor) and using the salt value `salt`, the
+     * creation bytecode `initCode`, `msg.value`, the initialisation code `data`, and the struct for
+     * the `payable` amounts `values`. In order to save deployment costs, we do not sanity check the
+     * `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a
+     * `payable` constructor, and any excess ether is returned to `msg.sender`. This implementation
+     * is based on Solmate:
      * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
@@ -632,40 +829,24 @@ contract CreateX {
         bytes memory data,
         Values memory values
     ) public payable onlyMsgSender(salt) returns (address newContract) {
-        bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
-        address proxy;
-        // solhint-disable-next-line no-inline-assembly
-        assembly ("memory-safe") {
-            proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), salt)
-        }
-        if (proxy == address(0)) revert FailedContractCreation({emitter: address(this)});
-        emit ContractCreation({newContract: proxy});
-
-        newContract = computeCreate3Address({salt: salt});
-        (bool success, ) = proxy.call{value: values.constructorAmount}(initCode);
-        if (!success || newContract.code.length == 0) revert FailedContractCreation({emitter: address(this)});
-        emit ContractCreation({newContract: newContract});
-
-        // solhint-disable-next-line avoid-low-level-calls
-        (success, ) = newContract.call{value: values.initCallAmount}(data);
-        if (!success) revert FailedContractInitialisation({emitter: address(this)});
-
-        uint256 balance = address(this).balance;
-        if (balance != 0) {
-            /**
-             * @dev Any wei amount previously forced into this contract (e.g. by
-             * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
-             */
-            // solhint-disable-next-line avoid-low-level-calls
-            (bool refunded, ) = msg.sender.call{value: balance}("");
-            if (!refunded) revert EtherTransferFail({emitter: address(this)});
-        }
+        /**
+         * @dev Note that the modifier `onlyMsgSender` is called as part of the overloaded
+         * function `deployCreate3AndInit`.
+         */
+        return
+            deployCreate3AndInit({
+                salt: salt,
+                initCode: initCode,
+                data: data,
+                values: values,
+                refundAddress: msg.sender
+            });
     }
 
     /**
-     * @dev Returns the address where a contract will be stored if deployed via `deployer`
-     * using the `CREATE3` pattern (i.e. without an initcode factor). Any change in the `salt`
-     * value will result in a new destination address. This implementation is based on Solady:
+     * @dev Returns the address where a contract will be stored if deployed via `deployer` using
+     * the `CREATE3` pattern (i.e. without an initcode factor). Any change in the `salt` value will
+     * result in a new destination address. This implementation is based on Solady:
      * https://github.com/Vectorized/solady/blob/main/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param deployer The 20-byte deployer address.
@@ -688,9 +869,9 @@ contract CreateX {
     }
 
     /**
-     * @dev Returns the address where a contract will be stored if deployed via this contract
-     * using the `CREATE3` pattern (i.e. without an initcode factor). Any change in the `salt`
-     * value will result in a new destination address. This implementation is based on Solady:
+     * @dev Returns the address where a contract will be stored if deployed via this contract using
+     * the `CREATE3` pattern (i.e. without an initcode factor). Any change in the `salt` value will
+     * result in a new destination address. This implementation is based on Solady:
      * https://github.com/Vectorized/solady/blob/main/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @return computedAddress The 20-byte address where a contract will be stored.
