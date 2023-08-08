@@ -69,22 +69,22 @@ contract CreateX {
     /**
      * @dev Modifier that implements different safeguarding mechanisms depending on the encoded
      * values in the salt:
-     * => salt (32 bytes) = 0xbebebebebebebebebebebebebebebebebebebebeaa1212121212121212121212
-     * - The first 20 bytes (i.e. `bebebebebebebebebebebebebebebebebebebebe`) may be used to implement
-     *   a permissioned deploy protection by setting them equal to `msg.sender`,
-     * - The 21st byte (i.e. `aa`) may be used to implement a cross-chain redeploy protection by setting
-     *   it equal to `0x01`,
-     * - The last random 11 bytes (i.e. `1212121212121212121212`) do generate 2**88 bits of entropy for
-     *   the salt mining.
+     * => salt (32 bytes) = 0xbebebebebebebebebebebebebebebebebebebebeff1212121212121212121212
+     * - The first 20 bytes (i.e. `bebebebebebebebebebebebebebebebebebebebe`) may be used to
+     *   implement a permissioned deploy protection by setting them equal to `msg.sender`,
+     * - The 21st byte (i.e. `ff`) may be used to implement a cross-chain redeploy protection by
+     *   setting it equal to `0x01`,
+     * - The last random 11 bytes (i.e. `1212121212121212121212`) do generate 2**88 bits of entropy
+     *   for the salt mining.
      * @param salt The 32-byte random value used to create the contract address.
      */
     modifier guard(bytes32 salt) {
         if (address(bytes20(salt)) == msg.sender && bytes1(bytes16(uint128(uint256(salt)))) == hex"01") {
             salt = keccak256(abi.encode(msg.sender, salt, block.chainid));
         } else if (address(bytes20(salt)) == msg.sender && bytes1(bytes16(uint128(uint256(salt)))) == hex"00") {
-            salt = _efficientHash(bytes32(bytes20(uint160(msg.sender))), salt);
+            salt = _efficientHash({a: bytes32(bytes20(uint160(msg.sender))), b: salt});
         } else if (address(bytes20(salt)) == address(0) && bytes1(bytes16(uint128(uint256(salt)))) == hex"01") {
-            salt = _efficientHash(salt, bytes32(block.chainid));
+            salt = _efficientHash({a: salt, b: bytes32(block.chainid)});
         }
         _;
     }
