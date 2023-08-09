@@ -74,8 +74,8 @@ contract CreateX {
      *   implement a permissioned deploy protection by setting them equal to `msg.sender`,
      * - The 21st byte (i.e. `ff`) may be used to implement a cross-chain redeploy protection by
      *   setting it equal to `0x01`,
-     * - The last random 11 bytes (i.e. `1212121212121212121212`) do generate 2**88 bits of entropy
-     *   for the salt mining.
+     * - The last random 11 bytes (i.e. `1212121212121212121212`) allow for 2**88 bits of entropy
+     *   for mining a salt.
      * @param salt The 32-byte random value used to create the contract address.
      */
     modifier guard(bytes32 salt) {
