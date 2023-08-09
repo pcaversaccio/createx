@@ -16,6 +16,7 @@
   "function deployCreate2AndInit(bytes32,bytes,bytes,tuple(uint256,uint256),address) payable returns (address)",
   "function deployCreate2AndInit(bytes,bytes,tuple(uint256,uint256)) payable returns (address)",
   "function deployCreate2AndInit(bytes,bytes,tuple(uint256,uint256),address) payable returns (address)",
+  "function deployCreate2AndInit(bytes32,bytes,bytes,tuple(uint256,uint256)) payable returns (address)",
   "function deployCreate2Clone(bytes32,address,bytes) payable returns (address)",
   "function deployCreate2Clone(address,bytes) payable returns (address)",
   "function deployCreate3(bytes) payable returns (address)",
