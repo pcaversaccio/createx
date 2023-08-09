@@ -79,22 +79,22 @@ contract CreateX {
      * @param salt The 32-byte random value used to create the contract address.
      */
     modifier guard(bytes32 salt) {
-        if (address(bytes20(salt)) == msg.sender && bytes1(bytes16(uint128(uint256(salt)))) == hex"01") {
+        if (address(bytes20(salt)) == msg.sender && bytes1(salt[20]) == hex"01") {
             /**
              * @dev Configures a permissioned deploy protection as well as a cross-chain redeploy protection.
              */
-            salt = keccak256(abi.encode(msg.sender, salt, block.chainid));
-        } else if (address(bytes20(salt)) == msg.sender && bytes1(bytes16(uint128(uint256(salt)))) == hex"00") {
+            salt = keccak256(abi.encode(msg.sender, block.chainid, salt));
+        } else if (address(bytes20(salt)) == msg.sender && bytes1(salt[20]) == hex"00") {
             /**
              * @dev Configures solely a permissioned deploy protection.
              */
             salt = _efficientHash({a: bytes32(bytes20(uint160(msg.sender))), b: salt});
-        } else if (address(bytes20(salt)) == address(0) && bytes1(bytes16(uint128(uint256(salt)))) == hex"01") {
+        } else if (address(bytes20(salt)) == address(0) && bytes1(salt[20]) == hex"01") {
             /**
              * @dev Configures solely a cross-chain redeploy protection. In order to prevent a pseudo-randomly
              * generated cross-chain redeploy protection, we enforce the zero address check for the first 20 bytes.
              */
-            salt = _efficientHash({a: salt, b: bytes32(block.chainid)});
+            salt = _efficientHash({a: bytes32(block.chainid), b: salt});
         }
         _;
     }
