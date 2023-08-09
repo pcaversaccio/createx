@@ -119,8 +119,7 @@ contract CreateX {
         /**
          * @dev We ensure that `newContract` is a non-zero byte contract.
          */
-        if (newContract == address(0) || newContract.code.length == 0)
-            revert FailedContractCreation({emitter: address(this)});
+        _requireContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
     }
 
@@ -152,8 +151,7 @@ contract CreateX {
         /**
          * @dev We ensure that `newContract` is a non-zero byte contract.
          */
-        if (newContract == address(0) || newContract.code.length == 0)
-            revert FailedContractCreation({emitter: address(this)});
+        _requireContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
 
         // solhint-disable-next-line avoid-low-level-calls
@@ -224,7 +222,7 @@ contract CreateX {
         /**
          * @dev We ensure that `implementation` is a non-zero byte contract.
          */
-        if (!success || implementation.code.length == 0) revert FailedContractInitialisation({emitter: address(this)});
+        _requireContractInitialisation(success, implementation);
     }
 
     /**
@@ -334,8 +332,7 @@ contract CreateX {
         /**
          * @dev We ensure that `newContract` is a non-zero byte contract.
          */
-        if (newContract == address(0) || newContract.code.length == 0)
-            revert FailedContractCreation({emitter: address(this)});
+        _requireContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
     }
 
@@ -385,8 +382,7 @@ contract CreateX {
         /**
          * @dev We ensure that `newContract` is a non-zero byte contract.
          */
-        if (newContract == address(0) || newContract.code.length == 0)
-            revert FailedContractCreation({emitter: address(this)});
+        _requireContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
 
         // solhint-disable-next-line avoid-low-level-calls
@@ -541,7 +537,7 @@ contract CreateX {
         /**
          * @dev We ensure that `implementation` is a non-zero byte contract.
          */
-        if (!success || implementation.code.length == 0) revert FailedContractInitialisation({emitter: address(this)});
+        _requireContractInitialisation(success, implementation);
     }
 
     /**
@@ -636,7 +632,7 @@ contract CreateX {
         /**
          * @dev We ensure that `newContract` is a non-zero byte contract.
          */
-        if (!success || newContract.code.length == 0) revert FailedContractCreation({emitter: address(this)});
+        _requireContractCreation(success, newContract);
         emit ContractCreation({newContract: newContract});
     }
 
@@ -702,7 +698,7 @@ contract CreateX {
         /**
          * @dev We ensure that `newContract` is a non-zero byte contract.
          */
-        if (!success || newContract.code.length == 0) revert FailedContractCreation({emitter: address(this)});
+        _requireContractCreation(success, newContract);
         emit ContractCreation({newContract: newContract});
 
         // solhint-disable-next-line avoid-low-level-calls
@@ -907,5 +903,32 @@ contract CreateX {
                 msg.sender
             )
         );
+    }
+
+    /**
+     * @dev Ensures that `newContract` is a non-zero byte contract.
+     * @param success The Boolean success condition.
+     * @param newContract The 20-byte address where the contract was deployed.
+     */
+    function _requireContractCreation(bool success, address newContract) private view {
+        if (!success || newContract.code.length == 0) revert FailedContractCreation({emitter: address(this)});
+    }
+
+    /**
+     * @dev Ensures that `newContract` is a non-zero byte contract.
+     * @param newContract The 20-byte address where the contract was deployed.
+     */
+    function _requireContractCreation(address newContract) private view {
+        if (newContract == address(0) || newContract.code.length == 0)
+            revert FailedContractCreation({emitter: address(this)});
+    }
+
+    /**
+     * @dev Ensures that the contract initialisation call to `implementation` has been successful.
+     * @param success The Boolean success condition.
+     * @param implementation The 20-byte address where the implementation was deployed.
+     */
+    function _requireContractInitialisation(bool success, address implementation) private view {
+        if (!success || implementation.code.length == 0) revert FailedContractInitialisation({emitter: address(this)});
     }
 }
