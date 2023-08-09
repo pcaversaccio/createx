@@ -3,6 +3,7 @@
   "error FailedContractInitialisation(address)",
   "error FailedEtherTransfer(address)",
   "error InvalidNonceValue(address)",
+  "error InvalidSalt(address)",
   "event ContractCreation(address indexed)",
   "function computeCreate2Address(bytes32,bytes32) view returns (address)",
   "function computeCreate2Address(bytes32,bytes32,address) pure returns (address)",

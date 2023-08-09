@@ -51,6 +51,12 @@ contract CreateX {
     error FailedContractInitialisation(address emitter);
 
     /**
+     * @dev Error that occurs when the salt value is invalid.
+     * @param emitter The contract that emits the error.
+     */
+    error InvalidSalt(address emitter);
+
+    /**
      * @dev Error that occurs when the nonce value is invalid.
      * @param emitter The contract that emits the error.
      */
@@ -89,12 +95,22 @@ contract CreateX {
              * @dev Configures solely a permissioned deploy protection.
              */
             salt = _efficientHash({a: bytes32(bytes20(uint160(msg.sender))), b: salt});
+        } else if (address(bytes20(salt)) == msg.sender) {
+            /**
+             * @dev Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
+             */
+            revert InvalidSalt({emitter: address(this)});
         } else if (address(bytes20(salt)) == address(0) && bytes1(salt[20]) == hex"01") {
             /**
              * @dev Configures solely a cross-chain redeploy protection. In order to prevent a pseudo-randomly
              * generated cross-chain redeploy protection, we enforce the zero address check for the first 20 bytes.
              */
             salt = _efficientHash({a: bytes32(block.chainid), b: salt});
+        } else if (address(bytes20(salt)) == address(0) && bytes1(salt[20]) > hex"01") {
+            /**
+             * @dev Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
+             */
+            revert InvalidSalt({emitter: address(this)});
         }
         _;
     }
