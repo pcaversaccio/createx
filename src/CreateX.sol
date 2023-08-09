@@ -60,7 +60,7 @@ contract CreateX {
      * @dev Error that occurs when transferring ether has failed.
      * @param emitter The contract that emits the error.
      */
-    error EtherTransferFail(address emitter);
+    error FailedEtherTransfer(address emitter);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                          MODIFIERS                         */
@@ -158,7 +158,7 @@ contract CreateX {
              */
             // solhint-disable-next-line avoid-low-level-calls
             (bool refunded, ) = refundAddress.call{value: balance}("");
-            if (!refunded) revert EtherTransferFail({emitter: address(this)});
+            if (!refunded) revert FailedEtherTransfer({emitter: address(this)});
         }
     }
 
@@ -408,7 +408,7 @@ contract CreateX {
              */
             // solhint-disable-next-line avoid-low-level-calls
             (bool refunded, ) = refundAddress.call{value: balance}("");
-            if (!refunded) revert EtherTransferFail({emitter: address(this)});
+            if (!refunded) revert FailedEtherTransfer({emitter: address(this)});
         }
     }
 
@@ -709,7 +709,7 @@ contract CreateX {
              */
             // solhint-disable-next-line avoid-low-level-calls
             (bool refunded, ) = refundAddress.call{value: balance}("");
-            if (!refunded) revert EtherTransferFail({emitter: address(this)});
+            if (!refunded) revert FailedEtherTransfer({emitter: address(this)});
         }
     }
 
