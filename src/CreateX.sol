@@ -614,6 +614,9 @@ contract CreateX {
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
+     * @custom:security We strongly recommend implementing a permissioned deploy protection by setting
+     * the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun
+     * proxy deployments on other chains.
      */
     function deployCreate3(
         bytes32 salt,
@@ -647,6 +650,8 @@ contract CreateX {
      * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
+     * @custom:security This function does not implement any permissioned deploy protection, thus
+     * anyone can frontrun the same proxy deployment on other chains. Use with caution!
      */
     function deployCreate3(bytes memory initCode) public payable returns (address newContract) {
         /**
@@ -657,11 +662,11 @@ contract CreateX {
 
     /**
      * @dev Deploys and initialises a new contract via employing the `CREATE3` pattern (i.e. without
-     * an initcode factor) and using the salt value `salt`, the creation bytecode `initCode`, `msg.value`,
-     * the initialisation code `data`, the struct for the `payable` amounts `values`, and the refund
-     * address `refundAddress` as inputs. In order to save deployment costs, we do not sanity check the
-     * `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a
-     * `payable` constructor. This implementation is based on Solmate:
+     * an initcode factor) and using the salt value `salt`, the creation bytecode `initCode`, the
+     * initialisation code `data`, the struct for the `payable` amounts `values`, the refund address
+     * `refundAddress`, and `msg.value` as inputs. In order to save deployment costs, we do not sanity
+     * check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must
+     * have a `payable` constructor. This implementation is based on Solmate:
      * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
@@ -672,6 +677,9 @@ contract CreateX {
      * @custom:security This function allows for reentrancy, however we refrain from adding
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
      * level that potentially malicious reentrant calls do not affect your smart contract system.
+     * Furthermore, we strongly recommend implementing a permissioned deploy protection by setting
+     * the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun
+     * proxy deployments on other chains.
      */
     function deployCreate3AndInit(
         bytes32 salt,
@@ -715,8 +723,46 @@ contract CreateX {
 
     /**
      * @dev Deploys and initialises a new contract via employing the `CREATE3` pattern (i.e. without
-     * an initcode factor) and using the creation bytecode `initCode`, `msg.value`, the initialisation
-     * code `data`, the struct for the `payable` amounts `values`, and the refund address `refundAddress`
+     * an initcode factor) and using the salt value `salt`, the creation bytecode `initCode`, the
+     * initialisation code `data`, the struct for the `payable` amounts `values`, and `msg.value` as
+     * inputs. In order to save deployment costs, we do not sanity check the `initCode` length. Note
+     * that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor,
+     * and any excess ether is returned to `msg.sender`. This implementation is based on Solmate:
+     * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
+     * @param salt The 32-byte random value used to create the contract address.
+     * @param initCode The creation bytecode.
+     * @param data The initialisation code that is passed to the deployed contract.
+     * @param values The specific `payable` amounts for the deployment and initialisation call.
+     * @return newContract The 20-byte address where the contract was deployed.
+     * @custom:security This function allows for reentrancy, however we refrain from adding
+     * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
+     * level that potentially malicious reentrant calls do not affect your smart contract system.
+     * Furthermore, we strongly recommend implementing a permissioned deploy protection by setting
+     * the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun
+     * proxy deployments on other chains.
+     */
+    function deployCreate3AndInit(
+        bytes32 salt,
+        bytes memory initCode,
+        bytes memory data,
+        Values memory values
+    ) public payable returns (address newContract) {
+        /**
+         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate3AndInit`.
+         */
+        newContract = deployCreate3AndInit({
+            salt: salt,
+            initCode: initCode,
+            data: data,
+            values: values,
+            refundAddress: msg.sender
+        });
+    }
+
+    /**
+     * @dev Deploys and initialises a new contract via employing the `CREATE3` pattern (i.e. without
+     * an initcode factor) and using the creation bytecode `initCode`, the initialisation code `data`,
+     * the struct for the `payable` amounts `values`, the refund address `refundAddress`, and `msg.value`
      * as inputs. The salt value is calculated pseudo-randomly using a diverse selection of block and
      * transaction properties. This approach does not guarantee true randomness! In order to save deployment
      * costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero,
@@ -730,6 +776,8 @@ contract CreateX {
      * @custom:security This function allows for reentrancy, however we refrain from adding
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
      * level that potentially malicious reentrant calls do not affect your smart contract system.
+     * Furthermore, this function does not implement any permissioned deploy protection, thus
+     * anyone can frontrun the same proxy deployment on other chains. Use with caution!
      */
     function deployCreate3AndInit(
         bytes memory initCode,
@@ -751,8 +799,8 @@ contract CreateX {
 
     /**
      * @dev Deploys and initialises a new contract via employing the `CREATE3` pattern (i.e. without
-     * an initcode factor) and using the creation bytecode `initCode`, `msg.value`, the initialisation
-     * code `data`, and the struct for the `payable` amounts `values` as inputs. The salt value is calculated
+     * an initcode factor) and using the creation bytecode `initCode`, the initialisation code `data`,
+     * the struct for the `payable` amounts `values`, `msg.value` as inputs. The salt value is calculated
      * pseudo-randomly using a diverse selection of block and transaction properties. This approach does
      * not guarantee true randomness! In order to save deployment costs, we do not sanity check the `initCode`
      * length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor,
@@ -765,6 +813,8 @@ contract CreateX {
      * @custom:security This function allows for reentrancy, however we refrain from adding
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
      * level that potentially malicious reentrant calls do not affect your smart contract system.
+     * Furthermore, this function does not implement any permissioned deploy protection, thus
+     * anyone can frontrun the same proxy deployment on other chains. Use with caution!
      */
     function deployCreate3AndInit(
         bytes memory initCode,
@@ -842,7 +892,7 @@ contract CreateX {
     /**
      * @dev Generates pseudo-randomly a salt value using a diverse selection of block and
      * transaction properties.
-     * @return salt The 32-byte `keccak256` hash of `a` and `b`.
+     * @return salt The 32-byte pseudo-random salt value.
      */
     function _generateSalt() private view returns (bytes32 salt) {
         salt = keccak256(
