@@ -191,7 +191,7 @@ contract CreateX {
         bytes memory data,
         Values memory values
     ) public payable returns (address newContract) {
-        return deployCreateAndInit({initCode: initCode, data: data, values: values, refundAddress: msg.sender});
+        newContract = deployCreateAndInit({initCode: initCode, data: data, values: values, refundAddress: msg.sender});
     }
 
     /**
@@ -307,7 +307,7 @@ contract CreateX {
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
     function computeCreateAddress(uint256 nonce) public view returns (address computedAddress) {
-        return computeCreateAddress({deployer: address(this), nonce: nonce});
+        computedAddress = computeCreateAddress({deployer: address(this), nonce: nonce});
     }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -352,22 +352,7 @@ contract CreateX {
         /**
          * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate2`.
          */
-        return
-            deployCreate2({
-                salt: keccak256(
-                    abi.encode(
-                        blockhash(block.number),
-                        block.coinbase,
-                        block.number,
-                        // solhint-disable-next-line not-rely-on-time
-                        block.timestamp,
-                        block.prevrandao,
-                        block.chainid,
-                        msg.sender
-                    )
-                ),
-                initCode: initCode
-            });
+        newContract = deployCreate2({salt: _generateSalt(), initCode: initCode});
     }
 
     /**
@@ -446,25 +431,13 @@ contract CreateX {
         /**
          * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate2AndInit`.
          */
-        return
-            deployCreate2AndInit({
-                salt: keccak256(
-                    abi.encode(
-                        blockhash(block.number),
-                        block.coinbase,
-                        block.number,
-                        // solhint-disable-next-line not-rely-on-time
-                        block.timestamp,
-                        block.prevrandao,
-                        block.chainid,
-                        msg.sender
-                    )
-                ),
-                initCode: initCode,
-                data: data,
-                values: values,
-                refundAddress: refundAddress
-            });
+        newContract = deployCreate2AndInit({
+            salt: _generateSalt(),
+            initCode: initCode,
+            data: data,
+            values: values,
+            refundAddress: refundAddress
+        });
     }
 
     /**
@@ -491,25 +464,13 @@ contract CreateX {
         /**
          * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate2AndInit`.
          */
-        return
-            deployCreate2AndInit({
-                salt: keccak256(
-                    abi.encode(
-                        blockhash(block.number),
-                        block.coinbase,
-                        block.number,
-                        // solhint-disable-next-line not-rely-on-time
-                        block.timestamp,
-                        block.prevrandao,
-                        block.chainid,
-                        msg.sender
-                    )
-                ),
-                initCode: initCode,
-                data: data,
-                values: values,
-                refundAddress: msg.sender
-            });
+        newContract = deployCreate2AndInit({
+            salt: _generateSalt(),
+            initCode: initCode,
+            data: data,
+            values: values,
+            refundAddress: msg.sender
+        });
     }
 
     /**
@@ -564,23 +525,7 @@ contract CreateX {
      * level that potentially malicious reentrant calls do not affect your smart contract system.
      */
     function deployCreate2Clone(address implementation, bytes memory data) public payable returns (address proxy) {
-        return
-            deployCreate2Clone({
-                salt: keccak256(
-                    abi.encode(
-                        blockhash(block.number),
-                        block.coinbase,
-                        block.number,
-                        // solhint-disable-next-line not-rely-on-time
-                        block.timestamp,
-                        block.prevrandao,
-                        block.chainid,
-                        msg.sender
-                    )
-                ),
-                implementation: implementation,
-                data: data
-            });
+        proxy = deployCreate2Clone({salt: _generateSalt(), implementation: implementation, data: data});
     }
 
     /**
@@ -618,7 +563,7 @@ contract CreateX {
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
     function computeCreate2Address(bytes32 salt, bytes32 initCodeHash) public view returns (address computedAddress) {
-        return computeCreate2Address({salt: salt, initCodeHash: initCodeHash, deployer: address(this)});
+        computedAddress = computeCreate2Address({salt: salt, initCodeHash: initCodeHash, deployer: address(this)});
     }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -626,11 +571,11 @@ contract CreateX {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
-     * @dev Deploys, using a frontrun guard, a new contract via employing the `CREATE3` pattern
-     * (i.e. without an initcode factor) and using the salt value `salt`, the creation bytecode
-     * `initCode`, and `msg.value` as inputs. In order to save deployment costs, we do not sanity
-     * check the `initCode` length. Note that if `msg.value` is non-zero, `initCode` must have a
-     * `payable` constructor. This implementation is based on Solmate:
+     * @dev Deploys a new contract via employing the `CREATE3` pattern (i.e. without an initcode
+     * factor) and using the salt value `salt`, the creation bytecode `initCode`, and `msg.value`
+     * as inputs. In order to save deployment costs, we do not sanity check the `initCode` length.
+     * Note that if `msg.value` is non-zero, `initCode` must have a `payable` constructor. This
+     * implementation is based on Solmate:
      * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
@@ -659,13 +604,30 @@ contract CreateX {
     }
 
     /**
-     * @dev Deploys and initialises, using a frontrun guard, a new contract via employing the
-     * `CREATE3` pattern (i.e. without an initcode factor) and using the salt value `salt`, the
-     * creation bytecode `initCode`, `msg.value`, the initialisation code `data`, the struct for
-     * the `payable` amounts `values`, and the refund address `refundAddress` as inputs. In order
-     * to save deployment costs, we do not sanity check the `initCode` length. Note that if
-     * `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor. This
-     * implementation is based on Solmate:
+     * @dev Deploys a new contract via employing the `CREATE3` pattern (i.e. without an initcode
+     * factor) and using the salt value `salt`, the creation bytecode `initCode`, and `msg.value`
+     * as inputs. The salt value is calculated pseudo-randomly using a diverse selection of block
+     * and transaction properties. This approach does not guarantee true randomness! In order to save
+     * deployment costs, we do not sanity check the `initCode` length. Note that if `msg.value` is
+     * non-zero, `initCode` must have a `payable` constructor. This implementation is based on Solmate:
+     * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
+     * @param initCode The creation bytecode.
+     * @return newContract The 20-byte address where the contract was deployed.
+     */
+    function deployCreate3(bytes memory initCode) public payable returns (address newContract) {
+        /**
+         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate3`.
+         */
+        newContract = deployCreate3({salt: _generateSalt(), initCode: initCode});
+    }
+
+    /**
+     * @dev Deploys and initialises a new contract via employing the `CREATE3` pattern (i.e. without
+     * an initcode factor) and using the salt value `salt`, the creation bytecode `initCode`, `msg.value`,
+     * the initialisation code `data`, the struct for the `payable` amounts `values`, and the refund
+     * address `refundAddress` as inputs. In order to save deployment costs, we do not sanity check the
+     * `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a
+     * `payable` constructor. This implementation is based on Solmate:
      * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
@@ -718,15 +680,50 @@ contract CreateX {
     }
 
     /**
-     * @dev Deploys and initialises, using a frontrun guard, a new contract via employing the
-     * `CREATE3` pattern (i.e. without an initcode factor) and using the salt value `salt`, the
-     * creation bytecode `initCode`, `msg.value`, the initialisation code `data`, and the struct for
-     * the `payable` amounts `values`. In order to save deployment costs, we do not sanity check the
-     * `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a
-     * `payable` constructor, and any excess ether is returned to `msg.sender`. This implementation
-     * is based on Solmate:
+     * @dev Deploys and initialises a new contract via employing the `CREATE3` pattern (i.e. without
+     * an initcode factor) and using the creation bytecode `initCode`, `msg.value`, the initialisation
+     * code `data`, the struct for the `payable` amounts `values`, and the refund address `refundAddress`
+     * as inputs. The salt value is calculated pseudo-randomly using a diverse selection of block and
+     * transaction properties. This approach does not guarantee true randomness! In order to save deployment
+     * costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero,
+     * `initCode` must have a `payable` constructor. This implementation is based on Solmate:
      * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
-     * @param salt The 32-byte random value used to create the contract address.
+     * @param initCode The creation bytecode.
+     * @param data The initialisation code that is passed to the deployed contract.
+     * @param values The specific `payable` amounts for the deployment and initialisation call.
+     * @param refundAddress The 20-byte address where any excess ether is returned to.
+     * @return newContract The 20-byte address where the contract was deployed.
+     * @custom:security This function allows for reentrancy, however we refrain from adding
+     * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
+     * level that potentially malicious reentrant calls do not affect your smart contract system.
+     */
+    function deployCreate3AndInit(
+        bytes memory initCode,
+        bytes memory data,
+        Values memory values,
+        address refundAddress
+    ) public payable returns (address newContract) {
+        /**
+         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate3AndInit`.
+         */
+        newContract = deployCreate3AndInit({
+            salt: _generateSalt(),
+            initCode: initCode,
+            data: data,
+            values: values,
+            refundAddress: refundAddress
+        });
+    }
+
+    /**
+     * @dev Deploys and initialises a new contract via employing the `CREATE3` pattern (i.e. without
+     * an initcode factor) and using the creation bytecode `initCode`, `msg.value`, the initialisation
+     * code `data`, and the struct for the `payable` amounts `values` as inputs. The salt value is calculated
+     * pseudo-randomly using a diverse selection of block and transaction properties. This approach does
+     * not guarantee true randomness! In order to save deployment costs, we do not sanity check the `initCode`
+     * length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor,
+     * and any excess ether is returned to `msg.sender`. This implementation is based on Solmate:
+     * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
      * @param values The specific `payable` amounts for the deployment and initialisation call.
@@ -736,7 +733,6 @@ contract CreateX {
      * level that potentially malicious reentrant calls do not affect your smart contract system.
      */
     function deployCreate3AndInit(
-        bytes32 salt,
         bytes memory initCode,
         bytes memory data,
         Values memory values
@@ -744,14 +740,13 @@ contract CreateX {
         /**
          * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate3AndInit`.
          */
-        return
-            deployCreate3AndInit({
-                salt: salt,
-                initCode: initCode,
-                data: data,
-                values: values,
-                refundAddress: msg.sender
-            });
+        newContract = deployCreate3AndInit({
+            salt: _generateSalt(),
+            initCode: initCode,
+            data: data,
+            values: values,
+            refundAddress: msg.sender
+        });
     }
 
     /**
@@ -788,7 +783,7 @@ contract CreateX {
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
     function computeCreate3Address(bytes32 salt) public view returns (address computedAddress) {
-        return computeCreate3Address({salt: salt, deployer: address(this)});
+        computedAddress = computeCreate3Address({salt: salt, deployer: address(this)});
     }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -799,14 +794,34 @@ contract CreateX {
      * @dev Returns the `keccak256` hash of `a` and `b` after concatenation.
      * @param a The first 32-byte value to be concatenated and hashed.
      * @param b The second 32-byte value to be concatenated and hashed.
-     * @return value The 32-byte `keccak256` hash of `a` and `b`.
+     * @return hash The 32-byte `keccak256` hash of `a` and `b`.
      */
-    function _efficientHash(bytes32 a, bytes32 b) private pure returns (bytes32 value) {
+    function _efficientHash(bytes32 a, bytes32 b) private pure returns (bytes32 hash) {
         // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             mstore(0x00, a)
             mstore(0x20, b)
-            value := keccak256(0x00, 0x40)
+            hash := keccak256(0x00, 0x40)
         }
+    }
+
+    /**
+     * @dev Generates pseudo-randomly a salt value using a diverse selection of block and
+     * transaction properties.
+     * @return salt The 32-byte `keccak256` hash of `a` and `b`.
+     */
+    function _generateSalt() private view returns (bytes32 salt) {
+        salt = keccak256(
+            abi.encode(
+                blockhash(block.number),
+                block.coinbase,
+                block.number,
+                // solhint-disable-next-line not-rely-on-time
+                block.timestamp,
+                block.prevrandao,
+                block.chainid,
+                msg.sender
+            )
+        );
     }
 }
