@@ -24,6 +24,24 @@ contract CreateX {
         uint256 initCallAmount;
     }
 
+    /**
+     * @dev Enum for the selection of a permissioned deploy protection.
+     */
+    enum SenderBytes {
+        MsgSender,
+        ZeroAddress,
+        Random
+    }
+
+    /**
+     * @dev Enum for the selection of a cross-chain redeploy protection.
+     */
+    enum RedeployProtectionFlag {
+        True,
+        False,
+        Unspecified
+    }
+
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                           EVENTS                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
@@ -85,33 +103,39 @@ contract CreateX {
      * @param salt The 32-byte random value used to create the contract address.
      */
     modifier guard(bytes32 salt) {
-        if (address(bytes20(salt)) == msg.sender && bytes1(salt[20]) == hex"01") {
+        (SenderBytes senderBytes, RedeployProtectionFlag redeployProtectionFlag) = _parseSalt(salt);
+        if (senderBytes == SenderBytes.MsgSender && redeployProtectionFlag == RedeployProtectionFlag.True) {
             /**
              * @dev Configures a permissioned deploy protection as well as a cross-chain redeploy protection.
              */
             salt = keccak256(abi.encode(msg.sender, block.chainid, salt));
-        } else if (address(bytes20(salt)) == msg.sender && bytes1(salt[20]) == hex"00") {
+        } else if (senderBytes == SenderBytes.MsgSender && redeployProtectionFlag == RedeployProtectionFlag.False) {
             /**
              * @dev Configures solely a permissioned deploy protection.
              */
             salt = _efficientHash({a: bytes32(bytes20(uint160(msg.sender))), b: salt});
-        } else if (address(bytes20(salt)) == msg.sender) {
+        } else if (senderBytes == SenderBytes.MsgSender) {
             /**
              * @dev Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
              */
             revert InvalidSalt({emitter: address(this)});
-        } else if (address(bytes20(salt)) == address(0) && bytes1(salt[20]) == hex"01") {
+        } else if (senderBytes == SenderBytes.ZeroAddress && redeployProtectionFlag == RedeployProtectionFlag.True) {
             /**
              * @dev Configures solely a cross-chain redeploy protection. In order to prevent a pseudo-randomly
              * generated cross-chain redeploy protection, we enforce the zero address check for the first 20 bytes.
              */
             salt = _efficientHash({a: bytes32(block.chainid), b: salt});
-        } else if (address(bytes20(salt)) == address(0) && bytes1(salt[20]) > hex"01") {
+        } else if (
+            senderBytes == SenderBytes.ZeroAddress && redeployProtectionFlag == RedeployProtectionFlag.Unspecified
+        ) {
             /**
              * @dev Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
              */
             revert InvalidSalt({emitter: address(this)});
         }
+        /**
+         * @dev In all other cases, the salt value is not modified.
+         */
         _;
     }
 
@@ -885,6 +909,38 @@ contract CreateX {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                      HELPER FUNCTIONS                      */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
+    /**
+     * @dev Returns the enum for the selection of a permissioned deploy protection as well as a
+     * cross-chain redeploy protection.
+     * @param salt The 32-byte random value used to create the contract address.
+     * @return senderBytes The 8-byte enum for the selection of a permissioned deploy protection.
+     * @return redeployProtectionFlag The 8-byte enum for the selection of a cross-chain redeploy
+     * protection.
+     */
+    function _parseSalt(
+        bytes32 salt
+    ) private view returns (SenderBytes senderBytes, RedeployProtectionFlag redeployProtectionFlag) {
+        if (address(bytes20(salt)) == msg.sender && bytes1(salt[20]) == hex"01") {
+            (senderBytes, redeployProtectionFlag) = (SenderBytes.MsgSender, RedeployProtectionFlag.True);
+        } else if (address(bytes20(salt)) == msg.sender && bytes1(salt[20]) == hex"00") {
+            (senderBytes, redeployProtectionFlag) = (SenderBytes.MsgSender, RedeployProtectionFlag.False);
+        } else if (address(bytes20(salt)) == msg.sender) {
+            (senderBytes, redeployProtectionFlag) = (SenderBytes.MsgSender, RedeployProtectionFlag.Unspecified);
+        } else if (address(bytes20(salt)) == address(0) && bytes1(salt[20]) == hex"01") {
+            (senderBytes, redeployProtectionFlag) = (SenderBytes.ZeroAddress, RedeployProtectionFlag.True);
+        } else if (address(bytes20(salt)) == address(0) && bytes1(salt[20]) == hex"00") {
+            (senderBytes, redeployProtectionFlag) = (SenderBytes.ZeroAddress, RedeployProtectionFlag.False);
+        } else if (address(bytes20(salt)) == address(0)) {
+            (senderBytes, redeployProtectionFlag) = (SenderBytes.ZeroAddress, RedeployProtectionFlag.Unspecified);
+        } else if (bytes1(salt[20]) == hex"01") {
+            (senderBytes, redeployProtectionFlag) = (SenderBytes.Random, RedeployProtectionFlag.True);
+        } else if (bytes1(salt[20]) == hex"00") {
+            (senderBytes, redeployProtectionFlag) = (SenderBytes.Random, RedeployProtectionFlag.False);
+        } else {
+            (senderBytes, redeployProtectionFlag) = (SenderBytes.Random, RedeployProtectionFlag.Unspecified);
+        }
+    }
 
     /**
      * @dev Returns the `keccak256` hash of `a` and `b` after concatenation.
