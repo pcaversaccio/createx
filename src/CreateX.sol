@@ -140,7 +140,6 @@ contract CreateX {
      * @return newContract The 20-byte address where the contract was deployed.
      */
     function deployCreate(bytes memory initCode) public payable returns (address newContract) {
-        // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             newContract := create(callvalue(), add(initCode, 0x20), mload(initCode))
         }
@@ -170,7 +169,6 @@ contract CreateX {
         Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
-        // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             newContract := create(mload(values), add(initCode, 0x20), mload(initCode))
         }
@@ -178,7 +176,6 @@ contract CreateX {
         _requireContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
 
-        // solhint-disable-next-line avoid-low-level-calls
         (bool success, ) = newContract.call{value: values.initCallAmount}(data);
         if (!success) revert FailedContractInitialisation({emitter: address(this)});
 
@@ -186,7 +183,6 @@ contract CreateX {
         if (balance != 0) {
             // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
             // opcode) will be part of the refund transaction.
-            // solhint-disable-next-line avoid-low-level-calls
             (bool refunded, ) = refundAddress.call{value: balance}("");
             if (!refunded) revert FailedEtherTransfer({emitter: address(this)});
         }
@@ -228,7 +224,6 @@ contract CreateX {
      */
     function deployCreateClone(address implementation, bytes memory data) public payable returns (address proxy) {
         bytes20 implementationInBytes = bytes20(implementation);
-        // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             let clone := mload(0x40)
             mstore(clone, hex"3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000")
@@ -239,7 +234,6 @@ contract CreateX {
         if (proxy == address(0)) revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: proxy});
 
-        // solhint-disable-next-line avoid-low-level-calls
         (bool success, ) = proxy.call{value: msg.value}(data);
         // We ensure that `implementation` is a non-zero byte contract.
         _requireContractInitialisation(success, implementation);
@@ -337,7 +331,6 @@ contract CreateX {
         bytes32 salt,
         bytes memory initCode
     ) public payable guard(salt) returns (address newContract) {
-        // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
         }
@@ -383,7 +376,6 @@ contract CreateX {
         Values memory values,
         address refundAddress
     ) public payable guard(salt) returns (address newContract) {
-        // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
         }
@@ -391,7 +383,6 @@ contract CreateX {
         _requireContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
 
-        // solhint-disable-next-line avoid-low-level-calls
         (bool success, ) = newContract.call{value: values.initCallAmount}(data);
         if (!success) revert FailedContractInitialisation({emitter: address(this)});
 
@@ -399,7 +390,6 @@ contract CreateX {
         if (balance != 0) {
             // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
             // opcode) will be part of the refund transaction.
-            // solhint-disable-next-line avoid-low-level-calls
             (bool refunded, ) = refundAddress.call{value: balance}("");
             if (!refunded) revert FailedEtherTransfer({emitter: address(this)});
         }
@@ -519,7 +509,6 @@ contract CreateX {
         bytes memory data
     ) public payable returns (address proxy) {
         bytes20 implementationInBytes = bytes20(implementation);
-        // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             let clone := mload(0x40)
             mstore(clone, hex"3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000")
@@ -530,7 +519,6 @@ contract CreateX {
         if (proxy == address(0)) revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: proxy});
 
-        // solhint-disable-next-line avoid-low-level-calls
         (bool success, ) = proxy.call{value: msg.value}(data);
         // We ensure that `implementation` is a non-zero byte contract.
         _requireContractInitialisation(success, implementation);
@@ -569,7 +557,6 @@ contract CreateX {
         bytes32 initCodeHash,
         address deployer
     ) public pure returns (address computedAddress) {
-        // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             let ptr := mload(0x40)
             mstore(add(ptr, 0x40), initCodeHash)
@@ -616,7 +603,6 @@ contract CreateX {
     ) public payable guard(salt) returns (address newContract) {
         bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
         address proxy;
-        // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), salt)
         }
@@ -678,7 +664,6 @@ contract CreateX {
     ) public payable guard(salt) returns (address newContract) {
         bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
         address proxy;
-        // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), salt)
         }
@@ -691,7 +676,6 @@ contract CreateX {
         _requireContractCreation(success, newContract);
         emit ContractCreation({newContract: newContract});
 
-        // solhint-disable-next-line avoid-low-level-calls
         (success, ) = newContract.call{value: values.initCallAmount}(data);
         if (!success) revert FailedContractInitialisation({emitter: address(this)});
 
@@ -699,7 +683,6 @@ contract CreateX {
         if (balance != 0) {
             // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
             // opcode) will be part of the refund transaction.
-            // solhint-disable-next-line avoid-low-level-calls
             (bool refunded, ) = refundAddress.call{value: balance}("");
             if (!refunded) revert FailedEtherTransfer({emitter: address(this)});
         }
@@ -821,7 +804,6 @@ contract CreateX {
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
     function computeCreate3Address(bytes32 salt, address deployer) public pure returns (address computedAddress) {
-        // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             let ptr := mload(0x40)
             mstore(0x00, deployer)
@@ -891,7 +873,6 @@ contract CreateX {
      * @return hash The 32-byte `keccak256` hash of `a` and `b`.
      */
     function _efficientHash(bytes32 a, bytes32 b) private pure returns (bytes32 hash) {
-        // solhint-disable-next-line no-inline-assembly
         assembly ("memory-safe") {
             mstore(0x00, a)
             mstore(0x20, b)
@@ -910,7 +891,6 @@ contract CreateX {
                 blockhash(block.number),
                 block.coinbase,
                 block.number,
-                // solhint-disable-next-line not-rely-on-time
                 block.timestamp,
                 block.prevrandao,
                 block.chainid,
