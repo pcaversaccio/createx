@@ -27,7 +27,7 @@ const config: HardhatUserConfig = {
         enabled: true,
         runs: 999999,
       },
-      evmVersion: "paris", // prevent using the `PUSH0` opcode
+      evmVersion: "paris", // Prevent using the `PUSH0` opcode
     },
   },
   networks: {
