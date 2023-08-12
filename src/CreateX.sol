@@ -93,49 +93,37 @@ contract CreateX {
     /**
      * @dev Modifier that implements different safeguarding mechanisms depending on the encoded
      * values in the salt (`||` stands for byte-wise concatenation):
-     * => salt (32 bytes) = 0xbebebebebebebebebebebebebebebebebebebebe||ff||1212121212121212121212
-     * - The first 20 bytes (i.e. `bebebebebebebebebebebebebebebebebebebebe`) may be used to
-     *   implement a permissioned deploy protection by setting them equal to `msg.sender`,
-     * - The 21st byte (i.e. `ff`) may be used to implement a cross-chain redeploy protection by
-     *   setting it equal to `0x01`,
-     * - The last random 11 bytes (i.e. `1212121212121212121212`) allow for 2**88 bits of entropy
-     *   for mining a salt.
+     *   => salt (32 bytes) = 0xbebebebebebebebebebebebebebebebebebebebe||ff||1212121212121212121212
+     *   - The first 20 bytes (i.e. `bebebebebebebebebebebebebebebebebebebebe`) may be used to
+     *     implement a permissioned deploy protection by setting them equal to `msg.sender`,
+     *   - The 21st byte (i.e. `ff`) may be used to implement a cross-chain redeploy protection by
+     *     setting it equal to `0x01`,
+     *   - The last random 11 bytes (i.e. `1212121212121212121212`) allow for 2**88 bits of entropy
+     *     for mining a salt.
      * @param salt The 32-byte random value used to create the contract address.
      */
     modifier guard(bytes32 salt) {
         (SenderBytes senderBytes, RedeployProtectionFlag redeployProtectionFlag) = _parseSalt(salt);
         if (senderBytes == SenderBytes.MsgSender && redeployProtectionFlag == RedeployProtectionFlag.True) {
-            /**
-             * @dev Configures a permissioned deploy protection as well as a cross-chain redeploy protection.
-             */
+            // Configures a permissioned deploy protection as well as a cross-chain redeploy protection.
             salt = keccak256(abi.encode(msg.sender, block.chainid, salt));
         } else if (senderBytes == SenderBytes.MsgSender && redeployProtectionFlag == RedeployProtectionFlag.False) {
-            /**
-             * @dev Configures solely a permissioned deploy protection.
-             */
+            // Configures solely a permissioned deploy protection.
             salt = _efficientHash({a: bytes32(bytes20(uint160(msg.sender))), b: salt});
         } else if (senderBytes == SenderBytes.MsgSender) {
-            /**
-             * @dev Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
-             */
+            // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
             revert InvalidSalt({emitter: address(this)});
         } else if (senderBytes == SenderBytes.ZeroAddress && redeployProtectionFlag == RedeployProtectionFlag.True) {
-            /**
-             * @dev Configures solely a cross-chain redeploy protection. In order to prevent a pseudo-randomly
-             * generated cross-chain redeploy protection, we enforce the zero address check for the first 20 bytes.
-             */
+            // Configures solely a cross-chain redeploy protection. In order to prevent a pseudo-randomly
+            // generated cross-chain redeploy protection, we enforce the zero address check for the first 20 bytes.
             salt = _efficientHash({a: bytes32(block.chainid), b: salt});
         } else if (
             senderBytes == SenderBytes.ZeroAddress && redeployProtectionFlag == RedeployProtectionFlag.Unspecified
         ) {
-            /**
-             * @dev Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
-             */
+            // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
             revert InvalidSalt({emitter: address(this)});
         }
-        /**
-         * @dev In all other cases, the salt value is not modified.
-         */
+        // In all other cases, the salt value is not modified.
         _;
     }
 
@@ -156,9 +144,7 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create(callvalue(), add(initCode, 0x20), mload(initCode))
         }
-        /**
-         * @dev We ensure that `newContract` is a non-zero byte contract.
-         */
+        // We ensure that `newContract` is a non-zero byte contract.
         _requireContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
     }
@@ -188,9 +174,7 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create(mload(values), add(initCode, 0x20), mload(initCode))
         }
-        /**
-         * @dev We ensure that `newContract` is a non-zero byte contract.
-         */
+        // We ensure that `newContract` is a non-zero byte contract.
         _requireContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
 
@@ -200,10 +184,8 @@ contract CreateX {
 
         uint256 balance = address(this).balance;
         if (balance != 0) {
-            /**
-             * @dev Any wei amount previously forced into this contract (e.g. by
-             * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
-             */
+            // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
+            // opcode) will be part of the refund transaction.
             // solhint-disable-next-line avoid-low-level-calls
             (bool refunded, ) = refundAddress.call{value: balance}("");
             if (!refunded) revert FailedEtherTransfer({emitter: address(this)});
@@ -259,9 +241,7 @@ contract CreateX {
 
         // solhint-disable-next-line avoid-low-level-calls
         (bool success, ) = proxy.call{value: msg.value}(data);
-        /**
-         * @dev We ensure that `implementation` is a non-zero byte contract.
-         */
+        // We ensure that `implementation` is a non-zero byte contract.
         _requireContractInitialisation(success, implementation);
     }
 
@@ -283,33 +263,25 @@ contract CreateX {
         bytes memory data;
         bytes1 len = bytes1(0x94);
 
-        /**
-         * @dev The theoretical allowed limit, based on EIP-2681, for an account nonce is 2**64-2:
-         * https://eips.ethereum.org/EIPS/eip-2681.
-         */
+        // The theoretical allowed limit, based on EIP-2681, for an account nonce is 2**64-2:
+        // https://eips.ethereum.org/EIPS/eip-2681.
         if (nonce > type(uint64).max - 1) revert InvalidNonceValue({emitter: address(this)});
 
-        /**
-         * @dev The integer zero is treated as an empty byte string and therefore has only one
-         * length prefix, 0x80, which is calculated via 0x80 + 0.
-         */
+        // The integer zero is treated as an empty byte string and therefore has only one length prefix,
+        // 0x80, which is calculated via 0x80 + 0.
         if (nonce == 0x00) {
             data = abi.encodePacked(bytes1(0xd6), len, deployer, bytes1(0x80));
         }
-        /**
-         * @dev A one-byte integer in the [0x00, 0x7f] range uses its own value as a length prefix,
-         * there is no additional "0x80 + length" prefix that precedes it.
-         */
+        // A one-byte integer in the [0x00, 0x7f] range uses its own value as a length prefix, there is no
+        // additional "0x80 + length" prefix that precedes it.
         else if (nonce <= 0x7f) {
             data = abi.encodePacked(bytes1(0xd6), len, deployer, uint8(nonce));
         }
-        /**
-         * @dev In the case of `nonce > 0x7f` and `nonce <= type(uint8).max`, we have the following
-         * encoding scheme (the same calculation can be carried over for higher nonce bytes):
-         * 0xda = 0xc0 (short RLP prefix) + 0x1a (= the bytes length of: 0x94 + address + 0x84 + nonce, in hex),
-         * 0x94 = 0x80 + 0x14 (= the bytes length of an address, 20 bytes, in hex),
-         * 0x84 = 0x80 + 0x04 (= the bytes length of the nonce, 4 bytes, in hex).
-         */
+        // In the case of `nonce > 0x7f` and `nonce <= type(uint8).max`, we have the following encoding scheme
+        // (the same calculation can be carried over for higher nonce bytes):
+        // 0xda = 0xc0 (short RLP prefix) + 0x1a (= the bytes length of: 0x94 + address + 0x84 + nonce, in hex),
+        // 0x94 = 0x80 + 0x14 (= the bytes length of an address, 20 bytes, in hex),
+        // 0x84 = 0x80 + 0x04 (= the bytes length of the nonce, 4 bytes, in hex).
         else if (nonce <= type(uint8).max) {
             data = abi.encodePacked(bytes1(0xd7), len, deployer, bytes1(0x81), uint8(nonce));
         } else if (nonce <= type(uint16).max) {
@@ -369,9 +341,7 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
         }
-        /**
-         * @dev We ensure that `newContract` is a non-zero byte contract.
-         */
+        // We ensure that `newContract` is a non-zero byte contract.
         _requireContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
     }
@@ -386,9 +356,7 @@ contract CreateX {
      * @return newContract The 20-byte address where the contract was deployed.
      */
     function deployCreate2(bytes memory initCode) public payable returns (address newContract) {
-        /**
-         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate2`.
-         */
+        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate2`.
         newContract = deployCreate2({salt: _generateSalt(), initCode: initCode});
     }
 
@@ -419,9 +387,7 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
         }
-        /**
-         * @dev We ensure that `newContract` is a non-zero byte contract.
-         */
+        // We ensure that `newContract` is a non-zero byte contract.
         _requireContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
 
@@ -431,10 +397,8 @@ contract CreateX {
 
         uint256 balance = address(this).balance;
         if (balance != 0) {
-            /**
-             * @dev Any wei amount previously forced into this contract (e.g. by
-             * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
-             */
+            // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
+            // opcode) will be part of the refund transaction.
             // solhint-disable-next-line avoid-low-level-calls
             (bool refunded, ) = refundAddress.call{value: balance}("");
             if (!refunded) revert FailedEtherTransfer({emitter: address(this)});
@@ -462,9 +426,7 @@ contract CreateX {
         bytes memory data,
         Values memory values
     ) public payable returns (address newContract) {
-        /**
-         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate2AndInit`.
-         */
+        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate2AndInit`.
         newContract = deployCreate2AndInit({
             salt: salt,
             initCode: initCode,
@@ -497,9 +459,7 @@ contract CreateX {
         Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
-        /**
-         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate2AndInit`.
-         */
+        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate2AndInit`.
         newContract = deployCreate2AndInit({
             salt: _generateSalt(),
             initCode: initCode,
@@ -530,9 +490,7 @@ contract CreateX {
         bytes memory data,
         Values memory values
     ) public payable returns (address newContract) {
-        /**
-         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate2AndInit`.
-         */
+        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate2AndInit`.
         newContract = deployCreate2AndInit({
             salt: _generateSalt(),
             initCode: initCode,
@@ -574,9 +532,7 @@ contract CreateX {
 
         // solhint-disable-next-line avoid-low-level-calls
         (bool success, ) = proxy.call{value: msg.value}(data);
-        /**
-         * @dev We ensure that `implementation` is a non-zero byte contract.
-         */
+        // We ensure that `implementation` is a non-zero byte contract.
         _requireContractInitialisation(success, implementation);
     }
 
@@ -669,9 +625,7 @@ contract CreateX {
 
         newContract = computeCreate3Address({salt: salt});
         (bool success, ) = proxy.call{value: msg.value}(initCode);
-        /**
-         * @dev We ensure that `newContract` is a non-zero byte contract.
-         */
+        // We ensure that `newContract` is a non-zero byte contract.
         _requireContractCreation(success, newContract);
         emit ContractCreation({newContract: newContract});
     }
@@ -690,9 +644,7 @@ contract CreateX {
      * anyone can frontrun the same proxy deployment on other chains. Use with caution!
      */
     function deployCreate3(bytes memory initCode) public payable returns (address newContract) {
-        /**
-         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate3`.
-         */
+        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate3`.
         newContract = deployCreate3({salt: _generateSalt(), initCode: initCode});
     }
 
@@ -735,9 +687,7 @@ contract CreateX {
 
         newContract = computeCreate3Address({salt: salt});
         (bool success, ) = proxy.call{value: values.constructorAmount}(initCode);
-        /**
-         * @dev We ensure that `newContract` is a non-zero byte contract.
-         */
+        // We ensure that `newContract` is a non-zero byte contract.
         _requireContractCreation(success, newContract);
         emit ContractCreation({newContract: newContract});
 
@@ -747,10 +697,8 @@ contract CreateX {
 
         uint256 balance = address(this).balance;
         if (balance != 0) {
-            /**
-             * @dev Any wei amount previously forced into this contract (e.g. by
-             * using the `SELFDESTRUCT` opcode) will be part of the refund transaction.
-             */
+            // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
+            // opcode) will be part of the refund transaction.
             // solhint-disable-next-line avoid-low-level-calls
             (bool refunded, ) = refundAddress.call{value: balance}("");
             if (!refunded) revert FailedEtherTransfer({emitter: address(this)});
@@ -783,9 +731,7 @@ contract CreateX {
         bytes memory data,
         Values memory values
     ) public payable returns (address newContract) {
-        /**
-         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate3AndInit`.
-         */
+        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate3AndInit`.
         newContract = deployCreate3AndInit({
             salt: salt,
             initCode: initCode,
@@ -821,9 +767,7 @@ contract CreateX {
         Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
-        /**
-         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate3AndInit`.
-         */
+        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate3AndInit`.
         newContract = deployCreate3AndInit({
             salt: _generateSalt(),
             initCode: initCode,
@@ -857,9 +801,7 @@ contract CreateX {
         bytes memory data,
         Values memory values
     ) public payable returns (address newContract) {
-        /**
-         * @dev Note that the modifier `guard` is called as part of the overloaded function `deployCreate3AndInit`.
-         */
+        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate3AndInit`.
         newContract = deployCreate3AndInit({
             salt: _generateSalt(),
             initCode: initCode,
