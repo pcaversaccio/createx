@@ -66,7 +66,9 @@ jobs:
           if [[ $version_foundry != "paris" ]] || [[ $version_foundry != $version_hh ]]; then exit 1; fi
 
       - name: Foundry tests
-        run: pnpm test:ci
+        run: pnpm test
+        env:
+          FOUNDRY_PROFILE: ci
 
       - name: Show the Foundry default config
         run: forge config

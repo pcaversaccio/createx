@@ -28,7 +28,6 @@
     "node": "npx hardhat node",
     "clean": "npx hardhat clean",
     "test": "forge test --out forge-artifacts",
-    "test:ci": "FOUNDRY_PROFILE=ci forge test --out forge-artifacts",
     "coverage": "npx hardhat coverage",
     "compile": "npx hardhat compile",
     "build": "forge build --out forge-artifacts",

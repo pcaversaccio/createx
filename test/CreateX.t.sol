@@ -87,12 +87,12 @@ contract CreateXTest is Test {
 
     function testDeployCreateRevertNonPayable() public {
         vm.expectRevert({revertData: abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr)});
-        createX.deployCreate({initCode: hex"01"});
+        createX.deployCreate({initCode: abi.encode(hex"01")});
     }
 
     function testDeployCreateRevertPayable() public {
         vm.expectRevert({revertData: abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr)});
-        createX.deployCreate{value: 1 wei}({initCode: hex"01"});
+        createX.deployCreate{value: 1 wei}({initCode: abi.encode(hex"01")});
     }
 
     function testFuzzDeployCreateNonPayable(uint64 nonce) public {
