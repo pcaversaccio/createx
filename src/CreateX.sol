@@ -189,11 +189,10 @@ contract CreateX {
         (bool success, bytes memory returnData) = newContract.call{value: values.initCallAmount}(data);
         if (!success) revert FailedContractInitialisation({emitter: self, revertData: returnData});
 
-        uint256 balance = self.balance;
-        if (balance != 0) {
+        if (self.balance != 0) {
             // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
             // opcode) will be part of the refund transaction.
-            (success, returnData) = refundAddress.call{value: balance}("");
+            (success, returnData) = refundAddress.call{value: self.balance}("");
             if (!success) revert FailedEtherTransfer({emitter: self, revertData: returnData});
         }
     }
@@ -396,11 +395,10 @@ contract CreateX {
         (bool success, bytes memory returnData) = newContract.call{value: values.initCallAmount}(data);
         if (!success) revert FailedContractInitialisation({emitter: self, revertData: returnData});
 
-        uint256 balance = self.balance;
-        if (balance != 0) {
+        if (self.balance != 0) {
             // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
             // opcode) will be part of the refund transaction.
-            (success, returnData) = refundAddress.call{value: balance}("");
+            (success, returnData) = refundAddress.call{value: self.balance}("");
             if (!success) revert FailedEtherTransfer({emitter: self, revertData: returnData});
         }
     }
@@ -690,11 +688,10 @@ contract CreateX {
         (success, returnData) = newContract.call{value: values.initCallAmount}(data);
         if (!success) revert FailedContractInitialisation({emitter: self, revertData: returnData});
 
-        uint256 balance = self.balance;
-        if (balance != 0) {
+        if (self.balance != 0) {
             // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
             // opcode) will be part of the refund transaction.
-            (success, returnData) = refundAddress.call{value: balance}("");
+            (success, returnData) = refundAddress.call{value: self.balance}("");
             if (!success) revert FailedEtherTransfer({emitter: self, revertData: returnData});
         }
     }
