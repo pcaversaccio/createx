@@ -47,6 +47,12 @@ contract CreateX {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
+     * @dev Event that is emitted when a create3 proxy contract is successfully created.
+     * @param newContract The address of the new proxy contract.
+     */
+    event Create3ProxyContractCreation(address indexed newContract);
+
+    /**
      * @dev Event that is emitted when a contract is successfully created.
      * @param newContract The address of the new contract.
      */
@@ -607,7 +613,7 @@ contract CreateX {
             proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), salt)
         }
         if (proxy == address(0)) revert FailedContractCreation({emitter: address(this)});
-        emit ContractCreation({newContract: proxy});
+        emit Create3ProxyContractCreation({newContract: proxy});
 
         newContract = computeCreate3Address({salt: salt});
         (bool success, ) = proxy.call{value: msg.value}(initCode);
@@ -668,7 +674,7 @@ contract CreateX {
             proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), salt)
         }
         if (proxy == address(0)) revert FailedContractCreation({emitter: address(this)});
-        emit ContractCreation({newContract: proxy});
+        emit Create3ProxyContractCreation({newContract: proxy});
 
         newContract = computeCreate3Address({salt: salt});
         (bool success, ) = proxy.call{value: values.constructorAmount}(initCode);
