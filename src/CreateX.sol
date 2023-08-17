@@ -12,7 +12,7 @@ pragma solidity 0.8.21;
  * @custom:security-contact See https://github.com/pcaversaccio/createx/security/policy.
  */
 contract CreateX {
-    address immutable self = address(this);
+    address private immutable _SELF = address(this);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            TYPES                           */
@@ -49,7 +49,7 @@ contract CreateX {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
-     * @dev Event that is emitted when a create3 proxy contract is successfully created.
+     * @dev Event that is emitted when a `CREATE3` proxy contract is successfully created.
      * @param newContract The address of the new proxy contract.
      */
     event Create3ProxyContractCreation(address indexed newContract);
@@ -92,7 +92,7 @@ contract CreateX {
     /**
      * @dev Error that occurs when transferring ether has failed.
      * @param emitter The contract that emits the error.
-     * @param revertData The data returned by the failed Ether transfer.
+     * @param revertData The data returned by the failed ether transfer.
      */
     error FailedEtherTransfer(address emitter, bytes revertData);
 
@@ -122,7 +122,7 @@ contract CreateX {
             salt = _efficientHash({a: bytes32(bytes20(uint160(msg.sender))), b: salt});
         } else if (senderBytes == SenderBytes.MsgSender) {
             // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
-            revert InvalidSalt({emitter: self});
+            revert InvalidSalt({emitter: _SELF});
         } else if (senderBytes == SenderBytes.ZeroAddress && redeployProtectionFlag == RedeployProtectionFlag.True) {
             // Configures solely a cross-chain redeploy protection. In order to prevent a pseudo-randomly
             // generated cross-chain redeploy protection, we enforce the zero address check for the first 20 bytes.
@@ -131,7 +131,7 @@ contract CreateX {
             senderBytes == SenderBytes.ZeroAddress && redeployProtectionFlag == RedeployProtectionFlag.Unspecified
         ) {
             // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
-            revert InvalidSalt({emitter: self});
+            revert InvalidSalt({emitter: _SELF});
         }
         // In all other cases, the salt value is not modified.
         _;
@@ -185,13 +185,13 @@ contract CreateX {
         emit ContractCreation({newContract: newContract});
 
         (bool success, bytes memory returnData) = newContract.call{value: values.initCallAmount}(data);
-        if (!success) revert FailedContractInitialisation({emitter: self, revertData: returnData});
+        if (!success) revert FailedContractInitialisation({emitter: _SELF, revertData: returnData});
 
-        if (self.balance != 0) {
+        if (_SELF.balance != 0) {
             // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
             // opcode) will be part of the refund transaction.
-            (success, returnData) = refundAddress.call{value: self.balance}("");
-            if (!success) revert FailedEtherTransfer({emitter: self, revertData: returnData});
+            (success, returnData) = refundAddress.call{value: _SELF.balance}("");
+            if (!success) revert FailedEtherTransfer({emitter: _SELF, revertData: returnData});
         }
     }
 
@@ -238,7 +238,7 @@ contract CreateX {
             mstore(add(clone, 0x28), hex"5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000")
             proxy := create(0, clone, 0x37)
         }
-        if (proxy == address(0)) revert FailedContractCreation({emitter: self});
+        if (proxy == address(0)) revert FailedContractCreation({emitter: _SELF});
         emit ContractCreation({newContract: proxy});
 
         (bool success, bytes memory returnData) = proxy.call{value: msg.value}(data);
@@ -265,7 +265,7 @@ contract CreateX {
 
         // The theoretical allowed limit, based on EIP-2681, for an account nonce is 2**64-2:
         // https://eips.ethereum.org/EIPS/eip-2681.
-        if (nonce > type(uint64).max - 1) revert InvalidNonceValue({emitter: self});
+        if (nonce > type(uint64).max - 1) revert InvalidNonceValue({emitter: _SELF});
 
         // The integer zero is treated as an empty byte string and therefore has only one length prefix,
         // 0x80, which is calculated via 0x80 + 0.
@@ -317,7 +317,7 @@ contract CreateX {
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
     function computeCreateAddress(uint256 nonce) public view returns (address computedAddress) {
-        computedAddress = computeCreateAddress({deployer: self, nonce: nonce});
+        computedAddress = computeCreateAddress({deployer: _SELF, nonce: nonce});
     }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -388,13 +388,13 @@ contract CreateX {
         emit ContractCreation({newContract: newContract});
 
         (bool success, bytes memory returnData) = newContract.call{value: values.initCallAmount}(data);
-        if (!success) revert FailedContractInitialisation({emitter: self, revertData: returnData});
+        if (!success) revert FailedContractInitialisation({emitter: _SELF, revertData: returnData});
 
-        if (self.balance != 0) {
+        if (_SELF.balance != 0) {
             // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
             // opcode) will be part of the refund transaction.
-            (success, returnData) = refundAddress.call{value: self.balance}("");
-            if (!success) revert FailedEtherTransfer({emitter: self, revertData: returnData});
+            (success, returnData) = refundAddress.call{value: _SELF.balance}("");
+            if (!success) revert FailedEtherTransfer({emitter: _SELF, revertData: returnData});
         }
     }
 
@@ -519,7 +519,7 @@ contract CreateX {
             mstore(add(clone, 0x28), hex"5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000")
             proxy := create2(0, clone, 0x37, salt)
         }
-        if (proxy == address(0)) revert FailedContractCreation({emitter: self});
+        if (proxy == address(0)) revert FailedContractCreation({emitter: _SELF});
         emit ContractCreation({newContract: proxy});
 
         (bool success, bytes memory returnData) = proxy.call{value: msg.value}(data);
@@ -578,7 +578,7 @@ contract CreateX {
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
     function computeCreate2Address(bytes32 salt, bytes32 initCodeHash) public view returns (address computedAddress) {
-        computedAddress = computeCreate2Address({salt: salt, initCodeHash: initCodeHash, deployer: self});
+        computedAddress = computeCreate2Address({salt: salt, initCodeHash: initCodeHash, deployer: _SELF});
     }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -608,7 +608,7 @@ contract CreateX {
         assembly ("memory-safe") {
             proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), salt)
         }
-        if (proxy == address(0)) revert FailedContractCreation({emitter: self});
+        if (proxy == address(0)) revert FailedContractCreation({emitter: _SELF});
         emit Create3ProxyContractCreation({newContract: proxy});
 
         newContract = computeCreate3Address({salt: salt});
@@ -668,7 +668,7 @@ contract CreateX {
         assembly ("memory-safe") {
             proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), salt)
         }
-        if (proxy == address(0)) revert FailedContractCreation({emitter: self});
+        if (proxy == address(0)) revert FailedContractCreation({emitter: _SELF});
         emit Create3ProxyContractCreation({newContract: proxy});
 
         newContract = computeCreate3Address({salt: salt});
@@ -678,13 +678,13 @@ contract CreateX {
 
         bytes memory returnData;
         (success, returnData) = newContract.call{value: values.initCallAmount}(data);
-        if (!success) revert FailedContractInitialisation({emitter: self, revertData: returnData});
+        if (!success) revert FailedContractInitialisation({emitter: _SELF, revertData: returnData});
 
-        if (self.balance != 0) {
+        if (_SELF.balance != 0) {
             // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
             // opcode) will be part of the refund transaction.
-            (success, returnData) = refundAddress.call{value: self.balance}("");
-            if (!success) revert FailedEtherTransfer({emitter: self, revertData: returnData});
+            (success, returnData) = refundAddress.call{value: _SELF.balance}("");
+            if (!success) revert FailedEtherTransfer({emitter: _SELF, revertData: returnData});
         }
     }
 
@@ -827,7 +827,7 @@ contract CreateX {
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
     function computeCreate3Address(bytes32 salt) public view returns (address computedAddress) {
-        computedAddress = computeCreate3Address({salt: salt, deployer: self});
+        computedAddress = computeCreate3Address({salt: salt, deployer: _SELF});
     }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -905,7 +905,7 @@ contract CreateX {
      * @param newContract The 20-byte address where the contract was deployed.
      */
     function _requireSuccessfulContractCreation(bool success, address newContract) private view {
-        if (!success || newContract.code.length == 0) revert FailedContractCreation({emitter: self});
+        if (!success || newContract.code.length == 0) revert FailedContractCreation({emitter: _SELF});
     }
 
     /**
@@ -913,7 +913,7 @@ contract CreateX {
      * @param newContract The 20-byte address where the contract was deployed.
      */
     function _requireSuccessfulContractCreation(address newContract) private view {
-        if (newContract == address(0) || newContract.code.length == 0) revert FailedContractCreation({emitter: self});
+        if (newContract == address(0) || newContract.code.length == 0) revert FailedContractCreation({emitter: _SELF});
     }
 
     /**
@@ -928,6 +928,6 @@ contract CreateX {
         address implementation
     ) private view {
         if (!success || implementation.code.length == 0)
-            revert FailedContractInitialisation({emitter: self, revertData: returnData});
+            revert FailedContractInitialisation({emitter: _SELF, revertData: returnData});
     }
 }
