@@ -71,8 +71,9 @@ contract CreateX {
     /**
      * @dev Error that occurs when the contract initialisation call failed.
      * @param emitter The contract that emits the error.
+     * @param revertData The data returned by the failed initialisation call.
      */
-    error FailedContractInitialisation(address emitter);
+    error FailedContractInitialisation(address emitter, bytes revertData);
 
     /**
      * @dev Error that occurs when the salt value is invalid.
@@ -89,8 +90,9 @@ contract CreateX {
     /**
      * @dev Error that occurs when transferring ether has failed.
      * @param emitter The contract that emits the error.
+     * @param revertData The data returned by the failed Ether transfer.
      */
-    error FailedEtherTransfer(address emitter);
+    error FailedEtherTransfer(address emitter, bytes revertData);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                          MODIFIERS                         */
@@ -182,15 +184,15 @@ contract CreateX {
         _requireContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
 
-        (bool success, ) = newContract.call{value: values.initCallAmount}(data);
-        if (!success) revert FailedContractInitialisation({emitter: address(this)});
+        (bool success, bytes memory returnData) = newContract.call{value: values.initCallAmount}(data);
+        if (!success) revert FailedContractInitialisation({emitter: address(this), revertData: returnData});
 
         uint256 balance = address(this).balance;
         if (balance != 0) {
             // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
             // opcode) will be part of the refund transaction.
-            (bool refunded, ) = refundAddress.call{value: balance}("");
-            if (!refunded) revert FailedEtherTransfer({emitter: address(this)});
+            (success, returnData) = refundAddress.call{value: balance}("");
+            if (!success) revert FailedEtherTransfer({emitter: address(this), revertData: returnData});
         }
     }
 
@@ -240,9 +242,9 @@ contract CreateX {
         if (proxy == address(0)) revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: proxy});
 
-        (bool success, ) = proxy.call{value: msg.value}(data);
+        (bool success, bytes memory returnData) = proxy.call{value: msg.value}(data);
         // We ensure that `implementation` is a non-zero byte contract.
-        _requireContractInitialisation(success, implementation);
+        _requireContractInitialisation(success, returnData, implementation);
     }
 
     /**
@@ -389,15 +391,15 @@ contract CreateX {
         _requireContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
 
-        (bool success, ) = newContract.call{value: values.initCallAmount}(data);
-        if (!success) revert FailedContractInitialisation({emitter: address(this)});
+        (bool success, bytes memory returnData) = newContract.call{value: values.initCallAmount}(data);
+        if (!success) revert FailedContractInitialisation({emitter: address(this), revertData: returnData});
 
         uint256 balance = address(this).balance;
         if (balance != 0) {
             // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
             // opcode) will be part of the refund transaction.
-            (bool refunded, ) = refundAddress.call{value: balance}("");
-            if (!refunded) revert FailedEtherTransfer({emitter: address(this)});
+            (success, returnData) = refundAddress.call{value: balance}("");
+            if (!success) revert FailedEtherTransfer({emitter: address(this), revertData: returnData});
         }
     }
 
@@ -525,9 +527,9 @@ contract CreateX {
         if (proxy == address(0)) revert FailedContractCreation({emitter: address(this)});
         emit ContractCreation({newContract: proxy});
 
-        (bool success, ) = proxy.call{value: msg.value}(data);
+        (bool success, bytes memory returnData) = proxy.call{value: msg.value}(data);
         // We ensure that `implementation` is a non-zero byte contract.
-        _requireContractInitialisation(success, implementation);
+        _requireContractInitialisation(success, returnData, implementation);
     }
 
     /**
@@ -682,15 +684,16 @@ contract CreateX {
         _requireContractCreation(success, newContract);
         emit ContractCreation({newContract: newContract});
 
-        (success, ) = newContract.call{value: values.initCallAmount}(data);
-        if (!success) revert FailedContractInitialisation({emitter: address(this)});
+        bytes memory returnData;
+        (success, returnData) = newContract.call{value: values.initCallAmount}(data);
+        if (!success) revert FailedContractInitialisation({emitter: address(this), revertData: returnData});
 
         uint256 balance = address(this).balance;
         if (balance != 0) {
             // Any wei amount previously forced into this contract (e.g. by using the `SELFDESTRUCT`
             // opcode) will be part of the refund transaction.
-            (bool refunded, ) = refundAddress.call{value: balance}("");
-            if (!refunded) revert FailedEtherTransfer({emitter: address(this)});
+            (success, returnData) = refundAddress.call{value: balance}("");
+            if (!success) revert FailedEtherTransfer({emitter: address(this), revertData: returnData});
         }
     }
 
@@ -926,9 +929,15 @@ contract CreateX {
     /**
      * @dev Ensures that the contract initialisation call to `implementation` has been successful.
      * @param success The Boolean success condition.
+     * @param returnData The return data from the contract initialisation call.
      * @param implementation The 20-byte address where the implementation was deployed.
      */
-    function _requireContractInitialisation(bool success, address implementation) private view {
-        if (!success || implementation.code.length == 0) revert FailedContractInitialisation({emitter: address(this)});
+    function _requireContractInitialisation(
+        bool success,
+        bytes memory returnData,
+        address implementation
+    ) private view {
+        if (!success || implementation.code.length == 0)
+            revert FailedContractInitialisation({emitter: address(this), revertData: returnData});
     }
 }
