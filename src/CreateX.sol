@@ -153,8 +153,7 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create(callvalue(), add(initCode, 0x20), mload(initCode))
         }
-        // We ensure that `newContract` is a non-zero byte contract.
-        _requireContractCreation(newContract);
+        _requireSuccessfulContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
     }
 
@@ -182,8 +181,7 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create(mload(values), add(initCode, 0x20), mload(initCode))
         }
-        // We ensure that `newContract` is a non-zero byte contract.
-        _requireContractCreation(newContract);
+        _requireSuccessfulContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
 
         (bool success, bytes memory returnData) = newContract.call{value: values.initCallAmount}(data);
@@ -244,8 +242,7 @@ contract CreateX {
         emit ContractCreation({newContract: proxy});
 
         (bool success, bytes memory returnData) = proxy.call{value: msg.value}(data);
-        // We ensure that `implementation` is a non-zero byte contract.
-        _requireContractInitialisation(success, returnData, implementation);
+        _requireSuccessfulContractInitialisation(success, returnData, implementation);
     }
 
     /**
@@ -343,8 +340,7 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
         }
-        // We ensure that `newContract` is a non-zero byte contract.
-        _requireContractCreation(newContract);
+        _requireSuccessfulContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
     }
 
@@ -388,8 +384,7 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
         }
-        // We ensure that `newContract` is a non-zero byte contract.
-        _requireContractCreation(newContract);
+        _requireSuccessfulContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
 
         (bool success, bytes memory returnData) = newContract.call{value: values.initCallAmount}(data);
@@ -528,8 +523,7 @@ contract CreateX {
         emit ContractCreation({newContract: proxy});
 
         (bool success, bytes memory returnData) = proxy.call{value: msg.value}(data);
-        // We ensure that `implementation` is a non-zero byte contract.
-        _requireContractInitialisation(success, returnData, implementation);
+        _requireSuccessfulContractInitialisation(success, returnData, implementation);
     }
 
     /**
@@ -619,8 +613,7 @@ contract CreateX {
 
         newContract = computeCreate3Address({salt: salt});
         (bool success, ) = proxy.call{value: msg.value}(initCode);
-        // We ensure that `newContract` is a non-zero byte contract.
-        _requireContractCreation(success, newContract);
+        _requireSuccessfulContractCreation(success, newContract);
         emit ContractCreation({newContract: newContract});
     }
 
@@ -680,8 +673,7 @@ contract CreateX {
 
         newContract = computeCreate3Address({salt: salt});
         (bool success, ) = proxy.call{value: values.constructorAmount}(initCode);
-        // We ensure that `newContract` is a non-zero byte contract.
-        _requireContractCreation(success, newContract);
+        _requireSuccessfulContractCreation(success, newContract);
         emit ContractCreation({newContract: newContract});
 
         bytes memory returnData;
@@ -912,7 +904,7 @@ contract CreateX {
      * @param success The Boolean success condition.
      * @param newContract The 20-byte address where the contract was deployed.
      */
-    function _requireContractCreation(bool success, address newContract) private view {
+    function _requireSuccessfulContractCreation(bool success, address newContract) private view {
         if (!success || newContract.code.length == 0) revert FailedContractCreation({emitter: self});
     }
 
@@ -920,7 +912,7 @@ contract CreateX {
      * @dev Ensures that `newContract` is a non-zero byte contract.
      * @param newContract The 20-byte address where the contract was deployed.
      */
-    function _requireContractCreation(address newContract) private view {
+    function _requireSuccessfulContractCreation(address newContract) private view {
         if (newContract == address(0) || newContract.code.length == 0) revert FailedContractCreation({emitter: self});
     }
 
@@ -930,7 +922,7 @@ contract CreateX {
      * @param returnData The return data from the contract initialisation call.
      * @param implementation The 20-byte address where the implementation was deployed.
      */
-    function _requireContractInitialisation(
+    function _requireSuccessfulContractInitialisation(
         bool success,
         bytes memory returnData,
         address implementation
