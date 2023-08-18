@@ -386,6 +386,12 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
+    mantaTestnet: {
+      chainId: 3441005,
+      url: process.env.MANTA_TESTNET_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -483,6 +489,8 @@ const config: HardhatUserConfig = {
       // For Lukso testnet & mainnet
       lukso: process.env.LUKSO_API_KEY || "",
       luksoTestnet: process.env.LUKSO_API_KEY || "",
+      // For Manta testnet
+      mantaTestnet: process.env.MANTA_API_KEY || "",
     },
     customChains: [
       {
@@ -691,6 +699,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://explorer.execution.testnet.lukso.network/api",
           browserURL: "https://explorer.execution.testnet.lukso.network",
+        },
+      },
+      {
+        network: "mantaTestnet",
+        chainId: 3441005,
+        urls: {
+          apiURL: "https://pacific-explorer.manta.network/api",
+          browserURL: "https://pacific-explorer.manta.network",
         },
       },
     ],
