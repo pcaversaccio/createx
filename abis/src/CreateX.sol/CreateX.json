@@ -1,10 +1,11 @@
 [
   "error FailedContractCreation(address)",
-  "error FailedContractInitialisation(address)",
-  "error FailedEtherTransfer(address)",
+  "error FailedContractInitialisation(address,bytes)",
+  "error FailedEtherTransfer(address,bytes)",
   "error InvalidNonceValue(address)",
   "error InvalidSalt(address)",
   "event ContractCreation(address indexed)",
+  "event Create3ProxyContractCreation(address indexed)",
   "function computeCreate2Address(bytes32,bytes32) view returns (address)",
   "function computeCreate2Address(bytes32,bytes32,address) pure returns (address)",
   "function computeCreate3Address(bytes32,address) pure returns (address)",
