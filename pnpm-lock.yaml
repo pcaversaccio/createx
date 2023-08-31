@@ -69,11 +69,11 @@ devDependencies:
     specifier: ^1.0.9
     version: 1.0.9(hardhat@2.17.2)
   prettier:
-    specifier: ^3.0.2
-    version: 3.0.2
+    specifier: ^3.0.3
+    version: 3.0.3
   prettier-plugin-solidity:
     specifier: ^1.1.3
-    version: 1.1.3(prettier@3.0.2)
+    version: 1.1.3(prettier@3.0.3)
   solhint:
     specifier: ^3.6.2
     version: 3.6.2
@@ -678,10 +678,10 @@ packages:
       "@ethersproject/strings": 5.7.0
     dev: true
 
-  /@humanwhocodes/config-array@0.11.10:
+  /@humanwhocodes/config-array@0.11.11:
     resolution:
       {
-        integrity: sha512-KVVjQmNUepDVGXNuoRRdmmEjruj0KfiGSbS8LVc12LMsWDQzRXJ0qdhN8L8uUigKpfEHRhlaQFY0ib1tnUbNeQ==,
+        integrity: sha512-N2brEuAadi0CcdeMXUkhbZB84eskAc8MEX1By6qEchoVywSgXPIjou4rYsl0V3Hj0ZnuGycGCjdNgockbzeWNA==,
       }
     engines: { node: ">=10.10.0" }
     dependencies:
@@ -1259,10 +1259,10 @@ packages:
       "@nomicfoundation/solidity-analyzer-win32-x64-msvc": 0.1.1
     dev: true
 
-  /@scure/base@1.1.2:
+  /@scure/base@1.1.3:
     resolution:
       {
-        integrity: sha512-sSCrnIdaUZQHhBxZThMuk7Wm1TWzMD3uJNdGgx3JS23xSqevu0tAOsg8k66nL3R2NwQe65AI9GgqpPOgZys/eA==,
+        integrity: sha512-/+SgoRjLq7Xlf0CWuLHq2LUZeL/w65kfzAPG5NH9pcmBhs+nunQTn4gvdwgMTIXnt9b2C/1SeL2XiysZEyIC9Q==,
       }
     dev: true
 
@@ -1274,7 +1274,7 @@ packages:
     dependencies:
       "@noble/hashes": 1.2.0
       "@noble/secp256k1": 1.7.1
-      "@scure/base": 1.1.2
+      "@scure/base": 1.1.3
     dev: true
 
   /@scure/bip32@1.3.1:
@@ -1285,7 +1285,7 @@ packages:
     dependencies:
       "@noble/curves": 1.1.0
       "@noble/hashes": 1.3.1
-      "@scure/base": 1.1.2
+      "@scure/base": 1.1.3
     dev: true
 
   /@scure/bip39@1.1.1:
@@ -1295,7 +1295,7 @@ packages:
       }
     dependencies:
       "@noble/hashes": 1.2.0
-      "@scure/base": 1.1.2
+      "@scure/base": 1.1.3
     dev: true
 
   /@scure/bip39@1.2.1:
@@ -1305,7 +1305,7 @@ packages:
       }
     dependencies:
       "@noble/hashes": 1.3.1
-      "@scure/base": 1.1.2
+      "@scure/base": 1.1.3
     dev: true
 
   /@sentry/core@5.30.0:
@@ -1614,10 +1614,10 @@ packages:
       }
     dev: true
 
-  /@types/qs@6.9.7:
+  /@types/qs@6.9.8:
     resolution:
       {
-        integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==,
+        integrity: sha512-u95svzDlTysU5xecFNTgfFG5RUWu1A9P0VzgpcIiGZA9iraHOdSzcxMxQ55DyeRaGCSxQi7LxXDI4rzq/MYfdg==,
       }
     dev: true
 
@@ -2109,10 +2109,10 @@ packages:
     engines: { node: ">=0.10.0" }
     dev: true
 
-  /array.prototype.reduce@1.0.5:
+  /array.prototype.reduce@1.0.6:
     resolution:
       {
-        integrity: sha512-kDdugMl7id9COE8R7MHF5jWk7Dqt/fs4Pv+JXoICnYwqpjjjbUurz6w5fT5IG6brLdJhv6/VoHB0H7oyIBXd+Q==,
+        integrity: sha512-UW+Mz8LG/sPSU8jRDCjVr6J/ZKAGpHfwrZ6kWTG5qCxIEiXdVshqGnu5vEZA8S1y6X4aCSbQZ0/EEsfvEvBiSg==,
       }
     engines: { node: ">= 0.4" }
     dependencies:
@@ -3136,7 +3136,7 @@ packages:
     dependencies:
       bn.js: 4.12.0
       brorand: 1.1.0
-      hash.js: 1.1.3
+      hash.js: 1.1.7
       hmac-drbg: 1.0.1
       inherits: 2.0.4
       minimalistic-assert: 1.0.1
@@ -3347,7 +3347,7 @@ packages:
       "@eslint-community/regexpp": 4.8.0
       "@eslint/eslintrc": 2.1.2
       "@eslint/js": 8.48.0
-      "@humanwhocodes/config-array": 0.11.10
+      "@humanwhocodes/config-array": 0.11.11
       "@humanwhocodes/module-importer": 1.0.1
       "@nodelib/fs.walk": 1.2.8
       ajv: 6.12.6
@@ -4591,7 +4591,7 @@ packages:
         integrity: sha512-Tti3gMqLdZfhOQY1Mzf/AanLiqh1WTiJgEj26ZuYQ9fbkLomzGchCws4FyrSd4VkpBfiNhaE1On+lOz894jvXg==,
       }
     dependencies:
-      hash.js: 1.1.3
+      hash.js: 1.1.7
       minimalistic-assert: 1.0.1
       minimalistic-crypto-utils: 1.0.1
     dev: true
@@ -5917,7 +5917,7 @@ packages:
       }
     engines: { node: ">= 0.8" }
     dependencies:
-      array.prototype.reduce: 1.0.5
+      array.prototype.reduce: 1.0.6
       call-bind: 1.0.2
       define-properties: 1.2.0
       es-abstract: 1.22.1
@@ -6224,7 +6224,7 @@ packages:
     engines: { node: ">= 0.8.0" }
     dev: true
 
-  /prettier-plugin-solidity@1.1.3(prettier@3.0.2):
+  /prettier-plugin-solidity@1.1.3(prettier@3.0.3):
     resolution:
       {
         integrity: sha512-fQ9yucPi2sBbA2U2Xjh6m4isUTJ7S7QLc/XDDsktqqxYfTwdYKJ0EnnywXHwCGAaYbQNK+HIYPL1OemxuMsgeg==,
@@ -6234,7 +6234,7 @@ packages:
       prettier: ">=2.3.0 || >=3.0.0-alpha.0"
     dependencies:
       "@solidity-parser/parser": 0.16.1
-      prettier: 3.0.2
+      prettier: 3.0.3
       semver: 7.5.4
       solidity-comments-extractor: 0.0.7
     dev: true
@@ -6248,10 +6248,10 @@ packages:
     hasBin: true
     dev: true
 
-  /prettier@3.0.2:
+  /prettier@3.0.3:
     resolution:
       {
-        integrity: sha512-o2YR9qtniXvwEZlOKbveKfDQVyqxbEIWn48Z8m3ZJjBjcCmUy3xZGIv+7AkaeuaTr6yPXJjwv07ZWlsWbEy1rQ==,
+        integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==,
       }
     engines: { node: ">=14" }
     hasBin: true
@@ -7336,7 +7336,7 @@ packages:
       "@types/concat-stream": 1.6.1
       "@types/form-data": 0.0.33
       "@types/node": 8.10.66
-      "@types/qs": 6.9.7
+      "@types/qs": 6.9.8
       caseless: 0.12.0
       concat-stream: 1.6.2
       form-data: 2.5.1
