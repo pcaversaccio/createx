@@ -104,6 +104,12 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
+    arbitrumSepolia: {
+      chainId: 421614,
+      url: process.env.ARBITRUM_SEPOLIA_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
     arbitrumMain: {
       chainId: 42161,
       url: process.env.ARBITRUM_MAINNET_URL || "",
@@ -433,10 +439,11 @@ const config: HardhatUserConfig = {
       polygonZkEVM: process.env.POLYGON_ZKEVM_API_KEY || "",
       polygonMumbai: process.env.POLYGON_API_KEY || "",
       polygonZkEVMTestnet: process.env.POLYGON_ZKEVM_API_KEY || "",
-      // For Arbitrum testnet & mainnets
+      // For Arbitrum testnets & mainnets
       arbitrumOne: process.env.ARBITRUM_API_KEY || "",
       arbitrumNova: process.env.ARBITRUM_API_KEY || "",
       arbitrumGoerli: process.env.ARBITRUM_API_KEY || "",
+      arbitrumSepolia: process.env.ARBITRUM_API_KEY || "",
       // For Avalanche testnet & mainnet
       avalanche: process.env.AVALANCHE_API_KEY || "",
       avalancheFujiTestnet: process.env.AVALANCHE_API_KEY || "",
@@ -571,6 +578,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-nova.arbiscan.io/api",
           browserURL: "https://nova.arbiscan.io",
+        },
+      },
+      {
+        network: "arbitrumSepolia",
+        chainId: 421614,
+        urls: {
+          apiURL: "https://sepolia-explorer.arbitrum.io/api",
+          browserURL: "https://sepolia-explorer.arbitrum.io",
         },
       },
       {
