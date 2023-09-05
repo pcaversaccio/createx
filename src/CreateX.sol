@@ -5,10 +5,14 @@ pragma solidity 0.8.21;
  * @title CreateX Factory Smart Contract
  * @author pcaversaccio (https://pcaversaccio.com)
  * @custom:coauthor Matt Solomon (https://mattsolomon.dev)
- * @dev Factory smart contract to make easier and safer usage of the
+ * @notice Factory smart contract to make easier and safer usage of the
  * `CREATE` (https://www.evm.codes/#f0?fork=shanghai) and `CREATE2`
  * (https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of
  * `CREATE3`-based (https://github.com/ethereum/EIPs/pull/3171) contract creations.
+ * @dev To simplify testing of non-public variables and functions, we use the `internal`
+ * function visibility specifier `internal` for all variables and functions, even though
+ * they could technically be `private` since we do not expect anyone to inherit from
+ * the `CreateX` contract.
  * @custom:security-contact See https://github.com/pcaversaccio/createx/security/policy.
  */
 contract CreateX {
