@@ -1,0 +1,9 @@
+MyContract._hashPair.sol
+├── When either input is 0
+│    └── It should revert.
+└── When both inputs are nonzero
+     ├── It should never revert.
+     └── When first arg is smaller than second arg
+     │   └── It should match the result of `keccak256(abi.encodePacked(a,b))`.
+     └── When first arg is bigger than second arg
+         └── It should match the result of `keccak256(abi.encodePacked(b,a))`.

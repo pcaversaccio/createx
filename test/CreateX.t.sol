@@ -1,25 +1,12 @@
 // SPDX-License-Identifier: WTFPL
 pragma solidity 0.8.21;
 
-import {Test} from "forge-std/Test.sol";
-
-import {CreateX} from "../src/CreateX.sol";
+import {BaseTest} from "./BaseTest.sol";
 import {ERC20Mock} from "./mocks/ERC20Mock.sol";
 
-contract CreateXTest is Test {
-    CreateX private createX;
-    address private createXAddr;
+import {CreateX} from "../src/CreateX.sol";
 
-    address private zeroAddress = address(0);
-
-    event ContractCreation(address indexed newContract);
-    event Transfer(address indexed from, address indexed to, uint256 value);
-
-    function setUp() public {
-        createX = new CreateX();
-        createXAddr = address(createX);
-    }
-
+contract CreateXTest is BaseTest {
     function testDeployCreateNonPayable() public {
         string memory arg1 = "MyToken";
         string memory arg2 = "MTKN";

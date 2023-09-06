@@ -5,14 +5,18 @@ pragma solidity 0.8.21;
  * @title CreateX Factory Smart Contract
  * @author pcaversaccio (https://pcaversaccio.com)
  * @custom:coauthor Matt Solomon (https://mattsolomon.dev)
- * @dev Factory smart contract to make easier and safer usage of the
+ * @notice Factory smart contract to make easier and safer usage of the
  * `CREATE` (https://www.evm.codes/#f0?fork=shanghai) and `CREATE2`
  * (https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of
  * `CREATE3`-based (https://github.com/ethereum/EIPs/pull/3171) contract creations.
+ * @dev To simplify testing of non-public variables and functions, we use the `internal`
+ * function visibility specifier `internal` for all variables and functions, even though
+ * they could technically be `private` since we do not expect anyone to inherit from
+ * the `CreateX` contract.
  * @custom:security-contact See https://github.com/pcaversaccio/createx/security/policy.
  */
 contract CreateX {
-    address private immutable _SELF = address(this);
+    address internal immutable _SELF = address(this);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            TYPES                           */
@@ -844,7 +848,7 @@ contract CreateX {
      */
     function _parseSalt(
         bytes32 salt
-    ) private view returns (SenderBytes senderBytes, RedeployProtectionFlag redeployProtectionFlag) {
+    ) internal view returns (SenderBytes senderBytes, RedeployProtectionFlag redeployProtectionFlag) {
         if (address(bytes20(salt)) == msg.sender && bytes1(salt[20]) == hex"01") {
             (senderBytes, redeployProtectionFlag) = (SenderBytes.MsgSender, RedeployProtectionFlag.True);
         } else if (address(bytes20(salt)) == msg.sender && bytes1(salt[20]) == hex"00") {
@@ -872,7 +876,7 @@ contract CreateX {
      * @param b The second 32-byte value to be concatenated and hashed.
      * @return hash The 32-byte `keccak256` hash of `a` and `b`.
      */
-    function _efficientHash(bytes32 a, bytes32 b) private pure returns (bytes32 hash) {
+    function _efficientHash(bytes32 a, bytes32 b) internal pure returns (bytes32 hash) {
         assembly ("memory-safe") {
             mstore(0x00, a)
             mstore(0x20, b)
@@ -885,7 +889,7 @@ contract CreateX {
      * transaction properties.
      * @return salt The 32-byte pseudo-random salt value.
      */
-    function _generateSalt() private view returns (bytes32 salt) {
+    function _generateSalt() internal view returns (bytes32 salt) {
         salt = keccak256(
             abi.encode(
                 blockhash(block.number),
@@ -904,7 +908,7 @@ contract CreateX {
      * @param success The Boolean success condition.
      * @param newContract The 20-byte address where the contract was deployed.
      */
-    function _requireSuccessfulContractCreation(bool success, address newContract) private view {
+    function _requireSuccessfulContractCreation(bool success, address newContract) internal view {
         if (!success || newContract.code.length == 0) revert FailedContractCreation({emitter: _SELF});
     }
 
@@ -912,7 +916,7 @@ contract CreateX {
      * @dev Ensures that `newContract` is a non-zero byte contract.
      * @param newContract The 20-byte address where the contract was deployed.
      */
-    function _requireSuccessfulContractCreation(address newContract) private view {
+    function _requireSuccessfulContractCreation(address newContract) internal view {
         if (newContract == address(0) || newContract.code.length == 0) revert FailedContractCreation({emitter: _SELF});
     }
 
@@ -926,7 +930,7 @@ contract CreateX {
         bool success,
         bytes memory returnData,
         address implementation
-    ) private view {
+    ) internal view {
         if (!success || implementation.code.length == 0)
             revert FailedContractInitialisation({emitter: _SELF, revertData: returnData});
     }

@@ -1,0 +1,3 @@
+CreateX._efficientHash.sol
+├── It matches the output of a high-level hash.
+└── It never reverts.
