@@ -24,6 +24,7 @@ contract BaseTest is Test {
     CreateXHarness internal createXHarness;
     address internal createXHarnessAddr;
 
+    // solhint-disable-next-line const-name-snakecase
     address internal constant zeroAddress = address(0);
 
     event ContractCreation(address indexed newContract);
