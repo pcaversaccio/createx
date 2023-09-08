@@ -1,0 +1,2 @@
+CreateX_GenerateSalt_Test
+└── It should be a function of all block properties and the caller.

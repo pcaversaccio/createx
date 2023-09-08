@@ -892,7 +892,7 @@ contract CreateX {
     function _generateSalt() internal view returns (bytes32 salt) {
         salt = keccak256(
             abi.encode(
-                blockhash(block.number),
+                blockhash(block.number - 1),
                 block.coinbase,
                 block.number,
                 block.timestamp,

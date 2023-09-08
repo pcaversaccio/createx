@@ -19,6 +19,10 @@ contract CreateXHarness is CreateX {
     function exposed_requireSuccessfulContractCreation(address newContract) external view {
         _requireSuccessfulContractCreation(newContract);
     }
+
+    function exposed_generateSalt() external view returns (bytes32 salt) {
+        return _generateSalt();
+    }
 }
 
 /**
