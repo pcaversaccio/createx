@@ -42,6 +42,8 @@ contract RequireSuccessfulContractCreation_2Args_Internal_Test is BaseTest {
 
     modifier whenTheSuccessBooleanIsTrueAndTheNewContractAddressHasCode(address newContract) {
         assumeAddressIsNot(newContract, AddressType.ForgeAddress, AddressType.Precompile);
+        // The zero address is explicitly not allowed by this method, so we must reject it.
+        vm.assume(newContract != zeroAddress);
         // If the new contract address has no code, etch some. This is faster than `vm.assume`.
         if (newContract.code.length == 0) vm.etch(newContract, "01");
         _;
