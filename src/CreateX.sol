@@ -892,7 +892,12 @@ contract CreateX {
     function _generateSalt() internal view returns (bytes32 salt) {
         salt = keccak256(
             abi.encode(
-                blockhash(block.number - 1),
+                // We don't use `block.number - 256` (the max value on the EVM) to accommodate any
+                // chains that may try to reduce the amount of available historical block hashes.
+                // We also don't subtract 1 to mitigate any risks arising from consecutive block
+                // producers on a PoS chain. Therefore we use `block.number - 32` as a reasonable
+                // compromise that should work on most chains, which is 1 epoch on mainnet.
+                blockhash(block.number - 32),
                 block.coinbase,
                 block.number,
                 block.timestamp,
@@ -914,8 +919,9 @@ contract CreateX {
         // be usable and safe on a wide range of chains, this check is cheap enough that it doesn't
         // hurt to include. It can protect against unexpected chain behavior, or a hypothetical
         // compiler bug that doesn't surface call success status properly.
-        if (!success || newContract == address(0) || newContract.code.length == 0)
+        if (!success || newContract == address(0) || newContract.code.length == 0) {
             revert FailedContractCreation({emitter: _SELF});
+        }
     }
 
     /**
@@ -937,7 +943,8 @@ contract CreateX {
         bytes memory returnData,
         address implementation
     ) internal view {
-        if (!success || implementation.code.length == 0)
+        if (!success || implementation.code.length == 0) {
             revert FailedContractInitialisation({emitter: _SELF, revertData: returnData});
+        }
     }
 }
