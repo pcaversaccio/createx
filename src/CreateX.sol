@@ -909,6 +909,11 @@ contract CreateX {
      * @param newContract The 20-byte address where the contract was deployed.
      */
     function _requireSuccessfulContractCreation(bool success, address newContract) internal view {
+        // Reverting when `newContract == address(0)` isn't strictly necessary here since if
+        // deployment fails then we should have `success = false. However, since CreateX should
+        // be usable and safe on a wide range of chains, this check is cheap enough that it doesn't
+        // hurt to include. It can protect against unexpected chain behavior, or a hypothetical
+        // compiler bug that doesn't surface call success status properly.
         if (!success || newContract == address(0) || newContract.code.length == 0)
             revert FailedContractCreation({emitter: _SELF});
     }
