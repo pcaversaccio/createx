@@ -909,7 +909,8 @@ contract CreateX {
      * @param newContract The 20-byte address where the contract was deployed.
      */
     function _requireSuccessfulContractCreation(bool success, address newContract) internal view {
-        if (!success || newContract.code.length == 0) revert FailedContractCreation({emitter: _SELF});
+        if (!success || newContract == address(0) || newContract.code.length == 0)
+            revert FailedContractCreation({emitter: _SELF});
     }
 
     /**
@@ -917,7 +918,7 @@ contract CreateX {
      * @param newContract The 20-byte address where the contract was deployed.
      */
     function _requireSuccessfulContractCreation(address newContract) internal view {
-        if (newContract.code.length == 0) revert FailedContractCreation({emitter: _SELF});
+        if (newContract == address(0) || newContract.code.length == 0) revert FailedContractCreation({emitter: _SELF});
     }
 
     /**
