@@ -20,6 +20,7 @@ contract RequireSuccessfulContractCreation_2Args_Internal_Test is BaseTest {
     }
 
     modifier whenTheNewContractAddressHasNoCode(address newContract) {
+        vm.assume(newContract != address(createXHarness)); // Avoid removing the code of the contract under test.
         assumeAddressIsNot(newContract, AddressType.ForgeAddress);
         // If the new contract address has code, remove the code. This is faster than `vm.assume`.
         if (newContract.code.length > 0) vm.etch(newContract, "");
