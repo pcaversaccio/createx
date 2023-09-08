@@ -11,6 +11,14 @@ contract CreateXHarness is CreateX {
     function exposed_efficientHash(bytes32 a, bytes32 b) external pure returns (bytes32 hash) {
         return _efficientHash(a, b);
     }
+
+    function exposed_requireSuccessfulContractCreation(bool success, address newContract) external view {
+        _requireSuccessfulContractCreation(success, newContract);
+    }
+
+    function exposed_requireSuccessfulContractCreation(address newContract) external view {
+        _requireSuccessfulContractCreation(newContract);
+    }
 }
 
 /**

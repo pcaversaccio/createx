@@ -1,0 +1,7 @@
+RequireSuccessfulContractCreation_2Args_Test
+├── When the success boolean is false
+│   └── It should revert.
+├── When the newContract address has no code
+│   └── It should revert.
+└── When the success boolean is true and the newContract address has code
+    └── It should never revert.

@@ -1,0 +1,5 @@
+RequireSuccessfulContractCreation_1Arg_Test
+├── When the newContract address has no code
+│   └── It should revert.
+└── When the newContract address has code
+    └── It should never revert.
