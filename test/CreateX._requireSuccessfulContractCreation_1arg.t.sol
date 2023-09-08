@@ -6,6 +6,7 @@ import {CreateX} from "../src/CreateX.sol";
 
 contract RequireSuccessfulContractCreation_1Arg_Internal_Test is BaseTest {
     modifier whenTheNewContractAddressHasNoCode(address newContract) {
+        assumeAddressIsNot(newContract, AddressType.ForgeAddress);
         // If the new contract address has code, remove the code. This is faster than `vm.assume`.
         if (newContract.code.length > 0) vm.etch(newContract, "");
         _;
@@ -24,7 +25,7 @@ contract RequireSuccessfulContractCreation_1Arg_Internal_Test is BaseTest {
     }
 
     modifier whenTheNewContractAddressHasCode(address newContract) {
-        assumeAddressIsNot(newContract, AddressType.Precompile);
+        assumeAddressIsNot(newContract, AddressType.ForgeAddress, AddressType.Precompile);
         // If the new contract address has no code, etch some. This is faster than `vm.assume`.
         if (newContract.code.length == 0) vm.etch(newContract, "01");
         _;
