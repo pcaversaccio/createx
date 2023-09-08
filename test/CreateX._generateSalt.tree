@@ -1,2 +1,2 @@
-CreateX_GenerateSalt_Test
+CreateX_GenerateSalt_Internal_Test
 └── It should be a function of all block properties and the caller.

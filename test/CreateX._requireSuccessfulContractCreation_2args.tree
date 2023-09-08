@@ -1,4 +1,4 @@
-RequireSuccessfulContractCreation_2Args_Test
+RequireSuccessfulContractCreation_2Args_Internal_Test
 ├── When the success boolean is false
 │   └── It should revert.
 ├── When the newContract address has no code

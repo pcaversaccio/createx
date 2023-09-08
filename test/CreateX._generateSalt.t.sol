@@ -3,7 +3,7 @@ pragma solidity 0.8.21;
 
 import {BaseTest} from "./BaseTest.sol";
 
-contract CreateX_GenerateSalt_Test is BaseTest {
+contract CreateX_GenerateSalt_Internal_Test is BaseTest {
     function test_ShouldBeAFunctionOfAllBlockPropertiesAndTheCaller() external {
         // It should be a function of all block properties and the caller.
         // The full set of dependencies is:

@@ -4,7 +4,7 @@ pragma solidity 0.8.21;
 import {BaseTest} from "./BaseTest.sol";
 import {CreateX} from "../src/CreateX.sol";
 
-contract RequireSuccessfulContractCreation_1Arg_Test is BaseTest {
+contract RequireSuccessfulContractCreation_1Arg_Internal_Test is BaseTest {
     modifier whenTheNewContractAddressHasNoCode(address newContract) {
         // If the new contract address has code, remove the code. This is faster than `vm.assume`.
         if (newContract.code.length > 0) vm.etch(newContract, "");
