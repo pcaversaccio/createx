@@ -43,8 +43,8 @@ contract BaseTest is Test {
     event Transfer(address indexed from, address indexed to, uint256 value);
 
     function setUp() public {
-        // CreateX does `block.number - 32` when generating it's own salt, so we start at block
-        // 100 here to prevent overflow there.
+        // Note that the main contract `CreateX` does `block.number - 32` when generating
+        // it's own salt, so we start at block 100 here to prevent a (negative) overflow.
         vm.roll(100);
 
         // Deploy contracts.
