@@ -1,4 +1,6 @@
 RequireSuccessfulContractCreation_1Arg_Internal_Test
+├── When the newContract address is the zero address
+│   └── It should revert.
 ├── When the newContract address has no code
 │   └── It should revert.
 └── When the newContract address has code
