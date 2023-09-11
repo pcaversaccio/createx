@@ -5,6 +5,22 @@ import {BaseTest} from "./BaseTest.sol";
 import {CreateX} from "../src/CreateX.sol";
 
 contract RequireSuccessfulContractCreation_1Arg_Internal_Test is BaseTest {
+    modifier whenTheNewContractAddressIsTheZeroAddress() {
+        _;
+    }
+
+    function test_WhenTheNewContractAddressIsTheZeroAddress() external whenTheNewContractAddressIsTheZeroAddress {
+        // It should revert.
+        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXHarnessAddr);
+        vm.expectRevert(expectedErr);
+        createXHarness.exposed_requireSuccessfulContractCreation(zeroAddress);
+    }
+
+    modifier whenTheNewContractAddressIsNotTheZeroAddress(address newContract) {
+        vm.assume(newContract != zeroAddress);
+        _;
+    }
+
     modifier whenTheNewContractAddressHasNoCode(address newContract) {
         vm.assume(newContract != createXHarnessAddr); // Avoid removing the code of the contract under test.
         assumeAddressIsNot(newContract, AddressType.ForgeAddress);
@@ -15,10 +31,21 @@ contract RequireSuccessfulContractCreation_1Arg_Internal_Test is BaseTest {
         _;
     }
 
+    function testFuzz_WhenTheNewContractAddressHasNoCode(
+        address newContract
+    )
+        external
+        whenTheNewContractAddressIsNotTheZeroAddress(newContract)
+        whenTheNewContractAddressHasNoCode(newContract)
+    {
+        // It should revert.
+        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXHarnessAddr);
+        vm.expectRevert(expectedErr);
+        createXHarness.exposed_requireSuccessfulContractCreation(newContract);
+    }
+
     modifier whenTheNewContractAddressHasCode(address newContract) {
         assumeAddressIsNot(newContract, AddressType.ForgeAddress, AddressType.Precompile);
-        // The zero address is explicitly not allowed by this method, so we must reject it.
-        vm.assume(newContract != zeroAddress);
         // If the new contract address has no code, etch some. This is faster than `vm.assume`.
         if (newContract.code.length == 0) {
             vm.etch(newContract, "01");
@@ -26,25 +53,9 @@ contract RequireSuccessfulContractCreation_1Arg_Internal_Test is BaseTest {
         _;
     }
 
-    function test_WhenTheNewContractAddressIsTheZeroAddress() external {
-        // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXHarnessAddr);
-        vm.expectRevert(expectedErr);
-        createXHarness.exposed_requireSuccessfulContractCreation(zeroAddress);
-    }
-
-    function testFuzz_WhenTheNewContractAddressHasNoCode(
-        address newContract
-    ) external whenTheNewContractAddressHasNoCode(newContract) {
-        // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXHarnessAddr);
-        vm.expectRevert(expectedErr);
-        createXHarness.exposed_requireSuccessfulContractCreation(newContract);
-    }
-
     function testFuzz_WhenTheNewContractAddressHasCode(
         address newContract
-    ) external whenTheNewContractAddressHasCode(newContract) {
+    ) external whenTheNewContractAddressIsNotTheZeroAddress(newContract) whenTheNewContractAddressHasCode(newContract) {
         // It should never revert. We do not need any assertions to test this.
         createXHarness.exposed_requireSuccessfulContractCreation(newContract);
     }
