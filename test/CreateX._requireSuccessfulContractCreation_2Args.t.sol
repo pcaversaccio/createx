@@ -4,7 +4,7 @@ pragma solidity 0.8.21;
 import {BaseTest} from "./BaseTest.sol";
 import {CreateX} from "../src/CreateX.sol";
 
-contract RequireSuccessfulContractCreation_2Args_Internal_Test is BaseTest {
+contract CreateX_RequireSuccessfulContractCreation_2Args_Internal_Test is BaseTest {
     modifier whenTheSuccessBooleanIsFalse() {
         _;
     }
