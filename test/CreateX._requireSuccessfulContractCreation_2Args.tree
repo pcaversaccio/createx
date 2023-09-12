@@ -1,0 +1,11 @@
+CreateX_RequireSuccessfulContractCreation_2Args_Internal_Test
+├── When the success Boolean is false
+│   └── It should revert.
+└── When the success Boolean is true
+    ├── When the newContract address is the zero address
+    │   └── It should revert.
+    └── When the newContract address is not the zero address
+        ├── When the newContract address has no code
+        │   └── It should revert.
+        └── When the newContract address has code
+            └── It should never revert.

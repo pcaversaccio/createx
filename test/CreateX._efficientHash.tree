@@ -1,3 +1,3 @@
-CreateX._efficientHash.sol
+CreateX_EfficientHash_Internal_Test
 ├── It matches the output of a high-level hash.
 └── It never reverts.

@@ -1,0 +1,3 @@
+CreateX_GenerateSalt_Internal_Test
+├── It should be a function of multiple block properties and the caller.
+└── It never reverts.
