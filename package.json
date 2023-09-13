@@ -96,6 +96,7 @@
     "deploy:luksotestnet": "npx hardhat run --network luksoTestnet scripts/deploy.ts",
     "deploy:luksomain": "npx hardhat run --network luksoMain scripts/deploy.ts",
     "deploy:mantatestnet": "npx hardhat run --network mantaTestnet scripts/deploy.ts",
+    "deploy:mantamain": "npx hardhat run --network mantaMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c **/*.{js,ts,md,sol,json,yml,yaml}",
     "prettier:fix": "npx prettier -w **/*.{js,ts,md,sol,json,yml,yaml}",
     "solhint:check": "npx solhint -c src/.solhint.json src/**/*.sol && npx solhint -c test/.solhint-tests.json test/**/*.sol",
