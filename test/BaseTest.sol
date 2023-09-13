@@ -8,8 +8,18 @@ import {CreateX} from "../src/CreateX.sol";
  * @dev Harness contract that exposes internal functions for testing.
  */
 contract CreateXHarness is CreateX {
+    function exposed_parseSalt(
+        bytes32 salt
+    ) external view returns (SenderBytes senderBytes, RedeployProtectionFlag redeployProtectionFlag) {
+        (senderBytes, redeployProtectionFlag) = _parseSalt(salt);
+    }
+
     function exposed_efficientHash(bytes32 a, bytes32 b) external pure returns (bytes32 hash) {
-        return _efficientHash(a, b);
+        hash = _efficientHash(a, b);
+    }
+
+    function exposed_generateSalt() external view returns (bytes32 salt) {
+        salt = _generateSalt();
     }
 
     function exposed_requireSuccessfulContractCreation(bool success, address newContract) external view {
@@ -20,8 +30,12 @@ contract CreateXHarness is CreateX {
         _requireSuccessfulContractCreation(newContract);
     }
 
-    function exposed_generateSalt() external view returns (bytes32 salt) {
-        return _generateSalt();
+    function exposed_requireSuccessfulContractInitialisation(
+        bool success,
+        bytes memory returnData,
+        address implementation
+    ) external view {
+        _requireSuccessfulContractInitialisation(success, returnData, implementation);
     }
 }
 
