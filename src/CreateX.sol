@@ -118,19 +118,36 @@ contract CreateX {
      */
     modifier guard(bytes32 salt) {
         (SenderBytes senderBytes, RedeployProtectionFlag redeployProtectionFlag) = _parseSalt(salt);
+
+        // Note that modifiers cannot implicitly access or change the arguments and return values of
+        // functions they modify. Their values can only be passed to them explicitly at the point of
+        // invocation. For further insights, please refer to: https://docs.soliditylang.org/en/latest/contracts.html#function-modifiers.
+        // We use a function modifier instead of an `internal` function because the modifier `guard`
+        // changes the behaviour of functions in a declarative way and should execute before the function
+        // body is executed. We use the scratch space starting at `0x00` in a memory-safe way to store
+        // memory changes for the `salt` hash.
         if (senderBytes == SenderBytes.MsgSender && redeployProtectionFlag == RedeployProtectionFlag.True) {
             // Configures a permissioned deploy protection as well as a cross-chain redeploy protection.
-            salt = keccak256(abi.encode(msg.sender, block.chainid, salt));
+            bytes32 hash = keccak256(abi.encode(msg.sender, block.chainid, salt));
+            assembly ("memory-safe") {
+                mstore(0x00, hash)
+            }
         } else if (senderBytes == SenderBytes.MsgSender && redeployProtectionFlag == RedeployProtectionFlag.False) {
             // Configures solely a permissioned deploy protection.
-            salt = _efficientHash({a: bytes32(bytes20(uint160(msg.sender))), b: salt});
+            bytes32 hash = _efficientHash({a: bytes32(bytes20(uint160(msg.sender))), b: salt});
+            assembly ("memory-safe") {
+                mstore(0x00, hash)
+            }
         } else if (senderBytes == SenderBytes.MsgSender) {
             // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
             revert InvalidSalt({emitter: _SELF});
         } else if (senderBytes == SenderBytes.ZeroAddress && redeployProtectionFlag == RedeployProtectionFlag.True) {
             // Configures solely a cross-chain redeploy protection. In order to prevent a pseudo-randomly
             // generated cross-chain redeploy protection, we enforce the zero address check for the first 20 bytes.
-            salt = _efficientHash({a: bytes32(block.chainid), b: salt});
+            bytes32 hash = _efficientHash({a: bytes32(block.chainid), b: salt});
+            assembly ("memory-safe") {
+                mstore(0x00, hash)
+            }
         } else if (
             senderBytes == SenderBytes.ZeroAddress && redeployProtectionFlag == RedeployProtectionFlag.Unspecified
         ) {
@@ -350,7 +367,7 @@ contract CreateX {
         bytes memory initCode
     ) public payable guard(salt) returns (address newContract) {
         assembly ("memory-safe") {
-            newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), salt)
+            newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), mload(0x00))
         }
         _requireSuccessfulContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
@@ -394,7 +411,7 @@ contract CreateX {
         address refundAddress
     ) public payable guard(salt) returns (address newContract) {
         assembly ("memory-safe") {
-            newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), salt)
+            newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), mload(0x00))
         }
         _requireSuccessfulContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
@@ -624,7 +641,7 @@ contract CreateX {
         bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
         address proxy;
         assembly ("memory-safe") {
-            proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), salt)
+            proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), mload(0x00))
         }
         if (proxy == address(0)) {
             revert FailedContractCreation({emitter: _SELF});
@@ -686,7 +703,7 @@ contract CreateX {
         bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
         address proxy;
         assembly ("memory-safe") {
-            proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), salt)
+            proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), mload(0x00))
         }
         if (proxy == address(0)) {
             revert FailedContractCreation({emitter: _SELF});
