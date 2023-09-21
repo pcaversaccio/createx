@@ -163,17 +163,17 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         vm.stopPrank();
     }
 
-    modifier whenTheFirst20BytesOfTheSaltDoesNotEqualTheCallerOrTheZeroAddress(bytes32 salt) {
+    modifier whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(bytes32 salt) {
         vm.assume(address(bytes20(salt)) != msg.sender && address(bytes20(salt)) != zeroAddress);
         cachedSalt = salt;
         _;
     }
 
-    function testFuzz_WhenTheFirst20BytesOfTheSaltDoesNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x01(
+    function testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x01(
         bytes32 salt
     )
         external
-        whenTheFirst20BytesOfTheSaltDoesNotEqualTheCallerOrTheZeroAddress(salt)
+        whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(salt)
         whenThe21stByteOfTheSaltEquals0x01
     {
         vm.startPrank(msg.sender);
@@ -186,11 +186,11 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         vm.stopPrank();
     }
 
-    function testFuzz_WhenTheFirst20BytesOfTheSaltDoesNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x00(
+    function testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x00(
         bytes32 salt
     )
         external
-        whenTheFirst20BytesOfTheSaltDoesNotEqualTheCallerOrTheZeroAddress(salt)
+        whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(salt)
         whenThe21stByteOfTheSaltEquals0x00
     {
         vm.startPrank(msg.sender);
@@ -203,11 +203,11 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         vm.stopPrank();
     }
 
-    function testFuzz_WhenTheFirst20BytesOfTheSaltDoesNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(
+    function testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(
         bytes32 salt
     )
         external
-        whenTheFirst20BytesOfTheSaltDoesNotEqualTheCallerOrTheZeroAddress(salt)
+        whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(salt)
         whenThe21stByteOfTheSaltIsGreaterThan0x01
     {
         vm.startPrank(msg.sender);
