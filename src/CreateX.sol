@@ -3,19 +3,26 @@ pragma solidity 0.8.21;
 
 /**
  * @title CreateX Factory Smart Contract
- * @author pcaversaccio (https://pcaversaccio.com)
- * @custom:coauthor Matt Solomon (https://mattsolomon.dev)
+ * @author pcaversaccio (https://web.archive.org/web/20230921103111/https://pcaversaccio.com/)
+ * @custom:coauthor Matt Solomon (https://web.archive.org/web/20230921103335/https://mattsolomon.dev/)
  * @notice Factory smart contract to make easier and safer usage of the
- * `CREATE` (https://www.evm.codes/#f0?fork=shanghai) and `CREATE2`
- * (https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of
- * `CREATE3`-based (https://github.com/ethereum/EIPs/pull/3171) contract creations.
+ * `CREATE` (https://web.archive.org/web/20230921103540/https://www.evm.codes/#f0?fork=shanghai) and `CREATE2`
+ * (https://web.archive.org/web/20230921103540/https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of
+ * `CREATE3`-based (https://web.archive.org/web/20230921103920/https://github.com/ethereum/EIPs/pull/3171) contract creations.
  * @dev To simplify testing of non-public variables and functions, we use the `internal`
  * function visibility specifier `internal` for all variables and functions, even though
  * they could technically be `private` since we do not expect anyone to inherit from
  * the `CreateX` contract.
- * @custom:security-contact See https://github.com/pcaversaccio/createx/security/policy.
+ * @custom:security-contact See https://web.archive.org/web/20230921105029/https://raw.githubusercontent.com/pcaversaccio/createx/main/SECURITY.md.
  */
 contract CreateX {
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                         IMMUTABLES                         */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
+    /**
+     * @dev Caches the contract address at construction, to be used for the custom errors.
+     */
     address internal immutable _SELF = address(this);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -99,64 +106,6 @@ contract CreateX {
      * @param revertData The data returned by the failed ether transfer.
      */
     error FailedEtherTransfer(address emitter, bytes revertData);
-
-    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
-    /*                          MODIFIERS                         */
-    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
-
-    /**
-     * @dev Modifier that implements different safeguarding mechanisms depending on the encoded
-     * values in the salt (`||` stands for byte-wise concatenation):
-     *   => salt (32 bytes) = 0xbebebebebebebebebebebebebebebebebebebebe||ff||1212121212121212121212
-     *   - The first 20 bytes (i.e. `bebebebebebebebebebebebebebebebebebebebe`) may be used to
-     *     implement a permissioned deploy protection by setting them equal to `msg.sender`,
-     *   - The 21st byte (i.e. `ff`) may be used to implement a cross-chain redeploy protection by
-     *     setting it equal to `0x01`,
-     *   - The last random 11 bytes (i.e. `1212121212121212121212`) allow for 2**88 bits of entropy
-     *     for mining a salt.
-     * @param salt The 32-byte random value used to create the contract address.
-     */
-    modifier guard(bytes32 salt) {
-        (SenderBytes senderBytes, RedeployProtectionFlag redeployProtectionFlag) = _parseSalt(salt);
-
-        // Note that modifiers cannot implicitly access or change the arguments and return values of
-        // functions they modify. Their values can only be passed to them explicitly at the point of
-        // invocation. For further insights, please refer to: https://docs.soliditylang.org/en/latest/contracts.html#function-modifiers.
-        // We use a function modifier instead of an `internal` function because the modifier `guard`
-        // changes the behaviour of functions in a declarative way and should execute before the function
-        // body is executed. We use the scratch space starting at `0x00` in a memory-safe way to store
-        // memory changes for the `salt` hash.
-        if (senderBytes == SenderBytes.MsgSender && redeployProtectionFlag == RedeployProtectionFlag.True) {
-            // Configures a permissioned deploy protection as well as a cross-chain redeploy protection.
-            bytes32 hash = keccak256(abi.encode(msg.sender, block.chainid, salt));
-            assembly ("memory-safe") {
-                mstore(0x00, hash)
-            }
-        } else if (senderBytes == SenderBytes.MsgSender && redeployProtectionFlag == RedeployProtectionFlag.False) {
-            // Configures solely a permissioned deploy protection.
-            bytes32 hash = _efficientHash({a: bytes32(bytes20(uint160(msg.sender))), b: salt});
-            assembly ("memory-safe") {
-                mstore(0x00, hash)
-            }
-        } else if (senderBytes == SenderBytes.MsgSender) {
-            // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
-            revert InvalidSalt({emitter: _SELF});
-        } else if (senderBytes == SenderBytes.ZeroAddress && redeployProtectionFlag == RedeployProtectionFlag.True) {
-            // Configures solely a cross-chain redeploy protection. In order to prevent a pseudo-randomly
-            // generated cross-chain redeploy protection, we enforce the zero address check for the first 20 bytes.
-            bytes32 hash = _efficientHash({a: bytes32(block.chainid), b: salt});
-            assembly ("memory-safe") {
-                mstore(0x00, hash)
-            }
-        } else if (
-            senderBytes == SenderBytes.ZeroAddress && redeployProtectionFlag == RedeployProtectionFlag.Unspecified
-        ) {
-            // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
-            revert InvalidSalt({emitter: _SELF});
-        }
-        // In all other cases, the salt value is not modified.
-        _;
-    }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                           CREATE                           */
@@ -275,11 +224,11 @@ contract CreateX {
     /**
      * @dev Returns the address where a contract will be stored if deployed via `deployer` using
      * the `CREATE` opcode. For the specification of the Recursive Length Prefix (RLP) encoding
-     * scheme, please refer to p. 19 of the Ethereum Yellow Paper (https://ethereum.github.io/yellowpaper/paper.pdf)
-     * and the Ethereum Wiki (https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/).
-     * For further insights also, see the following issue: https://github.com/transmissions11/solmate/issues/207.
+     * scheme, please refer to p. 19 of the Ethereum Yellow Paper (https://web.archive.org/web/20230921110603/https://ethereum.github.io/yellowpaper/paper.pdf)
+     * and the Ethereum Wiki (https://web.archive.org/web/20230921112807/https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/).
+     * For further insights also, see the following issue: https://web.archive.org/web/20230921112943/https://github.com/transmissions11/solmate/issues/207.
      *
-     * Based on the EIP-161 (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md) specification,
+     * Based on the EIP-161 (https://web.archive.org/web/20230921113207/https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-161.md) specification,
      * all contract accounts on the Ethereum mainnet are initiated with `nonce = 1`. Thus, the
      * first contract address created by another contract is calculated with a non-zero nonce.
      * @param deployer The 20-byte deployer address.
@@ -291,7 +240,7 @@ contract CreateX {
         bytes1 len = bytes1(0x94);
 
         // The theoretical allowed limit, based on EIP-2681, for an account nonce is 2**64-2:
-        // https://eips.ethereum.org/EIPS/eip-2681.
+        // https://web.archive.org/web/20230921113252/https://eips.ethereum.org/EIPS/eip-2681.
         if (nonce > type(uint64).max - 1) {
             revert InvalidNonceValue({emitter: _SELF});
         }
@@ -335,11 +284,11 @@ contract CreateX {
     /**
      * @dev Returns the address where a contract will be stored if deployed via this contract
      * using the `CREATE` opcode. For the specification of the Recursive Length Prefix (RLP)
-     * encoding scheme, please refer to p. 19 of the Ethereum Yellow Paper (https://ethereum.github.io/yellowpaper/paper.pdf)
-     * and the Ethereum Wiki (https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/).
-     * For further insights also, see the following issue: https://github.com/transmissions11/solmate/issues/207.
+     * encoding scheme, please refer to p. 19 of the Ethereum Yellow Paper (https://web.archive.org/web/20230921110603/https://ethereum.github.io/yellowpaper/paper.pdf)
+     * and the Ethereum Wiki (https://web.archive.org/web/20230921112807/https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/).
+     * For further insights also, see the following issue: https://web.archive.org/web/20230921112943/https://github.com/transmissions11/solmate/issues/207.
      *
-     * Based on the EIP-161 (https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md) specification,
+     * Based on the EIP-161 (https://web.archive.org/web/20230921113207/https://raw.githubusercontent.com/ethereum/EIPs/master/EIPS/eip-161.md) specification,
      * all contract accounts on the Ethereum mainnet are initiated with `nonce = 1`. Thus, the
      * first contract address created by another contract is calculated with a non-zero nonce.
      * @param nonce The next 32-byte nonce of this contract.
@@ -362,12 +311,10 @@ contract CreateX {
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
      */
-    function deployCreate2(
-        bytes32 salt,
-        bytes memory initCode
-    ) public payable guard(salt) returns (address newContract) {
+    function deployCreate2(bytes32 salt, bytes memory initCode) public payable returns (address newContract) {
+        bytes32 guardedSalt = _guard(salt);
         assembly ("memory-safe") {
-            newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), mload(0x00))
+            newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), guardedSalt)
         }
         _requireSuccessfulContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
@@ -383,7 +330,8 @@ contract CreateX {
      * @return newContract The 20-byte address where the contract was deployed.
      */
     function deployCreate2(bytes memory initCode) public payable returns (address newContract) {
-        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate2`.
+        // Note that the safeguarding function `_guard` is called as part of the overloaded function
+        // `deployCreate2`.
         newContract = deployCreate2({salt: _generateSalt(), initCode: initCode});
     }
 
@@ -409,9 +357,10 @@ contract CreateX {
         bytes memory data,
         Values memory values,
         address refundAddress
-    ) public payable guard(salt) returns (address newContract) {
+    ) public payable returns (address newContract) {
+        bytes32 guardedSalt = _guard(salt);
         assembly ("memory-safe") {
-            newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), mload(0x00))
+            newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), guardedSalt)
         }
         _requireSuccessfulContractCreation(newContract);
         emit ContractCreation({newContract: newContract});
@@ -452,7 +401,8 @@ contract CreateX {
         bytes memory data,
         Values memory values
     ) public payable returns (address newContract) {
-        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate2AndInit`.
+        // Note that the safeguarding function `_guard` is called as part of the overloaded function
+        // `deployCreate2AndInit`.
         newContract = deployCreate2AndInit({
             salt: salt,
             initCode: initCode,
@@ -485,7 +435,8 @@ contract CreateX {
         Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
-        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate2AndInit`.
+        // Note that the safeguarding function `_guard` is called as part of the overloaded function
+        // `deployCreate2AndInit`.
         newContract = deployCreate2AndInit({
             salt: _generateSalt(),
             initCode: initCode,
@@ -516,7 +467,8 @@ contract CreateX {
         bytes memory data,
         Values memory values
     ) public payable returns (address newContract) {
-        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate2AndInit`.
+        // Note that the safeguarding function `_guard` is called as part of the overloaded function
+        // `deployCreate2AndInit`.
         newContract = deployCreate2AndInit({
             salt: _generateSalt(),
             initCode: initCode,
@@ -583,7 +535,7 @@ contract CreateX {
      * @dev Returns the address where a contract will be stored if deployed via `deployer` using
      * the `CREATE2` opcode. Any change in the `initCodeHash` or `salt` values will result in a new
      * destination address. This implementation is based on OpenZeppelin:
-     * https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Create2.sol.
+     * https://web.archive.org/web/20230921113703/https://raw.githubusercontent.com/OpenZeppelin/openzeppelin-contracts/181d518609a9f006fcb97af63e6952e603cf100e/contracts/utils/Create2.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCodeHash The 32-byte bytecode digest of the contract creation bytecode.
      * @param deployer The 20-byte deployer address.
@@ -626,7 +578,7 @@ contract CreateX {
      * as inputs. In order to save deployment costs, we do not sanity check the `initCode` length.
      * Note that if `msg.value` is non-zero, `initCode` must have a `payable` constructor. This
      * implementation is based on Solmate:
-     * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
+     * https://web.archive.org/web/20230921113832/https://raw.githubusercontent.com/transmissions11/solmate/e8f96f25d48fe702117ce76c79228ca4f20206cb/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
@@ -634,14 +586,12 @@ contract CreateX {
      * the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun
      * proxy deployments on other chains.
      */
-    function deployCreate3(
-        bytes32 salt,
-        bytes memory initCode
-    ) public payable guard(salt) returns (address newContract) {
+    function deployCreate3(bytes32 salt, bytes memory initCode) public payable returns (address newContract) {
+        bytes32 guardedSalt = _guard(salt);
         bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
         address proxy;
         assembly ("memory-safe") {
-            proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), mload(0x00))
+            proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), guardedSalt)
         }
         if (proxy == address(0)) {
             revert FailedContractCreation({emitter: _SELF});
@@ -661,14 +611,15 @@ contract CreateX {
      * and transaction properties. This approach does not guarantee true randomness! In order to save
      * deployment costs, we do not sanity check the `initCode` length. Note that if `msg.value` is
      * non-zero, `initCode` must have a `payable` constructor. This implementation is based on Solmate:
-     * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
+     * https://web.archive.org/web/20230921113832/https://raw.githubusercontent.com/transmissions11/solmate/e8f96f25d48fe702117ce76c79228ca4f20206cb/src/utils/CREATE3.sol.
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
      * @custom:security This function does not implement any permissioned deploy protection, thus
      * anyone can frontrun the same proxy deployment on other chains. Use with caution!
      */
     function deployCreate3(bytes memory initCode) public payable returns (address newContract) {
-        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate3`.
+        // Note that the safeguarding function `_guard` is called as part of the overloaded function
+        // `deployCreate3`.
         newContract = deployCreate3({salt: _generateSalt(), initCode: initCode});
     }
 
@@ -679,7 +630,7 @@ contract CreateX {
      * `refundAddress`, and `msg.value` as inputs. In order to save deployment costs, we do not sanity
      * check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must
      * have a `payable` constructor. This implementation is based on Solmate:
-     * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
+     * https://web.archive.org/web/20230921113832/https://raw.githubusercontent.com/transmissions11/solmate/e8f96f25d48fe702117ce76c79228ca4f20206cb/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
@@ -699,11 +650,12 @@ contract CreateX {
         bytes memory data,
         Values memory values,
         address refundAddress
-    ) public payable guard(salt) returns (address newContract) {
+    ) public payable returns (address newContract) {
+        bytes32 guardedSalt = _guard(salt);
         bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
         address proxy;
         assembly ("memory-safe") {
-            proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), mload(0x00))
+            proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), guardedSalt)
         }
         if (proxy == address(0)) {
             revert FailedContractCreation({emitter: _SELF});
@@ -738,7 +690,7 @@ contract CreateX {
      * inputs. In order to save deployment costs, we do not sanity check the `initCode` length. Note
      * that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor,
      * and any excess ether is returned to `msg.sender`. This implementation is based on Solmate:
-     * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
+     * https://web.archive.org/web/20230921113832/https://raw.githubusercontent.com/transmissions11/solmate/e8f96f25d48fe702117ce76c79228ca4f20206cb/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
@@ -757,7 +709,8 @@ contract CreateX {
         bytes memory data,
         Values memory values
     ) public payable returns (address newContract) {
-        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate3AndInit`.
+        // Note that the safeguarding function `_guard` is called as part of the overloaded function
+        // `deployCreate3AndInit`.
         newContract = deployCreate3AndInit({
             salt: salt,
             initCode: initCode,
@@ -775,7 +728,7 @@ contract CreateX {
      * transaction properties. This approach does not guarantee true randomness! In order to save deployment
      * costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero,
      * `initCode` must have a `payable` constructor. This implementation is based on Solmate:
-     * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
+     * https://web.archive.org/web/20230921113832/https://raw.githubusercontent.com/transmissions11/solmate/e8f96f25d48fe702117ce76c79228ca4f20206cb/src/utils/CREATE3.sol.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
      * @param values The specific `payable` amounts for the deployment and initialisation call.
@@ -793,7 +746,8 @@ contract CreateX {
         Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
-        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate3AndInit`.
+        // Note that the safeguarding function `_guard` is called as part of the overloaded function
+        // `deployCreate3AndInit`.
         newContract = deployCreate3AndInit({
             salt: _generateSalt(),
             initCode: initCode,
@@ -811,7 +765,7 @@ contract CreateX {
      * not guarantee true randomness! In order to save deployment costs, we do not sanity check the `initCode`
      * length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor,
      * and any excess ether is returned to `msg.sender`. This implementation is based on Solmate:
-     * https://github.com/transmissions11/solmate/blob/v7/src/utils/CREATE3.sol.
+     * https://web.archive.org/web/20230921113832/https://raw.githubusercontent.com/transmissions11/solmate/e8f96f25d48fe702117ce76c79228ca4f20206cb/src/utils/CREATE3.sol.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
      * @param values The specific `payable` amounts for the deployment and initialisation call.
@@ -827,7 +781,8 @@ contract CreateX {
         bytes memory data,
         Values memory values
     ) public payable returns (address newContract) {
-        // Note that the modifier `guard` is called as part of the overloaded function `deployCreate3AndInit`.
+        // Note that the safeguarding function `_guard` is called as part of the overloaded function
+        // `deployCreate3AndInit`.
         newContract = deployCreate3AndInit({
             salt: _generateSalt(),
             initCode: initCode,
@@ -841,7 +796,7 @@ contract CreateX {
      * @dev Returns the address where a contract will be stored if deployed via `deployer` using
      * the `CREATE3` pattern (i.e. without an initcode factor). Any change in the `salt` value will
      * result in a new destination address. This implementation is based on Solady:
-     * https://github.com/Vectorized/solady/blob/main/src/utils/CREATE3.sol.
+     * https://web.archive.org/web/20230921114120/https://raw.githubusercontent.com/Vectorized/solady/1c1ac4ad9c8558001e92d8d1a7722ef67bec75df/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @param deployer The 20-byte deployer address.
      * @return computedAddress The 20-byte address where a contract will be stored.
@@ -865,7 +820,7 @@ contract CreateX {
      * @dev Returns the address where a contract will be stored if deployed via this contract using
      * the `CREATE3` pattern (i.e. without an initcode factor). Any change in the `salt` value will
      * result in a new destination address. This implementation is based on Solady:
-     * https://github.com/Vectorized/solady/blob/main/src/utils/CREATE3.sol.
+     * https://web.archive.org/web/20230921114120/https://raw.githubusercontent.com/Vectorized/solady/1c1ac4ad9c8558001e92d8d1a7722ef67bec75df/src/utils/CREATE3.sol.
      * @param salt The 32-byte random value used to create the contract address.
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
@@ -876,6 +831,46 @@ contract CreateX {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                      HELPER FUNCTIONS                      */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
+    /**
+     * @dev Implements different safeguarding mechanisms depending on the encoded values in the salt
+     * (`||` stands for byte-wise concatenation):
+     *   => salt (32 bytes) = 0xbebebebebebebebebebebebebebebebebebebebe||ff||1212121212121212121212
+     *   - The first 20 bytes (i.e. `bebebebebebebebebebebebebebebebebebebebe`) may be used to
+     *     implement a permissioned deploy protection by setting them equal to `msg.sender`,
+     *   - The 21st byte (i.e. `ff`) may be used to implement a cross-chain redeploy protection by
+     *     setting it equal to `0x01`,
+     *   - The last random 11 bytes (i.e. `1212121212121212121212`) allow for 2**88 bits of entropy
+     *     for mining a salt.
+     * @param salt The 32-byte random value used to create the contract address.
+     * @return guardedSalt The guarded 32-byte random value used to create the contract address.
+     */
+    function _guard(bytes32 salt) internal view returns (bytes32 guardedSalt) {
+        (SenderBytes senderBytes, RedeployProtectionFlag redeployProtectionFlag) = _parseSalt(salt);
+
+        if (senderBytes == SenderBytes.MsgSender && redeployProtectionFlag == RedeployProtectionFlag.True) {
+            // Configures a permissioned deploy protection as well as a cross-chain redeploy protection.
+            guardedSalt = keccak256(abi.encode(msg.sender, block.chainid, salt));
+        } else if (senderBytes == SenderBytes.MsgSender && redeployProtectionFlag == RedeployProtectionFlag.False) {
+            // Configures solely a permissioned deploy protection.
+            guardedSalt = _efficientHash({a: bytes32(bytes20(uint160(msg.sender))), b: salt});
+        } else if (senderBytes == SenderBytes.MsgSender) {
+            // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
+            revert InvalidSalt({emitter: _SELF});
+        } else if (senderBytes == SenderBytes.ZeroAddress && redeployProtectionFlag == RedeployProtectionFlag.True) {
+            // Configures solely a cross-chain redeploy protection. In order to prevent a pseudo-randomly
+            // generated cross-chain redeploy protection, we enforce the zero address check for the first 20 bytes.
+            guardedSalt = _efficientHash({a: bytes32(block.chainid), b: salt});
+        } else if (
+            senderBytes == SenderBytes.ZeroAddress && redeployProtectionFlag == RedeployProtectionFlag.Unspecified
+        ) {
+            // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
+            revert InvalidSalt({emitter: _SELF});
+        } else {
+            // In all other cases, the salt value is not modified.
+            guardedSalt = salt;
+        }
+    }
 
     /**
      * @dev Returns the enum for the selection of a permissioned deploy protection as well as a
