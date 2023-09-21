@@ -54,15 +54,13 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
     }
 
     modifier whenThe21stByteOfTheSaltDoesNotEqual0x00Or0x01() {
-        // Set the 21st byte of the `salt` equal to `0xc5`.
+        // Set the 21st byte of the `salt` to a value greater than `0x01`.
         if (uint8(cachedSalt[20]) <= uint8(1)) {
-            cachedSalt = bytes32(
-                abi.encodePacked(
-                    bytes20(cachedSalt),
-                    bytes1(keccak256(new bytes(0))),
-                    bytes11(uint88(uint256(cachedSalt)))
-                )
-            );
+            bytes1 newByte = bytes1(keccak256(abi.encode(cachedSalt[20])));
+            while (uint8(newByte) <= uint8(1)) {
+                newByte = bytes1(keccak256(abi.encode(newByte)));
+            }
+            cachedSalt = bytes32(abi.encodePacked(bytes20(cachedSalt), newByte, bytes11(uint88(uint256(cachedSalt)))));
         }
         _;
     }
