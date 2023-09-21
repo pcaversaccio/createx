@@ -78,7 +78,7 @@ contract CreateX_GenerateSalt_Internal_Test is BaseTest {
     }
 
     function testFuzz_NeverReverts(uint256 seed) external {
-        // It never reverts.
+        // It should never revert.
         // We derive all our salt properties from the seed and ensure that it never reverts.
         // First, we generate all the entropy.
         uint256 entropy1 = entropy(seed, 1);
