@@ -5,6 +5,10 @@ import {BaseTest} from "./BaseTest.sol";
 import {CreateX} from "../src/CreateX.sol";
 
 contract CreateX_RequireSuccessfulContractCreation_1Arg_Internal_Test is BaseTest {
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                            TESTS                           */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
     modifier whenTheNewContractAddressIsTheZeroAddress() {
         _;
     }

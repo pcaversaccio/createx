@@ -5,7 +5,49 @@ import {BaseTest} from "./BaseTest.sol";
 import {CreateX} from "../src/CreateX.sol";
 
 contract CreateX_ParseSalt_Internal_Test is BaseTest {
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                      HELPER VARIABLES                      */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
     bytes32 internal cachedSalt;
+
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                      HELPER FUNCTIONS                      */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
+    /**
+     * @dev Asserts the equality of `CreateX.SenderBytes` types.
+     * @param a The first 1-byte `CreateX.SenderBytes` value.
+     * @param b The second 1-byte `CreateX.SenderBytes` value.
+     */
+    function assertEq(CreateX.SenderBytes a, CreateX.SenderBytes b) internal {
+        // The `enum` type is treated as a `uint8` type by the Solidity compiler.
+        if (a != b) {
+            emit log("Error: a == b not satisfied [CreateX.SenderBytes]");
+            emit log_named_uint("      Left", uint8(a));
+            emit log_named_uint("     Right", uint8(b));
+            fail();
+        }
+    }
+
+    /**
+     * @dev Asserts the equality of `CreateX.RedeployProtectionFlag` types.
+     * @param a The first 1-byte `CreateX.RedeployProtectionFlag` value.
+     * @param b The second 1-byte `CreateX.RedeployProtectionFlag` value.
+     */
+    function assertEq(CreateX.RedeployProtectionFlag a, CreateX.RedeployProtectionFlag b) internal {
+        // The `enum` type is treated as a `uint8` type by the Solidity compiler.
+        if (a != b) {
+            emit log("Error: a == b not satisfied [CreateX.RedeployProtectionFlag]");
+            emit log_named_uint("      Left", uint8(a));
+            emit log_named_uint("     Right", uint8(b));
+            fail();
+        }
+    }
+
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                            TESTS                           */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     modifier whenTheFirst20BytesOfTheSaltEqualsTheCaller(bytes32 salt) {
         // Set the first 20 bytes of the `salt` equal to `msg.sender`.
@@ -27,9 +69,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.True` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
-        // The `enum` type is treated as a `uint8` type by the Solidity compiler.
-        assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.MsgSender));
-        assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.True));
+        assertEq(senderBytes, CreateX.SenderBytes.MsgSender);
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.True);
         vm.stopPrank();
     }
 
@@ -47,9 +88,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.False` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
-        // The `enum` type is treated as a `uint8` type by the Solidity compiler.
-        assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.MsgSender));
-        assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.False));
+        assertEq(senderBytes, CreateX.SenderBytes.MsgSender);
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.False);
         vm.stopPrank();
     }
 
@@ -73,9 +113,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.Unspecified` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
-        // The `enum` type is treated as a `uint8` type by the Solidity compiler.
-        assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.MsgSender));
-        assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.Unspecified));
+        assertEq(senderBytes, CreateX.SenderBytes.MsgSender);
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.Unspecified);
         vm.stopPrank();
     }
 
@@ -93,9 +132,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.True` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
-        // The `enum` type is treated as a `uint8` type by the Solidity compiler.
-        assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.ZeroAddress));
-        assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.True));
+        assertEq(senderBytes, CreateX.SenderBytes.ZeroAddress);
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.True);
         vm.stopPrank();
     }
 
@@ -107,9 +145,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.False` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
-        // The `enum` type is treated as a `uint8` type by the Solidity compiler.
-        assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.ZeroAddress));
-        assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.False));
+        assertEq(senderBytes, CreateX.SenderBytes.ZeroAddress);
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.False);
         vm.stopPrank();
     }
 
@@ -121,9 +158,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.Unspecified` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
-        // The `enum` type is treated as a `uint8` type by the Solidity compiler.
-        assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.ZeroAddress));
-        assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.Unspecified));
+        assertEq(senderBytes, CreateX.SenderBytes.ZeroAddress);
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.Unspecified);
         vm.stopPrank();
     }
 
@@ -145,9 +181,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.True` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
-        // The `enum` type is treated as a `uint8` type by the Solidity compiler.
-        assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.Random));
-        assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.True));
+        assertEq(senderBytes, CreateX.SenderBytes.Random);
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.True);
         vm.stopPrank();
     }
 
@@ -163,9 +198,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.False` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
-        // The `enum` type is treated as a `uint8` type by the Solidity compiler.
-        assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.Random));
-        assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.False));
+        assertEq(senderBytes, CreateX.SenderBytes.Random);
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.False);
         vm.stopPrank();
     }
 
@@ -181,9 +215,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.Unspecified` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
-        // The `enum` type is treated as a `uint8` type by the Solidity compiler.
-        assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.Random));
-        assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.Unspecified));
+        assertEq(senderBytes, CreateX.SenderBytes.Random);
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.Unspecified);
         vm.stopPrank();
     }
 }

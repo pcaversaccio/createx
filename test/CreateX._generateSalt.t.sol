@@ -4,6 +4,10 @@ pragma solidity 0.8.21;
 import {BaseTest} from "./BaseTest.sol";
 
 contract CreateX_GenerateSalt_Internal_Test is BaseTest {
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                      HELPER FUNCTIONS                      */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
     /**
      * @dev Generates a 32-byte entropy value using the `keccak256` hashing algorithm.
      * @param seed The 32-byte seed value to generate the entropy value.
@@ -13,6 +17,10 @@ contract CreateX_GenerateSalt_Internal_Test is BaseTest {
     function entropy(uint256 seed, uint256 i) internal pure returns (uint256 randomness) {
         randomness = uint256(keccak256(abi.encodePacked(seed, i)));
     }
+
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                            TESTS                           */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     function test_ShouldBeAFunctionOfMultipleBlockPropertiesAndTheCaller() external {
         // It should be a function of multiple block properties and the caller.
