@@ -30,9 +30,6 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // The `enum` type is treated as a `uint8` type by the Solidity compiler.
         assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.MsgSender));
         assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.True));
-
-        // Reset the `cachedSalt` parameter to the default value.
-        delete cachedSalt;
         vm.stopPrank();
     }
 
@@ -53,9 +50,6 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // The `enum` type is treated as a `uint8` type by the Solidity compiler.
         assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.MsgSender));
         assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.False));
-
-        // Reset the `cachedSalt` parameter to the default value.
-        delete cachedSalt;
         vm.stopPrank();
     }
 
@@ -84,9 +78,6 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // The `enum` type is treated as a `uint8` type by the Solidity compiler.
         assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.MsgSender));
         assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.Unspecified));
-
-        // Reset the `cachedSalt` parameter to the default value.
-        delete cachedSalt;
         vm.stopPrank();
     }
 
@@ -107,9 +98,6 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // The `enum` type is treated as a `uint8` type by the Solidity compiler.
         assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.ZeroAddress));
         assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.True));
-
-        // Reset the `cachedSalt` parameter to the default value.
-        delete cachedSalt;
         vm.stopPrank();
     }
 
@@ -124,9 +112,6 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // The `enum` type is treated as a `uint8` type by the Solidity compiler.
         assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.ZeroAddress));
         assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.False));
-
-        // Reset the `cachedSalt` parameter to the default value.
-        delete cachedSalt;
         vm.stopPrank();
     }
 
@@ -141,9 +126,6 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // The `enum` type is treated as a `uint8` type by the Solidity compiler.
         assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.ZeroAddress));
         assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.Unspecified));
-
-        // Reset the `cachedSalt` parameter to the default value.
-        delete cachedSalt;
         vm.stopPrank();
     }
 
@@ -168,9 +150,6 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // The `enum` type is treated as a `uint8` type by the Solidity compiler.
         assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.Random));
         assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.True));
-
-        // Reset the `cachedSalt` parameter to the default value.
-        delete cachedSalt;
         vm.stopPrank();
     }
 
@@ -189,9 +168,6 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // The `enum` type is treated as a `uint8` type by the Solidity compiler.
         assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.Random));
         assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.False));
-
-        // Reset the `cachedSalt` parameter to the default value.
-        delete cachedSalt;
         vm.stopPrank();
     }
 
@@ -210,9 +186,6 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // The `enum` type is treated as a `uint8` type by the Solidity compiler.
         assertEq(uint8(senderBytes), uint8(CreateX.SenderBytes.Random));
         assertEq(uint8(redeployProtectionFlag), uint8(CreateX.RedeployProtectionFlag.Unspecified));
-
-        // Reset the `cachedSalt` parameter to the default value.
-        delete cachedSalt;
         vm.stopPrank();
     }
 }
