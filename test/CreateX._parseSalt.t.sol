@@ -93,7 +93,7 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         vm.stopPrank();
     }
 
-    modifier whenThe21stByteOfTheSaltDoesNotEqual0x00Or0x01() {
+    modifier whenThe21stByteOfTheSaltIsGreaterThan0x01() {
         // Set the 21st byte of the `salt` to a value greater than `0x01`.
         if (uint8(cachedSalt[20]) <= uint8(1)) {
             bytes1 newByte = bytes1(keccak256(abi.encode(cachedSalt[20])));
@@ -105,9 +105,9 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheCallerAndWhenThe21stByteOfTheSaltDoesNotEqual0x00Or0x01(
+    function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheCallerAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(
         bytes32 salt
-    ) external whenTheFirst20BytesOfTheSaltEqualsTheCaller(salt) whenThe21stByteOfTheSaltDoesNotEqual0x00Or0x01 {
+    ) external whenTheFirst20BytesOfTheSaltEqualsTheCaller(salt) whenThe21stByteOfTheSaltIsGreaterThan0x01 {
         vm.startPrank(msg.sender);
         // It should return the `SenderBytes.MsgSender` `enum` as first return value.
         // It should return the `RedeployProtectionFlag.Unspecified` `enum` as second return value.
@@ -150,9 +150,9 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         vm.stopPrank();
     }
 
-    function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltDoesNotEqual0x00Or0x01(
+    function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(
         bytes32 salt
-    ) external whenTheFirst20BytesOfTheSaltEqualsTheZeroAddress(salt) whenThe21stByteOfTheSaltDoesNotEqual0x00Or0x01 {
+    ) external whenTheFirst20BytesOfTheSaltEqualsTheZeroAddress(salt) whenThe21stByteOfTheSaltIsGreaterThan0x01 {
         vm.startPrank(msg.sender);
         // It should return the `SenderBytes.ZeroAddress` `enum` as first return value.
         // It should return the `RedeployProtectionFlag.Unspecified` `enum` as second return value.
@@ -203,12 +203,12 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         vm.stopPrank();
     }
 
-    function testFuzz_WhenTheFirst20BytesOfTheSaltDoesNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltDoesNotEqual0x00Or0x0(
+    function testFuzz_WhenTheFirst20BytesOfTheSaltDoesNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(
         bytes32 salt
     )
         external
         whenTheFirst20BytesOfTheSaltDoesNotEqualTheCallerOrTheZeroAddress(salt)
-        whenThe21stByteOfTheSaltDoesNotEqual0x00Or0x01
+        whenThe21stByteOfTheSaltIsGreaterThan0x01
     {
         vm.startPrank(msg.sender);
         // It should return the `SenderBytes.Random` `enum` as first return value.
