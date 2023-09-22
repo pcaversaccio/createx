@@ -1,0 +1,8 @@
+CreateX_RequireSuccessfulContractInitialisation_Internal_Test
+├── When the success Boolean is false
+│   └── It should revert.
+└── When the success Boolean is true
+    ├── When the implementation address has no code
+    │   └── It should revert.
+    └── When the implementation address has code
+        └── It should never revert.

@@ -397,6 +397,24 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
+    mantaMain: {
+      chainId: 169,
+      url: process.env.MANTA_MAINNET_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    shardeumTestnet: {
+      chainId: 8081,
+      url: process.env.SHARDEUM_TESTNET_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    artheraTestnet: {
+      chainId: 10243,
+      url: process.env.ARTHERA_TESTNET_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -495,8 +513,11 @@ const config: HardhatUserConfig = {
       // For Lukso testnet & mainnet
       lukso: process.env.LUKSO_API_KEY || "",
       luksoTestnet: process.env.LUKSO_API_KEY || "",
-      // For Manta testnet
+      // For Manta testnet & mainnet
+      manta: process.env.MANTA_API_KEY || "",
       mantaTestnet: process.env.MANTA_API_KEY || "",
+      // For Arthera testnet
+      artheraTestnet: process.env.ARTHERA_API_KEY || "",
     },
     customChains: [
       {
@@ -716,11 +737,27 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        network: "mantaTestnet",
-        chainId: 3441005,
+        network: "manta",
+        chainId: 169,
         urls: {
           apiURL: "https://pacific-explorer.manta.network/api",
           browserURL: "https://pacific-explorer.manta.network",
+        },
+      },
+      {
+        network: "mantaTestnet",
+        chainId: 3441005,
+        urls: {
+          apiURL: "https://pacific-explorer.testnet.manta.network/api",
+          browserURL: "https://pacific-explorer.testnet.manta.network",
+        },
+      },
+      {
+        network: "artheraTestnet",
+        chainId: 10243,
+        urls: {
+          apiURL: "https://explorer-test.arthera.net/api",
+          browserURL: "https://explorer-test.arthera.net",
         },
       },
     ],

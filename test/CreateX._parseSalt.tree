@@ -1,0 +1,25 @@
+CreateX_ParseSalt_Internal_Test
+├── When the first 20 bytes of the salt equals the caller
+│   ├── It should return the SenderBytes.MsgSender enum as first return value.
+│   ├── When the 21st byte of the salt equals 0x01
+│   │   └── It should return the RedeployProtectionFlag.True enum as second return value.
+│   ├── When the 21st byte of the salt equals 0x00
+│   │   └── It should return the RedeployProtectionFlag.False enum as second return value.
+│   └── When the 21st byte of the salt is greater than 0x01
+│       └── It should return the RedeployProtectionFlag.Unspecified enum as second return value.
+├── When the first 20 bytes of the salt equals the zero address
+│   ├── It should return the SenderBytes.ZeroAddress enum as first return value.
+│   ├── When the 21st byte of the salt equals 0x01
+│   │   └── It should return the RedeployProtectionFlag.True enum as second return value.
+│   ├── When the 21st byte of the salt equals 0x00
+│   │   └── It should return the RedeployProtectionFlag.False enum as second return value.
+│   └── When the 21st byte of the salt is greater than 0x01
+│       └── It should return the RedeployProtectionFlag.Unspecified enum as second return value.
+└── When the first 20 bytes of the salt do not equal the caller or the zero address
+    ├── It should return the SenderBytes.Random enum as first return value.
+    ├── When the 21st byte of the salt equals 0x01
+    │   └── It should return the RedeployProtectionFlag.True enum as second return value.
+    ├── When the 21st byte of the salt equals 0x00
+    │   └── It should return the RedeployProtectionFlag.False enum as second return value.
+    └── When the 21st byte of the salt is greater than 0x01
+        └── It should return the RedeployProtectionFlag.Unspecified enum as second return value.
