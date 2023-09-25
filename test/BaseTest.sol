@@ -8,6 +8,10 @@ import {CreateX} from "../src/CreateX.sol";
  * @dev Harness contract that exposes internal functions for testing.
  */
 contract CreateXHarness is CreateX {
+    function exposed_guard(bytes32 salt) external view returns (bytes32 guardedSalt) {
+        guardedSalt = _guard(salt);
+    }
+
     function exposed_parseSalt(
         bytes32 salt
     ) external view returns (SenderBytes senderBytes, RedeployProtectionFlag redeployProtectionFlag) {
