@@ -36,7 +36,7 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     function setUp() public override {
-        super.setUp();
+        BaseTest.setUp();
         arg1 = "MyToken";
         arg2 = "MTKN";
         arg3 = makeAddr("initialAccount");
