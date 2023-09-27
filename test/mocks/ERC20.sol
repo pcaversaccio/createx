@@ -16,7 +16,7 @@ contract ERC20Mock is ERC20 {
         string memory symbol_,
         address initialAccount_,
         uint256 initialBalance_
-    ) payable ERC20(name_, symbol_) {
+    ) ERC20(name_, symbol_) {
         _mint({account: initialAccount_, value: initialBalance_});
     }
 

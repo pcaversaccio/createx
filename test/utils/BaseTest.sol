@@ -2,7 +2,7 @@
 pragma solidity 0.8.21;
 
 import {Test} from "forge-std/Test.sol";
-import {CreateX} from "../src/CreateX.sol";
+import {CreateX} from "../../src/CreateX.sol";
 
 /**
  * @dev Harness contract that exposes internal functions for testing.
@@ -57,7 +57,6 @@ contract BaseTest is Test {
     // solhint-disable-next-line const-name-snakecase
     address internal constant zeroAddress = address(0);
 
-    event ContractCreation(address indexed newContract);
     event Transfer(address indexed from, address indexed to, uint256 value);
 
     function setUp() public {
