@@ -3,6 +3,7 @@ pragma solidity 0.8.21;
 
 import {BaseTest} from "../utils/BaseTest.sol";
 import {ERC20Mock} from "../mocks/ERC20Mock.sol";
+import {ERC20MockPayable} from "../mocks/ERC20MockPayable.sol";
 import {CreateX} from "../../src/CreateX.sol";
 
 contract CreateX_DeployCreate_External_Test is BaseTest {
@@ -42,8 +43,8 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         arg3 = makeAddr("initialAccount");
         arg4 = 100;
         args = abi.encode(arg1, arg2, arg3, arg4);
-        cachedInitCode = abi.encodePacked(vm.getCode("ERC20Mock.sol:ERC20Mock"), args);
-        cachedInitCodePayable = abi.encodePacked(vm.getCode("ERC20MockPayable.sol:ERC20MockPayable"), args);
+        cachedInitCode = abi.encodePacked(type(ERC20Mock).creationCode, args);
+        cachedInitCodePayable = abi.encodePacked(type(ERC20MockPayable).creationCode, args);
     }
 
     modifier givenReenteringCallsAreAllowed() {
