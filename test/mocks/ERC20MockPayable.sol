@@ -25,7 +25,7 @@ contract ERC20MockPayable is ERC20 {
      * @param account The 20-byte account address.
      * @param amount The 32-byte token amount to be created.
      */
-    function mint(address account, uint256 amount) public {
+    function mint(address account, uint256 amount) public payable {
         _mint({account: account, value: amount});
     }
 
@@ -34,7 +34,7 @@ contract ERC20MockPayable is ERC20 {
      * @param account The 20-byte account address.
      * @param amount The 32-byte token amount to be destroyed.
      */
-    function burn(address account, uint256 amount) public {
+    function burn(address account, uint256 amount) public payable {
         _burn({account: account, value: amount});
     }
 }

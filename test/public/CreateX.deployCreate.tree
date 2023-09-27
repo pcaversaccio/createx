@@ -1,4 +1,4 @@
-CreateX_DeployCreate_External_Test
+CreateX_DeployCreate_Public_Test
 └── Given reentering calls are allowed
     ├── When the initCode creates a valid runtime bytecode
     │   ├── When the created runtime bytecode has a non-zero length
