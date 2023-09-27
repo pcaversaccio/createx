@@ -15,9 +15,9 @@ contract CreateX_Guard_Internal_Test is BaseTest {
     /*                            TESTS                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
-    modifier whenTheFirst20BytesOfTheSaltEqualsTheCaller(bytes32 salt) {
-        // Set the first 20 bytes of the `salt` equal to `msg.sender`.
-        cachedSalt = bytes32(abi.encodePacked(msg.sender, bytes12(uint96(uint256(salt)))));
+    modifier whenTheFirst20BytesOfTheSaltEqualsTheCaller(address caller, bytes32 salt) {
+        // Set the first 20 bytes of the `salt` equal to `caller` (a.k.a. `msg.sender`).
+        cachedSalt = bytes32(abi.encodePacked(caller, bytes12(uint96(uint256(salt)))));
         _;
     }
 
@@ -28,12 +28,13 @@ contract CreateX_Guard_Internal_Test is BaseTest {
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheCallerAndWhenThe21stByteOfTheSaltEquals0x01(
+        address caller,
         bytes32 salt
-    ) external whenTheFirst20BytesOfTheSaltEqualsTheCaller(salt) whenThe21stByteOfTheSaltEquals0x01 {
-        vm.startPrank(msg.sender);
+    ) external whenTheFirst20BytesOfTheSaltEqualsTheCaller(caller, salt) whenThe21stByteOfTheSaltEquals0x01 {
+        vm.startPrank(caller);
         // It should return the `keccak256` hash of the ABI-encoded values `msg.sender`, `block.chainid`, and the `salt`.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
-        assertEq(guardedSalt, keccak256(abi.encode(msg.sender, block.chainid, cachedSalt)));
+        assertEq(guardedSalt, keccak256(abi.encode(caller, block.chainid, cachedSalt)));
         vm.stopPrank();
     }
 
@@ -44,12 +45,13 @@ contract CreateX_Guard_Internal_Test is BaseTest {
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheCallerAndWhenThe21stByteOfTheSaltEquals0x00(
+        address caller,
         bytes32 salt
-    ) external whenTheFirst20BytesOfTheSaltEqualsTheCaller(salt) whenThe21stByteOfTheSaltEquals0x00 {
-        vm.startPrank(msg.sender);
+    ) external whenTheFirst20BytesOfTheSaltEqualsTheCaller(caller, salt) whenThe21stByteOfTheSaltEquals0x00 {
+        vm.startPrank(caller);
         // It should return the `keccak256` hash of the ABI-encoded values `msg.sender` and the `salt`.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
-        assertEq(guardedSalt, keccak256(abi.encode(msg.sender, cachedSalt)));
+        assertEq(guardedSalt, keccak256(abi.encode(caller, cachedSalt)));
         vm.stopPrank();
     }
 
@@ -66,9 +68,10 @@ contract CreateX_Guard_Internal_Test is BaseTest {
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheCallerAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(
+        address caller,
         bytes32 salt
-    ) external whenTheFirst20BytesOfTheSaltEqualsTheCaller(salt) whenThe21stByteOfTheSaltIsGreaterThan0x01 {
-        vm.startPrank(msg.sender);
+    ) external whenTheFirst20BytesOfTheSaltEqualsTheCaller(caller, salt) whenThe21stByteOfTheSaltIsGreaterThan0x01 {
+        vm.startPrank(caller);
         // It should revert.
         bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXHarnessAddr);
         vm.expectRevert(expectedErr);
@@ -83,9 +86,11 @@ contract CreateX_Guard_Internal_Test is BaseTest {
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x01(
+        address caller,
         bytes32 salt
     ) external whenTheFirst20BytesOfTheSaltEqualsTheZeroAddress(salt) whenThe21stByteOfTheSaltEquals0x01 {
-        vm.startPrank(msg.sender);
+        vm.assume(caller != zeroAddress);
+        vm.startPrank(caller);
         // It should return the `keccak256` hash of the ABI-encoded values `block.chainid` and the `salt`.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
         assertEq(guardedSalt, keccak256(abi.encode(block.chainid, cachedSalt)));
@@ -93,9 +98,11 @@ contract CreateX_Guard_Internal_Test is BaseTest {
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x00(
+        address caller,
         bytes32 salt
     ) external whenTheFirst20BytesOfTheSaltEqualsTheZeroAddress(salt) whenThe21stByteOfTheSaltEquals0x00 {
-        vm.startPrank(msg.sender);
+        vm.assume(caller != zeroAddress);
+        vm.startPrank(caller);
         // It should return the unmodified salt value.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
         assertEq(guardedSalt, cachedSalt);
@@ -103,9 +110,10 @@ contract CreateX_Guard_Internal_Test is BaseTest {
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(
+        address caller,
         bytes32 salt
     ) external whenTheFirst20BytesOfTheSaltEqualsTheZeroAddress(salt) whenThe21stByteOfTheSaltIsGreaterThan0x01 {
-        vm.startPrank(msg.sender);
+        vm.startPrank(caller);
         // It should revert.
         bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXHarnessAddr);
         vm.expectRevert(expectedErr);
@@ -113,16 +121,17 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         vm.stopPrank();
     }
 
-    modifier whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(bytes32 salt) {
-        vm.assume(address(bytes20(salt)) != msg.sender && address(bytes20(salt)) != zeroAddress);
+    modifier whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(address caller, bytes32 salt) {
+        vm.assume(address(bytes20(salt)) != caller && address(bytes20(salt)) != zeroAddress);
         cachedSalt = salt;
         _;
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(
+        address caller,
         bytes32 salt
-    ) external whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(salt) {
-        vm.startPrank(msg.sender);
+    ) external whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(caller, salt) {
+        vm.startPrank(caller);
         // It should return the unmodified salt value.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
         assertEq(guardedSalt, cachedSalt);
