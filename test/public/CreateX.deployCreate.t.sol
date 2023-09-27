@@ -68,10 +68,6 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         cachedInitCodePayable = abi.encodePacked(type(ERC20MockPayable).creationCode, args);
     }
 
-    modifier givenReenteringCallsAreAllowed() {
-        _;
-    }
-
     modifier whenTheInitCodeCreatesAValidRuntimeBytecode() {
         if (cachedInitCode.length == 0) {
             revert ZeroByteInitCode(address(this));
@@ -105,7 +101,6 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         uint64 nonce
     )
         external
-        givenReenteringCallsAreAllowed
         whenTheInitCodeCreatesAValidRuntimeBytecode
         whenTheCreatedRuntimeBytecodeHasANonZeroLength
         whenTheInitCodeHasANonpayableConstructor
@@ -143,7 +138,6 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         uint256 value
     )
         external
-        givenReenteringCallsAreAllowed
         whenTheInitCodeCreatesAValidRuntimeBytecode
         whenTheCreatedRuntimeBytecodeHasANonZeroLength
         whenTheInitCodeHasANonpayableConstructor
@@ -165,7 +159,6 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         uint64 nonce
     )
         external
-        givenReenteringCallsAreAllowed
         whenTheInitCodeCreatesAValidRuntimeBytecode
         whenTheCreatedRuntimeBytecodeHasANonZeroLength
         whenTheInitCodeHasAPayableConstructor
@@ -198,7 +191,6 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         uint256 value
     )
         external
-        givenReenteringCallsAreAllowed
         whenTheInitCodeCreatesAValidRuntimeBytecode
         whenTheCreatedRuntimeBytecodeHasANonZeroLength
         whenTheInitCodeHasAPayableConstructor
@@ -232,12 +224,7 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
 
     function testFuzz_WhenTheCreatedRuntimeBytecodeHasAZeroLength(
         uint64 nonce
-    )
-        external
-        givenReenteringCallsAreAllowed
-        whenTheInitCodeCreatesAValidRuntimeBytecode
-        whenTheCreatedRuntimeBytecodeHasAZeroLength
-    {
+    ) external whenTheInitCodeCreatesAValidRuntimeBytecode whenTheCreatedRuntimeBytecodeHasAZeroLength {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
         // It should revert.
@@ -250,9 +237,7 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheContractCreationFails(
-        uint64 nonce
-    ) external givenReenteringCallsAreAllowed whenTheContractCreationFails {
+    function testFuzz_WhenTheContractCreationFails(uint64 nonce) external whenTheContractCreationFails {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
 
