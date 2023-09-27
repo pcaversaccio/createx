@@ -134,8 +134,7 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
     }
 
     modifier whenTheCallvalueIsNonZero(uint256 value) {
-        value = bound(value, 1, type(uint64).max);
-        msgValue = value;
+        msgValue = bound(value, 1, type(uint64).max);
         _;
     }
 
