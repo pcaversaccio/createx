@@ -17,5 +17,5 @@ CreateX_DeployCreate_Public_Test
     │   │           └── It emits the event ContractCreation with the contract address as indexed argument.
     │   └── When the created runtime bytecode has a zero length
     │       └── It should revert.
-    └── When the initCode creates an invalid runtime bytecode
+    └── When the contract creation fails
         └── It should revert.

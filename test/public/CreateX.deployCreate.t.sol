@@ -246,27 +246,23 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         createX.deployCreate{value: msgValue}(new bytes(0));
     }
 
-    modifier whenTheInitCodeCreatesAnInvalidRuntimeBytecode() {
+    modifier whenTheContractCreationFails() {
         _;
     }
 
-    function testFuzz_WhenTheInitCodeCreatesAnInvalidRuntimeBytecode(
+    function testFuzz_WhenTheContractCreationFails(
         uint64 nonce
-    ) external givenReenteringCallsAreAllowed whenTheInitCodeCreatesAnInvalidRuntimeBytecode {
+    ) external givenReenteringCallsAreAllowed whenTheContractCreationFails {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
 
-        // The following contract creation code returns a runtime bytecode containing the invalid opcode `PUSH0` (`0x5F`).
-        // This bytecode was generated as part of an experiment here: https://twitter.com/pcaversaccio/status/1690653536751685633,
-        // and deployed on Optimism Goerli: https://goerli-optimism.etherscan.io/address/0x80f920010c9d0aa1d7504f588130e54a8bb0f6f9#code.
-        // This test also ensures that if we ever accidentally change the EVM version in Foundry and Hardhat, we will
-        // always have a corresponding failed test.
-        bytes memory invalidRuntimeBytecode = bytes(
-            "0x61004061000f6000396100406000f36003361161000c5761002d565b5f3560e01c6385384240811861002b573461002f574760405260206040f35b505b005b5f80fda165767970657283000309000b"
-        );
+        // The following contract creation code contains the invalid opcode `PUSH0` (`0x5F`) and `CREATE` must therefore
+        // return the zero address (technically zero bytes `0x`), as the deployment fails. This test also ensures that if
+        // we ever accidentally change the EVM version in Foundry and Hardhat, we will always have a corresponding failed test.
+        bytes memory invalidInitCode = bytes("0x5f8060093d393df3");
         // It should revert.
         bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
         vm.expectRevert(expectedErr);
-        createX.deployCreate{value: msgValue}(invalidRuntimeBytecode);
+        createX.deployCreate{value: msgValue}(invalidInitCode);
     }
 }
