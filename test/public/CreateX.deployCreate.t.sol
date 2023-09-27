@@ -25,12 +25,33 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
     /*                           EVENTS                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
+    // Solidity version `0.8.21` raises an ICE (Internal Compiler Error)
+    // when an event is emitted from another contract: https://github.com/ethereum/solidity/issues/14430.
+
     /**
-     * @dev Solidity version `0.8.21` raises an ICE (Internal Compiler Error) when an event is emitted
-     * from another contract: https://github.com/ethereum/solidity/issues/14430.
+     * @dev Event that is emitted when `amount` ERC-20 tokens are moved from one
+     * account (`owner`) to another (`to`).
+     * @param owner The 20-byte owner address.
+     * @param to The 20-byte receiver address.
+     * @param amount The 32-byte token amount to be transferred.
      */
-    event Transfer(address indexed from, address indexed to, uint256 value);
+    event Transfer(address indexed owner, address indexed to, uint256 amount);
+
+    /**
+     * @dev Event that is emitted when a contract is successfully created.
+     * @param newContract The address of the new contract.
+     */
     event ContractCreation(address indexed newContract);
+
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                        CUSTOM ERRORS                       */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
+    /**
+     * @dev Error that occurs when the contract creation code has zero-byte length.
+     * @param emitter The contract that emits the error.
+     */
+    error ZeroByteInitCode(address emitter);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            TESTS                           */
@@ -52,14 +73,22 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
     }
 
     modifier whenTheInitCodeCreatesAValidRuntimeBytecode() {
-        require(cachedInitCode.length != 0, "Error: zero-byte contract creation code");
-        require(cachedInitCodePayable.length != 0, "Error: zero-byte contract creation code");
+        if (cachedInitCode.length == 0) {
+            revert ZeroByteInitCode(address(this));
+        }
+        if (cachedInitCodePayable.length == 0) {
+            revert ZeroByteInitCode(address(this));
+        }
         _;
     }
 
     modifier whenTheCreatedRuntimeBytecodeHasANonZeroLength() {
-        require(cachedInitCode.length != 0, "Error: zero-byte contract creation code");
-        require(cachedInitCodePayable.length != 0, "Error: zero-byte contract creation code");
+        if (cachedInitCode.length == 0) {
+            revert ZeroByteInitCode(address(this));
+        }
+        if (cachedInitCodePayable.length == 0) {
+            revert ZeroByteInitCode(address(this));
+        }
         _;
     }
 
