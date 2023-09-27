@@ -257,6 +257,8 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         vm.setNonce(createXAddr, nonce);
 
         // The following contract creation code returns a runtime bytecode containing the invalid opcode `PUSH0` (`0x5F`).
+        // This bytecode was generated as part of an experiment here: https://twitter.com/pcaversaccio/status/1690653536751685633,
+        // and deployed on Optimism Goerli: https://goerli-optimism.etherscan.io/address/0x80f920010c9d0aa1d7504f588130e54a8bb0f6f9#code.
         // This test also ensures that if we ever accidentally change the EVM version in Foundry and Hardhat, we will
         // always have a corresponding failed test.
         bytes memory invalidRuntimeBytecode = bytes(
