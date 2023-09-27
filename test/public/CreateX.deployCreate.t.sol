@@ -52,14 +52,14 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
     }
 
     modifier whenTheInitCodeCreatesAValidRuntimeBytecode() {
-        assert(cachedInitCode.length != 0);
-        assert(cachedInitCodePayable.length != 0);
+        require(cachedInitCode.length != 0, "Error: zero-byte contract creation code");
+        require(cachedInitCodePayable.length != 0, "Error: zero-byte contract creation code");
         _;
     }
 
     modifier whenTheCreatedRuntimeBytecodeHasANonZeroLength() {
-        assert(cachedInitCode.length != 0);
-        assert(cachedInitCodePayable.length != 0);
+        require(cachedInitCode.length != 0, "Error: zero-byte contract creation code");
+        require(cachedInitCodePayable.length != 0, "Error: zero-byte contract creation code");
         _;
     }
 
