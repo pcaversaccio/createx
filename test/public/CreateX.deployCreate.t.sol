@@ -2,40 +2,63 @@
 pragma solidity 0.8.21;
 
 import {BaseTest} from "../utils/BaseTest.sol";
+import {ERC20Mock} from "../mocks/ERC20Mock.sol";
+import {CreateX} from "../../src/CreateX.sol";
 
 contract CreateX_DeployCreate_External_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                      HELPER VARIABLES                      */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+    string internal arg1;
+    string internal arg2;
+    address internal arg3;
+    uint256 internal arg4;
+    bytes internal args;
 
     bytes internal cachedInitCode;
     bytes internal cachedInitCodePayable;
 
+    uint256 internal msgValue;
+
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                           EVENTS                           */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
+    /**
+     * @dev Solidity version `0.8.21` raises an ICE (Internal Compiler Error) when an event is emitted
+     * from another contract: https://github.com/ethereum/solidity/issues/14430.
+     */
+    event Transfer(address indexed from, address indexed to, uint256 value);
+    event ContractCreation(address indexed newContract);
+
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            TESTS                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
+    function setUp() public override {
+        super.setUp();
+        arg1 = "MyToken";
+        arg2 = "MTKN";
+        arg3 = makeAddr("initialAccount");
+        arg4 = 100;
+        args = abi.encode(arg1, arg2, arg3, arg4);
+        cachedInitCode = abi.encodePacked(vm.getCode("ERC20Mock.sol:ERC20Mock"), args);
+        cachedInitCodePayable = abi.encodePacked(vm.getCode("ERC20MockPayable.sol:ERC20MockPayable"), args);
+    }
 
     modifier givenReenteringCallsAreAllowed() {
         _;
     }
 
     modifier whenTheInitCodeCreatesAValidRuntimeBytecode() {
-        string memory arg1 = "MyToken";
-        string memory arg2 = "MTKN";
-        address arg3 = makeAddr({name: "initialAccount"});
-        uint256 arg4 = 100;
-        bytes memory args = abi.encode(arg1, arg2, arg3, arg4);
-        bytes memory bytecode = abi.encodePacked(vm.getCode({artifactPath: "ERC20Mock.sol:ERC20Mock"}), args);
-        bytes memory bytecodePayable = abi.encodePacked(
-            vm.getCode({artifactPath: "ERC20MockPayable.sol:ERC20MockPayable"}),
-            args
-        );
-        cachedInitCode = bytecode;
-        cachedInitCodePayable = bytecodePayable;
+        assert(cachedInitCode.length != 0);
+        assert(cachedInitCodePayable.length != 0);
         _;
     }
 
     modifier whenTheCreatedRuntimeBytecodeHasANonZeroLength() {
+        assert(cachedInitCode.length != 0);
+        assert(cachedInitCodePayable.length != 0);
         _;
     }
 
@@ -44,10 +67,13 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
     }
 
     modifier whenTheCallvalueIsZero() {
+        msgValue = 0;
         _;
     }
 
-    function testFuzz_WhenTheCallvalueIsZeroAndHasANonpayableConstructor()
+    function testFuzz_WhenTheCallvalueIsZeroAndHasANonpayableConstructor(
+        uint64 nonce
+    )
         external
         givenReenteringCallsAreAllowed
         whenTheInitCodeCreatesAValidRuntimeBytecode
@@ -55,30 +81,60 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         whenTheInitCodeHasANonpayableConstructor
         whenTheCallvalueIsZero
     {
+        vm.assume(nonce != 0 && nonce < type(uint64).max);
+        vm.setNonce(createXAddr, nonce);
+        // We calculate the address beforehand where the contract is to be deployed.
+        address computedAddress = createX.computeCreateAddress(createXAddr, nonce);
+
+        // We also check for the ERC-20 standard `Transfer` event.
+        vm.expectEmit(true, true, true, true, computedAddress);
+        emit Transfer(zeroAddress, arg3, arg4);
         // It returns a contract address with a non-zero bytecode length and a zero ether balance.
-        // It emits the event ContractCreation with the contract address as indexed argument.
+        // It emits the event `ContractCreation` with the contract address as indexed argument.
+        vm.expectEmit(true, true, true, true, createXAddr);
+        emit ContractCreation(computedAddress);
+        address newContract = createX.deployCreate{value: msgValue}(cachedInitCode);
+        assertEq(newContract, computedAddress);
+        assertNotEq(newContract, zeroAddress);
+        assertNotEq(newContract.code.length, 0);
+        assertEq(newContract.balance, 0);
+        assertEq(ERC20Mock(computedAddress).name(), arg1);
+        assertEq(ERC20Mock(computedAddress).symbol(), arg2);
+        assertEq(ERC20Mock(computedAddress).balanceOf(arg3), arg4);
     }
 
-    modifier whenTheCallvalueIsNonZero() {
+    modifier whenTheCallvalueIsNonZero(uint256 value) {
+        value = bound(value, 1, type(uint64).max);
+        msgValue = value;
         _;
     }
 
-    function testFuzz_WhenTheCallvalueIsNonZeroAndHasANonpayableConstructor()
+    function testFuzz_WhenTheCallvalueIsNonZeroAndHasANonpayableConstructor(
+        uint64 nonce,
+        uint256 value
+    )
         external
         givenReenteringCallsAreAllowed
         whenTheInitCodeCreatesAValidRuntimeBytecode
         whenTheCreatedRuntimeBytecodeHasANonZeroLength
         whenTheInitCodeHasANonpayableConstructor
-        whenTheCallvalueIsNonZero
+        whenTheCallvalueIsNonZero(value)
     {
+        vm.assume(nonce != 0 && nonce < type(uint64).max);
+        vm.setNonce(createXAddr, nonce);
         // It should revert.
+        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
+        vm.expectRevert(expectedErr);
+        createX.deployCreate{value: msgValue}(cachedInitCode);
     }
 
     modifier whenTheInitCodeHasAPayableConstructor() {
         _;
     }
 
-    function testFuzz_WhenTheCallvalueIsZeroAndHasAPayableConstructor()
+    function testFuzz_WhenTheCallvalueIsZeroAndHasAPayableConstructor(
+        uint64 nonce
+    )
         external
         givenReenteringCallsAreAllowed
         whenTheInitCodeCreatesAValidRuntimeBytecode
@@ -86,44 +142,100 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         whenTheInitCodeHasAPayableConstructor
         whenTheCallvalueIsZero
     {
+        vm.assume(nonce != 0 && nonce < type(uint64).max);
+        vm.setNonce(createXAddr, nonce);
+        // We calculate the address beforehand where the contract is to be deployed.
+        address computedAddress = createX.computeCreateAddress(createXAddr, nonce);
+
+        // We also check for the ERC-20 standard `Transfer` event.
+        vm.expectEmit(true, true, true, true, computedAddress);
+        emit Transfer(zeroAddress, arg3, arg4);
         // It returns a contract address with a non-zero bytecode length and a zero ether balance.
-        // It emits the event ContractCreation with the contract address as indexed argument.
+        // It emits the event `ContractCreation` with the contract address as indexed argument.
+        vm.expectEmit(true, true, true, true, createXAddr);
+        emit ContractCreation(computedAddress);
+        address newContract = createX.deployCreate{value: msgValue}(cachedInitCodePayable);
+        assertEq(newContract, computedAddress);
+        assertNotEq(newContract, zeroAddress);
+        assertNotEq(newContract.code.length, 0);
+        assertEq(newContract.balance, 0);
+        assertEq(ERC20Mock(computedAddress).name(), arg1);
+        assertEq(ERC20Mock(computedAddress).symbol(), arg2);
+        assertEq(ERC20Mock(computedAddress).balanceOf(arg3), arg4);
     }
 
-    function testFuzz_WhenTheCallvalueIsNonZeroAndHasAPayableConstructor()
+    function testFuzz_WhenTheCallvalueIsNonZeroAndHasAPayableConstructor(
+        uint64 nonce,
+        uint256 value
+    )
         external
         givenReenteringCallsAreAllowed
         whenTheInitCodeCreatesAValidRuntimeBytecode
         whenTheCreatedRuntimeBytecodeHasANonZeroLength
         whenTheInitCodeHasAPayableConstructor
-        whenTheCallvalueIsNonZero
+        whenTheCallvalueIsNonZero(value)
     {
+        vm.assume(nonce != 0 && nonce < type(uint64).max);
+        vm.setNonce(createXAddr, nonce);
+        // We calculate the address beforehand where the contract is to be deployed.
+        address computedAddress = createX.computeCreateAddress(createXAddr, nonce);
+
+        // We also check for the ERC-20 standard `Transfer` event.
+        vm.expectEmit(true, true, true, true, computedAddress);
+        emit Transfer(zeroAddress, arg3, arg4);
         // It returns a contract address with a non-zero bytecode length and a potential non-zero ether balance.
-        // It emits the event ContractCreation with the contract address as indexed argument.
+        // It emits the event `ContractCreation` with the contract address as indexed argument.
+        vm.expectEmit(true, true, true, true, createXAddr);
+        emit ContractCreation(computedAddress);
+        address newContract = createX.deployCreate{value: msgValue}(cachedInitCodePayable);
+        assertEq(newContract, computedAddress);
+        assertNotEq(newContract, zeroAddress);
+        assertNotEq(newContract.code.length, 0);
+        assertEq(newContract.balance, msgValue);
+        assertEq(ERC20Mock(computedAddress).name(), arg1);
+        assertEq(ERC20Mock(computedAddress).symbol(), arg2);
+        assertEq(ERC20Mock(computedAddress).balanceOf(arg3), arg4);
     }
 
     modifier whenTheCreatedRuntimeBytecodeHasAZeroLength() {
         _;
     }
 
-    function testFuzz_WhenTheCreatedRuntimeBytecodeHasAZeroLength()
+    function testFuzz_WhenTheCreatedRuntimeBytecodeHasAZeroLength(
+        uint64 nonce
+    )
         external
         givenReenteringCallsAreAllowed
         whenTheInitCodeCreatesAValidRuntimeBytecode
         whenTheCreatedRuntimeBytecodeHasAZeroLength
     {
+        vm.assume(nonce != 0 && nonce < type(uint64).max);
+        vm.setNonce(createXAddr, nonce);
         // It should revert.
+        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
+        vm.expectRevert(expectedErr);
+        createX.deployCreate{value: msgValue}(new bytes(0));
     }
 
     modifier whenTheInitCodeCreatesAnInvalidRuntimeBytecode() {
         _;
     }
 
-    function testFuzz_WhenTheInitCodeCreatesAnInvalidRuntimeBytecode()
-        external
-        givenReenteringCallsAreAllowed
-        whenTheInitCodeCreatesAnInvalidRuntimeBytecode
-    {
+    function testFuzz_WhenTheInitCodeCreatesAnInvalidRuntimeBytecode(
+        uint64 nonce
+    ) external givenReenteringCallsAreAllowed whenTheInitCodeCreatesAnInvalidRuntimeBytecode {
+        vm.assume(nonce != 0 && nonce < type(uint64).max);
+        vm.setNonce(createXAddr, nonce);
+
+        // The following contract creation code returns a runtime bytecode containing the invalid opcode `PUSH0` (`0x5F`).
+        // This test also ensures that if we ever accidentally change the EVM version in Foundry and Hardhat, we will
+        // always have a corresponding failed test.
+        bytes memory invalidRuntimeBytecode = bytes(
+            "0x61004061000f6000396100406000f36003361161000c5761002d565b5f3560e01c6385384240811861002b573461002f574760405260206040f35b505b005b5f80fda165767970657283000309000b"
+        );
         // It should revert.
+        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
+        vm.expectRevert(expectedErr);
+        createX.deployCreate{value: msgValue}(invalidRuntimeBytecode);
     }
 }

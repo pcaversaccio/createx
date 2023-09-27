@@ -57,9 +57,7 @@ contract BaseTest is Test {
     // solhint-disable-next-line const-name-snakecase
     address internal constant zeroAddress = address(0);
 
-    event Transfer(address indexed from, address indexed to, uint256 value);
-
-    function setUp() public {
+    function setUp() public virtual {
         // Note that the main contract `CreateX` does `block.number - 32` when generating
         // it's own salt, so we start at block 100 here to prevent a (negative) overflow.
         vm.roll(100);
