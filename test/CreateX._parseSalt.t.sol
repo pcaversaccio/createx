@@ -55,6 +55,11 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         _;
     }
 
+    /**
+     * @custom:security To ensure a proper test coverage, please use this modifier only subsequent
+     * to a modifier that updates the value of `cachedSalt`. Otherwise, it might be possible that
+     * `cachedSalt` has never changed its default value.
+     */
     modifier whenThe21stByteOfTheSaltEquals0x01() {
         // Set the 21st byte of the `salt` equal to `0x01`.
         cachedSalt = bytes32(abi.encodePacked(bytes20(cachedSalt), hex"01", bytes11(uint88(uint256(cachedSalt)))));
@@ -75,6 +80,11 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         vm.stopPrank();
     }
 
+    /**
+     * @custom:security To ensure a proper test coverage, please use this modifier only subsequent
+     * to a modifier that updates the value of `cachedSalt`. Otherwise, it might be possible that
+     * `cachedSalt` has never changed its default value.
+     */
     modifier whenThe21stByteOfTheSaltEquals0x00() {
         // Set the 21st byte of the `salt` equal to `0x00`.
         cachedSalt = bytes32(abi.encodePacked(bytes20(cachedSalt), hex"00", bytes11(uint88(uint256(cachedSalt)))));
@@ -95,6 +105,11 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         vm.stopPrank();
     }
 
+    /**
+     * @custom:security To ensure a proper test coverage, please use this modifier only subsequent
+     * to a modifier that updates the value of `cachedSalt`. Otherwise, it might be possible that
+     * `cachedSalt` has never changed its default value.
+     */
     modifier whenThe21stByteOfTheSaltIsGreaterThan0x01() {
         // Set the 21st byte of the `salt` to a value greater than `0x01`.
         if (uint8(cachedSalt[20]) <= uint8(1)) {
