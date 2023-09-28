@@ -10,7 +10,7 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                      HELPER VARIABLES                      */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
-    address internal immutable self = address(this);
+    address internal immutable SELF = address(this);
 
     string internal arg1;
     string internal arg2;
@@ -72,20 +72,20 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
 
     modifier whenTheInitCodeCreatesAValidRuntimeBytecode() {
         if (cachedInitCode.length == 0) {
-            revert ZeroByteInitCode(self);
+            revert ZeroByteInitCode(SELF);
         }
         if (cachedInitCodePayable.length == 0) {
-            revert ZeroByteInitCode(self);
+            revert ZeroByteInitCode(SELF);
         }
         _;
     }
 
     modifier whenTheCreatedRuntimeBytecodeHasANonZeroLength() {
         if (cachedInitCode.length == 0) {
-            revert ZeroByteInitCode(self);
+            revert ZeroByteInitCode(SELF);
         }
         if (cachedInitCodePayable.length == 0) {
-            revert ZeroByteInitCode(self);
+            revert ZeroByteInitCode(SELF);
         }
         _;
     }
