@@ -71,20 +71,14 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
     }
 
     modifier whenTheInitCodeCreatesAValidRuntimeBytecode() {
-        if (cachedInitCode.length == 0) {
-            revert ZeroByteInitCode(SELF);
-        }
-        if (cachedInitCodePayable.length == 0) {
+        if (cachedInitCode.length == 0 || cachedInitCodePayable.length == 0) {
             revert ZeroByteInitCode(SELF);
         }
         _;
     }
 
     modifier whenTheCreatedRuntimeBytecodeHasANonZeroLength() {
-        if (cachedInitCode.length == 0) {
-            revert ZeroByteInitCode(SELF);
-        }
-        if (cachedInitCodePayable.length == 0) {
+        if (cachedInitCode.length == 0 || cachedInitCodePayable.length == 0) {
             revert ZeroByteInitCode(SELF);
         }
         _;
