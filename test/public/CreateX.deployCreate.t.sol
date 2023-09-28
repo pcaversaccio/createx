@@ -10,6 +10,8 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                      HELPER VARIABLES                      */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+    address internal immutable self = address(this);
+
     string internal arg1;
     string internal arg2;
     address internal arg3;
@@ -70,20 +72,20 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
 
     modifier whenTheInitCodeCreatesAValidRuntimeBytecode() {
         if (cachedInitCode.length == 0) {
-            revert ZeroByteInitCode(address(this));
+            revert ZeroByteInitCode(self);
         }
         if (cachedInitCodePayable.length == 0) {
-            revert ZeroByteInitCode(address(this));
+            revert ZeroByteInitCode(self);
         }
         _;
     }
 
     modifier whenTheCreatedRuntimeBytecodeHasANonZeroLength() {
         if (cachedInitCode.length == 0) {
-            revert ZeroByteInitCode(address(this));
+            revert ZeroByteInitCode(self);
         }
         if (cachedInitCodePayable.length == 0) {
-            revert ZeroByteInitCode(address(this));
+            revert ZeroByteInitCode(self);
         }
         _;
     }
@@ -119,6 +121,7 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         vm.expectEmit(true, true, true, true, createXAddr);
         emit ContractCreation(computedAddress);
         address newContract = createX.deployCreate{value: msgValue}(cachedInitCode);
+
         assertEq(newContract, computedAddress);
         assertNotEq(newContract, zeroAddress);
         assertNotEq(newContract.code.length, 0);
@@ -177,6 +180,7 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         vm.expectEmit(true, true, true, true, createXAddr);
         emit ContractCreation(computedAddress);
         address newContract = createX.deployCreate{value: msgValue}(cachedInitCodePayable);
+
         assertEq(newContract, computedAddress);
         assertNotEq(newContract, zeroAddress);
         assertNotEq(newContract.code.length, 0);
@@ -209,6 +213,7 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         vm.expectEmit(true, true, true, true, createXAddr);
         emit ContractCreation(computedAddress);
         address newContract = createX.deployCreate{value: msgValue}(cachedInitCodePayable);
+
         assertEq(newContract, computedAddress);
         assertNotEq(newContract, zeroAddress);
         assertNotEq(newContract.code.length, 0);
