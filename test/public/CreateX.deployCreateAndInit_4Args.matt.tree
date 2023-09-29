@@ -1,0 +1,14 @@
+CreateX_DeployCreateAndInit_4Args_Public_Test
+├── When the inputs result in no contract deployment
+│   └── It should revert
+└── When the inputs result in a contract deployment
+    ├── It should forward Values.constructorAmount ETH to the contract during deployment
+    ├── When the initialization call fails
+    │   └── It should revert
+    └── When the initialization call succeeds
+        ├── It should forward Values.initCallAmount ETH with the call
+        ├── It should emit a ContractCreation event
+        └── When the contract has leftover ETH after deployment and initialization
+            ├── It should attempt to transfer the leftover ETH to the refund address
+            └── When the transfer fails
+                └── It should revert
