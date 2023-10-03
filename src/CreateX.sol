@@ -853,7 +853,7 @@ contract CreateX {
             guardedSalt = keccak256(abi.encode(msg.sender, block.chainid, salt));
         } else if (senderBytes == SenderBytes.MsgSender && redeployProtectionFlag == RedeployProtectionFlag.False) {
             // Configures solely a permissioned deploy protection.
-            guardedSalt = _efficientHash({a: bytes32(bytes20(uint160(msg.sender))), b: salt});
+            guardedSalt = _efficientHash({a: bytes32(uint256(uint160(msg.sender))), b: salt});
         } else if (senderBytes == SenderBytes.MsgSender) {
             // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
             revert InvalidSalt({emitter: _SELF});
