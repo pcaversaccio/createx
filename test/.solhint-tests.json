@@ -5,6 +5,7 @@
     "one-contract-per-file": "off",
     "contract-name-camelcase": "off",
     "func-name-mixedcase": "off",
+    "no-empty-blocks": "off",
     "avoid-low-level-calls": "off",
     "no-inline-assembly": "off"
   }
