@@ -104,7 +104,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         vm.expectEmit(true, true, true, true, computedAddress);
         emit Transfer(zeroAddress, arg3, arg4);
         // It returns a contract address with a non-zero bytecode length and a potential non-zero ether balance.
-        // It emits the event ContractCreation with the contract address as indexed argument.
+        // It emits the event `ContractCreation` with the contract address as indexed argument.
         vm.expectEmit(true, true, true, true, createXAddr);
         emit ContractCreation(computedAddress);
         vm.deal(arg3, values.constructorAmount + values.initCallAmount);
@@ -159,7 +159,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         vm.expectEmit(true, true, true, true, computedAddress);
         emit Transfer(zeroAddress, arg3, arg4);
         // It returns a contract address with a non-zero bytecode length and a potential non-zero ether balance.
-        // It emits the event ContractCreation with the contract address as indexed argument.
+        // It emits the event `ContractCreation` with the contract address as indexed argument.
         vm.expectEmit(true, true, true, true, createXAddr);
         emit ContractCreation(computedAddress);
         vm.deal(arg3, values.constructorAmount + values.initCallAmount);

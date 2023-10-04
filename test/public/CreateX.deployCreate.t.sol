@@ -5,7 +5,7 @@ import {BaseTest} from "../utils/BaseTest.sol";
 import {ERC20MockPayable} from "../mocks/ERC20MockPayable.sol";
 import {CreateX} from "../../src/CreateX.sol";
 
-contract CreateX_DeployCreate_External_Test is BaseTest {
+contract CreateX_DeployCreate_Public_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                      HELPER VARIABLES                      */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
@@ -93,7 +93,7 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         vm.expectEmit(true, true, true, true, computedAddress);
         emit Transfer(zeroAddress, arg3, arg4);
         // It returns a contract address with a non-zero bytecode length and a potential non-zero ether balance.
-        // It emits the event ContractCreation with the contract address as indexed argument.
+        // It emits the event `ContractCreation` with the contract address as indexed argument.
         vm.expectEmit(true, true, true, true, createXAddr);
         emit ContractCreation(computedAddress);
         address newContract = createX.deployCreate{value: msgValue}(cachedInitCode);
