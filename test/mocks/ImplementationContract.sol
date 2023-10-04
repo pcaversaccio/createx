@@ -9,6 +9,7 @@ pragma solidity 0.8.21;
 contract ImplementationContract {
     bool public isInitialised;
 
+    // solhint-disable-next-line no-empty-blocks
     constructor() payable {}
 
     /**

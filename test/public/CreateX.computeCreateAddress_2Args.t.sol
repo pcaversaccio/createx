@@ -16,6 +16,9 @@ contract CreateX_ComputeCreateAddress_2Args_Public_Test is BaseTest {
 
     modifier whenTheNonceValueDoesNotExceed18446744073709551614(address deployer, uint64 nonce) {
         vm.assume(nonce < type(uint64).max);
+        if (deployer.code.length != 0) {
+            vm.assume(nonce != 0);
+        }
         vm.setNonce(deployer, nonce);
         _;
     }
