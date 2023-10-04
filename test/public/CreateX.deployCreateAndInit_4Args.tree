@@ -1,74 +1,16 @@
 CreateX_DeployCreateAndInit_4Args_Public_Test
 ├── When the initCode creates a valid runtime bytecode
 │   ├── When the created runtime bytecode has a non-zero length
-│   │   ├── When the initCode has a nonpayable constructor
-│   │   │   ├── When the callvalue is zero
-│   │   │   │   └── When the constructorAmount value is zero
-│   │   │   │       └── When the initCallAmount value is zero
-│   │   │   │           ├── When the nonpayable initialisation call is successful
-│   │   │   │           │   ├── When the CreateX balance is zero after the nonpayable contract creation and nonpayable initialisation call
-│   │   │   │           │   │   ├── It returns a contract address with a non-zero bytecode length and a zero ether balance.
-│   │   │   │           │   │   └── It emits the event ContractCreation with the contract address as indexed argument.
-│   │   │   │           │   └── When the CreateX balance is non-zero after the nonpayable contract creation and nonpayable initialisation call
-│   │   │   │           │       ├── It returns a contract address with a non-zero bytecode length and a zero ether balance.
-│   │   │   │           │       ├── It emits the event ContractCreation with the contract address as indexed argument.
-│   │   │   │           │       ├── It returns the non-zero balance to the refundAddress address.
-│   │   │   │           │       └── When the refund transaction is unsuccessful
-│   │   │   │           │           └── It should revert.
-│   │   │   │           └── When the nonpayable initialisation call is unsuccessful
-│   │   │   │               └── It should revert.
-│   │   │   └── When the callvalue is non-zero
-│   │   │       ├── When the constructorAmount value is non-zero
-│   │   │       │   └── When the initCallAmount value is zero
-│   │   │       │       └── It should revert.
-│   │   │       └── When the constructorAmount value is zero
-│   │   │           └── When the initCallAmount value is non-zero
-│   │   │               └── It should revert.
-│   │   └── When the initCode has a payable constructor
-│   │       ├── When the callvalue is zero
-│   │       │   └── When the constructorAmount value is zero
-│   │       │       └── When the initCallAmount value is zero
-│   │       │           ├── When the payable initialisation call is successful
-│   │       │           │   ├── When the CreateX balance is zero after the payable contract creation and payable initialisation call
-│   │       │           │   │   ├── It returns a contract address with a non-zero bytecode length and a zero ether balance.
-│   │       │           │   │   └── It emits the event ContractCreation with the contract address as indexed argument.
-│   │       │           │   └── When the CreateX balance is non-zero after the payable contract creation and payable initialisation call
-│   │       │           │       ├── It returns a contract address with a non-zero bytecode length and a zero ether balance.
-│   │       │           │       ├── It emits the event ContractCreation with the contract address as indexed argument.
-│   │       │           │       ├── It returns the non-zero balance to the refundAddress address.
-│   │       │           │       └── When the refund transaction is unsuccessful
-│   │       │           │           └── It should revert.
-│   │       │           └── When the payable initialisation call is unsuccessful
-│   │       │               └── It should revert.
-│   │       └── When the callvalue is non-zero
-│   │           ├── When the constructorAmount value is non-zero
-│   │           │   └── When the initCallAmount value is zero
-│   │           │       ├── When the payable initialisation call is successful
-│   │           │       │   ├── When the CreateX balance is zero after the payable contract creation and payable initialisation call
-│   │           │       │   │   ├── It returns a contract address with a non-zero bytecode length and a zero ether balance.
-│   │           │       │   │   └── It emits the event ContractCreation with the contract address as indexed argument.
-│   │           │       │   └── When the CreateX balance is non-zero after the payable contract creation and payable initialisation call
-│   │           │       │       ├── It returns a contract address with a non-zero bytecode length and a zero ether balance.
-│   │           │       │       ├── It emits the event ContractCreation with the contract address as indexed argument.
-│   │           │       │       ├── It returns the non-zero balance to the refundAddress address.
-│   │           │       │       └── When the refund transaction is unsuccessful
-│   │           │       │           └── It should revert.
-│   │           │       └── When the payable initialisation call is unsuccessful
-│   │           │           └── It should revert.
-│   │           └── When the constructorAmount value is zero
-│   │               └── When the initCallAmount value is non-zero
-│   │                   ├── When the payable initialisation call is successful
-│   │                   │   ├── When the CreateX balance is zero after the payable contract creation and payable initialisation call
-│   │                   │   │   ├── It returns a contract address with a non-zero bytecode length and a zero ether balance.
-│   │                   │   │   └── It emits the event ContractCreation with the contract address as indexed argument.
-│   │                   │   └── When the CreateX balance is non-zero after the payable contract creation and payable initialisation call
-│   │                   │       ├── It returns a contract address with a non-zero bytecode length and a zero ether balance.
-│   │                   │       ├── It emits the event ContractCreation with the contract address as indexed argument.
-│   │                   │       ├── It returns the non-zero balance to the refundAddress address.
-│   │                   │       └── When the refund transaction is unsuccessful
-│   │                   │           └── It should revert.
-│   │                   └── When the payable initialisation call is unsuccessful
-│   │                       └── It should revert.
+│   │   ├── It returns a contract address with a non-zero bytecode length and a potential non-zero ether balance.
+│   │   └── It emits the event ContractCreation with the contract address as indexed argument.
+│   │       ├── When the initialisation call is successful
+│   │       │   └── When the CreateX contract has a non-zero balance
+│   │       │       ├── When the refund transaction is successful
+│   │       │       │   └── It returns the non-zero balance to the refundAddress address.
+│   │       │       └── When the refund transaction is unsuccessful
+│   │       │           └── It should revert.
+│   │       └── When the initialisation call is unsuccessful
+│   │           └── It should revert.
 │   └── When the created runtime bytecode has a zero length
 │       └── It should revert.
 └── When the contract creation fails

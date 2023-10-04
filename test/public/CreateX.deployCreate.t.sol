@@ -79,7 +79,7 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         _;
     }
 
-    function test_WhenTheCreatedRuntimeBytecodeHasANonZeroLength(
+    function testFuzz_WhenTheCreatedRuntimeBytecodeHasANonZeroLength(
         uint64 nonce,
         uint256 msgValue
     ) external whenTheInitCodeCreatesAValidRuntimeBytecode whenTheCreatedRuntimeBytecodeHasANonZeroLength {
@@ -102,6 +102,7 @@ contract CreateX_DeployCreate_External_Test is BaseTest {
         assertNotEq(newContract, zeroAddress);
         assertNotEq(newContract.code.length, 0);
         assertEq(newContract.balance, msgValue);
+        assertEq(createXAddr.balance, 0);
         assertEq(ERC20MockPayable(computedAddress).name(), arg1);
         assertEq(ERC20MockPayable(computedAddress).symbol(), arg2);
         assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), arg4);
