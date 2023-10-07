@@ -547,11 +547,21 @@ contract CreateX {
         address deployer
     ) public pure returns (address computedAddress) {
         assembly ("memory-safe") {
+            // |                      | ↓ ptr ...  ↓ ptr + 0x0B (start) ...  ↓ ptr + 0x20 ...  ↓ ptr + 0x40 ...   |
+            // |----------------------|---------------------------------------------------------------------------|
+            // | initCodeHash         |                                                        CCCCCCCCCCCCC...CC |
+            // | salt                 |                                      BBBBBBBBBBBBB...BB                   |
+            // | deployer             | 000000...0000AAAAAAAAAAAAAAAAAAA...AA                                     |
+            // | 0xFF                 |            FF                                                             |
+            // |----------------------|---------------------------------------------------------------------------|
+            // | memory               | 000000...00FFAAAAAAAAAAAAAAAAAAA...AABBBBBBBBBBBBB...BBCCCCCCCCCCCCC...CC |
+            // | keccak256(start, 85) |            ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ |
             let ptr := mload(0x40)
             mstore(add(ptr, 0x40), initCodeHash)
             mstore(add(ptr, 0x20), salt)
             mstore(ptr, deployer)
             let start := add(ptr, 0x0b)
+            mstore8(start, 0xff)
             computedAddress := keccak256(start, 85)
         }
     }
@@ -867,7 +877,7 @@ contract CreateX {
             // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
             revert InvalidSalt({emitter: _SELF});
         } else {
-            // In all other cases, the salt value is not modified.
+            // In all other cases, the salt value `salt` is not modified.
             guardedSalt = salt;
         }
     }
