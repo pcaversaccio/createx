@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.21;
 
-import {BaseTest} from "./BaseTest.sol";
+import {BaseTest} from "../utils/BaseTest.sol";
 
 contract CreateX_GenerateSalt_Internal_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -22,7 +22,13 @@ contract CreateX_GenerateSalt_Internal_Test is BaseTest {
     /*                            TESTS                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
-    function test_ShouldBeAFunctionOfMultipleBlockPropertiesAndTheCaller() external {
+    function testFuzz_ShouldBeAFunctionOfMultipleBlockPropertiesAndTheCaller(
+        uint256 increment,
+        address coinbase,
+        string calldata prevrandao,
+        uint64 chainId,
+        address msgSender
+    ) external {
         // It should be a function of multiple block properties and the caller.
         // The full set of dependencies is:
         //    - blockhash(block.number - 32),
@@ -34,47 +40,51 @@ contract CreateX_GenerateSalt_Internal_Test is BaseTest {
         //    - msg.sender.
         // We test their dependencies by determining the current salt, changing any of those
         // values, and verifying that the salt changes.
+        increment = bound(increment, 1, type(uint128).max);
         uint256 snapshotId = vm.snapshot();
         bytes32 originalSalt = createXHarness.exposed_generateSalt();
 
         // Change block. Block number and hash are coupled, so we can't isolate this.
-        vm.roll(block.number + 1);
+        vm.roll(block.number + increment);
         assertNotEq(originalSalt, createXHarness.exposed_generateSalt());
 
         // Change coinbase.
         vm.revertTo(snapshotId);
         assertEq(createXHarness.exposed_generateSalt(), originalSalt);
 
-        vm.coinbase(makeAddr("new coinbase"));
+        vm.assume(coinbase != zeroAddress);
+        vm.coinbase(coinbase);
         assertNotEq(originalSalt, createXHarness.exposed_generateSalt());
 
         // Change timestamp.
         vm.revertTo(snapshotId);
         assertEq(createXHarness.exposed_generateSalt(), originalSalt);
 
-        vm.warp(block.timestamp + 1);
+        vm.warp(block.timestamp + increment);
         assertNotEq(originalSalt, createXHarness.exposed_generateSalt());
 
         // Change prevrandao.
         vm.revertTo(snapshotId);
         assertEq(createXHarness.exposed_generateSalt(), originalSalt);
 
-        vm.prevrandao("new prevrandao");
+        vm.prevrandao(keccak256(abi.encode(prevrandao)));
         assertNotEq(originalSalt, createXHarness.exposed_generateSalt());
 
         // Change chain ID.
         vm.revertTo(snapshotId);
         assertEq(createXHarness.exposed_generateSalt(), originalSalt);
 
-        vm.chainId(111222333);
+        vm.chainId(chainId);
         assertNotEq(originalSalt, createXHarness.exposed_generateSalt());
 
         // Change sender.
         vm.revertTo(snapshotId);
         assertEq(createXHarness.exposed_generateSalt(), originalSalt);
 
-        vm.prank(makeAddr("new sender"));
+        assumeAddressIsNot(msgSender, AddressType.ForgeAddress);
+        vm.startPrank(msgSender);
         assertNotEq(originalSalt, createXHarness.exposed_generateSalt());
+        vm.stopPrank();
     }
 
     function testFuzz_NeverReverts(uint256 seed) external {
@@ -94,9 +104,10 @@ contract CreateX_GenerateSalt_Internal_Test is BaseTest {
         vm.warp(bound(entropy3, block.timestamp, 52e4 weeks));
         vm.prevrandao(bytes32(entropy4));
         vm.chainId(bound(entropy5, 0, type(uint64).max));
-        vm.prank(address(uint160(entropy6)));
 
         // Third, we verify that it doesn't revert by calling it.
+        vm.startPrank(address(uint160(entropy6)));
         createXHarness.exposed_generateSalt();
+        vm.stopPrank();
     }
 }

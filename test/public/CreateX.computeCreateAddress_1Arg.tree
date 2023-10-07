@@ -1,0 +1,5 @@
+CreateX_ComputeCreateAddress_1Arg_Public_Test
+├── When the nonce value does not exceed 18446744073709551614
+│   └── It returns the 20-byte address where a contract will be stored.
+└── When the nonce value exceeds 18446744073709551614
+    └── It should revert.

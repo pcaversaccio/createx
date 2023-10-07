@@ -1,0 +1,8 @@
+CreateX_DeployCreate_Public_Test
+├── When the initCode successfully creates a runtime bytecode with a non-zero length
+│   ├── It returns a contract address with a non-zero bytecode length and a potential non-zero ether balance.
+│   └── It emits the event ContractCreation with the contract address as indexed argument.
+├── When the initCode successfully creates a runtime bytecode with a zero length
+│   └── It should revert.
+└── When the initCode fails to deploy a runtime bytecode
+    └── It should revert.

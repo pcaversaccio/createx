@@ -2,10 +2,10 @@
 pragma solidity 0.8.21;
 
 import {Test} from "forge-std/Test.sol";
-import {CreateX} from "../src/CreateX.sol";
+import {CreateX} from "../../src/CreateX.sol";
 
 /**
- * @dev Harness contract that exposes internal functions for testing.
+ * @dev Harness contract that exposes `internal` functions for testing.
  */
 contract CreateXHarness is CreateX {
     function exposed_guard(bytes32 salt) external view returns (bytes32 guardedSalt) {
@@ -57,10 +57,7 @@ contract BaseTest is Test {
     // solhint-disable-next-line const-name-snakecase
     address internal constant zeroAddress = address(0);
 
-    event ContractCreation(address indexed newContract);
-    event Transfer(address indexed from, address indexed to, uint256 value);
-
-    function setUp() public {
+    function setUp() public virtual {
         // Note that the main contract `CreateX` does `block.number - 32` when generating
         // it's own salt, so we start at block 100 here to prevent a (negative) overflow.
         vm.roll(100);
