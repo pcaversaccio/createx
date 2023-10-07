@@ -9,13 +9,21 @@ pragma solidity 0.8.21;
 contract ImplementationContract {
     bool public isInitialised;
 
+    /**
+     * @dev Error that occurs when the initialisation function has already been called previously.
+     * @param emitter The contract that emits the error.
+     */
+    error IsAlreadyInitialised(address emitter);
+
     constructor() payable {}
 
     /**
      * @dev An initialisation function that is called once during deployment.
      */
     function initialiser() external payable {
-        assert(!isInitialised);
+        if (isInitialised) {
+            revert IsAlreadyInitialised(address(this));
+        }
         isInitialised = true;
     }
 }
