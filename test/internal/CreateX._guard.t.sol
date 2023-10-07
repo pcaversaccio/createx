@@ -39,8 +39,8 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         vm.startPrank(caller);
         // It should return the `keccak256` hash of the ABI-encoded values `msg.sender`, `block.chainid`, and the `salt`.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
-        assertEq(guardedSalt, keccak256(abi.encode(caller, block.chainid, cachedSalt)));
         vm.stopPrank();
+        assertEq(guardedSalt, keccak256(abi.encode(caller, block.chainid, cachedSalt)));
     }
 
     /**
@@ -61,8 +61,8 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         vm.startPrank(caller);
         // It should return the `keccak256` hash of the ABI-encoded values `msg.sender` and the `salt`.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
-        assertEq(guardedSalt, keccak256(abi.encode(caller, cachedSalt)));
         vm.stopPrank();
+        assertEq(guardedSalt, keccak256(abi.encode(caller, cachedSalt)));
     }
 
     /**
@@ -108,8 +108,8 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         vm.startPrank(caller);
         // It should return the `keccak256` hash of the ABI-encoded values `block.chainid` and the `salt`.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
-        assertEq(guardedSalt, keccak256(abi.encode(block.chainid, cachedSalt)));
         vm.stopPrank();
+        assertEq(guardedSalt, keccak256(abi.encode(block.chainid, cachedSalt)));
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x00(
@@ -120,8 +120,8 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         vm.startPrank(caller);
         // It should return the unmodified salt value.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
-        assertEq(guardedSalt, cachedSalt);
         vm.stopPrank();
+        assertEq(guardedSalt, cachedSalt);
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(
@@ -149,7 +149,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         vm.startPrank(caller);
         // It should return the unmodified salt value.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
-        assertEq(guardedSalt, cachedSalt);
         vm.stopPrank();
+        assertEq(guardedSalt, cachedSalt);
     }
 }

@@ -75,9 +75,9 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.True` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
+        vm.stopPrank();
         assertEq(senderBytes, CreateX.SenderBytes.MsgSender);
         assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.True);
-        vm.stopPrank();
     }
 
     /**
@@ -100,9 +100,9 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.False` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
+        vm.stopPrank();
         assertEq(senderBytes, CreateX.SenderBytes.MsgSender);
         assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.False);
-        vm.stopPrank();
     }
 
     /**
@@ -131,9 +131,9 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.Unspecified` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
+        vm.stopPrank();
         assertEq(senderBytes, CreateX.SenderBytes.MsgSender);
         assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.Unspecified);
-        vm.stopPrank();
     }
 
     modifier whenTheFirst20BytesOfTheSaltEqualsTheZeroAddress(bytes32 salt) {
@@ -152,9 +152,9 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.True` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
+        vm.stopPrank();
         assertEq(senderBytes, CreateX.SenderBytes.ZeroAddress);
         assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.True);
-        vm.stopPrank();
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x00(
@@ -167,9 +167,9 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.False` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
+        vm.stopPrank();
         assertEq(senderBytes, CreateX.SenderBytes.ZeroAddress);
         assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.False);
-        vm.stopPrank();
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(
@@ -182,9 +182,9 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.Unspecified` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
+        vm.stopPrank();
         assertEq(senderBytes, CreateX.SenderBytes.ZeroAddress);
         assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.Unspecified);
-        vm.stopPrank();
     }
 
     modifier whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(address caller, bytes32 salt) {
@@ -206,9 +206,9 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.True` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
+        vm.stopPrank();
         assertEq(senderBytes, CreateX.SenderBytes.Random);
         assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.True);
-        vm.stopPrank();
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x00(
@@ -224,9 +224,9 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.False` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
+        vm.stopPrank();
         assertEq(senderBytes, CreateX.SenderBytes.Random);
         assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.False);
-        vm.stopPrank();
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(
@@ -242,8 +242,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         // It should return the `RedeployProtectionFlag.Unspecified` `enum` as second return value.
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
+        vm.stopPrank();
         assertEq(senderBytes, CreateX.SenderBytes.Random);
         assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.Unspecified);
-        vm.stopPrank();
     }
 }

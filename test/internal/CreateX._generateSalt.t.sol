@@ -73,8 +73,9 @@ contract CreateX_GenerateSalt_Internal_Test is BaseTest {
         vm.revertTo(snapshotId);
         assertEq(createXHarness.exposed_generateSalt(), originalSalt);
 
-        vm.prank(makeAddr("new sender"));
+        vm.startPrank(makeAddr("new sender"));
         assertNotEq(originalSalt, createXHarness.exposed_generateSalt());
+        vm.stopPrank();
     }
 
     function testFuzz_NeverReverts(uint256 seed) external {
@@ -94,9 +95,10 @@ contract CreateX_GenerateSalt_Internal_Test is BaseTest {
         vm.warp(bound(entropy3, block.timestamp, 52e4 weeks));
         vm.prevrandao(bytes32(entropy4));
         vm.chainId(bound(entropy5, 0, type(uint64).max));
-        vm.prank(address(uint160(entropy6)));
 
         // Third, we verify that it doesn't revert by calling it.
+        vm.startPrank(address(uint160(entropy6)));
         createXHarness.exposed_generateSalt();
+        vm.stopPrank();
     }
 }

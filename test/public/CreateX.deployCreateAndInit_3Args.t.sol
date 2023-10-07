@@ -114,6 +114,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
             abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
             values
         );
+        vm.stopPrank();
 
         assertEq(newContract, computedAddress);
         assertNotEq(newContract, zeroAddress);
@@ -123,7 +124,6 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         assertEq(ERC20MockPayable(computedAddress).name(), arg1);
         assertEq(ERC20MockPayable(computedAddress).symbol(), arg2);
         assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4);
-        vm.stopPrank();
     }
 
     modifier whenTheCreateXContractHasANonZeroBalance(uint256 amount) {
@@ -169,6 +169,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
             abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
             values
         );
+        vm.stopPrank();
 
         assertEq(newContract, computedAddress);
         assertNotEq(newContract, zeroAddress);
@@ -180,7 +181,6 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         assertEq(ERC20MockPayable(computedAddress).name(), arg1);
         assertEq(ERC20MockPayable(computedAddress).symbol(), arg2);
         assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4);
-        vm.stopPrank();
     }
 
     modifier whenTheRefundTransactionIsUnsuccessful() {
@@ -203,6 +203,8 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         vm.setNonce(createXAddr, nonce);
         values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
         values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
+        vm.deal(SELF, values.constructorAmount + values.initCallAmount);
+        vm.startPrank(SELF);
         // It should revert.
         bytes memory expectedErr = abi.encodeWithSelector(
             CreateX.FailedEtherTransfer.selector,
@@ -210,8 +212,6 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
             new bytes(0)
         );
         vm.expectRevert(expectedErr);
-        vm.deal(SELF, values.constructorAmount + values.initCallAmount);
-        vm.startPrank(SELF);
         createX.deployCreateAndInit{value: values.constructorAmount + values.initCallAmount}(
             cachedInitCode,
             abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
@@ -237,6 +237,8 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         vm.setNonce(createXAddr, nonce);
         values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
         values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
+        vm.deal(arg3, values.constructorAmount + values.initCallAmount);
+        vm.startPrank(arg3);
         // It should revert.
         bytes memory expectedErr = abi.encodeWithSelector(
             CreateX.FailedContractInitialisation.selector,
@@ -244,8 +246,6 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
             new bytes(0)
         );
         vm.expectRevert(expectedErr);
-        vm.deal(arg3, values.constructorAmount + values.initCallAmount);
-        vm.startPrank(arg3);
         createX.deployCreateAndInit{value: values.constructorAmount + values.initCallAmount}(
             cachedInitCode,
             abi.encodeWithSignature("wagmi"),
@@ -266,11 +266,11 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         vm.setNonce(createXAddr, nonce);
         values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
         values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
+        vm.deal(arg3, values.constructorAmount + values.initCallAmount);
+        vm.startPrank(arg3);
         // It should revert.
         bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
         vm.expectRevert(expectedErr);
-        vm.deal(arg3, values.constructorAmount + values.initCallAmount);
-        vm.startPrank(arg3);
         createX.deployCreateAndInit{value: values.constructorAmount + values.initCallAmount}(
             new bytes(0),
             abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
@@ -295,11 +295,11 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         // return the zero address (technically zero bytes `0x`), as the deployment fails. This test also ensures that if
         // we ever accidentally change the EVM version in Foundry and Hardhat, we will always have a corresponding failed test.
         bytes memory invalidInitCode = bytes("0x5f8060093d393df3");
+        vm.deal(arg3, values.constructorAmount + values.initCallAmount);
+        vm.startPrank(arg3);
         // It should revert.
         bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
         vm.expectRevert(expectedErr);
-        vm.deal(arg3, values.constructorAmount + values.initCallAmount);
-        vm.startPrank(arg3);
         createX.deployCreateAndInit{value: values.constructorAmount + values.initCallAmount}(
             invalidInitCode,
             abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
