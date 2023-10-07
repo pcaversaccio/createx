@@ -66,14 +66,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         cachedInitCode = abi.encodePacked(type(ERC20MockPayable).creationCode, args);
     }
 
-    modifier whenTheInitCodeCreatesAValidRuntimeBytecode() {
-        if (cachedInitCode.length == 0) {
-            revert ZeroByteInitCode(SELF);
-        }
-        _;
-    }
-
-    modifier whenTheCreatedRuntimeBytecodeHasANonZeroLength() {
+    modifier whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength() {
         if (cachedInitCode.length == 0) {
             revert ZeroByteInitCode(SELF);
         }
@@ -84,13 +77,12 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheCreatedRuntimeBytecodeHasANonZeroLengthAndWhenTheInitialisationCallIsSuccessful(
+    function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLengthAndWhenTheInitialisationCallIsSuccessful(
         uint64 nonce,
         CreateX.Values memory values
     )
         external
-        whenTheInitCodeCreatesAValidRuntimeBytecode
-        whenTheCreatedRuntimeBytecodeHasANonZeroLength
+        whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength
         whenTheInitialisationCallIsSuccessful
     {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
@@ -142,8 +134,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         uint256 amount
     )
         external
-        whenTheInitCodeCreatesAValidRuntimeBytecode
-        whenTheCreatedRuntimeBytecodeHasANonZeroLength
+        whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength
         whenTheInitialisationCallIsSuccessful
         whenTheCreateXContractHasANonZeroBalance(amount)
         whenTheRefundTransactionIsSuccessful
@@ -193,8 +184,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         uint256 amount
     )
         external
-        whenTheInitCodeCreatesAValidRuntimeBytecode
-        whenTheCreatedRuntimeBytecodeHasANonZeroLength
+        whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength
         whenTheInitialisationCallIsSuccessful
         whenTheCreateXContractHasANonZeroBalance(amount)
         whenTheRefundTransactionIsUnsuccessful
@@ -229,8 +219,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         CreateX.Values memory values
     )
         external
-        whenTheInitCodeCreatesAValidRuntimeBytecode
-        whenTheCreatedRuntimeBytecodeHasANonZeroLength
+        whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength
         whenTheInitialisationCallIsUnsuccessful
     {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
@@ -254,14 +243,14 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         vm.stopPrank();
     }
 
-    modifier whenTheCreatedRuntimeBytecodeHasAZeroLength() {
+    modifier whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength() {
         _;
     }
 
-    function testFuzz_WhenTheCreatedRuntimeBytecodeHasAZeroLength(
+    function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength(
         uint64 nonce,
         CreateX.Values memory values
-    ) external whenTheInitCodeCreatesAValidRuntimeBytecode whenTheCreatedRuntimeBytecodeHasAZeroLength {
+    ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
         values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
@@ -279,14 +268,14 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         vm.stopPrank();
     }
 
-    modifier whenTheContractCreationFails() {
+    modifier whenTheInitCodeFailsToDeployARuntimeBytecode() {
         _;
     }
 
-    function testFuzz_WhenTheContractCreationFails(
+    function testFuzz_WhenTheInitCodeFailsToDeployARuntimeBytecode(
         uint64 nonce,
         CreateX.Values memory values
-    ) external whenTheContractCreationFails {
+    ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
         values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);

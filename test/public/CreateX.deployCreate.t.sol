@@ -65,24 +65,17 @@ contract CreateX_DeployCreate_Public_Test is BaseTest {
         cachedInitCode = abi.encodePacked(type(ERC20MockPayable).creationCode, args);
     }
 
-    modifier whenTheInitCodeCreatesAValidRuntimeBytecode() {
+    modifier whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength() {
         if (cachedInitCode.length == 0) {
             revert ZeroByteInitCode(SELF);
         }
         _;
     }
 
-    modifier whenTheCreatedRuntimeBytecodeHasANonZeroLength() {
-        if (cachedInitCode.length == 0) {
-            revert ZeroByteInitCode(SELF);
-        }
-        _;
-    }
-
-    function testFuzz_WhenTheCreatedRuntimeBytecodeHasANonZeroLength(
+    function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength(
         uint64 nonce,
         uint256 msgValue
-    ) external whenTheInitCodeCreatesAValidRuntimeBytecode whenTheCreatedRuntimeBytecodeHasANonZeroLength {
+    ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
         msgValue = bound(msgValue, 0, type(uint64).max);
@@ -108,14 +101,14 @@ contract CreateX_DeployCreate_Public_Test is BaseTest {
         assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), arg4);
     }
 
-    modifier whenTheCreatedRuntimeBytecodeHasAZeroLength() {
+    modifier whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength() {
         _;
     }
 
-    function testFuzz_WhenTheCreatedRuntimeBytecodeHasAZeroLength(
+    function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength(
         uint64 nonce,
         uint256 msgValue
-    ) external whenTheInitCodeCreatesAValidRuntimeBytecode whenTheCreatedRuntimeBytecodeHasAZeroLength {
+    ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
         msgValue = bound(msgValue, 0, type(uint64).max);
@@ -125,14 +118,14 @@ contract CreateX_DeployCreate_Public_Test is BaseTest {
         createX.deployCreate{value: msgValue}(new bytes(0));
     }
 
-    modifier whenTheContractCreationFails() {
+    modifier whenTheInitCodeFailsToDeployARuntimeBytecode() {
         _;
     }
 
-    function testFuzz_WhenTheContractCreationFails(
+    function testFuzz_WhenTheInitCodeFailsToDeployARuntimeBytecode(
         uint64 nonce,
         uint256 msgValue
-    ) external whenTheContractCreationFails {
+    ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
         msgValue = bound(msgValue, 0, type(uint64).max);

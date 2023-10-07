@@ -8,7 +8,7 @@ contract CreateX_EfficientHash_Internal_Test is BaseTest {
     /*                            TESTS                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
-    function test_Requirements(bytes32 a, bytes32 b) external {
+    function testFuzz_MatchesTheOutputOfAHighLevelHashAndShouldNeverRevert(bytes32 a, bytes32 b) external {
         // It should match the output of a high-level hash.
         // It should never revert.
         bytes32 expected = keccak256(abi.encodePacked(a, b));
