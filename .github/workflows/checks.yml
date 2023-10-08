@@ -91,4 +91,4 @@ jobs:
 
       - name: Validate URLs
         run: |
-          awesome_bot ./*.md src/*.sol test/**/*.sol test/**/public/*.sol --allow-dupe --request-delay 0.4
+          awesome_bot ./*.md src/*.sol test/**/*.sol test/public/**/*.sol --allow-dupe --request-delay 0.4
