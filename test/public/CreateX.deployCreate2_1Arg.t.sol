@@ -157,7 +157,9 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
             chainId != block.chainid &&
                 chainId != 0 &&
                 originalDeployer != msgSender &&
+                originalDeployer != createXAddr &&
                 originalDeployer != zeroAddress &&
+                msgSender != createXAddr &&
                 msgSender != zeroAddress
         );
 
@@ -242,7 +244,7 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
     ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength {
         msgValue = bound(msgValue, 0, type(uint64).max);
         vm.deal(originalDeployer, msgValue);
-        vm.assume(originalDeployer != zeroAddress);
+        vm.assume(originalDeployer != createXAddr && originalDeployer != zeroAddress);
         vm.startPrank(originalDeployer);
         bytes32 salt = createXHarness.exposed_generateSalt();
         vm.stopPrank();
@@ -271,7 +273,7 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
     ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
         msgValue = bound(msgValue, 0, type(uint64).max);
         vm.deal(originalDeployer, msgValue);
-        vm.assume(originalDeployer != zeroAddress);
+        vm.assume(originalDeployer != createXAddr && originalDeployer != zeroAddress);
         vm.startPrank(originalDeployer);
         bytes32 salt = createXHarness.exposed_generateSalt();
         vm.stopPrank();

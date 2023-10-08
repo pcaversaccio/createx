@@ -158,7 +158,9 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
             chainId != block.chainid &&
                 chainId != 0 &&
                 originalDeployer != msgSender &&
+                originalDeployer != createXAddr &&
                 originalDeployer != zeroAddress &&
+                msgSender != createXAddr &&
                 msgSender != zeroAddress
         );
         uint256 snapshotId = vm.snapshot();
@@ -294,7 +296,12 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
     ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength {
         msgValue = bound(msgValue, 0, type(uint64).max);
         vm.deal(originalDeployer, msgValue);
-        vm.assume(chainId != block.chainid && chainId != 0 && originalDeployer != zeroAddress);
+        vm.assume(
+            chainId != block.chainid &&
+                chainId != 0 &&
+                originalDeployer != createXAddr &&
+                originalDeployer != zeroAddress
+        );
         // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
         if (chainId % 2 == 0) {
             salt = bytes32(abi.encodePacked(originalDeployer, bytes12(uint96(uint256(salt)))));
@@ -332,7 +339,12 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
     ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
         msgValue = bound(msgValue, 0, type(uint64).max);
         vm.deal(originalDeployer, msgValue);
-        vm.assume(chainId != block.chainid && chainId != 0 && originalDeployer != zeroAddress);
+        vm.assume(
+            chainId != block.chainid &&
+                chainId != 0 &&
+                originalDeployer != createXAddr &&
+                originalDeployer != zeroAddress
+        );
         // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
         if (chainId % 2 == 0) {
             salt = bytes32(abi.encodePacked(originalDeployer, bytes12(uint96(uint256(salt)))));
