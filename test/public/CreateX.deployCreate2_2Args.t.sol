@@ -27,6 +27,7 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
     /**
      * @dev Indicates whether a permissioned deploy protection and/or a cross-chain redeploy protection
      * has been configured via `salt` or whether it must revert.
+     * @param originalDeployer The 20-byte original deployer address.
      * @param salt The 32-byte random value used to create the contract address.
      * @return permissionedDeployProtection The Boolean variable that specifies whether a permissioned redeploy
      * protection has been configured.
@@ -36,29 +37,35 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
      * @return guardedSalt The guarded 32-byte random value used to create the contract address.
      */
     function parseFuzzerSalt(
+        address originalDeployer,
         bytes32 salt
     )
         internal
-        view
         returns (bool permissionedDeployProtection, bool xChainRedeployProtection, bool mustRevert, bytes32 guardedSalt)
     {
+        vm.startPrank(originalDeployer);
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(salt);
+        vm.stopPrank();
 
         if (
             senderBytes == CreateX.SenderBytes.MsgSender &&
             redeployProtectionFlag == CreateX.RedeployProtectionFlag.True
         ) {
+            vm.startPrank(originalDeployer);
             // Configures a permissioned deploy protection as well as a cross-chain redeploy protection.
             guardedSalt = createXHarness.exposed_guard(salt);
+            vm.stopPrank();
             permissionedDeployProtection = true;
             xChainRedeployProtection = true;
         } else if (
             senderBytes == CreateX.SenderBytes.MsgSender &&
             redeployProtectionFlag == CreateX.RedeployProtectionFlag.False
         ) {
+            vm.startPrank(originalDeployer);
             // Configures solely a permissioned deploy protection.
             guardedSalt = createXHarness.exposed_guard(salt);
+            vm.stopPrank();
             permissionedDeployProtection = true;
         } else if (senderBytes == CreateX.SenderBytes.MsgSender) {
             // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
@@ -67,8 +74,10 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
             senderBytes == CreateX.SenderBytes.ZeroAddress &&
             redeployProtectionFlag == CreateX.RedeployProtectionFlag.True
         ) {
+            vm.startPrank(originalDeployer);
             // Configures solely a cross-chain redeploy protection.
             guardedSalt = createXHarness.exposed_guard(salt);
+            vm.stopPrank();
             xChainRedeployProtection = true;
         } else if (
             senderBytes == CreateX.SenderBytes.ZeroAddress &&
@@ -137,25 +146,44 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
     }
 
     function testFuzz_whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength(
+        address originalDeployer,
         uint256 msgValue,
         bytes32 salt,
         uint64 chainId,
         address msgSender
     ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength {
         msgValue = bound(msgValue, 0, type(uint64).max);
-        vm.assume(chainId != block.chainid && chainId != 0);
-        assumeAddressIsNot(msgSender, AddressType.ForgeAddress);
+        vm.deal(originalDeployer, 2 * msgValue);
+        vm.assume(
+            chainId != block.chainid &&
+                chainId != 0 &&
+                originalDeployer != msgSender &&
+                originalDeployer != zeroAddress &&
+                msgSender != zeroAddress
+        );
+        uint256 snapshotId = vm.snapshot();
+
+        // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
+        if (chainId % 2 == 0) {
+            salt = bytes32(abi.encodePacked(originalDeployer, bytes12(uint96(uint256(salt)))));
+        }
+        // Helper logic to increase the probability of matching a cross-chain redeploy protection during fuzzing.
+        if (chainId % 3 == 0) {
+            salt = bytes32(abi.encodePacked(bytes20(salt), hex"01", bytes11(uint88(uint256(salt)))));
+        }
         (
             bool permissionedDeployProtection,
             bool xChainRedeployProtection,
             bool mustRevert,
             bytes32 guardedSalt
-        ) = parseFuzzerSalt(salt);
+        ) = parseFuzzerSalt(originalDeployer, salt);
 
         if (mustRevert) {
+            vm.startPrank(originalDeployer);
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXAddr);
             vm.expectRevert(expectedErr);
             createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
+            vm.stopPrank();
         } else {
             // We calculate the address beforehand where the contract is to be deployed.
             address computedAddress = createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr);
@@ -167,7 +195,9 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
             // It emits the event `ContractCreation` with the contract address as indexed argument.
             vm.expectEmit(true, true, true, true, createXAddr);
             emit ContractCreation(computedAddress);
+            vm.startPrank(originalDeployer);
             address newContract = createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
+            vm.stopPrank();
 
             assertEq(newContract, computedAddress);
             assertNotEq(newContract, zeroAddress);
@@ -180,21 +210,24 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
 
             if (permissionedDeployProtection && xChainRedeployProtection) {
                 vm.chainId(chainId);
-                address newContractOriginalCaller = createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
+                vm.startPrank(originalDeployer);
+                address newContractOriginalDeployer = createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
+                vm.stopPrank();
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractOriginalCaller, computedAddress);
-                assertNotEq(newContractOriginalCaller, zeroAddress);
-                assertNotEq(newContractOriginalCaller.code.length, 0);
-                assertEq(newContractOriginalCaller.balance, msgValue);
+                assertNotEq(newContractOriginalDeployer, computedAddress);
+                assertNotEq(newContractOriginalDeployer, zeroAddress);
+                assertNotEq(newContractOriginalDeployer.code.length, 0);
+                assertEq(newContractOriginalDeployer.balance, msgValue);
                 assertEq(createXAddr.balance, 0);
-                assertEq(ERC20MockPayable(newContractOriginalCaller).name(), arg1);
-                assertEq(ERC20MockPayable(newContractOriginalCaller).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractOriginalCaller).balanceOf(arg3), arg4);
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1);
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2);
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), arg4);
             } else if (permissionedDeployProtection) {
                 vm.chainId(chainId);
                 // We mock a potential frontrunner address.
+                vm.deal(msgSender, msgValue);
                 vm.startPrank(msgSender);
                 address newContractMsgSender = createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
                 vm.stopPrank();
@@ -210,32 +243,41 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
                 assertEq(ERC20MockPayable(newContractMsgSender).symbol(), arg2);
                 assertEq(ERC20MockPayable(newContractMsgSender).balanceOf(arg3), arg4);
 
+                // Foundry does not create a new, clean EVM environment when the `chainId` is changed, and
+                // a deployment of a contract to the same address therefore fails (see issue: https://github.com/foundry-rs/foundry/issues/6008).
+                // To solve this problem, we return to the original snapshot state.
+                vm.revertTo(snapshotId);
                 // We mock the original caller.
-                address newContractOriginalCaller = createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
+                vm.startPrank(originalDeployer);
+                address newContractOriginalDeployer = createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
+                vm.stopPrank();
                 // The newly created contract on chain `chainId` must be the same as the previously created contract
                 // at the `computedAddress` address.
-                assertEq(newContractOriginalCaller, computedAddress);
-                assertNotEq(newContractOriginalCaller, zeroAddress);
-                assertNotEq(newContractOriginalCaller.code.length, 0);
-                assertEq(newContractOriginalCaller.balance, msgValue);
-                assertEq(newContractOriginalCaller.balance, 0);
-                assertEq(ERC20MockPayable(newContractOriginalCaller).name(), arg1);
-                assertEq(ERC20MockPayable(newContractOriginalCaller).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractOriginalCaller).balanceOf(arg3), arg4);
+                assertEq(newContractOriginalDeployer, computedAddress);
+                assertNotEq(newContractOriginalDeployer, newContractMsgSender);
+                assertNotEq(newContractOriginalDeployer, zeroAddress);
+                assertNotEq(newContractOriginalDeployer.code.length, 0);
+                assertEq(newContractOriginalDeployer.balance, msgValue);
+                assertEq(createXAddr.balance, 0);
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1);
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2);
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), arg4);
             } else if (xChainRedeployProtection) {
                 vm.chainId(chainId);
-                address newContractOriginalCaller = createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
+                vm.startPrank(originalDeployer);
+                address newContractOriginalDeployer = createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
+                vm.stopPrank();
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractOriginalCaller, computedAddress);
-                assertNotEq(newContractOriginalCaller, zeroAddress);
-                assertNotEq(newContractOriginalCaller.code.length, 0);
-                assertEq(newContractOriginalCaller.balance, msgValue);
+                assertNotEq(newContractOriginalDeployer, computedAddress);
+                assertNotEq(newContractOriginalDeployer, zeroAddress);
+                assertNotEq(newContractOriginalDeployer.code.length, 0);
+                assertEq(newContractOriginalDeployer.balance, msgValue);
                 assertEq(createXAddr.balance, 0);
-                assertEq(ERC20MockPayable(newContractOriginalCaller).name(), arg1);
-                assertEq(ERC20MockPayable(newContractOriginalCaller).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractOriginalCaller).balanceOf(arg3), arg4);
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1);
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2);
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), arg4);
             }
         }
     }
@@ -245,21 +287,28 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
     }
 
     function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength(
+        address originalDeployer,
         bytes32 salt,
         uint256 msgValue
     ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength {
         msgValue = bound(msgValue, 0, type(uint64).max);
-        (, , bool mustRevert, ) = parseFuzzerSalt(salt);
+        vm.deal(originalDeployer, 2 * msgValue);
+        vm.assume(originalDeployer != zeroAddress);
+        (, , bool mustRevert, ) = parseFuzzerSalt(originalDeployer, salt);
 
         if (mustRevert) {
+            vm.startPrank(originalDeployer);
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXAddr);
             vm.expectRevert(expectedErr);
             createX.deployCreate2{value: msgValue}(salt, new bytes(0));
+            vm.stopPrank();
         } else {
+            vm.startPrank(originalDeployer);
             // It should revert.
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
             vm.expectRevert(expectedErr);
             createX.deployCreate2{value: msgValue}(salt, new bytes(0));
+            vm.stopPrank();
         }
     }
 
@@ -268,25 +317,32 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
     }
 
     function testFuzz_WhenTheInitCodeFailsToDeployARuntimeBytecode(
+        address originalDeployer,
         bytes32 salt,
         uint256 msgValue
     ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
         msgValue = bound(msgValue, 0, type(uint64).max);
-        (, , bool mustRevert, ) = parseFuzzerSalt(salt);
+        vm.deal(originalDeployer, 2 * msgValue);
+        vm.assume(originalDeployer != zeroAddress);
+        (, , bool mustRevert, ) = parseFuzzerSalt(originalDeployer, salt);
 
         // The following contract creation code contains the invalid opcode `PUSH0` (`0x5F`) and `CREATE` must therefore
         // return the zero address (technically zero bytes `0x`), as the deployment fails. This test also ensures that if
         // we ever accidentally change the EVM version in Foundry and Hardhat, we will always have a corresponding failed test.
         bytes memory invalidInitCode = bytes("0x5f8060093d393df3");
         if (mustRevert) {
+            vm.startPrank(originalDeployer);
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXAddr);
             vm.expectRevert(expectedErr);
             createX.deployCreate2{value: msgValue}(salt, invalidInitCode);
+            vm.stopPrank();
         } else {
+            vm.startPrank(originalDeployer);
             // It should revert.
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
             vm.expectRevert(expectedErr);
             createX.deployCreate2{value: msgValue}(salt, invalidInitCode);
+            vm.stopPrank();
         }
     }
 }
