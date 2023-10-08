@@ -241,7 +241,7 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
         uint256 msgValue
     ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength {
         msgValue = bound(msgValue, 0, type(uint64).max);
-        vm.deal(originalDeployer, 2 * msgValue);
+        vm.deal(originalDeployer, msgValue);
         vm.assume(originalDeployer != zeroAddress);
         vm.startPrank(originalDeployer);
         bytes32 salt = createXHarness.exposed_generateSalt();
@@ -270,7 +270,7 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
         uint256 msgValue
     ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
         msgValue = bound(msgValue, 0, type(uint64).max);
-        vm.deal(originalDeployer, 2 * msgValue);
+        vm.deal(originalDeployer, msgValue);
         vm.assume(originalDeployer != zeroAddress);
         vm.startPrank(originalDeployer);
         bytes32 salt = createXHarness.exposed_generateSalt();
