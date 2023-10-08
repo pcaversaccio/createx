@@ -289,13 +289,21 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
     function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength(
         address originalDeployer,
         bytes32 salt,
+        uint64 chainId,
         uint256 msgValue
     ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength {
         msgValue = bound(msgValue, 0, type(uint64).max);
-        vm.deal(originalDeployer, 2 * msgValue);
-        vm.assume(originalDeployer != zeroAddress);
+        vm.deal(originalDeployer, msgValue);
+        vm.assume(chainId != block.chainid && chainId != 0 && originalDeployer != zeroAddress);
+        // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
+        if (chainId % 2 == 0) {
+            salt = bytes32(abi.encodePacked(originalDeployer, bytes12(uint96(uint256(salt)))));
+        }
+        // Helper logic to increase the probability of matching a cross-chain redeploy protection during fuzzing.
+        if (chainId % 3 == 0) {
+            salt = bytes32(abi.encodePacked(bytes20(salt), hex"01", bytes11(uint88(uint256(salt)))));
+        }
         (, , bool mustRevert, ) = parseFuzzerSalt(originalDeployer, salt);
-
         if (mustRevert) {
             vm.startPrank(originalDeployer);
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXAddr);
@@ -319,13 +327,21 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
     function testFuzz_WhenTheInitCodeFailsToDeployARuntimeBytecode(
         address originalDeployer,
         bytes32 salt,
+        uint64 chainId,
         uint256 msgValue
     ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
         msgValue = bound(msgValue, 0, type(uint64).max);
-        vm.deal(originalDeployer, 2 * msgValue);
-        vm.assume(originalDeployer != zeroAddress);
+        vm.deal(originalDeployer, msgValue);
+        vm.assume(chainId != block.chainid && chainId != 0 && originalDeployer != zeroAddress);
+        // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
+        if (chainId % 2 == 0) {
+            salt = bytes32(abi.encodePacked(originalDeployer, bytes12(uint96(uint256(salt)))));
+        }
+        // Helper logic to increase the probability of matching a cross-chain redeploy protection during fuzzing.
+        if (chainId % 3 == 0) {
+            salt = bytes32(abi.encodePacked(bytes20(salt), hex"01", bytes11(uint88(uint256(salt)))));
+        }
         (, , bool mustRevert, ) = parseFuzzerSalt(originalDeployer, salt);
-
         // The following contract creation code contains the invalid opcode `PUSH0` (`0x5F`) and `CREATE` must therefore
         // return the zero address (technically zero bytes `0x`), as the deployment fails. This test also ensures that if
         // we ever accidentally change the EVM version in Foundry and Hardhat, we will always have a corresponding failed test.
