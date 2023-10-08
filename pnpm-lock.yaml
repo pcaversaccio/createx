@@ -12,11 +12,11 @@ devDependencies:
     specifier: ^1.1.1
     version: 1.1.1(hardhat@2.18.0)
   "@typechain/ethers-v6":
-    specifier: ^0.4.3
-    version: 0.4.3(ethers@6.7.1)(typechain@8.3.1)(typescript@5.2.2)
+    specifier: ^0.5.0
+    version: 0.5.0(ethers@6.7.1)(typechain@8.3.1)(typescript@5.2.2)
   "@typechain/hardhat":
-    specifier: ^8.0.3
-    version: 8.0.3(@typechain/ethers-v6@0.4.3)(ethers@6.7.1)(hardhat@2.18.0)(typechain@8.3.1)
+    specifier: ^9.0.0
+    version: 9.0.0(@typechain/ethers-v6@0.5.0)(ethers@6.7.1)(hardhat@2.18.0)(typechain@8.3.1)
   "@typescript-eslint/eslint-plugin":
     specifier: ^6.7.4
     version: 6.7.4(@typescript-eslint/parser@6.7.4)(eslint@8.51.0)(typescript@5.2.2)
@@ -1356,10 +1356,10 @@ packages:
       }
     dev: true
 
-  /@typechain/ethers-v6@0.4.3(ethers@6.7.1)(typechain@8.3.1)(typescript@5.2.2):
+  /@typechain/ethers-v6@0.5.0(ethers@6.7.1)(typechain@8.3.1)(typescript@5.2.2):
     resolution:
       {
-        integrity: sha512-TrxBsyb4ryhaY9keP6RzhFCviWYApcLCIRMPyWaKp2cZZrfaM3QBoxXTnw/eO4+DAY3l+8O0brNW0WgeQeOiDA==,
+        integrity: sha512-wsz7AvbY5n2uVwpS2RHDYsW6wYOrhWxeTLFpxuzhO62w/ZDQEVIipArX731KA/hdqygP2zJ2RTkVXgzU1WrU1g==,
       }
     peerDependencies:
       ethers: 6.x
@@ -1373,18 +1373,18 @@ packages:
       typescript: 5.2.2
     dev: true
 
-  /@typechain/hardhat@8.0.3(@typechain/ethers-v6@0.4.3)(ethers@6.7.1)(hardhat@2.18.0)(typechain@8.3.1):
+  /@typechain/hardhat@9.0.0(@typechain/ethers-v6@0.5.0)(ethers@6.7.1)(hardhat@2.18.0)(typechain@8.3.1):
     resolution:
       {
-        integrity: sha512-MytSmJJn+gs7Mqrpt/gWkTCOpOQ6ZDfRrRT2gtZL0rfGe4QrU4x9ZdW15fFbVM/XTa+5EsKiOMYXhRABibNeng==,
+        integrity: sha512-oCGRvcsryRHEDZ4KO2lenB7wdf8WMDS+f9KGcRFiQWcRLpWWD0ruBGRxNjzkTqyPLtgQ9MvZsXquAFPEw7gAEA==,
       }
     peerDependencies:
-      "@typechain/ethers-v6": ^0.4.3
+      "@typechain/ethers-v6": ^0.5.0
       ethers: ^6.1.0
       hardhat: ^2.9.9
       typechain: ^8.3.1
     dependencies:
-      "@typechain/ethers-v6": 0.4.3(ethers@6.7.1)(typechain@8.3.1)(typescript@5.2.2)
+      "@typechain/ethers-v6": 0.5.0(ethers@6.7.1)(typechain@8.3.1)(typescript@5.2.2)
       ethers: 6.7.1
       fs-extra: 9.1.0
       hardhat: 2.18.0(ts-node@10.9.1)(typescript@5.2.2)
@@ -3321,7 +3321,7 @@ packages:
     engines: { node: ">=12.0.0" }
     dependencies:
       flatted: 3.2.9
-      keyv: 4.5.3
+      keyv: 4.5.4
       rimraf: 3.0.2
     dev: true
 
@@ -4308,10 +4308,10 @@ packages:
       readable-stream: 3.6.2
     dev: true
 
-  /keyv@4.5.3:
+  /keyv@4.5.4:
     resolution:
       {
-        integrity: sha512-QCiSav9WaX1PgETJ+SpNnx2PRRapJ/oRSXM4VO5OGYGSjrxbKPVFVhB3l2OCbLCk329N8qyAtsJjSjvVBWzEug==,
+        integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==,
       }
     dependencies:
       json-buffer: 3.0.1
