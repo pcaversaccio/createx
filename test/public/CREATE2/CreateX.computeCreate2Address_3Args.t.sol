@@ -5,6 +5,10 @@ import {BaseTest} from "../../utils/BaseTest.sol";
 import {CreateX} from "../../../src/CreateX.sol";
 
 contract CreateX_ComputeCreate2Address_3Args_Public_Test is BaseTest {
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                            TESTS                           */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
     function testFuzz_ReturnsThe20ByteAddressWhereAContractWillBeStoredAndShouldNeverRevert(
         bytes32 salt,
         address deployer
