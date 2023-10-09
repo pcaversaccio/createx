@@ -496,13 +496,14 @@ contract CreateX {
         address implementation,
         bytes memory data
     ) public payable returns (address proxy) {
+        bytes32 guardedSalt = _guard(salt);
         bytes20 implementationInBytes = bytes20(implementation);
         assembly ("memory-safe") {
             let clone := mload(0x40)
             mstore(clone, hex"3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000")
             mstore(add(clone, 0x14), implementationInBytes)
             mstore(add(clone, 0x28), hex"5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000")
-            proxy := create2(0, clone, 0x37, salt)
+            proxy := create2(0, clone, 0x37, guardedSalt)
         }
         if (proxy == address(0)) {
             revert FailedContractCreation({emitter: _SELF});
@@ -528,6 +529,8 @@ contract CreateX {
      * level that potentially malicious reentrant calls do not affect your smart contract system.
      */
     function deployCreate2Clone(address implementation, bytes memory data) public payable returns (address proxy) {
+        // Note that the safeguarding function `_guard` is called as part of the overloaded function
+        // `deployCreate2Clone`.
         proxy = deployCreate2Clone({salt: _generateSalt(), implementation: implementation, data: data});
     }
 
