@@ -1,3 +1,5 @@
+CreateX_ComputeCreate2Address_2Args_Public_Test:testFuzz_ReturnsThe20ByteAddressWhereAContractWillBeStoredAndShouldNeverRevert(bytes32) (runs: 256, μ: 2253795, ~: 2253795)
+CreateX_ComputeCreate2Address_3Args_Public_Test:testFuzz_ReturnsThe20ByteAddressWhereAContractWillBeStoredAndShouldNeverRevert(bytes32,address) (runs: 256, μ: 2254372, ~: 2254372)
 CreateX_ComputeCreateAddress_1Arg_Public_Test:testFuzz_WhenTheNonceValueDoesNotExceed18446744073709551614(uint64) (runs: 256, μ: 2249557, ~: 2249533)
 CreateX_ComputeCreateAddress_1Arg_Public_Test:testFuzz_WhenTheNonceValueExceeds18446744073709551614(uint256) (runs: 256, μ: 37675, ~: 37659)
 CreateX_ComputeCreateAddress_2Args_Public_Test:testFuzz_WhenTheNonceValueDoesNotExceed18446744073709551614(address,uint64) (runs: 256, μ: 2252518, ~: 2252534)
