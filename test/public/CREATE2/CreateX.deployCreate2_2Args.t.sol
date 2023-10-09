@@ -20,6 +20,9 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
     bytes internal cachedInitCode;
     bytes32 internal initCodeHash;
 
+    // To avoid any stack-too-deep errors, we use an `internal` state variable for the snapshot ID.
+    uint256 internal snapshotId;
+
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                      HELPER FUNCTIONS                      */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
@@ -163,7 +166,7 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
                 msgSender != createXAddr &&
                 msgSender != zeroAddress
         );
-        uint256 snapshotId = vm.snapshot();
+        snapshotId = vm.snapshot();
 
         // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
         if (chainId % 2 == 0) {
@@ -189,6 +192,7 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
         } else {
             // We calculate the address beforehand where the contract is to be deployed.
             address computedAddress = createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr);
+            vm.assume(originalDeployer != computedAddress);
 
             // We also check for the ERC-20 standard `Transfer` event.
             vm.expectEmit(true, true, true, true, computedAddress);
@@ -215,6 +219,7 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
                 vm.startPrank(originalDeployer);
                 address newContractOriginalDeployer = createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
                 vm.stopPrank();
+                vm.assume(originalDeployer != newContractOriginalDeployer);
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
@@ -233,6 +238,7 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
                 vm.startPrank(msgSender);
                 address newContractMsgSender = createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
                 vm.stopPrank();
+                vm.assume(msgSender != newContractMsgSender);
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
@@ -253,6 +259,7 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
                 vm.startPrank(originalDeployer);
                 address newContractOriginalDeployer = createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
                 vm.stopPrank();
+                vm.assume(originalDeployer != newContractOriginalDeployer);
                 // The newly created contract on chain `chainId` must be the same as the previously created contract
                 // at the `computedAddress` address.
                 assertEq(newContractOriginalDeployer, computedAddress);
@@ -269,6 +276,7 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
                 vm.startPrank(originalDeployer);
                 address newContractOriginalDeployer = createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
                 vm.stopPrank();
+                vm.assume(originalDeployer != newContractOriginalDeployer);
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.

@@ -178,6 +178,7 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
 
         // We calculate the address beforehand where the contract is to be deployed.
         address computedAddress = createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr);
+        vm.assume(originalDeployer != computedAddress);
 
         // We also check for the ERC-20 standard `Transfer` event.
         vm.expectEmit(true, true, true, true, computedAddress);
@@ -205,6 +206,7 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
         vm.startPrank(msgSender);
         address newContractMsgSender = createX.deployCreate2{value: msgValue}(cachedInitCode);
         vm.stopPrank();
+        vm.assume(msgSender != newContractMsgSender);
 
         // The newly created contract on chain `chainId` must not be the same as the previously created
         // contract at the `computedAddress` address.
@@ -221,6 +223,7 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
         vm.startPrank(originalDeployer);
         address newContractOriginalDeployer = createX.deployCreate2{value: msgValue}(cachedInitCode);
         vm.stopPrank();
+        vm.assume(originalDeployer != newContractOriginalDeployer);
         // The newly created contract on chain `chainId` must not be the same as the previously created
         // contract at the `computedAddress` address as well as at the `newContractMsgSender` address.
         assertNotEq(newContractOriginalDeployer, computedAddress);

@@ -212,6 +212,7 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
         } else {
             // We calculate the address beforehand where the contract is to be deployed.
             computedAddress = createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr);
+            vm.assume(originalDeployer != computedAddress);
 
             // We also check for the ERC-20 standard `Transfer` event.
             vm.expectEmit(true, true, true, true, computedAddress);
@@ -246,6 +247,7 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
                     value: values.constructorAmount + values.initCallAmount
                 }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
                 vm.stopPrank();
+                vm.assume(originalDeployer != newContractOriginalDeployer);
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
@@ -266,6 +268,7 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
                     value: values.constructorAmount + values.initCallAmount
                 }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
                 vm.stopPrank();
+                vm.assume(msgSender != newContractMsgSender);
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
@@ -288,6 +291,7 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
                     value: values.constructorAmount + values.initCallAmount
                 }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
                 vm.stopPrank();
+                vm.assume(originalDeployer != newContractOriginalDeployer);
                 // The newly created contract on chain `chainId` must be the same as the previously created contract
                 // at the `computedAddress` address. As we return to the original snapshot state, we have to recalculate
                 // the address.
@@ -310,6 +314,7 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
                     value: values.constructorAmount + values.initCallAmount
                 }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
                 vm.stopPrank();
+                vm.assume(originalDeployer != newContractOriginalDeployer);
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
@@ -393,6 +398,7 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
         } else {
             // We calculate the address beforehand where the contract is to be deployed.
             computedAddress = createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr);
+            vm.assume(originalDeployer != computedAddress);
 
             // We also check for the ERC-20 standard `Transfer` event.
             vm.expectEmit(true, true, true, true, computedAddress);
@@ -429,6 +435,7 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
                     value: values.constructorAmount + values.initCallAmount
                 }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
                 vm.stopPrank();
+                vm.assume(originalDeployer != newContractOriginalDeployer);
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
@@ -452,6 +459,7 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
                     value: values.constructorAmount + values.initCallAmount
                 }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
                 vm.stopPrank();
+                vm.assume(msgSender != newContractMsgSender);
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
@@ -477,6 +485,7 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
                     value: values.constructorAmount + values.initCallAmount
                 }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
                 vm.stopPrank();
+                vm.assume(originalDeployer != newContractOriginalDeployer);
                 // The newly created contract on chain `chainId` must be the same as the previously created contract
                 // at the `computedAddress` address. As we return to the original snapshot state, we have to recalculate
                 // the address.
@@ -502,6 +511,7 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
                     value: values.constructorAmount + values.initCallAmount
                 }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
                 vm.stopPrank();
+                vm.assume(originalDeployer != newContractOriginalDeployer);
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
