@@ -21,82 +21,11 @@ contract CreateX_DeployCreate2AndInit_3Args_Public_Test is BaseTest {
     bytes32 internal initCodeHash;
     uint256 internal cachedBalance;
 
-    // To avoid any stack-too-deep errors, we use `internal` state variables for the precomputed `CREATE2` address,
+    // To avoid any stack-too-deep errors, we use `internal` state variables for the precomputed `CREATE2` address
     // and some further contract deployment addresses.
     address internal computedAddress;
     address internal newContractOriginalDeployer;
     address internal newContractMsgSender;
-
-    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
-    /*                      HELPER FUNCTIONS                      */
-    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
-
-    /**
-     * @dev Indicates whether a permissioned deploy protection and/or a cross-chain redeploy protection
-     * has been configured via `salt` or whether it must revert.
-     * @param originalDeployer The 20-byte original deployer address.
-     * @param salt The 32-byte random value used to create the contract address.
-     * @return permissionedDeployProtection The Boolean variable that specifies whether a permissioned redeploy
-     * protection has been configured.
-     * @return xChainRedeployProtection The Boolean variable that specifies whether a cross-chain deploy
-     * protection has been configured.
-     * @return mustRevert The Boolean variable that specifies whether it must revert.
-     * @return guardedSalt The guarded 32-byte random value used to create the contract address.
-     */
-    function parseFuzzerSalt(
-        address originalDeployer,
-        bytes32 salt
-    )
-        internal
-        returns (bool permissionedDeployProtection, bool xChainRedeployProtection, bool mustRevert, bytes32 guardedSalt)
-    {
-        vm.startPrank(originalDeployer);
-        (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
-            .exposed_parseSalt(salt);
-        vm.stopPrank();
-
-        if (
-            senderBytes == CreateX.SenderBytes.MsgSender &&
-            redeployProtectionFlag == CreateX.RedeployProtectionFlag.True
-        ) {
-            vm.startPrank(originalDeployer);
-            // Configures a permissioned deploy protection as well as a cross-chain redeploy protection.
-            guardedSalt = createXHarness.exposed_guard(salt);
-            vm.stopPrank();
-            permissionedDeployProtection = true;
-            xChainRedeployProtection = true;
-        } else if (
-            senderBytes == CreateX.SenderBytes.MsgSender &&
-            redeployProtectionFlag == CreateX.RedeployProtectionFlag.False
-        ) {
-            vm.startPrank(originalDeployer);
-            // Configures solely a permissioned deploy protection.
-            guardedSalt = createXHarness.exposed_guard(salt);
-            vm.stopPrank();
-            permissionedDeployProtection = true;
-        } else if (senderBytes == CreateX.SenderBytes.MsgSender) {
-            // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
-            mustRevert = true;
-        } else if (
-            senderBytes == CreateX.SenderBytes.ZeroAddress &&
-            redeployProtectionFlag == CreateX.RedeployProtectionFlag.True
-        ) {
-            vm.startPrank(originalDeployer);
-            // Configures solely a cross-chain redeploy protection.
-            guardedSalt = createXHarness.exposed_guard(salt);
-            vm.stopPrank();
-            xChainRedeployProtection = true;
-        } else if (
-            senderBytes == CreateX.SenderBytes.ZeroAddress &&
-            redeployProtectionFlag == CreateX.RedeployProtectionFlag.Unspecified
-        ) {
-            // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
-            mustRevert = true;
-        } else {
-            // In all other cases, the salt value `salt` is not modified.
-            guardedSalt = salt;
-        }
-    }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                           EVENTS                           */
