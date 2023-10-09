@@ -59,6 +59,7 @@ contract CreateX_DeployCreateClone_Public_Test is BaseTest {
             implementation,
             abi.encodeCall(implementationContract.initialiser, ())
         );
+        assertEq(proxy, computedAddress);
         assertEq(
             proxy.codehash,
             keccak256(abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3"))
