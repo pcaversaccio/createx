@@ -47,42 +47,42 @@ contract CreateX_GenerateSalt_Internal_Test is BaseTest {
 
         // Change block. Block number and hash are coupled, so we can't isolate this.
         vm.roll(block.number + increment);
-        assertNotEq(originalSalt, createXHarness.exposed_generateSalt());
+        assertNotEq(originalSalt, createXHarness.exposed_generateSalt(), "100");
 
         // Change coinbase.
         vm.revertTo(snapshotId);
-        assertEq(createXHarness.exposed_generateSalt(), originalSalt);
+        assertEq(createXHarness.exposed_generateSalt(), originalSalt, "200");
 
         vm.coinbase(coinbase);
-        assertNotEq(originalSalt, createXHarness.exposed_generateSalt());
+        assertNotEq(originalSalt, createXHarness.exposed_generateSalt(), "300");
 
         // Change timestamp.
         vm.revertTo(snapshotId);
-        assertEq(createXHarness.exposed_generateSalt(), originalSalt);
+        assertEq(createXHarness.exposed_generateSalt(), originalSalt, "400");
 
         vm.warp(block.timestamp + increment);
-        assertNotEq(originalSalt, createXHarness.exposed_generateSalt());
+        assertNotEq(originalSalt, createXHarness.exposed_generateSalt(), "500");
 
         // Change prevrandao.
         vm.revertTo(snapshotId);
-        assertEq(createXHarness.exposed_generateSalt(), originalSalt);
+        assertEq(createXHarness.exposed_generateSalt(), originalSalt, "600");
 
         vm.prevrandao(keccak256(abi.encode(prevrandao)));
-        assertNotEq(originalSalt, createXHarness.exposed_generateSalt());
+        assertNotEq(originalSalt, createXHarness.exposed_generateSalt(), "700");
 
         // Change chain ID.
         vm.revertTo(snapshotId);
-        assertEq(createXHarness.exposed_generateSalt(), originalSalt);
+        assertEq(createXHarness.exposed_generateSalt(), originalSalt, "800");
 
         vm.chainId(chainId);
-        assertNotEq(originalSalt, createXHarness.exposed_generateSalt());
+        assertNotEq(originalSalt, createXHarness.exposed_generateSalt(), "900");
 
         // Change sender.
         vm.revertTo(snapshotId);
-        assertEq(createXHarness.exposed_generateSalt(), originalSalt);
+        assertEq(createXHarness.exposed_generateSalt(), originalSalt, "1000");
 
         vm.startPrank(msgSender);
-        assertNotEq(originalSalt, createXHarness.exposed_generateSalt());
+        assertNotEq(originalSalt, createXHarness.exposed_generateSalt(), "1100");
         vm.stopPrank();
     }
 

@@ -13,6 +13,6 @@ contract CreateX_EfficientHash_Internal_Test is BaseTest {
         // It should never revert.
         bytes32 expected = keccak256(abi.encodePacked(a, b));
         bytes32 actual = createXHarness.exposed_efficientHash(a, b);
-        assertEq(actual, expected);
+        assertEq(actual, expected, "100");
     }
 }

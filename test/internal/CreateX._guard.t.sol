@@ -40,7 +40,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         // It should return the `keccak256` hash of the ABI-encoded values `msg.sender`, `block.chainid`, and the `salt`.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
         vm.stopPrank();
-        assertEq(guardedSalt, keccak256(abi.encode(caller, block.chainid, cachedSalt)));
+        assertEq(guardedSalt, keccak256(abi.encode(caller, block.chainid, cachedSalt)), "100");
     }
 
     /**
@@ -62,7 +62,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         // It should return the `keccak256` hash of the ABI-encoded values `msg.sender` and the `salt`.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
         vm.stopPrank();
-        assertEq(guardedSalt, keccak256(abi.encode(caller, cachedSalt)));
+        assertEq(guardedSalt, keccak256(abi.encode(caller, cachedSalt)), "100");
     }
 
     /**
@@ -109,7 +109,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         // It should return the `keccak256` hash of the ABI-encoded values `block.chainid` and the `salt`.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
         vm.stopPrank();
-        assertEq(guardedSalt, keccak256(abi.encode(block.chainid, cachedSalt)));
+        assertEq(guardedSalt, keccak256(abi.encode(block.chainid, cachedSalt)), "100");
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x00(
@@ -121,7 +121,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         // It should return the unmodified salt value.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
         vm.stopPrank();
-        assertEq(guardedSalt, cachedSalt);
+        assertEq(guardedSalt, cachedSalt, "100");
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(
@@ -150,6 +150,6 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         // It should return the unmodified salt value.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
         vm.stopPrank();
-        assertEq(guardedSalt, cachedSalt);
+        assertEq(guardedSalt, cachedSalt, "100");
     }
 }

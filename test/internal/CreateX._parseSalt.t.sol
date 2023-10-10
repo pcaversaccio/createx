@@ -19,10 +19,12 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
      * @dev Asserts the equality of `CreateX.SenderBytes` types.
      * @param a The first 1-byte `CreateX.SenderBytes` value.
      * @param b The second 1-byte `CreateX.SenderBytes` value.
+     * @param err The error message string.
      */
-    function assertEq(CreateX.SenderBytes a, CreateX.SenderBytes b) internal {
+    function assertEq(CreateX.SenderBytes a, CreateX.SenderBytes b, string memory err) internal {
         // The `enum` type is treated as a `uint8` type by the Solidity compiler.
         if (a != b) {
+            emit log_named_string("Error", err);
             emit log("Error: a == b not satisfied [CreateX.SenderBytes]");
             emit log_named_uint("      Left", uint8(a));
             emit log_named_uint("     Right", uint8(b));
@@ -34,10 +36,12 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
      * @dev Asserts the equality of `CreateX.RedeployProtectionFlag` types.
      * @param a The first 1-byte `CreateX.RedeployProtectionFlag` value.
      * @param b The second 1-byte `CreateX.RedeployProtectionFlag` value.
+     * @param err The error message string.
      */
-    function assertEq(CreateX.RedeployProtectionFlag a, CreateX.RedeployProtectionFlag b) internal {
+    function assertEq(CreateX.RedeployProtectionFlag a, CreateX.RedeployProtectionFlag b, string memory err) internal {
         // The `enum` type is treated as a `uint8` type by the Solidity compiler.
         if (a != b) {
+            emit log_named_string("Error", err);
             emit log("Error: a == b not satisfied [CreateX.RedeployProtectionFlag]");
             emit log_named_uint("      Left", uint8(a));
             emit log_named_uint("     Right", uint8(b));
@@ -76,8 +80,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
         vm.stopPrank();
-        assertEq(senderBytes, CreateX.SenderBytes.MsgSender);
-        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.True);
+        assertEq(senderBytes, CreateX.SenderBytes.MsgSender, "100");
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.True, "200");
     }
 
     /**
@@ -101,8 +105,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
         vm.stopPrank();
-        assertEq(senderBytes, CreateX.SenderBytes.MsgSender);
-        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.False);
+        assertEq(senderBytes, CreateX.SenderBytes.MsgSender, "100");
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.False, "200");
     }
 
     /**
@@ -132,8 +136,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
         vm.stopPrank();
-        assertEq(senderBytes, CreateX.SenderBytes.MsgSender);
-        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.Unspecified);
+        assertEq(senderBytes, CreateX.SenderBytes.MsgSender, "100");
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.Unspecified, "200");
     }
 
     modifier whenTheFirst20BytesOfTheSaltEqualsTheZeroAddress(bytes32 salt) {
@@ -153,8 +157,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
         vm.stopPrank();
-        assertEq(senderBytes, CreateX.SenderBytes.ZeroAddress);
-        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.True);
+        assertEq(senderBytes, CreateX.SenderBytes.ZeroAddress, "100");
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.True, "200");
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x00(
@@ -168,8 +172,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
         vm.stopPrank();
-        assertEq(senderBytes, CreateX.SenderBytes.ZeroAddress);
-        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.False);
+        assertEq(senderBytes, CreateX.SenderBytes.ZeroAddress, "100");
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.False, "200");
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(
@@ -183,8 +187,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
         vm.stopPrank();
-        assertEq(senderBytes, CreateX.SenderBytes.ZeroAddress);
-        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.Unspecified);
+        assertEq(senderBytes, CreateX.SenderBytes.ZeroAddress, "100");
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.Unspecified, "200");
     }
 
     modifier whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(address caller, bytes32 salt) {
@@ -207,8 +211,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
         vm.stopPrank();
-        assertEq(senderBytes, CreateX.SenderBytes.Random);
-        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.True);
+        assertEq(senderBytes, CreateX.SenderBytes.Random, "100");
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.True, "200");
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x00(
@@ -225,8 +229,8 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
         vm.stopPrank();
-        assertEq(senderBytes, CreateX.SenderBytes.Random);
-        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.False);
+        assertEq(senderBytes, CreateX.SenderBytes.Random, "100");
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.False, "200");
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(
@@ -243,7 +247,7 @@ contract CreateX_ParseSalt_Internal_Test is BaseTest {
         (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
             .exposed_parseSalt(cachedSalt);
         vm.stopPrank();
-        assertEq(senderBytes, CreateX.SenderBytes.Random);
-        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.Unspecified);
+        assertEq(senderBytes, CreateX.SenderBytes.Random, "100");
+        assertEq(redeployProtectionFlag, CreateX.RedeployProtectionFlag.Unspecified, "200");
     }
 }
