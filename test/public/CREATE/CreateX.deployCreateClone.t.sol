@@ -59,15 +59,16 @@ contract CreateX_DeployCreateClone_Public_Test is BaseTest {
             implementation,
             abi.encodeCall(implementationContract.initialiser, ())
         );
-        assertEq(proxy, computedAddress);
+        assertEq(proxy, computedAddress, "100");
         assertEq(
             proxy.codehash,
-            keccak256(abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3"))
+            keccak256(abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3")),
+            "200"
         );
-        assertTrue(!implementationContract.isInitialised());
-        assertTrue(ImplementationContract(proxy).isInitialised());
-        assertEq(proxy.balance, msgValue);
-        assertEq(implementation.balance, 0);
+        assertTrue(!implementationContract.isInitialised(), "300");
+        assertTrue(ImplementationContract(proxy).isInitialised(), "400");
+        assertEq(proxy.balance, msgValue, "500");
+        assertEq(implementation.balance, 0, "600");
     }
 
     modifier whenTheEIP1167MinimalProxyInitialisationCallIsUnsuccessful() {
