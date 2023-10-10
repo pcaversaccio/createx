@@ -74,7 +74,7 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
         _;
     }
 
-    function testFuzz_whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength(
+    function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength(
         address originalDeployer,
         uint256 msgValue,
         uint64 chainId,
