@@ -27,7 +27,7 @@ contract CreateX_ComputeCreateAddress_1Arg_Public_Test is BaseTest {
         address createAddressComputedOnChain = address(new CreateX());
         vm.stopPrank();
         // It returns the 20-byte address where a contract will be stored.
-        assertEq(createX.computeCreateAddress(nonce), createAddressComputedOnChain);
+        assertEq(createX.computeCreateAddress(nonce), createAddressComputedOnChain, "100");
     }
 
     modifier whenTheNonceValueExceeds18446744073709551614(uint256 nonce) {

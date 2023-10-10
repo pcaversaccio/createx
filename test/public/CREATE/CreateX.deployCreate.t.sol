@@ -91,14 +91,14 @@ contract CreateX_DeployCreate_Public_Test is BaseTest {
         emit ContractCreation(computedAddress);
         address newContract = createX.deployCreate{value: msgValue}(cachedInitCode);
 
-        assertEq(newContract, computedAddress);
-        assertNotEq(newContract, zeroAddress);
-        assertNotEq(newContract.code.length, 0);
-        assertEq(newContract.balance, msgValue);
-        assertEq(createXAddr.balance, 0);
-        assertEq(ERC20MockPayable(computedAddress).name(), arg1);
-        assertEq(ERC20MockPayable(computedAddress).symbol(), arg2);
-        assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), arg4);
+        assertEq(newContract, computedAddress, "100");
+        assertNotEq(newContract, zeroAddress, "200");
+        assertNotEq(newContract.code.length, 0, "300");
+        assertEq(newContract.balance, msgValue, "400");
+        assertEq(createXAddr.balance, 0, "500");
+        assertEq(ERC20MockPayable(computedAddress).name(), arg1, "600");
+        assertEq(ERC20MockPayable(computedAddress).symbol(), arg2, "700");
+        assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), arg4, "800");
     }
 
     modifier whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength() {

@@ -106,14 +106,14 @@ contract CreateX_DeployCreateAndInit_4Args_Public_Test is BaseTest {
             arg3
         );
 
-        assertEq(newContract, computedAddress);
-        assertNotEq(newContract, zeroAddress);
-        assertNotEq(newContract.code.length, 0);
-        assertEq(newContract.balance, values.constructorAmount + values.initCallAmount);
-        assertEq(createXAddr.balance, 0);
-        assertEq(ERC20MockPayable(computedAddress).name(), arg1);
-        assertEq(ERC20MockPayable(computedAddress).symbol(), arg2);
-        assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4);
+        assertEq(newContract, computedAddress, "100");
+        assertNotEq(newContract, zeroAddress, "200");
+        assertNotEq(newContract.code.length, 0, "300");
+        assertEq(newContract.balance, values.constructorAmount + values.initCallAmount, "400");
+        assertEq(createXAddr.balance, 0, "500");
+        assertEq(ERC20MockPayable(computedAddress).name(), arg1, "600");
+        assertEq(ERC20MockPayable(computedAddress).symbol(), arg2, "700");
+        assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4, "800");
     }
 
     modifier whenTheCreateXContractHasANonZeroBalance(uint256 amount) {
@@ -158,16 +158,16 @@ contract CreateX_DeployCreateAndInit_4Args_Public_Test is BaseTest {
             arg3
         );
 
-        assertEq(newContract, computedAddress);
-        assertNotEq(newContract, zeroAddress);
-        assertNotEq(newContract.code.length, 0);
-        assertEq(newContract.balance, values.constructorAmount + values.initCallAmount);
-        assertEq(createXAddr.balance, 0);
+        assertEq(newContract, computedAddress, "100");
+        assertNotEq(newContract, zeroAddress, "200");
+        assertNotEq(newContract.code.length, 0, "300");
+        assertEq(newContract.balance, values.constructorAmount + values.initCallAmount, "400");
+        assertEq(createXAddr.balance, 0, "500");
         // It returns the non-zero balance to the `refundAddress` address.
-        assertEq(arg3.balance, cachedBalance);
-        assertEq(ERC20MockPayable(computedAddress).name(), arg1);
-        assertEq(ERC20MockPayable(computedAddress).symbol(), arg2);
-        assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4);
+        assertEq(arg3.balance, cachedBalance, "600");
+        assertEq(ERC20MockPayable(computedAddress).name(), arg1, "700");
+        assertEq(ERC20MockPayable(computedAddress).symbol(), arg2, "800");
+        assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4, "900");
     }
 
     modifier whenTheRefundTransactionIsUnsuccessful() {
