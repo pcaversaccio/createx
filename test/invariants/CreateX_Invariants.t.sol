@@ -26,7 +26,7 @@ contract CreateX_Invariants is Test {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     function statefulFuzz_ZeroEtherBalance() external {
-        assertEq(address(createx).balance, 0);
+        assertEq(address(createx).balance, 0, "100");
     }
 }
 
