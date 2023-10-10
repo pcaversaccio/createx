@@ -119,12 +119,12 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
             );
             vm.stopPrank();
 
-            assertEq(proxy, computedAddress);
-            assertEq(proxy.codehash, codeHash);
-            assertTrue(!implementationContract.isInitialised());
-            assertTrue(ImplementationContract(proxy).isInitialised());
-            assertEq(proxy.balance, msgValue);
-            assertEq(implementation.balance, 0);
+            assertEq(proxy, computedAddress, "100");
+            assertEq(proxy.codehash, codeHash, "200");
+            assertTrue(!implementationContract.isInitialised(), "300");
+            assertTrue(ImplementationContract(proxy).isInitialised(), "400");
+            assertEq(proxy.balance, msgValue, "500");
+            assertEq(implementation.balance, 0, "600");
 
             if (permissionedDeployProtection && xChainRedeployProtection) {
                 vm.chainId(chainId);
@@ -139,12 +139,12 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractOriginalDeployer, computedAddress);
-                assertEq(newContractOriginalDeployer.codehash, codeHash);
-                assertTrue(!implementationContract.isInitialised());
-                assertTrue(ImplementationContract(newContractOriginalDeployer).isInitialised());
-                assertEq(newContractOriginalDeployer.balance, msgValue);
-                assertEq(implementation.balance, 0);
+                assertNotEq(newContractOriginalDeployer, computedAddress, "700");
+                assertEq(newContractOriginalDeployer.codehash, codeHash, "800");
+                assertTrue(!implementationContract.isInitialised(), "900");
+                assertTrue(ImplementationContract(newContractOriginalDeployer).isInitialised(), "1000");
+                assertEq(newContractOriginalDeployer.balance, msgValue, "1100");
+                assertEq(implementation.balance, 0, "1200");
             } else if (permissionedDeployProtection) {
                 vm.chainId(chainId);
                 // We mock a potential frontrunner address.
@@ -160,12 +160,12 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractMsgSender, computedAddress);
-                assertEq(newContractMsgSender.codehash, codeHash);
-                assertTrue(!implementationContract.isInitialised());
-                assertTrue(ImplementationContract(newContractMsgSender).isInitialised());
-                assertEq(newContractMsgSender.balance, msgValue);
-                assertEq(implementation.balance, 0);
+                assertNotEq(newContractMsgSender, computedAddress, "1300");
+                assertEq(newContractMsgSender.codehash, codeHash, "1400");
+                assertTrue(!implementationContract.isInitialised(), "1500");
+                assertTrue(ImplementationContract(newContractMsgSender).isInitialised(), "1600");
+                assertEq(newContractMsgSender.balance, msgValue, "1700");
+                assertEq(implementation.balance, 0, "1800");
 
                 // Foundry does not create a new, clean EVM environment when the `chainId` is changed, and
                 // a deployment of a contract to the same address therefore fails (see issue: https://github.com/foundry-rs/foundry/issues/6008).
@@ -182,12 +182,12 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
                 vm.assume(originalDeployer != newContractOriginalDeployer);
                 // The newly created contract on chain `chainId` must be the same as the previously created contract
                 // at the `computedAddress` address.
-                assertEq(newContractOriginalDeployer, computedAddress);
-                assertEq(newContractOriginalDeployer.codehash, codeHash);
-                assertTrue(!implementationContract.isInitialised());
-                assertTrue(ImplementationContract(newContractOriginalDeployer).isInitialised());
-                assertEq(newContractOriginalDeployer.balance, msgValue);
-                assertEq(implementation.balance, 0);
+                assertEq(newContractOriginalDeployer, computedAddress, "1900");
+                assertEq(newContractOriginalDeployer.codehash, codeHash, "2000");
+                assertTrue(!implementationContract.isInitialised(), "2100");
+                assertTrue(ImplementationContract(newContractOriginalDeployer).isInitialised(), "2200");
+                assertEq(newContractOriginalDeployer.balance, msgValue, "2300");
+                assertEq(implementation.balance, 0, "2400");
             } else if (xChainRedeployProtection) {
                 vm.chainId(chainId);
                 vm.startPrank(originalDeployer);
@@ -201,12 +201,12 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractOriginalDeployer, computedAddress);
-                assertEq(newContractOriginalDeployer.codehash, codeHash);
-                assertTrue(!implementationContract.isInitialised());
-                assertTrue(ImplementationContract(newContractOriginalDeployer).isInitialised());
-                assertEq(newContractOriginalDeployer.balance, msgValue);
-                assertEq(implementation.balance, 0);
+                assertNotEq(newContractOriginalDeployer, computedAddress, "2500");
+                assertEq(newContractOriginalDeployer.codehash, codeHash, "2600");
+                assertTrue(!implementationContract.isInitialised(), "2700");
+                assertTrue(ImplementationContract(newContractOriginalDeployer).isInitialised(), "2800");
+                assertEq(newContractOriginalDeployer.balance, msgValue, "2900");
+                assertEq(implementation.balance, 0, "3000");
             }
         }
     }

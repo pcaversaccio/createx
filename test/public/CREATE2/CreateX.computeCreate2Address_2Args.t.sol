@@ -17,7 +17,8 @@ contract CreateX_ComputeCreate2Address_2Args_Public_Test is BaseTest {
         // It should never revert.
         assertEq(
             createX.computeCreate2Address(salt, keccak256(type(CreateX).creationCode)),
-            createAddressComputedOnChain
+            createAddressComputedOnChain,
+            "100"
         );
     }
 }

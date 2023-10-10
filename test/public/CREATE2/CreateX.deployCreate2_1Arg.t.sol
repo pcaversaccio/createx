@@ -103,7 +103,7 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
         ) = parseFuzzerSalt(originalDeployer, salt);
         // When we pseudo-randomly calculate the salt value `salt`, we must never have configured a permissioned
         // deploy protection or a cross-chain redeploy protection, and it must never revert.
-        assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert);
+        assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert, "100");
 
         // We calculate the address beforehand where the contract is to be deployed.
         address computedAddress = createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr);
@@ -120,14 +120,14 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
         address newContract = createX.deployCreate2{value: msgValue}(cachedInitCode);
         vm.stopPrank();
 
-        assertEq(newContract, computedAddress);
-        assertNotEq(newContract, zeroAddress);
-        assertNotEq(newContract.code.length, 0);
-        assertEq(newContract.balance, msgValue);
-        assertEq(createXAddr.balance, 0);
-        assertEq(ERC20MockPayable(computedAddress).name(), arg1);
-        assertEq(ERC20MockPayable(computedAddress).symbol(), arg2);
-        assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), arg4);
+        assertEq(newContract, computedAddress, "200");
+        assertNotEq(newContract, zeroAddress, "300");
+        assertNotEq(newContract.code.length, 0, "400");
+        assertEq(newContract.balance, msgValue, "500");
+        assertEq(createXAddr.balance, 0, "600");
+        assertEq(ERC20MockPayable(computedAddress).name(), arg1, "700");
+        assertEq(ERC20MockPayable(computedAddress).symbol(), arg2, "800");
+        assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), arg4, "900");
 
         vm.chainId(chainId);
         // We mock a potential frontrunner address.
@@ -139,14 +139,14 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
 
         // The newly created contract on chain `chainId` must not be the same as the previously created
         // contract at the `computedAddress` address.
-        assertNotEq(newContractMsgSender, computedAddress);
-        assertNotEq(newContractMsgSender, zeroAddress);
-        assertNotEq(newContractMsgSender.code.length, 0);
-        assertEq(newContractMsgSender.balance, msgValue);
-        assertEq(createXAddr.balance, 0);
-        assertEq(ERC20MockPayable(newContractMsgSender).name(), arg1);
-        assertEq(ERC20MockPayable(newContractMsgSender).symbol(), arg2);
-        assertEq(ERC20MockPayable(newContractMsgSender).balanceOf(arg3), arg4);
+        assertNotEq(newContractMsgSender, computedAddress, "1000");
+        assertNotEq(newContractMsgSender, zeroAddress, "1100");
+        assertNotEq(newContractMsgSender.code.length, 0, "1200");
+        assertEq(newContractMsgSender.balance, msgValue, "1300");
+        assertEq(createXAddr.balance, 0, "1400");
+        assertEq(ERC20MockPayable(newContractMsgSender).name(), arg1, "1500");
+        assertEq(ERC20MockPayable(newContractMsgSender).symbol(), arg2, "1600");
+        assertEq(ERC20MockPayable(newContractMsgSender).balanceOf(arg3), arg4, "1700");
 
         // We mock the original caller.
         vm.startPrank(originalDeployer);
@@ -155,15 +155,15 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
         vm.assume(originalDeployer != newContractOriginalDeployer);
         // The newly created contract on chain `chainId` must not be the same as the previously created
         // contract at the `computedAddress` address as well as at the `newContractMsgSender` address.
-        assertNotEq(newContractOriginalDeployer, computedAddress);
-        assertNotEq(newContractOriginalDeployer, newContractMsgSender);
-        assertNotEq(newContractOriginalDeployer, zeroAddress);
-        assertNotEq(newContractOriginalDeployer.code.length, 0);
-        assertEq(newContractOriginalDeployer.balance, msgValue);
-        assertEq(createXAddr.balance, 0);
-        assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1);
-        assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2);
-        assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), arg4);
+        assertNotEq(newContractOriginalDeployer, computedAddress, "1800");
+        assertNotEq(newContractOriginalDeployer, newContractMsgSender, "1900");
+        assertNotEq(newContractOriginalDeployer, zeroAddress, "2000");
+        assertNotEq(newContractOriginalDeployer.code.length, 0, "2100");
+        assertEq(newContractOriginalDeployer.balance, msgValue, "2200");
+        assertEq(createXAddr.balance, 0, "2300");
+        assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "2400");
+        assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "2500");
+        assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), arg4, "2600");
     }
 
     modifier whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength() {
@@ -186,7 +186,7 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
         );
         // When we pseudo-randomly calculate the salt value `salt`, we must never have configured a permissioned
         // deploy protection or a cross-chain redeploy protection, and it must never revert.
-        assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert);
+        assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert, "100");
         vm.startPrank(originalDeployer);
         // It should revert.
         bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
@@ -215,7 +215,7 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
         );
         // When we pseudo-randomly calculate the salt value `salt`, we must never have configured a permissioned
         // deploy protection or a cross-chain redeploy protection, and it must never revert.
-        assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert);
+        assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert, "100");
         // The following contract creation code contains the invalid opcode `PUSH0` (`0x5F`) and `CREATE` must therefore
         // return the zero address (technically zero bytes `0x`), as the deployment fails. This test also ensures that if
         // we ever accidentally change the EVM version in Foundry and Hardhat, we will always have a corresponding failed test.

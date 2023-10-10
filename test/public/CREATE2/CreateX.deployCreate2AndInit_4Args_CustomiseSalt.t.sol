@@ -158,14 +158,14 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
             );
             vm.stopPrank();
 
-            assertEq(newContract, computedAddress);
-            assertNotEq(newContract, zeroAddress);
-            assertNotEq(newContract.code.length, 0);
-            assertEq(newContract.balance, values.constructorAmount + values.initCallAmount);
-            assertEq(createXAddr.balance, 0);
-            assertEq(ERC20MockPayable(computedAddress).name(), arg1);
-            assertEq(ERC20MockPayable(computedAddress).symbol(), arg2);
-            assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4);
+            assertEq(newContract, computedAddress, "100");
+            assertNotEq(newContract, zeroAddress, "200");
+            assertNotEq(newContract.code.length, 0, "300");
+            assertEq(newContract.balance, values.constructorAmount + values.initCallAmount, "400");
+            assertEq(createXAddr.balance, 0, "500");
+            assertEq(ERC20MockPayable(computedAddress).name(), arg1, "600");
+            assertEq(ERC20MockPayable(computedAddress).symbol(), arg2, "700");
+            assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4, "800");
 
             if (permissionedDeployProtection && xChainRedeployProtection) {
                 vm.chainId(chainId);
@@ -178,14 +178,14 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractOriginalDeployer, computedAddress);
-                assertNotEq(newContractOriginalDeployer, zeroAddress);
-                assertNotEq(newContractOriginalDeployer.code.length, 0);
-                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount);
-                assertEq(createXAddr.balance, 0);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4);
+                assertNotEq(newContractOriginalDeployer, computedAddress, "900");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "1000");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "1100");
+                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "1200");
+                assertEq(createXAddr.balance, 0, "1300");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "1400");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "1500");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "1600");
             } else if (permissionedDeployProtection) {
                 vm.chainId(chainId);
                 // We mock a potential frontrunner address.
@@ -199,14 +199,14 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractMsgSender, computedAddress);
-                assertNotEq(newContractMsgSender, zeroAddress);
-                assertNotEq(newContractMsgSender.code.length, 0);
-                assertEq(newContractMsgSender.balance, values.constructorAmount + values.initCallAmount);
-                assertEq(createXAddr.balance, 0);
-                assertEq(ERC20MockPayable(newContractMsgSender).name(), arg1);
-                assertEq(ERC20MockPayable(newContractMsgSender).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractMsgSender).balanceOf(arg3), 2 * arg4);
+                assertNotEq(newContractMsgSender, computedAddress, "1700");
+                assertNotEq(newContractMsgSender, zeroAddress, "1800");
+                assertNotEq(newContractMsgSender.code.length, 0, "1900");
+                assertEq(newContractMsgSender.balance, values.constructorAmount + values.initCallAmount, "2000");
+                assertEq(createXAddr.balance, 0, "2100");
+                assertEq(ERC20MockPayable(newContractMsgSender).name(), arg1, "2200");
+                assertEq(ERC20MockPayable(newContractMsgSender).symbol(), arg2, "2300");
+                assertEq(ERC20MockPayable(newContractMsgSender).balanceOf(arg3), 2 * arg4, "2400");
 
                 // Foundry does not create a new, clean EVM environment when the `chainId` is changed, and
                 // a deployment of a contract to the same address therefore fails (see issue: https://github.com/foundry-rs/foundry/issues/6008).
@@ -224,16 +224,17 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
                 // the address.
                 assertEq(
                     newContractOriginalDeployer,
-                    createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr)
+                    createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr),
+                    "2500"
                 );
-                assertNotEq(newContractOriginalDeployer, newContractMsgSender);
-                assertNotEq(newContractOriginalDeployer, zeroAddress);
-                assertNotEq(newContractOriginalDeployer.code.length, 0);
-                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount);
-                assertEq(createXAddr.balance, 0);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4);
+                assertNotEq(newContractOriginalDeployer, newContractMsgSender, "2600");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "2700");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "2800");
+                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "2900");
+                assertEq(createXAddr.balance, 0, "3000");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "3100");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "3200");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "3300");
             } else if (xChainRedeployProtection) {
                 vm.chainId(chainId);
                 vm.startPrank(originalDeployer);
@@ -245,14 +246,14 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractOriginalDeployer, computedAddress);
-                assertNotEq(newContractOriginalDeployer, zeroAddress);
-                assertNotEq(newContractOriginalDeployer.code.length, 0);
-                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount);
-                assertEq(createXAddr.balance, 0);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4);
+                assertNotEq(newContractOriginalDeployer, computedAddress, "3400");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "3500");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "3600");
+                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "3700");
+                assertEq(createXAddr.balance, 0, "3800");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "3900");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "4000");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "4100");
             }
         }
     }
@@ -343,16 +344,16 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
             );
             vm.stopPrank();
 
-            assertEq(newContract, computedAddress);
-            assertNotEq(newContract, zeroAddress);
-            assertNotEq(newContract.code.length, 0);
-            assertEq(newContract.balance, values.constructorAmount + values.initCallAmount);
-            assertEq(createXAddr.balance, 0);
+            assertEq(newContract, computedAddress, "100");
+            assertNotEq(newContract, zeroAddress, "200");
+            assertNotEq(newContract.code.length, 0, "300");
+            assertEq(newContract.balance, values.constructorAmount + values.initCallAmount, "400");
+            assertEq(createXAddr.balance, 0, "500");
             // It returns the non-zero balance to the `msg.sender` address.
-            assertEq(originalDeployer.balance, cachedBalance + values.constructorAmount + values.initCallAmount);
-            assertEq(ERC20MockPayable(computedAddress).name(), arg1);
-            assertEq(ERC20MockPayable(computedAddress).symbol(), arg2);
-            assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4);
+            assertEq(originalDeployer.balance, cachedBalance + values.constructorAmount + values.initCallAmount, "600");
+            assertEq(ERC20MockPayable(computedAddress).name(), arg1, "700");
+            assertEq(ERC20MockPayable(computedAddress).symbol(), arg2, "800");
+            assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4, "900");
 
             if (permissionedDeployProtection && xChainRedeployProtection) {
                 vm.chainId(chainId);
@@ -365,17 +366,17 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractOriginalDeployer, computedAddress);
-                assertNotEq(newContractOriginalDeployer, zeroAddress);
-                assertNotEq(newContractOriginalDeployer.code.length, 0);
-                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount);
-                assertEq(createXAddr.balance, 0);
+                assertNotEq(newContractOriginalDeployer, computedAddress, "1000");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "1100");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "1200");
+                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "1300");
+                assertEq(createXAddr.balance, 0, "1400");
                 // Since everything was returned in the previous call, the balance must be equal to the original
                 // refund amount.
-                assertEq(originalDeployer.balance, cachedBalance);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4);
+                assertEq(originalDeployer.balance, cachedBalance, "1500");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "1600");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "1700");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "1800");
             } else if (permissionedDeployProtection) {
                 vm.chainId(chainId);
                 // We mock a potential frontrunner address.
@@ -389,17 +390,21 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractMsgSender, computedAddress);
-                assertNotEq(newContractMsgSender, zeroAddress);
-                assertNotEq(newContractMsgSender.code.length, 0);
-                assertEq(newContractMsgSender.balance, values.constructorAmount + values.initCallAmount);
-                assertEq(createXAddr.balance, 0);
+                assertNotEq(newContractMsgSender, computedAddress, "1900");
+                assertNotEq(newContractMsgSender, zeroAddress, "2000");
+                assertNotEq(newContractMsgSender.code.length, 0, "2100");
+                assertEq(newContractMsgSender.balance, values.constructorAmount + values.initCallAmount, "2200");
+                assertEq(createXAddr.balance, 0, "2300");
                 // Since everything was returned in the previous call, the balance must be equal to the original
                 // refund amount.
-                assertEq(originalDeployer.balance, cachedBalance + values.constructorAmount + values.initCallAmount);
-                assertEq(ERC20MockPayable(newContractMsgSender).name(), arg1);
-                assertEq(ERC20MockPayable(newContractMsgSender).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractMsgSender).balanceOf(arg3), 2 * arg4);
+                assertEq(
+                    originalDeployer.balance,
+                    cachedBalance + values.constructorAmount + values.initCallAmount,
+                    "2400"
+                );
+                assertEq(ERC20MockPayable(newContractMsgSender).name(), arg1, "2500");
+                assertEq(ERC20MockPayable(newContractMsgSender).symbol(), arg2, "2600");
+                assertEq(ERC20MockPayable(newContractMsgSender).balanceOf(arg3), 2 * arg4, "2700");
 
                 // Foundry does not create a new, clean EVM environment when the `chainId` is changed, and
                 // a deployment of a contract to the same address therefore fails (see issue: https://github.com/foundry-rs/foundry/issues/6008).
@@ -417,19 +422,24 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
                 // the address.
                 assertEq(
                     newContractOriginalDeployer,
-                    createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr)
+                    createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr),
+                    "2800"
                 );
-                assertNotEq(newContractOriginalDeployer, newContractMsgSender);
-                assertNotEq(newContractOriginalDeployer, zeroAddress);
-                assertNotEq(newContractOriginalDeployer.code.length, 0);
-                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount);
-                assertEq(createXAddr.balance, 0);
+                assertNotEq(newContractOriginalDeployer, newContractMsgSender, "2900");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "3000");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "3100");
+                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "3200");
+                assertEq(createXAddr.balance, 0, "3300");
                 // Since everything was returned in the previous call, the balance must be equal to the original
                 // refund amount.
-                assertEq(originalDeployer.balance, cachedBalance + values.constructorAmount + values.initCallAmount);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4);
+                assertEq(
+                    originalDeployer.balance,
+                    cachedBalance + values.constructorAmount + values.initCallAmount,
+                    "3400"
+                );
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "3500");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "3600");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "3700");
             } else if (xChainRedeployProtection) {
                 vm.chainId(chainId);
                 vm.startPrank(originalDeployer);
@@ -441,17 +451,17 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractOriginalDeployer, computedAddress);
-                assertNotEq(newContractOriginalDeployer, zeroAddress);
-                assertNotEq(newContractOriginalDeployer.code.length, 0);
-                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount);
-                assertEq(createXAddr.balance, 0);
+                assertNotEq(newContractOriginalDeployer, computedAddress, "3800");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "3900");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "4000");
+                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "4100");
+                assertEq(createXAddr.balance, 0, "4200");
                 // Since everything was returned in the previous call, the balance must be equal to the original
                 // refund amount.
-                assertEq(originalDeployer.balance, cachedBalance);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4);
+                assertEq(originalDeployer.balance, cachedBalance, "4300");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "4400");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "4500");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "4600");
             }
         }
     }

@@ -83,7 +83,7 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
         ) = parseFuzzerSalt(originalDeployer, salt);
         // When we pseudo-randomly calculate the salt value `salt`, we must never have configured a permissioned
         // deploy protection or a cross-chain redeploy protection, and it must never revert.
-        assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert);
+        assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert, "100");
 
         // We calculate the address beforehand where the contract is to be deployed.
         address computedAddress = createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr);
@@ -101,12 +101,12 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
         );
         vm.stopPrank();
 
-        assertEq(proxy, computedAddress);
-        assertEq(proxy.codehash, codeHash);
-        assertTrue(!implementationContract.isInitialised());
-        assertTrue(ImplementationContract(proxy).isInitialised());
-        assertEq(proxy.balance, msgValue);
-        assertEq(implementation.balance, 0);
+        assertEq(proxy, computedAddress, "200");
+        assertEq(proxy.codehash, codeHash, "300");
+        assertTrue(!implementationContract.isInitialised(), "400");
+        assertTrue(ImplementationContract(proxy).isInitialised(), "500");
+        assertEq(proxy.balance, msgValue, "600");
+        assertEq(implementation.balance, 0, "700");
 
         vm.chainId(chainId);
         // We mock a potential frontrunner address.
@@ -121,12 +121,12 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
 
         // The newly created contract on chain `chainId` must not be the same as the previously created
         // contract at the `computedAddress` address.
-        assertNotEq(newContractMsgSender, computedAddress);
-        assertEq(newContractMsgSender.codehash, codeHash);
-        assertTrue(!implementationContract.isInitialised());
-        assertTrue(ImplementationContract(newContractMsgSender).isInitialised());
-        assertEq(newContractMsgSender.balance, msgValue);
-        assertEq(implementation.balance, 0);
+        assertNotEq(newContractMsgSender, computedAddress, "800");
+        assertEq(newContractMsgSender.codehash, codeHash, "900");
+        assertTrue(!implementationContract.isInitialised(), "1000");
+        assertTrue(ImplementationContract(newContractMsgSender).isInitialised(), "1100");
+        assertEq(newContractMsgSender.balance, msgValue, "1200");
+        assertEq(implementation.balance, 0, "1300");
 
         // We mock the original caller.
         vm.startPrank(originalDeployer);
@@ -138,12 +138,12 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
         vm.assume(originalDeployer != newContractOriginalDeployer);
         // The newly created contract on chain `chainId` must not be the same as the previously created
         // contract at the `computedAddress` address as well as at the `newContractMsgSender` address.
-        assertNotEq(newContractOriginalDeployer, computedAddress);
-        assertEq(newContractOriginalDeployer.codehash, codeHash);
-        assertTrue(!implementationContract.isInitialised());
-        assertTrue(ImplementationContract(newContractOriginalDeployer).isInitialised());
-        assertEq(newContractOriginalDeployer.balance, msgValue);
-        assertEq(implementation.balance, 0);
+        assertNotEq(newContractOriginalDeployer, computedAddress, "1400");
+        assertEq(newContractOriginalDeployer.codehash, codeHash, "1500");
+        assertTrue(!implementationContract.isInitialised(), "1600");
+        assertTrue(ImplementationContract(newContractOriginalDeployer).isInitialised(), "1700");
+        assertEq(newContractOriginalDeployer.balance, msgValue, "1800");
+        assertEq(implementation.balance, 0, "1900");
     }
 
     modifier whenTheEIP1167MinimalProxyInitialisationCallIsUnsuccessful() {
@@ -177,7 +177,7 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
         );
         // When we pseudo-randomly calculate the salt value `salt`, we must never have configured a permissioned
         // deploy protection or a cross-chain redeploy protection, and it must never revert.
-        assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert);
+        assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert, "100");
         if (mustRevert) {
             vm.startPrank(originalDeployer);
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXAddr);
@@ -227,7 +227,7 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
         ) = parseFuzzerSalt(originalDeployer, salt);
         // When we pseudo-randomly calculate the salt value `salt`, we must never have configured a permissioned
         // deploy protection or a cross-chain redeploy protection, and it must never revert.
-        assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert);
+        assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert, "100");
         // We calculate the address beforehand where the contract is to be deployed.
         address computedAddress = createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr);
         // To enforce a deployment failure, we add code to the destination address `proxy`.
