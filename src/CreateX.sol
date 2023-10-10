@@ -123,7 +123,7 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create(callvalue(), add(initCode, 0x20), mload(initCode))
         }
-        _requireSuccessfulContractCreation(newContract);
+        _requireSuccessfulContractCreation({newContract: newContract});
         emit ContractCreation({newContract: newContract});
     }
 
@@ -151,7 +151,7 @@ contract CreateX {
         assembly ("memory-safe") {
             newContract := create(mload(values), add(initCode, 0x20), mload(initCode))
         }
-        _requireSuccessfulContractCreation(newContract);
+        _requireSuccessfulContractCreation({newContract: newContract});
         emit ContractCreation({newContract: newContract});
 
         (bool success, bytes memory returnData) = newContract.call{value: values.initCallAmount}(data);
@@ -218,7 +218,11 @@ contract CreateX {
         emit ContractCreation({newContract: proxy});
 
         (bool success, bytes memory returnData) = proxy.call{value: msg.value}(data);
-        _requireSuccessfulContractInitialisation(success, returnData, implementation);
+        _requireSuccessfulContractInitialisation({
+            success: success,
+            returnData: returnData,
+            implementation: implementation
+        });
     }
 
     /**
@@ -312,11 +316,11 @@ contract CreateX {
      * @return newContract The 20-byte address where the contract was deployed.
      */
     function deployCreate2(bytes32 salt, bytes memory initCode) public payable returns (address newContract) {
-        bytes32 guardedSalt = _guard(salt);
+        bytes32 guardedSalt = _guard({salt: salt});
         assembly ("memory-safe") {
             newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), guardedSalt)
         }
-        _requireSuccessfulContractCreation(newContract);
+        _requireSuccessfulContractCreation({newContract: newContract});
         emit ContractCreation({newContract: newContract});
     }
 
@@ -358,11 +362,11 @@ contract CreateX {
         Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
-        bytes32 guardedSalt = _guard(salt);
+        bytes32 guardedSalt = _guard({salt: salt});
         assembly ("memory-safe") {
             newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), guardedSalt)
         }
-        _requireSuccessfulContractCreation(newContract);
+        _requireSuccessfulContractCreation({newContract: newContract});
         emit ContractCreation({newContract: newContract});
 
         (bool success, bytes memory returnData) = newContract.call{value: values.initCallAmount}(data);
@@ -496,7 +500,7 @@ contract CreateX {
         address implementation,
         bytes memory data
     ) public payable returns (address proxy) {
-        bytes32 guardedSalt = _guard(salt);
+        bytes32 guardedSalt = _guard({salt: salt});
         bytes20 implementationInBytes = bytes20(implementation);
         assembly ("memory-safe") {
             let clone := mload(0x40)
@@ -511,7 +515,11 @@ contract CreateX {
         emit ContractCreation({newContract: proxy});
 
         (bool success, bytes memory returnData) = proxy.call{value: msg.value}(data);
-        _requireSuccessfulContractInitialisation(success, returnData, implementation);
+        _requireSuccessfulContractInitialisation({
+            success: success,
+            returnData: returnData,
+            implementation: implementation
+        });
     }
 
     /**
@@ -600,7 +608,7 @@ contract CreateX {
      * proxy deployments on other chains.
      */
     function deployCreate3(bytes32 salt, bytes memory initCode) public payable returns (address newContract) {
-        bytes32 guardedSalt = _guard(salt);
+        bytes32 guardedSalt = _guard({salt: salt});
         bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
         address proxy;
         assembly ("memory-safe") {
@@ -613,7 +621,7 @@ contract CreateX {
 
         newContract = computeCreate3Address({salt: salt});
         (bool success, ) = proxy.call{value: msg.value}(initCode);
-        _requireSuccessfulContractCreation(success, newContract);
+        _requireSuccessfulContractCreation({success: success, newContract: newContract});
         emit ContractCreation({newContract: newContract});
     }
 
@@ -664,7 +672,7 @@ contract CreateX {
         Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
-        bytes32 guardedSalt = _guard(salt);
+        bytes32 guardedSalt = _guard({salt: salt});
         bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
         address proxy;
         assembly ("memory-safe") {
@@ -677,7 +685,7 @@ contract CreateX {
 
         newContract = computeCreate3Address({salt: salt});
         (bool success, ) = proxy.call{value: values.constructorAmount}(initCode);
-        _requireSuccessfulContractCreation(success, newContract);
+        _requireSuccessfulContractCreation({success: success, newContract: newContract});
         emit ContractCreation({newContract: newContract});
 
         bytes memory returnData;
@@ -859,7 +867,7 @@ contract CreateX {
      * @return guardedSalt The guarded 32-byte random value used to create the contract address.
      */
     function _guard(bytes32 salt) internal view returns (bytes32 guardedSalt) {
-        (SenderBytes senderBytes, RedeployProtectionFlag redeployProtectionFlag) = _parseSalt(salt);
+        (SenderBytes senderBytes, RedeployProtectionFlag redeployProtectionFlag) = _parseSalt({salt: salt});
 
         if (senderBytes == SenderBytes.MsgSender && redeployProtectionFlag == RedeployProtectionFlag.True) {
             // Configures a permissioned deploy protection as well as a cross-chain redeploy protection.
