@@ -17,4 +17,5 @@ fs_permissions = [{ access = "read-write", path = "./"}]    # set read-write acc
 [profile.ci]
 force = true                                                # always perform a clean build
 fuzz = { runs = 10_000 }                                    # increase the number of fuzz runs
+invariant = { runs = 5_000 }                                # increase the number of runs that must execute for each invariant test group
 verbosity = 4                                               # increase the verbosity of tests
