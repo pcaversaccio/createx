@@ -20,6 +20,8 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
                 hex"5af43d82803e903d91602b57fd5bf3"
             )
         );
+    bytes32 internal codeHash =
+        keccak256(abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3"));
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                           EVENTS                           */
@@ -63,8 +65,10 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
                 chainId != 0 &&
                 originalDeployer != msgSender &&
                 originalDeployer != createXAddr &&
+                originalDeployer != implementation &&
                 originalDeployer != zeroAddress &&
                 msgSender != createXAddr &&
+                msgSender != implementation &&
                 msgSender != zeroAddress
         );
 
@@ -98,10 +102,7 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
         vm.stopPrank();
 
         assertEq(proxy, computedAddress);
-        assertEq(
-            proxy.codehash,
-            keccak256(abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3"))
-        );
+        assertEq(proxy.codehash, codeHash);
         assertTrue(!implementationContract.isInitialised());
         assertTrue(ImplementationContract(proxy).isInitialised());
         assertEq(proxy.balance, msgValue);
@@ -121,10 +122,7 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
         // The newly created contract on chain `chainId` must not be the same as the previously created
         // contract at the `computedAddress` address.
         assertNotEq(newContractMsgSender, computedAddress);
-        assertEq(
-            newContractMsgSender.codehash,
-            keccak256(abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3"))
-        );
+        assertEq(newContractMsgSender.codehash, codeHash);
         assertTrue(!implementationContract.isInitialised());
         assertTrue(ImplementationContract(newContractMsgSender).isInitialised());
         assertEq(newContractMsgSender.balance, msgValue);
@@ -141,10 +139,7 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
         // The newly created contract on chain `chainId` must not be the same as the previously created
         // contract at the `computedAddress` address as well as at the `newContractMsgSender` address.
         assertNotEq(newContractOriginalDeployer, computedAddress);
-        assertEq(
-            newContractOriginalDeployer.codehash,
-            keccak256(abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3"))
-        );
+        assertEq(newContractOriginalDeployer.codehash, codeHash);
         assertTrue(!implementationContract.isInitialised());
         assertTrue(ImplementationContract(newContractOriginalDeployer).isInitialised());
         assertEq(newContractOriginalDeployer.balance, msgValue);
@@ -170,6 +165,7 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
             chainId != block.chainid &&
                 chainId != 0 &&
                 originalDeployer != createXAddr &&
+                originalDeployer != implementation &&
                 originalDeployer != zeroAddress
         );
         vm.startPrank(originalDeployer);
@@ -217,6 +213,7 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
             chainId != block.chainid &&
                 chainId != 0 &&
                 originalDeployer != createXAddr &&
+                originalDeployer != implementation &&
                 originalDeployer != zeroAddress
         );
         vm.startPrank(originalDeployer);
