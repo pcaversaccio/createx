@@ -20,6 +20,8 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
                 hex"5af43d82803e903d91602b57fd5bf3"
             )
         );
+    bytes32 internal codeHash =
+        keccak256(abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3"));
 
     // To avoid any stack-too-deep errors, we use an `internal` state variable for the snapshot ID.
     uint256 internal snapshotId;
@@ -67,8 +69,10 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
                 chainId != 0 &&
                 originalDeployer != msgSender &&
                 originalDeployer != createXAddr &&
+                originalDeployer != implementation &&
                 originalDeployer != zeroAddress &&
                 msgSender != createXAddr &&
+                msgSender != implementation &&
                 msgSender != zeroAddress
         );
         snapshotId = vm.snapshot();
@@ -116,12 +120,7 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
             vm.stopPrank();
 
             assertEq(proxy, computedAddress);
-            assertEq(
-                proxy.codehash,
-                keccak256(
-                    abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3")
-                )
-            );
+            assertEq(proxy.codehash, codeHash);
             assertTrue(!implementationContract.isInitialised());
             assertTrue(ImplementationContract(proxy).isInitialised());
             assertEq(proxy.balance, msgValue);
@@ -141,12 +140,7 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
                 assertNotEq(newContractOriginalDeployer, computedAddress);
-                assertEq(
-                    newContractOriginalDeployer.codehash,
-                    keccak256(
-                        abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3")
-                    )
-                );
+                assertEq(newContractOriginalDeployer.codehash, codeHash);
                 assertTrue(!implementationContract.isInitialised());
                 assertTrue(ImplementationContract(newContractOriginalDeployer).isInitialised());
                 assertEq(newContractOriginalDeployer.balance, msgValue);
@@ -167,12 +161,7 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
                 assertNotEq(newContractMsgSender, computedAddress);
-                assertEq(
-                    newContractMsgSender.codehash,
-                    keccak256(
-                        abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3")
-                    )
-                );
+                assertEq(newContractMsgSender.codehash, codeHash);
                 assertTrue(!implementationContract.isInitialised());
                 assertTrue(ImplementationContract(newContractMsgSender).isInitialised());
                 assertEq(newContractMsgSender.balance, msgValue);
@@ -192,15 +181,9 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
                 // The newly created contract on chain `chainId` must be the same as the previously created contract
-                // at the `computedAddress` address. As we return to the original snapshot state, we have to recalculate
-                // the address.
+                // at the `computedAddress` address.
                 assertEq(newContractOriginalDeployer, computedAddress);
-                assertEq(
-                    newContractOriginalDeployer.codehash,
-                    keccak256(
-                        abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3")
-                    )
-                );
+                assertEq(newContractOriginalDeployer.codehash, codeHash);
                 assertTrue(!implementationContract.isInitialised());
                 assertTrue(ImplementationContract(newContractOriginalDeployer).isInitialised());
                 assertEq(newContractOriginalDeployer.balance, msgValue);
@@ -219,12 +202,7 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
                 assertNotEq(newContractOriginalDeployer, computedAddress);
-                assertEq(
-                    newContractOriginalDeployer.codehash,
-                    keccak256(
-                        abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3")
-                    )
-                );
+                assertEq(newContractOriginalDeployer.codehash, codeHash);
                 assertTrue(!implementationContract.isInitialised());
                 assertTrue(ImplementationContract(newContractOriginalDeployer).isInitialised());
                 assertEq(newContractOriginalDeployer.balance, msgValue);
@@ -253,6 +231,7 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
             chainId != block.chainid &&
                 chainId != 0 &&
                 originalDeployer != createXAddr &&
+                originalDeployer != implementation &&
                 originalDeployer != zeroAddress
         );
         // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
@@ -300,6 +279,7 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
             chainId != block.chainid &&
                 chainId != 0 &&
                 originalDeployer != createXAddr &&
+                originalDeployer != implementation &&
                 originalDeployer != zeroAddress
         );
         // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
