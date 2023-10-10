@@ -134,14 +134,14 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
             address newContract = createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
             vm.stopPrank();
 
-            assertEq(newContract, computedAddress);
-            assertNotEq(newContract, zeroAddress);
-            assertNotEq(newContract.code.length, 0);
-            assertEq(newContract.balance, msgValue);
-            assertEq(createXAddr.balance, 0);
-            assertEq(ERC20MockPayable(computedAddress).name(), arg1);
-            assertEq(ERC20MockPayable(computedAddress).symbol(), arg2);
-            assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), arg4);
+            assertEq(newContract, computedAddress, "100");
+            assertNotEq(newContract, zeroAddress, "200");
+            assertNotEq(newContract.code.length, 0, "300");
+            assertEq(newContract.balance, msgValue, "400");
+            assertEq(createXAddr.balance, 0, "500");
+            assertEq(ERC20MockPayable(computedAddress).name(), arg1, "600");
+            assertEq(ERC20MockPayable(computedAddress).symbol(), arg2, "700");
+            assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), arg4, "800");
 
             if (permissionedDeployProtection && xChainRedeployProtection) {
                 vm.chainId(chainId);
@@ -152,14 +152,14 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractOriginalDeployer, computedAddress);
-                assertNotEq(newContractOriginalDeployer, zeroAddress);
-                assertNotEq(newContractOriginalDeployer.code.length, 0);
-                assertEq(newContractOriginalDeployer.balance, msgValue);
-                assertEq(createXAddr.balance, 0);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), arg4);
+                assertNotEq(newContractOriginalDeployer, computedAddress, "900");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "1000");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "1100");
+                assertEq(newContractOriginalDeployer.balance, msgValue, "1200");
+                assertEq(createXAddr.balance, 0, "1300");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "1400");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "1500");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), arg4, "1600");
             } else if (permissionedDeployProtection) {
                 vm.chainId(chainId);
                 // We mock a potential frontrunner address.
@@ -171,14 +171,14 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractMsgSender, computedAddress);
-                assertNotEq(newContractMsgSender, zeroAddress);
-                assertNotEq(newContractMsgSender.code.length, 0);
-                assertEq(newContractMsgSender.balance, msgValue);
-                assertEq(createXAddr.balance, 0);
-                assertEq(ERC20MockPayable(newContractMsgSender).name(), arg1);
-                assertEq(ERC20MockPayable(newContractMsgSender).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractMsgSender).balanceOf(arg3), arg4);
+                assertNotEq(newContractMsgSender, computedAddress, "1700");
+                assertNotEq(newContractMsgSender, zeroAddress, "1800");
+                assertNotEq(newContractMsgSender.code.length, 0, "1900");
+                assertEq(newContractMsgSender.balance, msgValue, "2000");
+                assertEq(createXAddr.balance, 0, "2100");
+                assertEq(ERC20MockPayable(newContractMsgSender).name(), arg1, "2200");
+                assertEq(ERC20MockPayable(newContractMsgSender).symbol(), arg2, "2300");
+                assertEq(ERC20MockPayable(newContractMsgSender).balanceOf(arg3), arg4, "2400");
 
                 // Foundry does not create a new, clean EVM environment when the `chainId` is changed, and
                 // a deployment of a contract to the same address therefore fails (see issue: https://github.com/foundry-rs/foundry/issues/6008).
@@ -191,15 +191,15 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
                 vm.assume(originalDeployer != newContractOriginalDeployer);
                 // The newly created contract on chain `chainId` must be the same as the previously created contract
                 // at the `computedAddress` address.
-                assertEq(newContractOriginalDeployer, computedAddress);
-                assertNotEq(newContractOriginalDeployer, newContractMsgSender);
-                assertNotEq(newContractOriginalDeployer, zeroAddress);
-                assertNotEq(newContractOriginalDeployer.code.length, 0);
-                assertEq(newContractOriginalDeployer.balance, msgValue);
-                assertEq(createXAddr.balance, 0);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), arg4);
+                assertEq(newContractOriginalDeployer, computedAddress, "2500");
+                assertNotEq(newContractOriginalDeployer, newContractMsgSender, "2600");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "2700");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "2800");
+                assertEq(newContractOriginalDeployer.balance, msgValue, "2900");
+                assertEq(createXAddr.balance, 0, "3000");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "3100");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "3200");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), arg4, "3300");
             } else if (xChainRedeployProtection) {
                 vm.chainId(chainId);
                 vm.startPrank(originalDeployer);
@@ -209,14 +209,14 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
 
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractOriginalDeployer, computedAddress);
-                assertNotEq(newContractOriginalDeployer, zeroAddress);
-                assertNotEq(newContractOriginalDeployer.code.length, 0);
-                assertEq(newContractOriginalDeployer.balance, msgValue);
-                assertEq(createXAddr.balance, 0);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2);
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), arg4);
+                assertNotEq(newContractOriginalDeployer, computedAddress, "3400");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "3500");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "3600");
+                assertEq(newContractOriginalDeployer.balance, msgValue, "3700");
+                assertEq(createXAddr.balance, 0, "3800");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "3900");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "4000");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), arg4, "4100");
             }
         }
     }
