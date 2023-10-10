@@ -9,15 +9,22 @@ contract CreateX_Invariants is Test {
     /*                      HELPER VARIABLES                      */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
-    CreateX internal createx = new CreateX();
+    CreateX internal createx;
     CreateXHandler internal createXHandler;
+
+    address internal createxAddr;
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            SETUP                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     function setUp() public {
-        createXHandler = new CreateXHandler(createx);
+        uint256 initialBalance = 1 ether;
+        createx = new CreateX();
+        createxAddr = address(createx);
+        createXHandler = new CreateXHandler(createx, initialBalance);
+        // We prefund the `CreateX` contract with an initial amount.
+        deal(createxAddr, initialBalance);
         targetContract(address(createXHandler));
     }
 
@@ -25,16 +32,18 @@ contract CreateX_Invariants is Test {
     /*                            TESTS                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
-    function statefulFuzz_ZeroEtherBalance() external {
-        assertEq(address(createx).balance, 0, "100");
+    function statefulFuzz_EtherBalance() external {
+        assertEq(createxAddr.balance, createXHandler.updatedBalance(), "100");
     }
 }
 
 contract CreateXHandler {
+    uint256 public updatedBalance;
     CreateX internal createx;
 
-    constructor(CreateX createx_) {
+    constructor(CreateX createx_, uint256 initialBalance_) {
         createx = createx_;
+        updatedBalance = initialBalance_;
     }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -51,6 +60,7 @@ contract CreateXHandler {
         CreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
+        updatedBalance = 0;
         newContract = createx.deployCreateAndInit(initCode, data, values, refundAddress);
     }
 
@@ -59,6 +69,7 @@ contract CreateXHandler {
         bytes memory data,
         CreateX.Values memory values
     ) public payable returns (address newContract) {
+        updatedBalance = 0;
         newContract = createx.deployCreateAndInit(initCode, data, values);
     }
 
@@ -85,6 +96,7 @@ contract CreateXHandler {
         CreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
+        updatedBalance = 0;
         newContract = deployCreate2AndInit(salt, initCode, data, values, refundAddress);
     }
 
@@ -94,6 +106,7 @@ contract CreateXHandler {
         bytes memory data,
         CreateX.Values memory values
     ) public payable returns (address newContract) {
+        updatedBalance = 0;
         newContract = deployCreate2AndInit(salt, initCode, data, values);
     }
 
@@ -103,6 +116,7 @@ contract CreateXHandler {
         CreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
+        updatedBalance = 0;
         newContract = deployCreate2AndInit(initCode, data, values, refundAddress);
     }
 
@@ -111,6 +125,7 @@ contract CreateXHandler {
         bytes memory data,
         CreateX.Values memory values
     ) public payable returns (address newContract) {
+        updatedBalance = 0;
         newContract = deployCreate2AndInit(initCode, data, values);
     }
 
@@ -145,6 +160,7 @@ contract CreateXHandler {
         CreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
+        updatedBalance = 0;
         newContract = deployCreate3AndInit(salt, initCode, data, values, refundAddress);
     }
 
@@ -154,6 +170,7 @@ contract CreateXHandler {
         bytes memory data,
         CreateX.Values memory values
     ) public payable returns (address newContract) {
+        updatedBalance = 0;
         newContract = deployCreate3AndInit(salt, initCode, data, values);
     }
 
@@ -163,6 +180,7 @@ contract CreateXHandler {
         CreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
+        updatedBalance = 0;
         newContract = deployCreate3AndInit(initCode, data, values, refundAddress);
     }
 
@@ -171,6 +189,7 @@ contract CreateXHandler {
         bytes memory data,
         CreateX.Values memory values
     ) public payable returns (address newContract) {
+        updatedBalance = 0;
         newContract = deployCreate3AndInit(initCode, data, values);
     }
 }
