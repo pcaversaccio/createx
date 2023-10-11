@@ -60,8 +60,8 @@ contract CreateXHandler {
         CreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
-        updatedBalance = 0;
         newContract = createX.deployCreateAndInit(initCode, data, values, refundAddress);
+        updatedBalance = 0;
     }
 
     function deployCreateAndInit(
@@ -69,8 +69,8 @@ contract CreateXHandler {
         bytes memory data,
         CreateX.Values memory values
     ) public payable returns (address newContract) {
-        updatedBalance = 0;
         newContract = createX.deployCreateAndInit(initCode, data, values);
+        updatedBalance = 0;
     }
 
     function deployCreateClone(address implementation, bytes memory data) public payable returns (address proxy) {
@@ -96,8 +96,8 @@ contract CreateXHandler {
         CreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
-        updatedBalance = 0;
         newContract = createX.deployCreate2AndInit(salt, initCode, data, values, refundAddress);
+        updatedBalance = 0;
     }
 
     function deployCreate2AndInit(
@@ -106,8 +106,8 @@ contract CreateXHandler {
         bytes memory data,
         CreateX.Values memory values
     ) public payable returns (address newContract) {
-        updatedBalance = 0;
         newContract = createX.deployCreate2AndInit(salt, initCode, data, values);
+        updatedBalance = 0;
     }
 
     function deployCreate2AndInit(
@@ -116,8 +116,8 @@ contract CreateXHandler {
         CreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
-        updatedBalance = 0;
         newContract = createX.deployCreate2AndInit(initCode, data, values, refundAddress);
+        updatedBalance = 0;
     }
 
     function deployCreate2AndInit(
@@ -125,8 +125,8 @@ contract CreateXHandler {
         bytes memory data,
         CreateX.Values memory values
     ) public payable returns (address newContract) {
-        updatedBalance = 0;
         newContract = createX.deployCreate2AndInit(initCode, data, values);
+        updatedBalance = 0;
     }
 
     function deployCreate2Clone(
@@ -160,8 +160,8 @@ contract CreateXHandler {
         CreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
-        updatedBalance = 0;
         newContract = createX.deployCreate3AndInit(salt, initCode, data, values, refundAddress);
+        updatedBalance = 0;
     }
 
     function deployCreate3AndInit(
@@ -170,8 +170,8 @@ contract CreateXHandler {
         bytes memory data,
         CreateX.Values memory values
     ) public payable returns (address newContract) {
-        updatedBalance = 0;
         newContract = createX.deployCreate3AndInit(salt, initCode, data, values);
+        updatedBalance = 0;
     }
 
     function deployCreate3AndInit(
@@ -180,8 +180,8 @@ contract CreateXHandler {
         CreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
-        updatedBalance = 0;
         newContract = createX.deployCreate3AndInit(initCode, data, values, refundAddress);
+        updatedBalance = 0;
     }
 
     function deployCreate3AndInit(
@@ -189,7 +189,7 @@ contract CreateXHandler {
         bytes memory data,
         CreateX.Values memory values
     ) public payable returns (address newContract) {
-        updatedBalance = 0;
         newContract = createX.deployCreate3AndInit(initCode, data, values);
+        updatedBalance = 0;
     }
 }
