@@ -1,0 +1,3 @@
+CreateX_ComputeCreate3Address_1Arg_Public_Test
+├── It returns the 20-byte address where a contract will be stored.
+└── It should never revert.

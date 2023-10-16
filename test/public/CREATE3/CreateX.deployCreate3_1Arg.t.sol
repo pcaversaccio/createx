@@ -96,7 +96,7 @@ contract CreateX_DeployCreate3_1Arg_Public_Test is BaseTest {
         address msgSender
     ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength {
         msgValue = bound(msgValue, 0, type(uint64).max);
-        vm.deal(originalDeployer, 2 * msgValue);
+        vm.deal(originalDeployer, msgValue);
         vm.assume(
             chainId != block.chainid &&
                 chainId != 0 &&
