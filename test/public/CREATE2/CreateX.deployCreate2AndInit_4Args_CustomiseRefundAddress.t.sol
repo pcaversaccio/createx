@@ -182,6 +182,7 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseRefundAddress_Public_Test i
         }(cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
         vm.stopPrank();
         vm.assume(originalDeployer != newContractOriginalDeployer);
+
         // The newly created contract on chain `chainId` must not be the same as the previously created
         // contract at the `computedAddress` address as well as at the `newContractMsgSender` address.
         assertNotEq(newContractOriginalDeployer, computedAddress, "1800");

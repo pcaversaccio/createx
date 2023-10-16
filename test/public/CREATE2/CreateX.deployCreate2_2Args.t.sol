@@ -190,6 +190,7 @@ contract CreateX_DeployCreate2_2Args_Public_Test is BaseTest {
                 address newContractOriginalDeployer = createX.deployCreate2{value: msgValue}(salt, cachedInitCode);
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
+
                 // The newly created contract on chain `chainId` must be the same as the previously created contract
                 // at the `computedAddress` address.
                 assertEq(newContractOriginalDeployer, computedAddress, "2500");
