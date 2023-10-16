@@ -6,4 +6,4 @@
 	url = https://github.com/openzeppelin/openzeppelin-contracts.git
 [submodule "lib/solady"]
 	path = lib/solady
-	url = https://github.com/vectorized/solady
+	url = https://github.com/vectorized/solady.git

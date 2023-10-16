@@ -14,13 +14,13 @@ contract CreateX_ComputeCreate2Address_3Args_Public_Test is BaseTest {
         address deployer
     ) external {
         vm.startPrank(deployer);
-        address createAddressComputedOnChain = address(new CreateX{salt: salt}());
+        address create2AddressComputedOnChain = address(new CreateX{salt: salt}());
         vm.stopPrank();
         // It returns the 20-byte address where a contract will be stored.
         // It should never revert.
         assertEq(
             createX.computeCreate2Address(salt, keccak256(type(CreateX).creationCode), deployer),
-            createAddressComputedOnChain,
+            create2AddressComputedOnChain,
             "100"
         );
     }
