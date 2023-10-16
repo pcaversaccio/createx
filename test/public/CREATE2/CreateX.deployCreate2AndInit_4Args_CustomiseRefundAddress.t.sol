@@ -9,6 +9,7 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseRefundAddress_Public_Test i
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                      HELPER VARIABLES                      */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
     address internal immutable SELF = address(this);
 
     string internal arg1;
