@@ -9,6 +9,7 @@ contract CreateX_DeployCreate2AndInit_3Args_Public_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                      HELPER VARIABLES                      */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
     address internal immutable SELF = address(this);
 
     string internal arg1;
