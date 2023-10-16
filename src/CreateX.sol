@@ -619,7 +619,7 @@ contract CreateX {
         }
         emit Create3ProxyContractCreation({newContract: proxy});
 
-        newContract = computeCreate3Address({salt: salt});
+        newContract = computeCreate3Address({salt: guardedSalt});
         (bool success, ) = proxy.call{value: msg.value}(initCode);
         _requireSuccessfulContractCreation({success: success, newContract: newContract});
         emit ContractCreation({newContract: newContract});
@@ -683,7 +683,7 @@ contract CreateX {
         }
         emit Create3ProxyContractCreation({newContract: proxy});
 
-        newContract = computeCreate3Address({salt: salt});
+        newContract = computeCreate3Address({salt: guardedSalt});
         (bool success, ) = proxy.call{value: values.constructorAmount}(initCode);
         _requireSuccessfulContractCreation({success: success, newContract: newContract});
         emit ContractCreation({newContract: newContract});
