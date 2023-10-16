@@ -417,6 +417,7 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
                 }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
+
                 // The newly created contract on chain `chainId` must be the same as the previously created contract
                 // at the `computedAddress` address. As we return to the original snapshot state, we have to recalculate
                 // the address.

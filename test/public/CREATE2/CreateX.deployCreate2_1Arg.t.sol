@@ -154,6 +154,7 @@ contract CreateX_DeployCreate2_1Arg_Public_Test is BaseTest {
         address newContractOriginalDeployer = createX.deployCreate2{value: msgValue}(cachedInitCode);
         vm.stopPrank();
         vm.assume(originalDeployer != newContractOriginalDeployer);
+
         // The newly created contract on chain `chainId` must not be the same as the previously created
         // contract at the `computedAddress` address as well as at the `newContractMsgSender` address.
         assertNotEq(newContractOriginalDeployer, computedAddress, "1800");
