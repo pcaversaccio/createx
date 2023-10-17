@@ -24,7 +24,7 @@ This project repository uses [`forge coverage`](https://book.getfoundry.sh/refer
 forge coverage
 ```
 
-The written tests available in the directory [`test`](./test) achieve a test coverage of **100%** for the [`CreateX`](./src/CreateX.sol):
+The written tests available in the directory [`test`](./test) achieve a test coverage of **100%** for the [`CreateX`](./src/CreateX.sol) contract:
 
 ```console
 | File            | % Lines           | % Statements      | % Branches      | % Funcs         |
