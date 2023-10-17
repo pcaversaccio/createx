@@ -1,7 +1,7 @@
 # `CreateX` – A Trustless, Universal Contract Deployer
 
 [![Test smart contracts](https://github.com/pcaversaccio/createx/actions/workflows/test-contracts.yml/badge.svg)](https://github.com/pcaversaccio/createx/actions/workflows/test-contracts.yml)
-[![Test coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)](#test-coverage)
+[![Test coverage](https://img.shields.io/badge/coverage-100%25-yellowgreen)](#test-coverage)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
 <img src=https://github-production-user-asset-6210df.s3.amazonaws.com/25297591/272914952-38a5989c-0113-427d-9158-47646971b7d8.png  width="1050"/>
