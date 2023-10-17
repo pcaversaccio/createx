@@ -432,8 +432,7 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
                 assertNotEq(newContractOriginalDeployer.code.length, 0, "3100");
                 assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "3200");
                 assertEq(createXAddr.balance, 0, "3300");
-                // Since everything was returned in the previous call, the balance must be equal to the original
-                // refund amount.
+                // It returns the non-zero balance to the `msg.sender` address.
                 assertEq(
                     originalDeployer.balance,
                     cachedBalance + values.constructorAmount + values.initCallAmount,

@@ -7,6 +7,7 @@
     "func-name-mixedcase": "off",
     "no-empty-blocks": "off",
     "avoid-low-level-calls": "off",
-    "no-inline-assembly": "off"
+    "no-inline-assembly": "off",
+    "max-states-count": "off"
   }
 }
