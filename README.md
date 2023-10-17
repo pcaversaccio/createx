@@ -17,7 +17,7 @@ TBD
 
 ## Test Coverage
 
-This project repository uses [`forge coverage`](https://book.getfoundry.sh/reference/forge/forge-coverage?highlight=coverag#forge-coverage). Simply run:
+This project repository uses [`forge coverage`](https://book.getfoundry.sh/reference/forge/forge-coverage). Simply run:
 
 ```console
 forge coverage
