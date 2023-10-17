@@ -6,7 +6,7 @@ import {BaseTest} from "../../utils/BaseTest.sol";
 import {ERC20MockPayable} from "../../mocks/ERC20MockPayable.sol";
 import {CreateX} from "../../../src/CreateX.sol";
 
-contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
+contract CreateX_DeployCreate3AndInit_4Args_CustomiseSalt_Public_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                      HELPER VARIABLES                      */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
@@ -145,8 +145,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 salt,
                 cachedInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         } else {
@@ -173,8 +172,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 salt,
                 cachedInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
 
@@ -200,7 +198,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 vm.startPrank(originalDeployer);
                 newContractOriginalDeployer = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
 
@@ -229,7 +227,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 vm.startPrank(msgSender);
                 newContractMsgSender = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(msgSender != newContractMsgSender);
 
@@ -260,7 +258,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 vm.startPrank(originalDeployer);
                 newContractOriginalDeployer = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
 
@@ -289,7 +287,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 vm.startPrank(originalDeployer);
                 newContractOriginalDeployer = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
 
@@ -345,6 +343,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 msgSender != createXAddr &&
                 msgSender != zeroAddress
         );
+        assumePayable(originalDeployer);
         snapshotId = vm.snapshot();
 
         // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
@@ -368,8 +367,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 salt,
                 cachedInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         } else {
@@ -396,8 +394,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 salt,
                 cachedInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
 
@@ -408,8 +405,8 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
             assertNotEq(newContract.code.length, 0, "400");
             assertEq(newContract.balance, values.constructorAmount + values.initCallAmount, "500");
             assertEq(createXAddr.balance, 0, "600");
-            // It returns the non-zero balance to the `refundAddress` address.
-            assertEq(arg3.balance, cachedBalance, "700");
+            // It returns the non-zero balance to the `msg.sender` address.
+            assertEq(originalDeployer.balance, cachedBalance + values.constructorAmount + values.initCallAmount, "700");
             assertEq(ERC20MockPayable(computedAddress).name(), arg1, "800");
             assertEq(ERC20MockPayable(computedAddress).symbol(), arg2, "900");
             assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4, "1000");
@@ -425,7 +422,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 vm.startPrank(originalDeployer);
                 newContractOriginalDeployer = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
 
@@ -440,7 +437,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 assertEq(createXAddr.balance, 0, "1600");
                 // Since everything was returned in the previous call, the balance must be equal to the original
                 // refund amount.
-                assertEq(arg3.balance, cachedBalance, "1700");
+                assertEq(originalDeployer.balance, cachedBalance, "1700");
                 assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "1800");
                 assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "1900");
                 assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "2000");
@@ -457,7 +454,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 vm.startPrank(msgSender);
                 newContractMsgSender = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(msgSender != newContractMsgSender);
 
@@ -472,7 +469,11 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 assertEq(createXAddr.balance, 0, "2600");
                 // Since everything was returned in the previous call, the balance must be equal to the original
                 // refund amount.
-                assertEq(arg3.balance, cachedBalance, "2700");
+                assertEq(
+                    originalDeployer.balance,
+                    cachedBalance + values.constructorAmount + values.initCallAmount,
+                    "2700"
+                );
                 assertEq(ERC20MockPayable(newContractMsgSender).name(), arg1, "2800");
                 assertEq(ERC20MockPayable(newContractMsgSender).symbol(), arg2, "2900");
                 assertEq(ERC20MockPayable(newContractMsgSender).balanceOf(arg3), 2 * arg4, "3000");
@@ -491,7 +492,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 vm.startPrank(originalDeployer);
                 newContractOriginalDeployer = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
 
@@ -506,8 +507,12 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 assertNotEq(newContractOriginalDeployer.code.length, 0, "3500");
                 assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "3600");
                 assertEq(createXAddr.balance, 0, "3700");
-                // It returns the non-zero balance to the `refundAddress` address.
-                assertEq(arg3.balance, cachedBalance, "3800");
+                // It returns the non-zero balance to the `msg.sender` address.
+                assertEq(
+                    originalDeployer.balance,
+                    cachedBalance + values.constructorAmount + values.initCallAmount,
+                    "3800"
+                );
                 assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "3900");
                 assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "4000");
                 assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "4100");
@@ -522,7 +527,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 vm.startPrank(originalDeployer);
                 newContractOriginalDeployer = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
 
@@ -537,7 +542,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 assertEq(createXAddr.balance, 0, "4700");
                 // Since everything was returned in the previous call, the balance must be equal to the original
                 // refund amount.
-                assertEq(arg3.balance, cachedBalance, "4800");
+                assertEq(originalDeployer.balance, cachedBalance, "4800");
                 assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "4900");
                 assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "5000");
                 assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "5100");
@@ -582,8 +587,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 salt,
                 cachedInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                SELF
+                values
             );
             vm.stopPrank();
         } else {
@@ -599,8 +603,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 salt,
                 cachedInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                SELF
+                values
             );
             vm.stopPrank();
         }
@@ -646,8 +649,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 salt,
                 cachedInitCode,
                 abi.encodeWithSignature("wagmi"),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         } else {
@@ -663,8 +665,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 salt,
                 cachedInitCode,
                 abi.encodeWithSignature("wagmi"),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         }
@@ -710,8 +711,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 salt,
                 cachedInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         } else {
@@ -723,8 +723,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 salt,
                 cachedInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         }
@@ -766,8 +765,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 salt,
                 new bytes(0),
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         } else {
@@ -779,8 +777,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 salt,
                 new bytes(0),
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         }
@@ -826,8 +823,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 salt,
                 invalidInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         } else {
@@ -839,8 +835,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 salt,
                 invalidInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         }
