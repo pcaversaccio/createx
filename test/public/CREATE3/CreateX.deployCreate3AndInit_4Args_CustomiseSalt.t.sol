@@ -99,7 +99,7 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
         _;
     }
 
-    function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength(
+    function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLengthAndWhenTheInitialisationCallIsSuccessful(
         address originalDeployer,
         CreateX.Values memory values,
         bytes32 salt,
@@ -317,7 +317,7 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
         _;
     }
 
-    function testFuzz_WhenTheRefundTransactionIsSuccessful(
+    function testFuzz_WhenTheCreateXContractHasANonZeroBalanceAndWhenTheRefundTransactionIsSuccessful(
         address originalDeployer,
         CreateX.Values memory values,
         bytes32 salt,

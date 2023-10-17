@@ -99,7 +99,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength(
+    function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLengthAndWhenTheInitialisationCallIsSuccessful(
         address originalDeployer,
         CreateX.Values memory values,
         bytes32 salt,
@@ -319,7 +319,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheRefundTransactionIsSuccessful(
+    function testFuzz_WhenTheCreateXContractHasANonZeroBalanceAndWhenTheRefundTransactionIsSuccessful(
         address originalDeployer,
         CreateX.Values memory values,
         bytes32 salt,
