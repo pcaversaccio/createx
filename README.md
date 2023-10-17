@@ -17,7 +17,21 @@ TBD
 
 ## Test Coverage
 
-TBD
+This project repository uses [`forge coverage`](https://book.getfoundry.sh/reference/forge/forge-coverage?highlight=coverag#forge-coverage). Simply run:
+
+```console
+forge coverage
+```
+
+The written tests available in the directory [test](./test) achieve a test coverage of 100% for the [`CreateX`](./src/CreateX.sol):
+
+```console
+| File                                     | % Lines           | % Statements      | % Branches      | % Funcs         |
+|------------------------------------------|-------------------|-------------------|-----------------|-----------------|
+| src/CreateX.sol                          | 100.00% (149/149) | 100.00% (210/210) | 100.00% (78/78) | 100.00% (31/31) |
+```
+
+> **Important:** A test coverage of 100% does not mean that there are no vulnerabilities. What really counts is the quality and spectrum of the tests themselves!
 
 ## Security Considerations
 
