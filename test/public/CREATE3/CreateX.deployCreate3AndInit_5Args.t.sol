@@ -345,6 +345,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 msgSender != createXAddr &&
                 msgSender != zeroAddress
         );
+        assumePayable(originalDeployer);
         snapshotId = vm.snapshot();
 
         // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
