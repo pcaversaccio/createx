@@ -89,6 +89,7 @@
     "deploy:mantlemain": "npx hardhat run --network mantleMain scripts/deploy.ts",
     "deploy:filecointestnet": "npx hardhat run --network filecoinTestnet scripts/deploy.ts",
     "deploy:scrolltestnet": "npx hardhat run --network scrollTestnet scripts/deploy.ts",
+    "deploy:scrollmain": "npx hardhat run --network scrollMain scripts/deploy.ts",
     "deploy:lineatestnet": "npx hardhat run --network lineaTestnet scripts/deploy.ts",
     "deploy:lineamain": "npx hardhat run --network lineaMain scripts/deploy.ts",
     "deploy:shimmerevmtestnet": "npx hardhat run --network shimmerEVMTestnet scripts/deploy.ts",
