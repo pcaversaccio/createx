@@ -275,6 +275,7 @@ contract CreateX_DeployCreate3AndInit_3Args_Public_Test is BaseTest {
                 msgSender != createXAddr &&
                 msgSender != zeroAddress
         );
+        assumePayable(originalDeployer);
         snapshotId = vm.snapshot();
 
         vm.startPrank(originalDeployer);
