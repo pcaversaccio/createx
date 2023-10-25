@@ -115,13 +115,15 @@ jobs:
         with:
           version: nightly
 
-      - name: Show the Foundry CI config
+      - name: Show the Foundry default config
         run: forge config
         env:
-          FOUNDRY_PROFILE: ci
+          FOUNDRY_PROFILE: default
 
       - name: Run forge-coverage
         run: forge coverage --report summary --report lcov
+        env:
+          FOUNDRY_PROFILE: default
 
       - name: Setup LCOV
         uses: hrishikesh-kadam/setup-lcov@v1
@@ -136,6 +138,7 @@ jobs:
         with:
           delete-old-comments: true
           lcov-file: ./lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Verify minimum coverage
         uses: zgosalvez/github-actions-report-lcov@v2
