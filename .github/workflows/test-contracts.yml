@@ -82,6 +82,12 @@ jobs:
 
       - name: Slither static analyser
         uses: crytic/slither-action@v0.3.0
+        id: slither
         with:
           fail-on: config
           node-version: ${{ matrix.node_version }}
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: ${{ steps.slither.outputs.sarif }}
