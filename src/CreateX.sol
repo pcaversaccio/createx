@@ -23,6 +23,7 @@ contract CreateX {
     /**
      * @dev Caches the contract address at construction, to be used for the custom errors.
      */
+    // slither-disable-next-line naming-convention
     address internal immutable _SELF = address(this);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
