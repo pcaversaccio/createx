@@ -85,7 +85,7 @@ jobs:
         id: slither
         with:
           fail-on: config
-          node-version: ${{ matrix.node_version }}
+          sarif: results.sarif
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
