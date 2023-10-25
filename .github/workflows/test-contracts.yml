@@ -121,7 +121,7 @@ jobs:
           FOUNDRY_PROFILE: default
 
       - name: Run forge-coverage
-        run: forge coverage --report summary --report lcov
+        run: NO_COLOR=1 forge coverage --report summary --report lcov >> $GITHUB_STEP_SUMMARY
         env:
           FOUNDRY_PROFILE: default
 
