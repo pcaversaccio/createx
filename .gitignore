@@ -52,9 +52,9 @@ artifacts
 # TypeScript bindings output directory
 typechain-types
 
-# solidity-coverage directory and output file
+# forge-coverage directory and lcov.info file
 coverage
-coverage.json
+lcov.info
 
 # Foundry output directory
 forge-artifacts

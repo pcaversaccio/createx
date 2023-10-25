@@ -28,7 +28,8 @@
     "node": "npx hardhat node",
     "clean": "npx hardhat clean",
     "test": "forge test --out forge-artifacts",
-    "coverage": "npx hardhat coverage",
+    "coverage": "forge coverage --report summary",
+    "coverage:report": "forge coverage --report lcov && lcov --remove lcov.info 'test/*' --output-file lcov.info --rc lcov_branch_coverage=1 && genhtml lcov.info --branch-coverage --output-dir coverage",
     "compile": "npx hardhat compile",
     "build": "forge build --out forge-artifacts",
     "size": "npx hardhat size-contracts",
@@ -128,7 +129,6 @@
     "prettier": "^3.0.3",
     "prettier-plugin-solidity": "^1.1.3",
     "solhint": "^3.6.2",
-    "solidity-coverage": "^0.8.5",
     "ts-node": "^10.9.1",
     "typechain": "^8.3.2",
     "typescript": "^5.2.2"
