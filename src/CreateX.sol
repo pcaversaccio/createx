@@ -155,6 +155,7 @@ contract CreateX {
         _requireSuccessfulContractCreation({newContract: newContract});
         emit ContractCreation({newContract: newContract});
 
+        // slither-disable-next-line arbitrary-send-eth
         (bool success, bytes memory returnData) = newContract.call{value: values.initCallAmount}(data);
         if (!success) {
             revert FailedContractInitialisation({emitter: _SELF, revertData: returnData});

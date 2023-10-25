@@ -1,7 +1,7 @@
 {
   "compile_force_framework": "foundry",
   "hardhat_ignore_compile": true,
-  "detectors_to_exclude": "pragma,solc-version,assembly,too-many-digits,low-level-calls",
+  "detectors_to_exclude": "pragma,solc-version,assembly,too-many-digits,low-level-calls,missing-zero-check,reentrancy-events",
   "exclude_informational": false,
   "exclude_low": false,
   "exclude_medium": false,
