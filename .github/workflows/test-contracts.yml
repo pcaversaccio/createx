@@ -82,6 +82,6 @@ jobs:
 
       - name: Slither static analyser
         uses: crytic/slither-action@v0.3.0
-        continue-on-error: true
         with:
+          fail-on: config
           node-version: ${{ matrix.node_version }}
