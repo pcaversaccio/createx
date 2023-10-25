@@ -458,7 +458,7 @@ const config: HardhatUserConfig = {
     pretty: true,
   },
   sourcify: {
-    // We enable Sourcify verification by default
+    // Enable Sourcify verification by default
     enabled: true,
   },
   etherscan: {
