@@ -23,7 +23,6 @@ contract CreateX {
     /**
      * @dev Caches the contract address at construction, to be used for the custom errors.
      */
-    // slither-disable-next-line naming-convention
     address internal immutable _SELF = address(this);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -155,7 +154,6 @@ contract CreateX {
         _requireSuccessfulContractCreation({newContract: newContract});
         emit ContractCreation({newContract: newContract});
 
-        // slither-disable-next-line arbitrary-send-eth
         (bool success, bytes memory returnData) = newContract.call{value: values.initCallAmount}(data);
         if (!success) {
             revert FailedContractInitialisation({emitter: _SELF, revertData: returnData});
