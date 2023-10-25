@@ -457,6 +457,10 @@ const config: HardhatUserConfig = {
     spacing: 2,
     pretty: true,
   },
+  sourcify: {
+    // We enable Sourcify verification by default
+    enabled: true,
+  },
   etherscan: {
     apiKey: {
       // For Ethereum testnets & mainnet
