@@ -5,7 +5,6 @@ import "@nomicfoundation/hardhat-ethers";
 import "@nomicfoundation/hardhat-verify";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
-import "solidity-coverage";
 import "hardhat-contract-sizer";
 import "hardhat-abi-exporter";
 
