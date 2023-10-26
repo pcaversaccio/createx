@@ -1,4 +1,4 @@
-import { ethers } from "hardhat";
+import hre, { ethers } from "hardhat";
 
 async function main() {
   const contract = await ethers.deployContract("CreateX");
@@ -6,6 +6,10 @@ async function main() {
   await contract.waitForDeployment();
 
   console.log("CreateX deployed to:", await contract.getAddress());
+
+  await hre.run("verify:verify", {
+    address: contract.getAddress(),
+  });
 }
 
 main().catch((error) => {
