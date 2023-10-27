@@ -161,6 +161,7 @@ contract CreateX_DeployCreate3_1Arg_Public_Test is BaseTest {
         vm.stopPrank();
         (, , , guardedSalt) = parseFuzzerSalt(msgSender, salt);
         proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
+        vm.assume(msgSender != proxyAddress);
         // We record the emitted events to later assert the proxy contract address.
         vm.recordLogs();
         vm.expectEmit(true, true, true, true, createXAddr);
@@ -196,6 +197,7 @@ contract CreateX_DeployCreate3_1Arg_Public_Test is BaseTest {
         vm.stopPrank();
         (, , , guardedSalt) = parseFuzzerSalt(originalDeployer, salt);
         proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
+        vm.assume(originalDeployer != proxyAddress);
         vm.expectEmit(true, true, true, true, createXAddr);
         emit Create3ProxyContractCreation(proxyAddress);
         // We mock the original caller.
