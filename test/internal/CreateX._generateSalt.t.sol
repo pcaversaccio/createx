@@ -41,7 +41,9 @@ contract CreateX_GenerateSalt_Internal_Test is BaseTest {
         // We test their dependencies by determining the current salt, changing any of those
         // values, and verifying that the salt changes.
         increment = bound(increment, 1, type(uint128).max);
-        vm.assume(coinbase != zeroAddress && chainId != block.chainid && chainId != 0 && msgSender != msg.sender);
+        vm.assume(
+            coinbase != zeroAddress && chainId != block.chainid && chainId != 0 && msgSender != createXHarnessAddr
+        );
         uint256 snapshotId = vm.snapshot();
         bytes32 originalSalt = createXHarness.exposed_generateSalt();
 

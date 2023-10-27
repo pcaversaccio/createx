@@ -98,7 +98,7 @@ CreateX_DeployCreate_Public_Test:testFuzz_WhenTheInitCodeSuccessfullyCreatesARun
 CreateX_DeployCreate_Public_Test:testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength(uint64,uint256) (runs: 256, μ: 52925, ~: 52894)
 CreateX_EfficientHash_Internal_Test:testFuzz_MatchesTheOutputOfAHighLevelHashAndShouldNeverRevert(bytes32,bytes32) (runs: 256, μ: 6021, ~: 6021)
 CreateX_GenerateSalt_Internal_Test:testFuzz_NeverReverts(uint256) (runs: 256, μ: 20650, ~: 20650)
-CreateX_GenerateSalt_Internal_Test:testFuzz_ShouldBeAFunctionOfMultipleBlockPropertiesAndTheCaller(uint256,address,string,uint64,address) (runs: 256, μ: 54851, ~: 54640)
+CreateX_GenerateSalt_Internal_Test:testFuzz_ShouldBeAFunctionOfMultipleBlockPropertiesAndTheCaller(uint256,address,string,uint64,address) (runs: 256, μ: 56969, ~: 56750)
 CreateX_Guard_Internal_Test:testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(address,bytes32) (runs: 256, μ: 32527, ~: 32528)
 CreateX_Guard_Internal_Test:testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheCallerAndWhenThe21stByteOfTheSaltEquals0x00(address,bytes32) (runs: 256, μ: 32597, ~: 32597)
 CreateX_Guard_Internal_Test:testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheCallerAndWhenThe21stByteOfTheSaltEquals0x01(address,bytes32) (runs: 256, μ: 32537, ~: 32537)
