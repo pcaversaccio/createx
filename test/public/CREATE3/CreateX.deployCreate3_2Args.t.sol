@@ -133,8 +133,10 @@ contract CreateX_DeployCreate3_2Args_Public_Test is BaseTest {
         } else {
             // We calculate the address beforehand where the contract is to be deployed.
             computedAddress = createX.computeCreate3Address(guardedSalt, createXAddr);
+            vm.assume(originalDeployer != computedAddress);
             // We calculate the address beforehand where the proxy is to be deployed.
             address proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
+            vm.assume(originalDeployer != proxyAddress);
 
             // It emits the event `Create3ProxyContractCreation` with the proxy address as indexed argument.
             // We record the emitted events to later assert the proxy contract address.
