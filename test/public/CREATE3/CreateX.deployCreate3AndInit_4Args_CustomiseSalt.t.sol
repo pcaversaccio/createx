@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.21;
 
+import {Vm} from "forge-std/Vm.sol";
 import {BaseTest} from "../../utils/BaseTest.sol";
 import {ERC20MockPayable} from "../../mocks/ERC20MockPayable.sol";
 import {CreateX} from "../../../src/CreateX.sol";
 
-contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
+contract CreateX_DeployCreate3AndInit_4Args_CustomiseSalt_Public_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                      HELPER VARIABLES                      */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
@@ -19,15 +20,21 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
     bytes internal args;
 
     bytes internal cachedInitCode;
-    bytes32 internal initCodeHash;
+    // The `keccak256`-hashed `CREATE3` proxy contract creation bytecode.
+    bytes32 internal proxyInitCodeHash = keccak256(abi.encodePacked(hex"67363d3d37363d34f03d5260086018f3"));
     uint256 internal cachedBalance;
 
     // To avoid any stack-too-deep errors, we use `internal` state variables for the precomputed `CREATE2` address
     // and some further contract deployment addresses and variables.
     address internal computedAddress;
+    address internal proxyAddress;
     address internal newContractOriginalDeployer;
     address internal newContractMsgSender;
     uint256 internal snapshotId;
+    bool internal permissionedDeployProtection;
+    bool internal xChainRedeployProtection;
+    bool internal mustRevert;
+    bytes32 internal guardedSalt;
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                           EVENTS                           */
@@ -44,6 +51,12 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
      * @param amount The 32-byte token amount to be transferred.
      */
     event Transfer(address indexed owner, address indexed to, uint256 amount);
+
+    /**
+     * @dev Event that is emitted when a `CREATE3` proxy contract is successfully created.
+     * @param newContract The address of the new proxy contract.
+     */
+    event Create3ProxyContractCreation(address indexed newContract);
 
     /**
      * @dev Event that is emitted when a contract is successfully created.
@@ -73,7 +86,6 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
         arg4 = 100;
         args = abi.encode(arg1, arg2, arg3, arg4);
         cachedInitCode = abi.encodePacked(type(ERC20MockPayable).creationCode, args);
-        initCodeHash = keccak256(cachedInitCode);
     }
 
     modifier whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength() {
@@ -120,30 +132,35 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
         if (chainId % 3 == 0) {
             salt = bytes32(abi.encodePacked(bytes20(salt), hex"01", bytes11(uint88(uint256(salt)))));
         }
-        (
-            bool permissionedDeployProtection,
-            bool xChainRedeployProtection,
-            bool mustRevert,
-            bytes32 guardedSalt
-        ) = parseFuzzerSalt(originalDeployer, salt);
+        (permissionedDeployProtection, xChainRedeployProtection, mustRevert, guardedSalt) = parseFuzzerSalt(
+            originalDeployer,
+            salt
+        );
 
         if (mustRevert) {
             vm.startPrank(originalDeployer);
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXAddr);
             vm.expectRevert(expectedErr);
-            createX.deployCreate2AndInit{value: values.constructorAmount + values.initCallAmount}(
+            createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
                 salt,
                 cachedInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         } else {
             // We calculate the address beforehand where the contract is to be deployed.
-            computedAddress = createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr);
+            computedAddress = createX.computeCreate3Address(guardedSalt, createXAddr);
             vm.assume(originalDeployer != computedAddress);
+            // We calculate the address beforehand where the proxy is to be deployed.
+            proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
+            vm.assume(originalDeployer != proxyAddress);
 
+            // It emits the event `Create3ProxyContractCreation` with the proxy address as indexed argument.
+            // We record the emitted events to later assert the proxy contract address.
+            vm.recordLogs();
+            vm.expectEmit(true, true, true, true, createXAddr);
+            emit Create3ProxyContractCreation(proxyAddress);
             // We also check for the ERC-20 standard `Transfer` event.
             vm.expectEmit(true, true, true, true, computedAddress);
             emit Transfer(zeroAddress, arg3, arg4);
@@ -152,112 +169,145 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
             vm.expectEmit(true, true, true, true, createXAddr);
             emit ContractCreation(computedAddress);
             vm.startPrank(originalDeployer);
-            address newContract = createX.deployCreate2AndInit{value: values.constructorAmount + values.initCallAmount}(
+            address newContract = createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
                 salt,
                 cachedInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
 
-            assertEq(newContract, computedAddress, "100");
-            assertNotEq(newContract, zeroAddress, "200");
-            assertNotEq(newContract.code.length, 0, "300");
-            assertEq(newContract.balance, values.constructorAmount + values.initCallAmount, "400");
-            assertEq(createXAddr.balance, 0, "500");
-            assertEq(ERC20MockPayable(computedAddress).name(), arg1, "600");
-            assertEq(ERC20MockPayable(computedAddress).symbol(), arg2, "700");
-            assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4, "800");
+            Vm.Log[] memory entries = vm.getRecordedLogs();
+            assertEq(entries[0].topics[1], bytes32(uint256(uint160(proxyAddress))), "100");
+            assertEq(newContract, computedAddress, "200");
+            assertNotEq(newContract, zeroAddress, "300");
+            assertNotEq(newContract.code.length, 0, "400");
+            assertEq(newContract.balance, values.constructorAmount + values.initCallAmount, "500");
+            assertEq(createXAddr.balance, 0, "600");
+            assertEq(ERC20MockPayable(computedAddress).name(), arg1, "700");
+            assertEq(ERC20MockPayable(computedAddress).symbol(), arg2, "800");
+            assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4, "900");
 
             if (permissionedDeployProtection && xChainRedeployProtection) {
                 vm.chainId(chainId);
+                (, , , guardedSalt) = parseFuzzerSalt(originalDeployer, salt);
+                proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
+                vm.assume(originalDeployer != proxyAddress);
+                // We record the emitted events to later assert the proxy contract address.
+                vm.recordLogs();
+                vm.expectEmit(true, true, true, true, createXAddr);
+                emit Create3ProxyContractCreation(proxyAddress);
                 vm.startPrank(originalDeployer);
-                newContractOriginalDeployer = createX.deployCreate2AndInit{
+                newContractOriginalDeployer = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
 
+                entries = vm.getRecordedLogs();
+                assertEq(entries[0].topics[1], bytes32(uint256(uint160(proxyAddress))), "1000");
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractOriginalDeployer, computedAddress, "900");
-                assertNotEq(newContractOriginalDeployer, zeroAddress, "1000");
-                assertNotEq(newContractOriginalDeployer.code.length, 0, "1100");
-                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "1200");
-                assertEq(createXAddr.balance, 0, "1300");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "1400");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "1500");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "1600");
+                assertNotEq(newContractOriginalDeployer, computedAddress, "1100");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "1200");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "1300");
+                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "1400");
+                assertEq(createXAddr.balance, 0, "1500");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "1600");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "1700");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "1800");
             } else if (permissionedDeployProtection) {
                 vm.chainId(chainId);
+                (, , , guardedSalt) = parseFuzzerSalt(msgSender, salt);
+                proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
+                vm.assume(msgSender != proxyAddress);
+                // We record the emitted events to later assert the proxy contract address.
+                vm.recordLogs();
+                vm.expectEmit(true, true, true, true, createXAddr);
+                emit Create3ProxyContractCreation(proxyAddress);
                 // We mock a potential frontrunner address.
                 vm.deal(msgSender, values.constructorAmount + values.initCallAmount);
                 vm.startPrank(msgSender);
-                newContractMsgSender = createX.deployCreate2AndInit{
+                newContractMsgSender = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(msgSender != newContractMsgSender);
 
+                entries = vm.getRecordedLogs();
+                assertEq(entries[0].topics[1], bytes32(uint256(uint160(proxyAddress))), "1900");
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractMsgSender, computedAddress, "1700");
-                assertNotEq(newContractMsgSender, zeroAddress, "1800");
-                assertNotEq(newContractMsgSender.code.length, 0, "1900");
-                assertEq(newContractMsgSender.balance, values.constructorAmount + values.initCallAmount, "2000");
-                assertEq(createXAddr.balance, 0, "2100");
-                assertEq(ERC20MockPayable(newContractMsgSender).name(), arg1, "2200");
-                assertEq(ERC20MockPayable(newContractMsgSender).symbol(), arg2, "2300");
-                assertEq(ERC20MockPayable(newContractMsgSender).balanceOf(arg3), 2 * arg4, "2400");
+                assertNotEq(newContractMsgSender, computedAddress, "2000");
+                assertNotEq(newContractMsgSender, zeroAddress, "2100");
+                assertNotEq(newContractMsgSender.code.length, 0, "2200");
+                assertEq(newContractMsgSender.balance, values.constructorAmount + values.initCallAmount, "2300");
+                assertEq(createXAddr.balance, 0, "2400");
+                assertEq(ERC20MockPayable(newContractMsgSender).name(), arg1, "2500");
+                assertEq(ERC20MockPayable(newContractMsgSender).symbol(), arg2, "2600");
+                assertEq(ERC20MockPayable(newContractMsgSender).balanceOf(arg3), 2 * arg4, "2700");
 
                 // Foundry does not create a new, clean EVM environment when the `chainId` is changed, and
                 // a deployment of a contract to the same address therefore fails (see issue: https://github.com/foundry-rs/foundry/issues/6008).
                 // To solve this problem, we return to the original snapshot state.
                 vm.revertTo(snapshotId);
+                // We record the emitted events to later assert the proxy contract address.
+                vm.recordLogs();
+                (, , , guardedSalt) = parseFuzzerSalt(originalDeployer, salt);
+                proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
+                vm.assume(originalDeployer != proxyAddress);
+                vm.expectEmit(true, true, true, true, createXAddr);
+                emit Create3ProxyContractCreation(proxyAddress);
                 // We mock the original caller.
                 vm.startPrank(originalDeployer);
-                newContractOriginalDeployer = createX.deployCreate2AndInit{
+                newContractOriginalDeployer = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
 
+                entries = vm.getRecordedLogs();
+                assertEq(entries[0].topics[1], bytes32(uint256(uint160(proxyAddress))), "2800");
                 // The newly created contract on chain `chainId` must be the same as the previously created contract
                 // at the `computedAddress` address. As we return to the original snapshot state, we have to recalculate
                 // the address.
-                assertEq(
-                    newContractOriginalDeployer,
-                    createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr),
-                    "2500"
-                );
-                assertNotEq(newContractOriginalDeployer, newContractMsgSender, "2600");
-                assertNotEq(newContractOriginalDeployer, zeroAddress, "2700");
-                assertNotEq(newContractOriginalDeployer.code.length, 0, "2800");
-                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "2900");
-                assertEq(createXAddr.balance, 0, "3000");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "3100");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "3200");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "3300");
+                assertEq(newContractOriginalDeployer, createX.computeCreate3Address(guardedSalt, createXAddr), "2900");
+                assertNotEq(newContractOriginalDeployer, newContractMsgSender, "3000");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "3100");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "3200");
+                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "3300");
+                assertEq(createXAddr.balance, 0, "3400");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "3500");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "3600");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "3700");
             } else if (xChainRedeployProtection) {
                 vm.chainId(chainId);
+                (, , , guardedSalt) = parseFuzzerSalt(originalDeployer, salt);
+                proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
+                vm.assume(originalDeployer != proxyAddress);
+                // We record the emitted events to later assert the proxy contract address.
+                vm.recordLogs();
+                vm.expectEmit(true, true, true, true, createXAddr);
+                emit Create3ProxyContractCreation(proxyAddress);
                 vm.startPrank(originalDeployer);
-                newContractOriginalDeployer = createX.deployCreate2AndInit{
+                newContractOriginalDeployer = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
 
+                entries = vm.getRecordedLogs();
+                assertEq(entries[0].topics[1], bytes32(uint256(uint160(proxyAddress))), "3800");
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractOriginalDeployer, computedAddress, "3400");
-                assertNotEq(newContractOriginalDeployer, zeroAddress, "3500");
-                assertNotEq(newContractOriginalDeployer.code.length, 0, "3600");
-                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "3700");
-                assertEq(createXAddr.balance, 0, "3800");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "3900");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "4000");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "4100");
+                assertNotEq(newContractOriginalDeployer, computedAddress, "3900");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "4000");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "4100");
+                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "4200");
+                assertEq(createXAddr.balance, 0, "4300");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "4400");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "4500");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "4600");
             }
         }
     }
@@ -298,6 +348,7 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
                 msgSender != createXAddr &&
                 msgSender != zeroAddress
         );
+        assumePayable(originalDeployer);
         snapshotId = vm.snapshot();
 
         // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
@@ -308,30 +359,35 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
         if (chainId % 3 == 0) {
             salt = bytes32(abi.encodePacked(bytes20(salt), hex"01", bytes11(uint88(uint256(salt)))));
         }
-        (
-            bool permissionedDeployProtection,
-            bool xChainRedeployProtection,
-            bool mustRevert,
-            bytes32 guardedSalt
-        ) = parseFuzzerSalt(originalDeployer, salt);
+        (permissionedDeployProtection, xChainRedeployProtection, mustRevert, guardedSalt) = parseFuzzerSalt(
+            originalDeployer,
+            salt
+        );
 
         if (mustRevert) {
             vm.startPrank(originalDeployer);
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXAddr);
             vm.expectRevert(expectedErr);
-            createX.deployCreate2AndInit{value: values.constructorAmount + values.initCallAmount}(
+            createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
                 salt,
                 cachedInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         } else {
             // We calculate the address beforehand where the contract is to be deployed.
-            computedAddress = createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr);
+            computedAddress = createX.computeCreate3Address(guardedSalt, createXAddr);
             vm.assume(originalDeployer != computedAddress);
+            // We calculate the address beforehand where the proxy is to be deployed.
+            proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
+            vm.assume(originalDeployer != proxyAddress);
 
+            // It emits the event `Create3ProxyContractCreation` with the proxy address as indexed argument.
+            // We record the emitted events to later assert the proxy contract address.
+            vm.recordLogs();
+            vm.expectEmit(true, true, true, true, createXAddr);
+            emit Create3ProxyContractCreation(proxyAddress);
             // We also check for the ERC-20 standard `Transfer` event.
             vm.expectEmit(true, true, true, true, computedAddress);
             emit Transfer(zeroAddress, arg3, arg4);
@@ -340,125 +396,166 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
             vm.expectEmit(true, true, true, true, createXAddr);
             emit ContractCreation(computedAddress);
             vm.startPrank(originalDeployer);
-            address newContract = createX.deployCreate2AndInit{value: values.constructorAmount + values.initCallAmount}(
+            address newContract = createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
                 salt,
                 cachedInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
 
-            assertEq(newContract, computedAddress, "100");
-            assertNotEq(newContract, zeroAddress, "200");
-            assertNotEq(newContract.code.length, 0, "300");
-            assertEq(newContract.balance, values.constructorAmount + values.initCallAmount, "400");
-            assertEq(createXAddr.balance, 0, "500");
-            // It returns the non-zero balance to the `refundAddress` address.
-            assertEq(arg3.balance, cachedBalance, "600");
-            assertEq(ERC20MockPayable(computedAddress).name(), arg1, "700");
-            assertEq(ERC20MockPayable(computedAddress).symbol(), arg2, "800");
-            assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4, "900");
+            Vm.Log[] memory entries = vm.getRecordedLogs();
+            assertEq(entries[0].topics[1], bytes32(uint256(uint160(proxyAddress))), "100");
+            assertEq(newContract, computedAddress, "200");
+            assertNotEq(newContract, zeroAddress, "300");
+            assertNotEq(newContract.code.length, 0, "400");
+            assertEq(newContract.balance, values.constructorAmount + values.initCallAmount, "500");
+            assertEq(createXAddr.balance, 0, "600");
+            // It returns the non-zero balance to the `msg.sender` address.
+            assertEq(originalDeployer.balance, cachedBalance + values.constructorAmount + values.initCallAmount, "700");
+            assertEq(ERC20MockPayable(computedAddress).name(), arg1, "800");
+            assertEq(ERC20MockPayable(computedAddress).symbol(), arg2, "900");
+            assertEq(ERC20MockPayable(computedAddress).balanceOf(arg3), 2 * arg4, "1000");
 
             if (permissionedDeployProtection && xChainRedeployProtection) {
                 vm.chainId(chainId);
+                (, , , guardedSalt) = parseFuzzerSalt(originalDeployer, salt);
+                proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
+                vm.assume(originalDeployer != proxyAddress);
+                // We record the emitted events to later assert the proxy contract address.
+                vm.recordLogs();
+                vm.expectEmit(true, true, true, true, createXAddr);
+                emit Create3ProxyContractCreation(proxyAddress);
                 vm.startPrank(originalDeployer);
-                newContractOriginalDeployer = createX.deployCreate2AndInit{
+                newContractOriginalDeployer = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
 
+                entries = vm.getRecordedLogs();
+                assertEq(entries[0].topics[1], bytes32(uint256(uint160(proxyAddress))), "1100");
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractOriginalDeployer, computedAddress, "1000");
-                assertNotEq(newContractOriginalDeployer, zeroAddress, "1100");
-                assertNotEq(newContractOriginalDeployer.code.length, 0, "1200");
-                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "1300");
-                assertEq(createXAddr.balance, 0, "1400");
+                assertNotEq(newContractOriginalDeployer, computedAddress, "1200");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "1300");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "1400");
+                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "1500");
+                assertEq(createXAddr.balance, 0, "1600");
                 // Since everything was returned in the previous call, the balance must be equal to the original
                 // refund amount.
-                assertEq(arg3.balance, cachedBalance, "1500");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "1600");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "1700");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "1800");
+                assertEq(originalDeployer.balance, cachedBalance, "1700");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "1800");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "1900");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "2000");
             } else if (permissionedDeployProtection) {
                 vm.chainId(chainId);
+                (, , , guardedSalt) = parseFuzzerSalt(msgSender, salt);
+                proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
+                vm.assume(msgSender != proxyAddress);
+                // We record the emitted events to later assert the proxy contract address.
+                vm.recordLogs();
+                vm.expectEmit(true, true, true, true, createXAddr);
+                emit Create3ProxyContractCreation(proxyAddress);
                 // We mock a potential frontrunner address.
                 vm.deal(msgSender, values.constructorAmount + values.initCallAmount);
                 vm.startPrank(msgSender);
-                newContractMsgSender = createX.deployCreate2AndInit{
+                newContractMsgSender = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(msgSender != newContractMsgSender);
 
+                entries = vm.getRecordedLogs();
+                assertEq(entries[0].topics[1], bytes32(uint256(uint160(proxyAddress))), "2100");
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractMsgSender, computedAddress, "1900");
-                assertNotEq(newContractMsgSender, zeroAddress, "2000");
-                assertNotEq(newContractMsgSender.code.length, 0, "2100");
-                assertEq(newContractMsgSender.balance, values.constructorAmount + values.initCallAmount, "2200");
-                assertEq(createXAddr.balance, 0, "2300");
+                assertNotEq(newContractMsgSender, computedAddress, "2200");
+                assertNotEq(newContractMsgSender, zeroAddress, "2300");
+                assertNotEq(newContractMsgSender.code.length, 0, "2400");
+                assertEq(newContractMsgSender.balance, values.constructorAmount + values.initCallAmount, "2500");
+                assertEq(createXAddr.balance, 0, "2600");
                 // Since everything was returned in the previous call, the balance must be equal to the original
                 // refund amount.
-                assertEq(arg3.balance, cachedBalance, "2400");
-                assertEq(ERC20MockPayable(newContractMsgSender).name(), arg1, "2500");
-                assertEq(ERC20MockPayable(newContractMsgSender).symbol(), arg2, "2600");
-                assertEq(ERC20MockPayable(newContractMsgSender).balanceOf(arg3), 2 * arg4, "2700");
+                assertEq(
+                    originalDeployer.balance,
+                    cachedBalance + values.constructorAmount + values.initCallAmount,
+                    "2700"
+                );
+                assertEq(ERC20MockPayable(newContractMsgSender).name(), arg1, "2800");
+                assertEq(ERC20MockPayable(newContractMsgSender).symbol(), arg2, "2900");
+                assertEq(ERC20MockPayable(newContractMsgSender).balanceOf(arg3), 2 * arg4, "3000");
 
                 // Foundry does not create a new, clean EVM environment when the `chainId` is changed, and
                 // a deployment of a contract to the same address therefore fails (see issue: https://github.com/foundry-rs/foundry/issues/6008).
                 // To solve this problem, we return to the original snapshot state.
                 vm.revertTo(snapshotId);
+                // We record the emitted events to later assert the proxy contract address.
+                vm.recordLogs();
+                (, , , guardedSalt) = parseFuzzerSalt(originalDeployer, salt);
+                proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
+                vm.assume(originalDeployer != proxyAddress);
+                vm.expectEmit(true, true, true, true, createXAddr);
+                emit Create3ProxyContractCreation(proxyAddress);
                 // We mock the original caller.
                 vm.startPrank(originalDeployer);
-                newContractOriginalDeployer = createX.deployCreate2AndInit{
+                newContractOriginalDeployer = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
 
+                entries = vm.getRecordedLogs();
+                assertEq(entries[0].topics[1], bytes32(uint256(uint160(proxyAddress))), "3100");
                 // The newly created contract on chain `chainId` must be the same as the previously created contract
                 // at the `computedAddress` address. As we return to the original snapshot state, we have to recalculate
                 // the address.
+                assertEq(newContractOriginalDeployer, createX.computeCreate3Address(guardedSalt, createXAddr), "3200");
+                assertNotEq(newContractOriginalDeployer, newContractMsgSender, "3300");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "3400");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "3500");
+                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "3600");
+                assertEq(createXAddr.balance, 0, "3700");
+                // It returns the non-zero balance to the `msg.sender` address.
                 assertEq(
-                    newContractOriginalDeployer,
-                    createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr),
-                    "2800"
+                    originalDeployer.balance,
+                    cachedBalance + values.constructorAmount + values.initCallAmount,
+                    "3800"
                 );
-                assertNotEq(newContractOriginalDeployer, newContractMsgSender, "2900");
-                assertNotEq(newContractOriginalDeployer, zeroAddress, "3000");
-                assertNotEq(newContractOriginalDeployer.code.length, 0, "3100");
-                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "3200");
-                assertEq(createXAddr.balance, 0, "3300");
-                // It returns the non-zero balance to the `refundAddress` address.
-                assertEq(arg3.balance, cachedBalance, "3400");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "3500");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "3600");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "3700");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "3900");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "4000");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "4100");
             } else if (xChainRedeployProtection) {
                 vm.chainId(chainId);
+                (, , , guardedSalt) = parseFuzzerSalt(originalDeployer, salt);
+                proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
+                vm.assume(originalDeployer != proxyAddress);
+                // We record the emitted events to later assert the proxy contract address.
+                vm.recordLogs();
+                vm.expectEmit(true, true, true, true, createXAddr);
+                emit Create3ProxyContractCreation(proxyAddress);
                 vm.startPrank(originalDeployer);
-                newContractOriginalDeployer = createX.deployCreate2AndInit{
+                newContractOriginalDeployer = createX.deployCreate3AndInit{
                     value: values.constructorAmount + values.initCallAmount
-                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values, arg3);
+                }(salt, cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values);
                 vm.stopPrank();
                 vm.assume(originalDeployer != newContractOriginalDeployer);
 
+                entries = vm.getRecordedLogs();
+                assertEq(entries[0].topics[1], bytes32(uint256(uint160(proxyAddress))), "4200");
                 // The newly created contract on chain `chainId` must not be the same as the previously created
                 // contract at the `computedAddress` address.
-                assertNotEq(newContractOriginalDeployer, computedAddress, "3800");
-                assertNotEq(newContractOriginalDeployer, zeroAddress, "3900");
-                assertNotEq(newContractOriginalDeployer.code.length, 0, "4000");
-                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "4100");
-                assertEq(createXAddr.balance, 0, "4200");
+                assertNotEq(newContractOriginalDeployer, computedAddress, "4300");
+                assertNotEq(newContractOriginalDeployer, zeroAddress, "4400");
+                assertNotEq(newContractOriginalDeployer.code.length, 0, "4500");
+                assertEq(newContractOriginalDeployer.balance, values.constructorAmount + values.initCallAmount, "4600");
+                assertEq(createXAddr.balance, 0, "4700");
                 // Since everything was returned in the previous call, the balance must be equal to the original
                 // refund amount.
-                assertEq(arg3.balance, cachedBalance, "4300");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "4400");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "4500");
-                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "4600");
+                assertEq(originalDeployer.balance, cachedBalance, "4800");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).name(), arg1, "4900");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).symbol(), arg2, "5000");
+                assertEq(ERC20MockPayable(newContractOriginalDeployer).balanceOf(arg3), 2 * arg4, "5100");
             }
         }
     }
@@ -491,17 +588,16 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
         if (chainId % 3 == 0) {
             salt = bytes32(abi.encodePacked(bytes20(salt), hex"01", bytes11(uint88(uint256(salt)))));
         }
-        (, , bool mustRevert, ) = parseFuzzerSalt(SELF, salt);
+        (, , mustRevert, ) = parseFuzzerSalt(SELF, salt);
         if (mustRevert) {
             vm.startPrank(SELF);
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXAddr);
             vm.expectRevert(expectedErr);
-            createX.deployCreate2AndInit{value: values.constructorAmount + values.initCallAmount}(
+            createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
                 salt,
                 cachedInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                SELF
+                values
             );
             vm.stopPrank();
         } else {
@@ -513,12 +609,11 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
                 new bytes(0)
             );
             vm.expectRevert(expectedErr);
-            createX.deployCreate2AndInit{value: values.constructorAmount + values.initCallAmount}(
+            createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
                 salt,
                 cachedInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                SELF
+                values
             );
             vm.stopPrank();
         }
@@ -555,17 +650,16 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
         if (chainId % 3 == 0) {
             salt = bytes32(abi.encodePacked(bytes20(salt), hex"01", bytes11(uint88(uint256(salt)))));
         }
-        (, , bool mustRevert, ) = parseFuzzerSalt(originalDeployer, salt);
+        (, , mustRevert, ) = parseFuzzerSalt(originalDeployer, salt);
         if (mustRevert) {
             vm.startPrank(originalDeployer);
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXAddr);
             vm.expectRevert(expectedErr);
-            createX.deployCreate2AndInit{value: values.constructorAmount + values.initCallAmount}(
+            createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
                 salt,
                 cachedInitCode,
                 abi.encodeWithSignature("wagmi"),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         } else {
@@ -577,12 +671,69 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
                 new bytes(0)
             );
             vm.expectRevert(expectedErr);
-            createX.deployCreate2AndInit{value: values.constructorAmount + values.initCallAmount}(
+            createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
                 salt,
                 cachedInitCode,
                 abi.encodeWithSignature("wagmi"),
-                values,
-                arg3
+                values
+            );
+            vm.stopPrank();
+        }
+    }
+
+    modifier whenTheProxyContractCreationFails() {
+        _;
+    }
+
+    function testFuzz_WhenTheProxyContractCreationFails(
+        address originalDeployer,
+        CreateX.Values memory values,
+        bytes32 salt,
+        uint64 chainId
+    ) external whenTheProxyContractCreationFails {
+        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
+        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
+        vm.deal(originalDeployer, values.constructorAmount + values.initCallAmount);
+        vm.assume(
+            chainId != block.chainid &&
+                chainId != 0 &&
+                originalDeployer != createXAddr &&
+                originalDeployer != zeroAddress
+        );
+        // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
+        if (chainId % 2 == 0) {
+            salt = bytes32(abi.encodePacked(originalDeployer, bytes12(uint96(uint256(salt)))));
+        }
+        // Helper logic to increase the probability of matching a cross-chain redeploy protection during fuzzing.
+        if (chainId % 3 == 0) {
+            salt = bytes32(abi.encodePacked(bytes20(salt), hex"01", bytes11(uint88(uint256(salt)))));
+        }
+        (, , mustRevert, guardedSalt) = parseFuzzerSalt(originalDeployer, salt);
+        // We calculate the address beforehand where the contract is to be deployed.
+        computedAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
+        // To enforce a deployment failure, we add code to the destination address `proxy`.
+        vm.etch(computedAddress, hex"01");
+        if (mustRevert) {
+            vm.startPrank(originalDeployer);
+            bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXAddr);
+            vm.expectRevert(expectedErr);
+            createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
+                salt,
+                cachedInitCode,
+                abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
+                values
+            );
+            vm.stopPrank();
+        } else {
+            vm.startPrank(originalDeployer);
+            // It should revert.
+            bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
+            vm.expectRevert(expectedErr);
+            createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
+                salt,
+                cachedInitCode,
+                abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
+                values
             );
             vm.stopPrank();
         }
@@ -615,17 +766,16 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
         if (chainId % 3 == 0) {
             salt = bytes32(abi.encodePacked(bytes20(salt), hex"01", bytes11(uint88(uint256(salt)))));
         }
-        (, , bool mustRevert, ) = parseFuzzerSalt(originalDeployer, salt);
+        (, , mustRevert, ) = parseFuzzerSalt(originalDeployer, salt);
         if (mustRevert) {
             vm.startPrank(originalDeployer);
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXAddr);
             vm.expectRevert(expectedErr);
-            createX.deployCreate2AndInit{value: values.constructorAmount + values.initCallAmount}(
+            createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
                 salt,
                 new bytes(0),
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         } else {
@@ -633,12 +783,11 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
             // It should revert.
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
             vm.expectRevert(expectedErr);
-            createX.deployCreate2AndInit{value: values.constructorAmount + values.initCallAmount}(
+            createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
                 salt,
                 new bytes(0),
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         }
@@ -671,7 +820,7 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
         if (chainId % 3 == 0) {
             salt = bytes32(abi.encodePacked(bytes20(salt), hex"01", bytes11(uint88(uint256(salt)))));
         }
-        (, , bool mustRevert, ) = parseFuzzerSalt(originalDeployer, salt);
+        (, , mustRevert, ) = parseFuzzerSalt(originalDeployer, salt);
         // The following contract creation code contains the invalid opcode `PUSH0` (`0x5F`) and `CREATE` must therefore
         // return the zero address (technically zero bytes `0x`), as the deployment fails. This test also ensures that if
         // we ever accidentally change the EVM version in Foundry and Hardhat, we will always have a corresponding failed test.
@@ -680,12 +829,11 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
             vm.startPrank(originalDeployer);
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXAddr);
             vm.expectRevert(expectedErr);
-            createX.deployCreate2AndInit{value: values.constructorAmount + values.initCallAmount}(
+            createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
                 salt,
                 invalidInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         } else {
@@ -693,12 +841,11 @@ contract CreateX_DeployCreate2AndInit_5Args_Public_Test is BaseTest {
             // It should revert.
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
             vm.expectRevert(expectedErr);
-            createX.deployCreate2AndInit{value: values.constructorAmount + values.initCallAmount}(
+            createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
                 salt,
                 invalidInitCode,
                 abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-                values,
-                arg3
+                values
             );
             vm.stopPrank();
         }

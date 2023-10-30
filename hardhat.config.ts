@@ -5,7 +5,6 @@ import "@nomicfoundation/hardhat-ethers";
 import "@nomicfoundation/hardhat-verify";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
-import "solidity-coverage";
 import "hardhat-contract-sizer";
 import "hardhat-abi-exporter";
 
@@ -94,6 +93,12 @@ const config: HardhatUserConfig = {
     optimismTestnet: {
       chainId: 420,
       url: process.env.OPTIMISM_TESTNET_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    optimismSepolia: {
+      chainId: 11155420,
+      url: process.env.OPTIMISM_SEPOLIA_URL || "",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
@@ -325,6 +330,12 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
+    baseSepolia: {
+      chainId: 84532,
+      url: process.env.BASE_SEPOLIA_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
     baseMain: {
       chainId: 8453,
       url: process.env.BASE_MAINNET_URL || "",
@@ -350,8 +361,14 @@ const config: HardhatUserConfig = {
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
     scrollTestnet: {
-      chainId: 534353,
+      chainId: 534351,
       url: process.env.SCROLL_TESTNET_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    scrollMain: {
+      chainId: 534352,
+      url: process.env.SCROLL_MAINNET_URL || "",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
@@ -439,6 +456,10 @@ const config: HardhatUserConfig = {
     spacing: 2,
     pretty: true,
   },
+  sourcify: {
+    // Enable Sourcify verification by default
+    enabled: true,
+  },
   etherscan: {
     apiKey: {
       // For Ethereum testnets & mainnet
@@ -455,9 +476,10 @@ const config: HardhatUserConfig = {
       // For Fantom testnet & mainnet
       opera: process.env.FANTOM_API_KEY || "",
       ftmTestnet: process.env.FANTOM_API_KEY || "",
-      // For Optimism testnet & mainnet
+      // For Optimism testnets & mainnet
       optimisticEthereum: process.env.OPTIMISM_API_KEY || "",
       optimisticGoerli: process.env.OPTIMISM_API_KEY || "",
+      optimisticSepolia: process.env.OPTIMISM_API_KEY || "",
       // For Polygon testnets & mainnets
       polygon: process.env.POLYGON_API_KEY || "",
       polygonZkEVM: process.env.POLYGON_ZKEVM_API_KEY || "",
@@ -501,13 +523,15 @@ const config: HardhatUserConfig = {
       // For Canto testnet & mainnet
       canto: process.env.CANTO_API_KEY || "",
       cantoTestnet: process.env.CANTO_API_KEY || "",
-      // For Base testnet & mainnet
+      // For Base testnets & mainnet
       base: process.env.BASE_API_KEY || "",
       baseTestnet: process.env.BASE_API_KEY || "",
+      baseSepolia: process.env.BASE_API_KEY || "",
       // For Mantle testnet & mainnet
       mantle: process.env.MANTLE_API_KEY || "",
       mantleTestnet: process.env.MANTLE_API_KEY || "",
-      // For Scroll testnet
+      // For Scroll testnet & mainnet
+      scroll: process.env.SCROLL_API_KEY || "",
       scrollTestnet: process.env.SCROLL_API_KEY || "",
       // For Linea testnet & mainnet
       linea: process.env.LINEA_API_KEY || "",
@@ -533,6 +557,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-holesky.etherscan.io/api",
           browserURL: "https://holesky.etherscan.io",
+        },
+      },
+      {
+        network: "optimisticSepolia",
+        chainId: 11155420,
+        urls: {
+          apiURL: "https://optimism-sepolia.blockscout.com/api",
+          browserURL: "https://optimism-sepolia.blockscout.com",
         },
       },
       {
@@ -619,8 +651,8 @@ const config: HardhatUserConfig = {
         network: "arbitrumSepolia",
         chainId: 421614,
         urls: {
-          apiURL: "https://sepolia-explorer.arbitrum.io/api",
-          browserURL: "https://sepolia-explorer.arbitrum.io",
+          apiURL: "https://api-sepolia.arbiscan.io/api",
+          browserURL: "https://sepolia.arbiscan.io",
         },
       },
       {
@@ -656,6 +688,14 @@ const config: HardhatUserConfig = {
         },
       },
       {
+        network: "baseSepolia",
+        chainId: 84532,
+        urls: {
+          apiURL: "https://base-sepolia.blockscout.com/api",
+          browserURL: "https://base-sepolia.blockscout.com",
+        },
+      },
+      {
         network: "mantle",
         chainId: 5000,
         urls: {
@@ -672,11 +712,19 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        network: "scrollTestnet",
-        chainId: 534353,
+        network: "scroll",
+        chainId: 534352,
         urls: {
-          apiURL: "https://blockscout.scroll.io/api",
-          browserURL: "https://blockscout.scroll.io",
+          apiURL: "https://api.scrollscan.com/api",
+          browserURL: "https://scrollscan.com",
+        },
+      },
+      {
+        network: "scrollTestnet",
+        chainId: 534351,
+        urls: {
+          apiURL: "https://api-sepolia.scrollscan.com/api",
+          browserURL: "https://sepolia.scrollscan.com",
         },
       },
       {
