@@ -21,6 +21,6 @@ body:
   - attributes:
       label: "Code example that solves the feature:"
       description: "It can be a GitHub repository/gist or a simple code snippet."
-      placeholder: "```solidity\npragma solidity 0.8.21;\n```"
+      placeholder: "```solidity\npragma solidity 0.8.22;\n```"
     id: reproduce
     type: textarea

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.21;
+pragma solidity 0.8.22;
 
 import {BaseTest} from "../../utils/BaseTest.sol";
 import {ERC20MockPayable} from "../../mocks/ERC20MockPayable.sol";
@@ -25,7 +25,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
     /*                           EVENTS                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
-    // Solidity version `0.8.21` raises an ICE (Internal Compiler Error)
+    // Solidity version `0.8.22` raises an ICE (Internal Compiler Error)
     // when an event is emitted from another contract: https://github.com/ethereum/solidity/issues/14430.
 
     /**
