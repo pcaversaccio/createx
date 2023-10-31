@@ -33,8 +33,8 @@ contract CreateX {
      * @dev Struct for the `payable` amounts in a deploy-and-initialise call.
      */
     struct Values {
-        uint256 constructorAmount;
-        uint256 initCallAmount;
+        uint128 constructorAmount;
+        uint128 initCallAmount;
     }
 
     /**
@@ -968,23 +968,27 @@ contract CreateX {
      * @return salt The 32-byte pseudo-random salt value.
      */
     function _generateSalt() internal view returns (bytes32 salt) {
-        salt = keccak256(
-            abi.encode(
-                // We don't use `block.number - 256` (the maximum value on the EVM) to accommodate
-                // any chains that may try to reduce the amount of available historical block hashes.
-                // We also don't subtract 1 to mitigate any risks arising from consecutive block
-                // producers on a PoS chain. Therefore, we use `block.number - 32` as a reasonable
-                // compromise, one we expect should work on most chains, which is 1 epoch on Ethereum
-                // mainnet.
-                blockhash(block.number - 32),
-                block.coinbase,
-                block.number,
-                block.timestamp,
-                block.prevrandao,
-                block.chainid,
-                msg.sender
-            )
-        );
+        // The following calculation of `blockhash` cannot negatively overflow as of block number 32.
+        // If you use this function between the genesis block and block number 31, it will revert.
+        unchecked {
+            salt = keccak256(
+                abi.encode(
+                    // We don't use `block.number - 256` (the maximum value on the EVM) to accommodate
+                    // any chains that may try to reduce the amount of available historical block hashes.
+                    // We also don't subtract 1 to mitigate any risks arising from consecutive block
+                    // producers on a PoS chain. Therefore, we use `block.number - 32` as a reasonable
+                    // compromise, one we expect should work on most chains, which is 1 epoch on Ethereum
+                    // mainnet.
+                    blockhash(block.number - 32),
+                    block.coinbase,
+                    block.number,
+                    block.timestamp,
+                    block.prevrandao,
+                    block.chainid,
+                    msg.sender
+                )
+            );
+        }
     }
 
     /**

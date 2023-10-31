@@ -42,8 +42,8 @@ contract CreateX_DeployCreateAndInit_4Args_Public_Test is BaseTest {
     {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
-        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
-        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
+        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
+        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
         // We calculate the address beforehand where the contract is to be deployed.
         address computedAddress = createX.computeCreateAddress(createXAddr, nonce);
 
@@ -94,8 +94,8 @@ contract CreateX_DeployCreateAndInit_4Args_Public_Test is BaseTest {
     {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
-        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
-        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
+        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
+        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
         // We calculate the address beforehand where the contract is to be deployed.
         address computedAddress = createX.computeCreateAddress(createXAddr, nonce);
 
@@ -142,8 +142,8 @@ contract CreateX_DeployCreateAndInit_4Args_Public_Test is BaseTest {
     {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
-        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
-        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
+        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
+        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
         // It should revert.
         bytes memory expectedErr = abi.encodeWithSelector(
             CreateX.FailedEtherTransfer.selector,
@@ -173,8 +173,8 @@ contract CreateX_DeployCreateAndInit_4Args_Public_Test is BaseTest {
     {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
-        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
-        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
+        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
+        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
         // It should revert.
         bytes memory expectedErr = abi.encodeWithSelector(
             CreateX.FailedContractInitialisation.selector,
@@ -200,8 +200,8 @@ contract CreateX_DeployCreateAndInit_4Args_Public_Test is BaseTest {
     ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
-        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
-        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
+        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
+        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
         // It should revert.
         bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
         vm.expectRevert(expectedErr);
@@ -223,8 +223,8 @@ contract CreateX_DeployCreateAndInit_4Args_Public_Test is BaseTest {
     ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
-        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
-        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
+        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
+        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
         // The following contract creation code contains the invalid opcode `PUSH0` (`0x5F`) and `CREATE` must therefore
         // return the zero address (technically zero bytes `0x`), as the deployment fails. This test also ensures that if
         // we ever accidentally change the EVM version in Foundry and Hardhat, we will always have a corresponding failed test.
