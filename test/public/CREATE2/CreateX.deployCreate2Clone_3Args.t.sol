@@ -12,14 +12,6 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
 
     ImplementationContract internal implementationContract = new ImplementationContract();
     address internal implementation = address(implementationContract);
-    bytes32 internal initCodeHash =
-        keccak256(
-            abi.encodePacked(
-                hex"3d602d80600a3d3981f3363d3d373d3d3d363d73",
-                implementation,
-                hex"5af43d82803e903d91602b57fd5bf3"
-            )
-        );
     bytes32 internal codeHash =
         keccak256(abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3"));
 
@@ -27,21 +19,19 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
     uint256 internal snapshotId;
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
-    /*                           EVENTS                           */
-    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
-
-    // Solidity version `0.8.22` raises an ICE (Internal Compiler Error)
-    // when an event is emitted from another contract: https://github.com/ethereum/solidity/issues/14430.
-
-    /**
-     * @dev Event that is emitted when a contract is successfully created.
-     * @param newContract The address of the new contract.
-     */
-    event ContractCreation(address indexed newContract);
-
-    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            TESTS                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
+    function setUp() public override {
+        BaseTest.setUp();
+        initCodeHash = keccak256(
+            abi.encodePacked(
+                hex"3d602d80600a3d3981f3363d3d373d3d3d363d73",
+                implementation,
+                hex"5af43d82803e903d91602b57fd5bf3"
+            )
+        );
+    }
 
     modifier whenTheEIP1167MinimalProxyContractIsSuccessfullyCreated() {
         _;
@@ -110,7 +100,7 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
             // It emits the event `ContractCreation` with the EIP-1167 minimal proxy address as indexed argument.
             // It returns the EIP-1167 minimal proxy address.
             vm.expectEmit(true, true, true, true, createXAddr);
-            emit ContractCreation(computedAddress);
+            emit CreateX.ContractCreation(computedAddress);
             vm.startPrank(originalDeployer);
             address proxy = createX.deployCreate2Clone{value: msgValue}(
                 salt,

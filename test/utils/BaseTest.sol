@@ -60,6 +60,29 @@ contract BaseTest is Test {
 
     // solhint-disable-next-line const-name-snakecase
     address internal constant zeroAddress = address(0);
+    address internal immutable SELF = address(this);
+
+    // Constructor arguments for the `ERC20MockPayable` contract.
+    string internal arg1;
+    string internal arg2;
+    address internal arg3;
+    uint256 internal arg4;
+    bytes internal args;
+
+    // Caching and helper variables used in numerous tests.
+    bytes internal cachedInitCode;
+    uint256 internal cachedBalance;
+    bytes32 internal initCodeHash;
+
+    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+    /*                        CUSTOM ERRORS                       */
+    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
+    /**
+     * @dev Error that occurs when the contract creation code has zero-byte length.
+     * @param emitter The contract that emits the error.
+     */
+    error ZeroByteInitCode(address emitter);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            SETUP                           */

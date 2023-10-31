@@ -14,19 +14,6 @@ contract CreateX_DeployCreateClone_Public_Test is BaseTest {
     address internal implementation = address(implementationContract);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
-    /*                           EVENTS                           */
-    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
-
-    // Solidity version `0.8.22` raises an ICE (Internal Compiler Error)
-    // when an event is emitted from another contract: https://github.com/ethereum/solidity/issues/14430.
-
-    /**
-     * @dev Event that is emitted when a contract is successfully created.
-     * @param newContract The address of the new contract.
-     */
-    event ContractCreation(address indexed newContract);
-
-    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            TESTS                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
@@ -54,7 +41,7 @@ contract CreateX_DeployCreateClone_Public_Test is BaseTest {
         // It emits the event `ContractCreation` with the EIP-1167 minimal proxy address as indexed argument.
         // It returns the EIP-1167 minimal proxy address.
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit ContractCreation(computedAddress);
+        emit CreateX.ContractCreation(computedAddress);
         address proxy = createX.deployCreateClone{value: msgValue}(
             implementation,
             abi.encodeCall(implementationContract.initialiser, ())

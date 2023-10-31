@@ -3,6 +3,7 @@ pragma solidity 0.8.22;
 
 import {Vm} from "forge-std/Vm.sol";
 import {BaseTest} from "../../utils/BaseTest.sol";
+import {IERC20} from "openzeppelin/token/ERC20/IERC20.sol";
 import {ERC20MockPayable} from "../../mocks/ERC20MockPayable.sol";
 import {CreateX} from "../../../src/CreateX.sol";
 
@@ -11,18 +12,8 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseRefundAddress_Public_Test i
     /*                      HELPER VARIABLES                      */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
-    address internal immutable SELF = address(this);
-
-    string internal arg1;
-    string internal arg2;
-    address internal arg3;
-    uint256 internal arg4;
-    bytes internal args;
-
-    bytes internal cachedInitCode;
     // The `keccak256`-hashed `CREATE3` proxy contract creation bytecode.
     bytes32 internal proxyInitCodeHash = keccak256(abi.encodePacked(hex"67363d3d37363d34f03d5260086018f3"));
-    uint256 internal cachedBalance;
 
     // To avoid any stack-too-deep errors, we use `internal` state variables for the precomputed `CREATE3` address
     // and some further contract deployment addresses and variables.
@@ -34,44 +25,6 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseRefundAddress_Public_Test i
     bool internal xChainRedeployProtection;
     bool internal mustRevert;
     bytes32 internal guardedSalt;
-
-    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
-    /*                           EVENTS                           */
-    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
-
-    // Solidity version `0.8.22` raises an ICE (Internal Compiler Error)
-    // when an event is emitted from another contract: https://github.com/ethereum/solidity/issues/14430.
-
-    /**
-     * @dev Event that is emitted when `amount` ERC-20 tokens are moved from one
-     * account (`owner`) to another (`to`).
-     * @param owner The 20-byte owner address.
-     * @param to The 20-byte receiver address.
-     * @param amount The 32-byte token amount to be transferred.
-     */
-    event Transfer(address indexed owner, address indexed to, uint256 amount);
-
-    /**
-     * @dev Event that is emitted when a `CREATE3` proxy contract is successfully created.
-     * @param newContract The address of the new proxy contract.
-     */
-    event Create3ProxyContractCreation(address indexed newContract);
-
-    /**
-     * @dev Event that is emitted when a contract is successfully created.
-     * @param newContract The address of the new contract.
-     */
-    event ContractCreation(address indexed newContract);
-
-    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
-    /*                        CUSTOM ERRORS                       */
-    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
-
-    /**
-     * @dev Error that occurs when the contract creation code has zero-byte length.
-     * @param emitter The contract that emits the error.
-     */
-    error ZeroByteInitCode(address emitter);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            TESTS                           */
@@ -144,14 +97,14 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseRefundAddress_Public_Test i
         // We record the emitted events to later assert the proxy contract address.
         vm.recordLogs();
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit Create3ProxyContractCreation(proxyAddress);
+        emit CreateX.Create3ProxyContractCreation(proxyAddress);
         // We also check for the ERC-20 standard `Transfer` event.
         vm.expectEmit(true, true, true, true, computedAddress);
-        emit Transfer(zeroAddress, arg3, arg4);
+        emit IERC20.Transfer(zeroAddress, arg3, arg4);
         // It returns a contract address with a non-zero bytecode length and a potential non-zero ether balance.
         // It emits the event `ContractCreation` with the contract address as indexed argument.
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit ContractCreation(computedAddress);
+        emit CreateX.ContractCreation(computedAddress);
         vm.startPrank(originalDeployer);
         address newContract = createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
             cachedInitCode,
@@ -182,7 +135,7 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseRefundAddress_Public_Test i
         // We record the emitted events to later assert the proxy contract address.
         vm.recordLogs();
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit Create3ProxyContractCreation(proxyAddress);
+        emit CreateX.Create3ProxyContractCreation(proxyAddress);
         // We mock a potential frontrunner address.
         vm.deal(msgSender, values.constructorAmount + values.initCallAmount);
         vm.startPrank(msgSender);
@@ -221,7 +174,7 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseRefundAddress_Public_Test i
         proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
         vm.assume(originalDeployer != proxyAddress);
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit Create3ProxyContractCreation(proxyAddress);
+        emit CreateX.Create3ProxyContractCreation(proxyAddress);
         // We mock the original caller.
         vm.startPrank(originalDeployer);
         newContractOriginalDeployer = createX.deployCreate3AndInit{
@@ -305,14 +258,14 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseRefundAddress_Public_Test i
         // We record the emitted events to later assert the proxy contract address.
         vm.recordLogs();
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit Create3ProxyContractCreation(proxyAddress);
+        emit CreateX.Create3ProxyContractCreation(proxyAddress);
         // We also check for the ERC-20 standard `Transfer` event.
         vm.expectEmit(true, true, true, true, computedAddress);
-        emit Transfer(zeroAddress, arg3, arg4);
+        emit IERC20.Transfer(zeroAddress, arg3, arg4);
         // It returns a contract address with a non-zero bytecode length and a potential non-zero ether balance.
         // It emits the event `ContractCreation` with the contract address as indexed argument.
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit ContractCreation(computedAddress);
+        emit CreateX.ContractCreation(computedAddress);
         vm.startPrank(originalDeployer);
         address newContract = createX.deployCreate3AndInit{value: values.constructorAmount + values.initCallAmount}(
             cachedInitCode,
@@ -345,7 +298,7 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseRefundAddress_Public_Test i
         // We record the emitted events to later assert the proxy contract address.
         vm.recordLogs();
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit Create3ProxyContractCreation(proxyAddress);
+        emit CreateX.Create3ProxyContractCreation(proxyAddress);
         // We mock a potential frontrunner address.
         vm.deal(msgSender, values.constructorAmount + values.initCallAmount);
         vm.startPrank(msgSender);
@@ -387,7 +340,7 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseRefundAddress_Public_Test i
         proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
         vm.assume(originalDeployer != proxyAddress);
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit Create3ProxyContractCreation(proxyAddress);
+        emit CreateX.Create3ProxyContractCreation(proxyAddress);
         // We mock the original caller.
         vm.startPrank(originalDeployer);
         newContractOriginalDeployer = createX.deployCreate3AndInit{
