@@ -13,7 +13,7 @@ interface ICreateX {
 
     struct Values {
         uint256 constructorAmount;
-        uint128 initCallAmount;
+        uint256 initCallAmount;
     }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
