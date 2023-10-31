@@ -968,8 +968,7 @@ contract CreateX {
      * @return salt The 32-byte pseudo-random salt value.
      */
     function _generateSalt() internal view returns (bytes32 salt) {
-        // The following calculation of `blockhash` cannot negatively overflow as of block number 32.
-        // If you use this function between the genesis block and block number 31, it will revert.
+        // If you use this function between the genesis block and block number 31, it will return zero.
         unchecked {
             salt = keccak256(
                 abi.encode(
