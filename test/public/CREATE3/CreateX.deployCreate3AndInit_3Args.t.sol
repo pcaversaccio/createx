@@ -93,11 +93,11 @@ contract CreateX_DeployCreate3AndInit_3Args_Public_Test is BaseTest {
         address proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
         vm.assume(originalDeployer != proxyAddress);
 
-        // It emits the event `Create3ProxyContractCreation` with the proxy address as indexed argument.
+        // It emits the event `Create3ProxyContractCreation` with the proxy address and the salt as indexed arguments.
         // We record the emitted events to later assert the proxy contract address.
         vm.recordLogs();
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.Create3ProxyContractCreation(proxyAddress);
+        emit CreateX.Create3ProxyContractCreation(proxyAddress, guardedSalt);
         // We also check for the ERC-20 standard `Transfer` event.
         vm.expectEmit(true, true, true, true, computedAddress);
         emit IERC20.Transfer(zeroAddress, arg3, arg4);
@@ -134,7 +134,7 @@ contract CreateX_DeployCreate3AndInit_3Args_Public_Test is BaseTest {
         // We record the emitted events to later assert the proxy contract address.
         vm.recordLogs();
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.Create3ProxyContractCreation(proxyAddress);
+        emit CreateX.Create3ProxyContractCreation(proxyAddress, guardedSalt);
         // We mock a potential frontrunner address.
         vm.deal(msgSender, values.constructorAmount + values.initCallAmount);
         vm.startPrank(msgSender);
@@ -172,7 +172,7 @@ contract CreateX_DeployCreate3AndInit_3Args_Public_Test is BaseTest {
         proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
         vm.assume(originalDeployer != proxyAddress);
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.Create3ProxyContractCreation(proxyAddress);
+        emit CreateX.Create3ProxyContractCreation(proxyAddress, guardedSalt);
         // We mock the original caller.
         vm.startPrank(originalDeployer);
         newContractOriginalDeployer = createX.deployCreate3AndInit{
@@ -253,11 +253,11 @@ contract CreateX_DeployCreate3AndInit_3Args_Public_Test is BaseTest {
         address proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
         vm.assume(originalDeployer != proxyAddress);
 
-        // It emits the event `Create3ProxyContractCreation` with the proxy address as indexed argument.
+        // It emits the event `Create3ProxyContractCreation` with the proxy address  and the salt as indexed arguments.
         // We record the emitted events to later assert the proxy contract address.
         vm.recordLogs();
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.Create3ProxyContractCreation(proxyAddress);
+        emit CreateX.Create3ProxyContractCreation(proxyAddress, guardedSalt);
         // We also check for the ERC-20 standard `Transfer` event.
         vm.expectEmit(true, true, true, true, computedAddress);
         emit IERC20.Transfer(zeroAddress, arg3, arg4);
@@ -296,7 +296,7 @@ contract CreateX_DeployCreate3AndInit_3Args_Public_Test is BaseTest {
         // We record the emitted events to later assert the proxy contract address.
         vm.recordLogs();
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.Create3ProxyContractCreation(proxyAddress);
+        emit CreateX.Create3ProxyContractCreation(proxyAddress, guardedSalt);
         // We mock a potential frontrunner address.
         vm.deal(msgSender, values.constructorAmount + values.initCallAmount);
         vm.startPrank(msgSender);
@@ -337,7 +337,7 @@ contract CreateX_DeployCreate3AndInit_3Args_Public_Test is BaseTest {
         proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
         vm.assume(originalDeployer != proxyAddress);
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.Create3ProxyContractCreation(proxyAddress);
+        emit CreateX.Create3ProxyContractCreation(proxyAddress, guardedSalt);
         // We mock the original caller.
         vm.startPrank(originalDeployer);
         newContractOriginalDeployer = createX.deployCreate3AndInit{

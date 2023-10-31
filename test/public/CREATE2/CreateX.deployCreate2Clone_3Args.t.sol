@@ -97,10 +97,10 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
             address computedAddress = createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr);
             vm.assume(originalDeployer != computedAddress);
 
-            // It emits the event `ContractCreation` with the EIP-1167 minimal proxy address as indexed argument.
+            // It emits the event `ContractCreation` with the EIP-1167 minimal proxy address and the salt as indexed arguments.
             // It returns the EIP-1167 minimal proxy address.
             vm.expectEmit(true, true, true, true, createXAddr);
-            emit CreateX.ContractCreation(computedAddress);
+            emit CreateX.ContractCreation(computedAddress, guardedSalt);
             vm.startPrank(originalDeployer);
             address proxy = createX.deployCreate2Clone{value: msgValue}(
                 salt,

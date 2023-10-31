@@ -1,6 +1,6 @@
 CreateX_DeployCreate2Clone_3Args_Public_Test
 ├── When the EIP-1167 minimal proxy contract is successfully created
-│   ├── It emits the event ContractCreation with the EIP-1167 minimal proxy address as indexed argument.
+│   ├── It emits the event ContractCreation with the EIP-1167 minimal proxy address and the salt as indexed arguments.
 │   ├── When the EIP-1167 minimal proxy initialisation call is successful
 │   │   └── It returns the EIP-1167 minimal proxy address.
 │   └── When the EIP-1167 minimal proxy initialisation call is unsuccessful

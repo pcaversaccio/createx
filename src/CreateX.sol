@@ -60,16 +60,24 @@ contract CreateX {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
-     * @dev Event that is emitted when a `CREATE3` proxy contract is successfully created.
-     * @param newContract The address of the new proxy contract.
+     * @dev Event that is emitted when a contract is successfully created.
+     * @param newContract The address of the new contract.
+     * @param salt The 32-byte random value used to create the contract address.
      */
-    event Create3ProxyContractCreation(address indexed newContract);
+    event ContractCreation(address indexed newContract, bytes32 indexed salt);
 
     /**
      * @dev Event that is emitted when a contract is successfully created.
      * @param newContract The address of the new contract.
      */
     event ContractCreation(address indexed newContract);
+
+    /**
+     * @dev Event that is emitted when a `CREATE3` proxy contract is successfully created.
+     * @param newContract The address of the new proxy contract.
+     * @param salt The 32-byte random value used to create the proxy address.
+     */
+    event Create3ProxyContractCreation(address indexed newContract, bytes32 indexed salt);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                        CUSTOM ERRORS                       */
@@ -321,7 +329,7 @@ contract CreateX {
             newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), guardedSalt)
         }
         _requireSuccessfulContractCreation({newContract: newContract});
-        emit ContractCreation({newContract: newContract});
+        emit ContractCreation({newContract: newContract, salt: guardedSalt});
     }
 
     /**
@@ -367,7 +375,7 @@ contract CreateX {
             newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), guardedSalt)
         }
         _requireSuccessfulContractCreation({newContract: newContract});
-        emit ContractCreation({newContract: newContract});
+        emit ContractCreation({newContract: newContract, salt: guardedSalt});
 
         (bool success, bytes memory returnData) = newContract.call{value: values.initCallAmount}(data);
         if (!success) {
@@ -512,7 +520,7 @@ contract CreateX {
         if (proxy == address(0)) {
             revert FailedContractCreation({emitter: _SELF});
         }
-        emit ContractCreation({newContract: proxy});
+        emit ContractCreation({newContract: proxy, salt: guardedSalt});
 
         (bool success, bytes memory returnData) = proxy.call{value: msg.value}(data);
         _requireSuccessfulContractInitialisation({
@@ -617,7 +625,7 @@ contract CreateX {
         if (proxy == address(0)) {
             revert FailedContractCreation({emitter: _SELF});
         }
-        emit Create3ProxyContractCreation({newContract: proxy});
+        emit Create3ProxyContractCreation({newContract: proxy, salt: guardedSalt});
 
         newContract = computeCreate3Address({salt: guardedSalt});
         (bool success, ) = proxy.call{value: msg.value}(initCode);
@@ -681,7 +689,7 @@ contract CreateX {
         if (proxy == address(0)) {
             revert FailedContractCreation({emitter: _SELF});
         }
-        emit Create3ProxyContractCreation({newContract: proxy});
+        emit Create3ProxyContractCreation({newContract: proxy, salt: guardedSalt});
 
         newContract = computeCreate3Address({salt: guardedSalt});
         (bool success, ) = proxy.call{value: values.constructorAmount}(initCode);

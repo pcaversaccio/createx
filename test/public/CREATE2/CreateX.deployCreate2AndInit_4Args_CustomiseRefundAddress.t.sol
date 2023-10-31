@@ -87,9 +87,9 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseRefundAddress_Public_Test i
         vm.expectEmit(true, true, true, true, computedAddress);
         emit IERC20.Transfer(zeroAddress, arg3, arg4);
         // It returns a contract address with a non-zero bytecode length and a potential non-zero ether balance.
-        // It emits the event `ContractCreation` with the contract address as indexed argument.
+        // It emits the event `ContractCreation` with the contract address and the salt as indexed arguments.
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.ContractCreation(computedAddress);
+        emit CreateX.ContractCreation(computedAddress, guardedSalt);
         vm.startPrank(originalDeployer);
         address newContract = createX.deployCreate2AndInit{value: values.constructorAmount + values.initCallAmount}(
             cachedInitCode,
@@ -210,9 +210,9 @@ contract CreateX_DeployCreate2AndInit_4Args_CustomiseRefundAddress_Public_Test i
         vm.expectEmit(true, true, true, true, computedAddress);
         emit IERC20.Transfer(zeroAddress, arg3, arg4);
         // It returns a contract address with a non-zero bytecode length and a potential non-zero ether balance.
-        // It emits the event `ContractCreation` with the contract address as indexed argument.
+        // It emits the event `ContractCreation` with the contract address and the salt as indexed arguments.
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.ContractCreation(computedAddress);
+        emit CreateX.ContractCreation(computedAddress, guardedSalt);
         vm.startPrank(originalDeployer);
         address newContract = createX.deployCreate2AndInit{value: values.constructorAmount + values.initCallAmount}(
             cachedInitCode,
