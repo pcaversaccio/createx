@@ -49,7 +49,13 @@ contract CreateX_DeployCreateClone_Public_Test is BaseTest {
         assertEq(proxy, computedAddress, "100");
         assertEq(
             proxy.codehash,
-            keccak256(abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3")),
+            keccak256(
+                abi.encodePacked(
+                    hex"36_3d_3d_37_3d_3d_3d_36_3d_73",
+                    implementation,
+                    hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3"
+                )
+            ),
             "200"
         );
         assertTrue(!implementationContract.isInitialised(), "300");

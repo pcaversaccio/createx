@@ -13,7 +13,8 @@ contract CreateX_DeployCreate3_2Args_Public_Test is BaseTest {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     // The `keccak256`-hashed `CREATE3` proxy contract creation bytecode.
-    bytes32 internal proxyInitCodeHash = keccak256(abi.encodePacked(hex"67363d3d37363d34f03d5260086018f3"));
+    bytes32 internal proxyInitCodeHash =
+        keccak256(abi.encodePacked(hex"67_36_3d_3d_37_36_3d_34_f0_3d_52_60_08_60_18_f3"));
 
     // To avoid any stack-too-deep errors, we use `internal` state variables for the precomputed `CREATE3` address
     // and some further contract deployment addresses and variables.
@@ -355,7 +356,7 @@ contract CreateX_DeployCreate3_2Args_Public_Test is BaseTest {
         // The following contract creation code contains the invalid opcode `PUSH0` (`0x5F`) and `CREATE` must therefore
         // return the zero address (technically zero bytes `0x`), as the deployment fails. This test also ensures that if
         // we ever accidentally change the EVM version in Foundry and Hardhat, we will always have a corresponding failed test.
-        bytes memory invalidInitCode = bytes("0x5f8060093d393df3");
+        bytes memory invalidInitCode = hex"5f_80_60_09_3d_39_3d_f3";
         if (mustRevert) {
             vm.startPrank(originalDeployer);
             bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXAddr);

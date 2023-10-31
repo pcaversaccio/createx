@@ -13,7 +13,13 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
     ImplementationContract internal implementationContract = new ImplementationContract();
     address internal implementation = address(implementationContract);
     bytes32 internal codeHash =
-        keccak256(abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3"));
+        keccak256(
+            abi.encodePacked(
+                hex"36_3d_3d_37_3d_3d_3d_36_3d_73",
+                implementation,
+                hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3"
+            )
+        );
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            TESTS                           */
@@ -23,9 +29,9 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
         BaseTest.setUp();
         initCodeHash = keccak256(
             abi.encodePacked(
-                hex"3d602d80600a3d3981f3363d3d373d3d3d363d73",
+                hex"3d_60_2d_80_60_0a_3d_39_81_f3_36_3d_3d_37_3d_3d_3d_36_3d_73",
                 implementation,
-                hex"5af43d82803e903d91602b57fd5bf3"
+                hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3"
             )
         );
     }

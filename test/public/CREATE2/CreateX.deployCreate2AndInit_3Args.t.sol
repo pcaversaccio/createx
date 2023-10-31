@@ -424,7 +424,7 @@ contract CreateX_DeployCreate2AndInit_3Args_Public_Test is BaseTest {
         // The following contract creation code contains the invalid opcode `PUSH0` (`0x5F`) and `CREATE` must therefore
         // return the zero address (technically zero bytes `0x`), as the deployment fails. This test also ensures that if
         // we ever accidentally change the EVM version in Foundry and Hardhat, we will always have a corresponding failed test.
-        bytes memory invalidInitCode = bytes("0x5f8060093d393df3");
+        bytes memory invalidInitCode = hex"5f_80_60_09_3d_39_3d_f3";
         vm.startPrank(originalDeployer);
         // It should revert.
         bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);

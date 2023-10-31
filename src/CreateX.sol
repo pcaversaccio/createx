@@ -215,9 +215,15 @@ contract CreateX {
         bytes20 implementationInBytes = bytes20(implementation);
         assembly ("memory-safe") {
             let clone := mload(0x40)
-            mstore(clone, hex"3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000")
+            mstore(
+                clone,
+                hex"3d_60_2d_80_60_0a_3d_39_81_f3_36_3d_3d_37_3d_3d_3d_36_3d_73_00_00_00_00_00_00_00_00_00_00_00_00"
+            )
             mstore(add(clone, 0x14), implementationInBytes)
-            mstore(add(clone, 0x28), hex"5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000")
+            mstore(
+                add(clone, 0x28),
+                hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00"
+            )
             proxy := create(0, clone, 0x37)
         }
         if (proxy == address(0)) {
@@ -512,9 +518,15 @@ contract CreateX {
         bytes20 implementationInBytes = bytes20(implementation);
         assembly ("memory-safe") {
             let clone := mload(0x40)
-            mstore(clone, hex"3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000")
+            mstore(
+                clone,
+                hex"3d_60_2d_80_60_0a_3d_39_81_f3_36_3d_3d_37_3d_3d_3d_36_3d_73_00_00_00_00_00_00_00_00_00_00_00_00"
+            )
             mstore(add(clone, 0x14), implementationInBytes)
-            mstore(add(clone, 0x28), hex"5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000")
+            mstore(
+                add(clone, 0x28),
+                hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00"
+            )
             proxy := create2(0, clone, 0x37, guardedSalt)
         }
         if (proxy == address(0)) {
@@ -617,7 +629,7 @@ contract CreateX {
      */
     function deployCreate3(bytes32 salt, bytes memory initCode) public payable returns (address newContract) {
         bytes32 guardedSalt = _guard({salt: salt});
-        bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
+        bytes memory proxyChildBytecode = hex"67_36_3d_3d_37_36_3d_34_f0_3d_52_60_08_60_18_f3";
         address proxy;
         assembly ("memory-safe") {
             proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), guardedSalt)
@@ -681,7 +693,7 @@ contract CreateX {
         address refundAddress
     ) public payable returns (address newContract) {
         bytes32 guardedSalt = _guard({salt: salt});
-        bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
+        bytes memory proxyChildBytecode = hex"67_36_3d_3d_37_36_3d_34_f0_3d_52_60_08_60_18_f3";
         address proxy;
         assembly ("memory-safe") {
             proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), guardedSalt)
@@ -836,7 +848,10 @@ contract CreateX {
             mstore(0x00, deployer)
             mstore8(0x0b, 0xff)
             mstore(0x20, salt)
-            mstore(0x40, hex"21c35dbe1b344a2488cf3321d6ce542f8e9f305544ff09e4993a62319a497c1f")
+            mstore(
+                0x40,
+                hex"21_c3_5d_be_1b_34_4a_24_88_cf_33_21_d6_ce_54_2f_8e_9f_30_55_44_ff_09_e4_99_3a_62_31_9a_49_7c_1f"
+            )
             mstore(0x14, keccak256(0x0b, 0x55))
             mstore(0x40, ptr)
             mstore(0x00, 0xd694)
