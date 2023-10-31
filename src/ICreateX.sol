@@ -12,8 +12,8 @@ interface ICreateX {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     struct Values {
-        uint128 constructorAmount;
-        uint128 initCallAmount;
+        uint256 constructorAmount;
+        uint256 initCallAmount;
     }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/

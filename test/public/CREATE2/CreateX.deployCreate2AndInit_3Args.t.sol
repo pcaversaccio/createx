@@ -53,8 +53,8 @@ contract CreateX_DeployCreate2AndInit_3Args_Public_Test is BaseTest {
         whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength
         whenTheInitialisationCallIsSuccessful
     {
-        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
-        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
+        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
+        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         vm.deal(originalDeployer, 2 * (values.constructorAmount + values.initCallAmount));
         vm.assume(
             chainId != block.chainid &&
@@ -174,8 +174,8 @@ contract CreateX_DeployCreate2AndInit_3Args_Public_Test is BaseTest {
         whenTheCreateXContractHasANonZeroBalance(amount)
         whenTheRefundTransactionIsSuccessful
     {
-        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
-        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
+        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
+        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         vm.deal(originalDeployer, 2 * (values.constructorAmount + values.initCallAmount));
         vm.assume(
             chainId != block.chainid &&
@@ -294,8 +294,8 @@ contract CreateX_DeployCreate2AndInit_3Args_Public_Test is BaseTest {
         whenTheCreateXContractHasANonZeroBalance(amount)
         whenTheRefundTransactionIsUnsuccessful
     {
-        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
-        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
+        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
+        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         vm.deal(SELF, values.constructorAmount + values.initCallAmount);
         vm.startPrank(SELF);
         bytes32 salt = createXHarness.exposed_generateSalt();
@@ -335,8 +335,8 @@ contract CreateX_DeployCreate2AndInit_3Args_Public_Test is BaseTest {
         whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength
         whenTheInitialisationCallIsUnsuccessful
     {
-        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
-        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
+        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
+        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         vm.deal(originalDeployer, values.constructorAmount + values.initCallAmount);
         vm.assume(originalDeployer != createXAddr && originalDeployer != zeroAddress);
         vm.startPrank(originalDeployer);
@@ -373,8 +373,8 @@ contract CreateX_DeployCreate2AndInit_3Args_Public_Test is BaseTest {
         address originalDeployer,
         CreateX.Values memory values
     ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength {
-        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
-        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
+        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
+        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         vm.deal(originalDeployer, values.constructorAmount + values.initCallAmount);
         vm.assume(originalDeployer != createXAddr && originalDeployer != zeroAddress);
         vm.startPrank(originalDeployer);
@@ -407,8 +407,8 @@ contract CreateX_DeployCreate2AndInit_3Args_Public_Test is BaseTest {
         address originalDeployer,
         CreateX.Values memory values
     ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
-        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
-        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
+        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
+        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         vm.deal(originalDeployer, values.constructorAmount + values.initCallAmount);
         vm.assume(originalDeployer != createXAddr && originalDeployer != zeroAddress);
         vm.startPrank(originalDeployer);

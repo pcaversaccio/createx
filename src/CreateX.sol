@@ -33,8 +33,8 @@ contract CreateX {
      * @dev Struct for the `payable` amounts in a deploy-and-initialise call.
      */
     struct Values {
-        uint128 constructorAmount;
-        uint128 initCallAmount;
+        uint256 constructorAmount;
+        uint256 initCallAmount;
     }
 
     /**

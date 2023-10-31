@@ -64,8 +64,8 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
         whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength
         whenTheInitialisationCallIsSuccessful
     {
-        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
-        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
+        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
+        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         vm.deal(originalDeployer, 2 * (values.constructorAmount + values.initCallAmount));
         vm.assume(
             chainId != block.chainid &&
@@ -290,8 +290,8 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
         whenTheCreateXContractHasANonZeroBalance(chainId)
         whenTheRefundTransactionIsSuccessful
     {
-        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
-        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
+        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
+        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         vm.deal(originalDeployer, 2 * (values.constructorAmount + values.initCallAmount));
         vm.assume(
             chainId != block.chainid &&
@@ -530,8 +530,8 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
         whenTheCreateXContractHasANonZeroBalance(chainId)
         whenTheRefundTransactionIsUnsuccessful
     {
-        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
-        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
+        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
+        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         vm.deal(SELF, values.constructorAmount + values.initCallAmount);
         vm.assume(chainId != block.chainid && chainId != 0);
         // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
@@ -587,8 +587,8 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
         whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength
         whenTheInitialisationCallIsUnsuccessful
     {
-        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
-        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
+        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
+        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         vm.deal(originalDeployer, values.constructorAmount + values.initCallAmount);
         vm.assume(
             chainId != block.chainid &&
@@ -645,8 +645,8 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
         bytes32 salt,
         uint64 chainId
     ) external whenTheProxyContractCreationFails {
-        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
-        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
+        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
+        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         vm.deal(originalDeployer, values.constructorAmount + values.initCallAmount);
         vm.assume(
             chainId != block.chainid &&
@@ -703,8 +703,8 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
         bytes32 salt,
         uint64 chainId
     ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength {
-        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
-        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
+        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
+        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         vm.deal(originalDeployer, values.constructorAmount + values.initCallAmount);
         vm.assume(
             chainId != block.chainid &&
@@ -757,8 +757,8 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseSalt_Public_Test is BaseTes
         bytes32 salt,
         uint64 chainId
     ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
-        values.constructorAmount = uint128(bound(values.constructorAmount, 0, type(uint64).max));
-        values.initCallAmount = uint128(bound(values.initCallAmount, 0, type(uint64).max));
+        values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
+        values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         vm.deal(originalDeployer, values.constructorAmount + values.initCallAmount);
         vm.assume(
             chainId != block.chainid &&
