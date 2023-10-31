@@ -6,7 +6,7 @@ pragma solidity ^0.8.4;
  * @author pcaversaccio (https://web.archive.org/web/20230921103111/https://pcaversaccio.com/)
  * @custom:coauthor Matt Solomon (https://web.archive.org/web/20230921103335/https://mattsolomon.dev/)
  */
-interface CreateX {
+interface ICreateX {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            TYPES                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
