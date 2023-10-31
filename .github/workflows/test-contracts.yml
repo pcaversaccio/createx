@@ -74,6 +74,7 @@ jobs:
         uses: actions/setup-go@v4
         with:
           go-version: ${{ matrix.go_version }}
+          cache: False
 
       - name: Install `jd` CLI
         run: go install github.com/josephburnett/jd@latest
