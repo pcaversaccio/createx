@@ -18,6 +18,8 @@ jobs:
           - ubuntu-latest
         node_version:
           - 18
+        go_version:
+          - 1.21.3
 
     steps:
       - name: Checkout
@@ -67,6 +69,20 @@ jobs:
           version_foundry=$(forge config --json | jq -r ".evm_version")
           version_hh=$(npx hardhat evm)
           if [[ $version_foundry != "paris" ]] || [[ $version_foundry != $version_hh ]]; then exit 1; fi
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: ${{ matrix.go_version }}
+
+      - name: Install `jd` CLI
+        run: go install github.com/josephburnett/jd@latest
+
+      - name: Ensure correctness of the `ICreateX` interface
+        run: |
+          pnpm abi
+          diff=$(jd -set abis/src/CreateX.sol/CreateX.json abis/src/ICreateX.sol/ICreateX.json)
+          if [[ -n $diff ]]; then exit 1; fi
 
       - name: Foundry tests
         run: pnpm test
