@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.21;
+pragma solidity 0.8.22;
 
 import {BaseTest} from "../../utils/BaseTest.sol";
 import {ImplementationContract} from "../../mocks/ImplementationContract.sol";
@@ -12,36 +12,32 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
 
     ImplementationContract internal implementationContract = new ImplementationContract();
     address internal implementation = address(implementationContract);
-    bytes32 internal initCodeHash =
+    bytes32 internal codeHash =
         keccak256(
             abi.encodePacked(
-                hex"3d602d80600a3d3981f3363d3d373d3d3d363d73",
+                hex"36_3d_3d_37_3d_3d_3d_36_3d_73",
                 implementation,
-                hex"5af43d82803e903d91602b57fd5bf3"
+                hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3"
             )
         );
-    bytes32 internal codeHash =
-        keccak256(abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3"));
 
     // To avoid any stack-too-deep errors, we use an `internal` state variable for the snapshot ID.
     uint256 internal snapshotId;
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
-    /*                           EVENTS                           */
-    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
-
-    // Solidity version `0.8.21` raises an ICE (Internal Compiler Error)
-    // when an event is emitted from another contract: https://github.com/ethereum/solidity/issues/14430.
-
-    /**
-     * @dev Event that is emitted when a contract is successfully created.
-     * @param newContract The address of the new contract.
-     */
-    event ContractCreation(address indexed newContract);
-
-    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            TESTS                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
+    function setUp() public override {
+        BaseTest.setUp();
+        initCodeHash = keccak256(
+            abi.encodePacked(
+                hex"3d_60_2d_80_60_0a_3d_39_81_f3_36_3d_3d_37_3d_3d_3d_36_3d_73",
+                implementation,
+                hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3"
+            )
+        );
+    }
 
     modifier whenTheEIP1167MinimalProxyContractIsSuccessfullyCreated() {
         _;
@@ -107,10 +103,10 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
             address computedAddress = createX.computeCreate2Address(guardedSalt, initCodeHash, createXAddr);
             vm.assume(originalDeployer != computedAddress);
 
-            // It emits the event `ContractCreation` with the EIP-1167 minimal proxy address as indexed argument.
+            // It emits the event `ContractCreation` with the EIP-1167 minimal proxy address and the salt as indexed arguments.
             // It returns the EIP-1167 minimal proxy address.
             vm.expectEmit(true, true, true, true, createXAddr);
-            emit ContractCreation(computedAddress);
+            emit CreateX.ContractCreation(computedAddress, guardedSalt);
             vm.startPrank(originalDeployer);
             address proxy = createX.deployCreate2Clone{value: msgValue}(
                 salt,

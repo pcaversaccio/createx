@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-only
-pragma solidity 0.8.21;
+pragma solidity 0.8.22;
 
 /**
  * @title CreateX Factory Smart Contract
@@ -60,16 +60,24 @@ contract CreateX {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     /**
-     * @dev Event that is emitted when a `CREATE3` proxy contract is successfully created.
-     * @param newContract The address of the new proxy contract.
+     * @dev Event that is emitted when a contract is successfully created.
+     * @param newContract The address of the new contract.
+     * @param salt The 32-byte random value used to create the contract address.
      */
-    event Create3ProxyContractCreation(address indexed newContract);
+    event ContractCreation(address indexed newContract, bytes32 indexed salt);
 
     /**
      * @dev Event that is emitted when a contract is successfully created.
      * @param newContract The address of the new contract.
      */
     event ContractCreation(address indexed newContract);
+
+    /**
+     * @dev Event that is emitted when a `CREATE3` proxy contract is successfully created.
+     * @param newContract The address of the new proxy contract.
+     * @param salt The 32-byte random value used to create the proxy address.
+     */
+    event Create3ProxyContractCreation(address indexed newContract, bytes32 indexed salt);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                        CUSTOM ERRORS                       */
@@ -207,9 +215,15 @@ contract CreateX {
         bytes20 implementationInBytes = bytes20(implementation);
         assembly ("memory-safe") {
             let clone := mload(0x40)
-            mstore(clone, hex"3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000")
+            mstore(
+                clone,
+                hex"3d_60_2d_80_60_0a_3d_39_81_f3_36_3d_3d_37_3d_3d_3d_36_3d_73_00_00_00_00_00_00_00_00_00_00_00_00"
+            )
             mstore(add(clone, 0x14), implementationInBytes)
-            mstore(add(clone, 0x28), hex"5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000")
+            mstore(
+                add(clone, 0x28),
+                hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00"
+            )
             proxy := create(0, clone, 0x37)
         }
         if (proxy == address(0)) {
@@ -321,7 +335,7 @@ contract CreateX {
             newContract := create2(callvalue(), add(initCode, 0x20), mload(initCode), guardedSalt)
         }
         _requireSuccessfulContractCreation({newContract: newContract});
-        emit ContractCreation({newContract: newContract});
+        emit ContractCreation({newContract: newContract, salt: guardedSalt});
     }
 
     /**
@@ -367,7 +381,7 @@ contract CreateX {
             newContract := create2(mload(values), add(initCode, 0x20), mload(initCode), guardedSalt)
         }
         _requireSuccessfulContractCreation({newContract: newContract});
-        emit ContractCreation({newContract: newContract});
+        emit ContractCreation({newContract: newContract, salt: guardedSalt});
 
         (bool success, bytes memory returnData) = newContract.call{value: values.initCallAmount}(data);
         if (!success) {
@@ -504,15 +518,21 @@ contract CreateX {
         bytes20 implementationInBytes = bytes20(implementation);
         assembly ("memory-safe") {
             let clone := mload(0x40)
-            mstore(clone, hex"3d602d80600a3d3981f3363d3d373d3d3d363d73000000000000000000000000")
+            mstore(
+                clone,
+                hex"3d_60_2d_80_60_0a_3d_39_81_f3_36_3d_3d_37_3d_3d_3d_36_3d_73_00_00_00_00_00_00_00_00_00_00_00_00"
+            )
             mstore(add(clone, 0x14), implementationInBytes)
-            mstore(add(clone, 0x28), hex"5af43d82803e903d91602b57fd5bf30000000000000000000000000000000000")
+            mstore(
+                add(clone, 0x28),
+                hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00"
+            )
             proxy := create2(0, clone, 0x37, guardedSalt)
         }
         if (proxy == address(0)) {
             revert FailedContractCreation({emitter: _SELF});
         }
-        emit ContractCreation({newContract: proxy});
+        emit ContractCreation({newContract: proxy, salt: guardedSalt});
 
         (bool success, bytes memory returnData) = proxy.call{value: msg.value}(data);
         _requireSuccessfulContractInitialisation({
@@ -609,7 +629,7 @@ contract CreateX {
      */
     function deployCreate3(bytes32 salt, bytes memory initCode) public payable returns (address newContract) {
         bytes32 guardedSalt = _guard({salt: salt});
-        bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
+        bytes memory proxyChildBytecode = hex"67_36_3d_3d_37_36_3d_34_f0_3d_52_60_08_60_18_f3";
         address proxy;
         assembly ("memory-safe") {
             proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), guardedSalt)
@@ -617,7 +637,7 @@ contract CreateX {
         if (proxy == address(0)) {
             revert FailedContractCreation({emitter: _SELF});
         }
-        emit Create3ProxyContractCreation({newContract: proxy});
+        emit Create3ProxyContractCreation({newContract: proxy, salt: guardedSalt});
 
         newContract = computeCreate3Address({salt: guardedSalt});
         (bool success, ) = proxy.call{value: msg.value}(initCode);
@@ -673,7 +693,7 @@ contract CreateX {
         address refundAddress
     ) public payable returns (address newContract) {
         bytes32 guardedSalt = _guard({salt: salt});
-        bytes memory proxyChildBytecode = hex"67363d3d37363d34f03d5260086018f3";
+        bytes memory proxyChildBytecode = hex"67_36_3d_3d_37_36_3d_34_f0_3d_52_60_08_60_18_f3";
         address proxy;
         assembly ("memory-safe") {
             proxy := create2(0, add(proxyChildBytecode, 32), mload(proxyChildBytecode), guardedSalt)
@@ -681,7 +701,7 @@ contract CreateX {
         if (proxy == address(0)) {
             revert FailedContractCreation({emitter: _SELF});
         }
-        emit Create3ProxyContractCreation({newContract: proxy});
+        emit Create3ProxyContractCreation({newContract: proxy, salt: guardedSalt});
 
         newContract = computeCreate3Address({salt: guardedSalt});
         (bool success, ) = proxy.call{value: values.constructorAmount}(initCode);
@@ -828,7 +848,10 @@ contract CreateX {
             mstore(0x00, deployer)
             mstore8(0x0b, 0xff)
             mstore(0x20, salt)
-            mstore(0x40, hex"21c35dbe1b344a2488cf3321d6ce542f8e9f305544ff09e4993a62319a497c1f")
+            mstore(
+                0x40,
+                hex"21_c3_5d_be_1b_34_4a_24_88_cf_33_21_d6_ce_54_2f_8e_9f_30_55_44_ff_09_e4_99_3a_62_31_9a_49_7c_1f"
+            )
             mstore(0x14, keccak256(0x0b, 0x55))
             mstore(0x40, ptr)
             mstore(0x00, 0xd694)
@@ -945,23 +968,26 @@ contract CreateX {
      * @return salt The 32-byte pseudo-random salt value.
      */
     function _generateSalt() internal view returns (bytes32 salt) {
-        salt = keccak256(
-            abi.encode(
-                // We don't use `block.number - 256` (the maximum value on the EVM) to accommodate
-                // any chains that may try to reduce the amount of available historical block hashes.
-                // We also don't subtract 1 to mitigate any risks arising from consecutive block
-                // producers on a PoS chain. Therefore, we use `block.number - 32` as a reasonable
-                // compromise, one we expect should work on most chains, which is 1 epoch on Ethereum
-                // mainnet.
-                blockhash(block.number - 32),
-                block.coinbase,
-                block.number,
-                block.timestamp,
-                block.prevrandao,
-                block.chainid,
-                msg.sender
-            )
-        );
+        // If you use this function between the genesis block and block number 31, it will return zero.
+        unchecked {
+            salt = keccak256(
+                abi.encode(
+                    // We don't use `block.number - 256` (the maximum value on the EVM) to accommodate
+                    // any chains that may try to reduce the amount of available historical block hashes.
+                    // We also don't subtract 1 to mitigate any risks arising from consecutive block
+                    // producers on a PoS chain. Therefore, we use `block.number - 32` as a reasonable
+                    // compromise, one we expect should work on most chains, which is 1 epoch on Ethereum
+                    // mainnet.
+                    blockhash(block.number - 32),
+                    block.coinbase,
+                    block.number,
+                    block.timestamp,
+                    block.prevrandao,
+                    block.chainid,
+                    msg.sender
+                )
+            );
+        }
     }
 
     /**

@@ -19,13 +19,16 @@ const config: HardhatUserConfig = {
     sources: "./src",
   },
   solidity: {
-    version: "0.8.21",
+    version: "0.8.22",
     settings: {
       optimizer: {
         enabled: true,
         runs: 999999,
       },
       evmVersion: "paris", // Prevent using the `PUSH0` opcode
+      metadata: {
+        bytecodeHash: "none", // Remove the metadata hash from the bytecode
+      },
     },
   },
   networks: {

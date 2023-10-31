@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.21;
+pragma solidity 0.8.22;
 
 import {BaseTest} from "../../utils/BaseTest.sol";
 import {ImplementationContract} from "../../mocks/ImplementationContract.sol";
@@ -12,19 +12,6 @@ contract CreateX_DeployCreateClone_Public_Test is BaseTest {
 
     ImplementationContract internal implementationContract = new ImplementationContract();
     address internal implementation = address(implementationContract);
-
-    /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
-    /*                           EVENTS                           */
-    /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
-
-    // Solidity version `0.8.21` raises an ICE (Internal Compiler Error)
-    // when an event is emitted from another contract: https://github.com/ethereum/solidity/issues/14430.
-
-    /**
-     * @dev Event that is emitted when a contract is successfully created.
-     * @param newContract The address of the new contract.
-     */
-    event ContractCreation(address indexed newContract);
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            TESTS                           */
@@ -54,7 +41,7 @@ contract CreateX_DeployCreateClone_Public_Test is BaseTest {
         // It emits the event `ContractCreation` with the EIP-1167 minimal proxy address as indexed argument.
         // It returns the EIP-1167 minimal proxy address.
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit ContractCreation(computedAddress);
+        emit CreateX.ContractCreation(computedAddress);
         address proxy = createX.deployCreateClone{value: msgValue}(
             implementation,
             abi.encodeCall(implementationContract.initialiser, ())
@@ -62,7 +49,13 @@ contract CreateX_DeployCreateClone_Public_Test is BaseTest {
         assertEq(proxy, computedAddress, "100");
         assertEq(
             proxy.codehash,
-            keccak256(abi.encodePacked(hex"363d3d373d3d3d363d73", implementation, hex"5af43d82803e903d91602b57fd5bf3")),
+            keccak256(
+                abi.encodePacked(
+                    hex"36_3d_3d_37_3d_3d_3d_36_3d_73",
+                    implementation,
+                    hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3"
+                )
+            ),
             "200"
         );
         assertTrue(!implementationContract.isInitialised(), "300");
