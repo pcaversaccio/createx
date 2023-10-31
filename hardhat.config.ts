@@ -26,6 +26,9 @@ const config: HardhatUserConfig = {
         runs: 999999,
       },
       evmVersion: "paris", // Prevent using the `PUSH0` opcode
+      metadata: {
+        bytecodeHash: "none", // Remove the metadata hash from the bytecode
+      },
     },
   },
   networks: {

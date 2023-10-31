@@ -12,6 +12,7 @@ optimizer = true                                            # enable the solc op
 optimizer_runs = 999999                                     # the number of optimiser runs
 verbosity = 3                                               # the verbosity of tests
 fs_permissions = [{ access = "read-write", path = "./"}]    # set read-write access to project root
+bytecode_hash = 'none'                                      # remove the metadata hash from the bytecode
 
 ## default overrides for the CI runs
 [profile.ci]
