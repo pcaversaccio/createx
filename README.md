@@ -52,9 +52,11 @@ CreateX
 
 Returns the address where a contract will be stored if deployed via _this contract_ (i.e. [`CreateX`](./src/CreateX.sol)) using the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode. For the specification of the Recursive Length Prefix (RLP) encoding scheme, please refer to p. 19 of the [Ethereum Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) and the [Ethereum Wiki](https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/). Based on the [EIP-161](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md) specification, all contract accounts on the Ethereum mainnet are initiated with `nonce = 1`. Thus, the first contract address created by another contract is calculated with a non-zero nonce.
 
-```solidity
-/*:°• Function Arguments •°:*/
-@param nonce The next 32-byte nonce of this contract.
+```yml
+# /*:°• Function Arguments •°:*/ #
+- name: nonce
+  type: uint256
+  description: The next 32-byte nonce of this contract.
 ```
 
 </details>
@@ -64,10 +66,14 @@ Returns the address where a contract will be stored if deployed via _this contra
 
 Returns the address where a contract will be stored if deployed via `deployer` using the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode. For the specification of the Recursive Length Prefix (RLP) encoding scheme, please refer to p. 19 of the [Ethereum Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) and the [Ethereum Wiki](https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/). Based on the [EIP-161](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md) specification, all contract accounts on the Ethereum mainnet are initiated with `nonce = 1`. Thus, the first contract address created by another contract is calculated with a non-zero nonce.
 
-```solidity
-/*:°• Function Arguments •°:*/
-@param deployer The 20-byte deployer address.
-@param nonce The next 32-byte nonce of the deployer address.
+```yml
+# /*:°• Function Arguments •°:*/ #
+- name: deployer
+  type: address
+  description: The 20-byte deployer address.
+- name: nonce
+  type: uint256
+  description: The next 32-byte nonce of the deployer address.
 ```
 
 </details>
@@ -77,9 +83,11 @@ Returns the address where a contract will be stored if deployed via `deployer` u
 
 Deploys a new contract via calling the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode and using the creation bytecode `initCode` and `msg.value` as inputs. In order to save deployment costs, we do not sanity check the `initCode` length. Note that if `msg.value` is non-zero, `initCode` must have a `payable` constructor.
 
-```solidity
-/*:°• Function Arguments •°:*/
-@param initCode The creation bytecode.
+```yml
+# /*:°• Function Arguments •°:*/ #
+- name: initCode
+  type: bytes
+  description: The creation bytecode.
 ```
 
 </details>
@@ -89,11 +97,17 @@ Deploys a new contract via calling the [`CREATE`](https://www.evm.codes/#f0?fork
 
 Deploys and initialises a new contract via calling the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode and using the creation bytecode `initCode`, the initialisation code `data`, the struct for the `payable` amounts `values`, and `msg.value` as inputs. In order to save deployment costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor, and any excess ether is returned to `msg.sender`.
 
-```solidity
-/*:°• Function Arguments •°:*/
-@param initCode The creation bytecode.
-@param data The initialisation code that is passed to the deployed contract.
-@param values The specific `payable` amounts for the deployment and initialisation call.
+```yml
+# /*:°• Function Arguments •°:*/ #
+- name: initCode
+  type: bytes
+  description: The creation bytecode.
+- name: data
+  type: bytes
+  description: The initialisation code that is passed to the deployed contract.
+- name: values
+  type: tuple(uint256,uint256)
+  description: The specific `payable` amounts for the deployment and initialisation call.
 ```
 
 > **Note**<br>
@@ -106,12 +120,20 @@ Deploys and initialises a new contract via calling the [`CREATE`](https://www.ev
 
 Deploys and initialises a new contract via calling the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode and using the creation bytecode `initCode`, the initialisation code `data`, the struct for the `payable` amounts `values`, the refund address `refundAddress`, and `msg.value` as inputs. In order to save deployment costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor.
 
-```solidity
-/*:°• Function Arguments •°:*/
-@param initCode The creation bytecode.
-@param data The initialisation code that is passed to the deployed contract.
-@param values The specific `payable` amounts for the deployment and initialisation call.
-@param refundAddress The 20-byte address where any excess ether is returned to.
+```yml
+# /*:°• Function Arguments •°:*/ #
+- name: initCode
+  type: bytes
+  description: The creation bytecode.
+- name: data
+  type: bytes
+  description: The initialisation code that is passed to the deployed contract.
+- name: values
+  type: tuple(uint256,uint256)
+  description: The specific `payable` amounts for the deployment and initialisation call.
+- name: refundAddress
+  type: address
+  description: The 20-byte address where any excess ether is returned to.
 ```
 
 > **Note**<br>
@@ -124,10 +146,14 @@ Deploys and initialises a new contract via calling the [`CREATE`](https://www.ev
 
 Deploys a new [EIP-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy contract using the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode, and initialises the implementation contract using the implementation address `implementation`, the initialisation code `data`, and `msg.value` as inputs. Note that if `msg.value` is non-zero, the initialiser function called via `data` must be `payable`.
 
-```solidity
-/*:°• Function Arguments •°:*/
-@param implementation The 20-byte implementation contract address.
-@param data The initialisation code that is passed to the deployed proxy contract.
+```yml
+# /*:°• Function Arguments •°:*/ #
+- name: implementation
+  type: address
+  description: The 20-byte implementation contract address.
+- name: data
+  type: bytes
+  description: The initialisation code that is passed to the deployed proxy contract.
 ```
 
 > **Note**<br>
