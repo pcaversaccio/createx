@@ -65,7 +65,7 @@ Returns the address where a contract will be stored if deployed via _this contra
 Returns the address where a contract will be stored if deployed via `deployer` using the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode. For the specification of the Recursive Length Prefix (RLP) encoding scheme, please refer to p. 19 of the [Ethereum Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) and the [Ethereum Wiki](https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/). Based on the [EIP-161](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md) specification, all contract accounts on the Ethereum mainnet are initiated with `nonce = 1`. Thus, the first contract address created by another contract is calculated with a non-zero nonce.
 
 ```solidity
-/// Function Arguments
+/*:°• Function Arguments •°:*/
 @param deployer The 20-byte deployer address.
 @param nonce The next 32-byte nonce of the deployer address.
 ```
@@ -78,7 +78,7 @@ Returns the address where a contract will be stored if deployed via `deployer` u
 Deploys a new contract via calling the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode and using the creation bytecode `initCode` and `msg.value` as inputs. In order to save deployment costs, we do not sanity check the `initCode` length. Note that if `msg.value` is non-zero, `initCode` must have a `payable` constructor.
 
 ```solidity
-/// Function Arguments
+/*:°• Function Arguments •°:*/
 @param initCode The creation bytecode.
 ```
 
@@ -90,7 +90,7 @@ Deploys a new contract via calling the [`CREATE`](https://www.evm.codes/#f0?fork
 Deploys and initialises a new contract via calling the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode and using the creation bytecode `initCode`, the initialisation code `data`, the struct for the `payable` amounts `values`, and `msg.value` as inputs. In order to save deployment costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor, and any excess ether is returned to `msg.sender`.
 
 ```solidity
-/// Function Arguments
+/*:°• Function Arguments •°:*/
 @param initCode The creation bytecode.
 @param data The initialisation code that is passed to the deployed contract.
 @param values The specific `payable` amounts for the deployment and initialisation call.
@@ -107,7 +107,7 @@ Deploys and initialises a new contract via calling the [`CREATE`](https://www.ev
 Deploys and initialises a new contract via calling the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode and using the creation bytecode `initCode`, the initialisation code `data`, the struct for the `payable` amounts `values`, the refund address `refundAddress`, and `msg.value` as inputs. In order to save deployment costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor.
 
 ```solidity
-/// Function Arguments
+/*:°• Function Arguments •°:*/
 @param initCode The creation bytecode.
 @param data The initialisation code that is passed to the deployed contract.
 @param values The specific `payable` amounts for the deployment and initialisation call.
@@ -125,10 +125,13 @@ Deploys and initialises a new contract via calling the [`CREATE`](https://www.ev
 Deploys a new [EIP-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy contract using the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode, and initialises the implementation contract using the implementation address `implementation`, the initialisation code `data`, and `msg.value` as inputs. Note that if `msg.value` is non-zero, the initialiser function called via `data` must be `payable`.
 
 ```solidity
-// Function Arguments
-@param salt The 32-byte random value used to create the contract address.
-@param initCode The creation bytecode.
+/*:°• Function Arguments •°:*/
+@param implementation The 20-byte implementation contract address.
+@param data The initialisation code that is passed to the deployed proxy contract.
 ```
+
+> **Note**<br>
+> This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
 
 </details>
 
