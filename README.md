@@ -53,7 +53,7 @@ CreateX
 Returns the address where a contract will be stored if deployed via _this contract_ (i.e. [`CreateX`](./src/CreateX.sol)) using the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode. For the specification of the Recursive Length Prefix (RLP) encoding scheme, please refer to p. 19 of the [Ethereum Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) and the [Ethereum Wiki](https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/). Based on the [EIP-161](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md) specification, all contract accounts on the Ethereum mainnet are initiated with `nonce = 1`. Thus, the first contract address created by another contract is calculated with a non-zero nonce.
 
 ```yml
-# /*:°• Function Arguments •°:*/ #
+# /*:°• Function Argument •°:*/ #
 - name: nonce
   type: uint256
   description: The next 32-byte nonce of this contract.
@@ -84,7 +84,7 @@ Returns the address where a contract will be stored if deployed via `deployer` u
 Deploys a new contract via calling the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode and using the creation bytecode `initCode` and `msg.value` as inputs. In order to save deployment costs, we do not sanity check the `initCode` length. Note that if `msg.value` is non-zero, `initCode` must have a `payable` constructor.
 
 ```yml
-# /*:°• Function Arguments •°:*/ #
+# /*:°• Function Argument •°:*/ #
 - name: initCode
   type: bytes
   description: The creation bytecode.
