@@ -53,9 +53,8 @@ CreateX
 Returns the address where a contract will be stored if deployed via _this contract_ (i.e. [`CreateX`](./src/CreateX.sol)) using the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode. For the specification of the Recursive Length Prefix (RLP) encoding scheme, please refer to p. 19 of the [Ethereum Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) and the [Ethereum Wiki](https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/). Based on the [EIP-161](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md) specification, all contract accounts on the Ethereum mainnet are initiated with `nonce = 1`. Thus, the first contract address created by another contract is calculated with a non-zero nonce.
 
 ```solidity
-/**
- * @param nonce The next 32-byte nonce of this contract.
- */
+/*:°• Function Arguments •°:*/
+@param nonce The next 32-byte nonce of this contract.
 ```
 
 </details>
@@ -66,10 +65,9 @@ Returns the address where a contract will be stored if deployed via _this contra
 Returns the address where a contract will be stored if deployed via `deployer` using the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode. For the specification of the Recursive Length Prefix (RLP) encoding scheme, please refer to p. 19 of the [Ethereum Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) and the [Ethereum Wiki](https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/). Based on the [EIP-161](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md) specification, all contract accounts on the Ethereum mainnet are initiated with `nonce = 1`. Thus, the first contract address created by another contract is calculated with a non-zero nonce.
 
 ```solidity
-/**
- * @param deployer The 20-byte deployer address.
- * @param nonce The next 32-byte nonce of the deployer address.
- */ 
+/// Function Arguments
+@param deployer The 20-byte deployer address.
+@param nonce The next 32-byte nonce of the deployer address.
 ```
 
 </details>
