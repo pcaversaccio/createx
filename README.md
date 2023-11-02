@@ -53,8 +53,9 @@ CreateX
 Returns the address where a contract will be stored if deployed via _this contract_ (i.e. [`CreateX`](./src/CreateX.sol)) using the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode. For the specification of the Recursive Length Prefix (RLP) encoding scheme, please refer to p. 19 of the [Ethereum Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) and the [Ethereum Wiki](https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/). Based on the [EIP-161](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md) specification, all contract accounts on the Ethereum mainnet are initiated with `nonce = 1`. Thus, the first contract address created by another contract is calculated with a non-zero nonce.
 
 ```solidity
-/// Function Arguments
-@param nonce The next 32-byte nonce of this contract.
+/**
+ * @param nonce The next 32-byte nonce of this contract.
+ */
 ```
 
 </details>
@@ -65,9 +66,10 @@ Returns the address where a contract will be stored if deployed via _this contra
 Returns the address where a contract will be stored if deployed via `deployer` using the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode. For the specification of the Recursive Length Prefix (RLP) encoding scheme, please refer to p. 19 of the [Ethereum Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) and the [Ethereum Wiki](https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/). Based on the [EIP-161](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md) specification, all contract accounts on the Ethereum mainnet are initiated with `nonce = 1`. Thus, the first contract address created by another contract is calculated with a non-zero nonce.
 
 ```solidity
-/// Function Arguments
-@param deployer The 20-byte deployer address.
-@param nonce The next 32-byte nonce of the deployer address.
+/**
+ * @param deployer The 20-byte deployer address.
+ * @param nonce The next 32-byte nonce of the deployer address.
+ */ 
 ```
 
 </details>
@@ -125,7 +127,7 @@ Deploys and initialises a new contract via calling the [`CREATE`](https://www.ev
 Deploys a new [EIP-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy contract using the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode, and initialises the implementation contract using the implementation address `implementation`, the initialisation code `data`, and `msg.value` as inputs. Note that if `msg.value` is non-zero, the initialiser function called via `data` must be `payable`.
 
 ```solidity
-/// Function Arguments
+// Function Arguments
 @param salt The 32-byte random value used to create the contract address.
 @param initCode The creation bytecode.
 ```
