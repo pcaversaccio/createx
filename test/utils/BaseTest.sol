@@ -45,7 +45,7 @@ contract CreateXHarness is CreateX {
 
 /**
  * @dev Base test contract that deploys `CreateX` and `CreateXHarness`, and defines
- * events and helper methods.
+ * custom errors, and helper variables and methods.
  */
 contract BaseTest is Test {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
