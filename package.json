@@ -30,6 +30,7 @@
     "compile": "npx hardhat compile && forge build --out forge-artifacts",
     "size": "npx hardhat size-contracts",
     "abi": "npx hardhat export-abi",
+    "vars:path": "npx hardhat vars path",
     "evm": "npx hardhat evm",
     "deploy:hh": "npx hardhat run --network hardhat scripts/deploy.ts",
     "deploy:localhost": "npx hardhat run --network localhost scripts/deploy.ts",
