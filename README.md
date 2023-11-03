@@ -408,7 +408,7 @@ Deploys and initialises a new contract via calling the [`CREATE2`](https://www.e
 <details>
 <summary> <a href="https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L545-L563"><code>deployCreate2Clone(address,bytes)</code></a> </summary>
 
-Deploys a new [EIP-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy contract using the [`CREATE2`](https://www.evm.codes/#f5?fork=shanghai) opcode and the salt value `salt`, and initialises the implementation contract using the implementation address `implementation`, the initialisation code `data`, and `msg.value` as inputs. The salt value is calculated pseudo-randomly using a diverse selection of block and transaction properties. This approach does not guarantee true randomness! Note that if `msg.value` is non-zero, the initialiser function called via `data` must be `payable`.
+Deploys a new [EIP-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy contract using the [`CREATE2`](https://www.evm.codes/#f5?fork=shanghai) opcode and the salt value `salt`, and initialises the implementation contract using the implementation address `implementation`, the initialisation code `data`, and `msg.value` as inputs. The salt value is calculated _pseudo-randomly_ using a diverse selection of block and transaction properties. This approach does not guarantee true randomness! Note that if `msg.value` is non-zero, the initialiser function called via `data` must be `payable`.
 
 ```yml
 # /*:°• Function Arguments •°:*/ #
@@ -461,8 +461,18 @@ Deploys a new [EIP-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy 
 <details>
 <summary> <a href="https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L863-L873"><code>computeCreate3Address(bytes32)</code></a> </summary>
 
-```solidity
-/// Function Arguments
+Returns the address where a contract will be stored if deployed via _this contract_ (i.e. [`CreateX`](./src/CreateX.sol)) using the [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171) pattern (i.e. without an initcode factor). Any change in the `salt` value will result in a new destination address.
+
+```yml
+# /*:°• Function Argument •°:*/ #
+- name: salt
+  type: bytes32
+  description: The 32-byte random value used to create the contract address.
+
+# /*:°• Return Value •°:*/ #
+- name: computedAddress
+  type: address
+  description: The 20-byte address where a contract will be stored.
 ```
 
 </details>
@@ -470,8 +480,21 @@ Deploys a new [EIP-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy 
 <details>
 <summary> <a href="https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L836-L861"><code>computeCreate3Address(bytes32,address)</code></a> </summary>
 
-```solidity
-/// Function Arguments
+Returns the address where a contract will be stored if deployed via `deployer` using the [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171) pattern (i.e. without an initcode factor). Any change in the `salt` value will result in a new destination address.
+
+```yml
+# /*:°• Function Arguments •°:*/ #
+- name: salt
+  type: bytes32
+  description: The 32-byte random value used to create the contract address.
+- name: deployer
+  type: address
+  description: The 20-byte deployer address.
+
+# /*:°• Return Value •°:*/ #
+- name: computedAddress
+  type: address
+  description: The 20-byte address where a contract will be stored.
 ```
 
 </details>
@@ -479,54 +502,171 @@ Deploys a new [EIP-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy 
 <details>
 <summary> <a href="https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L648-L665"><code>deployCreate3(bytes)</code></a> </summary>
 
-```solidity
-/// Function Arguments
+Deploys a new contract via employing the [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171) pattern (i.e. without an initcode factor) and using the salt value `salt`, the creation bytecode `initCode`, and `msg.value` as inputs. The salt value is calculated _pseudo-randomly_ using a diverse selection of block and transaction properties. This approach does not guarantee true randomness! In order to save deployment costs, we do not sanity check the `initCode` length. Note that if `msg.value` is non-zero, `initCode` must have a `payable` constructor.
+
+```yml
+# /*:°• Function Argument •°:*/ #
+- name: initCode
+  type: bytes
+  description: The creation bytecode.
+
+# /*:°• Return Value •°:*/ #
+- name: newContract
+  type: address
+  description: The 20-byte address where the contract was deployed.
 ```
+
+> **Note**<br>
+> This function does not implement any permissioned deploy protection, thus anyone can frontrun the same proxy deployment on other chains. Use with caution!
 
 </details>
 
 <details>
 <summary> <a href="https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L616-L646"><code>deployCreate3(bytes32,bytes)</code></a> </summary>
 
-```solidity
-/// Function Arguments
+Deploys a new contract via employing the [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171) pattern (i.e. without an initcode factor) and using the salt value `salt`, the creation bytecode `initCode`, and `msg.value` as inputs. In order to save deployment costs, we do not sanity check the `initCode` length. Note that if `msg.value` is non-zero, `initCode` must have a `payable` constructor.
+
+```yml
+# /*:°• Function Arguments •°:*/ #
+- name: salt
+  type: bytes32
+  description: The 32-byte random value used to create the contract address.
+- name: initCode
+  type: bytes
+  description: The creation bytecode.
+
+# /*:°• Return Value •°:*/ #
+- name: newContract
+  type: address
+  description: The 20-byte address where the contract was deployed.
 ```
+
+> **Note**<br>
+> We strongly recommend implementing a permissioned deploy protection by setting the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun proxy deployments on other chains.
 
 </details>
 
 <details>
 <summary> <a href="https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L801-L834"><code>deployCreate3AndInit(bytes,bytes,tuple(uint256,uint256))</code></a> </summary>
 
-```solidity
-/// Function Arguments
+Deploys and initialises a new contract via employing the [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171) pattern (i.e. without an initcode factor) and using the creation bytecode `initCode`, the initialisation code `data`, the struct for the `payable` amounts `values`, `msg.value` as inputs. The salt value is calculated _pseudo-randomly_ using a diverse selection of block and transaction properties. This approach does not guarantee true randomness! In order to save deployment costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor, and any excess ether is returned to `msg.sender`.
+
+```yml
+# /*:°• Function Arguments •°:*/ #
+- name: initCode
+  type: bytes
+  description: The creation bytecode.
+- name: data
+  type: bytes
+  description: The initialisation code that is passed to the deployed contract.
+- name: values
+  type: tuple(uint256,uint256)
+  description: The specific `payable` amounts for the deployment and initialisation call.
+
+# /*:°• Return Value •°:*/ #
+- name: newContract
+  type: address
+  description: The 20-byte address where the contract was deployed.
 ```
+
+> **Note**<br>
+> This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system. Furthermore, this function does not implement any permissioned deploy protection, thus anyone can frontrun the same proxy deployment on other chains. Use with caution!
 
 </details>
 
 <details>
 <summary> <a href="https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L727-L762"><code>deployCreate3AndInit(bytes32,bytes,bytes,tuple(uint256,uint256))</code></a> </summary>
 
-```solidity
-/// Function Arguments
+Deploys and initialises a new contract via employing the [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171) pattern (i.e. without an initcode factor) and using the salt value `salt`, the creation bytecode `initCode`, the initialisation code `data`, the struct for the `payable` amounts `values`, and `msg.value` as inputs. In order to save deployment costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor, and any excess ether is returned to `msg.sender`.
+
+```yml
+# /*:°• Function Arguments •°:*/ #
+- name: salt
+  type: bytes32
+  description: The 32-byte random value used to create the contract address.
+- name: initCode
+  type: bytes
+  description: The creation bytecode.
+- name: data
+  type: bytes
+  description: The initialisation code that is passed to the deployed contract.
+- name: values
+  type: tuple(uint256,uint256)
+  description: The specific `payable` amounts for the deployment and initialisation call.
+
+# /*:°• Return Value •°:*/ #
+- name: newContract
+  type: address
+  description: The 20-byte address where the contract was deployed.
 ```
+
+> **Note**<br>
+> This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system. Furthermore, this function does not implement any permissioned deploy protection, thus anyone can frontrun the same proxy deployment on other chains. Use with caution!
 
 </details>
 
 <details>
 <summary> <a href="https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L764-L799"><code>deployCreate3AndInit(bytes,bytes,tuple(uint256,uint256),address)</code></a> </summary>
 
-```solidity
-/// Function Arguments
+Deploys and initialises a new contract via employing the [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171) pattern (i.e. without an initcode factor) and using the creation bytecode `initCode`, the initialisation code `data`, the struct for the `payable` amounts `values`, the refund address `refundAddress`, and `msg.value` as inputs. The salt value is calculated pseudo-randomly using a diverse selection of block and transaction properties. This approach does not guarantee true randomness! In order to save deployment costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor.
+
+```yml
+# /*:°• Function Arguments •°:*/ #
+- name: initCode
+  type: bytes
+  description: The creation bytecode.
+- name: data
+  type: bytes
+  description: The initialisation code that is passed to the deployed contract.
+- name: values
+  type: tuple(uint256,uint256)
+  description: The specific `payable` amounts for the deployment and initialisation call.
+- name: refundAddress
+  type: address
+  description: The 20-byte address where any excess ether is returned to.
+
+# /*:°• Return Value •°:*/ #
+- name: newContract
+  type: address
+  description: The 20-byte address where the contract was deployed.
 ```
+
+> **Note**<br>
+> This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system. Furthermore, this function does not implement any permissioned deploy protection, thus anyone can frontrun the same proxy deployment on other chains. Use with caution!
 
 </details>
 
 <details>
 <summary> <a href="https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L727-L762"><code>deployCreate3AndInit(bytes32,bytes,bytes,tuple(uint256,uint256),address)</code></a> </summary>
 
-```solidity
-/// Function Arguments
+Deploys and initialises a new contract via employing the [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171) pattern (i.e. without an initcode factor) and using the salt value `salt`, the creation bytecode `initCode`, the initialisation code `data`, the struct for the `payable` amounts `values`, and `msg.value` as inputs. In order to save deployment costs, we do not sanity check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor, and any excess ether is returned to `msg.sender`.
+
+```yml
+# /*:°• Function Arguments •°:*/ #
+- name: salt
+  type: bytes32
+  description: The 32-byte random value used to create the contract address.
+- name: initCode
+  type: bytes
+  description: The creation bytecode.
+- name: data
+  type: bytes
+  description: The initialisation code that is passed to the deployed contract.
+- name: values
+  type: tuple(uint256,uint256)
+  description: The specific `payable` amounts for the deployment and initialisation call.
+- name: refundAddress
+  type: address
+  description: The 20-byte address where any excess ether is returned to.
+
+# /*:°• Return Value •°:*/ #
+- name: newContract
+  type: address
+  description: The 20-byte address where the contract was deployed.
 ```
+
+> **Note**<br>
+> This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system. Furthermore, we strongly recommend implementing a permissioned deploy protection by setting the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun proxy deployments on other chains.
 
 </details>
 
