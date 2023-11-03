@@ -19,7 +19,7 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
   - [Security Considerations](#security-considerations)
   - [Tests](#tests)
     - [Test Coverage](#test-coverage)
-  - [ABI](#abi)
+  - [ABI (Application Binary Interface)](#abi-application-binary-interface)
   - [New Deployment(s)](#new-deployments)
     - [Contract Verification](#contract-verification)
   - [`CreateX` Deployments](#createx-deployments)
@@ -698,27 +698,101 @@ The `salt` value implements different safeguarding mechanisms depending on the e
 - The 21st byte (i.e. `ff`) may be used to implement a cross-chain redeploy protection by setting it equal to `0x01`,
 - The last random 11 bytes (i.e. `1212121212121212121212`) allow for $2^{88}$ bits of entropy for mining a salt.
 
-Please note that when you configure a permissioned deploy protection, you **must** specify whether you want a cross-chain redeploy protection or not. The underlying reason for this logic is to enforce developer explicitness. If you don't configure a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. Furthermore, you can configure solely a cross-chain redeploy protection by setting the first 20 bytes equal to the zero address `0x0000000000000000000000000000000000000000`. The rationale behind this logic is to prevent a pseudo-randomly generated cross-chain redeploy protection. Also in this case, if you don't specify a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. The underlying reason for this logic is as well to enforce developer explicitness.
+The full logic is implemened in the `internal` [`_guard`](./src/CreateX.sol#L879-L917) function:
+
+```solidity
+function _guard(bytes32 salt) internal view returns (bytes32 guardedSalt) {
+  (
+    SenderBytes senderBytes,
+    RedeployProtectionFlag redeployProtectionFlag
+  ) = _parseSalt({ salt: salt });
+
+  if (
+    senderBytes == SenderBytes.MsgSender &&
+    redeployProtectionFlag == RedeployProtectionFlag.True
+  ) {
+    // Configures a permissioned deploy protection as well as a cross-chain redeploy protection.
+    guardedSalt = keccak256(abi.encode(msg.sender, block.chainid, salt));
+  } else if (
+    senderBytes == SenderBytes.MsgSender &&
+    redeployProtectionFlag == RedeployProtectionFlag.False
+  ) {
+    // Configures solely a permissioned deploy protection.
+    guardedSalt = _efficientHash({
+      a: bytes32(uint256(uint160(msg.sender))),
+      b: salt
+    });
+  } else if (senderBytes == SenderBytes.MsgSender) {
+    // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
+    revert InvalidSalt({ emitter: _SELF });
+  } else if (
+    senderBytes == SenderBytes.ZeroAddress &&
+    redeployProtectionFlag == RedeployProtectionFlag.True
+  ) {
+    // Configures solely a cross-chain redeploy protection. In order to prevent a pseudo-randomly
+    // generated cross-chain redeploy protection, we enforce the zero address check for the first 20 bytes.
+    guardedSalt = _efficientHash({ a: bytes32(block.chainid), b: salt });
+  } else if (
+    senderBytes == SenderBytes.ZeroAddress &&
+    redeployProtectionFlag == RedeployProtectionFlag.Unspecified
+  ) {
+    // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
+    revert InvalidSalt({ emitter: _SELF });
+  } else {
+    // In all other cases, the salt value `salt` is not modified.
+    guardedSalt = salt;
+  }
+}
+```
+
+Please note that when you configure a permissioned deploy protection, you **must** specify whether you want a cross-chain redeploy protection or not (i.e. the 21st byte equals `0x00`). The underlying reason for this logic is to enforce developer explicitness. If you don't configure a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. Furthermore, you can configure solely a cross-chain redeploy protection by setting the first 20 bytes equal to the zero address `0x0000000000000000000000000000000000000000`. The rationale behind this logic is to prevent a pseudo-randomly generated cross-chain redeploy protection. Also in this case, if you don't specify a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. The underlying reason for this logic is as well to enforce developer explicitness.
 
 ### Pseudo-Random Salt Value
 
 For developer convenience, the [`CreateX`](./src/CreateX.sol) contract offers several overloaded functions that generate the salt value pseudo-randomly using a diverse selection of block and transaction properties. Please note that this approach does not guarantee true randomness!
 
+The full logic is implemened in the `internal` [`_generateSalt`](./src/CreateX.sol#L965-L991) function:
+
+```solidity
+function _generateSalt() internal view returns (bytes32 salt) {
+  // If you use this function between the genesis block and block number 31, it will return zero.
+  unchecked {
+    salt = keccak256(
+      abi.encode(
+        // We don't use `block.number - 256` (the maximum value on the EVM) to accommodate
+        // any chains that may try to reduce the amount of available historical block hashes.
+        // We also don't subtract 1 to mitigate any risks arising from consecutive block
+        // producers on a PoS chain. Therefore, we use `block.number - 32` as a reasonable
+        // compromise, one we expect should work on most chains, which is 1 epoch on Ethereum
+        // mainnet.
+        blockhash(block.number - 32),
+        block.coinbase,
+        block.number,
+        block.timestamp,
+        block.prevrandao,
+        block.chainid,
+        msg.sender
+      )
+    );
+  }
+}
+```
+
 ## Design Principles
 
-- [`CreateX`](./src/CreateX.sol) should cover _most_ and not all contract creation use cases.
-- [`CreateX`](./src/CreateX.sol) should be human-readable and should be simple for readers with low prior experience.
-- [`CreateX`](./src/CreateX.sol) should be maximally secure.
+- [`CreateX`](./src/CreateX.sol) should cover _most_ but not all contract creation use cases.
+- [`CreateX`](./src/CreateX.sol) should be human-readable and should be simple to understand for readers with low prior experience.
+- [`CreateX`](./src/CreateX.sol) should be maximally secure, i.e. no hidden footguns.
 - [`CreateX`](./src/CreateX.sol) should be trustless.
 - [`CreateX`](./src/CreateX.sol) should be stateless.
 - [`CreateX`](./src/CreateX.sol) should be extensible.
 
-These principles lead to the following:
+The following consequences result from these principles:
 
 - We only use inline assembly if it is required or if the code section itself is based on short and/or audited code.
 - We document the contract to the smallest detail.
 - We extensively fuzz test all functions.
-- We deliberately do not implement special functions for [clones with immutable arguments](https://github.com/wighawag/clones-with-immutable-args), as there is neither a finalised standard nor a properly audited contract version. But you are of course free to use [`CreateX`](./src/CreateX.sol) to deploy your own clone with immutable arguments factory contracts 😎!
+- We deliberately do not implement special functions for [clones with immutable arguments](https://github.com/wighawag/clones-with-immutable-args), as there is neither a finalised standard nor a properly audited contract version.
 - We do not implement any special functions for [EIP-5202](https://eips.ethereum.org/EIPS/eip-5202) (a.k.a. blueprint contracts), as all existing functions in [`CreateX`](./src/CreateX.sol) are already cost-effective alternatives in our opinion.
 
 ## Security Considerations
@@ -734,7 +808,7 @@ Generally, for security issues, see our [Security Policy](./SECURITY.md). Furthe
 
 ## Tests
 
-For all tests available in the [`test`](./test) directory, we have consistently applied the [Branching Tree Technique](https://twitter.com/PaulRBerg/status/1682346315806539776). This means that each test file is accompanied by a `.tree` file that defines all the necessary branches to be tested.
+For all (fuzz) tests available in the [`test`](./test) directory, we have consistently applied the [Branching Tree Technique](https://twitter.com/PaulRBerg/status/1682346315806539776). This means that each test file is accompanied by a `.tree` file that defines all the necessary branches to be tested.
 
 **Example ([`CreateX._guard.tree`](./test/internal/CreateX._guard.tree)):**
 
@@ -766,6 +840,12 @@ This project repository uses [`forge coverage`](https://book.getfoundry.sh/refer
 forge coverage
 ```
 
+In order to generate an `HTML` file with the coverage data, you can invoke:
+
+```console
+pnpm coverage:report
+```
+
 The written tests available in the directory [`test`](./test) achieve a test coverage of **100%** for the [`CreateX`](./src/CreateX.sol) contract:
 
 ```console
@@ -774,9 +854,10 @@ The written tests available in the directory [`test`](./test) achieve a test cov
 | src/CreateX.sol | 100.00% (149/149) | 100.00% (210/210) | 100.00% (78/78) | 100.00% (31/31) |
 ```
 
-> **Important:** A test coverage of 100% does not mean that there are no vulnerabilities. What really counts is the quality and spectrum of the tests themselves!
+> **Note**<br>
+> A test coverage of 100% does not mean that there are no vulnerabilities. What really counts is the quality and spectrum of the tests themselves!
 
-## ABI
+## ABI (Application Binary Interface)
 
 <details>
 <summary> <a href="https://docs.soliditylang.org/en/latest/">Solidity</a> </summary>
@@ -1961,12 +2042,15 @@ interface ICreateX {
 
 ## New Deployment(s)
 
+> **Warning**<br>
+> The address `0x0000000000000000000000000000000000000000` is a simple placeholder for now. Do not send any funds there!
+
 We offer two options for deploying [`CreateX`](./src/CreateX.sol) to your desired chain:
 
-1. Deploy it yourself by using one of the pre-signed transactions. Details can be found in the following section.
-2. Request deployment by opening an [issue](). You can significantly reduce the time to deployment by sending funds to cover the deploy cost to the deployer account: [`0x0000000000000000000000000000000000000000`](https://etherscan.io/address/0x0000000000000000000000000000000000000000)
+1. Deploy it yourself by using one of the pre-signed transactions. Details can be found in the subsequent paragraph.
+2. Request a deployment by opening an [issue](https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+). You can significantly reduce the time to deployment by sending funds to cover the deployment cost to the deployer account: [`0x0000000000000000000000000000000000000000`](https://etherscan.io/address/0x0000000000000000000000000000000000000000).
 
-TBD (section on pre-signed transaction; will be added after the feedback phase)
+TBD (section on pre-signed transactions; we will offer multiple pre-signed transactions with different `gasLimit` levels; will be added after the feedback phase)
 
 ### Contract Verification
 
@@ -1975,6 +2059,9 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - TBD
 
 ## [`CreateX`](./src/CreateX.sol) Deployments
+
+> **Warning**<br>
+> The address `0x0000000000000000000000000000000000000000` is a simple placeholder for now. Do not send any funds there!
 
 - EVM-Based Production Networks:
   - Ethereum: [`0x0000000000000000000000000000000000000000`](https://etherscan.io/address/0x0000000000000000000000000000000000000000)
