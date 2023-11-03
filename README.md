@@ -1,6 +1,6 @@
 # [`CreateX`](./src/CreateX.sol) – A Trustless, Universal Contract Deployer
 
-[![🕵️‍♂️ Test CreateX](https://github.com/pcaversaccio/createx/actions/workflows/test-contracts.yml/badge.svg)](https://github.com/pcaversaccio/createx/actions/workflows/test-contracts.yml)
+[![🕵️‍♂️ Test CreateX](https://github.com/pcaversaccio/createx/actions/workflows/test-createx.yml/badge.svg)](https://github.com/pcaversaccio/createx/actions/workflows/test-createx.yml)
 [![Test coverage](https://img.shields.io/badge/coverage-100%25-yellowgreen)](#test-coverage)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
