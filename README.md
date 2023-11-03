@@ -699,7 +699,7 @@ The `salt` value implements different safeguarding mechanisms depending on the e
 - The 21st byte (i.e. `ff`) may be used to implement a cross-chain redeploy protection by setting it equal to `0x01`,
 - The last random 11 bytes (i.e. `1212121212121212121212`) allow for $2^{88}$ bits of entropy for mining a salt.
 
-The full logic is implemened in the `internal` [`_guard`](./src/CreateX.sol#L879-L917) function:
+The full logic is implemented in the `internal` [`_guard`](./src/CreateX.sol#L879-L917) function:
 
 ```solidity
 function _guard(bytes32 salt) internal view returns (bytes32 guardedSalt) {
@@ -752,7 +752,7 @@ Please note that when you configure a permissioned deploy protection, you **must
 
 For developer convenience, the [`CreateX`](./src/CreateX.sol) contract offers several overloaded functions that generate the salt value pseudo-randomly using a diverse selection of block and transaction properties. Please note that this approach does not guarantee true randomness!
 
-The full logic is implemened in the `internal` [`_generateSalt`](./src/CreateX.sol#L965-L991) function:
+The full logic is implemented in the `internal` [`_generateSalt`](./src/CreateX.sol#L965-L991) function:
 
 ```solidity
 function _generateSalt() internal view returns (bytes32 salt) {
