@@ -453,7 +453,7 @@ Deploys a new [EIP-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy 
 # /*:°• Function Arguments •°:*/ #
 - name: salt
   type: bytes32
-  description: The 32-byte random value used to create the contract address.
+  description: The 32-byte random value used to create the proxy contract address.
 - name: implementation
   type: address
   description: The 20-byte implementation contract address.
@@ -481,7 +481,7 @@ Returns the address where a contract will be stored if deployed via _this contra
 # /*:°• Function Argument •°:*/ #
 - name: salt
   type: bytes32
-  description: The 32-byte random value used to create the contract address.
+  description: The 32-byte random value used to create the proxy contract address.
 
 # /*:°• Return Value •°:*/ #
 - name: computedAddress
@@ -500,7 +500,7 @@ Returns the address where a contract will be stored if deployed via `deployer` u
 # /*:°• Function Arguments •°:*/ #
 - name: salt
   type: bytes32
-  description: The 32-byte random value used to create the contract address.
+  description: The 32-byte random value used to create the proxy contract address.
 - name: deployer
   type: address
   description: The 20-byte deployer address.
@@ -544,7 +544,7 @@ Deploys a new contract via employing the [`CREATE3`](https://github.com/ethereum
 # /*:°• Function Arguments •°:*/ #
 - name: salt
   type: bytes32
-  description: The 32-byte random value used to create the contract address.
+  description: The 32-byte random value used to create the proxy contract address.
 - name: initCode
   type: bytes
   description: The creation bytecode.
@@ -597,7 +597,7 @@ Deploys and initialises a new contract via employing the [`CREATE3`](https://git
 # /*:°• Function Arguments •°:*/ #
 - name: salt
   type: bytes32
-  description: The 32-byte random value used to create the contract address.
+  description: The 32-byte random value used to create the proxy contract address.
 - name: initCode
   type: bytes
   description: The creation bytecode.
@@ -659,7 +659,7 @@ Deploys and initialises a new contract via employing the [`CREATE3`](https://git
 # /*:°• Function Arguments •°:*/ #
 - name: salt
   type: bytes32
-  description: The 32-byte random value used to create the contract address.
+  description: The 32-byte random value used to create the proxy contract address.
 - name: initCode
   type: bytes
   description: The creation bytecode.
