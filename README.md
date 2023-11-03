@@ -8,17 +8,19 @@
 
 Factory smart contract to make easier and safer usage of the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) and [`CREATE2`](https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171)-based (i.e. without an initcode factor) contract creations.
 
+> The [`CreateX`](./src/CreateX.sol) contract should be considered as maximally extensible. Be encouraged to build on top of it!
+
 - [`CreateX` – A Trustless, Universal Contract Deployer](#createx--a-trustless-universal-contract-deployer)
   - [Available Versatile Functions](#available-versatile-functions)
   - [Special Features](#special-features)
     - [Permissioned Deploy Protection and Cross-Chain Redeploy Protection](#permissioned-deploy-protection-and-cross-chain-redeploy-protection)
     - [Pseudo-Random Salt Value](#pseudo-random-salt-value)
-    - [Design Principles](#design-principles)
+  - [Design Principles](#design-principles)
   - [Security Considerations](#security-considerations)
   - [Tests](#tests)
     - [Test Coverage](#test-coverage)
   - [ABI](#abi)
-  - [How to Request a Deployment](#how-to-request-a-deployment)
+  - [New Deployment(s)](#new-deployments)
     - [Contract Verification](#contract-verification)
   - [`CreateX` Deployments](#createx-deployments)
 
@@ -688,48 +690,53 @@ Deploys and initialises a new contract via employing the [`CREATE3`](https://git
 
 The `salt` value implements different safeguarding mechanisms depending on the encoded values in the salt (`||` stands for byte-wise concatenation):
 
-```txt
+```console
 => salt (32 bytes) = 0xbebebebebebebebebebebebebebebebebebebebe||ff||1212121212121212121212
 ```
 
 - The first 20 bytes (i.e. `bebebebebebebebebebebebebebebebebebebebe`) may be used to implement a permissioned deploy protection by setting them equal to `msg.sender`,
 - The 21st byte (i.e. `ff`) may be used to implement a cross-chain redeploy protection by setting it equal to `0x01`,
-- The last random 11 bytes (i.e. `1212121212121212121212`) allow for 2\*\*88 bits of entropy for mining a salt.
+- The last random 11 bytes (i.e. `1212121212121212121212`) allow for $2^{88}$ bits of entropy for mining a salt.
 
-Please note that when you configure a permissioned deploy protection, you must specify whether you want a cross-chain redeploy protection or not. The underlying reason for this logic is to enforce developer explicitness. If you don't configure a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. Furthermore, you can configure solely a cross-chain redeploy protection by setting the first 20 bytes equal to the zero address `0x0000000000000000000000000000000000000000`. The rationale behind this logic is to prevent a pseudo-randomly generated cross-chain redeploy protection. Also in this case, if you don't specify a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. The underlying reason for this logic is as well to enforce developer explicitness.
+Please note that when you configure a permissioned deploy protection, you **must** specify whether you want a cross-chain redeploy protection or not. The underlying reason for this logic is to enforce developer explicitness. If you don't configure a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. Furthermore, you can configure solely a cross-chain redeploy protection by setting the first 20 bytes equal to the zero address `0x0000000000000000000000000000000000000000`. The rationale behind this logic is to prevent a pseudo-randomly generated cross-chain redeploy protection. Also in this case, if you don't specify a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. The underlying reason for this logic is as well to enforce developer explicitness.
 
 ### Pseudo-Random Salt Value
 
 For developer convenience, the [`CreateX`](./src/CreateX.sol) contract offers several overloaded functions that generate the salt value pseudo-randomly using a diverse selection of block and transaction properties. Please note that this approach does not guarantee true randomness!
 
-### Design Principles
+## Design Principles
 
+- [`CreateX`](./src/CreateX.sol) should cover _most_ and not all contract creation use cases.
 - [`CreateX`](./src/CreateX.sol) should be human-readable and should be simple for readers with low prior experience.
 - [`CreateX`](./src/CreateX.sol) should be maximally secure.
 - [`CreateX`](./src/CreateX.sol) should be trustless.
 - [`CreateX`](./src/CreateX.sol) should be stateless.
+- [`CreateX`](./src/CreateX.sol) should be extensible.
 
-This results in the following:
+These principles lead to the following:
 
 - We only use inline assembly if it is required or if the code section itself is based on short and/or audited code.
 - We document the contract to the smallest detail.
+- We extensively fuzz test all functions.
+- We deliberately do not implement special functions for [clones with immutable arguments](https://github.com/wighawag/clones-with-immutable-args), as there is neither a finalised standard nor a properly audited contract version. But you are of course free to use [`CreateX`](./src/CreateX.sol) to deploy your own clone with immutable arguments factory contracts 😎!
+- We do not implement any special functions for [EIP-5202](https://eips.ethereum.org/EIPS/eip-5202) (a.k.a. blueprint contracts), as all existing functions in [`CreateX`](./src/CreateX.sol) are already cost-effective alternatives in our opinion.
 
 ## Security Considerations
 
-**This contract is unaudited.**
+> **Warning**<br>
+> This contract is unaudited!
 
-Generally, for security issues, see our [Security Policy](./SECURITY.md). Furthermore, you must be aware of the following dimensions:
+Generally, for security issues, see our [Security Policy](./SECURITY.md). Furthermore, you must be aware of the following aspects:
 
-- Several function allow for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
+- Several functions allow for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
 - In the functions [`deployCreate3(bytes32,bytes)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L616-L646), [`deployCreate3AndInit(bytes32,bytes,bytes,tuple(uint256,uint256))`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L727-L762), and [`deployCreate3AndInit(bytes32,bytes,bytes,tuple(uint256,uint256),address)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L667-L725) we strongly recommend implementing a permissioned deploy protection by setting the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun proxy deployments on other chains.
-- The functions [`deployCreate3(bytes)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L648-L665), [`deployCreate3AndInit(bytes,bytes,tuple(uint256,uint256))`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L801-L834), [`deployCreate3AndInit(bytes,bytes,tuple(uint256,uint256),address)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L764-L799), does not implement any permissioned deploy protection, thus anyone can frontrun the same proxy deployment on other chains. Use with caution!
-- We deliberately do not implement clones with immutable arguments, as there is neither a common standard nor a properly audited version. But you are of course free to use [`CreateX`](./src/CreateX.sol) to deploy your own clone with immutable arguments factory contracts 😎!
+- The functions [`deployCreate3(bytes)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L648-L665), [`deployCreate3AndInit(bytes,bytes,tuple(uint256,uint256))`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L801-L834), and [`deployCreate3AndInit(bytes,bytes,tuple(uint256,uint256),address)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L764-L799) do not implement any permissioned deploy protection, thus anyone can frontrun the same proxy deployment on other chains. Use with caution!
 
 ## Tests
 
 For all tests available in the [`test`](./test) directory, we have consistently applied the [Branching Tree Technique](https://twitter.com/PaulRBerg/status/1682346315806539776). This means that each test file is accompanied by a `.tree` file that defines all the necessary branches to be tested.
 
-**Example:**
+**Example ([`CreateX._guard.tree`](./test/internal/CreateX._guard.tree)):**
 
 ```tree
 CreateX_Guard_Internal_Test
@@ -1952,13 +1959,20 @@ interface ICreateX {
 
 </details>
 
-## How to Request a Deployment
+## New Deployment(s)
 
-TBD
+We offer two options for deploying [`CreateX`](./src/CreateX.sol) to your desired chain:
+
+1. Deploy it yourself by using one of the pre-signed transactions. Details can be found in the following section.
+2. Request deployment by opening an [issue](TBD). You can significantly reduce the time to deployment by sending funds to cover the deploy cost to the deployer account: [`0x0000000000000000000000000000000000000000`](https://etherscan.io/address/0x0000000000000000000000000000000000000000)
+
+TBD (section on pre-signed transaction; will be added after the feedback phase)
 
 ### Contract Verification
 
-TBD
+To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer, use the following parameters:
+
+- TBD
 
 ## [`CreateX`](./src/CreateX.sol) Deployments
 
