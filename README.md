@@ -670,21 +670,74 @@ Deploys and initialises a new contract via employing the [`CREATE3`](https://git
 
 </details>
 
-## Features
+## Special Features
 
-TBD
+### Permissioned Deploy Protection and Cross-Chain Redeploy Protection
+
+The `salt` value implements different safeguarding mechanisms depending on the encoded values in the salt (`||` stands for byte-wise concatenation):
+
+```txt
+=> salt (32 bytes) = 0xbebebebebebebebebebebebebebebebebebebebe||ff||1212121212121212121212
+```
+
+- The first 20 bytes (i.e. `bebebebebebebebebebebebebebebebebebebebe`) may be used to implement a permissioned deploy protection by setting them equal to `msg.sender`,
+- The 21st byte (i.e. `ff`) may be used to implement a cross-chain redeploy protection by setting it equal to `0x01`,
+- The last random 11 bytes (i.e. `1212121212121212121212`) allow for 2\*\*88 bits of entropy for mining a salt.
+
+Please note that when you configure a permissioned deploy protection, you must specify whether you want a cross-chain redeploy protection or not. The underlying reason for this logic is to enforce developer explicitness. If you don't configure a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. Furthermore, you can configure solely a cross-chain redeploy protection by setting the first 20 bytes equal to the zero address `0x0000000000000000000000000000000000000000`. The rationale behind this logic is to prevent a pseudo-randomly generated cross-chain redeploy protection. Also in this case, if you don't specify a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. The underlying reason for this logic is as well to enforce developer explicitness.
+
+### Pseudo-random Salt Value
+
+For developer convenience, the [`CreateX`](./src/CreateX.sol) contract offers several overloaded functions that generate the salt value pseudo-randomly using a diverse selection of block and transaction properties. Please note that this approach does not guarantee true randomness!
+
+### Design Principles
+
+- [`CreateX`](./src/CreateX.sol) should be human-readable and should be simple for readers with low prior experience.
+- [`CreateX`](./src/CreateX.sol) should be maximally secure.
+- [`CreateX`](./src/CreateX.sol) should be trustless.
+- [`CreateX`](./src/CreateX.sol) should be stateless.
+
+This results in the following:
+
+- We only use inline assembly if it is required or if the code section itself is based on short and/or audited code.
+- We document the contract to the smallest detail.
 
 ## Security Considerations
 
-TBD
+**This contract is unaudited.**
+
+Generally, for security issues, see our [Security Policy](./SECURITY.md). Furthermore, you must be aware of the following dimensions:
+
+- Several function allow for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
+- In the functions [`deployCreate3(bytes32,bytes)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L616-L646), [`deployCreate3AndInit(bytes32,bytes,bytes,tuple(uint256,uint256))`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L727-L762), and [`deployCreate3AndInit(bytes32,bytes,bytes,tuple(uint256,uint256),address)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L667-L725) we strongly recommend implementing a permissioned deploy protection by setting the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun proxy deployments on other chains.
+- The functions [`deployCreate3(bytes)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L648-L665), [`deployCreate3AndInit(bytes,bytes,tuple(uint256,uint256))`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L801-L834), [`deployCreate3AndInit(bytes,bytes,tuple(uint256,uint256),address)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L764-L799), does not implement any permissioned deploy protection, thus anyone can frontrun the same proxy deployment on other chains. Use with caution!
+- We deliberately do not implement clones with immutable arguments, as there is neither a common standard nor a properly audited version. But you are of course free to use [`CreateX`](./src/CreateX.sol) to deploy your own clone with immutable arguments factory contracts 😎!
 
 ## Tests
 
-### Stateless Fuzz Tests
+For all tests available in the [`test`](./test) directory, we have consistently applied the [Branching Tree Technique](https://twitter.com/PaulRBerg/status/1682346315806539776). This means that each test file is accompanied by a `.tree` file that defines all the necessary branches to be tested.
 
-TBD
+**Example:**
 
-### Stateful Fuzz (a.k.a. Invariant) Tests
+```ml
+CreateX_Guard_Internal_Test
+├── When the first 20 bytes of the salt equals the caller
+│   ├── When the 21st byte of the salt equals 0x01
+│   │   └── It should return the keccak256 hash of the ABI-encoded values msg.sender, block.chainid, and the salt.
+│   ├── When the 21st byte of the salt equals 0x00
+│   │   └── It should return the keccak256 hash of the ABI-encoded values msg.sender and the salt.
+│   └── When the 21st byte of the salt is greater than 0x01
+│       └── It should revert.
+├── When the first 20 bytes of the salt equals the zero address
+│   ├── When the 21st byte of the salt equals 0x01
+│   │   └── It should return the keccak256 hash of the ABI-encoded values block.chainid and the salt.
+│   ├── When the 21st byte of the salt equals 0x00
+│   │   └── It should return the unmodified salt value.
+│   └── When the 21st byte of the salt is greater than 0x01
+│       └── It should revert.
+└── When the first 20 bytes of the salt do not equal the caller or the zero address
+    └── It should return the unmodified salt value.
+```
 
 ### Test Coverage
 
