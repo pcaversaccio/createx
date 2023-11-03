@@ -1964,7 +1964,7 @@ interface ICreateX {
 We offer two options for deploying [`CreateX`](./src/CreateX.sol) to your desired chain:
 
 1. Deploy it yourself by using one of the pre-signed transactions. Details can be found in the following section.
-2. Request deployment by opening an [issue](TBD). You can significantly reduce the time to deployment by sending funds to cover the deploy cost to the deployer account: [`0x0000000000000000000000000000000000000000`](https://etherscan.io/address/0x0000000000000000000000000000000000000000)
+2. Request deployment by opening an [issue](). You can significantly reduce the time to deployment by sending funds to cover the deploy cost to the deployer account: [`0x0000000000000000000000000000000000000000`](https://etherscan.io/address/0x0000000000000000000000000000000000000000)
 
 TBD (section on pre-signed transaction; will be added after the feedback phase)
 
