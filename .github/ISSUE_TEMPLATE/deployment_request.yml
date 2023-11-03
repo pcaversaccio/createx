@@ -1,5 +1,5 @@
 name: "Deployment Request"
-description: "Request to deploy `CreateX` on a new chain."
+description: "Request to deploy CreateX on a new chain."
 title: "[New-Deployment-Request]: "
 labels:
   - new deployment ➕
@@ -8,51 +8,55 @@ assignees:
 body:
   - type: markdown
     attributes:
-      value: Before opening a deployment request, consider deploying CreateX yourself! See the [README](https://github.com/pcaversaccio/createx#new-deployments) for more information on how to do this.
+      value: |
+        Before opening a deployment request, consider deploying CreateX yourself.
+        See the README section [New Deployment(s)](https://github.com/pcaversaccio/createx#new-deployments) for more information about how to do this.
 
   - attributes:
       label: Chain Name
       description: What is the name of the target chain?
-      placeholder: "For example: Optimism Mainnet"
-    type: input
+      placeholder: "Optimism Mainnet"
     id: chain-name
+    type: input
     validations:
       required: true
 
   - attributes:
       label: Chain ID
       description: What is the chain ID of the target chain?
-      placeholder: "For example: 10"
-    type: input
+      placeholder: "10"
     id: chain-id
+    type: input
     validations:
       required: true
 
   - attributes:
       label: RPC URL
       description: What is the RPC URL for the target chain?
-      placeholder: "For example: https://mainnet.optimism.io"
-    type: input
+      placeholder: "https://mainnet.optimism.io"
     id: rpc-url
+    type: input
     validations:
       required: true
 
   - attributes:
       label: Block Explorer URL
       description: What is the URL of the block explorer for the target chain?
-      placeholder: "For example: https://optimistic.etherscan.io"
-    type: input
+      placeholder: "https://optimistic.etherscan.io"
     id: block-explorer-url
+    type: input
     validations:
       required: true
 
   - attributes:
       label: Deployment Funds
-      description: Have you sent the deployment funds to the deployer account (TBD) on the target chain? Doing so is greatly appreciated and will reduce time to deployment!
+      description: |
+        Have you sent the deployment funds to the deployer account (TBD) on the target chain?
+        Doing so is greatly appreciated and will reduce time to deployment!
       options:
         - "Yes"
         - "No"
-    type: dropdown
     id: deployment-funds
+    type: dropdown
     validations:
       required: true
