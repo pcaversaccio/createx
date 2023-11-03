@@ -8,7 +8,19 @@
 
 Factory smart contract to make easier and safer usage of the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) and [`CREATE2`](https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171)-based (i.e. without an initcode factor) contract creations.
 
-- [Available Versatile Functions](#available-versatile-functions)
+- [`CreateX` – A Trustless, Universal Contract Deployer](#createx--a-trustless-universal-contract-deployer)
+  - [Available Versatile Functions](#available-versatile-functions)
+  - [Special Features](#special-features)
+    - [Permissioned Deploy Protection and Cross-Chain Redeploy Protection](#permissioned-deploy-protection-and-cross-chain-redeploy-protection)
+    - [Pseudo-Random Salt Value](#pseudo-random-salt-value)
+    - [Design Principles](#design-principles)
+  - [Security Considerations](#security-considerations)
+  - [Tests](#tests)
+    - [Test Coverage](#test-coverage)
+  - [ABI](#abi)
+  - [How to Request a Deployment](#how-to-request-a-deployment)
+    - [Contract Verification](#contract-verification)
+  - [`CreateX` Deployments](#createx-deployments)
 
 ## Available Versatile Functions
 
@@ -686,7 +698,7 @@ The `salt` value implements different safeguarding mechanisms depending on the e
 
 Please note that when you configure a permissioned deploy protection, you must specify whether you want a cross-chain redeploy protection or not. The underlying reason for this logic is to enforce developer explicitness. If you don't configure a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. Furthermore, you can configure solely a cross-chain redeploy protection by setting the first 20 bytes equal to the zero address `0x0000000000000000000000000000000000000000`. The rationale behind this logic is to prevent a pseudo-randomly generated cross-chain redeploy protection. Also in this case, if you don't specify a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. The underlying reason for this logic is as well to enforce developer explicitness.
 
-### Pseudo-random Salt Value
+### Pseudo-Random Salt Value
 
 For developer convenience, the [`CreateX`](./src/CreateX.sol) contract offers several overloaded functions that generate the salt value pseudo-randomly using a diverse selection of block and transaction properties. Please note that this approach does not guarantee true randomness!
 
@@ -719,7 +731,7 @@ For all tests available in the [`test`](./test) directory, we have consistently 
 
 **Example:**
 
-```ml
+```tree
 CreateX_Guard_Internal_Test
 ├── When the first 20 bytes of the salt equals the caller
 │   ├── When the 21st byte of the salt equals 0x01
@@ -1945,6 +1957,8 @@ interface ICreateX {
 TBD
 
 ### Contract Verification
+
+TBD
 
 ## [`CreateX`](./src/CreateX.sol) Deployments
 
