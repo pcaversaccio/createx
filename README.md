@@ -59,6 +59,11 @@ Returns the address where a contract will be stored if deployed via _this contra
 - name: nonce
   type: uint256
   description: The next 32-byte nonce of this contract.
+
+# /*:°• Return Value •°:*/ #
+- name: computedAddress
+  type: address
+  description: The 20-byte address where a contract will be stored.
 ```
 
 </details>
@@ -76,6 +81,11 @@ Returns the address where a contract will be stored if deployed via `deployer` u
 - name: nonce
   type: uint256
   description: The next 32-byte nonce of the deployer address.
+
+# /*:°• Return Value •°:*/ #
+- name: computedAddress
+  type: address
+  description: The 20-byte address where a contract will be stored.
 ```
 
 </details>
@@ -90,6 +100,11 @@ Deploys a new contract via calling the [`CREATE`](https://www.evm.codes/#f0?fork
 - name: initCode
   type: bytes
   description: The creation bytecode.
+
+# /*:°• Return Value •°:*/ #
+- name: newContract
+  type: address
+  description: The 20-byte address where the contract was deployed.
 ```
 
 </details>
@@ -110,6 +125,11 @@ Deploys and initialises a new contract via calling the [`CREATE`](https://www.ev
 - name: values
   type: tuple(uint256,uint256)
   description: The specific `payable` amounts for the deployment and initialisation call.
+
+# /*:°• Return Value •°:*/ #
+- name: newContract
+  type: address
+  description: The 20-byte address where the contract was deployed.
 ```
 
 > **Note**<br>
@@ -136,6 +156,11 @@ Deploys and initialises a new contract via calling the [`CREATE`](https://www.ev
 - name: refundAddress
   type: address
   description: The 20-byte address where any excess ether is returned to.
+
+# /*:°• Return Value •°:*/ #
+- name: newContract
+  type: address
+  description: The 20-byte address where the contract was deployed.
 ```
 
 > **Note**<br>
@@ -156,6 +181,11 @@ Deploys a new [EIP-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy 
 - name: data
   type: bytes
   description: The initialisation code that is passed to the deployed proxy contract.
+
+# /*:°• Return Value •°:*/ #
+- name: newContract
+  type: address
+  description: The 20-byte address where the clone was deployed.
 ```
 
 > **Note**<br>
