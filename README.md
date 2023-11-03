@@ -2057,7 +2057,7 @@ TBD (section on pre-signed transactions; we will offer multiple pre-signed trans
 
 To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer, use the following parameters:
 
-- TBD
+- TBD (will be added after the feedback phase)
 
 ## [`CreateX`](./src/CreateX.sol) Deployments
 
