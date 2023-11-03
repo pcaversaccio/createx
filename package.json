@@ -1,7 +1,7 @@
 {
   "name": "createx",
   "version": "1.0.0",
-  "description": "Factory smart contract to make easier and safer usage of the `CREATE` and `CREATE2` EVM opcodes as well as of `CREATE3`-based contract creations.",
+  "description": "Factory smart contract to make easier and safer usage of the `CREATE` and `CREATE2` EVM opcodes as well as of `CREATE3`-based (i.e. without an initcode factor) contract creations.",
   "keywords": [
     "create",
     "create2",

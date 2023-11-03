@@ -1,12 +1,12 @@
-# `CreateX` – A Trustless, Universal Contract Deployer
+# [`CreateX`](./src/CreateX.sol) – A Trustless, Universal Contract Deployer
 
-[![Test smart contracts](https://github.com/pcaversaccio/createx/actions/workflows/test-contracts.yml/badge.svg)](https://github.com/pcaversaccio/createx/actions/workflows/test-contracts.yml)
+[![🕵️‍♂️ Test CreateX](https://github.com/pcaversaccio/createx/actions/workflows/test-createx.yml/badge.svg)](https://github.com/pcaversaccio/createx/actions/workflows/test-createx.yml)
 [![Test coverage](https://img.shields.io/badge/coverage-100%25-yellowgreen)](#test-coverage)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
 <img src=https://github-production-user-asset-6210df.s3.amazonaws.com/25297591/272914952-38a5989c-0113-427d-9158-47646971b7d8.png  width="1050"/>
 
-Factory smart contract to make easier and safer usage of the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) and [`CREATE2`](https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171)-based contract creations.
+Factory smart contract to make easier and safer usage of the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) and [`CREATE2`](https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171)-based (i.e. without an initcode factor) contract creations.
 
 ## Features
 
