@@ -31,13 +31,13 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
 CreateX
 ├── CREATE
 │   ├── Read-Only Functions
-│   │   ├── "computeCreateAddress(uint256) view returns (address)"
-│   │   └── "computeCreateAddress(address,uint256) view returns (address)"
+│   │   ├── "function computeCreateAddress(uint256) view returns (address)"
+│   │   └── "function computeCreateAddress(address,uint256) view returns (address)"
 │   └── Write Functions
 │       ├── "function deployCreate(bytes) payable returns (address)"
 │       ├── "function deployCreateAndInit(bytes,bytes,tuple(uint256,uint256)) payable returns (address)"
 │       ├── "function deployCreateAndInit(bytes,bytes,tuple(uint256,uint256),address) payable returns (address)"
-│       └── "deployCreateClone(address,bytes) payable returns (address)"
+│       └── "function deployCreateClone(address,bytes) payable returns (address)"
 ├── CREATE2
 │   ├── Read-Only Functions
 │   │   ├── "function computeCreate2Address(bytes32,bytes32) view returns (address)"
