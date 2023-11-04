@@ -746,7 +746,9 @@ function _guard(bytes32 salt) internal view returns (bytes32 guardedSalt) {
 }
 ```
 
-Please note that when you configure a permissioned deploy protection, you **must** specify whether you want a cross-chain redeploy protection or not (i.e. the 21st byte equals `0x00`). The underlying reason for this logic is to enforce developer explicitness. If you don't configure a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. Furthermore, you can configure solely a cross-chain redeploy protection by setting the first 20 bytes equal to the zero address `0x0000000000000000000000000000000000000000`. The rationale behind this logic is to prevent a pseudo-randomly generated cross-chain redeploy protection. Also in this case, if you don't specify a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. The underlying reason for this logic is as well to enforce developer explicitness.
+Please note that when you configure a permissioned deploy protection, you **must** specify whether you want cross-chain redeploy protection (i.e. 21st byte equals `0x01`) or not (i.e. the 21st byte equals `0x00`). The underlying reason for this logic is to enforce developer explicitness. If you don't specify a cross-chain redeploy protection decision (i.e. the 21st byte is greater than `0x01`) the function reverts.
+
+Furthermore, you can configure _only_ cross-chain redeploy protection by setting the first 20 bytes equal to the zero address `0x0000000000000000000000000000000000000000`. The rationale behind this logic is to prevent a pseudo-randomly generated 32 byte salt from inadvertently activating cross-chain redeploy protection. Also in this case, if you don't specify a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. The underlying reason for this logic is as well to enforce developer explicitness.
 
 ### Pseudo-Random Salt Value
 
