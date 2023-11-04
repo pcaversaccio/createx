@@ -1,6 +1,4 @@
-import * as dotenv from "dotenv";
-
-import { HardhatUserConfig, task } from "hardhat/config";
+import { HardhatUserConfig, task, vars } from "hardhat/config";
 import "@nomicfoundation/hardhat-ethers";
 import "@nomicfoundation/hardhat-verify";
 import "@typechain/hardhat";
@@ -8,7 +6,14 @@ import "hardhat-gas-reporter";
 import "hardhat-contract-sizer";
 import "hardhat-abi-exporter";
 
-dotenv.config();
+const ethMainnetUrl = vars.get("ETH_MAINNET_URL", "https://rpc.ankr.com/eth");
+const accounts = [
+  vars.get(
+    "PRIVATE_KEY",
+    // `keccak256("DEFAULT_VALUE")`
+    "0x0d1706281056b7de64efd2088195fa8224c39103f578c9b84f951721df3fa71c",
+  ),
+];
 
 task("evm", "Prints the configured EVM version", async (_, hre) => {
   console.log(hre.config.solidity.compilers[0].settings.evmVersion);
@@ -37,7 +42,7 @@ const config: HardhatUserConfig = {
       chainId: 31337,
       hardfork: "merge",
       forking: {
-        url: process.env.ETH_MAINNET_URL || "",
+        url: vars.get("ETH_MAINNET_URL", ethMainnetUrl),
         // The Hardhat network will by default fork from the latest mainnet block
         // To pin the block number, specify it below
         // You will need access to a node with archival data for this to work!
@@ -50,396 +55,387 @@ const config: HardhatUserConfig = {
       url: "http://127.0.0.1:8545",
     },
     tenderly: {
-      url: `https://rpc.tenderly.co/fork/${process.env.TENDERLY_FORK_ID}`,
+      url: `https://rpc.tenderly.co/fork/${vars.get("TENDERLY_FORK_ID", "")}`,
     },
     devnet: {
-      url: `https://rpc.vnet.tenderly.co/devnet/${process.env.TENDERLY_DEVNET_ID}`,
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: `https://rpc.vnet.tenderly.co/devnet/${vars.get(
+        "TENDERLY_DEVNET_ID",
+        "",
+      )}`,
+      accounts,
     },
     goerli: {
       chainId: 5,
-      url: process.env.ETH_GOERLI_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "ETH_GOERLI_TESTNET_URL",
+        "https://rpc.ankr.com/eth_goerli",
+      ),
+      accounts,
     },
     sepolia: {
       chainId: 11155111,
-      url: process.env.ETH_SEPOLIA_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("ETH_SEPOLIA_TESTNET_URL", "https://rpc.sepolia.org"),
+      accounts,
     },
     holesky: {
       chainId: 17000,
-      url: process.env.ETH_HOLESKY_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "ETH_HOLESKY_TESTNET_URL",
+        "https://holesky.rpc.thirdweb.com",
+      ),
+      accounts,
     },
     ethMain: {
       chainId: 1,
-      url: process.env.ETH_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: ethMainnetUrl,
+      accounts,
     },
     bscTestnet: {
       chainId: 97,
-      url: process.env.BSC_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "BSC_TESTNET_URL",
+        "https://data-seed-prebsc-1-s1.binance.org:8545",
+      ),
+      accounts,
     },
     bscMain: {
       chainId: 56,
-      url: process.env.BSC_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("BSC_MAINNET_URL", "https://bsc-dataseed1.binance.org"),
+      accounts,
     },
     optimismTestnet: {
       chainId: 420,
-      url: process.env.OPTIMISM_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("OPTIMISM_TESTNET_URL", "https://goerli.optimism.io"),
+      accounts,
     },
     optimismSepolia: {
       chainId: 11155420,
-      url: process.env.OPTIMISM_SEPOLIA_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("OPTIMISM_SEPOLIA_URL", "https://sepolia.optimism.io"),
+      accounts,
     },
     optimismMain: {
       chainId: 10,
-      url: process.env.OPTIMISM_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("OPTIMISM_MAINNET_URL", "https://mainnet.optimism.io"),
+      accounts,
     },
     arbitrumTestnet: {
       chainId: 421613,
-      url: process.env.ARBITRUM_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "ARBITRUM_TESTNET_URL",
+        "https://goerli-rollup.arbitrum.io/rpc",
+      ),
+      accounts,
     },
     arbitrumSepolia: {
       chainId: 421614,
-      url: process.env.ARBITRUM_SEPOLIA_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "ARBITRUM_SEPOLIA_URL",
+        "https://sepolia-rollup.arbitrum.io/rpc",
+      ),
+      accounts,
     },
     arbitrumMain: {
       chainId: 42161,
-      url: process.env.ARBITRUM_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("ARBITRUM_MAINNET_URL", "https://arb1.arbitrum.io/rpc"),
+      accounts,
     },
     arbitrumNova: {
       chainId: 42170,
-      url: process.env.ARBITRUM_NOVA_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("ARBITRUM_NOVA_URL", "https://nova.arbitrum.io/rpc"),
+      accounts,
     },
     mumbai: {
       chainId: 80001,
-      url: process.env.POLYGON_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("POLYGON_TESTNET_URL", "https://rpc-mumbai.maticvigil.com"),
+      accounts,
     },
     polygonZkEVMTestnet: {
       chainId: 1442,
-      url: process.env.POLYGON_ZKEVM_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "POLYGON_ZKEVM_TESTNET_URL",
+        "https://rpc.public.zkevm-test.net",
+      ),
+      accounts,
     },
     polygon: {
       chainId: 137,
-      url: process.env.POLYGON_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("POLYGON_MAINNET_URL", "https://polygon-rpc.com"),
+      accounts,
     },
     polygonZkEVMMain: {
       chainId: 1101,
-      url: process.env.POLYGON_ZKEVM_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("POLYGON_ZKEVM_MAINNET_URL", "https://zkevm-rpc.com"),
+      accounts,
     },
     hecoTestnet: {
       chainId: 256,
-      url: process.env.HECO_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("HECO_TESTNET_URL", "https://http-testnet.hecochain.com"),
+      accounts,
     },
     hecoMain: {
       chainId: 128,
-      url: process.env.HECO_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("HECO_MAINNET_URL", "https://http-mainnet.hecochain.com"),
+      accounts,
     },
     fantomTestnet: {
       chainId: 4002,
-      url: process.env.FANTOM_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("FANTOM_TESTNET_URL", "https://rpc.testnet.fantom.network"),
+      accounts,
     },
     fantomMain: {
       chainId: 250,
-      url: process.env.FANTOM_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("FANTOM_MAINNET_URL", "https://rpc.ankr.com/fantom"),
+      accounts,
     },
     fuji: {
       chainId: 43113,
-      url: process.env.AVALANCHE_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "AVALANCHE_TESTNET_URL",
+        "https://api.avax-test.network/ext/bc/C/rpc",
+      ),
+      accounts,
     },
     avalanche: {
       chainId: 43114,
-      url: process.env.AVALANCHE_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "AVALANCHE_MAINNET_URL",
+        "https://api.avax.network/ext/bc/C/rpc",
+      ),
+      accounts,
     },
     sokol: {
       chainId: 77,
-      url: process.env.SOKOL_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("SOKOL_TESTNET_URL", "https://sokol.poa.network"),
+      accounts,
     },
     chiado: {
       chainId: 10200,
-      url: process.env.GNOSIS_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("GNOSIS_TESTNET_URL", "https://rpc.chiadochain.net"),
+      accounts,
     },
     gnosis: {
       chainId: 100,
-      url: process.env.GNOSIS_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("GNOSIS_MAINNET_URL", "https://rpc.gnosischain.com"),
+      accounts,
     },
     moonbaseAlpha: {
       chainId: 1287,
-      url: process.env.MOONBEAM_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "MOONBEAM_TESTNET_URL",
+        "https://rpc.api.moonbase.moonbeam.network",
+      ),
+      accounts,
     },
     moonriver: {
       chainId: 1285,
-      url: process.env.MOONRIVER_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "MOONRIVER_MAINNET_URL",
+        "https://moonriver.public.blastapi.io",
+      ),
+      accounts,
     },
     moonbeam: {
       chainId: 1284,
-      url: process.env.MOONBEAM_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "MOONBEAM_MAINNET_URL",
+        "https://moonbeam.public.blastapi.io",
+      ),
+      accounts,
     },
     alfajores: {
       chainId: 44787,
-      url: process.env.CELO_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "CELO_TESTNET_URL",
+        "https://alfajores-forno.celo-testnet.org",
+      ),
+      accounts,
     },
     celo: {
       chainId: 42220,
-      url: process.env.CELO_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("CELO_MAINNET_URL", "https://forno.celo.org"),
+      accounts,
     },
     auroraTestnet: {
       chainId: 1313161555,
-      url: process.env.AURORA_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("AURORA_TESTNET_URL", "https://testnet.aurora.dev"),
+      accounts,
     },
     auroraMain: {
       chainId: 1313161554,
-      url: process.env.AURORA_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("AURORA_MAINNET_URL", "https://mainnet.aurora.dev"),
+      accounts,
     },
     harmonyTestnet: {
       chainId: 1666700000,
-      url: process.env.HARMONY_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("HARMONY_TESTNET_URL", "https://api.s0.b.hmny.io"),
+      accounts,
     },
     harmonyMain: {
       chainId: 1666600000,
-      url: process.env.HARMONY_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("HARMONY_MAINNET_URL", "https://api.harmony.one"),
+      accounts,
     },
     spark: {
       chainId: 123,
-      url: process.env.FUSE_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("FUSE_TESTNET_URL", "https://rpc.fusespark.io"),
+      accounts,
     },
     fuse: {
       chainId: 122,
-      url: process.env.FUSE_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("FUSE_MAINNET_URL", "https://rpc.fuse.io"),
+      accounts,
     },
     cronosTestnet: {
       chainId: 338,
-      url: process.env.CRONOS_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("CRONOS_TESTNET_URL", "https://evm-t3.cronos.org"),
+      accounts,
     },
     cronosMain: {
       chainId: 25,
-      url: process.env.CRONOS_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("CRONOS_MAINNET_URL", "https://evm.cronos.org"),
+      accounts,
     },
     evmosTestnet: {
       chainId: 9000,
-      url: process.env.EVMOS_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("EVMOS_TESTNET_URL", "https://eth.bd.evmos.dev:8545"),
+      accounts,
     },
     evmosMain: {
       chainId: 9001,
-      url: process.env.EVMOS_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("EVMOS_MAINNET_URL", "https://eth.bd.evmos.org:8545"),
+      accounts,
     },
     bobaTestnet: {
       chainId: 2888,
-      url: process.env.BOBA_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("BOBA_TESTNET_URL", "https://goerli.boba.network"),
+      accounts,
     },
     bobaMain: {
       chainId: 288,
-      url: process.env.BOBA_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("BOBA_MAINNET_URL", "https://mainnet.boba.network"),
+      accounts,
     },
     cantoTestnet: {
       chainId: 7701,
-      url: process.env.CANTO_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("CANTO_TESTNET_URL", "https://canto-testnet.plexnode.wtf"),
+      accounts,
     },
     cantoMain: {
       chainId: 7700,
-      url: process.env.CANTO_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("CANTO_MAINNET_URL", "https://canto.slingshot.finance"),
+      accounts,
     },
     baseTestnet: {
       chainId: 84531,
-      url: process.env.BASE_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("BASE_TESTNET_URL", "https://goerli.base.org"),
+      accounts,
     },
     baseSepolia: {
       chainId: 84532,
-      url: process.env.BASE_SEPOLIA_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("BASE_SEPOLIA_URL", "https://sepolia.base.org"),
+      accounts,
     },
     baseMain: {
       chainId: 8453,
-      url: process.env.BASE_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("BASE_MAINNET_URL", "https://mainnet.base.org"),
+      accounts,
     },
     mantleTestnet: {
       chainId: 5001,
-      url: process.env.MANTLE_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("MANTLE_TESTNET_URL", "https://rpc.testnet.mantle.xyz"),
+      accounts,
     },
     mantleMain: {
       chainId: 5000,
-      url: process.env.MANTLE_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("MANTLE_MAINNET_URL", "https://rpc.mantle.xyz"),
+      accounts,
     },
     filecoinTestnet: {
       chainId: 314159,
-      url: process.env.FILECOIN_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "FILECOIN_TESTNET_URL",
+        "https://rpc.ankr.com/filecoin_testnet",
+      ),
+      accounts,
+    },
+    filecoinMain: {
+      chainId: 314,
+      url: vars.get("FILECOIN_MAINNET_URL", "https://rpc.ankr.com/filecoin"),
+      accounts,
     },
     scrollTestnet: {
       chainId: 534351,
-      url: process.env.SCROLL_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("SCROLL_TESTNET_URL", "https://sepolia-rpc.scroll.io"),
+      accounts,
     },
     scrollMain: {
       chainId: 534352,
-      url: process.env.SCROLL_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("SCROLL_MAINNET_URL", "https://rpc.scroll.io"),
+      accounts,
     },
     lineaTestnet: {
       chainId: 59140,
-      url: process.env.LINEA_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("LINEA_TESTNET_URL", "https://rpc.goerli.linea.build"),
+      accounts,
     },
     lineaMain: {
       chainId: 59144,
-      url: process.env.LINEA_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("LINEA_MAINNET_URL", "https://rpc.linea.build"),
+      accounts,
     },
     shimmerEVMTestnet: {
       chainId: 1071,
-      url: process.env.SHIMMEREVM_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "SHIMMEREVM_TESTNET_URL",
+        "https://json-rpc.evm.testnet.shimmer.network",
+      ),
+      accounts,
     },
     zoraTestnet: {
       chainId: 999,
-      url: process.env.ZORA_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("ZORA_TESTNET_URL", "https://testnet.rpc.zora.energy"),
+      accounts,
     },
     zoraMain: {
       chainId: 7777777,
-      url: process.env.ZORA_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("ZORA_MAINNET_URL", "https://rpc.zora.energy"),
+      accounts,
     },
     luksoTestnet: {
       chainId: 4201,
-      url: process.env.LUKSO_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("LUKSO_TESTNET_URL", "https://rpc.testnet.lukso.network"),
+      accounts,
     },
     luksoMain: {
       chainId: 42,
-      url: process.env.LUKSO_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("LUKSO_MAINNET_URL", "https://rpc.lukso.gateway.fm"),
+      accounts,
     },
     mantaTestnet: {
       chainId: 3441005,
-      url: process.env.MANTA_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "MANTA_TESTNET_URL",
+        "https://pacific-rpc.testnet.manta.network/http",
+      ),
+      accounts,
     },
     mantaMain: {
       chainId: 169,
-      url: process.env.MANTA_MAINNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get(
+        "MANTA_MAINNET_URL",
+        "https://pacific-rpc.manta.network/http",
+      ),
+      accounts,
     },
     shardeumTestnet: {
       chainId: 8081,
-      url: process.env.SHARDEUM_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("SHARDEUM_TESTNET_URL", "https://dapps.shardeum.org"),
+      accounts,
     },
     artheraTestnet: {
       chainId: 10243,
-      url: process.env.ARTHERA_TESTNET_URL || "",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      url: vars.get("ARTHERA_TESTNET_URL", "https://rpc-test.arthera.net"),
+      accounts,
     },
   },
   contractSizer: {
@@ -449,6 +445,9 @@ const config: HardhatUserConfig = {
     strict: true,
     only: [],
     except: [],
+  },
+  gasReporter: {
+    enabled: vars.has("REPORT_GAS") ? true : false,
   },
   abiExporter: {
     path: "./abis",
@@ -466,92 +465,92 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       // For Ethereum testnets & mainnet
-      mainnet: process.env.ETHERSCAN_API_KEY || "",
-      goerli: process.env.ETHERSCAN_API_KEY || "",
-      sepolia: process.env.ETHERSCAN_API_KEY || "",
-      holesky: process.env.ETHERSCAN_API_KEY || "",
+      mainnet: vars.get("ETHERSCAN_API_KEY", ""),
+      goerli: vars.get("ETHERSCAN_API_KEY", ""),
+      sepolia: vars.get("ETHERSCAN_API_KEY", ""),
+      holesky: vars.get("ETHERSCAN_API_KEY", ""),
       // For BSC testnet & mainnet
-      bsc: process.env.BSC_API_KEY || "",
-      bscTestnet: process.env.BSC_API_KEY || "",
+      bsc: vars.get("BSC_API_KEY", ""),
+      bscTestnet: vars.get("BSC_API_KEY", ""),
       // For Heco testnet & mainnet
-      heco: process.env.HECO_API_KEY || "",
-      hecoTestnet: process.env.HECO_API_KEY || "",
+      heco: vars.get("HECO_API_KEY", ""),
+      hecoTestnet: vars.get("HECO_API_KEY", ""),
       // For Fantom testnet & mainnet
-      opera: process.env.FANTOM_API_KEY || "",
-      ftmTestnet: process.env.FANTOM_API_KEY || "",
+      opera: vars.get("FANTOM_API_KEY", ""),
+      ftmTestnet: vars.get("FANTOM_API_KEY", ""),
       // For Optimism testnets & mainnet
-      optimisticEthereum: process.env.OPTIMISM_API_KEY || "",
-      optimisticGoerli: process.env.OPTIMISM_API_KEY || "",
-      optimisticSepolia: process.env.OPTIMISM_API_KEY || "",
+      optimisticEthereum: vars.get("OPTIMISM_API_KEY", ""),
+      optimisticGoerli: vars.get("OPTIMISM_API_KEY", ""),
+      optimisticSepolia: vars.get("OPTIMISM_API_KEY", ""),
       // For Polygon testnets & mainnets
-      polygon: process.env.POLYGON_API_KEY || "",
-      polygonZkEVM: process.env.POLYGON_ZKEVM_API_KEY || "",
-      polygonMumbai: process.env.POLYGON_API_KEY || "",
-      polygonZkEVMTestnet: process.env.POLYGON_ZKEVM_API_KEY || "",
+      polygon: vars.get("POLYGON_API_KEY", ""),
+      polygonZkEVM: vars.get("POLYGON_ZKEVM_API_KEY", ""),
+      polygonMumbai: vars.get("POLYGON_API_KEY", ""),
+      polygonZkEVMTestnet: vars.get("POLYGON_ZKEVM_API_KEY", ""),
       // For Arbitrum testnets & mainnets
-      arbitrumOne: process.env.ARBITRUM_API_KEY || "",
-      arbitrumNova: process.env.ARBITRUM_API_KEY || "",
-      arbitrumGoerli: process.env.ARBITRUM_API_KEY || "",
-      arbitrumSepolia: process.env.ARBITRUM_API_KEY || "",
+      arbitrumOne: vars.get("ARBITRUM_API_KEY", ""),
+      arbitrumNova: vars.get("ARBITRUM_API_KEY", ""),
+      arbitrumGoerli: vars.get("ARBITRUM_API_KEY", ""),
+      arbitrumSepolia: vars.get("ARBITRUM_API_KEY", ""),
       // For Avalanche testnet & mainnet
-      avalanche: process.env.AVALANCHE_API_KEY || "",
-      avalancheFujiTestnet: process.env.AVALANCHE_API_KEY || "",
+      avalanche: vars.get("AVALANCHE_API_KEY", ""),
+      avalancheFujiTestnet: vars.get("AVALANCHE_API_KEY", ""),
       // For Moonbeam testnet & mainnets
-      moonbeam: process.env.MOONBEAM_API_KEY || "",
-      moonriver: process.env.MOONBEAM_API_KEY || "",
-      moonbaseAlpha: process.env.MOONBEAM_API_KEY || "",
+      moonbeam: vars.get("MOONBEAM_API_KEY", ""),
+      moonriver: vars.get("MOONBEAM_API_KEY", ""),
+      moonbaseAlpha: vars.get("MOONBEAM_API_KEY", ""),
       // For Harmony testnet & mainnet
-      harmony: process.env.HARMONY_API_KEY || "",
-      harmonyTest: process.env.HARMONY_API_KEY || "",
+      harmony: vars.get("HARMONY_API_KEY", ""),
+      harmonyTest: vars.get("HARMONY_API_KEY", ""),
       // For Aurora testnet & mainnet
-      aurora: process.env.AURORA_API_KEY || "",
-      auroraTestnet: process.env.AURORA_API_KEY || "",
+      aurora: vars.get("AURORA_API_KEY", ""),
+      auroraTestnet: vars.get("AURORA_API_KEY", ""),
       // For Cronos testnet & mainnet
-      cronos: process.env.CRONOS_API_KEY || "",
-      cronosTestnet: process.env.CRONOS_API_KEY || "",
+      cronos: vars.get("CRONOS_API_KEY", ""),
+      cronosTestnet: vars.get("CRONOS_API_KEY", ""),
       // For Gnosis/xDai testnets & mainnets
-      gnosis: process.env.GNOSIS_API_KEY || "",
-      xdai: process.env.GNOSIS_API_KEY || "",
-      sokol: process.env.GNOSIS_API_KEY || "",
-      chiado: process.env.GNOSIS_API_KEY || "",
+      gnosis: vars.get("GNOSIS_API_KEY", ""),
+      xdai: vars.get("GNOSIS_API_KEY", ""),
+      sokol: vars.get("GNOSIS_API_KEY", ""),
+      chiado: vars.get("GNOSIS_API_KEY", ""),
       // For Fuse testnet & mainnet
-      fuse: process.env.FUSE_API_KEY || "",
-      spark: process.env.FUSE_API_KEY || "",
+      fuse: vars.get("FUSE_API_KEY", ""),
+      spark: vars.get("FUSE_API_KEY", ""),
       // For Evmos testnet & mainnet
-      evmos: process.env.EVMOS_API_KEY || "",
-      evmosTestnet: process.env.EVMOS_API_KEY || "",
+      evmos: vars.get("EVMOS_API_KEY", ""),
+      evmosTestnet: vars.get("EVMOS_API_KEY", ""),
       // For Boba network testnet & mainnet
-      boba: process.env.BOBA_API_KEY || "",
-      bobaTestnet: process.env.BOBA_API_KEY || "",
+      boba: vars.get("BOBA_API_KEY", ""),
+      bobaTestnet: vars.get("BOBA_API_KEY", ""),
       // For Canto testnet & mainnet
-      canto: process.env.CANTO_API_KEY || "",
-      cantoTestnet: process.env.CANTO_API_KEY || "",
+      canto: vars.get("CANTO_API_KEY", ""),
+      cantoTestnet: vars.get("CANTO_API_KEY", ""),
       // For Base testnets & mainnet
-      base: process.env.BASE_API_KEY || "",
-      baseTestnet: process.env.BASE_API_KEY || "",
-      baseSepolia: process.env.BASE_API_KEY || "",
+      base: vars.get("BASE_API_KEY", ""),
+      baseTestnet: vars.get("BASE_API_KEY", ""),
+      baseSepolia: vars.get("BASE_API_KEY", ""),
       // For Mantle testnet & mainnet
-      mantle: process.env.MANTLE_API_KEY || "",
-      mantleTestnet: process.env.MANTLE_API_KEY || "",
+      mantle: vars.get("MANTLE_API_KEY", ""),
+      mantleTestnet: vars.get("MANTLE_API_KEY", ""),
       // For Scroll testnet & mainnet
-      scroll: process.env.SCROLL_API_KEY || "",
-      scrollTestnet: process.env.SCROLL_API_KEY || "",
+      scroll: vars.get("SCROLL_API_KEY", ""),
+      scrollTestnet: vars.get("SCROLL_API_KEY", ""),
       // For Linea testnet & mainnet
-      linea: process.env.LINEA_API_KEY || "",
-      lineaTestnet: process.env.LINEA_API_KEY || "",
+      linea: vars.get("LINEA_API_KEY", ""),
+      lineaTestnet: vars.get("LINEA_API_KEY", ""),
       // For ShimmerEVM testnet
-      shimmerEVMTestnet: process.env.SHIMMEREVM_API_KEY || "",
+      shimmerEVMTestnet: vars.get("SHIMMEREVM_API_KEY", ""),
       // For Zora testnet & mainnet
-      zora: process.env.ZORA_API_KEY || "",
-      zoraTestnet: process.env.ZORA_API_KEY || "",
+      zora: vars.get("ZORA_API_KEY", ""),
+      zoraTestnet: vars.get("ZORA_API_KEY", ""),
       // For Lukso testnet & mainnet
-      lukso: process.env.LUKSO_API_KEY || "",
-      luksoTestnet: process.env.LUKSO_API_KEY || "",
+      lukso: vars.get("LUKSO_API_KEY", ""),
+      luksoTestnet: vars.get("LUKSO_API_KEY", ""),
       // For Manta testnet & mainnet
-      manta: process.env.MANTA_API_KEY || "",
-      mantaTestnet: process.env.MANTA_API_KEY || "",
+      manta: vars.get("MANTA_API_KEY", ""),
+      mantaTestnet: vars.get("MANTA_API_KEY", ""),
       // For Arthera testnet
-      artheraTestnet: process.env.ARTHERA_API_KEY || "",
+      artheraTestnet: vars.get("ARTHERA_API_KEY", ""),
     },
     customChains: [
       {
