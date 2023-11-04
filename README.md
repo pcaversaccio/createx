@@ -865,7 +865,7 @@ The written tests available in the directory [`test`](./test) achieve a test cov
 ## ABI (Application Binary Interface)
 
 <details>
-<summary> <a href="https://docs.soliditylang.org/en/latest/">Solidity</a> </summary>
+<summary> <a href="https://docs.soliditylang.org/en/latest/">Solidity</a>[^1] </summary>
 
 ```solidity
 // SPDX-License-Identifier: AGPL-3.0-only
@@ -2074,3 +2074,5 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
   - Goerli: [`0x0000000000000000000000000000000000000000`](https://goerli.etherscan.io/address/0x0000000000000000000000000000000000000000)
 - Additional EVM-Based Test Networks:
   - Optimism Testnet (Goerli): [`0x0000000000000000000000000000000000000000`](https://goerli-optimism.etherscan.io/address/0x0000000000000000000000000000000000000000)
+
+[^1]: If you `forge install` this repository, the Solidity-based interface can also be found [here](./src/ICreateX.sol).
