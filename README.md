@@ -803,7 +803,7 @@ The following consequences result from these principles:
 ## Security Considerations
 
 > **Warning**<br>
-> This contract is unaudited!
+> **This contract is unaudited!**
 
 Generally, for security issues, see our [Security Policy](./SECURITY.md). Furthermore, you must be aware of the following aspects:
 
