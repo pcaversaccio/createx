@@ -6,6 +6,9 @@ import "hardhat-gas-reporter";
 import "hardhat-contract-sizer";
 import "hardhat-abi-exporter";
 
+const ethMainnetUrl = vars.get("ETH_MAINNET_URL", "https://rpc.ankr.com/eth");
+const accounts = [vars.get("PRIVATE_KEY", "")];
+
 task("evm", "Prints the configured EVM version", async (_, hre) => {
   console.log(hre.config.solidity.compilers[0].settings.evmVersion);
 });
@@ -33,7 +36,7 @@ const config: HardhatUserConfig = {
       chainId: 31337,
       hardfork: "merge",
       forking: {
-        url: vars.has("ETH_MAINNET_URL") ? vars.get("ETH_MAINNET_URL") : "",
+        url: vars.get("ETH_MAINNET_URL", ethMainnetUrl),
         // The Hardhat network will by default fork from the latest mainnet block
         // To pin the block number, specify it below
         // You will need access to a node with archival data for this to work!
@@ -46,383 +49,382 @@ const config: HardhatUserConfig = {
       url: "http://127.0.0.1:8545",
     },
     tenderly: {
-      url: `https://rpc.tenderly.co/fork/${
-        vars.has("TENDERLY_FORK_ID") ? vars.get("TENDERLY_FORK_ID") : ""
-      }`,
+      url: `https://rpc.tenderly.co/fork/${vars.get("TENDERLY_FORK_ID", "")}`,
     },
     devnet: {
-      url: `https://rpc.vnet.tenderly.co/devnet/${
-        vars.has("TENDERLY_DEVNET_ID") ? vars.get("TENDERLY_FORK_ID") : ""
-      } `,
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: `https://rpc.vnet.tenderly.co/devnet/${vars.get(
+        "TENDERLY_DEVNET_ID",
+        "",
+      )}`,
+      accounts,
     },
     goerli: {
       chainId: 5,
-      url: vars.has("ETH_GOERLI_TESTNET_URL")
-        ? vars.get("ETH_GOERLI_TESTNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "ETH_GOERLI_TESTNET_URL",
+        "https://rpc.ankr.com/eth_goerli",
+      ),
+      accounts,
     },
     sepolia: {
       chainId: 11155111,
-      url: vars.has("ETH_SEPOLIA_TESTNET_URL")
-        ? vars.get("ETH_SEPOLIA_TESTNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("ETH_SEPOLIA_TESTNET_URL", "https://rpc.sepolia.org"),
+      accounts,
     },
     holesky: {
       chainId: 17000,
-      url: vars.has("ETH_HOLESKY_TESTNET_URL")
-        ? vars.get("ETH_HOLESKY_TESTNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "ETH_HOLESKY_TESTNET_URL",
+        "https://holesky.rpc.thirdweb.com",
+      ),
+      accounts,
     },
     ethMain: {
       chainId: 1,
-      url: vars.has("ETH_MAINNET_URL") ? vars.get("ETH_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: ethMainnetUrl,
+      accounts,
     },
     bscTestnet: {
       chainId: 97,
-      url: vars.has("BSC_TESTNET_URL") ? vars.get("BSC_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "BSC_TESTNET_URL",
+        "https://data-seed-prebsc-1-s1.binance.org:8545",
+      ),
+      accounts,
     },
     bscMain: {
       chainId: 56,
-      url: vars.has("BSC_MAINNET_URL") ? vars.get("BSC_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("BSC_MAINNET_URL", "https://bsc-dataseed.binance.org"),
+      accounts,
     },
     optimismTestnet: {
       chainId: 420,
-      url: vars.has("OPTIMISM_TESTNET_URL")
-        ? vars.get("OPTIMISM_TESTNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("OPTIMISM_TESTNET_URL", "https://goerli.optimism.io"),
+      accounts,
     },
     optimismSepolia: {
       chainId: 11155420,
-      url: vars.has("OPTIMISM_SEPOLIA_URL")
-        ? vars.get("OPTIMISM_SEPOLIA_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("OPTIMISM_SEPOLIA_URL", "https://sepolia.optimism.io"),
+      accounts,
     },
     optimismMain: {
       chainId: 10,
-      url: vars.has("OPTIMISM_MAINNET_URL")
-        ? vars.get("OPTIMISM_MAINNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("OPTIMISM_MAINNET_URL", "https://mainnet.optimism.io"),
+      accounts,
     },
     arbitrumTestnet: {
       chainId: 421613,
-      url: vars.has("ARBITRUM_TESTNET_URL")
-        ? vars.get("ARBITRUM_TESTNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "ARBITRUM_TESTNET_URL",
+        "https://goerli-rollup.arbitrum.io/rpc",
+      ),
+      accounts,
     },
     arbitrumSepolia: {
       chainId: 421614,
-      url: vars.has("ARBITRUM_SEPOLIA_URL")
-        ? vars.get("ARBITRUM_SEPOLIA_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "ARBITRUM_SEPOLIA_URL",
+        "https://sepolia-rollup.arbitrum.io/rpc",
+      ),
+      accounts,
     },
     arbitrumMain: {
       chainId: 42161,
-      url: vars.has("ARBITRUM_MAINNET_URL")
-        ? vars.get("ARBITRUM_MAINNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("ARBITRUM_MAINNET_URL", "https://arb1.arbitrum.io/rpc"),
+      accounts,
     },
     arbitrumNova: {
       chainId: 42170,
-      url: vars.has("ARBITRUM_NOVA_URL") ? vars.get("ARBITRUM_NOVA_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("ARBITRUM_NOVA_URL", "https://nova.arbitrum.io/rpc"),
+      accounts,
     },
     mumbai: {
       chainId: 80001,
-      url: vars.has("POLYGON_TESTNET_URL")
-        ? vars.get("POLYGON_TESTNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("POLYGON_TESTNET_URL", "https://rpc-mumbai.maticvigil.com"),
+      accounts,
     },
     polygonZkEVMTestnet: {
       chainId: 1442,
-      url: vars.has("POLYGON_ZKEVM_TESTNET_URL")
-        ? vars.get("POLYGON_ZKEVM_TESTNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "POLYGON_ZKEVM_TESTNET_URL",
+        "https://rpc.public.zkevm-test.net",
+      ),
+      accounts,
     },
     polygon: {
       chainId: 137,
-      url: vars.has("POLYGON_MAINNET_URL")
-        ? vars.get("POLYGON_MAINNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("POLYGON_MAINNET_URL", "https://polygon-rpc.com"),
+      accounts,
     },
     polygonZkEVMMain: {
       chainId: 1101,
-      url: vars.has("POLYGON_ZKEVM_MAINNET_URL")
-        ? vars.get("POLYGON_ZKEVM_MAINNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("POLYGON_ZKEVM_MAINNET_URL", "https://zkevm-rpc.com"),
+      accounts,
     },
     hecoTestnet: {
       chainId: 256,
-      url: vars.has("HECO_TESTNET_URL") ? vars.get("HECO_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("HECO_TESTNET_URL", "https://http-testnet.hecochain.com"),
+      accounts,
     },
     hecoMain: {
       chainId: 128,
-      url: vars.has("HECO_MAINNET_URL") ? vars.get("HECO_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("HECO_MAINNET_URL", "https://http-mainnet.hecochain.com"),
+      accounts,
     },
     fantomTestnet: {
       chainId: 4002,
-      url: vars.has("FANTOM_TESTNET_URL") ? vars.get("FANTOM_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("FANTOM_TESTNET_URL", "https://rpc.testnet.fantom.network"),
+      accounts,
     },
     fantomMain: {
       chainId: 250,
-      url: vars.has("FANTOM_MAINNET_URL") ? vars.get("FANTOM_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("FANTOM_MAINNET_URL", "https://rpc.ftm.tools"),
+      accounts,
     },
     fuji: {
       chainId: 43113,
-      url: vars.has("AVALANCHE_TESTNET_URL")
-        ? vars.get("AVALANCHE_TESTNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "AVALANCHE_TESTNET_URL",
+        "https://api.avax-test.network/ext/bc/C/rpc",
+      ),
+      accounts,
     },
     avalanche: {
       chainId: 43114,
-      url: vars.has("AVALANCHE_MAINNET_URL")
-        ? vars.get("AVALANCHE_MAINNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "AVALANCHE_MAINNET_URL",
+        "https://api.avax.network/ext/bc/C/rpc",
+      ),
+      accounts,
     },
     sokol: {
       chainId: 77,
-      url: vars.has("SOKOL_TESTNET_URL") ? vars.get("SOKOL_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("SOKOL_TESTNET_URL", "https://sokol.poa.network"),
+      accounts,
     },
     chiado: {
       chainId: 10200,
-      url: vars.has("GNOSIS_TESTNET_URL") ? vars.get("GNOSIS_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("GNOSIS_TESTNET_URL", "https://rpc.chiadochain.net"),
+      accounts,
     },
     gnosis: {
       chainId: 100,
-      url: vars.has("GNOSIS_MAINNET_URL") ? vars.get("GNOSIS_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("GNOSIS_MAINNET_URL", "https://rpc.gnosischain.com"),
+      accounts,
     },
     moonbaseAlpha: {
       chainId: 1287,
-      url: vars.has("MOONBEAM_TESTNET_URL")
-        ? vars.get("MOONBEAM_TESTNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "MOONBEAM_TESTNET_URL",
+        "https://rpc.api.moonbase.moonbeam.network",
+      ),
+      accounts,
     },
     moonriver: {
       chainId: 1285,
-      url: vars.has("MOONRIVER_MAINNET_URL")
-        ? vars.get("MOONRIVER_MAINNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "MOONRIVER_MAINNET_URL",
+        "https://rpc.moonriver.moonbeam.network",
+      ),
+      accounts,
     },
     moonbeam: {
       chainId: 1284,
-      url: vars.has("MOONBEAM_MAINNET_URL")
-        ? vars.get("MOONBEAM_MAINNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("MOONBEAM_MAINNET_URL", "https://rpc.api.moonbeam.network"),
+      accounts,
     },
     alfajores: {
       chainId: 44787,
-      url: vars.has("CELO_TESTNET_URL") ? vars.get("CELO_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "CELO_TESTNET_URL",
+        "https://alfajores-forno.celo-testnet.org",
+      ),
+      accounts,
     },
     celo: {
       chainId: 42220,
-      url: vars.has("CELO_MAINNET_URL") ? vars.get("CELO_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("CELO_MAINNET_URL", "https://forno.celo.org"),
+      accounts,
     },
     auroraTestnet: {
       chainId: 1313161555,
-      url: vars.has("AURORA_TESTNET_URL") ? vars.get("AURORA_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("AURORA_TESTNET_URL", "https://testnet.aurora.dev"),
+      accounts,
     },
     auroraMain: {
       chainId: 1313161554,
-      url: vars.has("AURORA_MAINNET_URL") ? vars.get("AURORA_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("AURORA_MAINNET_URL", "https://mainnet.aurora.dev"),
+      accounts,
     },
     harmonyTestnet: {
       chainId: 1666700000,
-      url: vars.has("HARMONY_TESTNET_URL")
-        ? vars.get("HARMONY_TESTNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("HARMONY_TESTNET_URL", "https://api.s0.b.hmny.io"),
+      accounts,
     },
     harmonyMain: {
       chainId: 1666600000,
-      url: vars.has("HARMONY_MAINNET_URL")
-        ? vars.get("HARMONY_MAINNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("HARMONY_MAINNET_URL", "https://api.harmony.one"),
+      accounts,
     },
     spark: {
       chainId: 123,
-      url: vars.has("FUSE_TESTNET_URL") ? vars.get("FUSE_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("FUSE_TESTNET_URL", "https://rpc.fusespark.io"),
+      accounts,
     },
     fuse: {
       chainId: 122,
-      url: vars.has("FUSE_MAINNET_URL") ? vars.get("FUSE_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("FUSE_MAINNET_URL", "https://rpc.fuse.io"),
+      accounts,
     },
     cronosTestnet: {
       chainId: 338,
-      url: vars.has("CRONOS_TESTNET_URL") ? vars.get("CRONOS_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("CRONOS_TESTNET_URL", "https://evm-t3.cronos.org"),
+      accounts,
     },
     cronosMain: {
       chainId: 25,
-      url: vars.has("CRONOS_MAINNET_URL") ? vars.get("CRONOS_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("CRONOS_MAINNET_URL", "https://evm.cronos.org"),
+      accounts,
     },
     evmosTestnet: {
       chainId: 9000,
-      url: vars.has("EVMOS_TESTNET_URL") ? vars.get("EVMOS_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("EVMOS_TESTNET_URL", "https://eth.bd.evmos.dev:8545"),
+      accounts,
     },
     evmosMain: {
       chainId: 9001,
-      url: vars.has("EVMOS_MAINNET_URL") ? vars.get("EVMOS_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("EVMOS_MAINNET_URL", "https://eth.bd.evmos.org:8545"),
+      accounts,
     },
     bobaTestnet: {
       chainId: 2888,
-      url: vars.has("BOBA_TESTNET_URL") ? vars.get("BOBA_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("BOBA_TESTNET_URL", "https://goerli.boba.network"),
+      accounts,
     },
     bobaMain: {
       chainId: 288,
-      url: vars.has("BOBA_MAINNET_URL") ? vars.get("BOBA_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("BOBA_MAINNET_URL", "https://mainnet.boba.network"),
+      accounts,
     },
     cantoTestnet: {
       chainId: 7701,
-      url: vars.has("CANTO_TESTNET_URL") ? vars.get("CANTO_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("CANTO_TESTNET_URL", "https://canto-testnet.plexnode.wtf"),
+      accounts,
     },
     cantoMain: {
       chainId: 7700,
-      url: vars.has("CANTO_MAINNET_URL") ? vars.get("CANTO_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("CANTO_MAINNET_URL", "https://canto.slingshot.finance"),
+      accounts,
     },
     baseTestnet: {
       chainId: 84531,
-      url: vars.has("BASE_TESTNET_URL") ? vars.get("BASE_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("BASE_TESTNET_URL", "https://goerli.base.org"),
+      accounts,
     },
     baseSepolia: {
       chainId: 84532,
-      url: vars.has("BASE_SEPOLIA_URL") ? vars.get("BASE_SEPOLIA_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("BASE_SEPOLIA_URL", "https://sepolia.base.org"),
+      accounts,
     },
     baseMain: {
       chainId: 8453,
-      url: vars.has("BASE_MAINNET_URL") ? vars.get("BASE_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "BASE_MAINNET_URL",
+        "https://developer-access-mainnet.base.org",
+      ),
+      accounts,
     },
     mantleTestnet: {
       chainId: 5001,
-      url: vars.has("MANTLE_TESTNET_URL") ? vars.get("MANTLE_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("MANTLE_TESTNET_URL", "https://rpc.testnet.mantle.xyz"),
+      accounts,
     },
     mantleMain: {
       chainId: 5000,
-      url: vars.has("MANTLE_MAINNET_URL") ? vars.get("MANTLE_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("MANTLE_MAINNET_URL", "https://rpc.mantle.xyz"),
+      accounts,
     },
     filecoinTestnet: {
       chainId: 314159,
-      url: vars.has("FILECOIN_TESTNET_URL")
-        ? vars.get("FILECOIN_TESTNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "FILECOIN_TESTNET_URL",
+        "https://rpc.ankr.com/filecoin_testnet",
+      ),
+      accounts,
     },
     scrollTestnet: {
       chainId: 534351,
-      url: vars.has("SCROLL_TESTNET_URL") ? vars.get("SCROLL_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("SCROLL_TESTNET_URL", "https://sepolia-rpc.scroll.io"),
+      accounts,
     },
     scrollMain: {
       chainId: 534352,
-      url: vars.has("SCROLL_MAINNET_URL") ? vars.get("SCROLL_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("SCROLL_MAINNET_URL", "https://rpc.scroll.io"),
+      accounts,
     },
     lineaTestnet: {
       chainId: 59140,
-      url: vars.has("LINEA_TESTNET_URL") ? vars.get("LINEA_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("LINEA_TESTNET_URL", "https://rpc.goerli.linea.build"),
+      accounts,
     },
     lineaMain: {
       chainId: 59144,
-      url: vars.has("LINEA_MAINNET_URL") ? vars.get("LINEA_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("LINEA_MAINNET_URL", "https://linea-mainnet.infura.io/v3"),
+      accounts,
     },
     shimmerEVMTestnet: {
       chainId: 1071,
-      url: vars.has("SHIMMEREVM_TESTNET_URL")
-        ? vars.get("SHIMMEREVM_TESTNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "SHIMMEREVM_TESTNET_URL",
+        "https://json-rpc.evm.testnet.shimmer.networ",
+      ),
+      accounts,
     },
     zoraTestnet: {
       chainId: 999,
-      url: vars.has("ZORA_TESTNET_URL") ? vars.get("ZORA_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("ZORA_TESTNET_URL", "https://testnet.rpc.zora.co"),
+      accounts,
     },
     zoraMain: {
       chainId: 7777777,
-      url: vars.has("ZORA_MAINNET_URL") ? vars.get("ZORA_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("ZORA_MAINNET_URL", "https://rpc.zora.energy"),
+      accounts,
     },
     luksoTestnet: {
       chainId: 4201,
-      url: vars.has("LUKSO_TESTNET_URL") ? vars.get("LUKSO_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("LUKSO_TESTNET_URL", "https://rpc.testnet.lukso.network"),
+      accounts,
     },
     luksoMain: {
       chainId: 42,
-      url: vars.has("LUKSO_MAINNET_URL") ? vars.get("LUKSO_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("LUKSO_MAINNET_URL", "https://rpc.mainnet.lukso.network"),
+      accounts,
     },
     mantaTestnet: {
       chainId: 3441005,
-      url: vars.has("MANTA_TESTNET_URL") ? vars.get("MANTA_TESTNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "MANTA_TESTNET_URL",
+        "https://pacific-rpc.testnet.manta.network/http",
+      ),
+      accounts,
     },
     mantaMain: {
       chainId: 169,
-      url: vars.has("MANTA_MAINNET_URL") ? vars.get("MANTA_MAINNET_URL") : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get(
+        "MANTA_MAINNET_URL",
+        "https://pacific-rpc.manta.network/http",
+      ),
+      accounts,
     },
     shardeumTestnet: {
       chainId: 8081,
-      url: vars.has("SHARDEUM_TESTNET_URL")
-        ? vars.get("SHARDEUM_TESTNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("SHARDEUM_TESTNET_URL", "https://dapps.shardeum.org"),
+      accounts,
     },
     artheraTestnet: {
       chainId: 10243,
-      url: vars.has("ARTHERA_TESTNET_URL")
-        ? vars.get("ARTHERA_TESTNET_URL")
-        : "",
-      accounts: vars.has("PRIVATE_KEY") ? [vars.get("PRIVATE_KEY")] : [],
+      url: vars.get("ARTHERA_TESTNET_URL", "https://rpc-test.arthera.net"),
+      accounts,
     },
   },
   contractSizer: {
@@ -452,144 +454,92 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       // For Ethereum testnets & mainnet
-      mainnet: vars.has("ETHERSCAN_API_KEY")
-        ? vars.get("ETHERSCAN_API_KEY")
-        : "",
-      goerli: vars.has("ETHERSCAN_API_KEY")
-        ? vars.get("ETHERSCAN_API_KEY")
-        : "",
-      sepolia: vars.has("ETHERSCAN_API_KEY")
-        ? vars.get("ETHERSCAN_API_KEY")
-        : "",
-      holesky: vars.has("ETHERSCAN_API_KEY")
-        ? vars.get("ETHERSCAN_API_KEY")
-        : "",
+      mainnet: vars.get("ETHERSCAN_API_KEY", ""),
+      goerli: vars.get("ETHERSCAN_API_KEY", ""),
+      sepolia: vars.get("ETHERSCAN_API_KEY", ""),
+      holesky: vars.get("ETHERSCAN_API_KEY", ""),
       // For BSC testnet & mainnet
-      bsc: vars.has("BSC_API_KEY") ? vars.get("BSC_API_KEY") : "",
-      bscTestnet: vars.has("BSC_API_KEY") ? vars.get("BSC_API_KEY") : "",
+      bsc: vars.get("BSC_API_KEY", ""),
+      bscTestnet: vars.get("BSC_API_KEY", ""),
       // For Heco testnet & mainnet
-      heco: vars.has("HECO_API_KEY") ? vars.get("HECO_API_KEY") : "",
-      hecoTestnet: vars.has("HECO_API_KEY") ? vars.get("HECO_API_KEY") : "",
+      heco: vars.get("HECO_API_KEY", ""),
+      hecoTestnet: vars.get("HECO_API_KEY", ""),
       // For Fantom testnet & mainnet
-      opera: vars.has("FANTOM_API_KEY") ? vars.get("FANTOM_API_KEY") : "",
-      ftmTestnet: vars.has("FANTOM_API_KEY") ? vars.get("FANTOM_API_KEY") : "",
+      opera: vars.get("FANTOM_API_KEY", ""),
+      ftmTestnet: vars.get("FANTOM_API_KEY", ""),
       // For Optimism testnets & mainnet
-      optimisticEthereum: vars.has("OPTIMISM_API_KEY")
-        ? vars.get("OPTIMISM_API_KEY")
-        : "",
-      optimisticGoerli: vars.has("OPTIMISM_API_KEY")
-        ? vars.get("OPTIMISM_API_KEY")
-        : "",
-      optimisticSepolia: vars.has("OPTIMISM_API_KEY")
-        ? vars.get("OPTIMISM_API_KEY")
-        : "",
+      optimisticEthereum: vars.get("OPTIMISM_API_KEY", ""),
+      optimisticGoerli: vars.get("OPTIMISM_API_KEY", ""),
+      optimisticSepolia: vars.get("OPTIMISM_API_KEY", ""),
       // For Polygon testnets & mainnets
-      polygon: vars.has("POLYGON_API_KEY") ? vars.get("POLYGON_API_KEY") : "",
-      polygonZkEVM: vars.has("POLYGON_ZKEVM_API_KEY")
-        ? vars.get("POLYGON_ZKEVM_API_KEY")
-        : "",
-      polygonMumbai: vars.has("POLYGON_API_KEY")
-        ? vars.get("POLYGON_API_KEY")
-        : "",
-      polygonZkEVMTestnet: vars.has("POLYGON_ZKEVM_API_KEY")
-        ? vars.get("POLYGON_ZKEVM_API_KEY")
-        : "",
+      polygon: vars.get("POLYGON_API_KEY", ""),
+      polygonZkEVM: vars.get("POLYGON_ZKEVM_API_KEY", ""),
+      polygonMumbai: vars.get("POLYGON_API_KEY", ""),
+      polygonZkEVMTestnet: vars.get("POLYGON_ZKEVM_API_KEY", ""),
       // For Arbitrum testnets & mainnets
-      arbitrumOne: vars.has("ARBITRUM_API_KEY")
-        ? vars.get("ARBITRUM_API_KEY")
-        : "",
-      arbitrumNova: vars.has("ARBITRUM_API_KEY")
-        ? vars.get("ARBITRUM_API_KEY")
-        : "",
-      arbitrumGoerli: vars.has("ARBITRUM_API_KEY")
-        ? vars.get("ARBITRUM_API_KEY")
-        : "",
-      arbitrumSepolia: vars.has("ARBITRUM_API_KEY")
-        ? vars.get("ARBITRUM_API_KEY")
-        : "",
+      arbitrumOne: vars.get("ARBITRUM_API_KEY", ""),
+      arbitrumNova: vars.get("ARBITRUM_API_KEY", ""),
+      arbitrumGoerli: vars.get("ARBITRUM_API_KEY", ""),
+      arbitrumSepolia: vars.get("ARBITRUM_API_KEY", ""),
       // For Avalanche testnet & mainnet
-      avalanche: vars.has("AVALANCHE_API_KEY")
-        ? vars.get("AVALANCHE_API_KEY")
-        : "",
-      avalancheFujiTestnet: vars.has("AVALANCHE_API_KEY")
-        ? vars.get("AVALANCHE_API_KEY")
-        : "",
+      avalanche: vars.get("AVALANCHE_API_KEY", ""),
+      avalancheFujiTestnet: vars.get("AVALANCHE_API_KEY", ""),
       // For Moonbeam testnet & mainnets
-      moonbeam: vars.has("MOONBEAM_API_KEY")
-        ? vars.get("MOONBEAM_API_KEY")
-        : "",
-      moonriver: vars.has("MOONBEAM_API_KEY")
-        ? vars.get("MOONBEAM_API_KEY")
-        : "",
-      moonbaseAlpha: vars.has("MOONBEAM_API_KEY")
-        ? vars.get("MOONBEAM_API_KEY")
-        : "",
+      moonbeam: vars.get("MOONBEAM_API_KEY", ""),
+      moonriver: vars.get("MOONBEAM_API_KEY", ""),
+      moonbaseAlpha: vars.get("MOONBEAM_API_KEY", ""),
       // For Harmony testnet & mainnet
-      harmony: vars.has("HARMONY_API_KEY") ? vars.get("HARMONY_API_KEY") : "",
-      harmonyTest: vars.has("HARMONY_API_KEY")
-        ? vars.get("HARMONY_API_KEY")
-        : "",
+      harmony: vars.get("HARMONY_API_KEY", ""),
+      harmonyTest: vars.get("HARMONY_API_KEY", ""),
       // For Aurora testnet & mainnet
-      aurora: vars.has("AURORA_API_KEY") ? vars.get("AURORA_API_KEY") : "",
-      auroraTestnet: vars.has("AURORA_API_KEY")
-        ? vars.get("AURORA_API_KEY")
-        : "",
+      aurora: vars.get("AURORA_API_KEY", ""),
+      auroraTestnet: vars.get("AURORA_API_KEY", ""),
       // For Cronos testnet & mainnet
-      cronos: vars.has("CRONOS_API_KEY") ? vars.get("CRONOS_API_KEY") : "",
-      cronosTestnet: vars.has("CRONOS_API_KEY")
-        ? vars.get("CRONOS_API_KEY")
-        : "",
+      cronos: vars.get("CRONOS_API_KEY", ""),
+      cronosTestnet: vars.get("CRONOS_API_KEY", ""),
       // For Gnosis/xDai testnets & mainnets
-      gnosis: vars.has("GNOSIS_API_KEY") ? vars.get("GNOSIS_API_KEY") : "",
-      xdai: vars.has("GNOSIS_API_KEY") ? vars.get("GNOSIS_API_KEY") : "",
-      sokol: vars.has("GNOSIS_API_KEY") ? vars.get("GNOSIS_API_KEY") : "",
-      chiado: vars.has("GNOSIS_API_KEY") ? vars.get("GNOSIS_API_KEY") : "",
+      gnosis: vars.get("GNOSIS_API_KEY", ""),
+      xdai: vars.get("GNOSIS_API_KEY", ""),
+      sokol: vars.get("GNOSIS_API_KEY", ""),
+      chiado: vars.get("GNOSIS_API_KEY", ""),
       // For Fuse testnet & mainnet
-      fuse: vars.has("FUSE_API_KEY") ? vars.get("FUSE_API_KEY") : "",
-      spark: vars.has("FUSE_API_KEY") ? vars.get("FUSE_API_KEY") : "",
+      fuse: vars.get("FUSE_API_KEY", ""),
+      spark: vars.get("FUSE_API_KEY", ""),
       // For Evmos testnet & mainnet
-      evmos: vars.has("EVMOS_API_KEY") ? vars.get("EVMOS_API_KEY") : "",
-      evmosTestnet: vars.has("EVMOS_API_KEY") ? vars.get("EVMOS_API_KEY") : "",
+      evmos: vars.get("EVMOS_API_KEY", ""),
+      evmosTestnet: vars.get("EVMOS_API_KEY", ""),
       // For Boba network testnet & mainnet
-      boba: vars.has("BOBA_API_KEY") ? vars.get("BOBA_API_KEY") : "",
-      bobaTestnet: vars.has("BOBA_API_KEY") ? vars.get("BOBA_API_KEY") : "",
+      boba: vars.get("BOBA_API_KEY", ""),
+      bobaTestnet: vars.get("BOBA_API_KEY", ""),
       // For Canto testnet & mainnet
-      canto: vars.has("CANTO_API_KEY") ? vars.get("CANTO_API_KEY") : "",
-      cantoTestnet: vars.has("CANTO_API_KEY") ? vars.get("CANTO_API_KEY") : "",
+      canto: vars.get("CANTO_API_KEY", ""),
+      cantoTestnet: vars.get("CANTO_API_KEY", ""),
       // For Base testnets & mainnet
-      base: vars.has("BASE_API_KEY") ? vars.get("BASE_API_KEY") : "",
-      baseTestnet: vars.has("BASE_API_KEY") ? vars.get("BASE_API_KEY") : "",
-      baseSepolia: vars.has("BASE_API_KEY") ? vars.get("BASE_API_KEY") : "",
+      base: vars.get("BASE_API_KEY", ""),
+      baseTestnet: vars.get("BASE_API_KEY", ""),
+      baseSepolia: vars.get("BASE_API_KEY", ""),
       // For Mantle testnet & mainnet
-      mantle: vars.has("MANTLE_API_KEY") ? vars.get("MANTLE_API_KEY") : "",
-      mantleTestnet: vars.has("MANTLE_API_KEY")
-        ? vars.get("MANTLE_API_KEY")
-        : "",
+      mantle: vars.get("MANTLE_API_KEY", ""),
+      mantleTestnet: vars.get("MANTLE_API_KEY", ""),
       // For Scroll testnet & mainnet
-      scroll: vars.has("SCROLL_API_KEY") ? vars.get("SCROLL_API_KEY") : "",
-      scrollTestnet: vars.has("SCROLL_API_KEY")
-        ? vars.get("SCROLL_API_KEY")
-        : "",
+      scroll: vars.get("SCROLL_API_KEY", ""),
+      scrollTestnet: vars.get("SCROLL_API_KEY", ""),
       // For Linea testnet & mainnet
-      linea: vars.has("LINEA_API_KEY") ? vars.get("LINEA_API_KEY") : "",
-      lineaTestnet: vars.has("LINEA_API_KEY") ? vars.get("LINEA_API_KEY") : "",
+      linea: vars.get("LINEA_API_KEY", ""),
+      lineaTestnet: vars.get("LINEA_API_KEY", ""),
       // For ShimmerEVM testnet
-      shimmerEVMTestnet: vars.has("SHIMMEREVM_API_KEY")
-        ? vars.get("SHIMMEREVM_API_KEY")
-        : "",
+      shimmerEVMTestnet: vars.get("SHIMMEREVM_API_KEY", ""),
       // For Zora testnet & mainnet
-      zora: vars.has("ZORA_API_KEY") ? vars.get("ZORA_API_KEY") : "",
-      zoraTestnet: vars.has("ZORA_API_KEY") ? vars.get("ZORA_API_KEY") : "",
+      zora: vars.get("ZORA_API_KEY", ""),
+      zoraTestnet: vars.get("ZORA_API_KEY", ""),
       // For Lukso testnet & mainnet
-      lukso: vars.has("LUKSO_API_KEY") ? vars.get("LUKSO_API_KEY") : "",
-      luksoTestnet: vars.has("LUKSO_API_KEY") ? vars.get("LUKSO_API_KEY") : "",
+      lukso: vars.get("LUKSO_API_KEY", ""),
+      luksoTestnet: vars.get("LUKSO_API_KEY", ""),
       // For Manta testnet & mainnet
-      manta: vars.has("MANTA_API_KEY") ? vars.get("MANTA_API_KEY") : "",
-      mantaTestnet: vars.has("MANTA_API_KEY") ? vars.get("MANTA_API_KEY") : "",
+      manta: vars.get("MANTA_API_KEY", ""),
+      mantaTestnet: vars.get("MANTA_API_KEY", ""),
       // For Arthera testnet
-      artheraTestnet: vars.has("ARTHERA_API_KEY")
-        ? vars.get("ARTHERA_API_KEY")
-        : "",
+      artheraTestnet: vars.get("ARTHERA_API_KEY", ""),
     },
     customChains: [
       {
