@@ -94,7 +94,7 @@ const config: HardhatUserConfig = {
     },
     bscMain: {
       chainId: 56,
-      url: vars.get("BSC_MAINNET_URL", "https://bsc-dataseed.binance.org"),
+      url: vars.get("BSC_MAINNET_URL", "https://bsc-dataseed1.binance.org"),
       accounts,
     },
     optimismTestnet: {
@@ -178,7 +178,7 @@ const config: HardhatUserConfig = {
     },
     fantomMain: {
       chainId: 250,
-      url: vars.get("FANTOM_MAINNET_URL", "https://rpc.ftm.tools"),
+      url: vars.get("FANTOM_MAINNET_URL", "https://rpc.ankr.com/fantom"),
       accounts,
     },
     fuji: {
@@ -224,13 +224,16 @@ const config: HardhatUserConfig = {
       chainId: 1285,
       url: vars.get(
         "MOONRIVER_MAINNET_URL",
-        "https://rpc.moonriver.moonbeam.network",
+        "https://moonriver.public.blastapi.io",
       ),
       accounts,
     },
     moonbeam: {
       chainId: 1284,
-      url: vars.get("MOONBEAM_MAINNET_URL", "https://rpc.api.moonbeam.network"),
+      url: vars.get(
+        "MOONBEAM_MAINNET_URL",
+        "https://moonbeam.public.blastapi.io",
+      ),
       accounts,
     },
     alfajores: {
@@ -328,10 +331,7 @@ const config: HardhatUserConfig = {
     },
     baseMain: {
       chainId: 8453,
-      url: vars.get(
-        "BASE_MAINNET_URL",
-        "https://developer-access-mainnet.base.org",
-      ),
+      url: vars.get("BASE_MAINNET_URL", "https://mainnet.base.org"),
       accounts,
     },
     mantleTestnet: {
@@ -352,6 +352,11 @@ const config: HardhatUserConfig = {
       ),
       accounts,
     },
+    filecoinMain: {
+      chainId: 314,
+      url: vars.get("FILECOIN_MAINNET_URL", "https://rpc.ankr.com/filecoin"),
+      accounts,
+    },
     scrollTestnet: {
       chainId: 534351,
       url: vars.get("SCROLL_TESTNET_URL", "https://sepolia-rpc.scroll.io"),
@@ -369,20 +374,20 @@ const config: HardhatUserConfig = {
     },
     lineaMain: {
       chainId: 59144,
-      url: vars.get("LINEA_MAINNET_URL", "https://linea-mainnet.infura.io/v3"),
+      url: vars.get("LINEA_MAINNET_URL", "https://rpc.linea.build"),
       accounts,
     },
     shimmerEVMTestnet: {
       chainId: 1071,
       url: vars.get(
         "SHIMMEREVM_TESTNET_URL",
-        "https://json-rpc.evm.testnet.shimmer.networ",
+        "https://json-rpc.evm.testnet.shimmer.network",
       ),
       accounts,
     },
     zoraTestnet: {
       chainId: 999,
-      url: vars.get("ZORA_TESTNET_URL", "https://testnet.rpc.zora.co"),
+      url: vars.get("ZORA_TESTNET_URL", "https://testnet.rpc.zora.energy"),
       accounts,
     },
     zoraMain: {
@@ -397,7 +402,7 @@ const config: HardhatUserConfig = {
     },
     luksoMain: {
       chainId: 42,
-      url: vars.get("LUKSO_MAINNET_URL", "https://rpc.mainnet.lukso.network"),
+      url: vars.get("LUKSO_MAINNET_URL", "https://rpc.lukso.gateway.fm"),
       accounts,
     },
     mantaTestnet: {
