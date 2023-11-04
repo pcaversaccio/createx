@@ -802,8 +802,10 @@ The following consequences result from these principles:
 
 ## Security Considerations
 
+<!-- prettier-ignore-start -->
 > **Warning**<br>
 > **This contract is unaudited!**
+<!-- prettier-ignore-end -->
 
 Generally, for security issues, see our [Security Policy](./SECURITY.md). Furthermore, you must be aware of the following aspects:
 
