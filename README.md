@@ -810,8 +810,21 @@ The following consequences result from these principles:
 Generally, for security issues, see our [Security Policy](./SECURITY.md). Furthermore, you must be aware of the following aspects:
 
 - Several functions allow for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
-- In the functions [`deployCreate3(bytes32,bytes)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L616-L646), [`deployCreate3AndInit(bytes32,bytes,bytes,tuple(uint256,uint256))`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L727-L762), and [`deployCreate3AndInit(bytes32,bytes,bytes,tuple(uint256,uint256),address)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L667-L725) we strongly recommend implementing a permissioned deploy protection by setting the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun proxy deployments on other chains.
-- The functions [`deployCreate3(bytes)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L648-L665), [`deployCreate3AndInit(bytes,bytes,tuple(uint256,uint256))`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L801-L834), and [`deployCreate3AndInit(bytes,bytes,tuple(uint256,uint256),address)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L764-L799) do not implement any permissioned deploy protection, thus anyone can frontrun the same proxy deployment on other chains. Use with caution!
+- In the functions:
+
+  - [`deployCreate3(bytes32,bytes)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L616-L646),
+  - [`deployCreate3AndInit(bytes32,bytes,bytes,tuple(uint256,uint256))`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L727-L762), and
+  - [`deployCreate3AndInit(bytes32,bytes,bytes,tuple(uint256,uint256),address)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L667-L725)
+
+  we strongly recommend implementing a permissioned deploy protection by setting the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun proxy deployments on other chains.
+
+- The functions:
+
+  - [`deployCreate3(bytes)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L648-L665),
+  - [`deployCreate3AndInit(bytes,bytes,tuple(uint256,uint256))`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L801-L834), and
+  - [`deployCreate3AndInit(bytes,bytes,tuple(uint256,uint256),address)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L764-L799)
+
+  do not implement any permissioned deploy protection, thus anyone can frontrun the same proxy deployment on other chains. Use with caution!
 
 ## Tests
 
