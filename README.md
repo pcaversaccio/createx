@@ -754,11 +754,10 @@ Furthermore, you can configure _only_ cross-chain redeploy protection by setting
 
 For developer convenience, the [`CreateX`](./src/CreateX.sol) contract offers several overloaded functions that generate the salt value pseudo-randomly using a diverse selection of block and transaction properties. Please note that this approach does not guarantee true randomness!
 
-The full logic is implemented in the `internal` [`_generateSalt`](./src/CreateX.sol#L965-L991) function:
+The full logic is implemented in the `internal` [`_generateSalt`](./src/CreateX.sol#L965-L993) function:
 
 ```solidity
 function _generateSalt() internal view returns (bytes32 salt) {
-  // If you use this function between the genesis block and block number 31, it will return zero.
   unchecked {
     salt = keccak256(
       abi.encode(
@@ -767,7 +766,10 @@ function _generateSalt() internal view returns (bytes32 salt) {
         // We also don't subtract 1 to mitigate any risks arising from consecutive block
         // producers on a PoS chain. Therefore, we use `block.number - 32` as a reasonable
         // compromise, one we expect should work on most chains, which is 1 epoch on Ethereum
-        // mainnet.
+        // mainnet. Please note that if you use this function between the genesis block and block
+        // number 31, the block property `blockhash` will return zero, but the returned salt value
+        // `salt` will still have a non-zero value due to the hashing characteristic and the other
+        // remaining properties.
         blockhash(block.number - 32),
         block.coinbase,
         block.number,

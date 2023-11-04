@@ -968,7 +968,6 @@ contract CreateX {
      * @return salt The 32-byte pseudo-random salt value.
      */
     function _generateSalt() internal view returns (bytes32 salt) {
-        // If you use this function between the genesis block and block number 31, it will return zero.
         unchecked {
             salt = keccak256(
                 abi.encode(
@@ -977,7 +976,10 @@ contract CreateX {
                     // We also don't subtract 1 to mitigate any risks arising from consecutive block
                     // producers on a PoS chain. Therefore, we use `block.number - 32` as a reasonable
                     // compromise, one we expect should work on most chains, which is 1 epoch on Ethereum
-                    // mainnet.
+                    // mainnet. Please note that if you use this function between the genesis block and block
+                    // number 31, the block property `blockhash` will return zero, but the returned salt value
+                    // `salt` will still have a non-zero value due to the hashing characteristic and the other
+                    // remaining properties.
                     blockhash(block.number - 32),
                     block.coinbase,
                     block.number,
