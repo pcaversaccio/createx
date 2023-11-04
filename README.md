@@ -790,7 +790,7 @@ function _generateSalt() internal view returns (bytes32 salt) {
 - [`CreateX`](./src/CreateX.sol) should be maximally secure, i.e. no hidden footguns.
 - [`CreateX`](./src/CreateX.sol) should be trustless.
 - [`CreateX`](./src/CreateX.sol) should be stateless.
-- [`CreateX`](./src/CreateX.sol) should be extensible.
+- [`CreateX`](./src/CreateX.sol) should be extensible (i.e. it can be used to deploy protocols, within protocols, or to deploy other types of deterministic deployer factories).
 
 The following consequences result from these principles:
 
