@@ -9,7 +9,7 @@
 Factory smart contract to make easier and safer usage of the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) and [`CREATE2`](https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171)-based (i.e. without an initcode factor) contract creations.
 
 > **Note**<br>
-> The [`CreateX`](./src/CreateX.sol) contract should be considered as maximally extensible. Be encouraged to build on top of it! The Solidity-based interface can be found [here](./src/ICreateX.sol).
+> The [`CreateX`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol) contract should be considered as maximally extensible. Be encouraged to build on top of it! The Solidity-based interface can be found [here](https://github.com/pcaversaccio/createx/blob/main/src/ICreateX.sol).
 
 - [`CreateX` – A Trustless, Universal Contract Deployer](#createx--a-trustless-universal-contract-deployer)
   - [Available Versatile Functions](#available-versatile-functions)
@@ -880,7 +880,7 @@ The written tests available in the directory [`test`](./test) achieve a test cov
 ## ABI (Application Binary Interface)
 
 > **Note**<br>
-> If you `forge install` this repository, the Solidity-based interface can also be found [here](./src/ICreateX.sol).
+> If you `forge install` this repository, the Solidity-based interface can also be found [here](https://github.com/pcaversaccio/createx/blob/main/src/ICreateX.sol).
 
 <details>
 <summary> <a href="https://docs.soliditylang.org/en/latest/">Solidity</a> </summary>
