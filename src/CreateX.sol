@@ -620,7 +620,7 @@ contract CreateX {
      * Note that if `msg.value` is non-zero, `initCode` must have a `payable` constructor. This
      * implementation is based on Solmate:
      * https://web.archive.org/web/20230921113832/https://raw.githubusercontent.com/transmissions11/solmate/e8f96f25d48fe702117ce76c79228ca4f20206cb/src/utils/CREATE3.sol.
-     * @param salt The 32-byte random value used to create the contract address.
+     * @param salt The 32-byte random value used to create the proxy contract address.
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
      * @custom:security We strongly recommend implementing a permissioned deploy protection by setting
@@ -672,7 +672,7 @@ contract CreateX {
      * check the `initCode` length. Note that if `values.constructorAmount` is non-zero, `initCode` must
      * have a `payable` constructor. This implementation is based on Solmate:
      * https://web.archive.org/web/20230921113832/https://raw.githubusercontent.com/transmissions11/solmate/e8f96f25d48fe702117ce76c79228ca4f20206cb/src/utils/CREATE3.sol.
-     * @param salt The 32-byte random value used to create the contract address.
+     * @param salt The 32-byte random value used to create the proxy contract address.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
      * @param values The specific `payable` amounts for the deployment and initialisation call.
@@ -732,7 +732,7 @@ contract CreateX {
      * that if `values.constructorAmount` is non-zero, `initCode` must have a `payable` constructor,
      * and any excess ether is returned to `msg.sender`. This implementation is based on Solmate:
      * https://web.archive.org/web/20230921113832/https://raw.githubusercontent.com/transmissions11/solmate/e8f96f25d48fe702117ce76c79228ca4f20206cb/src/utils/CREATE3.sol.
-     * @param salt The 32-byte random value used to create the contract address.
+     * @param salt The 32-byte random value used to create the proxy contract address.
      * @param initCode The creation bytecode.
      * @param data The initialisation code that is passed to the deployed contract.
      * @param values The specific `payable` amounts for the deployment and initialisation call.
@@ -838,7 +838,7 @@ contract CreateX {
      * the `CREATE3` pattern (i.e. without an initcode factor). Any change in the `salt` value will
      * result in a new destination address. This implementation is based on Solady:
      * https://web.archive.org/web/20230921114120/https://raw.githubusercontent.com/Vectorized/solady/1c1ac4ad9c8558001e92d8d1a7722ef67bec75df/src/utils/CREATE3.sol.
-     * @param salt The 32-byte random value used to create the contract address.
+     * @param salt The 32-byte random value used to create the proxy contract address.
      * @param deployer The 20-byte deployer address.
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
@@ -865,7 +865,7 @@ contract CreateX {
      * the `CREATE3` pattern (i.e. without an initcode factor). Any change in the `salt` value will
      * result in a new destination address. This implementation is based on Solady:
      * https://web.archive.org/web/20230921114120/https://raw.githubusercontent.com/Vectorized/solady/1c1ac4ad9c8558001e92d8d1a7722ef67bec75df/src/utils/CREATE3.sol.
-     * @param salt The 32-byte random value used to create the contract address.
+     * @param salt The 32-byte random value used to create the proxy contract address.
      * @return computedAddress The 20-byte address where a contract will be stored.
      */
     function computeCreate3Address(bytes32 salt) public view returns (address computedAddress) {
@@ -968,7 +968,6 @@ contract CreateX {
      * @return salt The 32-byte pseudo-random salt value.
      */
     function _generateSalt() internal view returns (bytes32 salt) {
-        // If you use this function between the genesis block and block number 31, it will return zero.
         unchecked {
             salt = keccak256(
                 abi.encode(
@@ -977,7 +976,10 @@ contract CreateX {
                     // We also don't subtract 1 to mitigate any risks arising from consecutive block
                     // producers on a PoS chain. Therefore, we use `block.number - 32` as a reasonable
                     // compromise, one we expect should work on most chains, which is 1 epoch on Ethereum
-                    // mainnet.
+                    // mainnet. Please note that if you use this function between the genesis block and block
+                    // number 31, the block property `blockhash` will return zero, but the returned salt value
+                    // `salt` will still have a non-zero value due to the hashing characteristic and the other
+                    // remaining properties.
                     blockhash(block.number - 32),
                     block.coinbase,
                     block.number,
