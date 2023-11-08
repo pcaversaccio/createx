@@ -12,6 +12,7 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
 > The [`CreateX`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol) contract should be considered as maximally extensible. Be encouraged to build on top of it! The Solidity-based interface can be found [here](https://github.com/pcaversaccio/createx/blob/main/src/ICreateX.sol).
 
 - [`CreateX` – A Trustless, Universal Contract Deployer](#createx--a-trustless-universal-contract-deployer)
+  - [So What on Earth Is a Contract Factory?](#so-what-on-earth-is-a-contract-factory)
   - [Available Versatile Functions](#available-versatile-functions)
   - [Special Features](#special-features)
     - [Permissioned Deploy Protection and Cross-Chain Redeploy Protection](#permissioned-deploy-protection-and-cross-chain-redeploy-protection)
@@ -24,6 +25,13 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
   - [New Deployment(s)](#new-deployments)
     - [Contract Verification](#contract-verification)
   - [`CreateX` Deployments](#createx-deployments)
+
+## So What on Earth Is a Contract Factory?
+
+EVM opcodes (i.e. [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) or [`CREATE2`](https://www.evm.codes/#f5?fork=shanghai)) can only be called via a smart contract. A contract factory in the context of the EVM refers to a special smart contract that is used to create and deploy other smart contracts on EVM-compatible blockchains. Using a contract factory provides a flexible and efficient way to deploy and manage smart contracts that share similar functionalities but may have different configurations or settings. Different approaches can be used to create contracts using a factory contract, and this is exactly what [`CreateX`](./src/CreateX.sol) offers: _a comprehensive range of contract creation functions that are triggered by a smart contract itself_. It is worth emphasising the two differences in the address calculation of the opcodes [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) and [`CREATE2`](https://www.evm.codes/#f5?fork=shanghai) (`||` stands for byte-wise concatenation, `[12:]` refers to the last 20 bytes of a 32-byte expression, and `rlp` is an abbrevation for Ethereum's "Recursive Length Prefix" serialisation scheme):
+
+- [`CREATE`](https://www.evm.codes/#f0?fork=shanghai): `address computedAddress = keccak256(rlpEncode([deployerAddress, deployerNonce]))[12:]`,
+- [`CREATE2`](https://www.evm.codes/#f5?fork=shanghai): `address computedAddress = keccak256(0xff||deployerAddress||salt||keccak256(initCode))[12:]`.
 
 ## Available Versatile Functions
 
