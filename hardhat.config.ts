@@ -15,6 +15,10 @@ const accounts = [
   ),
 ];
 
+task("solc", "Prints the configured Solidity version", async (_, hre) => {
+  console.log(hre.config.solidity.compilers[0].version);
+});
+
 task("evm", "Prints the configured EVM version", async (_, hre) => {
   console.log(hre.config.solidity.compilers[0].settings.evmVersion);
 });

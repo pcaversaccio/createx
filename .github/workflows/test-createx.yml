@@ -64,6 +64,12 @@ jobs:
         env:
           FOUNDRY_PROFILE: ci
 
+      - name: Ensure Solidity version consistency
+        run: |
+          version_foundry=$(forge config --json | jq -r ".solc")
+          version_hh=$(npx hardhat solc)
+          if [[ $version_foundry != "0.8.23" ]] || [[ $version_foundry != $version_hh ]]; then exit 1; fi
+
       - name: Ensure `paris` as EVM version
         run: |
           version_foundry=$(forge config --json | jq -r ".evm_version")
