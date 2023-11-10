@@ -43,6 +43,7 @@ export async function sign() {
     tx.gasLimit = 3_000_000;
     tx.gasPrice = hre.ethers.parseUnits("100", "gwei");
     tx.data = initCode.data;
+    tx.chainId = 0; // Disable EIP-155 functionality
     tx.nonce = 0;
     tx.type = 0;
 
@@ -77,6 +78,7 @@ export async function sign() {
     console.log("- to: " + `${GREEN}${signedTx.to}${RESET}`);
     console.log("- type: " + `${GREEN}${signedTx.type}${RESET}`);
     console.log("- typeName: " + `${GREEN}${signedTx.typeName}${RESET}`);
+    console.log("- chainId: " + `${GREEN}${signedTx.chainId}${RESET}`);
     console.log("- serialised: " + `${GREEN}${signedTx.serialized}${RESET}`); // We use this output to broadcast the contract creation transaction
   } catch (err) {
     // Save the signing attempt error in a JSON file
