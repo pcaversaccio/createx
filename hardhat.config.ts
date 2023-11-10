@@ -6,8 +6,11 @@ import "hardhat-gas-reporter";
 import "hardhat-contract-sizer";
 import "hardhat-abi-exporter";
 
-const ethMainnetUrl = vars.get("ETH_MAINNET_URL", "https://rpc.ankr.com/eth");
-const accounts = [
+export const ethMainnetUrl = vars.get(
+  "ETH_MAINNET_URL",
+  "https://rpc.ankr.com/eth",
+);
+export const accounts = [
   vars.get(
     "PRIVATE_KEY",
     // `keccak256("DEFAULT_VALUE")`
