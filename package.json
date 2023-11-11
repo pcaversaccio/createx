@@ -32,7 +32,7 @@
     "abi": "npx hardhat export-abi",
     "vars:path": "npx hardhat vars path",
     "evm": "npx hardhat evm",
-    "presign": "npx hardhat run scripts/sign.ts",
+    "presign": "npx hardhat run scripts/presign.ts",
     "deploy:hh": "npx hardhat run --network hardhat scripts/deploy.ts",
     "deploy:localhost": "npx hardhat run --network localhost scripts/deploy.ts",
     "deploy:dashboard": "npx hardhat run --network truffleDashboard scripts/deploy.ts",
