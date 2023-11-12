@@ -630,10 +630,10 @@ packages:
       "@ethersproject/strings": 5.7.0
     dev: true
 
-  /@fastify/busboy@2.0.0:
+  /@fastify/busboy@2.1.0:
     resolution:
       {
-        integrity: sha512-JUFJad5lv7jxj926GPgymrWQxxjPYuJNiNjNMzqT+HiuP6Vl3dk5xzG+8sTX96np0ZAluvaMzPsjhHZ5rNuNQQ==,
+        integrity: sha512-+KpH+QxZU7O4675t3mnkQKcZZg56u+K/Ct2K+N2AZYNVK8kyeo/bI18tI8aPm3tvNNRyTWfj6s5tnGNlcbQRsA==,
       }
     engines: { node: ">=14" }
     dev: true
@@ -3529,7 +3529,7 @@ packages:
       decompress-response: 6.0.0
       form-data-encoder: 2.1.4
       get-stream: 6.0.1
-      http2-wrapper: 2.2.0
+      http2-wrapper: 2.2.1
       lowercase-keys: 3.0.0
       p-cancelable: 3.0.0
       responselike: 3.0.0
@@ -3809,10 +3809,10 @@ packages:
       "@types/node": 10.17.60
     dev: true
 
-  /http2-wrapper@2.2.0:
+  /http2-wrapper@2.2.1:
     resolution:
       {
-        integrity: sha512-kZB0wxMo0sh1PehyjJUWRFEd99KC5TLjZ2cULC4f9iqJBAmKQQXEICjxl5iPJRwP40dpeHFqqhm7tYCvODpqpQ==,
+        integrity: sha512-V5nVw1PAOgfI3Lmeaj2Exmeg7fenjhRUgz1lPSezy1CuhPYbgQtbQj4jZfEAEMlaL+vupsvhjqCyjzob0yxsmQ==,
       }
     engines: { node: ">=10.19.0" }
     dependencies:
@@ -5927,7 +5927,7 @@ packages:
       }
     engines: { node: ">=14.0" }
     dependencies:
-      "@fastify/busboy": 2.0.0
+      "@fastify/busboy": 2.1.0
     dev: true
 
   /universalify@0.1.2:
