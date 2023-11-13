@@ -33,17 +33,8 @@ async function deployNormal() {
 
 async function deployRaw() {
   try {
-    if (hre.network.config.url == null) {
-      throw new Error("No RPC URL configured.");
-    }
-    const rpc = hre.network.config.url;
-    if (typeof rpc !== "string") {
-      throw new Error("Invalid RPC URL configured.");
-    }
-
-    const provider = new hre.ethers.JsonRpcProvider(rpc);
     // Send the transaction
-    const tx = await provider.broadcastTransaction(signedTx);
+    const tx = await hre.ethers.provider.broadcastTransaction(signedTx);
     console.log("Transaction hash: " + `${GREEN}${tx.hash}${RESET}`);
     const transactionReceipt = await tx.wait();
     const contractAddress = transactionReceipt?.contractAddress;
