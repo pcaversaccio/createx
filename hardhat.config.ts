@@ -12,7 +12,7 @@ export const ethMainnetUrl = vars.get(
 );
 export const accounts = [
   vars.get(
-    "PRIVATE_KEY",
+    "CREATEX_DEPLOYER",
     // `keccak256("DEFAULT_VALUE")`
     "0x0d1706281056b7de64efd2088195fa8224c39103f578c9b84f951721df3fa71c",
   ),
