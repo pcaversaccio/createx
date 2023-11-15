@@ -6,10 +6,13 @@ import "hardhat-gas-reporter";
 import "hardhat-contract-sizer";
 import "hardhat-abi-exporter";
 
-const ethMainnetUrl = vars.get("ETH_MAINNET_URL", "https://rpc.ankr.com/eth");
-const accounts = [
+export const ethMainnetUrl = vars.get(
+  "ETH_MAINNET_URL",
+  "https://rpc.ankr.com/eth",
+);
+export const accounts = [
   vars.get(
-    "PRIVATE_KEY",
+    "CREATEX_DEPLOYER",
     // `keccak256("DEFAULT_VALUE")`
     "0x0d1706281056b7de64efd2088195fa8224c39103f578c9b84f951721df3fa71c",
   ),
