@@ -212,19 +212,13 @@ contract CreateX {
      * level that potentially malicious reentrant calls do not affect your smart contract system.
      */
     function deployCreateClone(address implementation, bytes memory data) public payable returns (address proxy) {
-        bytes20 implementationInBytes = bytes20(implementation);
+        // bytes20 implementationInBytes = bytes20(implementation);
         assembly ("memory-safe") {
             let clone := mload(0x40)
-            mstore(
-                clone,
-                hex"3d_60_2d_80_60_0a_3d_39_81_f3_36_3d_3d_37_3d_3d_3d_36_3d_73_00_00_00_00_00_00_00_00_00_00_00_00"
-            )
-            mstore(add(clone, 0x14), implementationInBytes)
-            mstore(
-                add(clone, 0x28),
-                hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00"
-            )
-            proxy := create(0, clone, 0x37)
+            mstore(add(clone, 0x21), hex"00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_5a_f4_3d_3d_93_80_3e_60_2a_57_fd_5b_f3")
+            mstore(add(clone, 0x14), implementation)
+            mstore(clone, hex"00_00_00_00_00_00_00_00_00_00_00_00_60_2c_3d_81_60_09_3d_39_f3_3d_3d_3d_3d_36_3d_3d_37_36_3d_73")
+            proxy := create(0, add(clone,0x0c) , 0x35)
         }
         if (proxy == address(0)) {
             revert FailedContractCreation({emitter: _SELF});
@@ -515,19 +509,12 @@ contract CreateX {
         bytes memory data
     ) public payable returns (address proxy) {
         bytes32 guardedSalt = _guard({salt: salt});
-        bytes20 implementationInBytes = bytes20(implementation);
         assembly ("memory-safe") {
             let clone := mload(0x40)
-            mstore(
-                clone,
-                hex"3d_60_2d_80_60_0a_3d_39_81_f3_36_3d_3d_37_3d_3d_3d_36_3d_73_00_00_00_00_00_00_00_00_00_00_00_00"
-            )
-            mstore(add(clone, 0x14), implementationInBytes)
-            mstore(
-                add(clone, 0x28),
-                hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00"
-            )
-            proxy := create2(0, clone, 0x37, guardedSalt)
+            mstore(add(clone, 0x21), hex"00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_00_5a_f4_3d_3d_93_80_3e_60_2a_57_fd_5b_f3")
+            mstore(add(clone, 0x14), implementation)
+            mstore(clone, hex"00_00_00_00_00_00_00_00_00_00_00_00_60_2c_3d_81_60_09_3d_39_f3_3d_3d_3d_3d_36_3d_3d_37_36_3d_73")
+            proxy := create2(0, add(clone,0x0c), 0x35, guardedSalt)
         }
         if (proxy == address(0)) {
             revert FailedContractCreation({emitter: _SELF});

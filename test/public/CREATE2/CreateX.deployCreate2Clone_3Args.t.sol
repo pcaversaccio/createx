@@ -15,9 +15,9 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
     bytes32 internal codeHash =
         keccak256(
             abi.encodePacked(
-                hex"36_3d_3d_37_3d_3d_3d_36_3d_73",
+                hex"3d_3d_3d_3d_36_3d_3d_37_36_3d_73",
                 implementation,
-                hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3"
+                hex"5a_f4_3d_3d_93_80_3e_60_2a_57_fd_5b_f3"
             )
         );
 
@@ -32,9 +32,9 @@ contract CreateX_DeployCreate2Clone_3Args_Public_Test is BaseTest {
         BaseTest.setUp();
         initCodeHash = keccak256(
             abi.encodePacked(
-                hex"3d_60_2d_80_60_0a_3d_39_81_f3_36_3d_3d_37_3d_3d_3d_36_3d_73",
+                hex"60_2c_3d_81_60_09_3d_39_f3_3d_3d_3d_3d_36_3d_3d_37_36_3d_73",
                 implementation,
-                hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3"
+                hex"5a_f4_3d_3d_93_80_3e_60_2a_57_fd_5b_f3"
             )
         );
     }
