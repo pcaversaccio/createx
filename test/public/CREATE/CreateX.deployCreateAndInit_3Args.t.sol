@@ -4,7 +4,7 @@ pragma solidity 0.8.23;
 import {BaseTest} from "../../utils/BaseTest.sol";
 import {IERC20} from "openzeppelin/token/ERC20/IERC20.sol";
 import {ERC20MockPayable} from "../../mocks/ERC20MockPayable.sol";
-import {CreateX} from "../../../src/CreateX.sol";
+import {ICreateX, CreateX} from "../../../src/CreateX.sol";
 
 contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -34,7 +34,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
 
     function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLengthAndWhenTheInitialisationCallIsSuccessful(
         uint64 nonce,
-        CreateX.Values memory values
+        ICreateX.Values memory values
     )
         external
         whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength
@@ -53,13 +53,11 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         // It returns a contract address with a non-zero bytecode length and a potential non-zero ether balance.
         // It emits the event `ContractCreation` with the contract address as indexed argument.
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.ContractCreation(computedAddress);
+        emit ICreateX.ContractCreation(computedAddress);
         vm.deal(arg3, values.constructorAmount + values.initCallAmount);
         vm.startPrank(arg3);
         address newContract = createX.deployCreateAndInit{value: values.constructorAmount + values.initCallAmount}(
-            cachedInitCode,
-            abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-            values
+            cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values
         );
         vm.stopPrank();
 
@@ -85,7 +83,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
 
     function testFuzz_WhenTheCreateXContractHasANonZeroBalanceAndWhenTheRefundTransactionIsSuccessful(
         uint64 nonce,
-        CreateX.Values memory values,
+        ICreateX.Values memory values,
         uint256 amount
     )
         external
@@ -107,13 +105,11 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         // It returns a contract address with a non-zero bytecode length and a potential non-zero ether balance.
         // It emits the event `ContractCreation` with the contract address as indexed argument.
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.ContractCreation(computedAddress);
+        emit ICreateX.ContractCreation(computedAddress);
         vm.deal(arg3, values.constructorAmount + values.initCallAmount);
         vm.startPrank(arg3);
         address newContract = createX.deployCreateAndInit{value: values.constructorAmount + values.initCallAmount}(
-            cachedInitCode,
-            abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-            values
+            cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values
         );
         vm.stopPrank();
 
@@ -135,7 +131,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
 
     function testFuzz_WhenTheRefundTransactionIsUnsuccessful(
         uint64 nonce,
-        CreateX.Values memory values,
+        ICreateX.Values memory values,
         uint256 amount
     )
         external
@@ -151,16 +147,11 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         vm.deal(SELF, values.constructorAmount + values.initCallAmount);
         vm.startPrank(SELF);
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(
-            CreateX.FailedEtherTransfer.selector,
-            createXAddr,
-            new bytes(0)
-        );
+        bytes memory expectedErr =
+            abi.encodeWithSelector(ICreateX.FailedEtherTransfer.selector, createXAddr, new bytes(0));
         vm.expectRevert(expectedErr);
         createX.deployCreateAndInit{value: values.constructorAmount + values.initCallAmount}(
-            cachedInitCode,
-            abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-            values
+            cachedInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values
         );
         vm.stopPrank();
     }
@@ -169,10 +160,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheInitialisationCallIsUnsuccessful(
-        uint64 nonce,
-        CreateX.Values memory values
-    )
+    function testFuzz_WhenTheInitialisationCallIsUnsuccessful(uint64 nonce, ICreateX.Values memory values)
         external
         whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength
         whenTheInitialisationCallIsUnsuccessful
@@ -184,16 +172,11 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         vm.deal(arg3, values.constructorAmount + values.initCallAmount);
         vm.startPrank(arg3);
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(
-            CreateX.FailedContractInitialisation.selector,
-            createXAddr,
-            new bytes(0)
-        );
+        bytes memory expectedErr =
+            abi.encodeWithSelector(ICreateX.FailedContractInitialisation.selector, createXAddr, new bytes(0));
         vm.expectRevert(expectedErr);
         createX.deployCreateAndInit{value: values.constructorAmount + values.initCallAmount}(
-            cachedInitCode,
-            abi.encodeWithSignature("wagmi"),
-            values
+            cachedInitCode, abi.encodeWithSignature("wagmi"), values
         );
         vm.stopPrank();
     }
@@ -204,7 +187,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
 
     function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength(
         uint64 nonce,
-        CreateX.Values memory values
+        ICreateX.Values memory values
     ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
@@ -213,12 +196,10 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         vm.deal(arg3, values.constructorAmount + values.initCallAmount);
         vm.startPrank(arg3);
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.FailedContractCreation.selector, createXAddr);
         vm.expectRevert(expectedErr);
         createX.deployCreateAndInit{value: values.constructorAmount + values.initCallAmount}(
-            new bytes(0),
-            abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-            values
+            new bytes(0), abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values
         );
         vm.stopPrank();
     }
@@ -227,10 +208,10 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheInitCodeFailsToDeployARuntimeBytecode(
-        uint64 nonce,
-        CreateX.Values memory values
-    ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
+    function testFuzz_WhenTheInitCodeFailsToDeployARuntimeBytecode(uint64 nonce, ICreateX.Values memory values)
+        external
+        whenTheInitCodeFailsToDeployARuntimeBytecode
+    {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
         values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
@@ -238,16 +219,14 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         // The following contract creation code contains the invalid opcode `PUSH0` (`0x5F`) and `CREATE` must therefore
         // return the zero address (technically zero bytes `0x`), as the deployment fails. This test also ensures that if
         // we ever accidentally change the EVM version in Foundry and Hardhat, we will always have a corresponding failed test.
-        bytes memory invalidInitCode = hex"5f_80_60_09_3d_39_3d_f3";
+        bytes memory invalidInitCode = hex"5f8060093d393df3";
         vm.deal(arg3, values.constructorAmount + values.initCallAmount);
         vm.startPrank(arg3);
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.FailedContractCreation.selector, createXAddr);
         vm.expectRevert(expectedErr);
         createX.deployCreateAndInit{value: values.constructorAmount + values.initCallAmount}(
-            invalidInitCode,
-            abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)),
-            values
+            invalidInitCode, abi.encodeCall(ERC20MockPayable.mint, (arg3, arg4)), values
         );
         vm.stopPrank();
     }

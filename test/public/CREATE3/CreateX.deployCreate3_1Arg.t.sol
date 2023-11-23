@@ -5,7 +5,7 @@ import {Vm} from "forge-std/Vm.sol";
 import {BaseTest} from "../../utils/BaseTest.sol";
 import {IERC20} from "openzeppelin/token/ERC20/IERC20.sol";
 import {ERC20MockPayable} from "../../mocks/ERC20MockPayable.sol";
-import {CreateX} from "../../../src/CreateX.sol";
+import {ICreateX, CreateX} from "../../../src/CreateX.sol";
 
 contract CreateX_DeployCreate3_1Arg_Public_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -13,8 +13,7 @@ contract CreateX_DeployCreate3_1Arg_Public_Test is BaseTest {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     // The `keccak256`-hashed `CREATE3` proxy contract creation bytecode.
-    bytes32 internal proxyInitCodeHash =
-        keccak256(abi.encodePacked(hex"67_36_3d_3d_37_36_3d_34_f0_3d_52_60_08_60_18_f3"));
+    bytes32 internal proxyInitCodeHash = keccak256(abi.encodePacked(hex"67363d3d37363d34f03d5260086018f3"));
 
     // To avoid any stack-too-deep errors, we use `internal` state variables for the precomputed `CREATE3` address
     // and some further contract deployment addresses and variables.
@@ -53,25 +52,16 @@ contract CreateX_DeployCreate3_1Arg_Public_Test is BaseTest {
         msgValue = bound(msgValue, 0, type(uint64).max);
         vm.deal(originalDeployer, msgValue);
         vm.assume(
-            chainId != block.chainid &&
-                chainId != 0 &&
-                originalDeployer != msgSender &&
-                originalDeployer != createXAddr &&
-                originalDeployer != zeroAddress &&
-                msgSender != createXAddr &&
-                msgSender != zeroAddress
+            chainId != block.chainid && chainId != 0 && originalDeployer != msgSender && originalDeployer != createXAddr
+                && originalDeployer != zeroAddress && msgSender != createXAddr && msgSender != zeroAddress
         );
         snapshotId = vm.snapshot();
 
         vm.startPrank(originalDeployer);
         bytes32 salt = createXHarness.exposed_generateSalt();
         vm.stopPrank();
-        (
-            bool permissionedDeployProtection,
-            bool xChainRedeployProtection,
-            bool mustRevert,
-            bytes32 guardedSalt
-        ) = parseFuzzerSalt(originalDeployer, salt);
+        (bool permissionedDeployProtection, bool xChainRedeployProtection, bool mustRevert, bytes32 guardedSalt) =
+            parseFuzzerSalt(originalDeployer, salt);
         // When we pseudo-randomly calculate the salt value `salt`, we must never have configured a permissioned
         // deploy protection or a cross-chain redeploy protection, and it must never revert.
         assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert, "100");
@@ -87,14 +77,14 @@ contract CreateX_DeployCreate3_1Arg_Public_Test is BaseTest {
         // We record the emitted events to later assert the proxy contract address.
         vm.recordLogs();
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.Create3ProxyContractCreation(proxyAddress, guardedSalt);
+        emit ICreateX.Create3ProxyContractCreation(proxyAddress, guardedSalt);
         // We also check for the ERC-20 standard `Transfer` event.
         vm.expectEmit(true, true, true, true, computedAddress);
         emit IERC20.Transfer(zeroAddress, arg3, arg4);
         // It returns a contract address with a non-zero bytecode length and a potential non-zero ether balance.
         // It emits the event `ContractCreation` with the contract address as indexed argument.
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.ContractCreation(computedAddress);
+        emit ICreateX.ContractCreation(computedAddress);
         vm.startPrank(originalDeployer);
         address newContract = createX.deployCreate3{value: msgValue}(cachedInitCode);
         vm.stopPrank();
@@ -114,13 +104,13 @@ contract CreateX_DeployCreate3_1Arg_Public_Test is BaseTest {
         vm.startPrank(msgSender);
         salt = createXHarness.exposed_generateSalt();
         vm.stopPrank();
-        (, , , guardedSalt) = parseFuzzerSalt(msgSender, salt);
+        (,,, guardedSalt) = parseFuzzerSalt(msgSender, salt);
         proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
         vm.assume(msgSender != proxyAddress);
         // We record the emitted events to later assert the proxy contract address.
         vm.recordLogs();
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.Create3ProxyContractCreation(proxyAddress, guardedSalt);
+        emit ICreateX.Create3ProxyContractCreation(proxyAddress, guardedSalt);
         // We mock a potential frontrunner address.
         vm.deal(msgSender, msgValue);
         vm.startPrank(msgSender);
@@ -150,11 +140,11 @@ contract CreateX_DeployCreate3_1Arg_Public_Test is BaseTest {
         vm.startPrank(originalDeployer);
         salt = createXHarness.exposed_generateSalt();
         vm.stopPrank();
-        (, , , guardedSalt) = parseFuzzerSalt(originalDeployer, salt);
+        (,,, guardedSalt) = parseFuzzerSalt(originalDeployer, salt);
         proxyAddress = createX.computeCreate2Address(guardedSalt, proxyInitCodeHash, createXAddr);
         vm.assume(originalDeployer != proxyAddress);
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.Create3ProxyContractCreation(proxyAddress, guardedSalt);
+        emit ICreateX.Create3ProxyContractCreation(proxyAddress, guardedSalt);
         // We mock the original caller.
         vm.startPrank(originalDeployer);
         newContractOriginalDeployer = createX.deployCreate3{value: msgValue}(cachedInitCode);
@@ -181,22 +171,18 @@ contract CreateX_DeployCreate3_1Arg_Public_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheProxyContractCreationFails(
-        address originalDeployer,
-        uint256 msgValue
-    ) external whenTheProxyContractCreationFails {
+    function testFuzz_WhenTheProxyContractCreationFails(address originalDeployer, uint256 msgValue)
+        external
+        whenTheProxyContractCreationFails
+    {
         msgValue = bound(msgValue, 0, type(uint64).max);
         vm.deal(originalDeployer, msgValue);
         vm.assume(originalDeployer != createXAddr && originalDeployer != zeroAddress);
         vm.startPrank(originalDeployer);
         bytes32 salt = createXHarness.exposed_generateSalt();
         vm.stopPrank();
-        (
-            bool permissionedDeployProtection,
-            bool xChainRedeployProtection,
-            bool mustRevert,
-            bytes32 guardedSalt
-        ) = parseFuzzerSalt(originalDeployer, salt);
+        (bool permissionedDeployProtection, bool xChainRedeployProtection, bool mustRevert, bytes32 guardedSalt) =
+            parseFuzzerSalt(originalDeployer, salt);
         // When we pseudo-randomly calculate the salt value `salt`, we must never have configured a permissioned
         // deploy protection or a cross-chain redeploy protection, and it must never revert.
         assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert, "100");
@@ -206,7 +192,7 @@ contract CreateX_DeployCreate3_1Arg_Public_Test is BaseTest {
         vm.etch(computedAddress, hex"01");
         vm.startPrank(originalDeployer);
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.FailedContractCreation.selector, createXAddr);
         vm.expectRevert(expectedErr);
         createX.deployCreate3{value: msgValue}(cachedInitCode);
         vm.stopPrank();
@@ -226,16 +212,14 @@ contract CreateX_DeployCreate3_1Arg_Public_Test is BaseTest {
         vm.startPrank(originalDeployer);
         bytes32 salt = createXHarness.exposed_generateSalt();
         vm.stopPrank();
-        (bool permissionedDeployProtection, bool xChainRedeployProtection, bool mustRevert, ) = parseFuzzerSalt(
-            originalDeployer,
-            salt
-        );
+        (bool permissionedDeployProtection, bool xChainRedeployProtection, bool mustRevert,) =
+            parseFuzzerSalt(originalDeployer, salt);
         // When we pseudo-randomly calculate the salt value `salt`, we must never have configured a permissioned
         // deploy protection or a cross-chain redeploy protection, and it must never revert.
         assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert, "100");
         vm.startPrank(originalDeployer);
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.FailedContractCreation.selector, createXAddr);
         vm.expectRevert(expectedErr);
         createX.deployCreate3{value: msgValue}(new bytes(0));
         vm.stopPrank();
@@ -245,30 +229,28 @@ contract CreateX_DeployCreate3_1Arg_Public_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheInitCodeFailsToDeployARuntimeBytecode(
-        address originalDeployer,
-        uint256 msgValue
-    ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
+    function testFuzz_WhenTheInitCodeFailsToDeployARuntimeBytecode(address originalDeployer, uint256 msgValue)
+        external
+        whenTheInitCodeFailsToDeployARuntimeBytecode
+    {
         msgValue = bound(msgValue, 0, type(uint64).max);
         vm.deal(originalDeployer, msgValue);
         vm.assume(originalDeployer != createXAddr && originalDeployer != zeroAddress);
         vm.startPrank(originalDeployer);
         bytes32 salt = createXHarness.exposed_generateSalt();
         vm.stopPrank();
-        (bool permissionedDeployProtection, bool xChainRedeployProtection, bool mustRevert, ) = parseFuzzerSalt(
-            originalDeployer,
-            salt
-        );
+        (bool permissionedDeployProtection, bool xChainRedeployProtection, bool mustRevert,) =
+            parseFuzzerSalt(originalDeployer, salt);
         // When we pseudo-randomly calculate the salt value `salt`, we must never have configured a permissioned
         // deploy protection or a cross-chain redeploy protection, and it must never revert.
         assertTrue(!permissionedDeployProtection && !xChainRedeployProtection && !mustRevert, "100");
         // The following contract creation code contains the invalid opcode `PUSH0` (`0x5F`) and `CREATE` must therefore
         // return the zero address (technically zero bytes `0x`), as the deployment fails. This test also ensures that if
         // we ever accidentally change the EVM version in Foundry and Hardhat, we will always have a corresponding failed test.
-        bytes memory invalidInitCode = hex"5f_80_60_09_3d_39_3d_f3";
+        bytes memory invalidInitCode = hex"5f8060093d393df3";
         vm.startPrank(originalDeployer);
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.FailedContractCreation.selector, createXAddr);
         vm.expectRevert(expectedErr);
         createX.deployCreate3{value: msgValue}(invalidInitCode);
         vm.stopPrank();

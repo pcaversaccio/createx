@@ -2,7 +2,7 @@
 pragma solidity 0.8.23;
 
 import {BaseTest} from "../utils/BaseTest.sol";
-import {CreateX} from "../../src/CreateX.sol";
+import {ICreateX, CreateX} from "../../src/CreateX.sol";
 
 contract CreateX_Guard_Internal_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -88,7 +88,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
     ) external whenTheFirst20BytesOfTheSaltEqualsTheCaller(caller, salt) whenThe21stByteOfTheSaltIsGreaterThan0x01 {
         vm.startPrank(caller);
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXHarnessAddr);
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.InvalidSalt.selector, createXHarnessAddr);
         vm.expectRevert(expectedErr);
         createXHarness.exposed_guard(cachedSalt);
         vm.stopPrank();
@@ -130,7 +130,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
     ) external whenTheFirst20BytesOfTheSaltEqualsTheZeroAddress(salt) whenThe21stByteOfTheSaltIsGreaterThan0x01 {
         vm.startPrank(caller);
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidSalt.selector, createXHarnessAddr);
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.InvalidSalt.selector, createXHarnessAddr);
         vm.expectRevert(expectedErr);
         createXHarness.exposed_guard(cachedSalt);
         vm.stopPrank();
@@ -142,10 +142,10 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(
-        address caller,
-        bytes32 salt
-    ) external whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(caller, salt) {
+    function testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(address caller, bytes32 salt)
+        external
+        whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(caller, salt)
+    {
         vm.startPrank(caller);
         // It should return the unmodified salt value.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);

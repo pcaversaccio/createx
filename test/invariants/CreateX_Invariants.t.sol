@@ -2,7 +2,7 @@
 pragma solidity 0.8.23;
 
 import {Test} from "forge-std/Test.sol";
-import {CreateX} from "../../src/CreateX.sol";
+import {ICreateX, CreateX} from "../../src/CreateX.sol";
 
 contract CreateX_Invariants is Test {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -57,18 +57,18 @@ contract CreateXHandler {
     function deployCreateAndInit(
         bytes memory initCode,
         bytes memory data,
-        CreateX.Values memory values,
+        ICreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
         newContract = createX.deployCreateAndInit(initCode, data, values, refundAddress);
         updatedBalance = 0;
     }
 
-    function deployCreateAndInit(
-        bytes memory initCode,
-        bytes memory data,
-        CreateX.Values memory values
-    ) public payable returns (address newContract) {
+    function deployCreateAndInit(bytes memory initCode, bytes memory data, ICreateX.Values memory values)
+        public
+        payable
+        returns (address newContract)
+    {
         newContract = createX.deployCreateAndInit(initCode, data, values);
         updatedBalance = 0;
     }
@@ -93,19 +93,18 @@ contract CreateXHandler {
         bytes32 salt,
         bytes memory initCode,
         bytes memory data,
-        CreateX.Values memory values,
+        ICreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
         newContract = createX.deployCreate2AndInit(salt, initCode, data, values, refundAddress);
         updatedBalance = 0;
     }
 
-    function deployCreate2AndInit(
-        bytes32 salt,
-        bytes memory initCode,
-        bytes memory data,
-        CreateX.Values memory values
-    ) public payable returns (address newContract) {
+    function deployCreate2AndInit(bytes32 salt, bytes memory initCode, bytes memory data, ICreateX.Values memory values)
+        public
+        payable
+        returns (address newContract)
+    {
         newContract = createX.deployCreate2AndInit(salt, initCode, data, values);
         updatedBalance = 0;
     }
@@ -113,27 +112,27 @@ contract CreateXHandler {
     function deployCreate2AndInit(
         bytes memory initCode,
         bytes memory data,
-        CreateX.Values memory values,
+        ICreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
         newContract = createX.deployCreate2AndInit(initCode, data, values, refundAddress);
         updatedBalance = 0;
     }
 
-    function deployCreate2AndInit(
-        bytes memory initCode,
-        bytes memory data,
-        CreateX.Values memory values
-    ) public payable returns (address newContract) {
+    function deployCreate2AndInit(bytes memory initCode, bytes memory data, ICreateX.Values memory values)
+        public
+        payable
+        returns (address newContract)
+    {
         newContract = createX.deployCreate2AndInit(initCode, data, values);
         updatedBalance = 0;
     }
 
-    function deployCreate2Clone(
-        bytes32 salt,
-        address implementation,
-        bytes memory data
-    ) public payable returns (address proxy) {
+    function deployCreate2Clone(bytes32 salt, address implementation, bytes memory data)
+        public
+        payable
+        returns (address proxy)
+    {
         proxy = createX.deployCreate2Clone(salt, implementation, data);
     }
 
@@ -157,19 +156,18 @@ contract CreateXHandler {
         bytes32 salt,
         bytes memory initCode,
         bytes memory data,
-        CreateX.Values memory values,
+        ICreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
         newContract = createX.deployCreate3AndInit(salt, initCode, data, values, refundAddress);
         updatedBalance = 0;
     }
 
-    function deployCreate3AndInit(
-        bytes32 salt,
-        bytes memory initCode,
-        bytes memory data,
-        CreateX.Values memory values
-    ) public payable returns (address newContract) {
+    function deployCreate3AndInit(bytes32 salt, bytes memory initCode, bytes memory data, ICreateX.Values memory values)
+        public
+        payable
+        returns (address newContract)
+    {
         newContract = createX.deployCreate3AndInit(salt, initCode, data, values);
         updatedBalance = 0;
     }
@@ -177,18 +175,18 @@ contract CreateXHandler {
     function deployCreate3AndInit(
         bytes memory initCode,
         bytes memory data,
-        CreateX.Values memory values,
+        ICreateX.Values memory values,
         address refundAddress
     ) public payable returns (address newContract) {
         newContract = createX.deployCreate3AndInit(initCode, data, values, refundAddress);
         updatedBalance = 0;
     }
 
-    function deployCreate3AndInit(
-        bytes memory initCode,
-        bytes memory data,
-        CreateX.Values memory values
-    ) public payable returns (address newContract) {
+    function deployCreate3AndInit(bytes memory initCode, bytes memory data, ICreateX.Values memory values)
+        public
+        payable
+        returns (address newContract)
+    {
         newContract = createX.deployCreate3AndInit(initCode, data, values);
         updatedBalance = 0;
     }

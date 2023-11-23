@@ -2,7 +2,7 @@
 pragma solidity 0.8.23;
 
 import {BaseTest} from "../../utils/BaseTest.sol";
-import {CreateX} from "../../../src/CreateX.sol";
+import {ICreateX, CreateX} from "../../../src/CreateX.sol";
 
 contract CreateX_ComputeCreateAddress_1Arg_Public_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -21,9 +21,10 @@ contract CreateX_ComputeCreateAddress_1Arg_Public_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheNonceValueDoesNotExceed18446744073709551614(
-        uint64 nonce
-    ) external whenTheNonceValueDoesNotExceed18446744073709551614(nonce) {
+    function testFuzz_WhenTheNonceValueDoesNotExceed18446744073709551614(uint64 nonce)
+        external
+        whenTheNonceValueDoesNotExceed18446744073709551614(nonce)
+    {
         vm.startPrank(createXAddr);
         address createAddressComputedOnChain = address(new CreateX());
         vm.stopPrank();
@@ -36,10 +37,11 @@ contract CreateX_ComputeCreateAddress_1Arg_Public_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheNonceValueExceeds18446744073709551614(
-        uint256 nonce
-    ) external whenTheNonceValueExceeds18446744073709551614(nonce) {
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.InvalidNonceValue.selector, createXAddr);
+    function testFuzz_WhenTheNonceValueExceeds18446744073709551614(uint256 nonce)
+        external
+        whenTheNonceValueExceeds18446744073709551614(nonce)
+    {
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.InvalidNonceValue.selector, createXAddr);
         vm.expectRevert(expectedErr);
         // It should revert.
         createX.computeCreateAddress(cachedNonce);

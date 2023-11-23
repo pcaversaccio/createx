@@ -2,7 +2,7 @@
 pragma solidity 0.8.23;
 
 import {BaseTest} from "../utils/BaseTest.sol";
-import {CreateX} from "../../src/CreateX.sol";
+import {ICreateX, CreateX} from "../../src/CreateX.sol";
 
 contract CreateX_RequireSuccessfulContractCreation_1Arg_Internal_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -15,7 +15,7 @@ contract CreateX_RequireSuccessfulContractCreation_1Arg_Internal_Test is BaseTes
 
     function test_WhenTheNewContractAddressIsTheZeroAddress() external whenTheNewContractAddressIsTheZeroAddress {
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXHarnessAddr);
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.FailedContractCreation.selector, createXHarnessAddr);
         vm.expectRevert(expectedErr);
         createXHarness.exposed_requireSuccessfulContractCreation(zeroAddress);
     }
@@ -35,15 +35,13 @@ contract CreateX_RequireSuccessfulContractCreation_1Arg_Internal_Test is BaseTes
         _;
     }
 
-    function testFuzz_WhenTheNewContractAddressHasNoCode(
-        address newContract
-    )
+    function testFuzz_WhenTheNewContractAddressHasNoCode(address newContract)
         external
         whenTheNewContractAddressIsNotTheZeroAddress(newContract)
         whenTheNewContractAddressHasNoCode(newContract)
     {
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXHarnessAddr);
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.FailedContractCreation.selector, createXHarnessAddr);
         vm.expectRevert(expectedErr);
         createXHarness.exposed_requireSuccessfulContractCreation(newContract);
     }
@@ -57,9 +55,11 @@ contract CreateX_RequireSuccessfulContractCreation_1Arg_Internal_Test is BaseTes
         _;
     }
 
-    function testFuzz_WhenTheNewContractAddressHasCode(
-        address newContract
-    ) external whenTheNewContractAddressIsNotTheZeroAddress(newContract) whenTheNewContractAddressHasCode(newContract) {
+    function testFuzz_WhenTheNewContractAddressHasCode(address newContract)
+        external
+        whenTheNewContractAddressIsNotTheZeroAddress(newContract)
+        whenTheNewContractAddressHasCode(newContract)
+    {
         // It should never revert. We do not need any assertions to test this.
         createXHarness.exposed_requireSuccessfulContractCreation(newContract);
     }

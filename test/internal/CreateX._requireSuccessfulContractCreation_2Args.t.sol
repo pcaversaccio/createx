@@ -2,7 +2,7 @@
 pragma solidity 0.8.23;
 
 import {BaseTest} from "../utils/BaseTest.sol";
-import {CreateX} from "../../src/CreateX.sol";
+import {ICreateX, CreateX} from "../../src/CreateX.sol";
 
 contract CreateX_RequireSuccessfulContractCreation_2Args_Internal_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -15,7 +15,7 @@ contract CreateX_RequireSuccessfulContractCreation_2Args_Internal_Test is BaseTe
 
     function testFuzz_WhenTheSuccessBooleanIsFalse(address newContract) external whenTheSuccessBooleanIsFalse {
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXHarnessAddr);
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.FailedContractCreation.selector, createXHarnessAddr);
         vm.expectRevert(expectedErr);
         createXHarness.exposed_requireSuccessfulContractCreation(false, newContract);
     }
@@ -34,7 +34,7 @@ contract CreateX_RequireSuccessfulContractCreation_2Args_Internal_Test is BaseTe
         whenTheNewContractAddressIsTheZeroAddress
     {
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXHarnessAddr);
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.FailedContractCreation.selector, createXHarnessAddr);
         vm.expectRevert(expectedErr);
         createXHarness.exposed_requireSuccessfulContractCreation(true, zeroAddress);
     }
@@ -55,17 +55,14 @@ contract CreateX_RequireSuccessfulContractCreation_2Args_Internal_Test is BaseTe
         _;
     }
 
-    function testFuzz_WhenTheNewContractAddressHasNoCode(
-        bool success,
-        address newContract
-    )
+    function testFuzz_WhenTheNewContractAddressHasNoCode(bool success, address newContract)
         external
         whenTheSuccessBooleanIsTrue
         whenTheNewContractAddressIsNotTheZeroAddress(newContract)
         whenTheNewContractAddressHasNoCode(newContract)
     {
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXHarnessAddr);
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.FailedContractCreation.selector, createXHarnessAddr);
         vm.expectRevert(expectedErr);
         createXHarness.exposed_requireSuccessfulContractCreation(success, newContract);
     }
@@ -80,9 +77,7 @@ contract CreateX_RequireSuccessfulContractCreation_2Args_Internal_Test is BaseTe
         _;
     }
 
-    function testFuzz_WhenTheNewContractAddressHasCode(
-        address newContract
-    )
+    function testFuzz_WhenTheNewContractAddressHasCode(address newContract)
         external
         whenTheSuccessBooleanIsTrue
         whenTheNewContractAddressIsNotTheZeroAddress(newContract)

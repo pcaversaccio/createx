@@ -12,9 +12,11 @@ contract CreateXHarness is CreateX {
         guardedSalt = _guard(salt);
     }
 
-    function exposed_parseSalt(
-        bytes32 salt
-    ) external view returns (SenderBytes senderBytes, RedeployProtectionFlag redeployProtectionFlag) {
+    function exposed_parseSalt(bytes32 salt)
+        external
+        view
+        returns (SenderBytes senderBytes, RedeployProtectionFlag redeployProtectionFlag)
+    {
         (senderBytes, redeployProtectionFlag) = _parseSalt(salt);
     }
 
@@ -117,21 +119,18 @@ contract BaseTest is Test {
      * @return mustRevert The Boolean variable that specifies whether it must revert.
      * @return guardedSalt The guarded 32-byte random value used to create the contract address.
      */
-    function parseFuzzerSalt(
-        address originalDeployer,
-        bytes32 salt
-    )
+    function parseFuzzerSalt(address originalDeployer, bytes32 salt)
         internal
         returns (bool permissionedDeployProtection, bool xChainRedeployProtection, bool mustRevert, bytes32 guardedSalt)
     {
         vm.startPrank(originalDeployer);
-        (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) = createXHarness
-            .exposed_parseSalt(salt);
+        (CreateX.SenderBytes senderBytes, CreateX.RedeployProtectionFlag redeployProtectionFlag) =
+            createXHarness.exposed_parseSalt(salt);
         vm.stopPrank();
 
         if (
-            senderBytes == CreateX.SenderBytes.MsgSender &&
-            redeployProtectionFlag == CreateX.RedeployProtectionFlag.True
+            senderBytes == CreateX.SenderBytes.MsgSender
+                && redeployProtectionFlag == CreateX.RedeployProtectionFlag.True
         ) {
             vm.startPrank(originalDeployer);
             // Configures a permissioned deploy protection as well as a cross-chain redeploy protection.
@@ -140,8 +139,8 @@ contract BaseTest is Test {
             permissionedDeployProtection = true;
             xChainRedeployProtection = true;
         } else if (
-            senderBytes == CreateX.SenderBytes.MsgSender &&
-            redeployProtectionFlag == CreateX.RedeployProtectionFlag.False
+            senderBytes == CreateX.SenderBytes.MsgSender
+                && redeployProtectionFlag == CreateX.RedeployProtectionFlag.False
         ) {
             vm.startPrank(originalDeployer);
             // Configures solely a permissioned deploy protection.
@@ -152,8 +151,8 @@ contract BaseTest is Test {
             // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
             mustRevert = true;
         } else if (
-            senderBytes == CreateX.SenderBytes.ZeroAddress &&
-            redeployProtectionFlag == CreateX.RedeployProtectionFlag.True
+            senderBytes == CreateX.SenderBytes.ZeroAddress
+                && redeployProtectionFlag == CreateX.RedeployProtectionFlag.True
         ) {
             vm.startPrank(originalDeployer);
             // Configures solely a cross-chain redeploy protection.
@@ -161,8 +160,8 @@ contract BaseTest is Test {
             vm.stopPrank();
             xChainRedeployProtection = true;
         } else if (
-            senderBytes == CreateX.SenderBytes.ZeroAddress &&
-            redeployProtectionFlag == CreateX.RedeployProtectionFlag.Unspecified
+            senderBytes == CreateX.SenderBytes.ZeroAddress
+                && redeployProtectionFlag == CreateX.RedeployProtectionFlag.Unspecified
         ) {
             // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
             mustRevert = true;

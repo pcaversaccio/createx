@@ -4,7 +4,7 @@ pragma solidity 0.8.23;
 import {BaseTest} from "../../utils/BaseTest.sol";
 import {IERC20} from "openzeppelin/token/ERC20/IERC20.sol";
 import {ERC20MockPayable} from "../../mocks/ERC20MockPayable.sol";
-import {CreateX} from "../../../src/CreateX.sol";
+import {ICreateX, CreateX} from "../../../src/CreateX.sol";
 
 contract CreateX_DeployCreate_Public_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -44,7 +44,7 @@ contract CreateX_DeployCreate_Public_Test is BaseTest {
         // It returns a contract address with a non-zero bytecode length and a potential non-zero ether balance.
         // It emits the event `ContractCreation` with the contract address as indexed argument.
         vm.expectEmit(true, true, true, true, createXAddr);
-        emit CreateX.ContractCreation(computedAddress);
+        emit ICreateX.ContractCreation(computedAddress);
         address newContract = createX.deployCreate{value: msgValue}(cachedInitCode);
 
         assertEq(newContract, computedAddress, "100");
@@ -61,15 +61,15 @@ contract CreateX_DeployCreate_Public_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength(
-        uint64 nonce,
-        uint256 msgValue
-    ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength {
+    function testFuzz_WhenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength(uint64 nonce, uint256 msgValue)
+        external
+        whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength
+    {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
         msgValue = bound(msgValue, 0, type(uint64).max);
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.FailedContractCreation.selector, createXAddr);
         vm.expectRevert(expectedErr);
         createX.deployCreate{value: msgValue}(new bytes(0));
     }
@@ -78,19 +78,19 @@ contract CreateX_DeployCreate_Public_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheInitCodeFailsToDeployARuntimeBytecode(
-        uint64 nonce,
-        uint256 msgValue
-    ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
+    function testFuzz_WhenTheInitCodeFailsToDeployARuntimeBytecode(uint64 nonce, uint256 msgValue)
+        external
+        whenTheInitCodeFailsToDeployARuntimeBytecode
+    {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
         vm.setNonce(createXAddr, nonce);
         msgValue = bound(msgValue, 0, type(uint64).max);
         // The following contract creation code contains the invalid opcode `PUSH0` (`0x5F`) and `CREATE` must therefore
         // return the zero address (technically zero bytes `0x`), as the deployment fails. This test also ensures that if
         // we ever accidentally change the EVM version in Foundry and Hardhat, we will always have a corresponding failed test.
-        bytes memory invalidInitCode = hex"5f_80_60_09_3d_39_3d_f3";
+        bytes memory invalidInitCode = hex"5f8060093d393df3";
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
+        bytes memory expectedErr = abi.encodeWithSelector(ICreateX.FailedContractCreation.selector, createXAddr);
         vm.expectRevert(expectedErr);
         createX.deployCreate{value: msgValue}(invalidInitCode);
     }

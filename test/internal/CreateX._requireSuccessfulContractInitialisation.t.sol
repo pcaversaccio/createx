@@ -2,7 +2,7 @@
 pragma solidity 0.8.23;
 
 import {BaseTest} from "../utils/BaseTest.sol";
-import {CreateX} from "../../src/CreateX.sol";
+import {ICreateX, CreateX} from "../../src/CreateX.sol";
 
 contract CreateX_RequireSuccessfulContractInitialisation_Internal_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
@@ -13,16 +13,13 @@ contract CreateX_RequireSuccessfulContractInitialisation_Internal_Test is BaseTe
         _;
     }
 
-    function testFuzz_WhenTheSuccessBooleanIsFalse(
-        bytes memory returnData,
-        address implementation
-    ) external whenTheSuccessBooleanIsFalse {
+    function testFuzz_WhenTheSuccessBooleanIsFalse(bytes memory returnData, address implementation)
+        external
+        whenTheSuccessBooleanIsFalse
+    {
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(
-            CreateX.FailedContractInitialisation.selector,
-            createXHarnessAddr,
-            returnData
-        );
+        bytes memory expectedErr =
+            abi.encodeWithSelector(ICreateX.FailedContractInitialisation.selector, createXHarnessAddr, returnData);
         vm.expectRevert(expectedErr);
         createXHarness.exposed_requireSuccessfulContractInitialisation(false, returnData, implementation);
     }
@@ -42,16 +39,14 @@ contract CreateX_RequireSuccessfulContractInitialisation_Internal_Test is BaseTe
         _;
     }
 
-    function testFuzz_WhenTheImplementationAddressHasNoCode(
-        bytes memory returnData,
-        address implementation
-    ) external whenTheSuccessBooleanIsTrue whenTheImplementationAddressHasNoCode(implementation) {
+    function testFuzz_WhenTheImplementationAddressHasNoCode(bytes memory returnData, address implementation)
+        external
+        whenTheSuccessBooleanIsTrue
+        whenTheImplementationAddressHasNoCode(implementation)
+    {
         // It should revert.
-        bytes memory expectedErr = abi.encodeWithSelector(
-            CreateX.FailedContractInitialisation.selector,
-            createXHarnessAddr,
-            returnData
-        );
+        bytes memory expectedErr =
+            abi.encodeWithSelector(ICreateX.FailedContractInitialisation.selector, createXHarnessAddr, returnData);
         vm.expectRevert(expectedErr);
         createXHarness.exposed_requireSuccessfulContractInitialisation(true, returnData, implementation);
     }
@@ -66,10 +61,11 @@ contract CreateX_RequireSuccessfulContractInitialisation_Internal_Test is BaseTe
         _;
     }
 
-    function testFuzz_WhenTheImplementationAddressHasCode(
-        bytes memory returnData,
-        address implementation
-    ) external whenTheSuccessBooleanIsTrue whenTheImplementationAddressHasCode(implementation) {
+    function testFuzz_WhenTheImplementationAddressHasCode(bytes memory returnData, address implementation)
+        external
+        whenTheSuccessBooleanIsTrue
+        whenTheImplementationAddressHasCode(implementation)
+    {
         // It should never revert.
         createXHarness.exposed_requireSuccessfulContractInitialisation(true, returnData, implementation);
     }
