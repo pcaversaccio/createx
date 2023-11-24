@@ -161,7 +161,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         uint64 chainId
     ) {
         increment = bound(increment, 1, type(uint128).max);
-        vm.assume(coinbase != zeroAddress && chainId != block.chainid && chainId != 0 && caller != createXHarnessAddr);
+        vm.assume(coinbase != zeroAddress && chainId != block.chainid && chainId != 0);
         vm.roll(block.number + increment);
         vm.coinbase(coinbase);
         vm.warp(block.timestamp + increment);
@@ -192,7 +192,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
     {
         vm.startPrank(caller);
         // It should return the unmodified salt value.
-        bytes32 guardedSalt = createXHarness.exposed_guard(createXHarness.exposed_generateSalt());
+        bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
         vm.stopPrank();
         assertEq(guardedSalt, cachedSalt, "100");
     }
