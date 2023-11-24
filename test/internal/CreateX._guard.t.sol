@@ -153,7 +153,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         assertEq(guardedSalt, keccak256(abi.encode(cachedSalt)), "100");
     }
 
-    modifier whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenTheSaltIsGeneratedPseudorandomly(
+    modifier whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenTheSaltValueIsGeneratedPseudorandomly(
         address caller,
         uint256 increment,
         address coinbase,
@@ -174,7 +174,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         _;
     }
 
-    function testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenTheSaltIsGeneratedPseudorandomly(
+    function testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenTheSaltValueIsGeneratedPseudorandomly(
         address caller,
         uint256 increment,
         address coinbase,
@@ -182,7 +182,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         uint64 chainId
     )
         external
-        whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenTheSaltIsGeneratedPseudorandomly(
+        whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenTheSaltValueIsGeneratedPseudorandomly(
             caller,
             increment,
             coinbase,

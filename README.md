@@ -863,7 +863,7 @@ CreateX_Guard_Internal_Test
 │       └── It should revert.
 └── When the first 20 bytes of the salt do not equal the caller or the zero address
     ├── It should return the keccak256 hash of the ABI-encoded value salt.
-    └── When the salt is generated pseudo-randomly
+    └── When the salt value is generated pseudo-randomly
         └── It should return the unmodified salt value.
 ```
 
