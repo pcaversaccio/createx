@@ -709,7 +709,7 @@ The `salt` value implements different safeguarding mechanisms depending on the e
 - The 21st byte (i.e. `ff`) may be used to implement a cross-chain redeploy protection by setting it equal to `0x01`,
 - The last random 11 bytes (i.e. `1212121212121212121212`) allow for $2^{88}$ bits of entropy for mining a salt.
 
-The full logic is implemented in the `internal` [`_guard`](./src/CreateX.sol#L879-L917) function:
+The full logic is implemented in the `internal` [`_guard`](./src/CreateX.sol#L879-L918) function:
 
 ```solidity
 function _guard(bytes32 salt) internal view returns (bytes32 guardedSalt) {
@@ -750,8 +750,11 @@ function _guard(bytes32 salt) internal view returns (bytes32 guardedSalt) {
     // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
     revert InvalidSalt({ emitter: _SELF });
   } else {
-    // In all other cases, the salt value `salt` is not modified.
-    guardedSalt = salt;
+    // For the non-pseudo-random cases, the salt value `salt` is hashed to prevent the safeguard mechanisms
+    // from being bypassed. Otherwise, the salt value `salt` is not modified.
+    guardedSalt = (salt != _generateSalt())
+      ? keccak256(abi.encode(salt))
+      : salt;
   }
 }
 ```
@@ -764,7 +767,7 @@ Furthermore, you can configure _only_ cross-chain redeploy protection by setting
 
 For developer convenience, the [`CreateX`](./src/CreateX.sol) contract offers several overloaded functions that generate the salt value pseudo-randomly using a diverse selection of block and transaction properties. Please note that this approach does not guarantee true randomness!
 
-The full logic is implemented in the `internal` [`_generateSalt`](./src/CreateX.sol#L965-L993) function:
+The full logic is implemented in the `internal` [`_generateSalt`](./src/CreateX.sol#L966-L994) function:
 
 ```solidity
 function _generateSalt() internal view returns (bytes32 salt) {
@@ -855,11 +858,13 @@ CreateX_Guard_Internal_Test
 │   ├── When the 21st byte of the salt equals 0x01
 │   │   └── It should return the keccak256 hash of the ABI-encoded values block.chainid and the salt.
 │   ├── When the 21st byte of the salt equals 0x00
-│   │   └── It should return the unmodified salt value.
+│   │   └── It should return the keccak256 hash of the ABI-encoded value salt.
 │   └── When the 21st byte of the salt is greater than 0x01
 │       └── It should revert.
 └── When the first 20 bytes of the salt do not equal the caller or the zero address
-    └── It should return the unmodified salt value.
+    ├── It should return the keccak256 hash of the ABI-encoded value salt.
+    └── When the salt is generated pseudo-randomly
+        └── It should return the unmodified salt value.
 ```
 
 ### Test Coverage

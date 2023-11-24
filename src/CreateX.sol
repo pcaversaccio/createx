@@ -911,8 +911,9 @@ contract CreateX {
             // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
             revert InvalidSalt({emitter: _SELF});
         } else {
-            // In all other cases, the salt value `salt` is not modified.
-            guardedSalt = salt;
+            // For the non-pseudo-random cases, the salt value `salt` is hashed to prevent the safeguard mechanisms
+            // from being bypassed. Otherwise, the salt value `salt` is not modified.
+            guardedSalt = (salt != _generateSalt()) ? keccak256(abi.encode(salt)) : salt;
         }
     }
 
