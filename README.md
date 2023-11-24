@@ -814,7 +814,7 @@ The following consequences result from these principles:
 
 <!-- prettier-ignore-start -->
 > **Warning**<br>
-> **This contract is unaudited!**
+> **This contract is unaudited!** Special thanks go to [Oleksii Matiiasevych](https://github.com/lastperson) for his thorough review and feedback 🙏🏽.
 <!-- prettier-ignore-end -->
 
 Generally, for security issues, see our [Security Policy](./SECURITY.md). Furthermore, you must be aware of the following aspects:
