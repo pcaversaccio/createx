@@ -156,6 +156,7 @@ jobs:
         run: lcov --remove lcov.info 'test/*' --output-file lcov.info --rc lcov_branch_coverage=1
 
       - name: Post coverage report
+        # See https://github.com/orgs/community/discussions/26829#discussioncomment-3253575.
         if: ${{ (github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request') }}
         uses: romeovs/lcov-reporter-action@v0.3.1
         with:
