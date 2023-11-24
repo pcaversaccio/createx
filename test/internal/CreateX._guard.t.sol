@@ -118,7 +118,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
     ) external whenTheFirst20BytesOfTheSaltEqualsTheZeroAddress(salt) whenThe21stByteOfTheSaltEquals0x00 {
         vm.assume(caller != zeroAddress);
         vm.startPrank(caller);
-        // It should return the `keccak256` hash of the ABI-encoded value salt.
+        // It should return the `keccak256` hash of the ABI-encoded value `salt`.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
         vm.stopPrank();
         assertEq(guardedSalt, keccak256(abi.encode(cachedSalt)), "100");
@@ -147,7 +147,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         bytes32 salt
     ) external whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(caller, salt) {
         vm.startPrank(caller);
-        // It should return the `keccak256` hash of the ABI-encoded value salt.
+        // It should return the `keccak256` hash of the ABI-encoded value `salt`.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
         vm.stopPrank();
         assertEq(guardedSalt, keccak256(abi.encode(cachedSalt)), "100");
