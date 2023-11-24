@@ -8,8 +8,8 @@
 
 Factory smart contract to make easier and safer usage of the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) and [`CREATE2`](https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171)-based (i.e. without an initcode factor) contract creations.
 
-> **Note**<br>
-> The [`CreateX`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol) contract should be considered as maximally extensible. Be encouraged to build on top of it! The Solidity-based interface can be found [here](https://github.com/pcaversaccio/createx/blob/main/src/ICreateX.sol).
+> [!NOTE]
+> The [`CreateX`](./src/CreateX.sol) contract should be considered as maximally extensible. Be encouraged to build on top of it! The Solidity-based interface can be found [here](./src/ICreateX.sol).
 
 - [`CreateX` – A Trustless, Universal Contract Deployer](#createx--a-trustless-universal-contract-deployer)
   - [So What on Earth Is a Contract Factory?](#so-what-on-earth-is-a-contract-factory)
@@ -157,7 +157,7 @@ Deploys and initialises a new contract via calling the [`CREATE`](https://www.ev
   description: The 20-byte address where the contract was deployed.
 ```
 
-> **Note**<br>
+> ℹ️ **Note**<br>
 > This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
 
 </details>
@@ -188,7 +188,7 @@ Deploys and initialises a new contract via calling the [`CREATE`](https://www.ev
   description: The 20-byte address where the contract was deployed.
 ```
 
-> **Note**<br>
+> ℹ️ **Note**<br>
 > This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
 
 </details>
@@ -213,7 +213,7 @@ Deploys a new [EIP-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy 
   description: The 20-byte address where the clone was deployed.
 ```
 
-> **Note**<br>
+> ℹ️ **Note**<br>
 > This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
 
 </details>
@@ -329,7 +329,7 @@ Deploys and initialises a new contract via calling the [`CREATE2`](https://www.e
   description: The 20-byte address where the contract was deployed.
 ```
 
-> **Note**<br>
+> ℹ️ **Note**<br>
 > This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
 
 </details>
@@ -360,7 +360,7 @@ Deploys and initialises a new contract via calling the [`CREATE2`](https://www.e
   description: The 20-byte address where the contract was deployed.
 ```
 
-> **Note**<br>
+> ℹ️ **Note**<br>
 > This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
 
 </details>
@@ -391,7 +391,7 @@ Deploys and initialises a new contract via calling the [`CREATE2`](https://www.e
   description: The 20-byte address where the contract was deployed.
 ```
 
-> **Note**<br>
+> ℹ️ **Note**<br>
 > This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
 
 </details>
@@ -425,7 +425,7 @@ Deploys and initialises a new contract via calling the [`CREATE2`](https://www.e
   description: The 20-byte address where the contract was deployed.
 ```
 
-> **Note**<br>
+> ℹ️ **Note**<br>
 > This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
 
 </details>
@@ -450,7 +450,7 @@ Deploys a new [EIP-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy 
   description: The 20-byte address where the clone was deployed.
 ```
 
-> **Note**<br>
+> ℹ️ **Note**<br>
 > This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
 
 </details>
@@ -478,7 +478,7 @@ Deploys a new [EIP-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal proxy 
   description: The 20-byte address where the clone was deployed.
 ```
 
-> **Note**<br>
+> ℹ️ **Note**<br>
 > This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
 
 </details>
@@ -563,7 +563,7 @@ Deploys a new contract via employing the [`CREATE3`](https://github.com/ethereum
   description: The 20-byte address where the contract was deployed.
 ```
 
-> **Note**<br>
+> ℹ️ **Note**<br>
 > We strongly recommend implementing a permissioned deploy protection by setting the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun proxy deployments on other chains.
 
 </details>
@@ -591,7 +591,7 @@ Deploys and initialises a new contract via employing the [`CREATE3`](https://git
   description: The 20-byte address where the contract was deployed.
 ```
 
-> **Note**<br>
+> ℹ️ **Note**<br>
 > This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
 
 </details>
@@ -622,7 +622,7 @@ Deploys and initialises a new contract via employing the [`CREATE3`](https://git
   description: The 20-byte address where the contract was deployed.
 ```
 
-> **Note**<br>
+> ℹ️ **Note**<br>
 > This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system. Furthermore, we strongly recommend implementing a permissioned deploy protection by setting the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun proxy deployments on other chains.
 
 </details>
@@ -653,7 +653,7 @@ Deploys and initialises a new contract via employing the [`CREATE3`](https://git
   description: The 20-byte address where the contract was deployed.
 ```
 
-> **Note**<br>
+> ℹ️ **Note**<br>
 > This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
 
 </details>
@@ -687,7 +687,7 @@ Deploys and initialises a new contract via employing the [`CREATE3`](https://git
   description: The 20-byte address where the contract was deployed.
 ```
 
-> **Note**<br>
+> ℹ️ **Note**<br>
 > This function allows for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system. Furthermore, we strongly recommend implementing a permissioned deploy protection by setting the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun proxy deployments on other chains.
 
 </details>
@@ -813,7 +813,7 @@ The following consequences result from these principles:
 ## Security Considerations
 
 <!-- prettier-ignore-start -->
-> **Warning**<br>
+> [!WARNING]
 > **This contract is unaudited!** Special thanks go to [Oleksii Matiiasevych](https://github.com/lastperson) for his thorough review and feedback 🙏🏽.
 <!-- prettier-ignore-end -->
 
@@ -878,13 +878,13 @@ The written tests available in the directory [`test`](./test) achieve a test cov
 | src/CreateX.sol | 100.00% (149/149) | 100.00% (210/210) | 100.00% (78/78) | 100.00% (31/31) |
 ```
 
-> **Note**<br>
+> [!IMPORTANT]
 > A test coverage of 100% does not mean that there are no vulnerabilities. What really counts is the quality and spectrum of the tests themselves!
 
 ## ABI (Application Binary Interface)
 
-> **Note**<br>
-> If you `forge install` this repository, the Solidity-based interface can also be found [here](https://github.com/pcaversaccio/createx/blob/main/src/ICreateX.sol).
+> [!TIP]
+> If you `forge install` this repository, the Solidity-based interface can also be found [here](./src/ICreateX.sol).
 
 <details>
 <summary> <a href="https://docs.soliditylang.org/en/latest/">Solidity</a> </summary>
@@ -2069,7 +2069,7 @@ interface ICreateX {
 
 ## New Deployment(s)
 
-> **Warning**<br>
+> [!CAUTION]
 > The address `0x0000000000000000000000000000000000000000` is a simple placeholder for now. Do not send any funds there!
 
 We offer two options for deploying [`CreateX`](./src/CreateX.sol) to your desired chain:
@@ -2087,7 +2087,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 
 ## [`CreateX`](./src/CreateX.sol) Deployments
 
-> **Warning**<br>
+> [!CAUTION]
 > The address `0x0000000000000000000000000000000000000000` is a simple placeholder for now. Do not send any funds there!
 
 - EVM-Based Production Networks:
