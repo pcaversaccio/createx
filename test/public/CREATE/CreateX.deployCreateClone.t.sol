@@ -34,7 +34,7 @@ contract CreateX_DeployCreateClone_Public_Test is BaseTest {
         whenTheEIP1167MinimalProxyInitialisationCallIsSuccessful
     {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
-        vm.setNonce(createXAddr, nonce);
+        vm.setNonceUnsafe(createXAddr, nonce);
         msgValue = bound(msgValue, 0, type(uint64).max);
         // We calculate the address beforehand where the contract is to be deployed.
         address computedAddress = createX.computeCreateAddress(createXAddr, nonce);
@@ -77,7 +77,7 @@ contract CreateX_DeployCreateClone_Public_Test is BaseTest {
         whenTheEIP1167MinimalProxyInitialisationCallIsUnsuccessful
     {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
-        vm.setNonce(createXAddr, nonce);
+        vm.setNonceUnsafe(createXAddr, nonce);
         msgValue = bound(msgValue, 0, type(uint64).max);
         // It should revert.
         bytes memory expectedErr = abi.encodeWithSelector(
@@ -101,7 +101,7 @@ contract CreateX_DeployCreateClone_Public_Test is BaseTest {
         uint256 msgValue
     ) external whenTheEIP1167MinimalProxyContractCreationFails {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
-        vm.setNonce(createXAddr, nonce);
+        vm.setNonceUnsafe(createXAddr, nonce);
         msgValue = bound(msgValue, 0, type(uint64).max);
         // We calculate the address beforehand where the contract is to be deployed.
         address computedAddress = createX.computeCreateAddress(createXAddr, nonce);
