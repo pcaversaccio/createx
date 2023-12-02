@@ -33,7 +33,7 @@ contract CreateX_DeployCreate_Public_Test is BaseTest {
         uint256 msgValue
     ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithANonZeroLength {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
-        vm.setNonce(createXAddr, nonce);
+        vm.setNonceUnsafe(createXAddr, nonce);
         msgValue = bound(msgValue, 0, type(uint64).max);
         // We calculate the address beforehand where the contract is to be deployed.
         address computedAddress = createX.computeCreateAddress(createXAddr, nonce);
@@ -66,7 +66,7 @@ contract CreateX_DeployCreate_Public_Test is BaseTest {
         uint256 msgValue
     ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
-        vm.setNonce(createXAddr, nonce);
+        vm.setNonceUnsafe(createXAddr, nonce);
         msgValue = bound(msgValue, 0, type(uint64).max);
         // It should revert.
         bytes memory expectedErr = abi.encodeWithSelector(CreateX.FailedContractCreation.selector, createXAddr);
@@ -83,7 +83,7 @@ contract CreateX_DeployCreate_Public_Test is BaseTest {
         uint256 msgValue
     ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
-        vm.setNonce(createXAddr, nonce);
+        vm.setNonceUnsafe(createXAddr, nonce);
         msgValue = bound(msgValue, 0, type(uint64).max);
         // The following contract creation code contains the invalid opcode `PUSH0` (`0x5F`) and `CREATE` must therefore
         // return the zero address (technically zero bytes `0x`), as the deployment fails. This test also ensures that if

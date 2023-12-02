@@ -167,8 +167,11 @@ contract BaseTest is Test {
             // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
             mustRevert = true;
         } else {
-            // In all other cases, the salt value `salt` is not modified.
-            guardedSalt = salt;
+            vm.startPrank(originalDeployer);
+            // For the non-pseudo-random cases, the salt value `salt` is hashed to prevent the safeguard mechanisms
+            // from being bypassed. Otherwise, the salt value `salt` is not modified.
+            guardedSalt = (salt != createXHarness.exposed_generateSalt()) ? keccak256(abi.encode(salt)) : salt;
+            vm.stopPrank();
         }
     }
 }

@@ -41,7 +41,7 @@ contract CreateX_DeployCreateAndInit_4Args_Public_Test is BaseTest {
         whenTheInitialisationCallIsSuccessful
     {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
-        vm.setNonce(createXAddr, nonce);
+        vm.setNonceUnsafe(createXAddr, nonce);
         values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
         values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         // We calculate the address beforehand where the contract is to be deployed.
@@ -93,7 +93,7 @@ contract CreateX_DeployCreateAndInit_4Args_Public_Test is BaseTest {
         whenTheRefundTransactionIsSuccessful
     {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
-        vm.setNonce(createXAddr, nonce);
+        vm.setNonceUnsafe(createXAddr, nonce);
         values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
         values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         // We calculate the address beforehand where the contract is to be deployed.
@@ -141,7 +141,7 @@ contract CreateX_DeployCreateAndInit_4Args_Public_Test is BaseTest {
         whenTheRefundTransactionIsUnsuccessful
     {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
-        vm.setNonce(createXAddr, nonce);
+        vm.setNonceUnsafe(createXAddr, nonce);
         values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
         values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         // It should revert.
@@ -172,7 +172,7 @@ contract CreateX_DeployCreateAndInit_4Args_Public_Test is BaseTest {
         whenTheInitialisationCallIsUnsuccessful
     {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
-        vm.setNonce(createXAddr, nonce);
+        vm.setNonceUnsafe(createXAddr, nonce);
         values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
         values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         // It should revert.
@@ -199,7 +199,7 @@ contract CreateX_DeployCreateAndInit_4Args_Public_Test is BaseTest {
         CreateX.Values memory values
     ) external whenTheInitCodeSuccessfullyCreatesARuntimeBytecodeWithAZeroLength {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
-        vm.setNonce(createXAddr, nonce);
+        vm.setNonceUnsafe(createXAddr, nonce);
         values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
         values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         // It should revert.
@@ -222,7 +222,7 @@ contract CreateX_DeployCreateAndInit_4Args_Public_Test is BaseTest {
         CreateX.Values memory values
     ) external whenTheInitCodeFailsToDeployARuntimeBytecode {
         vm.assume(nonce != 0 && nonce < type(uint64).max);
-        vm.setNonce(createXAddr, nonce);
+        vm.setNonceUnsafe(createXAddr, nonce);
         values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
         values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
         // The following contract creation code contains the invalid opcode `PUSH0` (`0x5F`) and `CREATE` must therefore

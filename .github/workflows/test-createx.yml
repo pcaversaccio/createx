@@ -149,16 +149,15 @@ jobs:
           FOUNDRY_PROFILE: default
 
       - name: Setup LCOV
-        if: github.event_name == 'pull_request'
         uses: hrishikesh-kadam/setup-lcov@v1
 
       # See https://github.com/ScopeLift/foundry-template/blob/fd3875d2e99a65dec19431723d6516b4ed76746e/.github/workflows/ci.yml#L49-L78.
       - name: Remove unnecessary `test` directory
-        if: github.event_name == 'pull_request'
         run: lcov --remove lcov.info 'test/*' --output-file lcov.info --rc lcov_branch_coverage=1
 
       - name: Post coverage report
-        if: github.event_name == 'pull_request'
+        # See https://github.com/orgs/community/discussions/26829#discussioncomment-3253575.
+        if: ${{ (github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request') }}
         uses: romeovs/lcov-reporter-action@v0.3.1
         with:
           delete-old-comments: true
@@ -166,8 +165,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Verify minimum coverage
-        if: github.event_name == 'pull_request'
-        uses: zgosalvez/github-actions-report-lcov@v2
+        uses: zgosalvez/github-actions-report-lcov@v4
         with:
           coverage-files: ./lcov.info
           minimum-coverage: 100

@@ -10,8 +10,10 @@ CreateX_Guard_Internal_Test
 │   ├── When the 21st byte of the salt equals 0x01
 │   │   └── It should return the keccak256 hash of the ABI-encoded values block.chainid and the salt.
 │   ├── When the 21st byte of the salt equals 0x00
-│   │   └── It should return the unmodified salt value.
+│   │   └── It should return the keccak256 hash of the ABI-encoded value salt.
 │   └── When the 21st byte of the salt is greater than 0x01
 │       └── It should revert.
 └── When the first 20 bytes of the salt do not equal the caller or the zero address
-    └── It should return the unmodified salt value.
+    ├── It should return the keccak256 hash of the ABI-encoded value salt.
+    └── When the salt value is generated pseudo-randomly
+        └── It should return the unmodified salt value.

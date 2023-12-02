@@ -118,10 +118,10 @@ contract CreateX_Guard_Internal_Test is BaseTest {
     ) external whenTheFirst20BytesOfTheSaltEqualsTheZeroAddress(salt) whenThe21stByteOfTheSaltEquals0x00 {
         vm.assume(caller != zeroAddress);
         vm.startPrank(caller);
-        // It should return the unmodified salt value.
+        // It should return the `keccak256` hash of the ABI-encoded value `salt`.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
         vm.stopPrank();
-        assertEq(guardedSalt, cachedSalt, "100");
+        assertEq(guardedSalt, keccak256(abi.encode(cachedSalt)), "100");
     }
 
     function testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(
@@ -146,6 +146,50 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         address caller,
         bytes32 salt
     ) external whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddress(caller, salt) {
+        vm.startPrank(caller);
+        // It should return the `keccak256` hash of the ABI-encoded value `salt`.
+        bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);
+        vm.stopPrank();
+        assertEq(guardedSalt, keccak256(abi.encode(cachedSalt)), "100");
+    }
+
+    modifier whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenTheSaltValueIsGeneratedPseudorandomly(
+        address caller,
+        uint256 increment,
+        address coinbase,
+        string calldata prevrandao,
+        uint64 chainId
+    ) {
+        increment = bound(increment, 1, type(uint128).max);
+        vm.assume(coinbase != zeroAddress && chainId != block.chainid && chainId != 0);
+        vm.roll(block.number + increment);
+        vm.coinbase(coinbase);
+        vm.warp(block.timestamp + increment);
+        vm.prevrandao(keccak256(abi.encode(prevrandao)));
+        vm.chainId(chainId);
+
+        vm.startPrank(caller);
+        cachedSalt = createXHarness.exposed_generateSalt();
+        vm.stopPrank();
+        _;
+    }
+
+    function testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenTheSaltValueIsGeneratedPseudorandomly(
+        address caller,
+        uint256 increment,
+        address coinbase,
+        string calldata prevrandao,
+        uint64 chainId
+    )
+        external
+        whenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenTheSaltValueIsGeneratedPseudorandomly(
+            caller,
+            increment,
+            coinbase,
+            prevrandao,
+            chainId
+        )
+    {
         vm.startPrank(caller);
         // It should return the unmodified salt value.
         bytes32 guardedSalt = createXHarness.exposed_guard(cachedSalt);

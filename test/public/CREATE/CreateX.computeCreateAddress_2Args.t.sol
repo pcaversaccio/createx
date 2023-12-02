@@ -20,7 +20,7 @@ contract CreateX_ComputeCreateAddress_2Args_Public_Test is BaseTest {
         if (deployer.code.length != 0) {
             vm.assume(nonce != 0);
         }
-        vm.setNonce(deployer, nonce);
+        vm.setNonceUnsafe(deployer, nonce);
         _;
     }
 
