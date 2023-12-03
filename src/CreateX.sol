@@ -655,8 +655,6 @@ contract CreateX {
      * https://web.archive.org/web/20230921113832/https://raw.githubusercontent.com/transmissions11/solmate/e8f96f25d48fe702117ce76c79228ca4f20206cb/src/utils/CREATE3.sol.
      * @param initCode The creation bytecode.
      * @return newContract The 20-byte address where the contract was deployed.
-     * @custom:security This function does not implement any permissioned deploy protection, thus
-     * anyone can frontrun the same proxy deployment on other chains. Use with caution!
      */
     function deployCreate3(bytes memory initCode) public payable returns (address newContract) {
         // Note that the safeguarding function `_guard` is called as part of the overloaded function
@@ -778,8 +776,6 @@ contract CreateX {
      * @custom:security This function allows for reentrancy, however we refrain from adding
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
      * level that potentially malicious reentrant calls do not affect your smart contract system.
-     * Furthermore, this function does not implement any permissioned deploy protection, thus
-     * anyone can frontrun the same proxy deployment on other chains. Use with caution!
      */
     function deployCreate3AndInit(
         bytes memory initCode,
@@ -814,8 +810,6 @@ contract CreateX {
      * @custom:security This function allows for reentrancy, however we refrain from adding
      * a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol
      * level that potentially malicious reentrant calls do not affect your smart contract system.
-     * Furthermore, this function does not implement any permissioned deploy protection, thus
-     * anyone can frontrun the same proxy deployment on other chains. Use with caution!
      */
     function deployCreate3AndInit(
         bytes memory initCode,
@@ -911,8 +905,9 @@ contract CreateX {
             // Reverts if the 21st byte is greater than `0x01` in order to enforce developer explicitness.
             revert InvalidSalt({emitter: _SELF});
         } else {
-            // In all other cases, the salt value `salt` is not modified.
-            guardedSalt = salt;
+            // For the non-pseudo-random cases, the salt value `salt` is hashed to prevent the safeguard mechanisms
+            // from being bypassed. Otherwise, the salt value `salt` is not modified.
+            guardedSalt = (salt != _generateSalt()) ? keccak256(abi.encode(salt)) : salt;
         }
     }
 
