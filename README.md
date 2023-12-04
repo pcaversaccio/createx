@@ -8,9 +8,6 @@
 
 Factory smart contract to make easier and safer usage of the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) and [`CREATE2`](https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171)-based (i.e. without an initcode factor) contract creations.
 
-> [!IMPORTANT]
-> All the work has been done jointly by myself and [Matt Solomon](https://github.com/mds1) as a public good for our ecosystem. Public good software is not just code; it's the embodiment of collective progress, a testament to collaboration's power, and a canvas where innovation meets the needs of the many. I hope we can live up to these principles! 🫡
-
 > [!NOTE]
 > The [`CreateX`](./src/CreateX.sol) contract should be considered as maximally extensible. Be encouraged to build on top of it! The Solidity-based interface can be found [here](./src/ICreateX.sol).
 
@@ -28,6 +25,7 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
   - [New Deployment(s)](#new-deployments)
     - [Contract Verification](#contract-verification)
   - [`CreateX` Deployments](#createx-deployments)
+  - [🙏 Acknowledgement](#-acknowledgement)
 
 ## So What on Earth Is a Contract Factory?
 
@@ -2101,3 +2099,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
   - Goerli: [`0x0000000000000000000000000000000000000000`](https://goerli.etherscan.io/address/0x0000000000000000000000000000000000000000)
 - Additional EVM-Based Test Networks:
   - Optimism Testnet (Goerli): [`0x0000000000000000000000000000000000000000`](https://goerli-optimism.etherscan.io/address/0x0000000000000000000000000000000000000000)
+
+## 🙏 Acknowledgement
+
+All the work has been done jointly by myself and [Matt Solomon](https://github.com/mds1) as a public good for our ecosystem. Public good software is not just code; it's the embodiment of collective progress, a testament to collaboration's power, and a canvas where innovation meets the needs of the many. I hope we can live up to these principles! 🫡
