@@ -25,7 +25,7 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
   - [New Deployment(s)](#new-deployments)
     - [Contract Verification](#contract-verification)
   - [`CreateX` Deployments](#createx-deployments)
-  - [🙏 Acknowledgement](#-acknowledgement)
+  - [🙏🏼 Acknowledgement](#-acknowledgement)
 
 ## So What on Earth Is a Contract Factory?
 
@@ -2100,6 +2100,6 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - Additional EVM-Based Test Networks:
   - Optimism Testnet (Goerli): [`0x0000000000000000000000000000000000000000`](https://goerli-optimism.etherscan.io/address/0x0000000000000000000000000000000000000000)
 
-## 🙏 Acknowledgement
+## 🙏🏼 Acknowledgement
 
 All the work has been done jointly by myself and [Matt Solomon](https://github.com/mds1) as a public good for our ecosystem. Public good software is not just code; it's the embodiment of collective progress, a testament to collaboration's power, and a canvas where innovation meets the needs of the many. I hope we can live up to these principles! 🫡
