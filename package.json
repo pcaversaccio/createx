@@ -112,7 +112,7 @@
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-ethers": "^3.0.5",
-    "@nomicfoundation/hardhat-verify": "^2.0.1",
+    "@nomicfoundation/hardhat-verify": "^2.0.2",
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
@@ -120,7 +120,7 @@
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
     "ethers": "^6.9.0",
-    "hardhat": "^2.19.1",
+    "hardhat": "^2.19.2",
     "hardhat-abi-exporter": "^2.10.1",
     "hardhat-contract-sizer": "^2.10.0",
     "hardhat-gas-reporter": "^1.0.9",
