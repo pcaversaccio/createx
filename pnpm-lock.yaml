@@ -34,7 +34,7 @@ devDependencies:
     version: 6.9.0
   hardhat:
     specifier: ^2.19.2
-    version: 2.19.2(ts-node@10.9.1)(typescript@5.3.3)
+    version: 2.19.2(ts-node@10.9.2)(typescript@5.3.3)
   hardhat-abi-exporter:
     specifier: ^2.10.1
     version: 2.10.1(hardhat@2.19.2)
@@ -54,8 +54,8 @@ devDependencies:
     specifier: ^4.0.0
     version: 4.0.0(typescript@5.3.3)
   ts-node:
-    specifier: ^10.9.1
-    version: 10.9.1(@types/node@20.10.4)(typescript@5.3.3)
+    specifier: ^10.9.2
+    version: 10.9.2(@types/node@20.10.4)(typescript@5.3.3)
   typechain:
     specifier: ^8.3.2
     version: 8.3.2(typescript@5.3.3)
@@ -969,7 +969,7 @@ packages:
     dependencies:
       debug: 4.3.4(supports-color@8.1.1)
       ethers: 6.9.0
-      hardhat: 2.19.2(ts-node@10.9.1)(typescript@5.3.3)
+      hardhat: 2.19.2(ts-node@10.9.2)(typescript@5.3.3)
       lodash.isequal: 4.5.0
     transitivePeerDependencies:
       - supports-color
@@ -988,7 +988,7 @@ packages:
       cbor: 8.1.0
       chalk: 2.4.2
       debug: 4.3.4(supports-color@8.1.1)
-      hardhat: 2.19.2(ts-node@10.9.1)(typescript@5.3.3)
+      hardhat: 2.19.2(ts-node@10.9.2)(typescript@5.3.3)
       lodash.clonedeep: 4.5.0
       semver: 6.3.1
       table: 6.8.1
@@ -1380,7 +1380,7 @@ packages:
       "@typechain/ethers-v6": 0.5.1(ethers@6.9.0)(typechain@8.3.2)(typescript@5.3.3)
       ethers: 6.9.0
       fs-extra: 9.1.0
-      hardhat: 2.19.2(ts-node@10.9.1)(typescript@5.3.3)
+      hardhat: 2.19.2(ts-node@10.9.2)(typescript@5.3.3)
       typechain: 8.3.2(typescript@5.3.3)
     dev: true
 
@@ -3567,7 +3567,7 @@ packages:
     dependencies:
       "@ethersproject/abi": 5.7.0
       delete-empty: 3.0.0
-      hardhat: 2.19.2(ts-node@10.9.1)(typescript@5.3.3)
+      hardhat: 2.19.2(ts-node@10.9.2)(typescript@5.3.3)
     dev: true
 
   /hardhat-contract-sizer@2.10.0(hardhat@2.19.2):
@@ -3580,7 +3580,7 @@ packages:
     dependencies:
       chalk: 4.1.2
       cli-table3: 0.6.3
-      hardhat: 2.19.2(ts-node@10.9.1)(typescript@5.3.3)
+      hardhat: 2.19.2(ts-node@10.9.2)(typescript@5.3.3)
       strip-ansi: 6.0.1
     dev: true
 
@@ -3594,7 +3594,7 @@ packages:
     dependencies:
       array-uniq: 1.0.3
       eth-gas-reporter: 0.2.27
-      hardhat: 2.19.2(ts-node@10.9.1)(typescript@5.3.3)
+      hardhat: 2.19.2(ts-node@10.9.2)(typescript@5.3.3)
       sha1: 1.1.1
     transitivePeerDependencies:
       - "@codechecks/client"
@@ -3603,7 +3603,7 @@ packages:
       - utf-8-validate
     dev: true
 
-  /hardhat@2.19.2(ts-node@10.9.1)(typescript@5.3.3):
+  /hardhat@2.19.2(ts-node@10.9.2)(typescript@5.3.3):
     resolution:
       {
         integrity: sha512-CRU3+0Cc8Qh9UpxKd8cLADDPes7ZDtKj4dTK+ERtLBomEzhRPLWklJn4VKOwjre9/k8GNd/e9DYxpfuzcxbXPQ==,
@@ -3662,7 +3662,7 @@ packages:
       solc: 0.7.3(debug@4.3.4)
       source-map-support: 0.5.21
       stacktrace-parser: 0.1.10
-      ts-node: 10.9.1(@types/node@20.10.4)(typescript@5.3.3)
+      ts-node: 10.9.2(@types/node@20.10.4)(typescript@5.3.3)
       tsort: 0.0.1
       typescript: 5.3.3
       undici: 5.28.2
@@ -5754,10 +5754,10 @@ packages:
       typescript: 5.3.3
     dev: true
 
-  /ts-node@10.9.1(@types/node@20.10.4)(typescript@5.3.3):
+  /ts-node@10.9.2(@types/node@20.10.4)(typescript@5.3.3):
     resolution:
       {
-        integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==,
+        integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==,
       }
     hasBin: true
     peerDependencies:

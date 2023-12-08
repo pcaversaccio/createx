@@ -174,11 +174,6 @@ const config: HardhatUserConfig = {
       url: vars.get("POLYGON_ZKEVM_MAINNET_URL", "https://zkevm-rpc.com"),
       accounts,
     },
-    hecoTestnet: {
-      chainId: 256,
-      url: vars.get("HECO_TESTNET_URL", "https://http-testnet.hecochain.com"),
-      accounts,
-    },
     hecoMain: {
       chainId: 128,
       url: vars.get("HECO_MAINNET_URL", "https://http-mainnet.hecochain.com"),
@@ -208,11 +203,6 @@ const config: HardhatUserConfig = {
         "AVALANCHE_MAINNET_URL",
         "https://api.avax.network/ext/bc/C/rpc",
       ),
-      accounts,
-    },
-    sokol: {
-      chainId: 77,
-      url: vars.get("SOKOL_TESTNET_URL", "https://sokol.poa.network"),
       accounts,
     },
     chiado: {
@@ -304,12 +294,12 @@ const config: HardhatUserConfig = {
     },
     evmosTestnet: {
       chainId: 9000,
-      url: vars.get("EVMOS_TESTNET_URL", "https://eth.bd.evmos.dev:8545"),
+      url: vars.get("EVMOS_TESTNET_URL", "https://evmos-testnet.lava.build"),
       accounts,
     },
     evmosMain: {
       chainId: 9001,
-      url: vars.get("EVMOS_MAINNET_URL", "https://eth.bd.evmos.org:8545"),
+      url: vars.get("EVMOS_MAINNET_URL", "https://evmos.lava.build"),
       accounts,
     },
     bobaTestnet: {
@@ -479,9 +469,8 @@ const config: HardhatUserConfig = {
       // For BSC testnet & mainnet
       bsc: vars.get("BSC_API_KEY", ""),
       bscTestnet: vars.get("BSC_API_KEY", ""),
-      // For Heco testnet & mainnet
+      // For Heco mainnet
       heco: vars.get("HECO_API_KEY", ""),
-      hecoTestnet: vars.get("HECO_API_KEY", ""),
       // For Fantom testnet & mainnet
       opera: vars.get("FANTOM_API_KEY", ""),
       ftmTestnet: vars.get("FANTOM_API_KEY", ""),
@@ -515,10 +504,9 @@ const config: HardhatUserConfig = {
       // For Cronos testnet & mainnet
       cronos: vars.get("CRONOS_API_KEY", ""),
       cronosTestnet: vars.get("CRONOS_API_KEY", ""),
-      // For Gnosis/xDai testnets & mainnets
+      // For Gnosis/xDai testnet & mainnets
       gnosis: vars.get("GNOSIS_API_KEY", ""),
       xdai: vars.get("GNOSIS_API_KEY", ""),
-      sokol: vars.get("GNOSIS_API_KEY", ""),
       chiado: vars.get("GNOSIS_API_KEY", ""),
       // For Fuse testnet & mainnet
       fuse: vars.get("FUSE_API_KEY", ""),
