@@ -55,13 +55,11 @@
     "deploy:polygonzkevmtestnet": "npx hardhat run --network polygonZkEVMTestnet scripts/deploy.ts",
     "deploy:polygon": "npx hardhat run --network polygon scripts/deploy.ts",
     "deploy:polygonzkevmmain": "npx hardhat run --network polygonZkEVMMain scripts/deploy.ts",
-    "deploy:hecotestnet": "npx hardhat run --network hecoTestnet scripts/deploy.ts",
     "deploy:hecomain": "npx hardhat run --network hecoMain scripts/deploy.ts",
     "deploy:fantomtestnet": "npx hardhat run --network fantomTestnet scripts/deploy.ts",
     "deploy:fantommain": "npx hardhat run --network fantomMain scripts/deploy.ts",
     "deploy:fuji": "npx hardhat run --network fuji scripts/deploy.ts",
     "deploy:avalanche": "npx hardhat run --network avalanche scripts/deploy.ts",
-    "deploy:sokol": "npx hardhat run --network sokol scripts/deploy.ts",
     "deploy:chiado": "npx hardhat run --network chiado scripts/deploy.ts",
     "deploy:gnosis": "npx hardhat run --network gnosis scripts/deploy.ts",
     "deploy:moonbasealpha": "npx hardhat run --network moonbaseAlpha scripts/deploy.ts",
@@ -127,7 +125,7 @@
     "prettier": "^3.1.0",
     "prettier-plugin-solidity": "^1.2.0",
     "solhint": "^4.0.0",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
     "typescript": "^5.3.3"
   }
