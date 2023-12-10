@@ -2072,13 +2072,15 @@ interface ICreateX {
 
 ## New Deployment(s)
 
-> [!CAUTION]
-> The address `0x0000000000000000000000000000000000000000` is a simple placeholder for now. Do not send any funds there!
-
 We offer two options for deploying [`CreateX`](./src/CreateX.sol) to your desired chain:
 
 1. Deploy it yourself by using one of the pre-signed transactions. Details can be found in the subsequent paragraph.
-2. Request a deployment by opening an [issue](https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+). You can significantly reduce the time to deployment by sending funds to cover the deployment cost to the deployer account: [`0x0000000000000000000000000000000000000000`](https://etherscan.io/address/0x0000000000000000000000000000000000000000).
+2. Request a deployment by opening an [issue](https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+). You can significantly reduce the time to deployment by sending funds to cover the deployment cost to the deployer account: [`0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`](https://etherscan.io/address/0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5).
+
+> [!CAUTION]
+> Prior to using a pre-signed transaction, you **MUST** ensure that the gas metering of the target chain is **EQUIVALENT** to that of Ethereum's EVM version!
+>
+> TBD
 
 TBD (section on pre-signed transactions; we will offer multiple pre-signed transactions with different `gasLimit` levels; will be added after the feedback phase)
 
@@ -2086,19 +2088,26 @@ TBD (section on pre-signed transactions; we will offer multiple pre-signed trans
 
 To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer, use the following parameters:
 
-- TBD (will be added after the feedback phase)
+- _Verification Method / Compiler Type:_ `Solidity (Standard JSON Input)`,
+- _Compiler Version:_ `v0.8.23+commit.f704f362`,
+- _Open Source License Type:_ `GNU Affero General Public License (GNU AGPLv3)`,
+- _Standard Input JSON File:_ Upload the file [here](),
+- _Constructor Arguments ABI-Encoded:_ Leave empty.
+
+> [!IMPORTANT]
+> We removed the metadata hash `bytecodeHash` from the bytecode in order to guarantee a deterministic compilation across all operating systems. This implies that all [sourcify.eth](https://sourcify.dev) verifications have partial verification, as opposed to [perfect verification](https://docs.sourcify.dev/blog/verify-contracts-perfectly/), which requires a matching metadata hash.
 
 ## [`CreateX`](./src/CreateX.sol) Deployments
 
-> [!CAUTION]
-> The address `0x0000000000000000000000000000000000000000` is a simple placeholder for now. Do not send any funds there!
+> [!TIP]
+> The complete list with additional chain information per deployment can be retrieved via [createx.rocks](https://www.createx.rocks).
 
 - EVM-Based Production Networks:
-  - Ethereum: [`0x0000000000000000000000000000000000000000`](https://etherscan.io/address/0x0000000000000000000000000000000000000000)
+  - Ethereum: [`0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`](https://etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - Ethereum Test Networks:
-  - Goerli: [`0x0000000000000000000000000000000000000000`](https://goerli.etherscan.io/address/0x0000000000000000000000000000000000000000)
+  - Sepolia: [`0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`](https://sepolia.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - Additional EVM-Based Test Networks:
-  - Optimism Testnet (Goerli): [`0x0000000000000000000000000000000000000000`](https://goerli-optimism.etherscan.io/address/0x0000000000000000000000000000000000000000)
+  - Binance Smart Chain Testnet: [`0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`](https://testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## 🙏🏼 Acknowledgement
 

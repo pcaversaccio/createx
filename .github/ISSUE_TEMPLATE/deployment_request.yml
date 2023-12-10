@@ -51,8 +51,8 @@ body:
   - attributes:
       label: Deployment Funds
       description: |
-        Have you sent the deployment funds to the deployer account (TBD) on the target chain?
-        Doing so is greatly appreciated and will reduce time to deployment!
+        Have you sent the deployment funds to the deployer account (`0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`) on the target chain?
+        Doing so is greatly appreciated and will reduce the time to deployment!
       options:
         - "Yes"
         - "No"
