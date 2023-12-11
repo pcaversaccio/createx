@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import path from "path";
-import hre, { ethers } from "hardhat";
+import hre from "hardhat";
 
 import signedTx from "./presigned-createx-deployment-transaction/signed_serialised_transaction.json";
 
@@ -17,7 +17,7 @@ function delay(ms: number) {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function deployNormal() {
-  const contract = await ethers.deployContract("CreateX");
+  const contract = await hre.ethers.deployContract("CreateX");
 
   await contract.waitForDeployment();
   const contractAddress = await contract.getAddress();
