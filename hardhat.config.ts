@@ -35,7 +35,7 @@ const config: HardhatUserConfig = {
     settings: {
       optimizer: {
         enabled: true,
-        runs: 6_942_000,
+        runs: 10_000_000,
       },
       evmVersion: "paris", // Prevent using the `PUSH0` opcode
       metadata: {
