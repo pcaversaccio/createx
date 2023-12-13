@@ -50,7 +50,7 @@ export async function presign() {
     tx.to = null; // A contract creation transaction has a `to` address of `null`
     tx.gasLimit = 3_000_000; // A normal deployment currently costs 2,580,902 gas
     tx.gasPrice = hre.ethers.parseUnits("100", "gwei"); // A gas price of 100 gwei
-    tx.data = initCode; // Contract creation bytecode
+    tx.data = initCode; // Contract creation bytecode of `CreateX`
     tx.chainId = 0; // Disable EIP-155 functionality (https://github.com/ethers-io/ethers.js/blob/bbcfb5f6b88800b8ef068e4a2923675503320e33/src.ts/transaction/transaction.ts#L168)
     tx.nonce = 0; // It must be the first transaction of the deployer account
     tx.type = 0; // Set to legacy transaction type 0

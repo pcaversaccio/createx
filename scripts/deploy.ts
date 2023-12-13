@@ -41,14 +41,14 @@ async function deployNormal() {
   const createx = await createxFactory.deploy();
 
   await createx.waitForDeployment();
-  const contractAddress = await createx.getAddress();
+  const createxAddress = await createx.getAddress();
 
-  console.log("CreateX deployed to:", contractAddress);
+  console.log("CreateX deployed to:", createxAddress);
 
-  await delay(30000); // Wait for 30 seconds before verifying the contract
+  await delay(30000); // Wait for 30 seconds before verifying `CreateX`
 
   await hre.run("verify:verify", {
-    address: contractAddress,
+    address: createxAddress,
   });
 }
 
@@ -63,8 +63,8 @@ async function deployRaw() {
     const tx = await hre.ethers.provider.broadcastTransaction(signedTx);
     console.log("Transaction hash: " + `${GREEN}${tx.hash}${RESET}`);
     const transactionReceipt = await tx.wait();
-    const contractAddress = transactionReceipt?.contractAddress;
-    console.log("Contract address: " + `${GREEN}${contractAddress}${RESET}`);
+    const createxAddress = transactionReceipt?.contractAddress;
+    console.log("Contract address: " + `${GREEN}${createxAddress}${RESET}`);
 
     // Save the transaction receipt in a JSON file
     if (!fs.existsSync(dir)) {
@@ -80,10 +80,10 @@ async function deployRaw() {
     );
     console.log(`Transaction details written to: ${GREEN}${saveDir}${RESET}\n`);
 
-    await delay(30000); // Wait for 30 seconds before verifying the contract
+    await delay(30000); // Wait for 30 seconds before verifying `CreateX`
 
     await hre.run("verify:verify", {
-      address: contractAddress,
+      address: createxAddress,
     });
   } catch (err) {
     // Save the transaction error in a JSON file
