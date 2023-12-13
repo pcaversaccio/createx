@@ -2107,6 +2107,8 @@ npm install -g pnpm
 After having installed `pnpm`, simply run:
 
 ```console
+git clone https://github.com/pcaversaccio/createx.git
+cd createx
 pnpm install
 ```
 
