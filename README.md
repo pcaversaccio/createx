@@ -2118,7 +2118,7 @@ Now configure your target chain in the [`hardhat.config.ts`](./hardhat.config.ts
 npx hardhat run --no-compile --network <NETWORK_NAME> scripts/deploy.ts
 ```
 
-The [deploy](./scripts/deploy.ts) script ensures that [`CreateX`](./src/CreateX.sol) is automatically verified if you have configured the `etherscan` property accordingly. The current script broadcasts the _default_ pre-signed transaction, which has a gas limit of 3,000,000 gas. If you want to use a different pre-signed transaction, you must change the import of the pre-signed transaction in the [deploy](./scripts/deploy.ts) script.
+The [`deploy.ts`](./scripts/deploy.ts) script ensures that [`CreateX`](./src/CreateX.sol) is automatically verified if you have configured the `etherscan` property accordingly. The current script broadcasts the _default_ pre-signed transaction, which has a gas limit of 3,000,000 gas. If you want to use a different pre-signed transaction, you must change the import of the pre-signed transaction in the [`deploy.ts`](./scripts/deploy.ts) script.
 
 #### [`cast`](https://book.getfoundry.sh/reference/cli/cast)
 
