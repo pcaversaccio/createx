@@ -2091,7 +2091,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - _Verification Method / Compiler Type:_ `Solidity (Standard JSON Input)`,
 - _Compiler Version:_ `v0.8.23+commit.f704f362`,
 - _Open Source License Type:_ `GNU Affero General Public License (GNU AGPLv3)`,
-- _Standard Input JSON File:_ Upload the file [here](),
+- _Standard Input JSON File:_ Upload the file [here](./verification/CreateX.json),
 - _Constructor Arguments ABI-Encoded:_ Leave empty.
 
 > [!IMPORTANT]

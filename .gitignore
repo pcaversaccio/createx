@@ -67,7 +67,3 @@ forge-artifacts
 # Compiler files
 cache
 out
-
-# Presigning and deployment directories
-presigned-createx-deployment-transaction
-broadcasted-createx-deployment-transaction
