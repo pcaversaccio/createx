@@ -23,6 +23,8 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
     - [Test Coverage](#test-coverage)
   - [ABI (Application Binary Interface)](#abi-application-binary-interface)
   - [New Deployment(s)](#new-deployments)
+    - [`ethers.js`](#ethersjs)
+    - [`cast`](#cast)
     - [Contract Verification](#contract-verification)
   - [`CreateX` Deployments](#createx-deployments)
   - [🙏🏼 Acknowledgement](#-acknowledgement)
@@ -2075,14 +2077,74 @@ interface ICreateX {
 We offer two options for deploying [`CreateX`](./src/CreateX.sol) to your desired chain:
 
 1. Deploy it yourself by using one of the pre-signed transactions. Details can be found in the subsequent paragraph.
-2. Request a deployment by opening an [issue](https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+). You can significantly reduce the time to deployment by sending funds to cover the deployment cost to the deployer account: [`0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`](https://etherscan.io/address/0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5).
+2. Request a deployment by opening an [issue](https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+). You can significantly reduce the time to deployment by sending funds to cover the deployment cost to the deployer account: `0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`.
 
 > [!CAUTION]
 > Prior to using a pre-signed transaction, you **MUST** ensure that the gas metering of the target chain is **EQUIVALENT** to that of Ethereum's EVM version!
 >
-> TBD
+> The _default_ pre-signed transaction has a gas limit of 3,000,000 gas, so if the target chain requires more than 1 million gas to deploy, the contract creation transaction will revert and we will not be able to deploy [`CreateX`](./src/CreateX.sol) to the address `0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`. In this case, the only way to get [`CreateX`](./src/CreateX.sol) deployed at the expected address is for the chain to store the contract there as a predeploy.
+>
+> If you are not sure how to validate this, you can either use the [`eth_estimateGas`](https://ethereum.github.io/execution-apis/api-documentation/) RPC method or simply deploy the [`CreateX`](./src/CreateX.sol) contract from another account and see how much gas is needed for the deployment. Standard EVM chains should require exactly 2,580,902 gas to deploy [`CreateX`](./src/CreateX.sol).
 
-TBD (section on pre-signed transactions; we will offer multiple pre-signed transactions with different `gasLimit` levels; will be added after the feedback phase)
+We repeat: PLEASE DO NOT BROADCAST ANY PRE-SIGNED TRANSACTION WITHOUT LOCAL TESTING! Also, before deploying, you MUST send at least 0.1 ETH to the deployer address `0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`. We offer three pre-signed, pre-[`EIP-155`](https://eips.ethereum.org/EIPS/eip-155) transactions with the same gas price of 100 gwei, but different `gasLimit` levels:
+
+- Base Case: `gasLimit = 3_000_000`; [`signed_serialised_transaction_gaslimit_3000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_3000000_.json),
+- Medium Case: `gasLimit = 25_000_000`; [`signed_serialised_transaction_gaslimit_3000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_25000000_.json),
+- High Case: `gasLimit = 45_000_000`; [`signed_serialised_transaction_gaslimit_3000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_45000000_.json).
+
+You can broadcast the transaction using either [`ethers.js`](https://docs.ethers.org/v6/) or [`cast`](https://book.getfoundry.sh/reference/cli/cast):
+
+#### [`ethers.js`](https://docs.ethers.org/v6/)
+
+It is recommended to install [`pnpm`](https://pnpm.io) through the `npm` package manager, which comes bundled with [Node.js](https://nodejs.org/en) when you install it on your system. It is recommended to use a Node.js version `>= 18.0.0`.
+
+Once you have `npm` installed, you can run the following both to install and upgrade `pnpm`:
+
+```console
+npm install -g pnpm
+```
+
+After having installed `pnpm`, simply run:
+
+```console
+pnpm install
+```
+
+Now configure your target chain in the [`hardhat.config.ts`](./hardhat.config.ts) file with the `networks` and `etherscan` properties, or use one of the preconfigured network configurations. After you have made sure locally that the `gasLimit` of 3 million works on your target chain, you can invoke:
+
+```console
+npx hardhat run --no-compile --network <NETWORK_NAME> scripts/deploy.ts
+```
+
+The [deploy](./scripts/deploy.ts) script ensures that [`CreateX`](./src/CreateX.sol) is automatically verified if you have configured the `etherscan` property accordingly. The current script broadcasts the _default_ pre-signed transaction, which has a gas limit of 3,000,000 gas. If you want to use a different pre-signed transaction, you must change the import of the pre-signed transaction in the [deploy](./scripts/deploy.ts) script.
+
+#### [`cast`](https://book.getfoundry.sh/reference/cli/cast)
+
+It is recommended to install [Foundry](https://github.com/foundry-rs/foundry) via:
+
+```console
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
+```
+
+If you want or need to build [Foundry](https://github.com/foundry-rs/foundry) from source code, you can simply invoke the following command to install the full toolkit:
+
+```console
+cargo install --git https://github.com/foundry-rs/foundry --profile local --force --locked forge cast chisel anvil
+```
+
+To broadcast a pre-signed transaction, you can invoke:
+
+```console
+# $TX is the pre-signed transaction.
+# $RPC_URL is the RPC URL of the target chain to which you want to deploy.
+cast publish $TX --rpc-url $RPC_URL
+```
+
+You must verify the [`CreateX`](./src/CreateX.sol) contract separately, as specified in the next section.
+
+> [!IMPORTANT]
+> After deployment, please open a pull request that updates the [`deployments.json`](./deployments/deployments.json) file and the [`CreateX` Deployments](#createx-deployments) section with the new deployment so that other users can easily know that it has been deployed.
 
 ### Contract Verification
 
