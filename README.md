@@ -2088,9 +2088,9 @@ We offer two options for deploying [`CreateX`](./src/CreateX.sol) to your desire
 
 We repeat: PLEASE DO NOT BROADCAST ANY PRE-SIGNED TRANSACTION WITHOUT LOCAL TESTING! Also, before deploying, you MUST send at least 0.1 ETH to the deployer address `0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`. We offer three pre-signed, pre-[`EIP-155`](https://eips.ethereum.org/EIPS/eip-155) transactions with the same gas price of 100 gwei, but different `gasLimit` levels:
 
-- _Base Case:_ `gasLimit = 3_000_000`; [`signed_serialised_transaction_gaslimit_3000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_3000000_.json),
+- _Default Case:_ `gasLimit = 3_000_000`; [`signed_serialised_transaction_gaslimit_3000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_3000000_.json),
 - _Medium Case:_ `gasLimit = 25_000_000`; [`signed_serialised_transaction_gaslimit_25000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_25000000_.json),
-- _High Case:_ `gasLimit = 45_000_000`; [`signed_serialised_transaction_gaslimit_45000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_45000000_.json).
+- _Heavy Case:_ `gasLimit = 45_000_000`; [`signed_serialised_transaction_gaslimit_45000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_45000000_.json).
 
 You can broadcast the transaction using either [`ethers.js`](https://docs.ethers.org/v6/) or [`cast`](https://book.getfoundry.sh/reference/cli/cast):
 
