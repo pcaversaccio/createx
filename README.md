@@ -2077,12 +2077,12 @@ interface ICreateX {
 We offer two options for deploying [`CreateX`](./src/CreateX.sol) to your desired chain:
 
 1. Deploy it yourself by using one of the pre-signed transactions. Details can be found in the subsequent paragraph.
-2. Request a deployment by opening an [issue](https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+). You can significantly reduce the time to deployment by sending funds to cover the deployment cost to the deployer account: `0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`.
+2. Request a deployment by opening an [issue](https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+). You can significantly reduce the time to deployment by sending funds to cover the deployment cost (a reliable amount with a small tip 😏 would be ~0.1 ETH) to the deployer account: `0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`.
 
 > [!CAUTION]
 > Prior to using a pre-signed transaction, you **MUST** ensure that the gas metering of the target chain is **EQUIVALENT** to that of Ethereum's EVM version!
 >
-> The _default_ pre-signed transaction has a gas limit of 3,000,000 gas, so if the target chain requires more than 1 million gas to deploy, the contract creation transaction will revert and we will not be able to deploy [`CreateX`](./src/CreateX.sol) to the address `0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`. In this case, the only way to get [`CreateX`](./src/CreateX.sol) deployed at the expected address is for the chain to store the contract there as a predeploy.
+> The _default_ pre-signed transaction has a gas limit of 3,000,000 gas, so if the target chain requires more than 3 million gas to deploy, the contract creation transaction will revert and we will not be able to deploy [`CreateX`](./src/CreateX.sol) to the address `0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`. In this case, the only way to get [`CreateX`](./src/CreateX.sol) deployed at the expected address is for the chain to store the contract there as a predeploy.
 >
 > If you are not sure how to validate this, you can either use the [`eth_estimateGas`](https://ethereum.github.io/execution-apis/api-documentation/) RPC method or simply deploy the [`CreateX`](./src/CreateX.sol) contract from another account and see how much gas is needed for the deployment. Standard EVM chains should require exactly 2,580,902 gas to deploy [`CreateX`](./src/CreateX.sol).
 
