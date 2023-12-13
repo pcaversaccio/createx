@@ -2084,7 +2084,7 @@ We offer two options for deploying [`CreateX`](./src/CreateX.sol) to your desire
 >
 > The _default_ pre-signed transaction has a gas limit of 3,000,000 gas, so if the target chain requires more than 3 million gas to deploy, the contract creation transaction will revert and we will not be able to deploy [`CreateX`](./src/CreateX.sol) to the address `0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`. In this case, the only way to get [`CreateX`](./src/CreateX.sol) deployed at the expected address is for the chain to store the contract there as a predeploy.
 >
-> If you are not sure how to validate this, you can either use the [`eth_estimateGas`](https://ethereum.github.io/execution-apis/api-documentation/) RPC method or simply deploy the [`CreateX`](./src/CreateX.sol) contract from another account and see how much gas is needed for the deployment. Standard EVM chains should require exactly 2,580,902 gas to deploy [`CreateX`](./src/CreateX.sol).
+> If you are not sure how to validate this, you can either use the [`eth_estimateGas`](https://ethereum.github.io/execution-apis/api-documentation/) JSON-RPC method or simply deploy the [`CreateX`](./src/CreateX.sol) contract from another account and see how much gas is needed for the deployment. Standard EVM chains should require exactly 2,580,902 gas to deploy [`CreateX`](./src/CreateX.sol).
 
 We repeat: PLEASE DO NOT BROADCAST ANY PRE-SIGNED TRANSACTION WITHOUT LOCAL TESTING! Also, before deploying, you MUST send at least 0.1 ETH to the deployer address `0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`. We offer three pre-signed, pre-[`EIP-155`](https://eips.ethereum.org/EIPS/eip-155) transactions with the same gas price of 100 gwei, but different `gasLimit` levels:
 
