@@ -31,6 +31,7 @@
     "size": "npx hardhat size-contracts",
     "abi": "npx hardhat export-abi",
     "vars:path": "npx hardhat vars path",
+    "solc": "npx hardhat solc",
     "evm": "npx hardhat evm",
     "presign": "npx hardhat run --no-compile scripts/presign.ts",
     "deploy:hh": "npx hardhat run --no-compile --network hardhat scripts/deploy.ts",
