@@ -8,9 +8,31 @@ const RESET = "\x1b[0m";
 const GREEN = "\x1b[32m";
 const RED = "\x1b[31m";
 
-const dir = path.join(__dirname, "presigned-createx-deployment-transaction");
+import initCode from "./contract_creation_bytecode_createx.json";
+const dir = path.join(__dirname, "presigned-createx-deployment-transactions");
 
 export async function presign() {
+  // Ensure the correct contract creation bytecode is used
+  if (
+    hre.ethers.keccak256(initCode) !=
+    // This following hash can be retrieved via Solidity and using the compiler settings in `./verification/CreateX.json`:
+    // ```sol
+    // // SPDX-License-Identifier: AGPL-3.0-only
+    // pragma solidity 0.8.23;
+    //
+    // import {CreateX} from "./src/CreateX.sol";
+    //
+    // contract CreationCodeHashCreateX {
+    //     function creationCodeHashCreateX() external pure returns (bytes32) {
+    //         return keccak256(type(CreateX).creationCode);
+    //     }
+    // }
+    // ```
+    "0x12ec861579b63a3ab9db3b5a23c57d56402ad3061475b088f17054e2f2daf22f"
+  ) {
+    throw new Error("Incorrect contract creation bytecode.");
+  }
+
   try {
     if (!Array.isArray(accounts)) {
       throw new Error("No private key configured.");
@@ -34,17 +56,14 @@ export async function presign() {
       "Using wallet address: " + `${GREEN}${wallet.address}${RESET}\n`,
     );
 
-    const CreateX = await hre.ethers.getContractFactory("CreateX");
-    const initCode = await CreateX.getDeployTransaction();
-
     ////////////////////////////////////////////////
     // Prepare the replayable transaction payload //
     ////////////////////////////////////////////////
     const tx = new hre.ethers.Transaction();
     tx.to = null; // A contract creation transaction has a `to` address of `null`
-    tx.gasLimit = 3_000_000; // A normal deployment currently costs 2,543,595 gas. We can later add different `gasLimit` levels for the final presigned transaction
+    tx.gasLimit = 3_000_000; // A normal deployment currently costs 2,580,902 gas
     tx.gasPrice = hre.ethers.parseUnits("100", "gwei"); // A gas price of 100 gwei
-    tx.data = initCode.data; // Contract creation bytecode
+    tx.data = initCode; // Contract creation bytecode of `CreateX`
     tx.chainId = 0; // Disable EIP-155 functionality (https://github.com/ethers-io/ethers.js/blob/bbcfb5f6b88800b8ef068e4a2923675503320e33/src.ts/transaction/transaction.ts#L168)
     tx.nonce = 0; // It must be the first transaction of the deployer account
     tx.type = 0; // Set to legacy transaction type 0
@@ -59,11 +78,14 @@ export async function presign() {
       fs.mkdirSync(dir);
     }
     const saveDir = path.normalize(
-      path.join(dir, "signed_serialised_transaction.json"),
+      path.join(
+        dir,
+        `signed_serialised_transaction_gaslimit_${tx.gasLimit}_.json`,
+      ),
     );
     fs.writeFileSync(saveDir, JSON.stringify(signedTx.serialized));
 
-    console.log(`${GREEN}Signing attempt has been successful!${RESET}`);
+    console.log(`${GREEN}Signing attempt has been successful!${RESET}\n`);
     console.log(
       `Serialised signed transaction written to: ${GREEN}${saveDir}${RESET}\n`,
     );
@@ -92,7 +114,7 @@ export async function presign() {
     );
     fs.writeFileSync(saveDir, JSON.stringify(err));
 
-    console.log(`${RED}Signing attempt failed!${RESET}`);
+    console.log(`${RED}Signing attempt failed!${RESET}\n`);
     console.log(`Error details written to: ${RED}${saveDir}${RESET}\n`);
   }
 }

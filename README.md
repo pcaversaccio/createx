@@ -23,6 +23,8 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
     - [Test Coverage](#test-coverage)
   - [ABI (Application Binary Interface)](#abi-application-binary-interface)
   - [New Deployment(s)](#new-deployments)
+    - [`ethers.js`](#ethersjs)
+    - [`cast`](#cast)
     - [Contract Verification](#contract-verification)
   - [`CreateX` Deployments](#createx-deployments)
   - [🙏🏼 Acknowledgement](#-acknowledgement)
@@ -2072,33 +2074,98 @@ interface ICreateX {
 
 ## New Deployment(s)
 
-> [!CAUTION]
-> The address `0x0000000000000000000000000000000000000000` is a simple placeholder for now. Do not send any funds there!
-
 We offer two options for deploying [`CreateX`](./src/CreateX.sol) to your desired chain:
 
 1. Deploy it yourself by using one of the pre-signed transactions. Details can be found in the subsequent paragraph.
-2. Request a deployment by opening an [issue](https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+). You can significantly reduce the time to deployment by sending funds to cover the deployment cost to the deployer account: [`0x0000000000000000000000000000000000000000`](https://etherscan.io/address/0x0000000000000000000000000000000000000000).
+2. Request a deployment by opening an [issue](https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+). You can significantly reduce the time to deployment by sending funds to cover the deployment cost (a reliable amount with a small tip 😏 would be ~0.3 ETH) to the deployer account: `0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`.
 
-TBD (section on pre-signed transactions; we will offer multiple pre-signed transactions with different `gasLimit` levels; will be added after the feedback phase)
+> [!CAUTION]
+> Prior to using a pre-signed transaction, you **MUST** ensure that the gas metering of the target chain is **EQUIVALENT** to that of Ethereum's EVM version!
+>
+> The _default_ pre-signed transaction has a gas limit of 3,000,000 gas, so if the target chain requires more than 3 million gas to deploy, the contract creation transaction will revert and we will not be able to deploy [`CreateX`](./src/CreateX.sol) to the address `0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`. In this case, the only way to get [`CreateX`](./src/CreateX.sol) deployed at the expected address is for the chain to store the contract there as a predeploy.
+>
+> If you are not sure how to validate this, you can either use the [`eth_estimateGas`](https://ethereum.github.io/execution-apis/api-documentation/) JSON-RPC method or simply deploy the [`CreateX`](./src/CreateX.sol) contract from another account and see how much gas is needed for the deployment. Standard EVM chains should require exactly 2,580,902 gas to deploy [`CreateX`](./src/CreateX.sol).
+
+We repeat: PLEASE DO NOT BROADCAST ANY PRE-SIGNED TRANSACTION WITHOUT LOCAL TESTING! Also, before deploying, you MUST send at least 0.3 ETH to the deployer address `0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`. We offer three pre-signed, pre-[`EIP-155`](https://eips.ethereum.org/EIPS/eip-155) transactions with the same gas price of 100 gwei, but different `gasLimit` levels:
+
+- _Default Case:_ `gasLimit = 3_000_000`; [`signed_serialised_transaction_gaslimit_3000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_3000000_.json),
+- _Medium Case:_ `gasLimit = 25_000_000`; [`signed_serialised_transaction_gaslimit_25000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_25000000_.json),
+- _Heavy Case:_ `gasLimit = 45_000_000`; [`signed_serialised_transaction_gaslimit_45000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_45000000_.json).
+
+You can broadcast the transaction using either [`ethers.js`](https://docs.ethers.org/v6/) or [`cast`](https://book.getfoundry.sh/reference/cli/cast):
+
+#### [`ethers.js`](https://docs.ethers.org/v6/)
+
+It is recommended to install [`pnpm`](https://pnpm.io) through the `npm` package manager, which comes bundled with [Node.js](https://nodejs.org/en) when you install it on your system. It is recommended to use a Node.js version `>= 20.0.0`.
+
+Once you have `npm` installed, you can run the following both to install and upgrade `pnpm`:
+
+```console
+npm install -g pnpm
+```
+
+After having installed `pnpm`, simply run:
+
+```console
+git clone https://github.com/pcaversaccio/createx.git
+cd createx
+pnpm install
+```
+
+Now configure your target chain in the [`hardhat.config.ts`](./hardhat.config.ts) file with the `networks` and `etherscan` properties, or use one of the preconfigured network configurations. After you have locally ensured that the `gasLimit` of 3 million works on your target chain, you can invoke:
+
+```console
+npx hardhat run --no-compile --network <NETWORK_NAME> scripts/deploy.ts
+```
+
+The [`deploy.ts`](./scripts/deploy.ts) script ensures that [`CreateX`](./src/CreateX.sol) is automatically verified if you have configured the `etherscan` property accordingly. The current script broadcasts the _default_ pre-signed transaction, which has a gas limit of 3,000,000 gas. If you want to use a different pre-signed transaction, you must change the import of the pre-signed transaction in the [`deploy.ts`](./scripts/deploy.ts) script.
+
+#### [`cast`](https://book.getfoundry.sh/reference/cli/cast)
+
+It is recommended to install [Foundry](https://github.com/foundry-rs/foundry) via:
+
+```console
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
+```
+
+To broadcast a pre-signed transaction, you can invoke:
+
+```console
+# $TX is the pre-signed transaction.
+# $RPC_URL is the RPC URL of the target chain to which you want to deploy.
+cast publish $TX --rpc-url $RPC_URL
+```
+
+You must verify the [`CreateX`](./src/CreateX.sol) contract separately, as specified in the next section.
+
+> [!IMPORTANT]
+> After deployment, please open a pull request that updates the [`deployments.json`](./deployments/deployments.json) file and the [`CreateX` Deployments](#createx-deployments) section with the new deployment so that other users can easily know that it has been deployed.
 
 ### Contract Verification
 
 To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer, use the following parameters:
 
-- TBD (will be added after the feedback phase)
+- _Verification Method / Compiler Type:_ `Solidity (Standard JSON Input)`,
+- _Compiler Version:_ `v0.8.23+commit.f704f362`,
+- _Open Source License Type:_ `GNU Affero General Public License (GNU AGPLv3)`,
+- _Standard Input JSON File:_ Upload the file [here](./verification/CreateX.json),
+- _Constructor Arguments ABI-Encoded:_ Leave empty.
+
+> [!IMPORTANT]
+> We removed the metadata hash `bytecodeHash` from the bytecode in order to guarantee a deterministic compilation across all operating systems. This implies that all [sourcify.eth](https://sourcify.dev) verifications have partial verification, as opposed to [perfect verification](https://docs.sourcify.dev/blog/verify-contracts-perfectly/), which requires a matching metadata hash.
 
 ## [`CreateX`](./src/CreateX.sol) Deployments
 
-> [!CAUTION]
-> The address `0x0000000000000000000000000000000000000000` is a simple placeholder for now. Do not send any funds there!
+> [!TIP]
+> The complete list with additional chain information per deployment can be retrieved via [createx.rocks](https://www.createx.rocks).
 
 - EVM-Based Production Networks:
-  - Ethereum: [`0x0000000000000000000000000000000000000000`](https://etherscan.io/address/0x0000000000000000000000000000000000000000)
+  - Ethereum: [`0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`](https://etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - Ethereum Test Networks:
-  - Goerli: [`0x0000000000000000000000000000000000000000`](https://goerli.etherscan.io/address/0x0000000000000000000000000000000000000000)
+  - Sepolia: [`0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`](https://sepolia.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - Additional EVM-Based Test Networks:
-  - Optimism Testnet (Goerli): [`0x0000000000000000000000000000000000000000`](https://goerli-optimism.etherscan.io/address/0x0000000000000000000000000000000000000000)
+  - Binance Smart Chain Testnet: [`0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`](https://testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## 🙏🏼 Acknowledgement
 

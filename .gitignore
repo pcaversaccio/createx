@@ -51,7 +51,6 @@ yarn-error.log*
 
 # Hardhat files
 cache
-artifacts
 .deps
 
 # TypeScript bindings output directory
@@ -67,7 +66,3 @@ forge-artifacts
 # Compiler files
 cache
 out
-
-# Presigning and deployment directories
-presigned-createx-deployment-transaction
-broadcasted-createx-deployment-transaction

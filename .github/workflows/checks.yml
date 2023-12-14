@@ -14,7 +14,7 @@ jobs:
         os:
           - ubuntu-latest
         node_version:
-          - 18
+          - 20
 
     steps:
       - name: Checkout
@@ -92,4 +92,4 @@ jobs:
       - name: Validate URLs
         run: |
           awesome_bot ./*.md src/*.sol test/**/*.sol test/public/**/*.sol --allow-dupe --request-delay 0.4 \
-          --white-list "https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+",https://twitter.com/PaulRBerg/status/1682346315806539776
+          --white-list "https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+",https://twitter.com/PaulRBerg/status/1682346315806539776,https://www.createx.rocks,https://foundry.paradigm.xyz,https://github.com/pcaversaccio/createx.git
