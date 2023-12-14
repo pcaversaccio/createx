@@ -91,7 +91,7 @@ async function deployUsingPrivateKey() {
 // The preconfigured pre-signed transaction is the default version using 3 million gas.
 // IMPORTANT: This function is enabled in the main entry point of the script! Thus, every
 // `npx hardhat run --no-compile --network <NETWORK_NAME> scripts/deploy.ts` invocation
-// will use the `deployUsingPrivateKey` function.
+// will use the `deployUsingPresignedTransaction` function.
 async function deployUsingPresignedTransaction() {
   // Ensure a correct pre-signed transaction is used
   if (!signedTxHashes.includes(hre.ethers.keccak256(signedTx))) {
