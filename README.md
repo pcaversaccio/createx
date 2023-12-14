@@ -2077,7 +2077,7 @@ interface ICreateX {
 We offer two options for deploying [`CreateX`](./src/CreateX.sol) to your desired chain:
 
 1. Deploy it yourself by using one of the pre-signed transactions. Details can be found in the subsequent paragraph.
-2. Request a deployment by opening an [issue](https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+). You can significantly reduce the time to deployment by sending funds to cover the deployment cost (a reliable amount with a small tip 😏 would be ~0.1 ETH) to the deployer account: `0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`.
+2. Request a deployment by opening an [issue](https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+). You can significantly reduce the time to deployment by sending funds to cover the deployment cost (a reliable amount with a small tip 😏 would be ~0.3 ETH) to the deployer account: `0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`.
 
 > [!CAUTION]
 > Prior to using a pre-signed transaction, you **MUST** ensure that the gas metering of the target chain is **EQUIVALENT** to that of Ethereum's EVM version!
@@ -2086,7 +2086,7 @@ We offer two options for deploying [`CreateX`](./src/CreateX.sol) to your desire
 >
 > If you are not sure how to validate this, you can either use the [`eth_estimateGas`](https://ethereum.github.io/execution-apis/api-documentation/) JSON-RPC method or simply deploy the [`CreateX`](./src/CreateX.sol) contract from another account and see how much gas is needed for the deployment. Standard EVM chains should require exactly 2,580,902 gas to deploy [`CreateX`](./src/CreateX.sol).
 
-We repeat: PLEASE DO NOT BROADCAST ANY PRE-SIGNED TRANSACTION WITHOUT LOCAL TESTING! Also, before deploying, you MUST send at least 0.1 ETH to the deployer address `0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`. We offer three pre-signed, pre-[`EIP-155`](https://eips.ethereum.org/EIPS/eip-155) transactions with the same gas price of 100 gwei, but different `gasLimit` levels:
+We repeat: PLEASE DO NOT BROADCAST ANY PRE-SIGNED TRANSACTION WITHOUT LOCAL TESTING! Also, before deploying, you MUST send at least 0.3 ETH to the deployer address `0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5`. We offer three pre-signed, pre-[`EIP-155`](https://eips.ethereum.org/EIPS/eip-155) transactions with the same gas price of 100 gwei, but different `gasLimit` levels:
 
 - _Default Case:_ `gasLimit = 3_000_000`; [`signed_serialised_transaction_gaslimit_3000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_3000000_.json),
 - _Medium Case:_ `gasLimit = 25_000_000`; [`signed_serialised_transaction_gaslimit_25000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_25000000_.json),
@@ -2127,12 +2127,6 @@ It is recommended to install [Foundry](https://github.com/foundry-rs/foundry) vi
 ```console
 curl -L https://foundry.paradigm.xyz | bash
 foundryup
-```
-
-If you want or need to build [Foundry](https://github.com/foundry-rs/foundry) from source code, you can simply invoke the following command to install the full toolkit:
-
-```console
-cargo install --git https://github.com/foundry-rs/foundry --profile local --force --locked forge cast chisel anvil
 ```
 
 To broadcast a pre-signed transaction, you can invoke:

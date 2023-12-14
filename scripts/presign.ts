@@ -15,6 +15,19 @@ export async function presign() {
   // Ensure the correct contract creation bytecode is used
   if (
     hre.ethers.keccak256(initCode) !=
+    // This following hash can be retrieved via Solidity and using the compiler settings in `./verification/CreateX.json`:
+    // ```sol
+    // // SPDX-License-Identifier: AGPL-3.0-only
+    // pragma solidity 0.8.23;
+    //
+    // import {CreateX} from "./src/CreateX.sol";
+    //
+    // contract CreationCodeHashCreateX {
+    //     function creationCodeHashCreateX() external pure returns (bytes32) {
+    //         return keccak256(type(CreateX).creationCode);
+    //     }
+    // }
+    // ```
     "0x12ec861579b63a3ab9db3b5a23c57d56402ad3061475b088f17054e2f2daf22f"
   ) {
     throw new Error("Incorrect contract creation bytecode.");
@@ -72,7 +85,7 @@ export async function presign() {
     );
     fs.writeFileSync(saveDir, JSON.stringify(signedTx.serialized));
 
-    console.log(`${GREEN}Signing attempt has been successful!${RESET}`);
+    console.log(`${GREEN}Signing attempt has been successful!${RESET}\n`);
     console.log(
       `Serialised signed transaction written to: ${GREEN}${saveDir}${RESET}\n`,
     );
@@ -101,7 +114,7 @@ export async function presign() {
     );
     fs.writeFileSync(saveDir, JSON.stringify(err));
 
-    console.log(`${RED}Signing attempt failed!${RESET}`);
+    console.log(`${RED}Signing attempt failed!${RESET}\n`);
     console.log(`Error details written to: ${RED}${saveDir}${RESET}\n`);
   }
 }
