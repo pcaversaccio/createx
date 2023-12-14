@@ -2112,7 +2112,7 @@ cd createx
 pnpm install
 ```
 
-Now configure your target chain in the [`hardhat.config.ts`](./hardhat.config.ts) file with the `networks` and `etherscan` properties, or use one of the preconfigured network configurations. After you have made sure locally that the `gasLimit` of 3 million works on your target chain, you can invoke:
+Now configure your target chain in the [`hardhat.config.ts`](./hardhat.config.ts) file with the `networks` and `etherscan` properties, or use one of the preconfigured network configurations. After you have locally ensured that the `gasLimit` of 3 million works on your target chain, you can invoke:
 
 ```console
 npx hardhat run --no-compile --network <NETWORK_NAME> scripts/deploy.ts
