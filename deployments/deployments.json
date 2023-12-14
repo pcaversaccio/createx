@@ -2,7 +2,6 @@
   {
     "name": "Ethereum Mainnet",
     "chainId": 1,
-    "url": "",
-    "deprecated": false
+    "url": ""
   }
 ]
