@@ -1,4 +1,4 @@
-# [`CreateX`](./src/CreateX.sol) User Interface
+# [`CreateX`](../src/CreateX.sol) User Interface
 
 [Next.js](https://nextjs.org)-based user interface for [createx.rocks](https://www.createx.rocks).
 
