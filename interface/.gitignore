@@ -1,35 +1,51 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Ignore all Visual Studio Code settings
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Local history for Visual Studio Code
+.history
 
-# testing
-/coverage
+# Built Visual Studio Code extensions
+*.vsix
 
-# next.js
-/.next/
-/out/
+# Dependency directory
+node_modules
 
-# production
-/build
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
-# misc
-.DS_Store
-*.pem
-
-# debug
+# Log files
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
-# local env files
-.env*.local
+# Yarn integrity file
+.yarn-integrity
 
-# vercel
-.vercel
+# Optional npm cache directory
+.npm
 
-# typescript
-*.tsbuildinfo
+# Modern Yarn files
+.pnp.*
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Next.js
+.next
 next-env.d.ts

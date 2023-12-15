@@ -1,16 +1,7 @@
-# Multicall3 Website
+# [`CreateX`](./src/CreateX.sol) User Interface
 
-This is the source code for https://multicall3.com.
+[Next.js](https://nextjs.org)-based user interface for [createx.rocks](https://www.createx.rocks).
 
-## Development
+## 🙏🏼 Acknowledgement
 
-```bash
-# Install dependencies.
-pnpm install
-
-# Start the development server.
-pnpm dev
-
-# Format files.
-pnpm fmt
-```
+Our code is based on a fork of [Matt Solomon](https://github.com/mds1)'s [`Multicall3`](https://github.com/mds1/multicall) [frontend](https://github.com/mds1/multicall3-frontend), licensed under the [MIT License](https://github.com/mds1/multicall3-frontend/blob/main/LICENSE).

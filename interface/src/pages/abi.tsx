@@ -1,82 +1,85 @@
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { Tab } from '@headlessui/react';
-import { ArrowDownTrayIcon, ClipboardDocumentIcon } from '@heroicons/react/24/solid';
-import { useTheme } from 'next-themes';
-import Prism from 'prismjs';
-import 'prismjs/components/prism-json';
-import 'prismjs/components/prism-solidity';
-import 'prismjs/components/prism-typescript';
-import { Head } from '@/components/layout/Head';
-import { Notification } from '@/components/ui/Notification';
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { Tab } from "@headlessui/react";
+import {
+  ArrowDownTrayIcon,
+  ClipboardDocumentIcon,
+} from "@heroicons/react/24/solid";
+import { useTheme } from "next-themes";
+import Prism from "prismjs";
+import "prismjs/components/prism-json";
+import "prismjs/components/prism-solidity";
+import "prismjs/components/prism-typescript";
+import { Head } from "@/components/layout/Head";
+import { Notification } from "@/components/ui/Notification";
 import {
   MULTICALL_ABI,
   MULTICALL_ABI_ETHERS,
   MULTICALL_ABI_VIEM,
   MULTICALL_SOLIDITY_INTERFACE,
-} from '@/lib/constants';
-import { classNames } from '@/lib/utils';
-import { copyToClipboard } from '@/lib/utils';
+} from "@/lib/constants";
+import { classNames } from "@/lib/utils";
+import { copyToClipboard } from "@/lib/utils";
 
 const tabs = [
   {
-    name: 'Solidity',
-    href: '#solidity',
-    imgUri: '/solidity.png',
-    imgSize: 'sm',
-    language: 'solidity',
+    name: "Solidity",
+    href: "#solidity",
+    imgUri: "/solidity.png",
+    imgSize: "sm",
+    language: "solidity",
     abi: MULTICALL_SOLIDITY_INTERFACE,
-    filename: 'IMulticall3.sol',
-    mimeType: 'text/plain',
+    filename: "IMulticall3.sol",
+    mimeType: "text/plain",
   },
   {
-    name: 'ethers.js',
-    href: '#ethers-js',
-    imgUri: '/ethersjs.png',
-    language: 'typescript',
+    name: "ethers.js",
+    href: "#ethers-js",
+    imgUri: "/ethersjs.png",
+    language: "typescript",
     abi: MULTICALL_ABI_ETHERS,
-    filename: 'IMulticall3.ts',
-    mimeType: 'text/plain',
+    filename: "IMulticall3.ts",
+    mimeType: "text/plain",
   },
   {
-    name: 'viem',
-    href: '#viem',
-    imgUri: '/viem.png',
-    language: 'typescript',
+    name: "viem",
+    href: "#viem",
+    imgUri: "/viem.png",
+    language: "typescript",
     abi: MULTICALL_ABI_VIEM,
-    filename: 'IMulticall3.ts',
-    mimeType: 'text/plain',
+    filename: "IMulticall3.ts",
+    mimeType: "text/plain",
   },
   {
-    name: 'JSON',
-    href: '#json',
-    imgUri: '/json.svg',
-    imgSize: 'sm',
-    language: 'json',
+    name: "JSON",
+    href: "#json",
+    imgUri: "/json.svg",
+    imgSize: "sm",
+    language: "json",
     abi: JSON.stringify(MULTICALL_ABI, null, 2),
-    filename: 'IMulticall3.json',
-    mimeType: 'application/json',
+    filename: "IMulticall3.json",
+    mimeType: "application/json",
   },
   {
-    name: 'JSON (minified)',
-    href: '#json-minified',
-    imgUri: '/json.svg',
-    imgSize: 'sm',
-    language: 'json',
+    name: "JSON (minified)",
+    href: "#json-minified",
+    imgUri: "/json.svg",
+    imgSize: "sm",
+    language: "json",
     abi: JSON.stringify(MULTICALL_ABI),
-    filename: 'IMulticall3.json',
-    mimeType: 'application/json',
+    filename: "IMulticall3.json",
+    mimeType: "application/json",
   },
 ];
 
 const hashToIndex = () => {
-  const anchor = window.location.hash || '#solidity';
+  const anchor = window.location.hash || "#solidity";
   const index = tabs.findIndex((tab) => tab.href === anchor);
   return index === -1 ? 0 : index;
 };
 
 const indexToHash = (index: number) => {
-  return tabs[index].href || '#solidity';
+  return tabs[index].href || "#solidity";
 };
 
 const Abi = () => {
@@ -112,18 +115,19 @@ const Abi = () => {
   useEffect(() => {
     const importTheme = async () => {
       // Define the new stylesheet href based on the theme and get it's element.
-      const newStylesheetHref = theme === 'dark' ? '/prism-dark.css' : '/prism-light.css';
-      const existingStylesheet = document.getElementById('dynamic-stylesheet');
+      const newStylesheetHref =
+        theme === "dark" ? "/prism-dark.css" : "/prism-light.css";
+      const existingStylesheet = document.getElementById("dynamic-stylesheet");
 
       // If there's an existing stylesheet, remove it.
       existingStylesheet?.parentNode?.removeChild(existingStylesheet);
 
       // Create a new element for the new stylesheet, and append the stylesheet to the head.
-      const newStylesheet = document.createElement('link');
-      newStylesheet.rel = 'stylesheet';
-      newStylesheet.type = 'text/css';
+      const newStylesheet = document.createElement("link");
+      newStylesheet.rel = "stylesheet";
+      newStylesheet.type = "text/css";
       newStylesheet.href = newStylesheetHref;
-      newStylesheet.id = 'dynamic-stylesheet';
+      newStylesheet.id = "dynamic-stylesheet";
       document.head.appendChild(newStylesheet);
     };
     importTheme();
@@ -133,11 +137,11 @@ const Abi = () => {
   const onDownload = (content: string, filename: string, mimeType: string) => {
     const blob = new Blob([content], { type: mimeType });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
 
     link.href = url;
     link.download = filename;
-    link.style.display = 'none';
+    link.style.display = "none";
 
     document.body.appendChild(link);
     link.click();
@@ -157,38 +161,40 @@ const Abi = () => {
   // -------- Render --------
   return (
     <>
-      <Head title='ABI' description='Multicall3 ABI in various formats' />
+      <Head title="ABI" description="Multicall3 ABI in various formats" />
 
       <Notification
         show={showNotification}
         setShow={setShowNotification}
-        kind='success'
+        kind="success"
         title={`${tabs[selectedTab].name} ABI copied to clipboard!`}
       />
 
       <Tab.Group selectedIndex={selectedTab} onChange={onTabChange}>
-        <Tab.List className='space-x-4 overflow-x-auto whitespace-nowrap border-b border-gray-200 dark:border-gray-700 md:flex md:justify-center md:space-x-8'>
+        <Tab.List className="space-x-4 overflow-x-auto whitespace-nowrap border-b border-gray-200 dark:border-gray-700 md:flex md:justify-center md:space-x-8">
           {tabs.map((tab) => {
             return (
-              <Tab key={tab.name} className='focus:outline-0'>
+              <Tab key={tab.name} className="focus:outline-0">
                 {({ selected }) => (
                   <div
                     className={classNames(
-                      'group inline-flex items-center px-1 py-3 text-sm font-medium',
+                      "group inline-flex items-center px-1 py-3 text-sm font-medium",
                       selected
-                        ? 'text-accent border-b-2 border-b-blue-800 outline-none dark:border-b-blue-300'
-                        : 'text-secondary text-hover'
+                        ? "text-accent border-b-2 border-b-blue-800 outline-none dark:border-b-blue-300"
+                        : "text-secondary text-hover",
                     )}
                   >
                     <Image
                       src={tab.imgUri}
-                      height={tab.imgSize === 'sm' ? 16 : 20}
-                      width={tab.imgSize === 'sm' ? 16 : 20}
-                      alt='JSON logo'
-                      className='mr-2'
+                      height={tab.imgSize === "sm" ? 16 : 20}
+                      width={tab.imgSize === "sm" ? 16 : 20}
+                      alt="JSON logo"
+                      className="mr-2"
                       style={{
                         filter:
-                          theme === 'dark' ? 'invert(1) brightness(1) saturate(0)' : undefined,
+                          theme === "dark"
+                            ? "invert(1) brightness(1) saturate(0)"
+                            : undefined,
                       }}
                     />
                     {tab.name}
@@ -198,36 +204,41 @@ const Abi = () => {
             );
           })}
         </Tab.List>
-        <Tab.Panels className='text-center' style={{ opacity: isLoading ? 0 : 1 }}>
+        <Tab.Panels
+          className="text-center"
+          style={{ opacity: isLoading ? 0 : 1 }}
+        >
           {tabs.map((tab) => {
             return (
               <Tab.Panel
                 key={tab.name}
-                className='relative mt-4 inline-block max-h-screen max-w-full overflow-x-auto overflow-y-auto text-sm shadow-md'
+                className="relative mt-4 inline-block max-h-screen max-w-full overflow-x-auto overflow-y-auto text-sm shadow-md"
               >
                 <button
-                  className='absolute right-3 top-4 z-10 mr-10 rounded-md border border-gray-500 p-1 hover:border-black focus:outline-0 dark:border-gray-400 hover:dark:border-gray-200'
+                  className="absolute right-3 top-4 z-10 mr-10 rounded-md border border-gray-500 p-1 hover:border-black focus:outline-0 dark:border-gray-400 hover:dark:border-gray-200"
                   style={{
                     // Blur the background behind the copy button.
-                    background: 'rgba(0, 0, 0, 0.0)',
-                    backdropFilter: 'blur(4px)',
+                    background: "rgba(0, 0, 0, 0.0)",
+                    backdropFilter: "blur(4px)",
                   }}
-                  onClick={() => onDownload(tab.abi, tab.filename, tab.mimeType)}
+                  onClick={() =>
+                    onDownload(tab.abi, tab.filename, tab.mimeType)
+                  }
                 >
-                  <ArrowDownTrayIcon className='h-4 w-4' />
+                  <ArrowDownTrayIcon className="h-4 w-4" />
                 </button>
                 <button
-                  className='absolute right-3 top-4 z-10 rounded-md border border-gray-500 p-1 hover:border-black focus:outline-0 dark:border-gray-400 hover:dark:border-gray-200'
+                  className="absolute right-3 top-4 z-10 rounded-md border border-gray-500 p-1 hover:border-black focus:outline-0 dark:border-gray-400 hover:dark:border-gray-200"
                   style={{
                     // Blur the background behind the copy button.
-                    background: 'rgba(0, 0, 0, 0.0)',
-                    backdropFilter: 'blur(4px)',
+                    background: "rgba(0, 0, 0, 0.0)",
+                    backdropFilter: "blur(4px)",
                   }}
                   onClick={() => onCopy(tab.abi)}
                 >
-                  <ClipboardDocumentIcon className='h-4 w-4' />
+                  <ClipboardDocumentIcon className="h-4 w-4" />
                 </button>
-                <pre className='rounded-lg'>
+                <pre className="rounded-lg">
                   <code className={`language-${tab.language}`}>{tab.abi}</code>
                 </pre>
               </Tab.Panel>
