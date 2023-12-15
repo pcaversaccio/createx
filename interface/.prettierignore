@@ -1,0 +1,4 @@
+.next
+pnpm-lock.yaml
+public/prism-light.css
+public/prism-dark.css
