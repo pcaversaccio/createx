@@ -1,6 +1,5 @@
 export const SITE_NAME = "CreateX";
-export const SITE_DESCRIPTION =
-  "CreateX – A Trustless, Universal Contract Deployer";
+export const SITE_DESCRIPTION = "A Trustless, Universal Contract Deployer";
 export const COMPANY_NAME = "pcaversaccio";
 export const COMPANY_URL = "https://pcaversaccio.com";
 export const GITHUB_URL = "https://github.com/pcaversaccio/createx";
