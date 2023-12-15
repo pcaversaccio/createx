@@ -93,7 +93,6 @@ jobs:
 
       - name: Validate URLs
         run: |
-          awesome_bot ./*.md src/*.sol test/**/*.sol test/public/**/*.sol interface/*.md interface/public/*.css\
-          interface/src/**/*.css interface/src/**/*.tsx interface/src/**/*.ts interface/src/components/**/*.tsx\
+          awesome_bot ./*.md src/*.sol test/**/*.sol test/public/**/*.sol interface/*.md interface/public/*.css interface/src/**/*.css interface/src/**/*.tsx interface/src/**/*.ts interface/src/components/**/*.tsx \
           --allow-dupe --request-delay 0.4 \
           --white-list "https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+",https://twitter.com/PaulRBerg/status/1682346315806539776,https://www.createx.rocks,https://foundry.paradigm.xyz,https://github.com/pcaversaccio/createx.git
