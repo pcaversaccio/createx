@@ -13,15 +13,16 @@ const navigation = [
         viewBox="0 0 48 48"
         width="24px"
         height="24px"
-        clip-rule="evenodd"
+        clipRule="evenodd"
         baseProfile="basic"
+        {...props}
       >
         <polygon fill="#616161" points="41,6 9.929,42 6.215,42 37.287,6" />
         <polygon
           fill="#fff"
-          fill-rule="evenodd"
+          fillRule="evenodd"
           points="31.143,41 7.82,7 16.777,7 40.1,41"
-          clip-rule="evenodd"
+          clipRule="evenodd"
         />
         <path
           fill="#616161"
