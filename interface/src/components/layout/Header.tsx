@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { ClipboardDocumentIcon } from "@heroicons/react/24/solid";
 import { Notification } from "@/components/ui/Notification";
-import { COMPANY_NAME, MULTICALL_ADDRESS, SITE_NAME } from "@/lib/constants";
+import { COMPANY_NAME, CREATEX_ADDRESS, SITE_NAME } from "@/lib/constants";
 import { copyToClipboard } from "@/lib/utils";
 
 export const Header = () => {
@@ -65,7 +65,7 @@ export const Header = () => {
             />
             <NavLink path="/abi" label="ABI" className="text-hover mr-4" />
             <NavLink
-              path="https://github.com/mds1/multicall"
+              path="https://github.com/pcaversaccio/createx"
               className="text-hover"
               label="Documentation"
             />
@@ -79,11 +79,11 @@ export const Header = () => {
           </p>
           <div className="flex items-center">
             <pre className="text-sm">
-              <code className="font-semibold">{MULTICALL_ADDRESS}</code>
+              <code className="font-semibold">{CREATEX_ADDRESS}</code>
             </pre>
             <ClipboardDocumentIcon
               className="ml-3 h-4 w-4 cursor-pointer"
-              onClick={() => onCopy(MULTICALL_ADDRESS)}
+              onClick={() => onCopy(CREATEX_ADDRESS)}
             />
           </div>
         </div>

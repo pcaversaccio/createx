@@ -3,17 +3,28 @@ import { Head } from "@/components/layout/Head";
 import { SITE_DESCRIPTION } from "@/lib/constants";
 
 const Home = () => {
+  // eslint-disable-next-line no-console
+  console.log(`
+:'######::'########::'########::::'###::::'########:'########:'##::::'##:
+'##... ##: ##.... ##: ##.....::::'## ##:::... ##..:: ##.....::. ##::'##::
+ ##:::..:: ##:::: ##: ##::::::::'##:. ##::::: ##:::: ##::::::::. ##'##:::
+ ##::::::: ########:: ######:::'##:::. ##:::: ##:::: ######:::::. ###::::
+ ##::::::: ##.. ##::: ##...:::: #########:::: ##:::: ##...:::::: ## ##:::
+ ##::: ##: ##::. ##:: ##::::::: ##.... ##:::: ##:::: ##:::::::: ##:. ##::
+. ######:: ##:::. ##: ########: ##:::: ##:::: ##:::: ########: ##:::. ##:
+:......:::..:::::..::........::..:::::..:::::..:::::........::..:::::..::
+`);
   const cards = [
     {
       id: 1,
       href: "/deployments",
       title: "Deployments",
-      subtitle: "Deployed on 100+ chains",
+      subtitle: "Deployed on 60+ chains",
     },
     { id: 2, href: "/abi", title: "ABI", subtitle: "In any format" },
     {
       id: 3,
-      href: "https://github.com/mds1/multicall",
+      href: "https://github.com/pcaversaccio/createx",
       title: "Docs",
       subtitle: "Learn more",
     },

@@ -13,10 +13,10 @@ import "prismjs/components/prism-typescript";
 import { Head } from "@/components/layout/Head";
 import { Notification } from "@/components/ui/Notification";
 import {
-  MULTICALL_ABI,
-  MULTICALL_ABI_ETHERS,
-  MULTICALL_ABI_VIEM,
-  MULTICALL_SOLIDITY_INTERFACE,
+  CREATEX_ABI,
+  CREATEX_ABI_ETHERS,
+  CREATEX_ABI_VIEM,
+  CREATEX_SOLIDITY_INTERFACE,
 } from "@/lib/constants";
 import { classNames } from "@/lib/utils";
 import { copyToClipboard } from "@/lib/utils";
@@ -28,17 +28,17 @@ const tabs = [
     imgUri: "/solidity.png",
     imgSize: "sm",
     language: "solidity",
-    abi: MULTICALL_SOLIDITY_INTERFACE,
-    filename: "IMulticall3.sol",
+    abi: CREATEX_SOLIDITY_INTERFACE,
+    filename: "ICreateX.sol",
     mimeType: "text/plain",
   },
   {
     name: "ethers.js",
     href: "#ethers-js",
     imgUri: "/ethersjs.png",
-    language: "typescript",
-    abi: MULTICALL_ABI_ETHERS,
-    filename: "IMulticall3.ts",
+    language: "json",
+    abi: CREATEX_ABI_ETHERS,
+    filename: "ICreateX.json",
     mimeType: "text/plain",
   },
   {
@@ -46,8 +46,8 @@ const tabs = [
     href: "#viem",
     imgUri: "/viem.png",
     language: "typescript",
-    abi: MULTICALL_ABI_VIEM,
-    filename: "IMulticall3.ts",
+    abi: CREATEX_ABI_VIEM,
+    filename: "ICreateX.ts",
     mimeType: "text/plain",
   },
   {
@@ -56,18 +56,8 @@ const tabs = [
     imgUri: "/json.svg",
     imgSize: "sm",
     language: "json",
-    abi: JSON.stringify(MULTICALL_ABI, null, 2),
-    filename: "IMulticall3.json",
-    mimeType: "application/json",
-  },
-  {
-    name: "JSON (minified)",
-    href: "#json-minified",
-    imgUri: "/json.svg",
-    imgSize: "sm",
-    language: "json",
-    abi: JSON.stringify(MULTICALL_ABI),
-    filename: "IMulticall3.json",
+    abi: JSON.stringify(CREATEX_ABI, null, 2),
+    filename: "ICreateX.json",
     mimeType: "application/json",
   },
 ];
@@ -161,7 +151,7 @@ const Abi = () => {
   // -------- Render --------
   return (
     <>
-      <Head title="ABI" description="Multicall3 ABI in various formats" />
+      <Head title="ABI" description="CreateX ABI in various formats" />
 
       <Notification
         show={showNotification}

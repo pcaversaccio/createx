@@ -1,28 +1,283 @@
-export const SITE_NAME = "Multicall3";
-export const SITE_DESCRIPTION = "Batch contract calls on any chain.";
-export const COMPANY_NAME = "Matt Solomon";
-export const COMPANY_URL = "https://twitter.com/msolomon44";
-export const GITHUB_URL = "https://github.com/mds1/multicall";
-export const TWITTER_URL = "https://twitter.com/msolomon44";
+export const SITE_NAME = "CreateX";
+export const SITE_DESCRIPTION =
+  "CreateX – A Trustless, Universal Contract Deployer";
+export const COMPANY_NAME = "pcaversaccio";
+export const COMPANY_URL = "https://pcaversaccio.com";
+export const GITHUB_URL = "https://github.com/pcaversaccio/createx";
+export const X_URL = "https://twitter.com/pcaversaccio";
 
-export const MULTICALL_ADDRESS = "0xcA11bde05977b3631167028862bE2a173976CA11";
-export const MULTICALL_ABI = [
+export const CREATEX_ADDRESS = "0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed";
+export const CREATEX_ABI = [
   {
     inputs: [
       {
-        components: [
-          { internalType: "address", name: "target", type: "address" },
-          { internalType: "bytes", name: "callData", type: "bytes" },
-        ],
-        internalType: "struct Multicall3.Call[]",
-        name: "calls",
-        type: "tuple[]",
+        internalType: "address",
+        name: "emitter",
+        type: "address",
       },
     ],
-    name: "aggregate",
+    name: "FailedContractCreation",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "emitter",
+        type: "address",
+      },
+      {
+        internalType: "bytes",
+        name: "revertData",
+        type: "bytes",
+      },
+    ],
+    name: "FailedContractInitialisation",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "emitter",
+        type: "address",
+      },
+      {
+        internalType: "bytes",
+        name: "revertData",
+        type: "bytes",
+      },
+    ],
+    name: "FailedEtherTransfer",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "emitter",
+        type: "address",
+      },
+    ],
+    name: "InvalidNonceValue",
+    type: "error",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "emitter",
+        type: "address",
+      },
+    ],
+    name: "InvalidSalt",
+    type: "error",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "salt",
+        type: "bytes32",
+      },
+    ],
+    name: "ContractCreation",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
+    ],
+    name: "ContractCreation",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "bytes32",
+        name: "salt",
+        type: "bytes32",
+      },
+    ],
+    name: "Create3ProxyContractCreation",
+    type: "event",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "salt",
+        type: "bytes32",
+      },
+      {
+        internalType: "bytes32",
+        name: "initCodeHash",
+        type: "bytes32",
+      },
+    ],
+    name: "computeCreate2Address",
     outputs: [
-      { internalType: "uint256", name: "blockNumber", type: "uint256" },
-      { internalType: "bytes[]", name: "returnData", type: "bytes[]" },
+      {
+        internalType: "address",
+        name: "computedAddress",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "salt",
+        type: "bytes32",
+      },
+      {
+        internalType: "bytes32",
+        name: "initCodeHash",
+        type: "bytes32",
+      },
+      {
+        internalType: "address",
+        name: "deployer",
+        type: "address",
+      },
+    ],
+    name: "computeCreate2Address",
+    outputs: [
+      {
+        internalType: "address",
+        name: "computedAddress",
+        type: "address",
+      },
+    ],
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "salt",
+        type: "bytes32",
+      },
+      {
+        internalType: "address",
+        name: "deployer",
+        type: "address",
+      },
+    ],
+    name: "computeCreate3Address",
+    outputs: [
+      {
+        internalType: "address",
+        name: "computedAddress",
+        type: "address",
+      },
+    ],
+    stateMutability: "pure",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "salt",
+        type: "bytes32",
+      },
+    ],
+    name: "computeCreate3Address",
+    outputs: [
+      {
+        internalType: "address",
+        name: "computedAddress",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "nonce",
+        type: "uint256",
+      },
+    ],
+    name: "computeCreateAddress",
+    outputs: [
+      {
+        internalType: "address",
+        name: "computedAddress",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "deployer",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "nonce",
+        type: "uint256",
+      },
+    ],
+    name: "computeCreateAddress",
+    outputs: [
+      {
+        internalType: "address",
+        name: "computedAddress",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
+      },
+    ],
+    name: "deployCreate",
+    outputs: [
+      {
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
     ],
     stateMutability: "payable",
     type: "function",
@@ -30,26 +285,22 @@ export const MULTICALL_ABI = [
   {
     inputs: [
       {
-        components: [
-          { internalType: "address", name: "target", type: "address" },
-          { internalType: "bool", name: "allowFailure", type: "bool" },
-          { internalType: "bytes", name: "callData", type: "bytes" },
-        ],
-        internalType: "struct Multicall3.Call3[]",
-        name: "calls",
-        type: "tuple[]",
+        internalType: "bytes32",
+        name: "salt",
+        type: "bytes32",
+      },
+      {
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
       },
     ],
-    name: "aggregate3",
+    name: "deployCreate2",
     outputs: [
       {
-        components: [
-          { internalType: "bool", name: "success", type: "bool" },
-          { internalType: "bytes", name: "returnData", type: "bytes" },
-        ],
-        internalType: "struct Multicall3.Result[]",
-        name: "returnData",
-        type: "tuple[]",
+        internalType: "address",
+        name: "newContract",
+        type: "address",
       },
     ],
     stateMutability: "payable",
@@ -58,27 +309,17 @@ export const MULTICALL_ABI = [
   {
     inputs: [
       {
-        components: [
-          { internalType: "address", name: "target", type: "address" },
-          { internalType: "bool", name: "allowFailure", type: "bool" },
-          { internalType: "uint256", name: "value", type: "uint256" },
-          { internalType: "bytes", name: "callData", type: "bytes" },
-        ],
-        internalType: "struct Multicall3.Call3Value[]",
-        name: "calls",
-        type: "tuple[]",
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
       },
     ],
-    name: "aggregate3Value",
+    name: "deployCreate2",
     outputs: [
       {
-        components: [
-          { internalType: "bool", name: "success", type: "bool" },
-          { internalType: "bytes", name: "returnData", type: "bytes" },
-        ],
-        internalType: "struct Multicall3.Result[]",
-        name: "returnData",
-        type: "tuple[]",
+        internalType: "address",
+        name: "newContract",
+        type: "address",
       },
     ],
     stateMutability: "payable",
@@ -87,127 +328,49 @@ export const MULTICALL_ABI = [
   {
     inputs: [
       {
-        components: [
-          { internalType: "address", name: "target", type: "address" },
-          { internalType: "bytes", name: "callData", type: "bytes" },
-        ],
-        internalType: "struct Multicall3.Call[]",
-        name: "calls",
-        type: "tuple[]",
+        internalType: "bytes32",
+        name: "salt",
+        type: "bytes32",
       },
-    ],
-    name: "blockAndAggregate",
-    outputs: [
-      { internalType: "uint256", name: "blockNumber", type: "uint256" },
-      { internalType: "bytes32", name: "blockHash", type: "bytes32" },
+      {
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
       {
         components: [
-          { internalType: "bool", name: "success", type: "bool" },
-          { internalType: "bytes", name: "returnData", type: "bytes" },
+          {
+            internalType: "uint256",
+            name: "constructorAmount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "initCallAmount",
+            type: "uint256",
+          },
         ],
-        internalType: "struct Multicall3.Result[]",
-        name: "returnData",
-        type: "tuple[]",
+        internalType: "struct CreateX.Values",
+        name: "values",
+        type: "tuple",
+      },
+      {
+        internalType: "address",
+        name: "refundAddress",
+        type: "address",
       },
     ],
-    stateMutability: "payable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getBasefee",
-    outputs: [{ internalType: "uint256", name: "basefee", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "uint256", name: "blockNumber", type: "uint256" }],
-    name: "getBlockHash",
-    outputs: [{ internalType: "bytes32", name: "blockHash", type: "bytes32" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getBlockNumber",
-    outputs: [
-      { internalType: "uint256", name: "blockNumber", type: "uint256" },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getChainId",
-    outputs: [{ internalType: "uint256", name: "chainid", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getCurrentBlockCoinbase",
-    outputs: [{ internalType: "address", name: "coinbase", type: "address" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getCurrentBlockDifficulty",
-    outputs: [{ internalType: "uint256", name: "difficulty", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getCurrentBlockGasLimit",
-    outputs: [{ internalType: "uint256", name: "gaslimit", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getCurrentBlockTimestamp",
-    outputs: [{ internalType: "uint256", name: "timestamp", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "address", name: "addr", type: "address" }],
-    name: "getEthBalance",
-    outputs: [{ internalType: "uint256", name: "balance", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "getLastBlockHash",
-    outputs: [{ internalType: "bytes32", name: "blockHash", type: "bytes32" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      { internalType: "bool", name: "requireSuccess", type: "bool" },
-      {
-        components: [
-          { internalType: "address", name: "target", type: "address" },
-          { internalType: "bytes", name: "callData", type: "bytes" },
-        ],
-        internalType: "struct Multicall3.Call[]",
-        name: "calls",
-        type: "tuple[]",
-      },
-    ],
-    name: "tryAggregate",
+    name: "deployCreate2AndInit",
     outputs: [
       {
-        components: [
-          { internalType: "bool", name: "success", type: "bool" },
-          { internalType: "bytes", name: "returnData", type: "bytes" },
-        ],
-        internalType: "struct Multicall3.Result[]",
-        name: "returnData",
-        type: "tuple[]",
+        internalType: "address",
+        name: "newContract",
+        type: "address",
       },
     ],
     stateMutability: "payable",
@@ -215,29 +378,523 @@ export const MULTICALL_ABI = [
   },
   {
     inputs: [
-      { internalType: "bool", name: "requireSuccess", type: "bool" },
+      {
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
       {
         components: [
-          { internalType: "address", name: "target", type: "address" },
-          { internalType: "bytes", name: "callData", type: "bytes" },
+          {
+            internalType: "uint256",
+            name: "constructorAmount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "initCallAmount",
+            type: "uint256",
+          },
         ],
-        internalType: "struct Multicall3.Call[]",
-        name: "calls",
-        type: "tuple[]",
+        internalType: "struct CreateX.Values",
+        name: "values",
+        type: "tuple",
       },
     ],
-    name: "tryBlockAndAggregate",
+    name: "deployCreate2AndInit",
     outputs: [
-      { internalType: "uint256", name: "blockNumber", type: "uint256" },
-      { internalType: "bytes32", name: "blockHash", type: "bytes32" },
+      {
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
       {
         components: [
-          { internalType: "bool", name: "success", type: "bool" },
-          { internalType: "bytes", name: "returnData", type: "bytes" },
+          {
+            internalType: "uint256",
+            name: "constructorAmount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "initCallAmount",
+            type: "uint256",
+          },
         ],
-        internalType: "struct Multicall3.Result[]",
-        name: "returnData",
-        type: "tuple[]",
+        internalType: "struct CreateX.Values",
+        name: "values",
+        type: "tuple",
+      },
+      {
+        internalType: "address",
+        name: "refundAddress",
+        type: "address",
+      },
+    ],
+    name: "deployCreate2AndInit",
+    outputs: [
+      {
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "salt",
+        type: "bytes32",
+      },
+      {
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "constructorAmount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "initCallAmount",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct CreateX.Values",
+        name: "values",
+        type: "tuple",
+      },
+    ],
+    name: "deployCreate2AndInit",
+    outputs: [
+      {
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "salt",
+        type: "bytes32",
+      },
+      {
+        internalType: "address",
+        name: "implementation",
+        type: "address",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
+    ],
+    name: "deployCreate2Clone",
+    outputs: [
+      {
+        internalType: "address",
+        name: "proxy",
+        type: "address",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "implementation",
+        type: "address",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
+    ],
+    name: "deployCreate2Clone",
+    outputs: [
+      {
+        internalType: "address",
+        name: "proxy",
+        type: "address",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
+      },
+    ],
+    name: "deployCreate3",
+    outputs: [
+      {
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "salt",
+        type: "bytes32",
+      },
+      {
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
+      },
+    ],
+    name: "deployCreate3",
+    outputs: [
+      {
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "salt",
+        type: "bytes32",
+      },
+      {
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "constructorAmount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "initCallAmount",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct CreateX.Values",
+        name: "values",
+        type: "tuple",
+      },
+    ],
+    name: "deployCreate3AndInit",
+    outputs: [
+      {
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "constructorAmount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "initCallAmount",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct CreateX.Values",
+        name: "values",
+        type: "tuple",
+      },
+    ],
+    name: "deployCreate3AndInit",
+    outputs: [
+      {
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "salt",
+        type: "bytes32",
+      },
+      {
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "constructorAmount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "initCallAmount",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct CreateX.Values",
+        name: "values",
+        type: "tuple",
+      },
+      {
+        internalType: "address",
+        name: "refundAddress",
+        type: "address",
+      },
+    ],
+    name: "deployCreate3AndInit",
+    outputs: [
+      {
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "constructorAmount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "initCallAmount",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct CreateX.Values",
+        name: "values",
+        type: "tuple",
+      },
+      {
+        internalType: "address",
+        name: "refundAddress",
+        type: "address",
+      },
+    ],
+    name: "deployCreate3AndInit",
+    outputs: [
+      {
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "constructorAmount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "initCallAmount",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct CreateX.Values",
+        name: "values",
+        type: "tuple",
+      },
+    ],
+    name: "deployCreateAndInit",
+    outputs: [
+      {
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "initCode",
+        type: "bytes",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "constructorAmount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "initCallAmount",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct CreateX.Values",
+        name: "values",
+        type: "tuple",
+      },
+      {
+        internalType: "address",
+        name: "refundAddress",
+        type: "address",
+      },
+    ],
+    name: "deployCreateAndInit",
+    outputs: [
+      {
+        internalType: "address",
+        name: "newContract",
+        type: "address",
+      },
+    ],
+    stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "implementation",
+        type: "address",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
+    ],
+    name: "deployCreateClone",
+    outputs: [
+      {
+        internalType: "address",
+        name: "proxy",
+        type: "address",
       },
     ],
     stateMutability: "payable",
@@ -245,121 +902,263 @@ export const MULTICALL_ABI = [
   },
 ] as const;
 
-export const MULTICALL_ABI_VIEM = `[
-  "struct Call { address target; bytes callData; }",
-  "struct Call3 { address target; bool allowFailure; bytes callData; }",
-  "struct Call3Value { address target; bool allowFailure; uint256 value; bytes callData; }",
-  "struct Result { bool success; bytes returnData; }",
-  "function aggregate(Call[] calldata calls) public payable returns (uint256 blockNumber, bytes[] memory returnData)",
-  "function aggregate3(Call3[] calldata calls) public payable returns (Result[] memory returnData)",
-  "function aggregate3Value(Call3Value[] calldata calls) public payable returns (Result[] memory returnData)",
-  "function blockAndAggregate(Call[] calldata calls) public payable returns (uint256 blockNumber, bytes32 blockHash, Result[] memory returnData)",
-  "function getBasefee() view returns (uint256 basefee)",
-  "function getBlockHash(uint256 blockNumber) view returns (bytes32 blockHash)",
-  "function getBlockNumber() view returns (uint256 blockNumber)",
-  "function getChainId() view returns (uint256 chainid)",
-  "function getCurrentBlockCoinbase() view returns (address coinbase)",
-  "function getCurrentBlockDifficulty() view returns (uint256 difficulty)",
-  "function getCurrentBlockGasLimit() view returns (uint256 gaslimit)",
-  "function getCurrentBlockTimestamp() view returns (uint256 timestamp)",
-  "function getEthBalance(address addr) view returns (uint256 balance)",
-  "function getLastBlockHash() view returns (bytes32 blockHash)",
-  "function tryAggregate(bool requireSuccess, Call[] calldata calls) public payable returns (Result[] memory returnData)",
-  "function tryBlockAndAggregate(bool requireSuccess, Call[] calldata calls) public payable returns (uint256 blockNumber, bytes32 blockHash, Result[] memory returnData)",
-] as const`;
+export const CREATEX_ABI_VIEM = `[
+  "error FailedContractCreation(address emitter)",
+  "error FailedContractInitialisation(address emitter, bytes revertData)",
+  "error FailedEtherTransfer(address emitter, bytes revertData)",
+  "error InvalidNonceValue(address emitter)",
+  "error InvalidSalt(address emitter)",
+  "event ContractCreation(address indexed newContract, bytes32 indexed salt)",
+  "event ContractCreation(address indexed newContract)",
+  "event Create3ProxyContractCreation(address indexed newContract, bytes32 indexed salt)",
+  "function computeCreate2Address(bytes32 salt, bytes32 initCodeHash) view returns (address computedAddress)",
+  "function computeCreate2Address(bytes32 salt, bytes32 initCodeHash, address deployer) pure returns (address computedAddress)",
+  "function computeCreate3Address(bytes32 salt, address deployer) pure returns (address computedAddress)",
+  "function computeCreate3Address(bytes32 salt) view returns (address computedAddress)",
+  "function computeCreateAddress(uint256 nonce) view returns (address computedAddress)",
+  "function computeCreateAddress(address deployer, uint256 nonce) view returns (address computedAddress)",
+  "function deployCreate(bytes initCode) payable returns (address newContract)",
+  "function deployCreate2(bytes32 salt, bytes initCode) payable returns (address newContract)",
+  "function deployCreate2(bytes initCode) payable returns (address newContract)",
+  "function deployCreate2AndInit(bytes32 salt, bytes initCode, bytes data, (uint256 constructorAmount, uint256 initCallAmount) values, address refundAddress) payable returns (address newContract)",
+  "function deployCreate2AndInit(bytes initCode, bytes data, (uint256 constructorAmount, uint256 initCallAmount) values) payable returns (address newContract)",
+  "function deployCreate2AndInit(bytes initCode, bytes data, (uint256 constructorAmount, uint256 initCallAmount) values, address refundAddress) payable returns (address newContract)",
+  "function deployCreate2AndInit(bytes32 salt, bytes initCode, bytes data, (uint256 constructorAmount, uint256 initCallAmount) values) payable returns (address newContract)",
+  "function deployCreate2Clone(bytes32 salt, address implementation, bytes data) payable returns (address proxy)",
+  "function deployCreate2Clone(address implementation, bytes data) payable returns (address proxy)",
+  "function deployCreate3(bytes initCode) payable returns (address newContract)",
+  "function deployCreate3(bytes32 salt, bytes initCode) payable returns (address newContract)",
+  "function deployCreate3AndInit(bytes32 salt, bytes initCode, bytes data, (uint256 constructorAmount, uint256 initCallAmount) values) payable returns (address newContract)",
+  "function deployCreate3AndInit(bytes initCode, bytes data, (uint256 constructorAmount, uint256 initCallAmount) values) payable returns (address newContract)",
+  "function deployCreate3AndInit(bytes32 salt, bytes initCode, bytes data, (uint256 constructorAmount, uint256 initCallAmount) values, address refundAddress) payable returns (address newContract)",
+  "function deployCreate3AndInit(bytes initCode, bytes data, (uint256 constructorAmount, uint256 initCallAmount) values, address refundAddress) payable returns (address newContract)",
+  "function deployCreateAndInit(bytes initCode, bytes data, (uint256 constructorAmount, uint256 initCallAmount) values) payable returns (address newContract)",
+  "function deployCreateAndInit(bytes initCode, bytes data, (uint256 constructorAmount, uint256 initCallAmount) values, address refundAddress) payable returns (address newContract)",
+  "function deployCreateClone(address implementation, bytes data) payable returns (address proxy)",
+] as const;`;
 
-export const MULTICALL_ABI_ETHERS = `[
-  "function aggregate(tuple(address target, bytes callData)[] calls) payable returns (uint256 blockNumber, bytes[] returnData)",
-  "function aggregate3(tuple(address target, bool allowFailure, bytes callData)[] calls) payable returns (tuple(bool success, bytes returnData)[] returnData)",
-  "function aggregate3Value(tuple(address target, bool allowFailure, uint256 value, bytes callData)[] calls) payable returns (tuple(bool success, bytes returnData)[] returnData)",
-  "function blockAndAggregate(tuple(address target, bytes callData)[] calls) payable returns (uint256 blockNumber, bytes32 blockHash, tuple(bool success, bytes returnData)[] returnData)",
-  "function getBasefee() view returns (uint256 basefee)",
-  "function getBlockHash(uint256 blockNumber) view returns (bytes32 blockHash)",
-  "function getBlockNumber() view returns (uint256 blockNumber)",
-  "function getChainId() view returns (uint256 chainid)",
-  "function getCurrentBlockCoinbase() view returns (address coinbase)",
-  "function getCurrentBlockDifficulty() view returns (uint256 difficulty)",
-  "function getCurrentBlockGasLimit() view returns (uint256 gaslimit)",
-  "function getCurrentBlockTimestamp() view returns (uint256 timestamp)",
-  "function getEthBalance(address addr) view returns (uint256 balance)",
-  "function getLastBlockHash() view returns (bytes32 blockHash)",
-  "function tryAggregate(bool requireSuccess, tuple(address target, bytes callData)[] calls) payable returns (tuple(bool success, bytes returnData)[] returnData)",
-  "function tryBlockAndAggregate(bool requireSuccess, tuple(address target, bytes callData)[] calls) payable returns (uint256 blockNumber, bytes32 blockHash, tuple(bool success, bytes returnData)[] returnData)",
+export const CREATEX_ABI_ETHERS = `
+[
+  "error FailedContractCreation(address)",
+  "error FailedContractInitialisation(address,bytes)",
+  "error FailedEtherTransfer(address,bytes)",
+  "error InvalidNonceValue(address)",
+  "error InvalidSalt(address)",
+  "event ContractCreation(address indexed,bytes32 indexed)",
+  "event ContractCreation(address indexed)",
+  "event Create3ProxyContractCreation(address indexed,bytes32 indexed)",
+  "function computeCreate2Address(bytes32,bytes32) view returns (address)",
+  "function computeCreate2Address(bytes32,bytes32,address) pure returns (address)",
+  "function computeCreate3Address(bytes32,address) pure returns (address)",
+  "function computeCreate3Address(bytes32) view returns (address)",
+  "function computeCreateAddress(uint256) view returns (address)",
+  "function computeCreateAddress(address,uint256) view returns (address)",
+  "function deployCreate(bytes) payable returns (address)",
+  "function deployCreate2(bytes32,bytes) payable returns (address)",
+  "function deployCreate2(bytes) payable returns (address)",
+  "function deployCreate2AndInit(bytes32,bytes,bytes,tuple(uint256,uint256),address) payable returns (address)",
+  "function deployCreate2AndInit(bytes,bytes,tuple(uint256,uint256)) payable returns (address)",
+  "function deployCreate2AndInit(bytes,bytes,tuple(uint256,uint256),address) payable returns (address)",
+  "function deployCreate2AndInit(bytes32,bytes,bytes,tuple(uint256,uint256)) payable returns (address)",
+  "function deployCreate2Clone(bytes32,address,bytes) payable returns (address)",
+  "function deployCreate2Clone(address,bytes) payable returns (address)",
+  "function deployCreate3(bytes) payable returns (address)",
+  "function deployCreate3(bytes32,bytes) payable returns (address)",
+  "function deployCreate3AndInit(bytes32,bytes,bytes,tuple(uint256,uint256)) payable returns (address)",
+  "function deployCreate3AndInit(bytes,bytes,tuple(uint256,uint256)) payable returns (address)",
+  "function deployCreate3AndInit(bytes32,bytes,bytes,tuple(uint256,uint256),address) payable returns (address)",
+  "function deployCreate3AndInit(bytes,bytes,tuple(uint256,uint256),address) payable returns (address)",
+  "function deployCreateAndInit(bytes,bytes,tuple(uint256,uint256)) payable returns (address)",
+  "function deployCreateAndInit(bytes,bytes,tuple(uint256,uint256),address) payable returns (address)",
+  "function deployCreateClone(address,bytes) payable returns (address)"
 ]`;
 
-export const MULTICALL_SOLIDITY_INTERFACE = `// SPDX-License-Identifier: MIT
-pragma solidity >=0.5.0;
-pragma experimental ABIEncoderV2;
+export const CREATEX_SOLIDITY_INTERFACE = `
+// SPDX-License-Identifier: AGPL-3.0-only
+pragma solidity ^0.8.4;
 
-interface IMulticall3 {
-  struct Call {
-    address target;
-    bytes callData;
+/**
+ * @title CreateX Factory Interface Definition
+ * @author pcaversaccio (https://web.archive.org/web/20230921103111/https://pcaversaccio.com/)
+ * @custom:coauthor Matt Solomon (https://web.archive.org/web/20230921103335/https://mattsolomon.dev/)
+ */
+interface ICreateX {
+  /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+  /*                            TYPES                           */
+  /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
+  struct Values {
+    uint256 constructorAmount;
+    uint256 initCallAmount;
   }
 
-  struct Call3 {
-    address target;
-    bool allowFailure;
-    bytes callData;
-  }
+  /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+  /*                           EVENTS                           */
+  /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
-  struct Call3Value {
-    address target;
-    bool allowFailure;
-    uint256 value;
-    bytes callData;
-  }
+  event ContractCreation(address indexed newContract, bytes32 indexed salt);
+  event ContractCreation(address indexed newContract);
+  event Create3ProxyContractCreation(
+    address indexed newContract,
+    bytes32 indexed salt
+  );
 
-  struct Result {
-    bool success;
-    bytes returnData;
-  }
+  /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+  /*                        CUSTOM ERRORS                       */
+  /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
-  function aggregate(Call[] calldata calls)
-    external
-    payable
-    returns (uint256 blockNumber, bytes[] memory returnData);
+  error FailedContractCreation(address emitter);
+  error FailedContractInitialisation(address emitter, bytes revertData);
+  error InvalidSalt(address emitter);
+  error InvalidNonceValue(address emitter);
+  error FailedEtherTransfer(address emitter, bytes revertData);
 
-  function aggregate3(Call3[] calldata calls) external payable returns (Result[] memory returnData);
+  /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+  /*                           CREATE                           */
+  /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
-  function aggregate3Value(Call3Value[] calldata calls)
-    external
-    payable
-    returns (Result[] memory returnData);
+  function deployCreate(
+    bytes memory initCode
+  ) external payable returns (address newContract);
 
-  function blockAndAggregate(Call[] calldata calls)
-    external
-    payable
-    returns (uint256 blockNumber, bytes32 blockHash, Result[] memory returnData);
+  function deployCreateAndInit(
+    bytes memory initCode,
+    bytes memory data,
+    Values memory values,
+    address refundAddress
+  ) external payable returns (address newContract);
 
-  function getBasefee() external view returns (uint256 basefee);
+  function deployCreateAndInit(
+    bytes memory initCode,
+    bytes memory data,
+    Values memory values
+  ) external payable returns (address newContract);
 
-  function getBlockHash(uint256 blockNumber) external view returns (bytes32 blockHash);
+  function deployCreateClone(
+    address implementation,
+    bytes memory data
+  ) external payable returns (address proxy);
 
-  function getBlockNumber() external view returns (uint256 blockNumber);
+  function computeCreateAddress(
+    address deployer,
+    uint256 nonce
+  ) external view returns (address computedAddress);
 
-  function getChainId() external view returns (uint256 chainid);
+  function computeCreateAddress(
+    uint256 nonce
+  ) external view returns (address computedAddress);
 
-  function getCurrentBlockCoinbase() external view returns (address coinbase);
+  /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+  /*                           CREATE2                          */
+  /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
-  function getCurrentBlockDifficulty() external view returns (uint256 difficulty);
+  function deployCreate2(
+    bytes32 salt,
+    bytes memory initCode
+  ) external payable returns (address newContract);
 
-  function getCurrentBlockGasLimit() external view returns (uint256 gaslimit);
+  function deployCreate2(
+    bytes memory initCode
+  ) external payable returns (address newContract);
 
-  function getCurrentBlockTimestamp() external view returns (uint256 timestamp);
+  function deployCreate2AndInit(
+    bytes32 salt,
+    bytes memory initCode,
+    bytes memory data,
+    Values memory values,
+    address refundAddress
+  ) external payable returns (address newContract);
 
-  function getEthBalance(address addr) external view returns (uint256 balance);
+  function deployCreate2AndInit(
+    bytes32 salt,
+    bytes memory initCode,
+    bytes memory data,
+    Values memory values
+  ) external payable returns (address newContract);
 
-  function getLastBlockHash() external view returns (bytes32 blockHash);
+  function deployCreate2AndInit(
+    bytes memory initCode,
+    bytes memory data,
+    Values memory values,
+    address refundAddress
+  ) external payable returns (address newContract);
 
-  function tryAggregate(bool requireSuccess, Call[] calldata calls)
-    external
-    payable
-    returns (Result[] memory returnData);
+  function deployCreate2AndInit(
+    bytes memory initCode,
+    bytes memory data,
+    Values memory values
+  ) external payable returns (address newContract);
 
-  function tryBlockAndAggregate(bool requireSuccess, Call[] calldata calls)
-    external
-    payable
-    returns (uint256 blockNumber, bytes32 blockHash, Result[] memory returnData);
+  function deployCreate2Clone(
+    bytes32 salt,
+    address implementation,
+    bytes memory data
+  ) external payable returns (address proxy);
+
+  function deployCreate2Clone(
+    address implementation,
+    bytes memory data
+  ) external payable returns (address proxy);
+
+  function computeCreate2Address(
+    bytes32 salt,
+    bytes32 initCodeHash,
+    address deployer
+  ) external pure returns (address computedAddress);
+
+  function computeCreate2Address(
+    bytes32 salt,
+    bytes32 initCodeHash
+  ) external view returns (address computedAddress);
+
+  /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
+  /*                           CREATE3                          */
+  /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
+
+  function deployCreate3(
+    bytes32 salt,
+    bytes memory initCode
+  ) external payable returns (address newContract);
+
+  function deployCreate3(
+    bytes memory initCode
+  ) external payable returns (address newContract);
+
+  function deployCreate3AndInit(
+    bytes32 salt,
+    bytes memory initCode,
+    bytes memory data,
+    Values memory values,
+    address refundAddress
+  ) external payable returns (address newContract);
+
+  function deployCreate3AndInit(
+    bytes32 salt,
+    bytes memory initCode,
+    bytes memory data,
+    Values memory values
+  ) external payable returns (address newContract);
+
+  function deployCreate3AndInit(
+    bytes memory initCode,
+    bytes memory data,
+    Values memory values,
+    address refundAddress
+  ) external payable returns (address newContract);
+
+  function deployCreate3AndInit(
+    bytes memory initCode,
+    bytes memory data,
+    Values memory values
+  ) external payable returns (address newContract);
+
+  function computeCreate3Address(
+    bytes32 salt,
+    address deployer
+  ) external pure returns (address computedAddress);
+
+  function computeCreate3Address(
+    bytes32 salt
+  ) external view returns (address computedAddress);
 }
 `;

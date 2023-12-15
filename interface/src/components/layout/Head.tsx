@@ -15,6 +15,15 @@ export const Head = (props: Props) => {
         content={props.description ?? SITE_DESCRIPTION}
       />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta property="og:title" content="CreateX" />
+      <meta
+        property="og:description"
+        content="A Trustless, Universal Contract Deployer"
+      />
+      <meta
+        property="og:image"
+        content="https://github-production-user-asset-6210df.s3.amazonaws.com/25297591/272914952-38a5989c-0113-427d-9158-47646971b7d8.png"
+      />
     </NextHead>
   );
 };

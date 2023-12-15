@@ -19,9 +19,9 @@ const Deployments = () => {
   const [deployments, setDeployments] = useState([] as Deployment[]);
   const [isLoading, setIsLoading] = useState(true);
   const deploymentsUrl =
-    "https://github.com/mds1/multicall/blob/main/deployments.json";
+    "https://github.com/pcaversaccio/createx/blob/main/deployments/deployments.json";
   const deploymentsUrlRaw =
-    "https://raw.githubusercontent.com/mds1/multicall/main/deployments.json";
+    "https://raw.githubusercontent.com/pcaversaccio/createx/main/deployments/deployments.json";
 
   useEffect(() => {
     setIsLoading(true);
@@ -94,7 +94,7 @@ const Deployments = () => {
     <main className="grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
       <div className="text-center">
         <h1 className="text-primary mt-4 text-3xl font-bold tracking-tight sm:text-5xl">
-          Oops!
+          🥴Oops!
         </h1>
         <p className="text-secondary mt-6 text-base leading-7">
           Something went wrong fetching the list of deployments.
@@ -104,7 +104,7 @@ const Deployments = () => {
             onClick={() => window.location.reload()}
             className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
           >
-            Try again
+            Please try again!
           </button>
           <ExternalLink
             href={deploymentsUrl}
@@ -127,10 +127,10 @@ const Deployments = () => {
     <div className="mt-10 grid min-h-full place-items-center">
       <div className="text-center">
         <p className="text-primary font-bold tracking-tight">
-          No deployments found
+          No deployments found.
         </p>
         <p className="text-secondary mt-2 text-base leading-7">
-          If you need Multicall3 deployed on a new chain,
+          If you need CreateX deployed on a new chain,
           <br />
           please{" "}
           <ExternalLink
@@ -223,14 +223,6 @@ const Deployments = () => {
         <p className="text-secondary p-2 text-xs font-normal">
           Showing {filteredDeployments.length} of {deployments.length}{" "}
           deployments.
-          {filteredDeployments.some((deployment) => deployment.address) && (
-            <span>
-              {" "}
-              Deployments with an address underneath are unofficial deployments
-              on chains that do not support deployments to the same address as
-              Ethereum Mainnet.
-            </span>
-          )}
         </p>
       </div>
     </div>
@@ -245,7 +237,7 @@ const Deployments = () => {
         <input
           type="text"
           className="block w-full rounded-md border-gray-300 px-4 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-          placeholder="Chain name or ID..."
+          placeholder="Network name or chain ID..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           ref={searchInputRef}
@@ -259,7 +251,7 @@ const Deployments = () => {
   // -------- Render --------
   return (
     <>
-      <Head title="Deployments" description="Multicall3 deployments" />
+      <Head title="Deployments" description="CreateX deployments" />
       <div className="flex justify-center">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block py-2 align-middle sm:px-6 lg:px-8">
