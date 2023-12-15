@@ -937,8 +937,7 @@ export const CREATEX_ABI_VIEM = `[
   "function deployCreateClone(address implementation, bytes data) payable returns (address proxy)",
 ] as const;`;
 
-export const CREATEX_ABI_ETHERS = `
-[
+export const CREATEX_ABI_ETHERS = `[
   "error FailedContractCreation(address)",
   "error FailedContractInitialisation(address,bytes)",
   "error FailedEtherTransfer(address,bytes)",
@@ -973,8 +972,7 @@ export const CREATEX_ABI_ETHERS = `
   "function deployCreateClone(address,bytes) payable returns (address)"
 ]`;
 
-export const CREATEX_SOLIDITY_INTERFACE = `
-// SPDX-License-Identifier: AGPL-3.0-only
+export const CREATEX_SOLIDITY_INTERFACE = `// SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity ^0.8.4;
 
 /**
