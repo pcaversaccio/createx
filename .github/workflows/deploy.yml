@@ -42,7 +42,7 @@ jobs:
           path: |
             ${{ steps.pnpm-cache-dir-path.outputs.dir }}
             ${{ github.workspace }}/interface/.next/cache
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('interface/**/*.js', 'interface/**/*.jsx', 'interface/**/*.ts', 'interface/**/*.tsx') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
