@@ -106,9 +106,7 @@ const Abi = () => {
     const importTheme = async () => {
       // Define the new stylesheet href based on the theme and get it's element.
       const newStylesheetHref =
-        theme === "dark"
-          ? "/createx/prism-dark.css"
-          : "/createx/prism-light.css";
+        theme === "dark" ? "prism-dark.css" : "prism-light.css";
       const existingStylesheet = document.getElementById("dynamic-stylesheet");
 
       // If there's an existing stylesheet, remove it.
@@ -177,7 +175,7 @@ const Abi = () => {
                     )}
                   >
                     <Image
-                      src={`/createx/${tab.imgUri}`}
+                      src={tab.imgUri}
                       height={tab.imgSize === "sm" ? 16 : 20}
                       width={tab.imgSize === "sm" ? 16 : 20}
                       alt="JSON logo"
