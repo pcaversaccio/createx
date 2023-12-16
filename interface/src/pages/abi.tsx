@@ -175,7 +175,7 @@ const Abi = () => {
                     )}
                   >
                     <Image
-                      src={tab.imgUri}
+                      src={`/createx/${tab.imgUri}`}
                       height={tab.imgSize === "sm" ? 16 : 20}
                       width={tab.imgSize === "sm" ? 16 : 20}
                       alt="JSON logo"
