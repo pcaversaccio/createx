@@ -1,0 +1,56 @@
+{
+  "name": "createx-interface",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Next.js-based user interface for createx.rocks.",
+  "keywords": [
+    "frontend",
+    "interface",
+    "nextjs",
+    "react",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pcaversaccio/createx.git"
+  },
+  "homepage": "https://github.com/pcaversaccio/createx/tree/main/interface#readme",
+  "bugs": {
+    "url": "https://github.com/pcaversaccio/createx/issues"
+  },
+  "author": "pcaversaccio (https://pcaversaccio.com), Matt Solomon (https://mattsolomon.dev)",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npx next dev",
+    "build": "npx next build",
+    "start": "pnpm build && npx next start",
+    "prettier:check": "npx prettier -c **/*.{js,ts,tsx,css,md,json,yml,yaml}",
+    "prettier:fix": "npx prettier -w **/*.{js,ts,tsx,css,md,json,yml,yaml}",
+    "lint:check": "pnpm prettier:check && npx next lint",
+    "lint:fix": "pnpm prettier:fix && npx next lint --fix"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "next": "14.0.4",
+    "next-themes": "^0.2.1",
+    "prismjs": "^1.29.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "sharp": "^0.33.0"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/node": "20.10.4",
+    "@types/react": "18.2.45",
+    "@types/react-dom": "18.2.18",
+    "autoprefixer": "10.4.16",
+    "eslint": "8.56.0",
+    "eslint-config-next": "14.0.4",
+    "postcss": "8.4.32",
+    "prettier": "^3.1.1",
+    "prettier-plugin-tailwindcss": "^0.5.9",
+    "tailwindcss": "3.3.6",
+    "typescript": "5.3.3"
+  }
+}

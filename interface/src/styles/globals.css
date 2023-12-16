@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .hyperlink {
+    @apply text-blue-700 no-underline hover:text-blue-900 dark:text-blue-300 dark:hover:text-blue-400;
+  }
+
+  .text-primary {
+    @apply text-gray-900 dark:text-gray-50;
+  }
+
+  .text-secondary {
+    @apply text-gray-500 dark:text-gray-400;
+  }
+
+  .text-hover {
+    @apply hover:text-gray-500 dark:hover:text-gray-300;
+  }
+
+  .text-accent {
+    @apply text-blue-800 dark:text-blue-300;
+  }
+
+  .bg-primary {
+    @apply bg-gray-100 dark:bg-gray-900;
+  }
+
+  .bg-secondary {
+    @apply bg-gray-50 dark:bg-gray-800;
+  }
+}
