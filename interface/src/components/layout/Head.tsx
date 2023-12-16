@@ -15,6 +15,9 @@ export const Head = (props: Props) => {
         content={props.description ?? SITE_DESCRIPTION}
       />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:creator" content="@pcaversaccio" />
+      <meta property="og:url" content="https://www.createx.rocks" />
       <meta property="og:title" content="CreateX" />
       <meta
         property="og:description"
