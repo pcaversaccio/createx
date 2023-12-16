@@ -27,6 +27,13 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+
+  /**
+   * Use a custom build directory to use instead of `.next`.
+   *
+   * @see https://nextjs.org/docs/pages/api-reference/next-config-js/distDir
+   */
+  distDir: "dist",
 };
 
 module.exports = nextConfig;

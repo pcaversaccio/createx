@@ -14,8 +14,6 @@ concurrency:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    permissions:
-        id-token: write
     strategy:
       matrix:
         os:
@@ -60,7 +58,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./out
+          path: "interface/dist"
 
   deploy:
     runs-on: ${{ matrix.os }}

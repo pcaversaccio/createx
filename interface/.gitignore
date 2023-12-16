@@ -49,3 +49,4 @@ yarn-error.log*
 # Next.js
 .next
 next-env.d.ts
+dist
