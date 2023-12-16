@@ -49,6 +49,9 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
 
+      - name: Install pnpm project with a clean slate
+        run: pnpm install --prefer-offline --frozen-lockfile
+
       - name: Build with Next.js
         run: pnpm build:interface
 
