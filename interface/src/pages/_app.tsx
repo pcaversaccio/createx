@@ -5,11 +5,11 @@ import { Layout } from "@/components/layout/Layout";
 import "@/styles/globals.css";
 
 function App({ Component, pageProps }: AppProps) {
-  const [mounted, setMounted] = React.useState(false);
-  React.useEffect(() => setMounted(true), []);
+  // const [mounted, setMounted] = React.useState(false);
+  // React.useEffect(() => setMounted(true), []);
   return (
     <ThemeProvider attribute="class">
-      {mounted && (
+      {(
         <Layout>
           <>
             <Component {...pageProps} />
