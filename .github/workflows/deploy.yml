@@ -2,7 +2,7 @@ name: 🚀 UI deployment
 
 on:
   push:
-    branches: ["main", "gh-pages-deployment"]
+    branches: ["main"]
   workflow_dispatch:
 
 # Allows only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
