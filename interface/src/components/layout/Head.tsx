@@ -16,7 +16,7 @@ export const Head = (props: Props) => {
       />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <meta property="og:url" content="https://www.createx.rocks" />
+      <meta property="og:url" content="https://createx.rocks" />
       <meta property="og:title" content="CreateX" />
       <meta
         property="og:description"
