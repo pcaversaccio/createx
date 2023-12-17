@@ -2,7 +2,8 @@
 
 [![🕵️‍♂️ Test CreateX](https://github.com/pcaversaccio/createx/actions/workflows/test-createx.yml/badge.svg)](https://github.com/pcaversaccio/createx/actions/workflows/test-createx.yml)
 [![Test Coverage](https://img.shields.io/badge/Coverage-100%25-green)](#test-coverage)
-[![🚀 Deploy UI](https://github.com/pcaversaccio/createx/actions/workflows/deploy.yml/badge.svg)](https://github.com/pcaversaccio/createx/actions/workflows/deploy.yml)
+[![👮‍♂️ Sanity Checks](https://github.com/pcaversaccio/createx/actions/workflows/checks.yml/badge.svg)](https://github.com/pcaversaccio/createx/actions/workflows/checks.yml)
+[![🖥 UI Deployment](https://github.com/pcaversaccio/createx/actions/workflows/deploy.yml/badge.svg)](https://github.com/pcaversaccio/createx/actions/workflows/deploy.yml)
 [![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue)](https://www.gnu.org/licenses/agpl-3.0)
 
 <img src=https://github-production-user-asset-6210df.s3.amazonaws.com/25297591/272914952-38a5989c-0113-427d-9158-47646971b7d8.png  width="1050"/>

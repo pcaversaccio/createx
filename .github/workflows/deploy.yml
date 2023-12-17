@@ -1,4 +1,4 @@
-name: 🚀 Deploy UI
+name: 🖥 UI deployment
 
 on:
   push:
