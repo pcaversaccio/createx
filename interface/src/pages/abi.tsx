@@ -106,7 +106,7 @@ const Abi = () => {
     const importTheme = async () => {
       // Define the new stylesheet href based on the theme and get it's element.
       const newStylesheetHref =
-        theme === "dark" ? "prism-dark.css" : "prism-light.css";
+        theme === "dark" ? "/prism-dark.css" : "/prism-light.css";
       const existingStylesheet = document.getElementById("dynamic-stylesheet");
 
       // If there's an existing stylesheet, remove it.
