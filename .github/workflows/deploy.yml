@@ -1,0 +1,82 @@
+name: 🚀 UI deployment
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+# Allows only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, we do not cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+        node_version:
+          - 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: false
+
+      - name: Get pnpm cache directory path
+        id: pnpm-cache-dir-path
+        run: echo "dir=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+
+      - name: Restore pnpm cache
+        uses: actions/cache@v3
+        id: pnpm-cache
+        with:
+          path: |
+            ${{ steps.pnpm-cache-dir-path.outputs.dir }}
+            ${{ github.workspace }}/interface/.next/cache
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('interface/**/*.js', 'interface/**/*.jsx', 'interface/**/*.ts', 'interface/**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Install pnpm project with a clean slate
+        run: pnpm install --prefer-offline --frozen-lockfile
+
+      - name: Build with Next.js
+        run: pnpm build:interface
+
+      - name: Upload artifacts
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: "interface/dist"
+
+  deploy:
+    runs-on: ${{ matrix.os }}
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3

@@ -48,7 +48,6 @@
     "deploy:optimismtestnet": "npx hardhat run --no-compile --network optimismTestnet scripts/deploy.ts",
     "deploy:optimismsepolia": "npx hardhat run --no-compile --network optimismSepolia scripts/deploy.ts",
     "deploy:optimismmain": "npx hardhat run --no-compile --network optimismMain scripts/deploy.ts",
-    "deploy:arbitrumtestnet": "npx hardhat run --no-compile --network arbitrumTestnet scripts/deploy.ts",
     "deploy:arbitrumsepolia": "npx hardhat run --no-compile --network arbitrumSepolia scripts/deploy.ts",
     "deploy:arbitrummain": "npx hardhat run --no-compile --network arbitrumMain scripts/deploy.ts",
     "deploy:arbitrumnova": "npx hardhat run --no-compile --network arbitrumNova scripts/deploy.ts",

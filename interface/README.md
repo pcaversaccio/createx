@@ -1,6 +1,6 @@
 # [`CreateX`](../src/CreateX.sol) User Interface
 
-[Next.js](https://nextjs.org)-based user interface for [createx.rocks](https://www.createx.rocks).
+[Next.js](https://nextjs.org)-based user interface for [createx.rocks](https://createx.rocks).
 
 ## 🙏🏼 Acknowledgement
 

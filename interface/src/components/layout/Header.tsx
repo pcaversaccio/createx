@@ -54,7 +54,6 @@ export const Header = () => {
               <span className="text-accent font-mono font-bold">
                 {SITE_NAME}
               </span>
-              {/* <Image className="h-8 w-auto rounded-full sm:h-10" src={logo} alt="logo" /> */}
             </Link>
           </div>
           <div>

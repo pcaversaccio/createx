@@ -2,6 +2,8 @@
 
 [![🕵️‍♂️ Test CreateX](https://github.com/pcaversaccio/createx/actions/workflows/test-createx.yml/badge.svg)](https://github.com/pcaversaccio/createx/actions/workflows/test-createx.yml)
 [![Test Coverage](https://img.shields.io/badge/Coverage-100%25-green)](#test-coverage)
+[![👮‍♂️ Sanity checks](https://github.com/pcaversaccio/createx/actions/workflows/checks.yml/badge.svg)](https://github.com/pcaversaccio/createx/actions/workflows/checks.yml)
+[![🚀 UI deployment](https://github.com/pcaversaccio/createx/actions/workflows/deploy.yml/badge.svg)](https://github.com/pcaversaccio/createx/actions/workflows/deploy.yml)
 [![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue)](https://www.gnu.org/licenses/agpl-3.0)
 
 <img src=https://github-production-user-asset-6210df.s3.amazonaws.com/25297591/272914952-38a5989c-0113-427d-9158-47646971b7d8.png  width="1050"/>
@@ -2158,7 +2160,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 ## [`CreateX`](./src/CreateX.sol) Deployments
 
 > [!TIP]
-> The complete list with additional chain information per deployment can be retrieved via [createx.rocks](https://www.createx.rocks).
+> The complete list with additional chain information per deployment can be retrieved via [createx.rocks](https://createx.rocks).
 
 - EVM-Based Production Networks:
   - Ethereum: [`0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`](https://etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
