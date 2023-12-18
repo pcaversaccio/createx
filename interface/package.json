@@ -37,7 +37,7 @@
     "prismjs": "^1.29.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.1"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
