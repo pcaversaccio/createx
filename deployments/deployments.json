@@ -8,8 +8,8 @@
   {
     "name": "Binance Smart Chain",
     "chainId": 56,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/56/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Optimism",
@@ -44,8 +44,8 @@
   {
     "name": "Fantom",
     "chainId": 250,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://ftmscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/250/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Avalanche",
@@ -56,44 +56,44 @@
   {
     "name": "Gnosis Chain",
     "chainId": 100,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://gnosisscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/100/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Moonriver",
     "chainId": 1285,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://moonriver.moonscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/1285/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Moonbeam",
     "chainId": 1284,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://moonbeam.moonscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/1284/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Celo",
     "chainId": 42220,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://explorer.celo.org/mainnet/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/42220/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Aurora",
     "chainId": 1313161554,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://explorer.mainnet.aurora.dev/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/1313161554/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Harmony",
     "chainId": 1666600000,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://explorer.harmony.one/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
   },
   {
     "name": "Fuse Network",
     "chainId": 122,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://explorer.fuse.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/122/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Cronos",
@@ -104,8 +104,8 @@
   {
     "name": "Evmos",
     "chainId": 9001,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://escan.live/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/9001/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Boba Network",
@@ -116,20 +116,20 @@
   {
     "name": "Canto",
     "chainId": 7700,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://tuber.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/7700/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
   },
   {
     "name": "Base",
     "chainId": 8453,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://basescan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/8453/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Mantle",
     "chainId": 5000,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://explorer.mantle.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/5000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Scroll",
@@ -146,20 +146,20 @@
   {
     "name": "Zora",
     "chainId": 7777777,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://explorer.zora.energy/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/7777777/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "LUKSO",
     "chainId": 42,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://explorer.execution.mainnet.lukso.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
   },
   {
     "name": "Manta Pacific",
     "chainId": 169,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://pacific-explorer.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
   },
   {
     "name": "Sepolia",
