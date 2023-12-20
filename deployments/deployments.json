@@ -1,5 +1,167 @@
 [
   {
+    "name": "Ethereum",
+    "chainId": 1,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Binance Smart Chain",
+    "chainId": 56,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Optimism",
+    "chainId": 10,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Arbitrum One",
+    "chainId": 42161,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Arbitrum Nova",
+    "chainId": 42170,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Polygon",
+    "chainId": 137,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Polygon zkEVM",
+    "chainId": 1101,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Fantom",
+    "chainId": 250,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Avalanche",
+    "chainId": 43114,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Gnosis Chain",
+    "chainId": 100,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Moonriver",
+    "chainId": 1285,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Moonbeam",
+    "chainId": 1284,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Celo",
+    "chainId": 42220,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Aurora",
+    "chainId": 1313161554,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Harmony",
+    "chainId": 1666600000,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Fuse Network",
+    "chainId": 122,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Cronos",
+    "chainId": 25,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Evmos",
+    "chainId": 9001,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Boba Network",
+    "chainId": 288,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Canto",
+    "chainId": 7700,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Base",
+    "chainId": 8453,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Mantle",
+    "chainId": 5000,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Scroll",
+    "chainId": 534352,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Linea",
+    "chainId": 59144,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Zora",
+    "chainId": 7777777,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "LUKSO",
+    "chainId": 42,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
+    "name": "Manta Pacific",
+    "chainId": 169,
+    "url": "",
+    "sourcify": "TBD"
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "url": "https://sepolia.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
