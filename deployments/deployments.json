@@ -98,8 +98,8 @@
   {
     "name": "Cronos",
     "chainId": 25,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://cronoscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/25/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Evmos",
@@ -110,14 +110,14 @@
   {
     "name": "Boba Network",
     "chainId": 288,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://bobascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/288/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Canto",
     "chainId": 7700,
     "url": "https://tuber.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/7700/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/7700/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Base",
@@ -140,14 +140,14 @@
   {
     "name": "Scroll",
     "chainId": 534352,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://scrollscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
   },
   {
     "name": "Linea",
     "chainId": 59144,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://lineascan.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
   },
   {
     "name": "Zora",

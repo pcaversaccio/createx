@@ -302,7 +302,7 @@ const config: HardhatUserConfig = {
     },
     bobaMain: {
       chainId: 288,
-      url: vars.get("BOBA_MAINNET_URL", "https://mainnet.boba.network"),
+      url: vars.get("BOBA_MAINNET_URL", "https://replica.boba.network"),
       accounts,
     },
     cantoTestnet: {
@@ -645,7 +645,8 @@ const config: HardhatUserConfig = {
         network: "boba",
         chainId: 288,
         urls: {
-          apiURL: "https://api.bobascan.com/api",
+          apiURL:
+            "https://api.routescan.io/v2/network/mainnet/evm/288/etherscan",
           browserURL: "https://bobascan.com",
         },
       },
