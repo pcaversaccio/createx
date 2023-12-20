@@ -427,6 +427,11 @@ const config: HardhatUserConfig = {
       url: vars.get("ARTHERA_TESTNET_URL", "https://rpc-test.arthera.net"),
       accounts,
     },
+    frameTestnet: {
+      chainId: 68840142,
+      url: vars.get("FRAME_TESTNET_URL", "https://rpc.testnet.frame.xyz/http"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
