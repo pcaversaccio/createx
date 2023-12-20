@@ -1,7 +1,170 @@
 [
   {
-    "name": "Ethereum Mainnet",
-    "chainId": 1,
-    "url": ""
+    "name": "Sepolia",
+    "chainId": 11155111,
+    "url": "https://sepolia.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/11155111/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
+    "name": "Holešky (Holešovice)",
+    "chainId": 17000,
+    "url": "https://holesky.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/17000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
+    "name": "Binance Smart Chain Testnet",
+    "chainId": 97,
+    "url": "https://testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/17000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
+    "name": "Optimism Sepolia Testnet",
+    "chainId": 11155420,
+    "url": "https://sepolia-optimism.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/11155420/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
+    "name": "Arbitrum Sepolia Testnet",
+    "chainId": 421614,
+    "url": "https://sepolia.arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/421614/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
+    "name": "Polygon Testnet (Mumbai)",
+    "chainId": 80001,
+    "url": "https://mumbai.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/80001/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
+    "name": "Polygon Testnet (zkEVM)",
+    "chainId": 1442,
+    "url": "https://testnet-zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
+  },
+  {
+    "name": "Fantom Testnet",
+    "chainId": 4002,
+    "url": "https://testnet.ftmscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
+  },
+  {
+    "name": "Avalanche Testnet (Fuji)",
+    "chainId": 43113,
+    "url": "https://testnet.snowtrace.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/43113/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
+    "name": "Gnosis Chain Testnet (Chiado)",
+    "chainId": 10200,
+    "url": "https://gnosis-chiado.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/10200/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
+    "name": "Moonbeam Testnet (Moonbase Alpha)",
+    "chainId": 1287,
+    "url": "https://moonbase.moonscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/1287/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
+    "name": "Celo Testnet (Alfajores)",
+    "chainId": 44787,
+    "url": "https://explorer.celo.org/alfajores/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/44787/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
+    "name": "Aurora Testnet",
+    "chainId": 1313161555,
+    "url": "https://explorer.testnet.aurora.dev/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/1313161555/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
+    "name": "Harmony Testnet",
+    "chainId": 1666700000,
+    "url": "https://explorer.testnet.harmony.one/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
+  },
+  {
+    "name": "Fuse Network Testnet (Spark)",
+    "chainId": 123,
+    "url": "https://explorer.fusespark.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
+  },
+  {
+    "name": "Cronos Testnet",
+    "chainId": 338,
+    "url": "https://cronos.org/explorer/testnet3/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
+  },
+  {
+    "name": "Evmos Testnet",
+    "chainId": 9000,
+    "url": "https://testnet.escan.live/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/9000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
+    "name": "Boba Network Testnet",
+    "chainId": 2888,
+    "url": "https://testnet.bobascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
+  },
+  {
+    "name": "Canto Testnet",
+    "chainId": 7701,
+    "url": "https://testnet.tuber.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/7701/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
+    "name": "Base Sepolia Testnet",
+    "chainId": 84532,
+    "url": "https://base-sepolia.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
+  },
+  {
+    "name": "Mantle Testnet (Ringwood)",
+    "chainId": 5001,
+    "url": "https://explorer.testnet.mantle.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
+  },
+  {
+    "name": "Filecoin Testnet (Calibration)",
+    "chainId": 314159,
+    "url": "https://calibration.filfox.info/en/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/314159/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
+    "name": "Scroll Sepolia Testnet",
+    "chainId": 534351,
+    "url": "https://sepolia.scrollscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
+  },
+  {
+    "name": "Linea Testnet",
+    "chainId": 59140,
+    "url": "https://goerli.lineascan.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
+  },
+  {
+    "name": "Zora Testnet",
+    "chainId": 999,
+    "url": "https://testnet.explorer.zora.energy/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
+  },
+  {
+    "name": "LUKSO Testnet",
+    "chainId": 4201,
+    "url": "https://explorer.execution.testnet.lukso.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
+  },
+  {
+    "name": "Manta Pacific Testnet",
+    "chainId": 3441005,
+    "url": "https://pacific-explorer.testnet.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
+  },
+  {
+    "name": "Frame Testnet",
+    "chainId": 68840142,
+    "url": "https://explorer.testnet.frame.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
   }
 ]

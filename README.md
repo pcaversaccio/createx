@@ -2159,15 +2159,43 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 
 ## [`CreateX`](./src/CreateX.sol) Deployments
 
+📌 The deployment address of [`CreateX`](./src/CreateX.sol) is **`0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`**.
+
 > [!TIP]
-> The complete list with additional chain information per deployment can be retrieved via [createx.rocks](https://createx.rocks).
+> The complete list with additional chain information per deployment can be retrieved via [createx.rocks](https://createx.rocks). In addition, all [sourcify.eth](https://sourcify.dev) verification links can be found in the [`deployments.json`](./deployments/deployments.json) file.
 
 - EVM-Based Production Networks:
-  - Ethereum: [`0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`](https://etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - Ethereum: TBD
 - Ethereum Test Networks:
-  - Sepolia: [`0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`](https://sepolia.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Sepolia](https://sepolia.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Holešky (Holešovice)](https://holesky.etherscan.io/address/0xba5ed099633d3b313e4d5f7bdc1305d3c28ba5ed)
 - Additional EVM-Based Test Networks:
-  - Binance Smart Chain Testnet: [`0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`](https://testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Binance Smart Chain Testnet](https://testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Optimism Sepolia Testnet](https://sepolia-optimism.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Arbitrum Sepolia Testnet](https://sepolia.arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Polygon Testnet (Mumbai)](https://mumbai.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Polygon Testnet (zkEVM)](https://testnet-zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Fantom Testnet](https://testnet.ftmscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Avalanche Testnet (Fuji)](https://testnet.snowtrace.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Gnosis Chain Testnet (Chiado)](https://gnosis-chiado.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Moonbeam Testnet (Moonbase Alpha)](https://moonbase.moonscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Celo Testnet (Alfajores)](https://explorer.celo.org/alfajores/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Aurora Testnet](https://explorer.testnet.aurora.dev/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Harmony Testnet](https://explorer.testnet.harmony.one/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Fuse Network Testnet (Spark)](https://explorer.fusespark.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Cronos Testnet](https://cronos.org/explorer/testnet3/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Evmos Testnet](https://testnet.escan.live/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Boba Network Testnet](https://testnet.bobascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Canto Testnet](https://testnet.tuber.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Base Sepolia Testnet](https://base-sepolia.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Mantle Testnet (Ringwood)](https://explorer.testnet.mantle.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Filecoin Testnet (Calibration)](https://calibration.filfox.info/en/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Scroll Sepolia Testnet](https://sepolia.scrollscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Linea Testnet](https://goerli.lineascan.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Zora Testnet](https://testnet.explorer.zora.energy/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [LUKSO Testnet](https://explorer.execution.testnet.lukso.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Manta Pacific Testnet](https://pacific-explorer.testnet.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Frame Testnet](https://explorer.testnet.frame.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## 🙏🏼 Acknowledgement
 

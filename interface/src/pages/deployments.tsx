@@ -12,6 +12,7 @@ interface Deployment {
   chainId: number;
   url: string;
   address?: `0x${string}`;
+  sourcify?: string; // Currently not used in the deployed interface, but we might use it in the future.
 }
 
 const Deployments = () => {
