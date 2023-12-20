@@ -2187,6 +2187,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
   - [Canto](https://tuber.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Base](https://basescan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Mantle](https://explorer.mantle.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+  - [Filecoin](https://filfox.info/en/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Scroll]()
   - [Linea]()
   - [Zora](https://explorer.zora.energy/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)

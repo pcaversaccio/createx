@@ -132,6 +132,12 @@
     "sourcify": "https://repo.sourcify.dev/contracts/partial_match/5000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
+    "name": "Filecoin",
+    "chainId": 314,
+    "url": "https://filfox.info/en/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/314/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+  },
+  {
     "name": "Scroll",
     "chainId": 534352,
     "url": "",
