@@ -14,32 +14,32 @@
   {
     "name": "Optimism",
     "chainId": 10,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://optimistic.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/10/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Arbitrum One",
     "chainId": 42161,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/42161/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Arbitrum Nova",
     "chainId": 42170,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://nova.arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/42170/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Polygon",
     "chainId": 137,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/137/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Polygon zkEVM",
     "chainId": 1101,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "Not Supported"
   },
   {
     "name": "Fantom",
