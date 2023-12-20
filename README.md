@@ -2170,7 +2170,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
   - [Optimism](https://optimistic.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Arbitrum One](https://arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Arbitrum Nova](https://nova.arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-  - [Polygon]()
+  - [Polygon](https://polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Polygon zkEVM](https://zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Fantom]()
   - [Avalanche]()
