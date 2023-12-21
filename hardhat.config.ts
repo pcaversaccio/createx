@@ -495,8 +495,8 @@ const config: HardhatUserConfig = {
       moonriver: vars.get("MOONBEAM_API_KEY", ""),
       moonbaseAlpha: vars.get("MOONBEAM_API_KEY", ""),
       // For Celo testnet & mainnet
-      alfajores: vars.get("CELO_API_KEY", ""),
       celo: vars.get("CELO_API_KEY", ""),
+      alfajores: vars.get("CELO_API_KEY", ""),
       // For Harmony testnet & mainnet
       harmony: vars.get("HARMONY_API_KEY", ""),
       harmonyTest: vars.get("HARMONY_API_KEY", ""),
