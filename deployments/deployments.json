@@ -2,8 +2,8 @@
   {
     "name": "Ethereum",
     "chainId": 1,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/1/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Binance Smart Chain",
@@ -50,8 +50,8 @@
   {
     "name": "Avalanche",
     "chainId": 43114,
-    "url": "",
-    "sourcify": "TBD"
+    "url": "https://snowtrace.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/43114/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
   },
   {
     "name": "Gnosis Chain",

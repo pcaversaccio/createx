@@ -2165,7 +2165,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 > The complete list with additional chain information per deployment can be retrieved via [createx.rocks](https://createx.rocks). In addition, all [sourcify.eth](https://sourcify.dev) verification links can be found in the [`deployments.json`](./deployments/deployments.json) file.
 
 - EVM-Based Production Networks:
-  - [Ethereum]()
+  - [Ethereum](https://etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Binance Smart Chain](https://bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Optimism](https://optimistic.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Arbitrum One](https://arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
@@ -2173,7 +2173,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
   - [Polygon](https://polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Polygon zkEVM](https://zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Fantom](https://ftmscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-  - [Avalanche]()
+  - [Avalanche](https://snowtrace.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Gnosis Chain](https://gnosisscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Moonriver](https://moonriver.moonscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
   - [Moonbeam](https://moonbeam.moonscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
