@@ -27,7 +27,7 @@ const Deployments = () => {
     setIsLoading(true);
     fetch(deploymentsUrlsRaw)
       .then((response) => response.json())
-      .then((data) => setDeployments(data))
+      .then((data: Deployment[]) => setDeployments(data.sort((a, b) => a.chainId - b.chainId)))
       .catch((error) => console.error("Error:", error))
       .finally(() => setIsLoading(false));
   }, []);
