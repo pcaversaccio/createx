@@ -10,23 +10,22 @@ import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 interface Deployment {
   name: string;
   chainId: number;
-  url: string;
+  urls: string[];
   address?: `0x${string}`;
-  sourcify?: string; // Currently not used in the deployed interface, but we might use it in the future.
 }
 
 const Deployments = () => {
   // -------- Fetch deployments --------
   const [deployments, setDeployments] = useState([] as Deployment[]);
   const [isLoading, setIsLoading] = useState(true);
-  const deploymentsUrl =
+  const deploymentsUrls =
     "https://github.com/pcaversaccio/createx/blob/main/deployments/deployments.json";
-  const deploymentsUrlRaw =
+  const deploymentsUrlsRaw =
     "https://raw.githubusercontent.com/pcaversaccio/createx/main/deployments/deployments.json";
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(deploymentsUrlRaw)
+    fetch(deploymentsUrlsRaw)
       .then((response) => response.json())
       .then((data) => setDeployments(data))
       .catch((error) => console.error("Error:", error))
@@ -108,7 +107,7 @@ const Deployments = () => {
             Please try again!
           </button>
           <ExternalLink
-            href={deploymentsUrl}
+            href={deploymentsUrls}
             className="text-primary flex items-center text-sm font-semibold"
           >
             <>
@@ -188,7 +187,7 @@ const Deployments = () => {
               key={`${deployment.chainId}-${deployment.name}`}
               className="group dark:bg-gray-800"
               onClick={() =>
-                window.open(deployment.url, "_blank", "noopener,noreferrer")
+                window.open(deployment.urls[0], "_blank", "noopener,noreferrer")
               }
             >
               <td className="text-primary flex flex-col whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">

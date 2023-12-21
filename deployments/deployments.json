@@ -2,337 +2,429 @@
   {
     "name": "Ethereum",
     "chainId": 1,
-    "url": "https://etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/1/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/1/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Binance Smart Chain",
     "chainId": 56,
-    "url": "https://bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/56/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/56/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Optimism",
     "chainId": 10,
-    "url": "https://optimistic.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/10/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://optimistic.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/10/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Arbitrum One",
     "chainId": 42161,
-    "url": "https://arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/42161/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/42161/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Arbitrum Nova",
     "chainId": 42170,
-    "url": "https://nova.arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/42170/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://nova.arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/42170/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Polygon",
     "chainId": 137,
-    "url": "https://polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/137/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/137/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Polygon zkEVM",
     "chainId": 1101,
-    "url": "https://zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Fantom",
     "chainId": 250,
-    "url": "https://ftmscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/250/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://ftmscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/250/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Avalanche",
     "chainId": 43114,
-    "url": "https://snowtrace.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/43114/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://snowtrace.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/43114/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Gnosis Chain",
     "chainId": 100,
-    "url": "https://gnosisscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/100/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://gnosisscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/100/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Moonriver",
     "chainId": 1285,
-    "url": "https://moonriver.moonscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/1285/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://moonriver.moonscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/1285/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Moonbeam",
     "chainId": 1284,
-    "url": "https://moonbeam.moonscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/1284/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://moonbeam.moonscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/1284/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Celo",
     "chainId": 42220,
-    "url": "https://explorer.celo.org/mainnet/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/42220/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://explorer.celo.org/mainnet/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/42220/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Aurora",
     "chainId": 1313161554,
-    "url": "https://explorer.mainnet.aurora.dev/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/1313161554/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://explorer.mainnet.aurora.dev/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/1313161554/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Harmony",
     "chainId": 1666600000,
-    "url": "https://explorer.harmony.one/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://explorer.harmony.one/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Fuse Network",
     "chainId": 122,
-    "url": "https://explorer.fuse.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/122/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://explorer.fuse.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/122/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Cronos",
     "chainId": 25,
-    "url": "https://cronoscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/25/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://cronoscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/25/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Evmos",
     "chainId": 9001,
-    "url": "https://escan.live/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/9001/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://escan.live/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/9001/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Boba Network",
     "chainId": 288,
-    "url": "https://bobascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/288/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://bobascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/288/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Canto",
     "chainId": 7700,
-    "url": "https://tuber.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/7700/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://tuber.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/7700/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Base",
     "chainId": 8453,
-    "url": "https://basescan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/8453/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://basescan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/8453/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Mantle",
     "chainId": 5000,
-    "url": "https://explorer.mantle.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/5000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://explorer.mantle.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/5000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Filecoin",
     "chainId": 314,
-    "url": "https://filfox.info/en/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/314/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://filfox.info/en/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/314/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Scroll",
     "chainId": 534352,
-    "url": "https://scrollscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://scrollscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Linea",
     "chainId": 59144,
-    "url": "https://lineascan.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://lineascan.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Zora",
     "chainId": 7777777,
-    "url": "https://explorer.zora.energy/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/7777777/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://explorer.zora.energy/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/7777777/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "LUKSO",
     "chainId": 42,
-    "url": "https://explorer.execution.mainnet.lukso.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://explorer.execution.mainnet.lukso.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Manta Pacific",
     "chainId": 169,
-    "url": "https://pacific-explorer.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://pacific-explorer.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Sepolia",
     "chainId": 11155111,
-    "url": "https://sepolia.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/11155111/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://sepolia.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/11155111/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Holešky (Holešovice)",
     "chainId": 17000,
-    "url": "https://holesky.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/17000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://holesky.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/17000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Binance Smart Chain Testnet",
     "chainId": 97,
-    "url": "https://testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/17000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/17000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Optimism Sepolia Testnet",
     "chainId": 11155420,
-    "url": "https://sepolia-optimism.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/11155420/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://sepolia-optimism.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/11155420/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Arbitrum Sepolia Testnet",
     "chainId": 421614,
-    "url": "https://sepolia.arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/421614/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://sepolia.arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/421614/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Polygon Testnet (Mumbai)",
     "chainId": 80001,
-    "url": "https://mumbai.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/80001/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://mumbai.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/80001/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Polygon Testnet (zkEVM)",
     "chainId": 1442,
-    "url": "https://testnet-zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://testnet-zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Fantom Testnet",
     "chainId": 4002,
-    "url": "https://testnet.ftmscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://testnet.ftmscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Avalanche Testnet (Fuji)",
     "chainId": 43113,
-    "url": "https://testnet.snowtrace.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/43113/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://testnet.snowtrace.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/43113/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Gnosis Chain Testnet (Chiado)",
     "chainId": 10200,
-    "url": "https://gnosis-chiado.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/10200/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://gnosis-chiado.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/10200/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Moonbeam Testnet (Moonbase Alpha)",
     "chainId": 1287,
-    "url": "https://moonbase.moonscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/1287/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://moonbase.moonscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/1287/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Celo Testnet (Alfajores)",
     "chainId": 44787,
-    "url": "https://explorer.celo.org/alfajores/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/44787/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://explorer.celo.org/alfajores/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/44787/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Aurora Testnet",
     "chainId": 1313161555,
-    "url": "https://explorer.testnet.aurora.dev/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/1313161555/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://explorer.testnet.aurora.dev/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/1313161555/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Harmony Testnet",
     "chainId": 1666700000,
-    "url": "https://explorer.testnet.harmony.one/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://explorer.testnet.harmony.one/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Fuse Network Testnet (Spark)",
     "chainId": 123,
-    "url": "https://explorer.fusespark.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://explorer.fusespark.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Cronos Testnet",
     "chainId": 338,
-    "url": "https://cronos.org/explorer/testnet3/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://cronos.org/explorer/testnet3/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Evmos Testnet",
     "chainId": 9000,
-    "url": "https://testnet.escan.live/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/9000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://testnet.escan.live/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/9000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Boba Network Testnet",
     "chainId": 2888,
-    "url": "https://testnet.bobascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://testnet.bobascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Canto Testnet",
     "chainId": 7701,
-    "url": "https://testnet.tuber.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/7701/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://testnet.tuber.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/7701/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Base Sepolia Testnet",
     "chainId": 84532,
-    "url": "https://base-sepolia.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://base-sepolia.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Mantle Testnet (Ringwood)",
     "chainId": 5001,
-    "url": "https://explorer.testnet.mantle.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://explorer.testnet.mantle.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Filecoin Testnet (Calibration)",
     "chainId": 314159,
-    "url": "https://calibration.filfox.info/en/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "https://repo.sourcify.dev/contracts/partial_match/314159/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    "urls": [
+      "https://calibration.filfox.info/en/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/314159/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   },
   {
     "name": "Scroll Sepolia Testnet",
     "chainId": 534351,
-    "url": "https://sepolia.scrollscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://sepolia.scrollscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Linea Testnet",
     "chainId": 59140,
-    "url": "https://goerli.lineascan.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://goerli.lineascan.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Zora Testnet",
     "chainId": 999,
-    "url": "https://testnet.explorer.zora.energy/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://testnet.explorer.zora.energy/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "LUKSO Testnet",
     "chainId": 4201,
-    "url": "https://explorer.execution.testnet.lukso.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://explorer.execution.testnet.lukso.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Manta Pacific Testnet",
     "chainId": 3441005,
-    "url": "https://pacific-explorer.testnet.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://pacific-explorer.testnet.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Frame Testnet",
     "chainId": 68840142,
-    "url": "https://explorer.testnet.frame.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-    "sourcify": "Not Supported"
+    "urls": [
+      "https://explorer.testnet.frame.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   }
 ]
