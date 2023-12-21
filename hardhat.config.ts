@@ -382,8 +382,8 @@ const config: HardhatUserConfig = {
       accounts,
     },
     zoraTestnet: {
-      chainId: 999,
-      url: vars.get("ZORA_TESTNET_URL", "https://testnet.rpc.zora.energy"),
+      chainId: 999999999,
+      url: vars.get("ZORA_TESTNET_URL", "https://sepolia.rpc.zora.energy"),
       accounts,
     },
     zoraMain: {
@@ -813,10 +813,10 @@ const config: HardhatUserConfig = {
       },
       {
         network: "zoraTestnet",
-        chainId: 999,
+        chainId: 999999999,
         urls: {
-          apiURL: "https://testnet.explorer.zora.energy/api",
-          browserURL: "https://testnet.explorer.zora.energy",
+          apiURL: "https://sepolia.explorer.zora.energy/api",
+          browserURL: "https://sepolia.explorer.zora.energy",
         },
       },
       {

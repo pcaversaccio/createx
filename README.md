@@ -2227,7 +2227,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Filecoin Testnet (Calibration)](https://calibration.filfox.info/en/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Scroll Sepolia Testnet](https://sepolia.scrollscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Linea Testnet](https://goerli.lineascan.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Zora Testnet](https://testnet.explorer.zora.energy/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Zora Sepolia Testnet](https://sepolia.explorer.zora.energy/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [LUKSO Testnet](https://explorer.execution.testnet.lukso.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Manta Pacific Testnet](https://pacific-explorer.testnet.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Frame Testnet](https://explorer.testnet.frame.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
