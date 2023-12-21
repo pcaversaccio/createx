@@ -2162,7 +2162,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 📌 The deployment address of [`CreateX`](./src/CreateX.sol) is **`0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed`**.
 
 > [!TIP]
-> The complete list with additional chain information per deployment can be retrieved via [createx.rocks](https://createx.rocks). In addition, all [sourcify.eth](https://sourcify.dev) verification links can be found in the [`deployments.json`](./deployments/deployments.json) file.
+> The complete list with additional chain information per deployment can be retrieved via [createx.rocks](https://createx.rocks). In addition, all [sourcify.eth](https://sourcify.dev) verification links (for the chains that are [supported](https://docs.sourcify.dev/docs/chains/) by [sourcify.eth](https://sourcify.dev)) can be found in the [`deployments.json`](./deployments/deployments.json) file.
 
 - EVM-Based Production Networks:
   - [Ethereum](https://etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
