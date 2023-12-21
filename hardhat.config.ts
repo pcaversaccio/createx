@@ -302,7 +302,7 @@ const config: HardhatUserConfig = {
     },
     bobaMain: {
       chainId: 288,
-      url: vars.get("BOBA_MAINNET_URL", "https://mainnet.boba.network"),
+      url: vars.get("BOBA_MAINNET_URL", "https://replica.boba.network"),
       accounts,
     },
     cantoTestnet: {
@@ -382,8 +382,8 @@ const config: HardhatUserConfig = {
       accounts,
     },
     zoraTestnet: {
-      chainId: 999,
-      url: vars.get("ZORA_TESTNET_URL", "https://testnet.rpc.zora.energy"),
+      chainId: 999999999,
+      url: vars.get("ZORA_TESTNET_URL", "https://sepolia.rpc.zora.energy"),
       accounts,
     },
     zoraMain: {
@@ -495,8 +495,8 @@ const config: HardhatUserConfig = {
       moonriver: vars.get("MOONBEAM_API_KEY", ""),
       moonbaseAlpha: vars.get("MOONBEAM_API_KEY", ""),
       // For Celo testnet & mainnet
-      alfajores: vars.get("CELO_API_KEY", ""),
       celo: vars.get("CELO_API_KEY", ""),
+      alfajores: vars.get("CELO_API_KEY", ""),
       // For Harmony testnet & mainnet
       harmony: vars.get("HARMONY_API_KEY", ""),
       harmonyTest: vars.get("HARMONY_API_KEY", ""),
@@ -645,7 +645,8 @@ const config: HardhatUserConfig = {
         network: "boba",
         chainId: 288,
         urls: {
-          apiURL: "https://api.bobascan.com/api",
+          apiURL:
+            "https://api.routescan.io/v2/network/mainnet/evm/288/etherscan",
           browserURL: "https://bobascan.com",
         },
       },
@@ -812,10 +813,10 @@ const config: HardhatUserConfig = {
       },
       {
         network: "zoraTestnet",
-        chainId: 999,
+        chainId: 999999999,
         urls: {
-          apiURL: "https://testnet.explorer.zora.energy/api",
-          browserURL: "https://testnet.explorer.zora.energy",
+          apiURL: "https://sepolia.explorer.zora.energy/api",
+          browserURL: "https://sepolia.explorer.zora.energy",
         },
       },
       {
