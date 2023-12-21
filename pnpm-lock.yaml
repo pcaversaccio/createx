@@ -9,16 +9,16 @@ importers:
     devDependencies:
       "@nomicfoundation/hardhat-ethers":
         specifier: ^3.0.5
-        version: 3.0.5(ethers@6.9.0)(hardhat@2.19.3)
+        version: 3.0.5(ethers@6.9.1)(hardhat@2.19.3)
       "@nomicfoundation/hardhat-verify":
         specifier: ^2.0.3
         version: 2.0.3(hardhat@2.19.3)
       "@typechain/ethers-v6":
         specifier: ^0.5.1
-        version: 0.5.1(ethers@6.9.0)(typechain@8.3.2)(typescript@5.3.3)
+        version: 0.5.1(ethers@6.9.1)(typechain@8.3.2)(typescript@5.3.3)
       "@typechain/hardhat":
         specifier: ^9.1.0
-        version: 9.1.0(@typechain/ethers-v6@0.5.1)(ethers@6.9.0)(hardhat@2.19.3)(typechain@8.3.2)
+        version: 9.1.0(@typechain/ethers-v6@0.5.1)(ethers@6.9.1)(hardhat@2.19.3)(typechain@8.3.2)
       "@typescript-eslint/eslint-plugin":
         specifier: ^6.15.0
         version: 6.15.0(@typescript-eslint/parser@6.15.0)(eslint@8.56.0)(typescript@5.3.3)
@@ -32,8 +32,8 @@ importers:
         specifier: ^9.1.0
         version: 9.1.0(eslint@8.56.0)
       ethers:
-        specifier: ^6.9.0
-        version: 6.9.0
+        specifier: ^6.9.1
+        version: 6.9.1
       hardhat:
         specifier: ^2.19.3
         version: 2.19.3(ts-node@10.9.2)(typescript@5.3.3)
@@ -126,8 +126,8 @@ importers:
         specifier: ^0.5.9
         version: 0.5.9(@trivago/prettier-plugin-sort-imports@4.3.0)(prettier@3.1.1)
       tailwindcss:
-        specifier: 3.3.7
-        version: 3.3.7(ts-node@10.9.2)
+        specifier: 3.4.0
+        version: 3.4.0(ts-node@10.9.2)
       typescript:
         specifier: 5.3.3
         version: 5.3.3
@@ -1691,7 +1691,7 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@nomicfoundation/hardhat-ethers@3.0.5(ethers@6.9.0)(hardhat@2.19.3):
+  /@nomicfoundation/hardhat-ethers@3.0.5(ethers@6.9.1)(hardhat@2.19.3):
     resolution:
       {
         integrity: sha512-RNFe8OtbZK6Ila9kIlHp0+S80/0Bu/3p41HUpaRIoHLm6X3WekTd83vob3rE54Duufu1edCiBDxspBzi2rxHHw==,
@@ -1701,7 +1701,7 @@ packages:
       hardhat: ^2.0.0
     dependencies:
       debug: 4.3.4(supports-color@8.1.1)
-      ethers: 6.9.0
+      ethers: 6.9.1
       hardhat: 2.19.3(ts-node@10.9.2)(typescript@5.3.3)
       lodash.isequal: 4.5.0
     transitivePeerDependencies:
@@ -2120,7 +2120,7 @@ packages:
       }
     dev: true
 
-  /@typechain/ethers-v6@0.5.1(ethers@6.9.0)(typechain@8.3.2)(typescript@5.3.3):
+  /@typechain/ethers-v6@0.5.1(ethers@6.9.1)(typechain@8.3.2)(typescript@5.3.3):
     resolution:
       {
         integrity: sha512-F+GklO8jBWlsaVV+9oHaPh5NJdd6rAKN4tklGfInX1Q7h0xPgVLP39Jl3eCulPB5qexI71ZFHwbljx4ZXNfouA==,
@@ -2130,14 +2130,14 @@ packages:
       typechain: ^8.3.2
       typescript: ">=4.7.0"
     dependencies:
-      ethers: 6.9.0
+      ethers: 6.9.1
       lodash: 4.17.21
       ts-essentials: 7.0.3(typescript@5.3.3)
       typechain: 8.3.2(typescript@5.3.3)
       typescript: 5.3.3
     dev: true
 
-  /@typechain/hardhat@9.1.0(@typechain/ethers-v6@0.5.1)(ethers@6.9.0)(hardhat@2.19.3)(typechain@8.3.2):
+  /@typechain/hardhat@9.1.0(@typechain/ethers-v6@0.5.1)(ethers@6.9.1)(hardhat@2.19.3)(typechain@8.3.2):
     resolution:
       {
         integrity: sha512-mtaUlzLlkqTlfPwB3FORdejqBskSnh+Jl8AIJGjXNAQfRQ4ofHADPl1+oU7Z3pAJzmZbUXII8MhOLQltcHgKnA==,
@@ -2148,8 +2148,8 @@ packages:
       hardhat: ^2.9.9
       typechain: ^8.3.2
     dependencies:
-      "@typechain/ethers-v6": 0.5.1(ethers@6.9.0)(typechain@8.3.2)(typescript@5.3.3)
-      ethers: 6.9.0
+      "@typechain/ethers-v6": 0.5.1(ethers@6.9.1)(typechain@8.3.2)(typescript@5.3.3)
+      ethers: 6.9.1
       fs-extra: 9.1.0
       hardhat: 2.19.3(ts-node@10.9.2)(typescript@5.3.3)
       typechain: 8.3.2(typescript@5.3.3)
@@ -4550,10 +4550,10 @@ packages:
       - utf-8-validate
     dev: true
 
-  /ethers@6.9.0:
+  /ethers@6.9.1:
     resolution:
       {
-        integrity: sha512-pmfNyQzc2mseLe91FnT2vmNaTt8dDzhxZ/xItAV7uGsF4dI4ek2ufMu3rAkgQETL/TIs0GS5A+U05g9QyWnv3Q==,
+        integrity: sha512-kuV8fGd4/8Gj7wkurbsuUsm1DCG6N5gKGYdw3fnWG/7QGknhy1xtHD7kbkCWQAcbAYmzLCLqCPedS3FYncFkKQ==,
       }
     engines: { node: ">=14.0.0" }
     dependencies:
@@ -8280,10 +8280,10 @@ packages:
       strip-ansi: 6.0.1
     dev: true
 
-  /tailwindcss@3.3.7(ts-node@10.9.2):
+  /tailwindcss@3.4.0(ts-node@10.9.2):
     resolution:
       {
-        integrity: sha512-pjgQxDZPvyS/nG3ZYkyCvsbONJl7GdOejfm24iMt2ElYQQw8Jc4p0m8RdMp7mznPD0kUhfzwV3zAwa80qI0zmQ==,
+        integrity: sha512-VigzymniH77knD1dryXbyxR+ePHihHociZbXnLZHUyzf2MMs2ZVqlUrZ3FvpXP8pno9JzmILt1sZPD19M3IxtA==,
       }
     engines: { node: ">=14.0.0" }
     hasBin: true
