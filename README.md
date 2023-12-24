@@ -32,6 +32,7 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
     - [EVM-Based Production Networks](#evm-based-production-networks)
     - [Ethereum Test Networks](#ethereum-test-networks)
     - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
+  - [Integration With External Tooling](#integration-with-external-tooling)
   - [🙏🏼 Acknowledgement](#-acknowledgement)
 
 ## So What on Earth Is a Contract Factory?
@@ -2231,6 +2232,12 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [LUKSO Testnet](https://explorer.execution.testnet.lukso.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Manta Pacific Testnet](https://pacific-explorer.testnet.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Frame Testnet](https://explorer.testnet.frame.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+
+## Integration With External Tooling
+
+A list of external tooling that integrate [`CreateX`](./src/CreateX.sol):
+
+- [`xdeployer`](https://github.com/pcaversaccio/xdeployer)
 
 ## 🙏🏼 Acknowledgement
 
