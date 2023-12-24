@@ -98,7 +98,7 @@
     "name": "Celo",
     "chainId": 42220,
     "urls": [
-      "https://explorer.celo.org/mainnet/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://celoscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/contracts/partial_match/42220/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
     ]
   },
@@ -307,7 +307,7 @@
     "name": "Celo Testnet (Alfajores)",
     "chainId": 44787,
     "urls": [
-      "https://explorer.celo.org/alfajores/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://alfajores.celoscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/contracts/partial_match/44787/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
     ]
   },
