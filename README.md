@@ -716,7 +716,6 @@ The `salt` value implements different safeguarding mechanisms depending on the e
 
 The full logic is implemented in the `internal` [`_guard`](./src/CreateX.sol#L873-L912) function:
 
-<!-- prettier-ignore-start -->
 ```solidity
 function _guard(bytes32 salt) internal view returns (bytes32 guardedSalt) {
   (
@@ -764,7 +763,6 @@ function _guard(bytes32 salt) internal view returns (bytes32 guardedSalt) {
   }
 }
 ```
-<!-- prettier-ignore-end -->
 
 Please note that when you configure a permissioned deploy protection, you **must** specify whether you want cross-chain redeploy protection (i.e. 21st byte equals `0x01`) or not (i.e. the 21st byte equals `0x00`). The underlying reason for this logic is to enforce developer explicitness. If you don't specify a cross-chain redeploy protection decision (i.e. the 21st byte is greater than `0x01`) the function reverts.
 
@@ -776,7 +774,6 @@ For developer convenience, the [`CreateX`](./src/CreateX.sol) contract offers se
 
 The full logic is implemented in the `internal` [`_generateSalt`](./src/CreateX.sol#L960-L988) function:
 
-<!-- prettier-ignore-start -->
 ```solidity
 function _generateSalt() internal view returns (bytes32 salt) {
   unchecked {
@@ -803,7 +800,6 @@ function _generateSalt() internal view returns (bytes32 salt) {
   }
 }
 ```
-<!-- prettier-ignore-end -->
 
 ## Design Principles
 
@@ -903,7 +899,6 @@ The written tests available in the directory [`test`](./test) achieve a test cov
 <details>
 <summary> <a href="https://docs.soliditylang.org/en/latest/">Solidity</a> </summary>
 
-<!-- prettier-ignore-start -->
 ```solidity
 // SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity ^0.8.4;
@@ -1093,7 +1088,6 @@ interface ICreateX {
   ) external view returns (address computedAddress);
 }
 ```
-<!-- prettier-ignore-end -->
 
 </details>
 

@@ -1,6 +1,5 @@
 node_modules
 interface
-src
 lib
 cache
 typechain-types
