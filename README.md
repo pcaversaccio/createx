@@ -838,6 +838,7 @@ Generally, for security issues, see our [Security Policy](./SECURITY.md). Furthe
   we strongly recommend implementing a permissioned deploy protection by setting the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun proxy deployments on other chains.
 
 - The target EVM version for compilation is set to [`paris`](https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/paris.md), i.e. neither the contract creation bytecode of [`CreateX`](./src/CreateX.sol) nor the returned runtime bytecode contains a [`PUSH0`](https://www.evm.codes/#5f?fork=shanghai) instruction.
+- Please refer to our comment in the discussion [here](https://github.com/pcaversaccio/createx/discussions/61#discussioncomment-7937359) for background information on the risks of our private-key-based deployment approach.
 
 ## Tests
 
