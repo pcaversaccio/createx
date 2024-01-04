@@ -367,7 +367,7 @@
     "name": "Base Sepolia Testnet",
     "chainId": 84532,
     "urls": [
-      "https://base-sepolia.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://sepolia.basescan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
