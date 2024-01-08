@@ -2239,6 +2239,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 A list of external tooling that integrates with [`CreateX`](./src/CreateX.sol):
 
 - [`xdeployer`](https://github.com/pcaversaccio/xdeployer)
+- [`createx-forge`](https://github.com/radeksvarz/createx-forge)
 
 ## 🙏🏼 Acknowledgement
 
