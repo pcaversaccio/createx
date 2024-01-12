@@ -25,13 +25,13 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
     - [Test Coverage](#test-coverage)
   - [ABI (Application Binary Interface)](#abi-application-binary-interface)
   - [New Deployment(s)](#new-deployments)
-    - [`ethers.js`](#ethersjs)
-    - [`cast`](#cast)
+      - [`ethers.js`](#ethersjs)
+      - [`cast`](#cast)
     - [Contract Verification](#contract-verification)
   - [`CreateX` Deployments](#createx-deployments)
-    - [EVM-Based Production Networks](#evm-based-production-networks)
-    - [Ethereum Test Networks](#ethereum-test-networks)
-    - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
+      - [EVM-Based Production Networks](#evm-based-production-networks)
+      - [Ethereum Test Networks](#ethereum-test-networks)
+      - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
   - [Integration With External Tooling](#integration-with-external-tooling)
   - [🙏🏼 Acknowledgement](#-acknowledgement)
 
@@ -86,7 +86,7 @@ CreateX
 <details>
 <summary> <a href="https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L302-L317"><code>computeCreateAddress(uint256)</code></a> </summary>
 
-Returns the address where a contract will be stored if deployed via _this contract_ (i.e. [`CreateX`](./src/CreateX.sol)) using the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode. For the specification of the Recursive Length Prefix (RLP) encoding scheme, please refer to p. 19 of the [Ethereum Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) and the [Ethereum Wiki](https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp/). Based on the [EIP-161](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md) specification, all contract accounts on the Ethereum mainnet are initiated with `nonce = 1`. Thus, the first contract address created by another contract is calculated with a non-zero nonce.
+Returns the address where a contract will be stored if deployed via _this contract_ (i.e. [`CreateX`](./src/CreateX.sol)) using the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) opcode. For the specification of the Recursive Length Prefix (RLP) encoding scheme, please refer to p. 19 of the [Ethereum Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) and the [Ethereum Wiki](https://ethereum.org/en/developers/docs/data-structures-and-encoding/rlp). Based on the [EIP-161](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-161.md) specification, all contract accounts on the Ethereum mainnet are initiated with `nonce = 1`. Thus, the first contract address created by another contract is calculated with a non-zero nonce.
 
 ```yml
 # /*:°• Function Argument •°:*/ #
