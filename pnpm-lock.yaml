@@ -47,17 +47,17 @@ importers:
         specifier: ^1.0.9
         version: 1.0.9(hardhat@2.19.4)
       prettier:
-        specifier: ^3.2.2
-        version: 3.2.2
+        specifier: ^3.2.4
+        version: 3.2.4
       prettier-plugin-solidity:
         specifier: ^1.3.1
-        version: 1.3.1(prettier@3.2.2)
+        version: 1.3.1(prettier@3.2.4)
       solhint:
         specifier: ^4.1.1
         version: 4.1.1(typescript@5.3.3)
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@20.11.3)(typescript@5.3.3)
+        version: 10.9.2(@types/node@20.11.5)(typescript@5.3.3)
       typechain:
         specifier: ^8.3.2
         version: 8.3.2(typescript@5.3.3)
@@ -94,10 +94,10 @@ importers:
     devDependencies:
       "@trivago/prettier-plugin-sort-imports":
         specifier: ^4.3.0
-        version: 4.3.0(prettier@3.2.2)
+        version: 4.3.0(prettier@3.2.4)
       "@types/node":
-        specifier: ^20.11.3
-        version: 20.11.3
+        specifier: ^20.11.5
+        version: 20.11.5
       "@types/react":
         specifier: ^18.2.48
         version: 18.2.48
@@ -105,8 +105,8 @@ importers:
         specifier: ^18.2.18
         version: 18.2.18
       autoprefixer:
-        specifier: ^10.4.16
-        version: 10.4.16(postcss@8.4.33)
+        specifier: ^10.4.17
+        version: 10.4.17(postcss@8.4.33)
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -120,11 +120,11 @@ importers:
         specifier: ^8.4.33
         version: 8.4.33
       prettier:
-        specifier: ^3.2.2
-        version: 3.2.2
+        specifier: ^3.2.4
+        version: 3.2.4
       prettier-plugin-tailwindcss:
         specifier: ^0.5.11
-        version: 0.5.11(@trivago/prettier-plugin-sort-imports@4.3.0)(prettier@3.2.2)
+        version: 0.5.11(@trivago/prettier-plugin-sort-imports@4.3.0)(prettier@3.2.4)
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.1(ts-node@10.9.2)
@@ -2123,7 +2123,7 @@ packages:
       }
     dev: false
 
-  /@trivago/prettier-plugin-sort-imports@4.3.0(prettier@3.2.2):
+  /@trivago/prettier-plugin-sort-imports@4.3.0(prettier@3.2.4):
     resolution:
       {
         integrity: sha512-r3n0onD3BTOVUNPhR4lhVK4/pABGpbA7bW3eumZnYdKaHkf1qEC+Mag6DPbGNuuh0eG8AaYj+YqmVHSiGslaTQ==,
@@ -2141,7 +2141,7 @@ packages:
       "@babel/types": 7.17.0
       javascript-natural-sort: 0.7.1
       lodash: 4.17.21
-      prettier: 3.2.2
+      prettier: 3.2.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2215,7 +2215,7 @@ packages:
         integrity: sha512-pqr857jrp2kPuO9uRjZ3PwnJTjoQy+fcdxvBTvHm6dkmEL9q+hDD/2j/0ELOBPtPnS8LjCX0gI9nbl8lVkadpg==,
       }
     dependencies:
-      "@types/node": 20.11.3
+      "@types/node": 20.11.5
     dev: true
 
   /@types/bn.js@5.1.5:
@@ -2224,7 +2224,7 @@ packages:
         integrity: sha512-V46N0zwKRF5Q00AZ6hWtN0T8gGmDUaUzLWQvHFo5yThtVwK/VCenFY3wXVbOvNfajEpsTfQM4IN9k/d6gUVX3A==,
       }
     dependencies:
-      "@types/node": 20.11.3
+      "@types/node": 20.11.5
     dev: true
 
   /@types/concat-stream@1.6.1:
@@ -2287,10 +2287,10 @@ packages:
       }
     dev: true
 
-  /@types/node@20.11.3:
+  /@types/node@20.11.5:
     resolution:
       {
-        integrity: sha512-nrlmbvGPNGaj84IJZXMPhQuCMEVTT/hXZMJJG/aIqVL9fKxqk814sGGtJA4GI6hpJSLQjpi6cn0Qx9eOf9SDVg==,
+        integrity: sha512-g557vgQjUUfN76MZAN/dt1z3dzcUsimuysco0KeluHgrPdJXkP/XdAURgyO2W9fZWHRtRBiVKzKn8vyOAwlG+w==,
       }
     dependencies:
       undici-types: 5.26.5
@@ -2309,7 +2309,7 @@ packages:
         integrity: sha512-uRwJqmiXmh9++aSu1VNEn3iIxWOhd8AHXNSdlaLfdAAdSTY9jYVeGWnzejM3dvrkbqE3/hyQkQQ29IFATEGlew==,
       }
     dependencies:
-      "@types/node": 20.11.3
+      "@types/node": 20.11.5
     dev: true
 
   /@types/prettier@2.7.3:
@@ -2359,7 +2359,7 @@ packages:
         integrity: sha512-oM5JSKQCcICF1wvGgmecmHldZ48OZamtMxcGGVICOJA8o8cahXC1zEVAif8iwoc5j8etxFaRFnf095+CDsuoFQ==,
       }
     dependencies:
-      "@types/node": 20.11.3
+      "@types/node": 20.11.5
       safe-buffer: 5.1.2
     dev: true
 
@@ -2376,7 +2376,7 @@ packages:
         integrity: sha512-hHxJU6PAEUn0TP4S/ZOzuTUvJWuZ6eIKeNKb5RBpODvSl6hp1Wrw4s7ATY50rklRCScUDpHzVA/DQdSjJ3UoYQ==,
       }
     dependencies:
-      "@types/node": 20.11.3
+      "@types/node": 20.11.5
     dev: true
 
   /@types/semver@7.5.6:
@@ -2981,10 +2981,10 @@ packages:
     engines: { node: ">= 4.0.0" }
     dev: true
 
-  /autoprefixer@10.4.16(postcss@8.4.33):
+  /autoprefixer@10.4.17(postcss@8.4.33):
     resolution:
       {
-        integrity: sha512-7vd3UC6xKp0HLfua5IjZlcXvGAGy7cBAXTg2lyQ/8WpNhd6SiZ8Be+xm3FyBSYJx5GKcpRCzBh7RH4/0dnY+uQ==,
+        integrity: sha512-/cpVNRLSfhOtcGflT13P2794gVSgmPgTR+erw5ifnMLZb0UnSlkK4tquLmkd3BhA+nLo5tX8Cu0upUsGKvKbmg==,
       }
     engines: { node: ^10 || ^12 || >=14 }
     hasBin: true
@@ -2992,7 +2992,7 @@ packages:
       postcss: ^8.1.0
     dependencies:
       browserslist: 4.22.2
-      caniuse-lite: 1.0.30001572
+      caniuse-lite: 1.0.30001579
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.0
@@ -3182,7 +3182,7 @@ packages:
     engines: { node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7 }
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001572
+      caniuse-lite: 1.0.30001579
       electron-to-chromium: 1.4.616
       node-releases: 2.0.14
       update-browserslist-db: 1.0.13(browserslist@4.22.2)
@@ -3313,6 +3313,13 @@ packages:
       {
         integrity: sha512-1Pbh5FLmn5y4+QhNyJE9j3/7dK44dGB83/ZMjv/qJk86TvDbjk0LosiZo0i0WB0Vx607qMX9jYrn1VLHCkN4rw==,
       }
+
+  /caniuse-lite@1.0.30001579:
+    resolution:
+      {
+        integrity: sha512-u5AUVkixruKHJjw/pj9wISlcMpgFWzSrczLZbrqBSxukQixmg0SJ5sZTpvaFvxU0HoQKd4yoyAogyrAz9pzJnA==,
+      }
+    dev: true
 
   /case@1.6.3:
     resolution:
@@ -5326,7 +5333,7 @@ packages:
       solc: 0.7.3(debug@4.3.4)
       source-map-support: 0.5.21
       stacktrace-parser: 0.1.10
-      ts-node: 10.9.2(@types/node@20.11.3)(typescript@5.3.3)
+      ts-node: 10.9.2(@types/node@20.11.5)(typescript@5.3.3)
       tsort: 0.0.1
       typescript: 5.3.3
       undici: 5.28.2
@@ -7178,7 +7185,7 @@ packages:
     dependencies:
       lilconfig: 3.0.0
       postcss: 8.4.33
-      ts-node: 10.9.2(@types/node@20.11.3)(typescript@5.3.3)
+      ts-node: 10.9.2(@types/node@20.11.5)(typescript@5.3.3)
       yaml: 2.3.4
     dev: true
 
@@ -7244,7 +7251,7 @@ packages:
     engines: { node: ">= 0.8.0" }
     dev: true
 
-  /prettier-plugin-solidity@1.3.1(prettier@3.2.2):
+  /prettier-plugin-solidity@1.3.1(prettier@3.2.4):
     resolution:
       {
         integrity: sha512-MN4OP5I2gHAzHZG1wcuJl0FsLS3c4Cc5494bbg+6oQWBPuEamjwDvmGfFMZ6NFzsh3Efd9UUxeT7ImgjNH4ozA==,
@@ -7254,12 +7261,12 @@ packages:
       prettier: ">=2.3.0"
     dependencies:
       "@solidity-parser/parser": 0.17.0
-      prettier: 3.2.2
+      prettier: 3.2.4
       semver: 7.5.4
       solidity-comments-extractor: 0.0.8
     dev: true
 
-  /prettier-plugin-tailwindcss@0.5.11(@trivago/prettier-plugin-sort-imports@4.3.0)(prettier@3.2.2):
+  /prettier-plugin-tailwindcss@0.5.11(@trivago/prettier-plugin-sort-imports@4.3.0)(prettier@3.2.4):
     resolution:
       {
         integrity: sha512-AvI/DNyMctyyxGOjyePgi/gqj5hJYClZ1avtQvLlqMT3uDZkRbi4HhGUpok3DRzv9z7Lti85Kdj3s3/1CeNI0w==,
@@ -7311,8 +7318,8 @@ packages:
       prettier-plugin-twig-melody:
         optional: true
     dependencies:
-      "@trivago/prettier-plugin-sort-imports": 4.3.0(prettier@3.2.2)
-      prettier: 3.2.2
+      "@trivago/prettier-plugin-sort-imports": 4.3.0(prettier@3.2.4)
+      prettier: 3.2.4
     dev: true
 
   /prettier@2.8.8:
@@ -7324,10 +7331,10 @@ packages:
     hasBin: true
     dev: true
 
-  /prettier@3.2.2:
+  /prettier@3.2.4:
     resolution:
       {
-        integrity: sha512-HTByuKZzw7utPiDO523Tt2pLtEyK7OibUD9suEJQrPUCYQqrHr74GGX6VidMrovbf/I50mPqr8j/II6oBAuc5A==,
+        integrity: sha512-FWu1oLHKCrtpO1ypU6J0SbK2d9Ckwysq6bHj/uaCP26DxrPpppCLQRGVuqAxSTvhF00AcvDRyYrLNW7ocBhFFQ==,
       }
     engines: { node: ">=14" }
     hasBin: true
@@ -8616,7 +8623,7 @@ packages:
       }
     dev: true
 
-  /ts-node@10.9.2(@types/node@20.11.3)(typescript@5.3.3):
+  /ts-node@10.9.2(@types/node@20.11.5)(typescript@5.3.3):
     resolution:
       {
         integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==,
@@ -8638,7 +8645,7 @@ packages:
       "@tsconfig/node12": 1.0.11
       "@tsconfig/node14": 1.0.3
       "@tsconfig/node16": 1.0.4
-      "@types/node": 20.11.3
+      "@types/node": 20.11.5
       acorn: 8.11.3
       acorn-walk: 8.3.2
       arg: 4.1.3
