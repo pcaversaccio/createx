@@ -432,6 +432,14 @@ const config: HardhatUserConfig = {
       url: vars.get("FRAME_TESTNET_URL", "https://rpc.testnet.frame.xyz/http"),
       accounts,
     },
+    openduranceTestnet: {
+      chainId: 6480001001,
+      url: vars.get(
+        "OPENDURANCE_TESTNET_URL",
+        "https://rpc-l2-testnet.fusionist.io",
+      ),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -551,6 +559,8 @@ const config: HardhatUserConfig = {
       mantaTestnet: vars.get("MANTA_API_KEY", ""),
       // For Arthera testnet
       artheraTestnet: vars.get("ARTHERA_API_KEY", ""),
+      // For OP-Endurance testnet
+      openduranceTestnet: vars.get("OPENDURANCE_API_KEY", ""),
     },
     customChains: [
       {
@@ -857,6 +867,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://explorer-test.arthera.net/api",
           browserURL: "https://explorer-test.arthera.net",
+        },
+      },
+      {
+        network: "openduranceTestnet",
+        chainId: 6480001001,
+        urls: {
+          apiURL: "https://explorer-l2-testnet.fusionist.io/api",
+          browserURL: "https://explorer-l2-testnet.fusionist.io",
         },
       },
     ],

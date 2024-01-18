@@ -102,6 +102,7 @@
     "deploy:shardeumtestnet": "npx hardhat run --no-compile --network shardeumTestnet scripts/deploy.ts",
     "deploy:artheratestnet": "npx hardhat run --no-compile --network artheraTestnet scripts/deploy.ts",
     "deploy:frametestnet": "npx hardhat run --no-compile --network frameTestnet scripts/deploy.ts",
+    "deploy:opendurancetestnet": "npx hardhat run --no-compile --network openduranceTestnet scripts/deploy.ts",
     "prettier:check": "npx prettier -c **/*.{js,ts,md,sol,json,yml,yaml}",
     "prettier:check:interface": "cd interface && pnpm prettier:check",
     "prettier:fix": "npx prettier -w **/*.{js,ts,md,sol,json,yml,yaml}",
