@@ -24,8 +24,8 @@
     "dev": "npx next dev",
     "build": "npx next build",
     "start": "pnpm build && npx next start",
-    "prettier:check": "npx prettier -c **/*.{js,ts,tsx,css,md,json,yml,yaml}",
-    "prettier:fix": "npx prettier -w **/*.{js,ts,tsx,css,md,json,yml,yaml}",
+    "prettier:check": "npx prettier -c \"**/*.{js,ts,tsx,css,md,json,yml,yaml}\"",
+    "prettier:fix": "npx prettier -w \"**/*.{js,ts,tsx,css,md,json,yml,yaml}\"",
     "lint:check": "pnpm prettier:check && npx next lint",
     "lint:fix": "pnpm prettier:fix && npx next lint --fix"
   },
