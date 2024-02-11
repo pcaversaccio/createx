@@ -25,13 +25,13 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
     - [Test Coverage](#test-coverage)
   - [ABI (Application Binary Interface)](#abi-application-binary-interface)
   - [New Deployment(s)](#new-deployments)
-    - [`ethers.js`](#ethersjs)
-    - [`cast`](#cast)
+      - [`ethers.js`](#ethersjs)
+      - [`cast`](#cast)
     - [Contract Verification](#contract-verification)
   - [`CreateX` Deployments](#createx-deployments)
-    - [EVM-Based Production Networks](#evm-based-production-networks)
-    - [Ethereum Test Networks](#ethereum-test-networks)
-    - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
+      - [EVM-Based Production Networks](#evm-based-production-networks)
+      - [Ethereum Test Networks](#ethereum-test-networks)
+      - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
   - [Integration With External Tooling](#integration-with-external-tooling)
   - [🙏🏼 Acknowledgement](#-acknowledgement)
 
@@ -704,7 +704,7 @@ Deploys and initialises a new contract via employing the [`CREATE3`](https://git
 ## Special Features
 
 > [!TIP]
-> Please note that the separate project [`createXcrunch`](https://github.com/HrikB/createXcrunch) is a [Rust](https://www.rust-lang.org)-based program designed to efficiently find _zero-leading_, _zero-containing_, or _pattern-matching_ addresses, taking into account the following special features of [`CreateX`](./src/CreateX.sol).
+> Note that the separate project [`createXcrunch`](https://github.com/HrikB/createXcrunch) is a [Rust](https://www.rust-lang.org)-based program designed to efficiently find _zero-leading_, _zero-containing_, or _pattern-matching_ addresses, taking into account the following special features of [`CreateX`](./src/CreateX.sol).
 
 ### Permissioned Deploy Protection and Cross-Chain Redeploy Protection
 
