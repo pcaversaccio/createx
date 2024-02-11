@@ -704,7 +704,7 @@ Deploys and initialises a new contract via employing the [`CREATE3`](https://git
 ## Special Features
 
 > [!TIP]
-> Note that the separate project [`createXcrunch`](https://github.com/HrikB/createXcrunch) is a [Rust](https://www.rust-lang.org)-based program designed to efficiently find _zero-leading_, _zero-containing_, or _pattern-matching_ addresses, taking into account the following special features of [`CreateX`](./src/CreateX.sol).
+> Note that the separate project [`createXcrunch`](https://github.com/HrikB/createXcrunch) is a [Rust](https://www.rust-lang.org)-based program designed to efficiently find _zero-leading_, _zero-containing_, or _pattern-matching_ addresses, taking into account the subsequent special features of [`CreateX`](./src/CreateX.sol).
 
 ### Permissioned Deploy Protection and Cross-Chain Redeploy Protection
 
