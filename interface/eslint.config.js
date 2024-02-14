@@ -3,7 +3,7 @@ const eslint = require("@eslint/js");
 const tseslint = require("typescript-eslint");
 const next = require("@next/eslint-plugin-next");
 const react = require("eslint-plugin-react");
-const hooks = require("eslint-plugin-react-hooks");
+const reactHooks = require("eslint-plugin-react-hooks");
 const eslintConfigPrettier = require("eslint-config-prettier");
 /* eslint-enable @typescript-eslint/no-var-requires */
 
@@ -20,12 +20,12 @@ module.exports = tseslint.config(
       "@typescript-eslint": tseslint.plugin,
       "@next/next": next,
       react: react,
-      "react-hooks": hooks,
+      "react-hooks": reactHooks,
     },
     rules: {
       ...next.configs.recommended.rules,
       ...react.configs["jsx-runtime"].rules,
-      ...hooks.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
     },
     languageOptions: {
       ecmaVersion: "latest",
