@@ -19,13 +19,20 @@ module.exports = tseslint.config(
     plugins: {
       "@typescript-eslint": tseslint.plugin,
       "@next/next": next,
-      "react": react,
+      react: react,
       "react-hooks": hooks,
     },
     rules: {
       ...next.configs.recommended.rules,
       ...react.configs["jsx-runtime"].rules,
       ...hooks.configs.recommended.rules,
+    },
+    languageOptions: {
+      ecmaVersion: "latest",
+      parser: tseslint.parser,
+      parserOptions: {
+        project: true,
+      },
     },
   },
   {
