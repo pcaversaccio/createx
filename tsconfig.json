@@ -11,5 +11,5 @@
     "resolveJsonModule": true
   },
   "include": ["./scripts", "./typechain-types"],
-  "files": ["./hardhat.config.ts"]
+  "files": ["./hardhat.config.ts", "eslint.config.js"]
 }
