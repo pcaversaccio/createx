@@ -26,8 +26,8 @@
     "start": "pnpm build && npx next start",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,tsx,css,md,json,yml,yaml}\"",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,tsx,css,md,json,yml,yaml}\"",
-    "lint:check": "pnpm prettier:check && npx next lint",
-    "lint:fix": "pnpm prettier:fix && npx next lint --fix"
+    "lint:check": "pnpm prettier:check && npx eslint .",
+    "lint:fix": "pnpm prettier:fix && npx eslint . --fix"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",
@@ -40,18 +40,23 @@
     "sharp": "^0.33.2"
   },
   "devDependencies": {
+    "@eslint/js": "^8.56.0",
+    "@next/eslint-plugin-next": "^14.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@types/node": "^20.11.17",
+    "@types/node": "^20.11.18",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "autoprefixer": "^10.4.17",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.1.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "next-seo": "^6.4.0",
     "postcss": "^8.4.35",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "typescript-eslint": "^7.0.1"
   }
 }

@@ -25,6 +25,7 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["**/*.js", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "files": ["next-env.d.ts", "eslint.config.js"],
   "exclude": ["node_modules"]
 }
