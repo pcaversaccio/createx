@@ -440,6 +440,11 @@ const config: HardhatUserConfig = {
       ),
       accounts,
     },
+    blastTestnet: {
+      chainId: 168587773,
+      url: vars.get("BLAST_TESTNET_URL", "https://sepolia.blast.io"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -561,6 +566,8 @@ const config: HardhatUserConfig = {
       artheraTestnet: vars.get("ARTHERA_API_KEY", ""),
       // For OP-Endurance testnet
       openduranceTestnet: vars.get("OPENDURANCE_API_KEY", ""),
+      // For Blast testnet
+      blastTestnet: vars.get("BLAST_API_KEY", ""),
     },
     customChains: [
       {
@@ -875,6 +882,15 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://explorer-l2-testnet.fusionist.io/api",
           browserURL: "https://explorer-l2-testnet.fusionist.io",
+        },
+      },
+      {
+        network: "blastTestnet",
+        chainId: 168587773,
+        urls: {
+          apiURL:
+            "https://api.routescan.io/v2/network/testnet/evm/168587773/etherscan",
+          browserURL: "https://testnet.blastscan.io",
         },
       },
     ],
