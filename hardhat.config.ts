@@ -445,6 +445,16 @@ const config: HardhatUserConfig = {
       url: vars.get("BLAST_TESTNET_URL", "https://sepolia.blast.io"),
       accounts,
     },
+    kromaTestnet: {
+      chainId: 2358,
+      url: vars.get("KROMA_TESTNET_URL", "https://api.sepolia.kroma.network"),
+      accounts,
+    },
+    kromaMain: {
+      chainId: 255,
+      url: vars.get("KROMA_MAINNET_URL", "https://api.kroma.network"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -568,6 +578,9 @@ const config: HardhatUserConfig = {
       openduranceTestnet: vars.get("OPENDURANCE_API_KEY", ""),
       // For Blast testnet
       blastTestnet: vars.get("BLAST_API_KEY", ""),
+      // For Kroma testnet & mainnet
+      kroma: vars.get("KROMA_API_KEY", ""),
+      kromaTestnet: vars.get("KROMA_API_KEY", ""),
     },
     customChains: [
       {
@@ -891,6 +904,22 @@ const config: HardhatUserConfig = {
           apiURL:
             "https://api.routescan.io/v2/network/testnet/evm/168587773/etherscan",
           browserURL: "https://testnet.blastscan.io",
+        },
+      },
+      {
+        network: "kroma",
+        chainId: 255,
+        urls: {
+          apiURL: "https://api.kromascan.com/api",
+          browserURL: "https://kromascan.com",
+        },
+      },
+      {
+        network: "kromaTestnet",
+        chainId: 2358,
+        urls: {
+          apiURL: "https://api-sepolia.kromascan.com",
+          browserURL: "https://sepolia.kromascan.com",
         },
       },
     ],
