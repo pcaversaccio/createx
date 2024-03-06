@@ -104,6 +104,7 @@
     "deploy:frametestnet": "npx hardhat run --no-compile --network frameTestnet scripts/deploy.ts",
     "deploy:opendurancetestnet": "npx hardhat run --no-compile --network openduranceTestnet scripts/deploy.ts",
     "deploy:blasttestnet": "npx hardhat run --no-compile --network blastTestnet scripts/deploy.ts",
+    "deploy:blastmain": "npx hardhat run --no-compile --network blastMain scripts/deploy.ts",
     "deploy:kromatestnet": "npx hardhat run --no-compile --network kromaTestnet scripts/deploy.ts",
     "deploy:kromamain": "npx hardhat run --no-compile --network kromaMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
