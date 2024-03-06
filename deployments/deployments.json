@@ -218,6 +218,13 @@
     ]
   },
   {
+    "name": "Blast",
+    "chainId": 81457,
+    "urls": [
+      "https://blastscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -439,7 +446,7 @@
     "name": "Blast Testnet",
     "chainId": 168587773,
     "urls": [
-      "https://testnet.blastscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://sepolia.blastscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
