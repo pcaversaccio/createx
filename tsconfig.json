@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "es2021",
     "module": "commonjs",
+    "allowJs": true,
     "strict": true,
     "esModuleInterop": true,
     "outDir": "dist",
