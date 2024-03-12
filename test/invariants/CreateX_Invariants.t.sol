@@ -32,7 +32,7 @@ contract CreateX_Invariants is Test {
     /*                            TESTS                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
-    function statefulFuzz_EtherBalance() external {
+    function statefulFuzz_EtherBalance() external view {
         assertEq(createXAddr.balance, createXHandler.updatedBalance(), "100");
     }
 }
