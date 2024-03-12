@@ -54,7 +54,7 @@ importers:
         version: 4.1.1(typescript@5.4.2)
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@20.11.25)(typescript@5.4.2)
+        version: 10.9.2(@types/node@20.11.26)(typescript@5.4.2)
       typechain:
         specifier: ^8.3.2
         version: 8.3.2(typescript@5.4.2)
@@ -102,11 +102,11 @@ importers:
         specifier: ^4.3.0
         version: 4.3.0(prettier@3.2.5)
       "@types/node":
-        specifier: ^20.11.25
-        version: 20.11.25
+        specifier: ^20.11.26
+        version: 20.11.26
       "@types/react":
-        specifier: ^18.2.64
-        version: 18.2.64
+        specifier: ^18.2.65
+        version: 18.2.65
       "@types/react-dom":
         specifier: ^18.2.21
         version: 18.2.21
@@ -2181,7 +2181,7 @@ packages:
         integrity: sha512-pqr857jrp2kPuO9uRjZ3PwnJTjoQy+fcdxvBTvHm6dkmEL9q+hDD/2j/0ELOBPtPnS8LjCX0gI9nbl8lVkadpg==,
       }
     dependencies:
-      "@types/node": 20.11.25
+      "@types/node": 20.11.26
     dev: true
 
   /@types/bn.js@5.1.5:
@@ -2190,7 +2190,7 @@ packages:
         integrity: sha512-V46N0zwKRF5Q00AZ6hWtN0T8gGmDUaUzLWQvHFo5yThtVwK/VCenFY3wXVbOvNfajEpsTfQM4IN9k/d6gUVX3A==,
       }
     dependencies:
-      "@types/node": 20.11.25
+      "@types/node": 20.11.26
     dev: true
 
   /@types/concat-stream@1.6.1:
@@ -2253,10 +2253,10 @@ packages:
       }
     dev: true
 
-  /@types/node@20.11.25:
+  /@types/node@20.11.26:
     resolution:
       {
-        integrity: sha512-TBHyJxk2b7HceLVGFcpAUjsa5zIdsPWlR6XHfyGzd0SFu+/NFgQgMAl96MSDZgQDvJAvV6BKsFOrt6zIL09JDw==,
+        integrity: sha512-YwOMmyhNnAWijOBQweOJnQPl068Oqd4K3OFbTc6AHJwzweUwwWG3GIFY74OKks2PJUDkQPeddOQES9mLn1CTEQ==,
       }
     dependencies:
       undici-types: 5.26.5
@@ -2275,7 +2275,7 @@ packages:
         integrity: sha512-uRwJqmiXmh9++aSu1VNEn3iIxWOhd8AHXNSdlaLfdAAdSTY9jYVeGWnzejM3dvrkbqE3/hyQkQQ29IFATEGlew==,
       }
     dependencies:
-      "@types/node": 20.11.25
+      "@types/node": 20.11.26
     dev: true
 
   /@types/prettier@2.7.3:
@@ -2305,13 +2305,13 @@ packages:
         integrity: sha512-gnvBA/21SA4xxqNXEwNiVcP0xSGHh/gi1VhWv9Bl46a0ItbTT5nFY+G9VSQpaG/8N/qdJpJ+vftQ4zflTtnjLw==,
       }
     dependencies:
-      "@types/react": 18.2.64
+      "@types/react": 18.2.65
     dev: true
 
-  /@types/react@18.2.64:
+  /@types/react@18.2.65:
     resolution:
       {
-        integrity: sha512-MlmPvHgjj2p3vZaxbQgFUQFvD8QiZwACfGqEdDSWou5yISWxDQ4/74nCAwsUiX7UFLKZz3BbVSPj+YxeoGGCfg==,
+        integrity: sha512-98TsY0aW4jqx/3RqsUXwMDZSWR1Z4CUlJNue8ueS2/wcxZOsz4xmW1X8ieaWVRHcmmQM3R8xVA4XWB3dJnWwDQ==,
       }
     dependencies:
       "@types/prop-types": 15.7.11
@@ -2332,7 +2332,7 @@ packages:
         integrity: sha512-hHxJU6PAEUn0TP4S/ZOzuTUvJWuZ6eIKeNKb5RBpODvSl6hp1Wrw4s7ATY50rklRCScUDpHzVA/DQdSjJ3UoYQ==,
       }
     dependencies:
-      "@types/node": 20.11.25
+      "@types/node": 20.11.26
     dev: true
 
   /@types/semver@7.5.8:
@@ -5437,7 +5437,7 @@ packages:
       solc: 0.7.3(debug@4.3.4)
       source-map-support: 0.5.21
       stacktrace-parser: 0.1.10
-      ts-node: 10.9.2(@types/node@20.11.25)(typescript@5.4.2)
+      ts-node: 10.9.2(@types/node@20.11.26)(typescript@5.4.2)
       tsort: 0.0.1
       typescript: 5.4.2
       undici: 5.28.3
@@ -7203,7 +7203,7 @@ packages:
     dependencies:
       lilconfig: 3.0.0
       postcss: 8.4.35
-      ts-node: 10.9.2(@types/node@20.11.25)(typescript@5.4.2)
+      ts-node: 10.9.2(@types/node@20.11.26)(typescript@5.4.2)
       yaml: 2.3.4
     dev: true
 
@@ -8660,7 +8660,7 @@ packages:
       }
     dev: true
 
-  /ts-node@10.9.2(@types/node@20.11.25)(typescript@5.4.2):
+  /ts-node@10.9.2(@types/node@20.11.26)(typescript@5.4.2):
     resolution:
       {
         integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==,
@@ -8682,7 +8682,7 @@ packages:
       "@tsconfig/node12": 1.0.11
       "@tsconfig/node14": 1.0.3
       "@tsconfig/node16": 1.0.4
-      "@types/node": 20.11.25
+      "@types/node": 20.11.26
       acorn: 8.11.3
       acorn-walk: 8.3.2
       arg: 4.1.3
