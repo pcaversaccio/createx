@@ -470,6 +470,11 @@ const config: HardhatUserConfig = {
       url: vars.get("DOS_MAINNET_URL", "https://main.doschain.com"),
       accounts,
     },
+    fraxtalTestnet: {
+      chainId: 2522,
+      url: vars.get("FRAXTAL_TESTNET_URL", "https://rpc.testnet.frax.com"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -600,6 +605,8 @@ const config: HardhatUserConfig = {
       // For DOS Chain testnet & mainnet
       dos: vars.get("DOS_API_KEY", ""),
       dosTestnet: vars.get("DOS_API_KEY", ""),
+      // For Fraxtal testnet
+      fraxtalTestnet: vars.get("FRAXTAL_API_KEY", ""),
     },
     customChains: [
       {
@@ -962,6 +969,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://test.doscan.io/api",
           browserURL: "https://test.doscan.io",
+        },
+      },
+      {
+        network: "fraxtalTestnet",
+        chainId: 2522,
+        urls: {
+          apiURL: "https://api-holesky.fraxscan.com/api",
+          browserURL: "https://holesky.fraxscan.com",
         },
       },
     ],

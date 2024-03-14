@@ -2241,6 +2241,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [OP-Endurance Testnet](https://explorer-l2-testnet.fusionist.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Blast Testnet](https://sepolia.blastscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [DOS Chain Testnet](https://test.doscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Fraxtal Testnet](https://holesky.fraxscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 
