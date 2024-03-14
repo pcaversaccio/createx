@@ -225,6 +225,13 @@
     ]
   },
   {
+    "name": "DOS Chain",
+    "chainId": 7979,
+    "urls": [
+      "https://doscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -276,7 +283,7 @@
     "name": "Polygon Testnet (zkEVM)",
     "chainId": 1442,
     "urls": [
-      "https://testnet-zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://cardona-zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -447,6 +454,13 @@
     "chainId": 168587773,
     "urls": [
       "https://sepolia.blastscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "DOS Chain Testnet",
+    "chainId": 3939,
+    "urls": [
+      "https://test.doscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]

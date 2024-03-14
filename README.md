@@ -2203,6 +2203,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [LUKSO](https://explorer.execution.mainnet.lukso.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Manta Pacific](https://pacific-explorer.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Blast](https://blastscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [DOS Chain](https://doscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
@@ -2215,7 +2216,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Optimism Sepolia Testnet](https://sepolia-optimism.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Arbitrum Sepolia Testnet](https://sepolia.arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Polygon Testnet (Mumbai)](https://mumbai.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Polygon Testnet (zkEVM)](https://testnet-zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Polygon Testnet (zkEVM)](https://cardona-zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Fantom Testnet](https://testnet.ftmscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Avalanche Testnet (Fuji)](https://testnet.snowtrace.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Gnosis Chain Testnet (Chiado)](https://gnosis-chiado.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
@@ -2239,6 +2240,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Frame Testnet](https://explorer.testnet.frame.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [OP-Endurance Testnet](https://explorer-l2-testnet.fusionist.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Blast Testnet](https://sepolia.blastscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [DOS Chain Testnet](https://test.doscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 
