@@ -54,7 +54,7 @@ importers:
         version: 4.1.1(typescript@5.4.2)
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@20.11.27)(typescript@5.4.2)
+        version: 10.9.2(@types/node@20.11.28)(typescript@5.4.2)
       typechain:
         specifier: ^8.3.2
         version: 8.3.2(typescript@5.4.2)
@@ -102,8 +102,8 @@ importers:
         specifier: ^4.3.0
         version: 4.3.0(prettier@3.2.5)
       "@types/node":
-        specifier: ^20.11.27
-        version: 20.11.27
+        specifier: ^20.11.28
+        version: 20.11.28
       "@types/react":
         specifier: ^18.2.66
         version: 18.2.66
@@ -2064,7 +2064,7 @@ packages:
         integrity: sha512-pqr857jrp2kPuO9uRjZ3PwnJTjoQy+fcdxvBTvHm6dkmEL9q+hDD/2j/0ELOBPtPnS8LjCX0gI9nbl8lVkadpg==,
       }
     dependencies:
-      "@types/node": 20.11.27
+      "@types/node": 20.11.28
     dev: true
 
   /@types/bn.js@5.1.5:
@@ -2073,7 +2073,7 @@ packages:
         integrity: sha512-V46N0zwKRF5Q00AZ6hWtN0T8gGmDUaUzLWQvHFo5yThtVwK/VCenFY3wXVbOvNfajEpsTfQM4IN9k/d6gUVX3A==,
       }
     dependencies:
-      "@types/node": 20.11.27
+      "@types/node": 20.11.28
     dev: true
 
   /@types/http-cache-semantics@4.0.4:
@@ -2111,10 +2111,10 @@ packages:
       }
     dev: true
 
-  /@types/node@20.11.27:
+  /@types/node@20.11.28:
     resolution:
       {
-        integrity: sha512-qyUZfMnCg1KEz57r7pzFtSGt49f6RPkPBis3Vo4PbS7roQEDn22hiHzl/Lo1q4i4hDEgBJmBF/NTNg2XR0HbFg==,
+        integrity: sha512-M/GPWVS2wLkSkNHVeLkrF2fD5Lx5UC4PxA0uZcKc6QqbIQUJyW1jVjueJYi1z8n0I5PxYrtpnPnWglE+y9A0KA==,
       }
     dependencies:
       undici-types: 5.26.5
@@ -2126,7 +2126,7 @@ packages:
         integrity: sha512-uRwJqmiXmh9++aSu1VNEn3iIxWOhd8AHXNSdlaLfdAAdSTY9jYVeGWnzejM3dvrkbqE3/hyQkQQ29IFATEGlew==,
       }
     dependencies:
-      "@types/node": 20.11.27
+      "@types/node": 20.11.28
     dev: true
 
   /@types/prettier@2.7.3:
@@ -2176,7 +2176,7 @@ packages:
         integrity: sha512-hHxJU6PAEUn0TP4S/ZOzuTUvJWuZ6eIKeNKb5RBpODvSl6hp1Wrw4s7ATY50rklRCScUDpHzVA/DQdSjJ3UoYQ==,
       }
     dependencies:
-      "@types/node": 20.11.27
+      "@types/node": 20.11.28
     dev: true
 
   /@types/semver@7.5.8:
@@ -5139,7 +5139,7 @@ packages:
       solc: 0.7.3(debug@4.3.4)
       source-map-support: 0.5.21
       stacktrace-parser: 0.1.10
-      ts-node: 10.9.2(@types/node@20.11.27)(typescript@5.4.2)
+      ts-node: 10.9.2(@types/node@20.11.28)(typescript@5.4.2)
       tsort: 0.0.1
       typescript: 5.4.2
       undici: 5.28.3
@@ -6879,7 +6879,7 @@ packages:
     dependencies:
       lilconfig: 3.0.0
       postcss: 8.4.35
-      ts-node: 10.9.2(@types/node@20.11.27)(typescript@5.4.2)
+      ts-node: 10.9.2(@types/node@20.11.28)(typescript@5.4.2)
       yaml: 2.3.4
     dev: true
 
@@ -8197,7 +8197,7 @@ packages:
       }
     dev: true
 
-  /ts-node@10.9.2(@types/node@20.11.27)(typescript@5.4.2):
+  /ts-node@10.9.2(@types/node@20.11.28)(typescript@5.4.2):
     resolution:
       {
         integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==,
@@ -8219,7 +8219,7 @@ packages:
       "@tsconfig/node12": 1.0.11
       "@tsconfig/node14": 1.0.3
       "@tsconfig/node16": 1.0.4
-      "@types/node": 20.11.27
+      "@types/node": 20.11.28
       acorn: 8.11.3
       acorn-walk: 8.3.2
       arg: 4.1.3
