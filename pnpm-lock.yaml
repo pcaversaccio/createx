@@ -41,8 +41,8 @@ importers:
         specifier: ^2.10.0
         version: 2.10.0(hardhat@2.22.1)
       hardhat-gas-reporter:
-        specifier: ^2.0.0
-        version: 2.0.0(hardhat@2.22.1)(typescript@5.4.2)
+        specifier: ^2.0.2
+        version: 2.0.2(hardhat@2.22.1)(typescript@5.4.2)
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
@@ -2957,10 +2957,10 @@ packages:
       safe-buffer: 5.2.1
     dev: true
 
-  /binary-extensions@2.2.0:
+  /binary-extensions@2.3.0:
     resolution:
       {
-        integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==,
+        integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==,
       }
     engines: { node: ">=8" }
     dev: true
@@ -5054,10 +5054,10 @@ packages:
       strip-ansi: 6.0.1
     dev: true
 
-  /hardhat-gas-reporter@2.0.0(hardhat@2.22.1)(typescript@5.4.2):
+  /hardhat-gas-reporter@2.0.2(hardhat@2.22.1)(typescript@5.4.2):
     resolution:
       {
-        integrity: sha512-OOgSvpl9Dq9Guv9/zWeo5J/tq/txEgV3AuJmKZUj+MyiZL93CCNTd0F7zwHdygPl4/KBwAHxkyeCcFHcBR+cWQ==,
+        integrity: sha512-i/+g+dX+/+MZ7L4M5NE78TgjDgnE3dINhsNUJmjwbqR3cLSMPrsEyiee+/1c5w32JSD08SKyDf+8W9Q5iC+zLw==,
       }
     peerDependencies:
       hardhat: ^2.16.0
@@ -5076,7 +5076,7 @@ packages:
       lodash: 4.17.21
       markdown-table: 2.0.0
       sha1: 1.1.1
-      viem: 2.8.6(typescript@5.4.2)
+      viem: 2.7.14(typescript@5.4.2)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -5464,7 +5464,7 @@ packages:
       }
     engines: { node: ">=8" }
     dependencies:
-      binary-extensions: 2.2.0
+      binary-extensions: 2.3.0
     dev: true
 
   /is-boolean-object@1.1.2:
@@ -8542,10 +8542,10 @@ packages:
       }
     dev: true
 
-  /viem@2.8.6(typescript@5.4.2):
+  /viem@2.7.14(typescript@5.4.2):
     resolution:
       {
-        integrity: sha512-LqxLOSFtXfbC3tsiZ8Km8jKR4ktTOLfigL2dR9IN28He2+QrNhYvvwGPz3P4hbfU12Wvuxo6mWGZ2L1lpNtvrA==,
+        integrity: sha512-5b1KB1gXli02GOQHZIUsRluNUwssl2t4hqdFAzyWPwJ744N83jAOBOjOkrGz7K3qMIv9b0GQt3DoZIErSQTPkQ==,
       }
     peerDependencies:
       typescript: ">=5.0.4"
