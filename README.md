@@ -2238,7 +2238,6 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [LUKSO Testnet](https://explorer.execution.testnet.lukso.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Manta Pacific Testnet](https://pacific-explorer.testnet.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Frame Testnet](https://explorer.testnet.frame.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [OP-Endurance Testnet](https://explorer-l2-testnet.fusionist.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Blast Testnet](https://sepolia.blastscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [DOS Chain Testnet](https://test.doscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Fraxtal Testnet](https://holesky.fraxscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
