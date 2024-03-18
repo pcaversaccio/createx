@@ -48,7 +48,7 @@ const config: HardhatUserConfig = {
     hardhat: {
       initialBaseFeePerGas: 0,
       chainId: 31337,
-      hardfork: "merge",
+      hardfork: "cancun",
       forking: {
         url: vars.get("ETH_MAINNET_URL", ethMainnetUrl),
         // The Hardhat network will by default fork from the latest mainnet block
@@ -150,10 +150,10 @@ const config: HardhatUserConfig = {
       accounts,
     },
     polygonZkEVMTestnet: {
-      chainId: 1442,
+      chainId: 2442,
       url: vars.get(
         "POLYGON_ZKEVM_TESTNET_URL",
-        "https://rpc.public.zkevm-test.net",
+        "https://rpc.cardona.zkevm-rpc.com",
       ),
       accounts,
     },
@@ -432,6 +432,49 @@ const config: HardhatUserConfig = {
       url: vars.get("FRAME_TESTNET_URL", "https://rpc.testnet.frame.xyz/http"),
       accounts,
     },
+    openduranceTestnet: {
+      chainId: 6480001001,
+      url: vars.get(
+        "OPENDURANCE_TESTNET_URL",
+        "https://rpc-l2-testnet.fusionist.io",
+      ),
+      accounts,
+    },
+    blastTestnet: {
+      chainId: 168587773,
+      url: vars.get("BLAST_TESTNET_URL", "https://sepolia.blast.io"),
+      accounts,
+    },
+    blastMain: {
+      chainId: 81457,
+      url: vars.get("BLAST_MAINNET_URL", "https://rpc.blast.io"),
+      accounts,
+    },
+    kromaTestnet: {
+      chainId: 2358,
+      url: vars.get("KROMA_TESTNET_URL", "https://api.sepolia.kroma.network"),
+      accounts,
+    },
+    kromaMain: {
+      chainId: 255,
+      url: vars.get("KROMA_MAINNET_URL", "https://api.kroma.network"),
+      accounts,
+    },
+    dosTestnet: {
+      chainId: 3939,
+      url: vars.get("DOS_TESTNET_URL", "https://test.doschain.com"),
+      accounts,
+    },
+    dosMain: {
+      chainId: 7979,
+      url: vars.get("DOS_MAINNET_URL", "https://main.doschain.com"),
+      accounts,
+    },
+    fraxtalTestnet: {
+      chainId: 2522,
+      url: vars.get("FRAXTAL_TESTNET_URL", "https://rpc.testnet.frax.com"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -551,6 +594,19 @@ const config: HardhatUserConfig = {
       mantaTestnet: vars.get("MANTA_API_KEY", ""),
       // For Arthera testnet
       artheraTestnet: vars.get("ARTHERA_API_KEY", ""),
+      // For OP-Endurance testnet
+      openduranceTestnet: vars.get("OPENDURANCE_API_KEY", ""),
+      // For Blast testnet & mainnet
+      blast: vars.get("BLAST_API_KEY", ""),
+      blastTestnet: vars.get("BLAST_API_KEY", ""),
+      // For Kroma testnet & mainnet
+      kroma: vars.get("KROMA_API_KEY", ""),
+      kromaTestnet: vars.get("KROMA_API_KEY", ""),
+      // For DOS Chain testnet & mainnet
+      dos: vars.get("DOS_API_KEY", ""),
+      dosTestnet: vars.get("DOS_API_KEY", ""),
+      // For Fraxtal testnet
+      fraxtalTestnet: vars.get("FRAXTAL_API_KEY", ""),
     },
     customChains: [
       {
@@ -773,10 +829,10 @@ const config: HardhatUserConfig = {
       },
       {
         network: "polygonZkEVMTestnet",
-        chainId: 1442,
+        chainId: 2442,
         urls: {
-          apiURL: "https://api-testnet-zkevm.polygonscan.com/api",
-          browserURL: "https://testnet-zkevm.polygonscan.com",
+          apiURL: "https://api-cardona-zkevm.polygonscan.com/api",
+          browserURL: "https://cardona-zkevm.polygonscan.com",
         },
       },
       {
@@ -857,6 +913,70 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://explorer-test.arthera.net/api",
           browserURL: "https://explorer-test.arthera.net",
+        },
+      },
+      {
+        network: "openduranceTestnet",
+        chainId: 6480001001,
+        urls: {
+          apiURL: "https://explorer-l2-testnet.fusionist.io/api",
+          browserURL: "https://explorer-l2-testnet.fusionist.io",
+        },
+      },
+      {
+        network: "blast",
+        chainId: 81457,
+        urls: {
+          apiURL: "https://api.blastscan.io/api",
+          browserURL: "https://blastscan.io",
+        },
+      },
+      {
+        network: "blastTestnet",
+        chainId: 168587773,
+        urls: {
+          apiURL: "https://api-sepolia.blastscan.io/api",
+          browserURL: "https://sepolia.blastscan.io",
+        },
+      },
+      {
+        network: "kroma",
+        chainId: 255,
+        urls: {
+          apiURL: "https://api.kromascan.com/api",
+          browserURL: "https://kromascan.com",
+        },
+      },
+      {
+        network: "kromaTestnet",
+        chainId: 2358,
+        urls: {
+          apiURL: "https://api-sepolia.kromascan.com",
+          browserURL: "https://sepolia.kromascan.com",
+        },
+      },
+      {
+        network: "dos",
+        chainId: 7979,
+        urls: {
+          apiURL: "https://doscan.io/api",
+          browserURL: "https://doscan.io",
+        },
+      },
+      {
+        network: "dosTestnet",
+        chainId: 3939,
+        urls: {
+          apiURL: "https://test.doscan.io/api",
+          browserURL: "https://test.doscan.io",
+        },
+      },
+      {
+        network: "fraxtalTestnet",
+        chainId: 2522,
+        urls: {
+          apiURL: "https://api-holesky.fraxscan.com/api",
+          browserURL: "https://holesky.fraxscan.com",
         },
       },
     ],

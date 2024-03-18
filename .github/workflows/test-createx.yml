@@ -19,7 +19,7 @@ jobs:
         node_version:
           - 20
         go_version:
-          - 1.21.5
+          - 1.22.0
 
     steps:
       - name: Checkout
@@ -28,7 +28,7 @@ jobs:
           submodules: recursive
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v3
         with:
           version: latest
           run_install: false
@@ -38,7 +38,7 @@ jobs:
         run: echo "dir=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
 
       - name: Restore pnpm cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: pnpm-cache
         with:
           path: ${{ steps.pnpm-cache-dir-path.outputs.dir }}
@@ -107,7 +107,7 @@ jobs:
           FOUNDRY_PROFILE: default
 
       - name: Slither static analyser
-        uses: crytic/slither-action@v0.3.0
+        uses: crytic/slither-action@v0.3.1
         id: slither
         with:
           fail-on: config
