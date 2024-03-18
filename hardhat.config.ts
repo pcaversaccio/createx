@@ -432,11 +432,27 @@ const config: HardhatUserConfig = {
       url: vars.get("FRAME_TESTNET_URL", "https://rpc.testnet.frame.xyz/http"),
       accounts,
     },
+    enduranceTestnet: {
+      chainId: 6480,
+      url: vars.get(
+        "ENDURANCE_TESTNET_URL",
+        "https://myrpctestnet.fusionist.io",
+      ),
+      accounts,
+    },
     openduranceTestnet: {
       chainId: 6480001001,
       url: vars.get(
         "OPENDURANCE_TESTNET_URL",
         "https://rpc-l2-testnet.fusionist.io",
+      ),
+      accounts,
+    },
+    enduranceMain: {
+      chainId: 648,
+      url: vars.get(
+        "ENDURANCE_MAINNET_URL",
+        "https://rpc-endurance.fusionist.io",
       ),
       accounts,
     },
@@ -594,7 +610,9 @@ const config: HardhatUserConfig = {
       mantaTestnet: vars.get("MANTA_API_KEY", ""),
       // For Arthera testnet
       artheraTestnet: vars.get("ARTHERA_API_KEY", ""),
-      // For OP-Endurance testnet
+      // For Endurance testnets & mainnet
+      endurance: vars.get("ENDURANCE_API_KEY", ""),
+      enduranceTestnet: vars.get("ENDURANCE_API_KEY", ""),
       openduranceTestnet: vars.get("OPENDURANCE_API_KEY", ""),
       // For Blast testnet & mainnet
       blast: vars.get("BLAST_API_KEY", ""),
@@ -913,6 +931,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://explorer-test.arthera.net/api",
           browserURL: "https://explorer-test.arthera.net",
+        },
+      },
+      {
+        network: "endurance",
+        chainId: 648,
+        urls: {
+          apiURL: "https://explorer-endurance.fusionist.io/api",
+          browserURL: "https://explorer-endurance.fusionist.io",
+        },
+      },
+      {
+        network: "enduranceTestnet",
+        chainId: 6480,
+        urls: {
+          apiURL: "https://myexplorertestnet.fusionist.io/api",
+          browserURL: "https://myexplorertestnet.fusionist.io",
         },
       },
       {
