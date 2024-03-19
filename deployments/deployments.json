@@ -470,12 +470,5 @@
     "urls": [
       "https://holesky.fraxscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
-  },
-  {
-    "name": "Endurance Testnet",
-    "chainId": 6480,
-    "urls": [
-      "https://myexplorertestnet.fusionist.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
-    ]
   }
 ]
