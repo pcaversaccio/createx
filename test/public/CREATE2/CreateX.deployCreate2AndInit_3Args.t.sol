@@ -180,9 +180,11 @@ contract CreateX_DeployCreate2AndInit_3Args_Public_Test is BaseTest {
         vm.assume(
             chainId != block.chainid &&
                 chainId != 0 &&
+                originalDeployer != arg3 &&
                 originalDeployer != msgSender &&
                 originalDeployer != createXAddr &&
                 originalDeployer != zeroAddress &&
+                msgSender != arg3 &&
                 msgSender != createXAddr &&
                 msgSender != zeroAddress
         );
