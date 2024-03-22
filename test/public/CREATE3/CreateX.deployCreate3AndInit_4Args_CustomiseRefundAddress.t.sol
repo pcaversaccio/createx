@@ -232,6 +232,7 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseRefundAddress_Public_Test i
                 originalDeployer != msgSender &&
                 originalDeployer != createXAddr &&
                 originalDeployer != zeroAddress &&
+                msgSender != arg3 &&
                 msgSender != createXAddr &&
                 msgSender != zeroAddress
         );
