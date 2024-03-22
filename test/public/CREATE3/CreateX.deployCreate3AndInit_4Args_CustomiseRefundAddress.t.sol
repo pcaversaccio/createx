@@ -229,6 +229,7 @@ contract CreateX_DeployCreate3AndInit_4Args_CustomiseRefundAddress_Public_Test i
         vm.assume(
             chainId != block.chainid &&
                 chainId != 0 &&
+                originalDeployer != arg3 &&
                 originalDeployer != msgSender &&
                 originalDeployer != createXAddr &&
                 originalDeployer != zeroAddress &&

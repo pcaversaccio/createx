@@ -94,7 +94,7 @@ contract CreateX_DeployCreateAndInit_3Args_Public_Test is BaseTest {
         whenTheCreateXContractHasANonZeroBalance(amount)
         whenTheRefundTransactionIsSuccessful
     {
-        vm.assume(nonce != 0 && nonce < type(uint64).max);
+        vm.assume(nonce != 0 && nonce < type(uint64).max && SELF != arg3);
         vm.setNonceUnsafe(createXAddr, nonce);
         values.constructorAmount = bound(values.constructorAmount, 0, type(uint64).max);
         values.initCallAmount = bound(values.initCallAmount, 0, type(uint64).max);
