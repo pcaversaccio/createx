@@ -54,7 +54,7 @@ importers:
         version: 4.5.2(typescript@5.4.3)
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@20.11.30)(typescript@5.4.3)
+        version: 10.9.2(@types/node@20.12.2)(typescript@5.4.3)
       typechain:
         specifier: ^8.3.2
         version: 8.3.2(typescript@5.4.3)
@@ -102,8 +102,8 @@ importers:
         specifier: ^4.3.0
         version: 4.3.0(prettier@3.2.5)
       "@types/node":
-        specifier: ^20.11.30
-        version: 20.11.30
+        specifier: ^20.12.2
+        version: 20.12.2
       "@types/react":
         specifier: ^18.2.73
         version: 18.2.73
@@ -402,10 +402,10 @@ packages:
       "@jridgewell/trace-mapping": 0.3.9
     dev: true
 
-  /@emnapi/runtime@1.1.0:
+  /@emnapi/runtime@1.1.1:
     resolution:
       {
-        integrity: sha512-gCGlE0fJGWalfy+wbFApjhKn6uoSVvopru77IPyxNKkjkaiSx2HxDS7eOYSmo9dcMIhmmIvoxiC3N9TM1c3EaA==,
+        integrity: sha512-3bfqkzuR1KLx57nZfjr2NLnFOobvyS0aTszaEGCGqmYMVDRaGvgIZbjGSV/MHSSmLgQ/b9JFHQ5xm5WRZYd+XQ==,
       }
     requiresBuild: true
     dependencies:
@@ -1036,7 +1036,7 @@ packages:
     cpu: [wasm32]
     requiresBuild: true
     dependencies:
-      "@emnapi/runtime": 1.1.0
+      "@emnapi/runtime": 1.1.1
     dev: false
     optional: true
 
@@ -2109,7 +2109,7 @@ packages:
         integrity: sha512-pqr857jrp2kPuO9uRjZ3PwnJTjoQy+fcdxvBTvHm6dkmEL9q+hDD/2j/0ELOBPtPnS8LjCX0gI9nbl8lVkadpg==,
       }
     dependencies:
-      "@types/node": 20.11.30
+      "@types/node": 20.12.2
     dev: true
 
   /@types/bn.js@5.1.5:
@@ -2118,7 +2118,7 @@ packages:
         integrity: sha512-V46N0zwKRF5Q00AZ6hWtN0T8gGmDUaUzLWQvHFo5yThtVwK/VCenFY3wXVbOvNfajEpsTfQM4IN9k/d6gUVX3A==,
       }
     dependencies:
-      "@types/node": 20.11.30
+      "@types/node": 20.12.2
     dev: true
 
   /@types/http-cache-semantics@4.0.4:
@@ -2156,10 +2156,10 @@ packages:
       }
     dev: true
 
-  /@types/node@20.11.30:
+  /@types/node@20.12.2:
     resolution:
       {
-        integrity: sha512-dHM6ZxwlmuZaRmUPfv1p+KrdD1Dci04FbdEm/9wEMouFqxYoFl5aMkt0VMAUtYRQDyYvD41WJLukhq/ha3YuTw==,
+        integrity: sha512-zQ0NYO87hyN6Xrclcqp7f8ZbXNbRfoGWNcMvHTPQp9UUrwI0mI7XBz+cu7/W6/VClYo2g63B0cjull/srU7LgQ==,
       }
     dependencies:
       undici-types: 5.26.5
@@ -2171,7 +2171,7 @@ packages:
         integrity: sha512-uRwJqmiXmh9++aSu1VNEn3iIxWOhd8AHXNSdlaLfdAAdSTY9jYVeGWnzejM3dvrkbqE3/hyQkQQ29IFATEGlew==,
       }
     dependencies:
-      "@types/node": 20.11.30
+      "@types/node": 20.12.2
     dev: true
 
   /@types/prettier@2.7.3:
@@ -2213,7 +2213,7 @@ packages:
         integrity: sha512-hHxJU6PAEUn0TP4S/ZOzuTUvJWuZ6eIKeNKb5RBpODvSl6hp1Wrw4s7ATY50rklRCScUDpHzVA/DQdSjJ3UoYQ==,
       }
     dependencies:
-      "@types/node": 20.11.30
+      "@types/node": 20.12.2
     dev: true
 
   /@types/semver@7.5.8:
@@ -5317,7 +5317,7 @@ packages:
       solc: 0.7.3(debug@4.3.4)
       source-map-support: 0.5.21
       stacktrace-parser: 0.1.10
-      ts-node: 10.9.2(@types/node@20.11.30)(typescript@5.4.3)
+      ts-node: 10.9.2(@types/node@20.12.2)(typescript@5.4.3)
       tsort: 0.0.1
       typescript: 5.4.3
       undici: 5.28.3
@@ -7128,7 +7128,7 @@ packages:
     dependencies:
       lilconfig: 3.1.1
       postcss: 8.4.38
-      ts-node: 10.9.2(@types/node@20.11.30)(typescript@5.4.3)
+      ts-node: 10.9.2(@types/node@20.12.2)(typescript@5.4.3)
       yaml: 2.4.1
     dev: true
 
@@ -8458,7 +8458,7 @@ packages:
       }
     dev: true
 
-  /ts-node@10.9.2(@types/node@20.11.30)(typescript@5.4.3):
+  /ts-node@10.9.2(@types/node@20.12.2)(typescript@5.4.3):
     resolution:
       {
         integrity: sha512-f0FFpIdcHgn8zcPSbf1dRevwt047YMnaiJM3u2w2RewrB+fob/zePZcrOyQoLMMO7aBIddLcQIEK5dYjkLnGrQ==,
@@ -8480,7 +8480,7 @@ packages:
       "@tsconfig/node12": 1.0.11
       "@tsconfig/node14": 1.0.3
       "@tsconfig/node16": 1.0.4
-      "@types/node": 20.11.30
+      "@types/node": 20.12.2
       acorn: 8.11.3
       acorn-walk: 8.3.2
       arg: 4.1.3
