@@ -2250,6 +2250,7 @@ A list of external tooling that integrates with [`CreateX`](./src/CreateX.sol):
 - [`xdeployer`](https://github.com/pcaversaccio/xdeployer)
 - [`createx-forge`](https://github.com/radeksvarz/createx-forge)
 - [`createXcrunch`](https://github.com/HrikB/createXcrunch)
+- [`hardhat-ignition`](https://github.com/NomicFoundation/hardhat-ignition)
 
 ## 🙏🏼 Acknowledgement
 
