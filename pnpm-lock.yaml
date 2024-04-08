@@ -8,8 +8,8 @@ importers:
   .:
     devDependencies:
       "@eslint/js":
-        specifier: ^8.57.0
-        version: 8.57.0
+        specifier: ^9.0.0
+        version: 9.0.0
       "@nomicfoundation/hardhat-ethers":
         specifier: ^3.0.5
         version: 3.0.5(ethers@6.11.1)(hardhat@2.22.2)
@@ -93,8 +93,8 @@ importers:
         version: 0.33.3
     devDependencies:
       "@eslint/js":
-        specifier: ^8.57.0
-        version: 8.57.0
+        specifier: ^9.0.0
+        version: 9.0.0
       "@next/eslint-plugin-next":
         specifier: ^14.1.4
         version: 14.1.4
@@ -460,6 +460,14 @@ packages:
         integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==,
       }
     engines: { node: ^12.22.0 || ^14.17.0 || >=16.0.0 }
+    dev: true
+
+  /@eslint/js@9.0.0:
+    resolution:
+      {
+        integrity: sha512-RThY/MnKrhubF6+s1JflwUjPEsnCEmYCWwqa/aRISKWNXGZ9epUwft4bUMM35SdKF9xvBrLydAM1RDHd1Z//ZQ==,
+      }
+    engines: { node: ^18.18.0 || ^20.9.0 || >=21.1.0 }
     dev: true
 
   /@ethersproject/abi@5.7.0:
@@ -1390,10 +1398,10 @@ packages:
       fastq: 1.17.1
     dev: true
 
-  /@nomicfoundation/edr-darwin-arm64@0.3.3:
+  /@nomicfoundation/edr-darwin-arm64@0.3.4:
     resolution:
       {
-        integrity: sha512-E9VGsUD+1Ga4mn/5ooHsMi8JEfhZbKP6CXN/BhJ8kXbIC10NqTD1RuhCKGRtYq4vqH/3Nfq25Xg8E8RWOF4KBQ==,
+        integrity: sha512-tjavrUFLWnkn0PI+jk0D83hP2jjbmeXT1QLd5NtIleyGrJ00ZWVl+sfuA2Lle3kzfOceoI2VTR0n1pZB4KJGbQ==,
       }
     engines: { node: ">= 18" }
     cpu: [arm64]
@@ -1402,10 +1410,10 @@ packages:
     dev: true
     optional: true
 
-  /@nomicfoundation/edr-darwin-x64@0.3.3:
+  /@nomicfoundation/edr-darwin-x64@0.3.4:
     resolution:
       {
-        integrity: sha512-vkZXZ1ydPg+Ijb2iyqENA+KCkxGTCUWG5itCSliiA0Li2YE7ujDMGhheEpFp1WVlZadviz0bfk1rZXbCqlirpg==,
+        integrity: sha512-dXO0vlIoBosp8gf5/ah3dESMymjwit0Daef1E4Ew3gZ8q3LAdku0RC+YEQJi9f0I3QNfdgIrBTzibRZUoP+kVA==,
       }
     engines: { node: ">= 18" }
     cpu: [x64]
@@ -1414,10 +1422,10 @@ packages:
     dev: true
     optional: true
 
-  /@nomicfoundation/edr-linux-arm64-gnu@0.3.3:
+  /@nomicfoundation/edr-linux-arm64-gnu@0.3.4:
     resolution:
       {
-        integrity: sha512-gdIg0Yj1qqS9wVuywc5B/+DqKylfUGB6/CQn/shMqwAfsAVAVpchkhy66PR+REEx7fh/GkNctxLlENXPeLzDiA==,
+        integrity: sha512-dv38qmFUaqkkeeA9S0JjerqruytTfHav7gbPLpZUAEXPlJGo49R0+HQxd45I0msbm6NAXbkmKEchTLApp1ohaA==,
       }
     engines: { node: ">= 18" }
     cpu: [arm64]
@@ -1426,10 +1434,10 @@ packages:
     dev: true
     optional: true
 
-  /@nomicfoundation/edr-linux-arm64-musl@0.3.3:
+  /@nomicfoundation/edr-linux-arm64-musl@0.3.4:
     resolution:
       {
-        integrity: sha512-AXZ08MFvhNeBZbOBNmz1SJ/DMrMOE2mHEJtaNnsctlxIunjxfrWww4q+WXB34jbr9iaVYYlPsaWe5sueuw6s3Q==,
+        integrity: sha512-CfEsb6gdCMVIlRSpWYTxoongEKHB60V6alE/y8mkfjIo7tA95wyiuvCtyo3fpiia3wQV7XoMYgIJHObHiKLKtA==,
       }
     engines: { node: ">= 18" }
     cpu: [arm64]
@@ -1438,10 +1446,10 @@ packages:
     dev: true
     optional: true
 
-  /@nomicfoundation/edr-linux-x64-gnu@0.3.3:
+  /@nomicfoundation/edr-linux-x64-gnu@0.3.4:
     resolution:
       {
-        integrity: sha512-xElOs1U+E6lBLtv1mnJ+E8nr2MxZgKiLo8bZAgBboy9odYtmkDVwhMjtsFKSuZbGxFtsSyGRT4cXw3JAbtUDeA==,
+        integrity: sha512-V0CpJA2lYWulgTR+zP11ftBAEwkpMAAki/AuMu3vd7HoPfjwIDzWDQR5KFU17qFmqAVz0ICRxsxDlvvBZ/PUxA==,
       }
     engines: { node: ">= 18" }
     cpu: [x64]
@@ -1450,10 +1458,10 @@ packages:
     dev: true
     optional: true
 
-  /@nomicfoundation/edr-linux-x64-musl@0.3.3:
+  /@nomicfoundation/edr-linux-x64-musl@0.3.4:
     resolution:
       {
-        integrity: sha512-2Fe6gwm1RAGQ/PfMYiaSba2OrFp8zzYWh+am9lYObOFjV9D+A1zhIzfy0UC74glPks5eV8eY4pBPrVR042m2Nw==,
+        integrity: sha512-0sgTrwZajarukerU/QSb+oRdlQLnJdd7of8OlXq2wtpeTNTqemgCOwY2l2qImbWboMpVrYgcmGbINXNVPCmuJw==,
       }
     engines: { node: ">= 18" }
     cpu: [x64]
@@ -1462,10 +1470,10 @@ packages:
     dev: true
     optional: true
 
-  /@nomicfoundation/edr-win32-arm64-msvc@0.3.3:
+  /@nomicfoundation/edr-win32-arm64-msvc@0.3.4:
     resolution:
       {
-        integrity: sha512-8NHyxIsFrl0ufSQ/ErqF2lKIa/gz1gaaa1a2vKkDEqvqCUcPhBTYhA5NHgTPhLETFTnCFr0z+YbctFCyjh4qrA==,
+        integrity: sha512-bOl3vhMtV0W9ozUMF5AZRBWw1183hhhx+e1YJdDLMaqNkBUFYi2CZbMYefDylq2OKQtOQ0gPLhZvn+z2D21Ztw==,
       }
     engines: { node: ">= 10" }
     cpu: [arm64]
@@ -1474,10 +1482,10 @@ packages:
     dev: true
     optional: true
 
-  /@nomicfoundation/edr-win32-ia32-msvc@0.3.3:
+  /@nomicfoundation/edr-win32-ia32-msvc@0.3.4:
     resolution:
       {
-        integrity: sha512-0F6hM0kGia4dQVb/kauho9JcP1ozWisY2/She+ISR5ceuhzmAwQJluM0g+0TYDME0LtxBxiMPq/yPiZMQeq31w==,
+        integrity: sha512-yKQCpAX0uB2dalsSwOkau3yfNXkwBJa/Ks2OPl9AjHqJ+E8AqvBEB9jRpfQrdPzElMsgZuN4mqE+wh+JxY+0Aw==,
       }
     engines: { node: ">= 18" }
     cpu: [ia32]
@@ -1486,10 +1494,10 @@ packages:
     dev: true
     optional: true
 
-  /@nomicfoundation/edr-win32-x64-msvc@0.3.3:
+  /@nomicfoundation/edr-win32-x64-msvc@0.3.4:
     resolution:
       {
-        integrity: sha512-d75q1uaMb6z9i+GQZoblbOfFBvlBnWc+5rB13UWRkCOJSnoYwyFWhGJx5GeM59gC7aIblc5VD9qOAhHuvM9N+w==,
+        integrity: sha512-fResvsL/fSucep1K5W6iOs8lqqKKovHLsAmigMzAYVovqkyZKgCGVS/D8IVxA0nxuGCOlNxFnVmwWtph3pbKWA==,
       }
     engines: { node: ">= 18" }
     cpu: [x64]
@@ -1498,22 +1506,22 @@ packages:
     dev: true
     optional: true
 
-  /@nomicfoundation/edr@0.3.3:
+  /@nomicfoundation/edr@0.3.4:
     resolution:
       {
-        integrity: sha512-zP+e+3B1nEUx6bW5BPnIzCQbkhmYfdMBJdiVggTqqTfAA82sOkdOG7wsOMcz5qF3fYfx/irNRM1kgc9HVFIbpQ==,
+        integrity: sha512-e4jzVeJ+VTKBFzNgKDbSVnGVbHYNZHIfMdgifQBugXPiIa6QEUzZqleh2+y4lhkXcCthnFyrTYe3jiEpUzr3cA==,
       }
     engines: { node: ">= 18" }
     optionalDependencies:
-      "@nomicfoundation/edr-darwin-arm64": 0.3.3
-      "@nomicfoundation/edr-darwin-x64": 0.3.3
-      "@nomicfoundation/edr-linux-arm64-gnu": 0.3.3
-      "@nomicfoundation/edr-linux-arm64-musl": 0.3.3
-      "@nomicfoundation/edr-linux-x64-gnu": 0.3.3
-      "@nomicfoundation/edr-linux-x64-musl": 0.3.3
-      "@nomicfoundation/edr-win32-arm64-msvc": 0.3.3
-      "@nomicfoundation/edr-win32-ia32-msvc": 0.3.3
-      "@nomicfoundation/edr-win32-x64-msvc": 0.3.3
+      "@nomicfoundation/edr-darwin-arm64": 0.3.4
+      "@nomicfoundation/edr-darwin-x64": 0.3.4
+      "@nomicfoundation/edr-linux-arm64-gnu": 0.3.4
+      "@nomicfoundation/edr-linux-arm64-musl": 0.3.4
+      "@nomicfoundation/edr-linux-x64-gnu": 0.3.4
+      "@nomicfoundation/edr-linux-x64-musl": 0.3.4
+      "@nomicfoundation/edr-win32-arm64-msvc": 0.3.4
+      "@nomicfoundation/edr-win32-ia32-msvc": 0.3.4
+      "@nomicfoundation/edr-win32-x64-msvc": 0.3.4
     dev: true
 
   /@nomicfoundation/ethereumjs-common@4.0.4:
@@ -5288,7 +5296,7 @@ packages:
     dependencies:
       "@ethersproject/abi": 5.7.0
       "@metamask/eth-sig-util": 4.0.1
-      "@nomicfoundation/edr": 0.3.3
+      "@nomicfoundation/edr": 0.3.4
       "@nomicfoundation/ethereumjs-common": 4.0.4
       "@nomicfoundation/ethereumjs-tx": 5.0.4
       "@nomicfoundation/ethereumjs-util": 9.0.4
