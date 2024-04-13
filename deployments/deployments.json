@@ -240,6 +240,14 @@
     ]
   },
   {
+    "name": "Kava",
+    "chainId": 2222,
+    "urls": [
+      "https://kavascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/2222/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -280,11 +288,10 @@
     ]
   },
   {
-    "name": "Polygon Testnet (Mumbai)",
-    "chainId": 80001,
+    "name": "Polygon Sepolia Testnet (Amoy)",
+    "chainId": 80002,
     "urls": [
-      "https://mumbai.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-      "https://repo.sourcify.dev/contracts/partial_match/80001/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+      "https://www.oklink.com/amoy/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -393,10 +400,10 @@
     ]
   },
   {
-    "name": "Mantle Testnet (Ringwood)",
-    "chainId": 5001,
+    "name": "Mantle Sepolia Testnet",
+    "chainId": 5003,
     "urls": [
-      "https://explorer.testnet.mantle.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://explorer.sepolia.mantle.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -415,10 +422,10 @@
     ]
   },
   {
-    "name": "Linea Testnet",
+    "name": "Linea Sepolia Testnet",
     "chainId": 59140,
     "urls": [
-      "https://goerli.lineascan.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://sepolia.lineascan.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -451,7 +458,7 @@
     ]
   },
   {
-    "name": "Blast Testnet",
+    "name": "Blast Sepolia Testnet",
     "chainId": 168587773,
     "urls": [
       "https://sepolia.blastscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
@@ -465,7 +472,7 @@
     ]
   },
   {
-    "name": "Fraxtal Testnet",
+    "name": "Fraxtal Holešky Testnet",
     "chainId": 2522,
     "urls": [
       "https://holesky.fraxscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"

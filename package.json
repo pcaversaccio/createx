@@ -51,7 +51,7 @@
     "deploy:arbitrumsepolia": "npx hardhat run --no-compile --network arbitrumSepolia scripts/deploy.ts",
     "deploy:arbitrummain": "npx hardhat run --no-compile --network arbitrumMain scripts/deploy.ts",
     "deploy:arbitrumnova": "npx hardhat run --no-compile --network arbitrumNova scripts/deploy.ts",
-    "deploy:mumbai": "npx hardhat run --no-compile --network mumbai scripts/deploy.ts",
+    "deploy:amoy": "npx hardhat run --no-compile --network amoy scripts/deploy.ts",
     "deploy:polygonzkevmtestnet": "npx hardhat run --no-compile --network polygonZkEVMTestnet scripts/deploy.ts",
     "deploy:polygon": "npx hardhat run --no-compile --network polygon scripts/deploy.ts",
     "deploy:polygonzkevmmain": "npx hardhat run --no-compile --network polygonZkEVMMain scripts/deploy.ts",
@@ -112,6 +112,7 @@
     "deploy:dostestnet": "npx hardhat run --no-compile --network dosTestnet scripts/deploy.ts",
     "deploy:dosmain": "npx hardhat run --no-compile --network dosMain scripts/deploy.ts",
     "deploy:fraxtaltestnet": "npx hardhat run --no-compile --network fraxtalTestnet scripts/deploy.ts",
+    "deploy:kavamain": "npx hardhat run --no-compile --network kavaMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "cd interface && pnpm prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
@@ -141,10 +142,10 @@
     "hardhat-gas-reporter": "^2.1.1",
     "prettier": "^3.2.5",
     "prettier-plugin-solidity": "^1.3.1",
-    "solhint": "^4.5.2",
+    "solhint": "^4.5.4",
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
-    "typescript": "^5.4.4",
+    "typescript": "^5.4.5",
     "typescript-eslint": "^7.6.0"
   }
 }
