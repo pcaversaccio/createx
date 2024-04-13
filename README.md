@@ -2205,6 +2205,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Blast](https://blastscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [DOS Chain](https://doscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Endurance](https://explorer-endurance.fusionist.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Kava](https://kavascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
@@ -2216,7 +2217,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Binance Smart Chain Testnet](https://testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Optimism Sepolia Testnet](https://sepolia-optimism.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Arbitrum Sepolia Testnet](https://sepolia.arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Polygon Testnet (Mumbai)](https://mumbai.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Polygon Sepolia Testnet (Amoy)](https://www.oklink.com/amoy/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Polygon Testnet (zkEVM)](https://cardona-zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Fantom Testnet](https://testnet.ftmscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Avalanche Testnet (Fuji)](https://testnet.snowtrace.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
@@ -2231,17 +2232,17 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Boba Network Testnet](https://testnet.bobascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Canto Testnet](https://testnet.tuber.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Base Sepolia Testnet](https://sepolia.basescan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Mantle Testnet (Ringwood)](https://explorer.testnet.mantle.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Mantle Sepolia Testnet](https://explorer.sepolia.mantle.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Filecoin Testnet (Calibration)](https://calibration.filfox.info/en/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Scroll Sepolia Testnet](https://sepolia.scrollscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Linea Testnet](https://goerli.lineascan.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Linea Sepolia Testnet](https://sepolia.lineascan.build/address/0xba5ed099633d3b313e4d5f7bdc1305d3c28ba5ed)
 - [Zora Sepolia Testnet](https://sepolia.explorer.zora.energy/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [LUKSO Testnet](https://explorer.execution.testnet.lukso.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Manta Pacific Testnet](https://pacific-explorer.testnet.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Frame Testnet](https://explorer.testnet.frame.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Blast Testnet](https://sepolia.blastscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Blast Sepolia Testnet](https://sepolia.blastscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [DOS Chain Testnet](https://test.doscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Fraxtal Testnet](https://holesky.fraxscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Fraxtal Holešky Testnet](https://holesky.fraxscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 
