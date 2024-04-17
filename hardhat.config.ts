@@ -548,7 +548,7 @@ const config: HardhatUserConfig = {
       // For Polygon testnets & mainnets
       polygon: vars.get("POLYGON_API_KEY", ""),
       polygonZkEVM: vars.get("POLYGON_ZKEVM_API_KEY", ""),
-      polygonAmoy: vars.get("POLYGON_AMOY_API_KEY", ""),
+      polygonAmoy: vars.get("POLYGON_API_KEY", ""),
       polygonZkEVMTestnet: vars.get("POLYGON_ZKEVM_API_KEY", ""),
       // For Arbitrum testnet & mainnets
       arbitrumOne: vars.get("ARBITRUM_API_KEY", ""),
@@ -859,9 +859,8 @@ const config: HardhatUserConfig = {
         network: "polygonAmoy",
         chainId: 80002,
         urls: {
-          apiURL:
-            "https://www.oklink.com/api/explorer/v1/contract/verify/async/api/polygonAmoy",
-          browserURL: "https://www.oklink.com/amoy",
+          apiURL: "https://api-amoy.polygonscan.com/api",
+          browserURL: "https://amoy.polygonscan.com",
         },
       },
       {
