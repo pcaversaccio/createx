@@ -40,7 +40,7 @@
     "sharp": "^0.33.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9.0.0",
+    "@eslint/js": "^9.1.1",
     "@next/eslint-plugin-next": "^14.2.2",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "^20.12.7",
