@@ -248,6 +248,13 @@
     ]
   },
   {
+    "name": "Metis Andromeda",
+    "chainId": 1088,
+    "urls": [
+      "https://andromeda-explorer.metis.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -476,6 +483,13 @@
     "chainId": 2522,
     "urls": [
       "https://holesky.fraxscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Metis Sepolia Testnet",
+    "chainId": 59902,
+    "urls": [
+      "https://sepolia-explorer.metisdevops.link/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
