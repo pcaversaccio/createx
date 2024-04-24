@@ -499,6 +499,19 @@ const config: HardhatUserConfig = {
       url: vars.get("KAVA_MAINNET_URL", "https://evm.kava-rpc.com"),
       accounts,
     },
+    metisTestnet: {
+      chainId: 59902,
+      url: vars.get("METIS_TESTNET_URL", "https://sepolia.metisdevops.link"),
+      accounts,
+    },
+    metisMain: {
+      chainId: 1088,
+      url: vars.get(
+        "METIS_MAINNET_URL",
+        "https://andromeda.metis.io/?owner=1088",
+      ),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -635,6 +648,9 @@ const config: HardhatUserConfig = {
       fraxtalTestnet: vars.get("FRAXTAL_API_KEY", ""),
       // For Kava mainnet
       kava: vars.get("KAVA_API_KEY", ""),
+      // For Metis testnet & mainnet
+      metis: vars.get("METIS_API_KEY", ""),
+      metisTestnet: vars.get("METIS_API_KEY", ""),
     },
     customChains: [
       {
@@ -1037,6 +1053,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://kavascan.com/api",
           browserURL: "https://kavascan.com",
+        },
+      },
+      {
+        network: "metis",
+        chainId: 1088,
+        urls: {
+          apiURL: "https://andromeda-explorer.metis.io/api",
+          browserURL: "https://andromeda-explorer.metis.io",
+        },
+      },
+      {
+        network: "metisTestnet",
+        chainId: 59902,
+        urls: {
+          apiURL: "https://sepolia-explorer.metisdevops.link/api",
+          browserURL: "https://sepolia-explorer.metisdevops.link",
         },
       },
     ],

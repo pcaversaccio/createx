@@ -113,6 +113,8 @@
     "deploy:dosmain": "npx hardhat run --no-compile --network dosMain scripts/deploy.ts",
     "deploy:fraxtaltestnet": "npx hardhat run --no-compile --network fraxtalTestnet scripts/deploy.ts",
     "deploy:kavamain": "npx hardhat run --no-compile --network kavaMain scripts/deploy.ts",
+    "deploy:metistestnet": "npx hardhat run --no-compile --network metisTestnet scripts/deploy.ts",
+    "deploy:metismain": "npx hardhat run --no-compile --network metisMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "cd interface && pnpm prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
