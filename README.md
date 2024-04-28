@@ -2245,6 +2245,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [DOS Chain Testnet](https://test.doscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Fraxtal Holešky Testnet](https://holesky.fraxscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Metis Sepolia Testnet](https://sepolia-explorer.metisdevops.link/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Mode Sepolia Testnet](https://sepolia.explorer.mode.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 
