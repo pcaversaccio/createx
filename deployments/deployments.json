@@ -491,5 +491,13 @@
     "urls": [
       "https://sepolia-explorer.metisdevops.link/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
+  },
+  {
+    "name": "Mode Sepolia Testnet",
+    "chainId": 919,
+    "urls": [
+      "https://sepolia.explorer.mode.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/919/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
   }
 ]
