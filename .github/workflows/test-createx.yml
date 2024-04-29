@@ -158,8 +158,9 @@ jobs:
       - name: Post coverage report
         # See https://github.com/orgs/community/discussions/26829#discussioncomment-3253575.
         if: ${{ (github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request') }}
-        uses: romeovs/lcov-reporter-action@v0.3.1
+        uses: sunsergdev/lcov-reporter-action@v0.3.1-fork
         with:
+          title: "`CreateX` Test Coverage Report"
           delete-old-comments: true
           lcov-file: ./lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
