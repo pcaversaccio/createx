@@ -517,6 +517,11 @@ const config: HardhatUserConfig = {
       url: vars.get("MODE_TESTNET_URL", "https://sepolia.mode.network"),
       accounts,
     },
+    modeMain: {
+      chainId: 34443,
+      url: vars.get("MODE_MAINNET_URL", "https://mainnet.mode.network"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -656,7 +661,8 @@ const config: HardhatUserConfig = {
       // For Metis testnet & mainnet
       metis: vars.get("METIS_API_KEY", ""),
       metisTestnet: vars.get("METIS_API_KEY", ""),
-      // For Mode testnet
+      // For Mode testnet & mainnet
+      mode: vars.get("MODE_API_KEY", ""),
       modeTestnet: vars.get("MODE_API_KEY", ""),
     },
     customChains: [
@@ -1076,6 +1082,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://sepolia-explorer.metisdevops.link/api",
           browserURL: "https://sepolia-explorer.metisdevops.link",
+        },
+      },
+      {
+        network: "mode",
+        chainId: 34443,
+        urls: {
+          apiURL: "https://explorer.mode.network/api",
+          browserURL: "https://explorer.mode.network",
         },
       },
       {
