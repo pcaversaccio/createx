@@ -160,7 +160,7 @@ jobs:
         if: ${{ (github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request') }}
         uses: sunsergdev/lcov-reporter-action@v0.3.1-fork
         with:
-          title: "`CreateX` Coverage Report"
+          title: "`CreateX` Test Coverage Report"
           delete-old-comments: true
           lcov-file: ./lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
