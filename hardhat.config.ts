@@ -522,6 +522,11 @@ const config: HardhatUserConfig = {
       url: vars.get("MODE_MAINNET_URL", "https://mainnet.mode.network"),
       accounts,
     },
+    seiTestnet: {
+      chainId: 713715,
+      url: vars.get("SEI_TESTNET_URL", "https://evm-rpc-arctic-1.sei-apis.com"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
