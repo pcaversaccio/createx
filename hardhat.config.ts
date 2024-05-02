@@ -527,6 +527,16 @@ const config: HardhatUserConfig = {
       url: vars.get("SEI_TESTNET_URL", "https://evm-rpc-arctic-1.sei-apis.com"),
       accounts,
     },
+    xlayerTestnet: {
+      chainId: 195,
+      url: vars.get("XLAYER_TESTNET_URL", "https://testrpc.xlayer.tech"),
+      accounts,
+    },
+    xlayerMain: {
+      chainId: 196,
+      url: vars.get("XLAYER_MAINNET_URL", "https://rpc.xlayer.tech"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -669,6 +679,9 @@ const config: HardhatUserConfig = {
       // For Mode testnet & mainnet
       mode: vars.get("MODE_API_KEY", ""),
       modeTestnet: vars.get("MODE_API_KEY", ""),
+      // For X Layer testnet & mainnet
+      xlayer: vars.get("OKLINK_API_KEY", ""),
+      xlayerTestnet: vars.get("OKLINK_API_KEY", ""),
     },
     customChains: [
       {
@@ -1103,6 +1116,24 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://sepolia.explorer.mode.network/api",
           browserURL: "https://sepolia.explorer.mode.network",
+        },
+      },
+      {
+        network: "xlayer",
+        chainId: 196,
+        urls: {
+          apiURL:
+            "https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER",
+          browserURL: "https://www.oklink.com/xlayer",
+        },
+      },
+      {
+        network: "xlayerTestnet",
+        chainId: 195,
+        urls: {
+          apiURL:
+            "https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER_TESTNET",
+          browserURL: "https://www.oklink.com/xlayer-test",
         },
       },
     ],
