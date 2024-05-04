@@ -8,8 +8,8 @@ importers:
   .:
     devDependencies:
       "@eslint/js":
-        specifier: ^9.1.1
-        version: 9.1.1
+        specifier: ^9.2.0
+        version: 9.2.0
       "@nomicfoundation/hardhat-ethers":
         specifier: ^3.0.5
         version: 3.0.5(ethers@6.12.1)(hardhat@2.22.3(ts-node@10.9.2(@types/node@20.12.8)(typescript@5.4.5))(typescript@5.4.5))
@@ -93,8 +93,8 @@ importers:
         version: 0.33.3
     devDependencies:
       "@eslint/js":
-        specifier: ^9.1.1
-        version: 9.1.1
+        specifier: ^9.2.0
+        version: 9.2.0
       "@next/eslint-plugin-next":
         specifier: ^14.2.3
         version: 14.2.3
@@ -330,10 +330,10 @@ packages:
       }
     engines: { node: ^12.22.0 || ^14.17.0 || >=16.0.0 }
 
-  "@eslint/js@9.1.1":
+  "@eslint/js@9.2.0":
     resolution:
       {
-        integrity: sha512-5WoDz3Y19Bg2BnErkZTp0en+c/i9PvgFS7MBe1+m60HjFr0hrphlAGp4yzI7pxpt4xShln4ZyYp4neJm8hmOkQ==,
+        integrity: sha512-ESiIudvhoYni+MdsI8oD7skpprZ89qKocwRM2KEvhhBJ9nl5MRh7BXU5GTod7Mdygq+AUl+QzId6iWJKR/wABA==,
       }
     engines: { node: ^18.18.0 || ^20.9.0 || >=21.1.0 }
 
@@ -2580,10 +2580,10 @@ packages:
         integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==,
       }
 
-  electron-to-chromium@1.4.754:
+  electron-to-chromium@1.4.756:
     resolution:
       {
-        integrity: sha512-7Kr5jUdns5rL/M9wFFmMZAgFDuL2YOnanFH4OI4iFzUqyh3XOL7nAGbSlSMZdzKMIyyTpNSbqZsWG9odwLeKvA==,
+        integrity: sha512-RJKZ9+vEBMeiPAvKNWyZjuYyUqMndcP1f335oHqn3BEQbs2NFtVrnK5+6Xg5wSM9TknNNpWghGDUCKGYF+xWXw==,
       }
 
   elliptic@6.5.4:
@@ -4126,10 +4126,10 @@ packages:
         integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==,
       }
 
-  minipass@7.0.4:
+  minipass@7.1.0:
     resolution:
       {
-        integrity: sha512-jYofLM5Dam9279rdkWzqHozUo4ybjdZmCsDHePy5V/PbBcVMiSZR97gmAy45aqi8CK1lG2ECd356FU86avfwUQ==,
+        integrity: sha512-oGZRv2OT1lO2UF1zUcwdTb3wqUwI0kBGTgt/T7OdSj6M6N5m3o5uPf0AIW6lVxGGoiWUR7e2AwTE+xiwK8WQig==,
       }
     engines: { node: ">=16 || 14 >=14.17" }
 
@@ -4233,10 +4233,10 @@ packages:
         integrity: sha512-Ntyt4AIXyaLIuMHF6IOoTakB3K+RWxwtsHNRxllEoA6vPwP9o4866g6YWDLUdnucilZhmkxiHwHr11gAENw+QA==,
       }
 
-  node-gyp-build@4.8.0:
+  node-gyp-build@4.8.1:
     resolution:
       {
-        integrity: sha512-u6fs2AEUljNho3EYTJNBfImO5QTo/J/1Etd+NVdCj7qWKUSN/bSLkZwhDv7I+w/MSC6qJ4cknepkAYykDdK8og==,
+        integrity: sha512-OSs33Z9yWr148JZcbZd5WiAXhh/n9z8TxQcdMhIOlpN9AhWpLfvVFO73+m77bBABQMaY9XSvIa+qk0jlI7Gcaw==,
       }
     hasBin: true
 
@@ -5640,10 +5640,10 @@ packages:
       }
     engines: { node: ">= 0.8" }
 
-  update-browserslist-db@1.0.14:
+  update-browserslist-db@1.0.15:
     resolution:
       {
-        integrity: sha512-JixKH8GR2pWYshIPUg/NujK3JO7JiqEEUiNArE86NQyrgUuZeTlZQN3xuS/yiV5Kb48ev9K6RqNkaJjXsdg7Jw==,
+        integrity: sha512-K9HWH62x3/EalU1U6sjSZiylm9C8tgq2mSvshZpqc7QE69RaA2qjhkW2HlNA0tFpEbtyFz7HTqbSdN4MSwUodA==,
       }
     hasBin: true
     peerDependencies:
@@ -5994,7 +5994,7 @@ snapshots:
 
   "@eslint/js@8.57.0": {}
 
-  "@eslint/js@9.1.1": {}
+  "@eslint/js@9.2.0": {}
 
   "@ethersproject/abi@5.7.0":
     dependencies:
@@ -7036,9 +7036,9 @@ snapshots:
   browserslist@4.23.0:
     dependencies:
       caniuse-lite: 1.0.30001615
-      electron-to-chromium: 1.4.754
+      electron-to-chromium: 1.4.756
       node-releases: 2.0.14
-      update-browserslist-db: 1.0.14(browserslist@4.23.0)
+      update-browserslist-db: 1.0.15(browserslist@4.23.0)
 
   bs58@4.0.1:
     dependencies:
@@ -7342,7 +7342,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  electron-to-chromium@1.4.754: {}
+  electron-to-chromium@1.4.756: {}
 
   elliptic@6.5.4:
     dependencies:
@@ -7909,7 +7909,7 @@ snapshots:
       foreground-child: 3.1.1
       jackspeak: 2.3.6
       minimatch: 9.0.4
-      minipass: 7.0.4
+      minipass: 7.1.0
       path-scurry: 1.10.2
 
   glob@10.3.12:
@@ -7917,7 +7917,7 @@ snapshots:
       foreground-child: 3.1.1
       jackspeak: 2.3.6
       minimatch: 9.0.4
-      minipass: 7.0.4
+      minipass: 7.1.0
       path-scurry: 1.10.2
 
   glob@7.1.7:
@@ -8374,7 +8374,7 @@ snapshots:
   keccak@3.0.4:
     dependencies:
       node-addon-api: 2.0.2
-      node-gyp-build: 4.8.0
+      node-gyp-build: 4.8.1
       readable-stream: 3.6.2
 
   keyv@4.5.4:
@@ -8503,7 +8503,7 @@ snapshots:
 
   minimist@1.2.8: {}
 
-  minipass@7.0.4: {}
+  minipass@7.1.0: {}
 
   mkdirp@1.0.4: {}
 
@@ -8586,7 +8586,7 @@ snapshots:
 
   node-addon-api@2.0.2: {}
 
-  node-gyp-build@4.8.0: {}
+  node-gyp-build@4.8.1: {}
 
   node-releases@2.0.14: {}
 
@@ -8716,7 +8716,7 @@ snapshots:
   path-scurry@1.10.2:
     dependencies:
       lru-cache: 10.2.2
-      minipass: 7.0.4
+      minipass: 7.1.0
 
   path-starts-with@2.0.1: {}
 
@@ -8978,7 +8978,7 @@ snapshots:
     dependencies:
       elliptic: 6.5.5
       node-addon-api: 2.0.2
-      node-gyp-build: 4.8.0
+      node-gyp-build: 4.8.1
 
   semver@5.7.2: {}
 
@@ -9448,7 +9448,7 @@ snapshots:
 
   unpipe@1.0.0: {}
 
-  update-browserslist-db@1.0.14(browserslist@4.23.0):
+  update-browserslist-db@1.0.15(browserslist@4.23.0):
     dependencies:
       browserslist: 4.23.0
       escalade: 3.1.2
