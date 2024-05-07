@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Tab } from "@headlessui/react";
+import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import {
   ArrowDownTrayIcon,
   ClipboardDocumentIcon,
@@ -160,8 +160,8 @@ const Abi = () => {
         title={`${tabs[selectedTab].name} ABI copied to clipboard!`}
       />
 
-      <Tab.Group selectedIndex={selectedTab} onChange={onTabChange}>
-        <Tab.List className="space-x-4 overflow-x-auto whitespace-nowrap border-b border-gray-200 dark:border-gray-700 md:flex md:justify-center md:space-x-8">
+      <TabGroup selectedIndex={selectedTab} onChange={onTabChange}>
+        <TabList className="space-x-4 overflow-x-auto whitespace-nowrap border-b border-gray-200 dark:border-gray-700 md:flex md:justify-center md:space-x-8">
           {tabs.map((tab) => {
             return (
               <Tab key={tab.name} className="focus:outline-0">
@@ -193,14 +193,14 @@ const Abi = () => {
               </Tab>
             );
           })}
-        </Tab.List>
-        <Tab.Panels
+        </TabList>
+        <TabPanels
           className="text-center"
           style={{ opacity: isLoading ? 0 : 1 }}
         >
           {tabs.map((tab) => {
             return (
-              <Tab.Panel
+              <TabPanel
                 key={tab.name}
                 className="relative mt-4 inline-block max-h-screen max-w-full overflow-x-auto overflow-y-auto text-sm shadow-md"
               >
@@ -231,11 +231,11 @@ const Abi = () => {
                 <pre className="rounded-lg">
                   <code className={`language-${tab.language}`}>{tab.abi}</code>
                 </pre>
-              </Tab.Panel>
+              </TabPanel>
             );
           })}
-        </Tab.Panels>
-      </Tab.Group>
+        </TabPanels>
+      </TabGroup>
     </>
   );
 };
