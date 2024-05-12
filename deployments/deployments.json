@@ -270,6 +270,13 @@
     ]
   },
   {
+    "name": "BOB",
+    "chainId": 60808,
+    "urls": [
+      "https://explorer.gobob.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -527,6 +534,13 @@
     "chainId": 195,
     "urls": [
       "https://www.oklink.com/xlayer-test/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "BOB Sepolia Testnet",
+    "chainId": 111,
+    "urls": [
+      "https://testnet-explorer.gobob.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
