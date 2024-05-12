@@ -2209,6 +2209,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Metis Andromeda](https://andromeda-explorer.metis.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Mode](https://explorer.mode.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [X Layer](https://www.oklink.com/xlayer/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [BOB](https://explorer.gobob.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
@@ -2250,6 +2251,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Mode Sepolia Testnet](https://sepolia.explorer.mode.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Sei Arctic Testnet](https://seistream.app/account/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [X Layer Sepolia Testnet](https://www.oklink.com/xlayer-test/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [BOB Sepolia Testnet](https://testnet-explorer.gobob.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 
