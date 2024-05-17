@@ -845,7 +845,7 @@ Generally, for security issues, see our [Security Policy](./SECURITY.md). Furthe
 
 ## Tests
 
-For all (fuzz) tests available in the [`test`](./test) directory, we have consistently applied the [Branching Tree Technique](https://twitter.com/PaulRBerg/status/1682346315806539776) with [`bulloak`](https://github.com/alexfertel/bulloak). This means that each test file is accompanied by a `.tree` file that defines all the necessary branches to be tested.
+For all (fuzz) tests available in the [`test`](./test) directory, we have consistently applied the [Branching Tree Technique](https://x.com/PaulRBerg/status/1682346315806539776) with [`bulloak`](https://github.com/alexfertel/bulloak). This means that each test file is accompanied by a `.tree` file that defines all the necessary branches to be tested.
 
 **Example ([`CreateX._guard.tree`](./test/internal/CreateX._guard.tree)):**
 

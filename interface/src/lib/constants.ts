@@ -3,7 +3,7 @@ export const SITE_DESCRIPTION = "A Trustless, Universal Contract Deployer";
 export const COMPANY_NAME = "pcaversaccio";
 export const COMPANY_URL = "https://pcaversaccio.com";
 export const GITHUB_URL = "https://github.com/pcaversaccio/createx";
-export const X_URL = "https://twitter.com/pcaversaccio";
+export const X_URL = "https://x.com/pcaversaccio";
 export const SITE_IMAGE =
   "https://github-production-user-asset-6210df.s3.amazonaws.com/25297591/272914952-38a5989c-0113-427d-9158-47646971b7d8.png";
 
