@@ -1,19 +1,19 @@
 ## defaults for all profiles
 [profile.default]
-src = 'src'                                                 # the source directory
-test = 'test'                                               # the test directory
-out = 'out'                                                 # the output directory (for artifacts)
-libs = ['lib']                                              # a list of library directories
+src = "src"                                                 # the source directory
+test = "test"                                               # the test directory
+out = "out"                                                 # the output directory (for artifacts)
+libs = ["lib"]                                              # a list of library directories
 cache = true                                                # cache the builds
-cache_path = 'cache'                                        # where the cache is stored
-solc_version = '0.8.23'                                     # override for the solc version
-evm_version = 'paris'                                       # set the EVM target version (prevent using the `PUSH0` opcode)
+cache_path = "cache"                                        # where the cache is stored
+solc_version = "0.8.23"                                     # override for the solc version
+evm_version = "paris"                                       # set the EVM target version (prevent using the `PUSH0` opcode)
 optimizer = true                                            # enable the solc optimiser
 optimizer_runs = 10_000_000                                 # the number of optimiser runs
 via_ir = false                                              # disable compilation pipeline to go through the Yul intermediate representation
 verbosity = 3                                               # the verbosity of tests
-fs_permissions = [{ access = "read-write", path = "./"}]    # set read-write access to project root
-bytecode_hash = 'none'                                      # remove the metadata hash from the bytecode
+fs_permissions = [{ access = "read-write", path = "./" }]   # set read-write access to project root
+bytecode_hash = "none"                                      # remove the metadata hash from the bytecode
 
 ## default overrides for the CI runs
 [profile.ci]
