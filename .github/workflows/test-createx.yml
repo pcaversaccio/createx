@@ -3,7 +3,7 @@ name: 🕵️‍♂️ Test CreateX
 on: [push, pull_request, workflow_dispatch]
 
 concurrency:
-  group: ${{github.workflow}}-${{github.ref}}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
         node_version:
           - 20
         go_version:
-          - 1.22.0
+          - 1.22
 
     steps:
       - name: Checkout

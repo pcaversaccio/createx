@@ -232,6 +232,14 @@
     ]
   },
   {
+    "name": "Fraxtal",
+    "chainId": 252,
+    "urls": [
+      "https://fraxscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/252/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
+  },
+  {
     "name": "Endurance",
     "chainId": 648,
     "urls": [

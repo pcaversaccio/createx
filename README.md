@@ -2204,6 +2204,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Manta Pacific](https://pacific-explorer.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Blast](https://blastscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [DOS Chain](https://doscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Fraxtal](https://fraxscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Endurance](https://explorer-endurance.fusionist.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Kava](https://kavascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Metis Andromeda](https://andromeda-explorer.metis.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
