@@ -112,6 +112,7 @@
     "deploy:dostestnet": "npx hardhat run --no-compile --network dosTestnet scripts/deploy.ts",
     "deploy:dosmain": "npx hardhat run --no-compile --network dosMain scripts/deploy.ts",
     "deploy:fraxtaltestnet": "npx hardhat run --no-compile --network fraxtalTestnet scripts/deploy.ts",
+    "deploy:fraxtalmain": "npx hardhat run --no-compile --network fraxtalMain scripts/deploy.ts",
     "deploy:kavamain": "npx hardhat run --no-compile --network kavaMain scripts/deploy.ts",
     "deploy:metistestnet": "npx hardhat run --no-compile --network metisTestnet scripts/deploy.ts",
     "deploy:metismain": "npx hardhat run --no-compile --network metisMain scripts/deploy.ts",

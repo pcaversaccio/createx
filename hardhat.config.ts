@@ -494,6 +494,11 @@ const config: HardhatUserConfig = {
       url: vars.get("FRAXTAL_TESTNET_URL", "https://rpc.testnet.frax.com"),
       accounts,
     },
+    fraxtalMain: {
+      chainId: 252,
+      url: vars.get("FRAXTAL_MAINNET_URL", "https://rpc.frax.com"),
+      accounts,
+    },
     kavaMain: {
       chainId: 2222,
       url: vars.get("KAVA_MAINNET_URL", "https://evm.kava-rpc.com"),
@@ -679,7 +684,8 @@ const config: HardhatUserConfig = {
       // For DOS Chain testnet & mainnet
       dos: vars.get("DOS_API_KEY", ""),
       dosTestnet: vars.get("DOS_API_KEY", ""),
-      // For Fraxtal testnet
+      // For Fraxtal testnet & mainnet
+      fraxtal: vars.get("FRAXTAL_API_KEY", ""),
       fraxtalTestnet: vars.get("FRAXTAL_API_KEY", ""),
       // For Kava mainnet
       kava: vars.get("KAVA_API_KEY", ""),
@@ -1081,6 +1087,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://test.doscan.io/api",
           browserURL: "https://test.doscan.io",
+        },
+      },
+      {
+        network: "fraxtal",
+        chainId: 252,
+        urls: {
+          apiURL: "https://api.fraxscan.com/api",
+          browserURL: "https://fraxscan.com",
         },
       },
       {
