@@ -512,7 +512,8 @@
     "name": "Fraxtal Holešky Testnet",
     "chainId": 2522,
     "urls": [
-      "https://holesky.fraxscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://holesky.fraxscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/2522/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
     ]
   },
   {
