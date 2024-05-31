@@ -26,6 +26,7 @@ contract CreateX_Invariants is Test {
         // We prefund the `createX` contract with an initial amount.
         deal(createXAddr, initialBalance);
         targetContract(address(createXHandler));
+        excludeSender(createXAddr);
     }
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/

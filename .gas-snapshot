@@ -107,7 +107,7 @@ CreateX_Guard_Internal_Test:testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheCaller
 CreateX_Guard_Internal_Test:testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x00(address,bytes32) (runs: 256, μ: 34185, ~: 34263)
 CreateX_Guard_Internal_Test:testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x01(address,bytes32) (runs: 256, μ: 33748, ~: 33748)
 CreateX_Guard_Internal_Test:testFuzz_WhenTheFirst20BytesOfTheSaltEqualsTheZeroAddressAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(address,bytes32) (runs: 256, μ: 36308, ~: 36004)
-CreateX_Invariants:statefulFuzz_EtherBalance() (runs: 256, calls: 3840, reverts: 3837)
+CreateX_Invariants:statefulFuzz_EtherBalance() (runs: 256, calls: 3840, reverts: 3839)
 CreateX_ParseSalt_Internal_Test:testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x00(address,bytes32) (runs: 256, μ: 32948, ~: 32948)
 CreateX_ParseSalt_Internal_Test:testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltEquals0x01(address,bytes32) (runs: 256, μ: 32906, ~: 32906)
 CreateX_ParseSalt_Internal_Test:testFuzz_WhenTheFirst20BytesOfTheSaltDoNotEqualTheCallerOrTheZeroAddressAndWhenThe21stByteOfTheSaltIsGreaterThan0x01(address,bytes32) (runs: 256, μ: 32697, ~: 32669)
