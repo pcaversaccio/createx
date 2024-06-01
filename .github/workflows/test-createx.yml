@@ -107,7 +107,7 @@ jobs:
           FOUNDRY_PROFILE: default
 
       - name: Slither static analyser
-        uses: crytic/slither-action@v0.3.2
+        uses: crytic/slither-action@v0.4.0
         id: slither
         with:
           fail-on: config
