@@ -40,10 +40,10 @@
     "sharp": "^0.33.4"
   },
   "devDependencies": {
-    "@eslint/js": "^9.3.0",
+    "@eslint/js": "^9.4.0",
     "@next/eslint-plugin-next": "^14.2.3",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@types/node": "^20.12.13",
+    "@types/node": "^20.13.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.19",
@@ -54,7 +54,7 @@
     "next-seo": "^6.5.0",
     "postcss": "^8.4.38",
     "prettier": "^3.2.5",
-    "prettier-plugin-tailwindcss": "^0.5.14",
+    "prettier-plugin-tailwindcss": "^0.6.1",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.11.0"

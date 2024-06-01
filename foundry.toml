@@ -1,25 +1,26 @@
-## defaults for all profiles
+# Defaults for all profiles.
 [profile.default]
-src = "src"                                                 # the source directory
-test = "test"                                               # the test directory
-out = "out"                                                 # the output directory (for artifacts)
-libs = ["lib"]                                              # a list of library directories
-cache = true                                                # cache the builds
-cache_path = "cache"                                        # where the cache is stored
-solc_version = "0.8.23"                                     # override for the solc version
-evm_version = "paris"                                       # set the EVM target version (prevent using the `PUSH0` opcode)
-optimizer = true                                            # enable the solc optimiser
-optimizer_runs = 10_000_000                                 # the number of optimiser runs
-via_ir = false                                              # disable compilation pipeline to go through the Yul intermediate representation
-bytecode_hash = "none"                                      # remove the metadata hash from the bytecode
-fuzz = { runs = 256 }                                       # the number of fuzz runs for tests
-invariant = { runs = 256, depth = 15 }                      # the number of runs and calls (executed in one run) for each invariant test group
-verbosity = 3                                               # the verbosity of tests
-fs_permissions = [{ access = "read-write", path = "./" }]   # set read-write access to project root
+src = "src"                                               # Set the source directory.
+test = "test"                                             # Set the test directory.
+out = "out"                                               # Set the output directory for the artifacts.
+libs = ["lib"]                                            # Configure an array of library directories.
+cache = true                                              # Enable caching.
+cache_path = "cache"                                      # Set the path to the cache.
+force = false                                             # Do not ignore the cache.
+solc_version = "0.8.23"                                   # Set the Solidity compiler version.
+evm_version = "paris"                                     # Set the EVM target version (prevent using the `PUSH0` and `cancun` opcodes).
+optimizer = true                                          # Enable the Solidity compiler optimiser.
+optimizer_runs = 10_000_000                               # Configure the number of optimiser runs.
+via_ir = false                                            # Prevent the compilation pipeline from running through the Yul intermediate representation.
+bytecode_hash = "none"                                    # Remove the metadata hash from the bytecode.
+verbosity = 3                                             # Set the verbosity level for the tests.
+fs_permissions = [{ access = "read-write", path = "./" }] # Configure read-write access to the project root.
+fuzz = { runs = 256 }                                     # Configure the number of fuzz runs for the tests.
+invariant = { runs = 256, depth = 15 }                    # Configure the number of runs and calls (executed in one run) for each invariant test group.
 
-## default overrides for the CI runs
+# Default overrides for the CI runs.
 [profile.ci]
-force = true                                                # always perform a clean build
-fuzz = { runs = 10_000 }                                    # increase the number of fuzz runs
-invariant = { runs = 500, depth = 500 }                     # increase the number of runs (while preserving the default depth) for each invariant test group
-verbosity = 4                                               # increase the verbosity of tests
+force = true                                              # Perform always a clean build.
+verbosity = 4                                             # Increase the verbosity level for the tests.
+fuzz = { runs = 10_000 }                                  # Increase the number of fuzz runs.
+invariant = { runs = 500, depth = 500 }                   # Increase the number of runs (while preserving the default depth) for each invariant test group.
