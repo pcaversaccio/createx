@@ -46,10 +46,7 @@ const Home = () => {
                 card.href.startsWith("http") ? "noopener noreferrer" : undefined
               }
               target={card.href.startsWith("http") ? "_blank" : undefined}
-              className="bg-secondary m-4 w-3/4 cursor-pointer gap-y-4 rounded-xl
-              border border-blue-800/0 p-6 shadow-md
-              hover:border-blue-800/40 dark:border-blue-300/0
-              dark:shadow-lg dark:hover:border-blue-300/40 sm:w-full "
+              className="bg-secondary m-4 w-3/4 cursor-pointer gap-y-4 rounded-xl border border-blue-800/0 p-6 shadow-md hover:border-blue-800/40 dark:border-blue-300/0 dark:shadow-lg dark:hover:border-blue-300/40 sm:w-full"
             >
               <dd className="text-primary text-2xl font-semibold tracking-tight sm:text-3xl">
                 {card.title}
