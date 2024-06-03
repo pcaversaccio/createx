@@ -145,7 +145,7 @@
     "@typechain/hardhat": "^9.1.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
-    "ethers": "^6.12.1",
+    "ethers": "^6.12.2",
     "hardhat": "^2.22.4",
     "hardhat-abi-exporter": "^2.10.1",
     "hardhat-contract-sizer": "^2.10.0",
