@@ -135,8 +135,8 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       prettier-plugin-tailwindcss:
-        specifier: ^0.6.1
-        version: 0.6.1(@trivago/prettier-plugin-sort-imports@4.3.0(prettier@3.3.1))(prettier@3.3.1)
+        specifier: ^0.6.2
+        version: 0.6.2(@trivago/prettier-plugin-sort-imports@4.3.0(prettier@3.3.1))(prettier@3.3.1)
       tailwindcss:
         specifier: ^3.4.4
         version: 3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5))
@@ -1099,100 +1099,59 @@ packages:
     peerDependencies:
       hardhat: ^2.0.4
 
-  "@nomicfoundation/solidity-analyzer-darwin-arm64@0.1.1":
+  "@nomicfoundation/solidity-analyzer-darwin-arm64@0.1.2":
     resolution:
       {
-        integrity: sha512-KcTodaQw8ivDZyF+D76FokN/HdpgGpfjc/gFCImdLUyqB6eSWVaZPazMbeAjmfhx3R0zm/NYVzxwAokFKgrc0w==,
+        integrity: sha512-JaqcWPDZENCvm++lFFGjrDd8mxtf+CtLd2MiXvMNTBD33dContTZ9TWETwNFwg7JTJT5Q9HEecH7FA+HTSsIUw==,
       }
-    engines: { node: ">= 10" }
-    cpu: [arm64]
-    os: [darwin]
+    engines: { node: ">= 12" }
 
-  "@nomicfoundation/solidity-analyzer-darwin-x64@0.1.1":
+  "@nomicfoundation/solidity-analyzer-darwin-x64@0.1.2":
     resolution:
       {
-        integrity: sha512-XhQG4BaJE6cIbjAVtzGOGbK3sn1BO9W29uhk9J8y8fZF1DYz0Doj8QDMfpMu+A6TjPDs61lbsmeYodIDnfveSA==,
+        integrity: sha512-fZNmVztrSXC03e9RONBT+CiksSeYcxI1wlzqyr0L7hsQlK1fzV+f04g2JtQ1c/Fe74ZwdV6aQBdd6Uwl1052sw==,
       }
-    engines: { node: ">= 10" }
-    cpu: [x64]
-    os: [darwin]
+    engines: { node: ">= 12" }
 
-  "@nomicfoundation/solidity-analyzer-freebsd-x64@0.1.1":
+  "@nomicfoundation/solidity-analyzer-linux-arm64-gnu@0.1.2":
     resolution:
       {
-        integrity: sha512-GHF1VKRdHW3G8CndkwdaeLkVBi5A9u2jwtlS7SLhBc8b5U/GcoL39Q+1CSO3hYqePNP+eV5YI7Zgm0ea6kMHoA==,
+        integrity: sha512-3d54oc+9ZVBuB6nbp8wHylk4xh0N0Gc+bk+/uJae+rUgbOBwQSfuGIbAZt1wBXs5REkSmynEGcqx6DutoK0tPA==,
       }
-    engines: { node: ">= 10" }
-    cpu: [x64]
-    os: [freebsd]
+    engines: { node: ">= 12" }
 
-  "@nomicfoundation/solidity-analyzer-linux-arm64-gnu@0.1.1":
+  "@nomicfoundation/solidity-analyzer-linux-arm64-musl@0.1.2":
     resolution:
       {
-        integrity: sha512-g4Cv2fO37ZsUENQ2vwPnZc2zRenHyAxHcyBjKcjaSmmkKrFr64yvzeNO8S3GBFCo90rfochLs99wFVGT/0owpg==,
+        integrity: sha512-iDJfR2qf55vgsg7BtJa7iPiFAsYf2d0Tv/0B+vhtnI16+wfQeTbP7teookbGvAo0eJo7aLLm0xfS/GTkvHIucA==,
       }
-    engines: { node: ">= 10" }
-    cpu: [arm64]
-    os: [linux]
+    engines: { node: ">= 12" }
 
-  "@nomicfoundation/solidity-analyzer-linux-arm64-musl@0.1.1":
+  "@nomicfoundation/solidity-analyzer-linux-x64-gnu@0.1.2":
     resolution:
       {
-        integrity: sha512-WJ3CE5Oek25OGE3WwzK7oaopY8xMw9Lhb0mlYuJl/maZVo+WtP36XoQTb7bW/i8aAdHW5Z+BqrHMux23pvxG3w==,
+        integrity: sha512-9dlHMAt5/2cpWyuJ9fQNOUXFB/vgSFORg1jpjX1Mh9hJ/MfZXlDdHQ+DpFCs32Zk5pxRBb07yGvSHk9/fezL+g==,
       }
-    engines: { node: ">= 10" }
-    cpu: [arm64]
-    os: [linux]
+    engines: { node: ">= 12" }
 
-  "@nomicfoundation/solidity-analyzer-linux-x64-gnu@0.1.1":
+  "@nomicfoundation/solidity-analyzer-linux-x64-musl@0.1.2":
     resolution:
       {
-        integrity: sha512-5WN7leSr5fkUBBjE4f3wKENUy9HQStu7HmWqbtknfXkkil+eNWiBV275IOlpXku7v3uLsXTOKpnnGHJYI2qsdA==,
+        integrity: sha512-GzzVeeJob3lfrSlDKQw2bRJ8rBf6mEYaWY+gW0JnTDHINA0s2gPR4km5RLIj1xeZZOYz4zRw+AEeYgLRqB2NXg==,
       }
-    engines: { node: ">= 10" }
-    cpu: [x64]
-    os: [linux]
+    engines: { node: ">= 12" }
 
-  "@nomicfoundation/solidity-analyzer-linux-x64-musl@0.1.1":
+  "@nomicfoundation/solidity-analyzer-win32-x64-msvc@0.1.2":
     resolution:
       {
-        integrity: sha512-KdYMkJOq0SYPQMmErv/63CwGwMm5XHenEna9X9aB8mQmhDBrYrlAOSsIPgFCUSL0hjxE3xHP65/EPXR/InD2+w==,
+        integrity: sha512-Fdjli4DCcFHb4Zgsz0uEJXZ2K7VEO+w5KVv7HmT7WO10iODdU9csC2az4jrhEsRtiR9Gfd74FlG0NYlw1BMdyA==,
       }
-    engines: { node: ">= 10" }
-    cpu: [x64]
-    os: [linux]
+    engines: { node: ">= 12" }
 
-  "@nomicfoundation/solidity-analyzer-win32-arm64-msvc@0.1.1":
+  "@nomicfoundation/solidity-analyzer@0.1.2":
     resolution:
       {
-        integrity: sha512-VFZASBfl4qiBYwW5xeY20exWhmv6ww9sWu/krWSesv3q5hA0o1JuzmPHR4LPN6SUZj5vcqci0O6JOL8BPw+APg==,
-      }
-    engines: { node: ">= 10" }
-    cpu: [arm64]
-    os: [win32]
-
-  "@nomicfoundation/solidity-analyzer-win32-ia32-msvc@0.1.1":
-    resolution:
-      {
-        integrity: sha512-JnFkYuyCSA70j6Si6cS1A9Gh1aHTEb8kOTBApp/c7NRTFGNMH8eaInKlyuuiIbvYFhlXW4LicqyYuWNNq9hkpQ==,
-      }
-    engines: { node: ">= 10" }
-    cpu: [ia32]
-    os: [win32]
-
-  "@nomicfoundation/solidity-analyzer-win32-x64-msvc@0.1.1":
-    resolution:
-      {
-        integrity: sha512-HrVJr6+WjIXGnw3Q9u6KQcbZCtk0caVWhCdFADySvRyUxJ8PnzlaP+MhwNE8oyT8OZ6ejHBRrrgjSqDCFXGirw==,
-      }
-    engines: { node: ">= 10" }
-    cpu: [x64]
-    os: [win32]
-
-  "@nomicfoundation/solidity-analyzer@0.1.1":
-    resolution:
-      {
-        integrity: sha512-1LMtXj1puAxyFusBgUIy5pZk3073cNXYnXUpuNKFghHbIit/xZgbk0AokpUADbNm3gyD6bFWl3LRFh3dhVdREg==,
+        integrity: sha512-q4n32/FNKIhQ3zQGGw5CvPF6GTvDCpYwIf7bEY/dZTZbgfDsHyjJwURxUJf3VQuuJj+fDIFl4+KkBVbw4Ef6jA==,
       }
     engines: { node: ">= 12" }
 
@@ -2665,10 +2624,10 @@ packages:
         integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==,
       }
 
-  electron-to-chromium@1.4.794:
+  electron-to-chromium@1.4.796:
     resolution:
       {
-        integrity: sha512-6FApLtsYhDCY0Vglq3AptsdxQ+PJLc6AxlAM0HjEihUAiOPPbkASEsq9gtxUeZY9o0sJIEa3WnF0vVH4VT4iug==,
+        integrity: sha512-NglN/xprcM+SHD2XCli4oC6bWe6kHoytcyLKCWXmRL854F0qhPhaYgUswUsglnPxYaNQIg2uMY4BvaomIf3kLA==,
       }
 
   elliptic@6.5.4:
@@ -4717,10 +4676,10 @@ packages:
     peerDependencies:
       prettier: ">=2.3.0"
 
-  prettier-plugin-tailwindcss@0.6.1:
+  prettier-plugin-tailwindcss@0.6.2:
     resolution:
       {
-        integrity: sha512-AnbeYZu0WGj+QgKciUgdMnRxrqcxltleZPgdwfA5104BHM3siBLONN/HLW1yS2HvzSNkzpQ/JAj+LN0jcJO+0w==,
+        integrity: sha512-eFefm4cg+1c2B57+H274Qm//CTWBdtQN9ansl0YTP/8TC8x3bugCTQSS/e4FC5Ctl9djhTzsbcMrZ7x2/abIow==,
       }
     engines: { node: ">=14.21.3" }
     peerDependencies:
@@ -6514,48 +6473,36 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  "@nomicfoundation/solidity-analyzer-darwin-arm64@0.1.1":
+  "@nomicfoundation/solidity-analyzer-darwin-arm64@0.1.2":
     optional: true
 
-  "@nomicfoundation/solidity-analyzer-darwin-x64@0.1.1":
+  "@nomicfoundation/solidity-analyzer-darwin-x64@0.1.2":
     optional: true
 
-  "@nomicfoundation/solidity-analyzer-freebsd-x64@0.1.1":
+  "@nomicfoundation/solidity-analyzer-linux-arm64-gnu@0.1.2":
     optional: true
 
-  "@nomicfoundation/solidity-analyzer-linux-arm64-gnu@0.1.1":
+  "@nomicfoundation/solidity-analyzer-linux-arm64-musl@0.1.2":
     optional: true
 
-  "@nomicfoundation/solidity-analyzer-linux-arm64-musl@0.1.1":
+  "@nomicfoundation/solidity-analyzer-linux-x64-gnu@0.1.2":
     optional: true
 
-  "@nomicfoundation/solidity-analyzer-linux-x64-gnu@0.1.1":
+  "@nomicfoundation/solidity-analyzer-linux-x64-musl@0.1.2":
     optional: true
 
-  "@nomicfoundation/solidity-analyzer-linux-x64-musl@0.1.1":
+  "@nomicfoundation/solidity-analyzer-win32-x64-msvc@0.1.2":
     optional: true
 
-  "@nomicfoundation/solidity-analyzer-win32-arm64-msvc@0.1.1":
-    optional: true
-
-  "@nomicfoundation/solidity-analyzer-win32-ia32-msvc@0.1.1":
-    optional: true
-
-  "@nomicfoundation/solidity-analyzer-win32-x64-msvc@0.1.1":
-    optional: true
-
-  "@nomicfoundation/solidity-analyzer@0.1.1":
+  "@nomicfoundation/solidity-analyzer@0.1.2":
     optionalDependencies:
-      "@nomicfoundation/solidity-analyzer-darwin-arm64": 0.1.1
-      "@nomicfoundation/solidity-analyzer-darwin-x64": 0.1.1
-      "@nomicfoundation/solidity-analyzer-freebsd-x64": 0.1.1
-      "@nomicfoundation/solidity-analyzer-linux-arm64-gnu": 0.1.1
-      "@nomicfoundation/solidity-analyzer-linux-arm64-musl": 0.1.1
-      "@nomicfoundation/solidity-analyzer-linux-x64-gnu": 0.1.1
-      "@nomicfoundation/solidity-analyzer-linux-x64-musl": 0.1.1
-      "@nomicfoundation/solidity-analyzer-win32-arm64-msvc": 0.1.1
-      "@nomicfoundation/solidity-analyzer-win32-ia32-msvc": 0.1.1
-      "@nomicfoundation/solidity-analyzer-win32-x64-msvc": 0.1.1
+      "@nomicfoundation/solidity-analyzer-darwin-arm64": 0.1.2
+      "@nomicfoundation/solidity-analyzer-darwin-x64": 0.1.2
+      "@nomicfoundation/solidity-analyzer-linux-arm64-gnu": 0.1.2
+      "@nomicfoundation/solidity-analyzer-linux-arm64-musl": 0.1.2
+      "@nomicfoundation/solidity-analyzer-linux-x64-gnu": 0.1.2
+      "@nomicfoundation/solidity-analyzer-linux-x64-musl": 0.1.2
+      "@nomicfoundation/solidity-analyzer-win32-x64-msvc": 0.1.2
 
   "@pkgjs/parseargs@0.11.0":
     optional: true
@@ -7185,7 +7132,7 @@ snapshots:
   browserslist@4.23.0:
     dependencies:
       caniuse-lite: 1.0.30001629
-      electron-to-chromium: 1.4.794
+      electron-to-chromium: 1.4.796
       node-releases: 2.0.14
       update-browserslist-db: 1.0.16(browserslist@4.23.0)
 
@@ -7497,7 +7444,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  electron-to-chromium@1.4.794: {}
+  electron-to-chromium@1.4.796: {}
 
   elliptic@6.5.4:
     dependencies:
@@ -8190,7 +8137,7 @@ snapshots:
       "@nomicfoundation/ethereumjs-common": 4.0.4
       "@nomicfoundation/ethereumjs-tx": 5.0.4
       "@nomicfoundation/ethereumjs-util": 9.0.4
-      "@nomicfoundation/solidity-analyzer": 0.1.1
+      "@nomicfoundation/solidity-analyzer": 0.1.2
       "@sentry/node": 5.30.0
       "@types/bn.js": 5.1.5
       "@types/lru-cache": 5.1.1
@@ -8942,7 +8889,7 @@ snapshots:
       semver: 7.6.2
       solidity-comments-extractor: 0.0.8
 
-  prettier-plugin-tailwindcss@0.6.1(@trivago/prettier-plugin-sort-imports@4.3.0(prettier@3.3.1))(prettier@3.3.1):
+  prettier-plugin-tailwindcss@0.6.2(@trivago/prettier-plugin-sort-imports@4.3.0(prettier@3.3.1))(prettier@3.3.1):
     dependencies:
       prettier: 3.3.1
     optionalDependencies:
