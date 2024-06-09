@@ -829,8 +829,8 @@ const config: HardhatUserConfig = {
         network: "evmosTestnet",
         chainId: 9000,
         urls: {
-          apiURL: "https://testnet.escan.live/api",
-          browserURL: "https://testnet.escan.live",
+          apiURL: "https://api.verify.mintscan.io/evm/api/0x2328",
+          browserURL: "https://www.mintscan.io/evmos-testnet",
         },
       },
       {

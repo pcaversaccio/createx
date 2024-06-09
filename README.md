@@ -2236,7 +2236,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Harmony Testnet](https://explorer.testnet.harmony.one/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Fuse Network Testnet (Spark)](https://explorer.fusespark.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Cronos Testnet](https://cronos.org/explorer/testnet3/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Evmos Testnet](https://testnet.escan.live/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Evmos Testnet](https://www.mintscan.io/evmos-testnet/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Boba Network Testnet](https://testnet.bobascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Canto Testnet](https://testnet.tuber.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Base Sepolia Testnet](https://sepolia.basescan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
