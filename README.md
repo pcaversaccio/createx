@@ -1,4 +1,4 @@
-# [`CreateX`](./src/CreateX.sol) – A Trustless, Universal Contract Deployer
+# [`CreateX`](./src/CreateX.sol) – A Trustless, Universal Contract Deployer <!-- omit from toc -->
 
 [![🕵️‍♂️ Test CreateX](https://github.com/pcaversaccio/createx/actions/workflows/test-createx.yml/badge.svg)](https://github.com/pcaversaccio/createx/actions/workflows/test-createx.yml)
 [![Test Coverage](https://img.shields.io/badge/Coverage-100%25-green)](#test-coverage)
@@ -13,27 +13,26 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
 > [!NOTE]
 > The [`CreateX`](./src/CreateX.sol) contract should be considered as maximally extensible. Be encouraged to build on top of it! The Solidity-based interface can be found [here](./src/ICreateX.sol).
 
-- [`CreateX` – A Trustless, Universal Contract Deployer](#createx--a-trustless-universal-contract-deployer)
-  - [So What on Earth Is a Contract Factory?](#so-what-on-earth-is-a-contract-factory)
-  - [Available Versatile Functions](#available-versatile-functions)
-  - [Special Features](#special-features)
-    - [Permissioned Deploy Protection and Cross-Chain Redeploy Protection](#permissioned-deploy-protection-and-cross-chain-redeploy-protection)
-    - [Pseudo-Random Salt Value](#pseudo-random-salt-value)
-  - [Design Principles](#design-principles)
-  - [Security Considerations](#security-considerations)
-  - [Tests](#tests)
-    - [Test Coverage](#test-coverage)
-  - [ABI (Application Binary Interface)](#abi-application-binary-interface)
-  - [New Deployment(s)](#new-deployments)
-    - [`ethers.js`](#ethersjs)
-    - [`cast`](#cast)
-    - [Contract Verification](#contract-verification)
-  - [`CreateX` Deployments](#createx-deployments)
-    - [EVM-Based Production Networks](#evm-based-production-networks)
-    - [Ethereum Test Networks](#ethereum-test-networks)
-    - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
-  - [Integration With External Tooling](#integration-with-external-tooling)
-  - [🙏🏼 Acknowledgement](#-acknowledgement)
+- [So What on Earth Is a Contract Factory?](#so-what-on-earth-is-a-contract-factory)
+- [Available Versatile Functions](#available-versatile-functions)
+- [Special Features](#special-features)
+  - [Permissioned Deploy Protection and Cross-Chain Redeploy Protection](#permissioned-deploy-protection-and-cross-chain-redeploy-protection)
+  - [Pseudo-Random Salt Value](#pseudo-random-salt-value)
+- [Design Principles](#design-principles)
+- [Security Considerations](#security-considerations)
+- [Tests](#tests)
+  - [Test Coverage](#test-coverage)
+- [ABI (Application Binary Interface)](#abi-application-binary-interface)
+- [New Deployment(s)](#new-deployments)
+  - [`ethers.js`](#ethersjs)
+  - [`cast`](#cast)
+  - [Contract Verification](#contract-verification)
+- [`CreateX` Deployments](#createx-deployments)
+  - [EVM-Based Production Networks](#evm-based-production-networks)
+  - [Ethereum Test Networks](#ethereum-test-networks)
+  - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
+- [Integration With External Tooling](#integration-with-external-tooling)
+- [🙏🏼 Acknowledgement](#-acknowledgement)
 
 ## So What on Earth Is a Contract Factory?
 
