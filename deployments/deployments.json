@@ -491,7 +491,7 @@
   },
   {
     "name": "Zora Sepolia Testnet",
-    "chainId": 999,
+    "chainId": 999999999,
     "urls": [
       "https://sepolia.explorer.zora.energy/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/contracts/partial_match/999999999/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
