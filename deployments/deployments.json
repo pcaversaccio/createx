@@ -186,7 +186,8 @@
     "name": "Scroll",
     "chainId": 534352,
     "urls": [
-      "https://scrollscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://scrollscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/534352/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
     ]
   },
   {
@@ -353,7 +354,8 @@
     "name": "Polygon Sepolia Testnet (Amoy)",
     "chainId": 80002,
     "urls": [
-      "https://amoy.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://amoy.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/80002/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
     ]
   },
   {
@@ -480,7 +482,8 @@
     "name": "Scroll Sepolia Testnet",
     "chainId": 534351,
     "urls": [
-      "https://sepolia.scrollscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://sepolia.scrollscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/534351/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
     ]
   },
   {
