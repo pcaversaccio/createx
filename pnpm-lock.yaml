@@ -8,8 +8,8 @@ importers:
   .:
     devDependencies:
       "@eslint/js":
-        specifier: ^9.4.0
-        version: 9.4.0
+        specifier: ^9.5.0
+        version: 9.5.0
       "@nomicfoundation/hardhat-ethers":
         specifier: ^3.0.6
         version: 3.0.6(ethers@6.13.0)(hardhat@2.22.5(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5))(typescript@5.4.5))
@@ -93,8 +93,8 @@ importers:
         version: 0.33.4
     devDependencies:
       "@eslint/js":
-        specifier: ^9.4.0
-        version: 9.4.0
+        specifier: ^9.5.0
+        version: 9.5.0
       "@next/eslint-plugin-next":
         specifier: ^14.2.4
         version: 14.2.4
@@ -135,8 +135,8 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2
       prettier-plugin-tailwindcss:
-        specifier: ^0.6.3
-        version: 0.6.3(@trivago/prettier-plugin-sort-imports@4.3.0(prettier@3.3.2))(prettier@3.3.2)
+        specifier: ^0.6.4
+        version: 0.6.4(@trivago/prettier-plugin-sort-imports@4.3.0(prettier@3.3.2))(prettier@3.3.2)
       tailwindcss:
         specifier: ^3.4.4
         version: 3.4.4(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5))
@@ -330,10 +330,10 @@ packages:
       }
     engines: { node: ^12.22.0 || ^14.17.0 || >=16.0.0 }
 
-  "@eslint/js@9.4.0":
+  "@eslint/js@9.5.0":
     resolution:
       {
-        integrity: sha512-fdI7VJjP3Rvc70lC4xkFXHB0fiPeojiL1PxVG6t1ZvXQrarj893PweuBTujxDUFk0Fxj4R7PIIAZ/aiiyZPZcg==,
+        integrity: sha512-A7+AOT2ICkodvtsWnxZP4Xxk3NbZ3VMHd8oihydLRGrJgqqdEz1qSeEgXYyT/Cu8h1TWWsQRejIx48mtjZ5y1w==,
       }
     engines: { node: ^18.18.0 || ^20.9.0 || >=21.1.0 }
 
@@ -479,10 +479,10 @@ packages:
       react: ">=16.8.0"
       react-dom: ">=16.8.0"
 
-  "@floating-ui/react@0.26.16":
+  "@floating-ui/react@0.26.17":
     resolution:
       {
-        integrity: sha512-HEf43zxZNAI/E781QIVpYSF3K2VH4TTYZpqecjdsFkjsaU1EbaWcM++kw0HXFffj7gDUcBFevX8s0rQGQpxkow==,
+        integrity: sha512-ESD+jYWwqwVzaIgIhExrArdsCL1rOAzryG/Sjlu8yaD3Mtqi3uVyhbE2V7jD58Mo52qbzKz2eUY/Xgh5I86FCQ==,
       }
     peerDependencies:
       react: ">=16.8.0"
@@ -1240,10 +1240,10 @@ packages:
         integrity: sha512-qC/xYId4NMebE6w/V33Fh9gWxLgURiNYgVNObbJl2LZv0GUUItCcCqC5axQSwRaAgaxl2mELq1rMzlswaQ0Zxg==,
       }
 
-  "@scure/base@1.1.6":
+  "@scure/base@1.1.7":
     resolution:
       {
-        integrity: sha512-ok9AWwhcgYuGG3Zfhyqg+zwl+Wn5uE+dwC0NV/2qQkx4dABbb/bx96vWu8NSj+BNjjSjno+JRYRjle1jV08k3g==,
+        integrity: sha512-PPNYBslrLNNUQ/Yad37MHYsNQtK67EhWb6WtSvNLLPo7SdVZgkUjD6Dg+5On7zNwmskf8OX7I7Nx5oN+MIWE0g==,
       }
 
   "@scure/bip32@1.1.5":
@@ -1681,17 +1681,17 @@ packages:
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
 
-  acorn-walk@8.3.2:
+  acorn-walk@8.3.3:
     resolution:
       {
-        integrity: sha512-cjkyv4OtNCIeqhHrfS81QWXoCBPExR/J62oyEqepVw8WaQeSqpW2uhuLPh1m9eWhDuOo/jUXVTlifvesOWp/4A==,
+        integrity: sha512-MxXdReSRhGO7VlFe1bRG/oI7/mdLV9B9JJT0N8vZOhF7gFRR5l3M8W9G8JxmKV+JC5mGqJ0QvqfSOLsCPa4nUw==,
       }
     engines: { node: ">=0.4.0" }
 
-  acorn@8.11.3:
+  acorn@8.12.0:
     resolution:
       {
-        integrity: sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==,
+        integrity: sha512-RTvkC4w+KNXrM39/lWCUaG0IbRkWdCv7W/IOW9oU6SawyxulvkQy5HQPVTKxEjczcUvapcrw3cFx/60VN/NRNw==,
       }
     engines: { node: ">=0.4.0" }
     hasBin: true
@@ -2167,10 +2167,10 @@ packages:
       }
     engines: { node: ">=10" }
 
-  caniuse-lite@1.0.30001632:
+  caniuse-lite@1.0.30001634:
     resolution:
       {
-        integrity: sha512-udx3o7yHJfUxMLkGohMlVHCvFvWmirKh9JAH/d7WOLPetlH+LTL5cocMZ0t7oZx/mdlOWXti97xLZWc8uURRHg==,
+        integrity: sha512-fbBYXQ9q3+yp1q1gBk86tOFs4pyn/yxFm5ZNP18OXJDfA3txImOY9PhfxVggZ4vRHDqoU8NrKU81eN0OtzOgRA==,
       }
 
   cbor@8.1.0:
@@ -2626,10 +2626,10 @@ packages:
         integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==,
       }
 
-  electron-to-chromium@1.4.799:
+  electron-to-chromium@1.4.803:
     resolution:
       {
-        integrity: sha512-3D3DwWkRTzrdEpntY0hMLYwj7SeBk1138CkPE8sBDSj3WzrzOiG2rHm3luw8jucpf+WiyLBCZyU9lMHyQI9M9Q==,
+        integrity: sha512-61H9mLzGOCLLVsnLiRzCbc63uldP0AniRYPV3hbGVtONA1pI7qSGILdbofR7A8TMbOypDocEAjH/e+9k1QIe3g==,
       }
 
   elliptic@6.5.4:
@@ -3077,10 +3077,10 @@ packages:
         integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==,
       }
 
-  foreground-child@3.2.0:
+  foreground-child@3.2.1:
     resolution:
       {
-        integrity: sha512-CrWQNaEl1/6WeZoarcM9LHupTo3RpZO2Pdk1vktwzPiQTsJnAKJmm3TACKeG5UZbWDfaH2AbvYxzP96y0MT7fA==,
+        integrity: sha512-PXUUyLqrR2XCWICfv6ukppP96sdFwWbNEnfEMt7jNsISjMsvaLNinAHNDYyvkyU+SZG2BTSbT5NjG+vZslfGTA==,
       }
     engines: { node: ">=14" }
 
@@ -4678,10 +4678,10 @@ packages:
     peerDependencies:
       prettier: ">=2.3.0"
 
-  prettier-plugin-tailwindcss@0.6.3:
+  prettier-plugin-tailwindcss@0.6.4:
     resolution:
       {
-        integrity: sha512-GeJ9bqXN4APAP0V5T2a1J/o6a50MWevEUCPWxijpdXFDQkBCoAfz4pQfv+YMXSqZ5GXLMDYio0mUOfrYL7gf4w==,
+        integrity: sha512-3vhbIvlKyAWPaw9bUr2cw6M1BGx2Oy9CCLJyv+nxEiBGCTcL69WcAz2IFMGqx8IXSzQCInGSo2ujAByg9poHLQ==,
       }
     engines: { node: ">=14.21.3" }
     peerDependencies:
@@ -6049,7 +6049,7 @@ snapshots:
 
   "@eslint/js@8.57.0": {}
 
-  "@eslint/js@9.4.0": {}
+  "@eslint/js@9.5.0": {}
 
   "@ethersproject/abi@5.7.0":
     dependencies:
@@ -6197,7 +6197,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  "@floating-ui/react@0.26.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)":
+  "@floating-ui/react@0.26.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)":
     dependencies:
       "@floating-ui/react-dom": 2.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       "@floating-ui/utils": 0.2.2
@@ -6209,7 +6209,7 @@ snapshots:
 
   "@headlessui/react@2.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)":
     dependencies:
-      "@floating-ui/react": 0.26.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      "@floating-ui/react": 0.26.17(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       "@react-aria/focus": 3.17.1(react@18.3.1)
       "@react-aria/interactions": 3.21.3(react@18.3.1)
       "@tanstack/react-virtual": 3.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -6563,40 +6563,40 @@ snapshots:
 
   "@rushstack/eslint-patch@1.10.3": {}
 
-  "@scure/base@1.1.6": {}
+  "@scure/base@1.1.7": {}
 
   "@scure/bip32@1.1.5":
     dependencies:
       "@noble/hashes": 1.2.0
       "@noble/secp256k1": 1.7.1
-      "@scure/base": 1.1.6
+      "@scure/base": 1.1.7
 
   "@scure/bip32@1.3.2":
     dependencies:
       "@noble/curves": 1.2.0
       "@noble/hashes": 1.3.2
-      "@scure/base": 1.1.6
+      "@scure/base": 1.1.7
 
   "@scure/bip32@1.4.0":
     dependencies:
       "@noble/curves": 1.4.0
       "@noble/hashes": 1.4.0
-      "@scure/base": 1.1.6
+      "@scure/base": 1.1.7
 
   "@scure/bip39@1.1.1":
     dependencies:
       "@noble/hashes": 1.2.0
-      "@scure/base": 1.1.6
+      "@scure/base": 1.1.7
 
   "@scure/bip39@1.2.1":
     dependencies:
       "@noble/hashes": 1.3.2
-      "@scure/base": 1.1.6
+      "@scure/base": 1.1.7
 
   "@scure/bip39@1.3.0":
     dependencies:
       "@noble/hashes": 1.4.0
-      "@scure/base": 1.1.6
+      "@scure/base": 1.1.7
 
   "@sentry/core@5.30.0":
     dependencies:
@@ -6880,13 +6880,15 @@ snapshots:
     optionalDependencies:
       typescript: 5.4.5
 
-  acorn-jsx@5.3.2(acorn@8.11.3):
+  acorn-jsx@5.3.2(acorn@8.12.0):
     dependencies:
-      acorn: 8.11.3
+      acorn: 8.12.0
 
-  acorn-walk@8.3.2: {}
+  acorn-walk@8.3.3:
+    dependencies:
+      acorn: 8.12.0
 
-  acorn@8.11.3: {}
+  acorn@8.12.0: {}
 
   adm-zip@0.4.16: {}
 
@@ -7053,7 +7055,7 @@ snapshots:
   autoprefixer@10.4.19(postcss@8.4.38):
     dependencies:
       browserslist: 4.23.1
-      caniuse-lite: 1.0.30001632
+      caniuse-lite: 1.0.30001634
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.0.1
@@ -7133,8 +7135,8 @@ snapshots:
 
   browserslist@4.23.1:
     dependencies:
-      caniuse-lite: 1.0.30001632
-      electron-to-chromium: 1.4.799
+      caniuse-lite: 1.0.30001634
+      electron-to-chromium: 1.4.803
       node-releases: 2.0.14
       update-browserslist-db: 1.0.16(browserslist@4.23.1)
 
@@ -7184,7 +7186,7 @@ snapshots:
 
   camelcase@6.3.0: {}
 
-  caniuse-lite@1.0.30001632: {}
+  caniuse-lite@1.0.30001634: {}
 
   cbor@8.1.0:
     dependencies:
@@ -7446,7 +7448,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  electron-to-chromium@1.4.799: {}
+  electron-to-chromium@1.4.803: {}
 
   elliptic@6.5.4:
     dependencies:
@@ -7769,8 +7771,8 @@ snapshots:
 
   espree@9.6.1:
     dependencies:
-      acorn: 8.11.3
-      acorn-jsx: 5.3.2(acorn@8.11.3)
+      acorn: 8.12.0
+      acorn-jsx: 5.3.2(acorn@8.12.0)
       eslint-visitor-keys: 3.4.3
 
   esquery@1.5.0:
@@ -7914,7 +7916,7 @@ snapshots:
     dependencies:
       is-callable: 1.2.7
 
-  foreground-child@3.2.0:
+  foreground-child@3.2.1:
     dependencies:
       cross-spawn: 7.0.3
       signal-exit: 4.1.0
@@ -8000,7 +8002,7 @@ snapshots:
 
   glob@10.3.10:
     dependencies:
-      foreground-child: 3.2.0
+      foreground-child: 3.2.1
       jackspeak: 2.3.6
       minimatch: 9.0.4
       minipass: 7.1.2
@@ -8008,7 +8010,7 @@ snapshots:
 
   glob@10.4.1:
     dependencies:
-      foreground-child: 3.2.0
+      foreground-child: 3.2.1
       jackspeak: 3.4.0
       minimatch: 9.0.4
       minipass: 7.1.2
@@ -8660,7 +8662,7 @@ snapshots:
       "@next/env": 14.2.4
       "@swc/helpers": 0.5.5
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001632
+      caniuse-lite: 1.0.30001634
       graceful-fs: 4.2.11
       postcss: 8.4.31
       react: 18.3.1
@@ -8891,7 +8893,7 @@ snapshots:
       semver: 7.6.2
       solidity-comments-extractor: 0.0.8
 
-  prettier-plugin-tailwindcss@0.6.3(@trivago/prettier-plugin-sort-imports@4.3.0(prettier@3.3.2))(prettier@3.3.2):
+  prettier-plugin-tailwindcss@0.6.4(@trivago/prettier-plugin-sort-imports@4.3.0(prettier@3.3.2))(prettier@3.3.2):
     dependencies:
       prettier: 3.3.2
     optionalDependencies:
@@ -9421,8 +9423,8 @@ snapshots:
       "@tsconfig/node14": 1.0.3
       "@tsconfig/node16": 1.0.4
       "@types/node": 20.14.2
-      acorn: 8.11.3
-      acorn-walk: 8.3.2
+      acorn: 8.12.0
+      acorn-walk: 8.3.3
       arg: 4.1.3
       create-require: 1.1.1
       diff: 4.0.2
