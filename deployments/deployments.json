@@ -138,7 +138,7 @@
     "name": "Evmos",
     "chainId": 9001,
     "urls": [
-      "https://escan.live/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://www.mintscan.io/evmos/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/contracts/partial_match/9001/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
     ]
   },
