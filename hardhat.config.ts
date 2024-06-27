@@ -585,6 +585,11 @@ const config: HardhatUserConfig = {
       url: vars.get("ROOTSTOCK_MAINNET_URL", "https://public-node.rsk.co"),
       accounts,
     },
+    chilizTestnet: {
+      chainId: 88882,
+      url: vars.get("CHILIZ_TESTNET_URL", "https://spicy-rpc.chiliz.com"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -743,6 +748,8 @@ const config: HardhatUserConfig = {
       // For Rootstock testnet & mainnet
       rootstock: vars.get("ROOTSTOCK_API_KEY", ""),
       rootstockTestnet: vars.get("ROOTSTOCK_API_KEY", ""),
+      // For Chiliz testnet
+      chilizTestnet: vars.get("CHILIZ_API_KEY", ""),
     },
     customChains: [
       {
@@ -1267,6 +1274,15 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://rootstock-testnet.blockscout.com/api",
           browserURL: "https://rootstock-testnet.blockscout.com",
+        },
+      },
+      {
+        network: "chilizTestnet",
+        chainId: 88882,
+        urls: {
+          apiURL:
+            "https://api.routescan.io/v2/network/testnet/evm/88882/etherscan/api",
+          browserURL: "https://testnet.chiliscan.com",
         },
       },
     ],

@@ -129,6 +129,7 @@
     "deploy:telosmain": "npx hardhat run --no-compile --network telosMain scripts/deploy.ts",
     "deploy:rootstocktestnet": "npx hardhat run --no-compile --network rootstockTestnet scripts/deploy.ts",
     "deploy:rootstockmain": "npx hardhat run --no-compile --network rootstockMain scripts/deploy.ts",
+    "deploy:chiliztestnet": "npx hardhat run --no-compile --network chilizTestnet scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "cd interface && pnpm prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
