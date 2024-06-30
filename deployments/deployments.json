@@ -313,7 +313,9 @@
   {
     "name": "Taraxa",
     "chainId": 841,
-    "urls": [""]
+    "urls": [
+      "https://mainnet.explorer.taraxa.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   },
   {
     "name": "Sepolia",
@@ -609,8 +611,10 @@
     ]
   },
   {
-    "name": "Taraxa",
+    "name": "Taraxa Testnet",
     "chainId": 842,
-    "urls": [""]
+    "urls": [
+      "https://testnet.explorer.taraxa.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   }
 ]
