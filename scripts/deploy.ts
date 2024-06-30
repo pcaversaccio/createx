@@ -143,7 +143,7 @@ async function deployUsingPresignedTransaction() {
   }
 }
 
-deployUsingPrivateKey().catch((error) => {
+deployUsingPresignedTransaction().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
