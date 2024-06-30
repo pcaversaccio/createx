@@ -130,6 +130,8 @@
     "deploy:rootstocktestnet": "npx hardhat run --no-compile --network rootstockTestnet scripts/deploy.ts",
     "deploy:rootstockmain": "npx hardhat run --no-compile --network rootstockMain scripts/deploy.ts",
     "deploy:chiliztestnet": "npx hardhat run --no-compile --network chilizTestnet scripts/deploy.ts",
+    "deploy:taraxatestnet": "npx hardhat run --no-compile --network taraxaTestnet scripts/deploy.ts",
+    "deploy:taraxakmain": "npx hardhat run --no-compile --network taraxaMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "cd interface && pnpm prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
@@ -145,7 +147,7 @@
     "start:interface": "cd interface && pnpm start"
   },
   "devDependencies": {
-    "@eslint/js": "^9.5.0",
+    "@eslint/js": "^9.6.0",
     "@nomicfoundation/hardhat-ethers": "^3.0.6",
     "@nomicfoundation/hardhat-verify": "^2.0.8",
     "@typechain/ethers-v6": "^0.5.1",

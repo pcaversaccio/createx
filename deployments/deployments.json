@@ -311,6 +311,11 @@
     ]
   },
   {
+    "name": "Taraxa",
+    "chainId": 841,
+    "urls": [""]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -602,5 +607,10 @@
     "urls": [
       "https://testnet.chiliscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
+  },
+  {
+    "name": "Taraxa",
+    "chainId": 842,
+    "urls": [""]
   }
 ]

@@ -590,6 +590,16 @@ const config: HardhatUserConfig = {
       url: vars.get("CHILIZ_TESTNET_URL", "https://spicy-rpc.chiliz.com"),
       accounts,
     },
+    taraxaTestnet: {
+      chainId: 842,
+      url: vars.get("TARAXA_TESTNET_URL", "https://rpc.testnet.taraxa.io"),
+      accounts,
+    },
+    taraxaMain: {
+      chainId: 841,
+      url: vars.get("TARAXA_MAINNET_URL", "https://rpc.mainnet.taraxa.io"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,

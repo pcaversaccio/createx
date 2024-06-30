@@ -2213,6 +2213,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Core](https://scan.coredao.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Telos](https://www.teloscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Rootstock](https://rootstock.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Taraxa]()
 
 #### Ethereum Test Networks
 
@@ -2258,6 +2259,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Telos Testnet](https://testnet.teloscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Rootstock Testnet](https://rootstock-testnet.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Chiliz Testnet (Spicy)](https://testnet.chiliscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Taraxa Testnet]()
 
 ## Integration With External Tooling
 
