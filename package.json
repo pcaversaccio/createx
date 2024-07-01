@@ -131,7 +131,7 @@
     "deploy:rootstockmain": "npx hardhat run --no-compile --network rootstockMain scripts/deploy.ts",
     "deploy:chiliztestnet": "npx hardhat run --no-compile --network chilizTestnet scripts/deploy.ts",
     "deploy:taraxatestnet": "npx hardhat run --no-compile --network taraxaTestnet scripts/deploy.ts",
-    "deploy:taraxakmain": "npx hardhat run --no-compile --network taraxaMain scripts/deploy.ts",
+    "deploy:taraxamain": "npx hardhat run --no-compile --network taraxaMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "cd interface && pnpm prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
