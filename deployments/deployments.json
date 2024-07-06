@@ -516,10 +516,10 @@
     ]
   },
   {
-    "name": "Manta Pacific Testnet",
-    "chainId": 3441005,
+    "name": "Manta Pacific Sepolia Testnet",
+    "chainId": 3441006,
     "urls": [
-      "https://pacific-explorer.testnet.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://pacific-explorer.sepolia-testnet.manta.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
