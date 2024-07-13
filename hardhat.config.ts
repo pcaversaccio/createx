@@ -590,6 +590,11 @@ const config: HardhatUserConfig = {
       url: vars.get("CHILIZ_TESTNET_URL", "https://spicy-rpc.chiliz.com"),
       accounts,
     },
+    chilizMain: {
+      chainId: 88888,
+      url: vars.get("CHILIZ_MAINNET_URL", "https://rpc.ankr.com/chiliz"),
+      accounts,
+    },
     taraxaTestnet: {
       chainId: 842,
       url: vars.get("TARAXA_TESTNET_URL", "https://rpc.testnet.taraxa.io"),
@@ -758,7 +763,8 @@ const config: HardhatUserConfig = {
       // For Rootstock testnet & mainnet
       rootstock: vars.get("ROOTSTOCK_API_KEY", ""),
       rootstockTestnet: vars.get("ROOTSTOCK_API_KEY", ""),
-      // For Chiliz testnet
+      // For Chiliz testnet & mainnet
+      chiliz: vars.get("CHILIZ_API_KEY", ""),
       chilizTestnet: vars.get("CHILIZ_API_KEY", ""),
     },
     customChains: [
@@ -1284,6 +1290,15 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://rootstock-testnet.blockscout.com/api",
           browserURL: "https://rootstock-testnet.blockscout.com",
+        },
+      },
+      {
+        network: "chiliz",
+        chainId: 88888,
+        urls: {
+          apiURL:
+            "https://api.routescan.io/v2/network/mainnet/evm/88888/etherscan/api",
+          browserURL: "https://chiliscan.com",
         },
       },
       {
