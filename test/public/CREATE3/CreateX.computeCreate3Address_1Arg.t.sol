@@ -5,7 +5,7 @@ import {BaseTest} from "../../utils/BaseTest.sol";
 import {CreateX} from "../../../src/CreateX.sol";
 import {CREATE3} from "solady/utils/CREATE3.sol";
 
-contract CreateX_ComputeCreate2Address_1Arg_Public_Test is BaseTest {
+contract CreateX_ComputeCreate3Address_1Arg_Public_Test is BaseTest {
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            TESTS                           */
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
@@ -14,7 +14,7 @@ contract CreateX_ComputeCreate2Address_1Arg_Public_Test is BaseTest {
         vm.startPrank(createXAddr);
         // We test our implementation against Solady's implementation. We have tested our own `CREATE3`
         // implementation extensively against `computeCreate3Address` as part of the other `CREATE3` tests.
-        address create3AddressComputedOnChain = CREATE3.deploy(salt, type(CreateX).creationCode, 0);
+        address create3AddressComputedOnChain = CREATE3.deployDeterministic(type(CreateX).creationCode, salt);
         vm.stopPrank();
         // It returns the 20-byte address where a contract will be stored.
         // It should never revert.

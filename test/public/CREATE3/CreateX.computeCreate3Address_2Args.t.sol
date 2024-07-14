@@ -17,7 +17,7 @@ contract CreateX_ComputeCreate3Address_2Args_Public_Test is BaseTest {
         vm.startPrank(deployer);
         // We test our implementation against Solady's implementation. We have tested our own `CREATE3`
         // implementation extensively against `computeCreate3Address` as part of the other `CREATE3` tests.
-        address create3AddressComputedOnChain = CREATE3.deploy(salt, type(CreateX).creationCode, 0);
+        address create3AddressComputedOnChain = CREATE3.deployDeterministic(type(CreateX).creationCode, salt);
         vm.stopPrank();
         // It returns the 20-byte address where a contract will be stored.
         // It should never revert.
