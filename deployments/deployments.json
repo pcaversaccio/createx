@@ -170,7 +170,7 @@
     "name": "Mantle",
     "chainId": 5000,
     "urls": [
-      "https://explorer.mantle.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://mantlescan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/contracts/partial_match/5000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
     ]
   },
@@ -481,7 +481,7 @@
     "name": "Mantle Sepolia Testnet",
     "chainId": 5003,
     "urls": [
-      "https://explorer.sepolia.mantle.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://sepolia.mantlescan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
