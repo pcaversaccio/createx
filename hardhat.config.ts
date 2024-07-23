@@ -672,7 +672,7 @@ const config: HardhatUserConfig = {
       alfajores: vars.get("CELO_API_KEY", ""),
       // For Harmony testnet & mainnet
       harmony: vars.get("HARMONY_API_KEY", ""),
-      harmonyTest: vars.get("HARMONY_API_KEY", ""),
+      harmonyTestnet: vars.get("HARMONY_API_KEY", ""),
       // For Aurora testnet & mainnet
       aurora: vars.get("AURORA_API_KEY", ""),
       auroraTestnet: vars.get("AURORA_API_KEY", ""),
@@ -1308,6 +1308,22 @@ const config: HardhatUserConfig = {
           apiURL:
             "https://api.routescan.io/v2/network/testnet/evm/88882/etherscan/api",
           browserURL: "https://testnet.chiliscan.com",
+        },
+      },
+      {
+        network: "harmony",
+        chainId: 1666600000,
+        urls: {
+          apiURL: "https://explorer.harmony.one/api",
+          browserURL: "https://explorer.harmony.one",
+        },
+      },
+      {
+        network: "harmonyTestnet",
+        chainId: 1666700000,
+        urls: {
+          apiURL: "https://explorer.testnet.harmony.one/api",
+          browserURL: "https://explorer.testnet.harmony.one",
         },
       },
     ],
