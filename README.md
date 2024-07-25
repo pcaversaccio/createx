@@ -32,6 +32,7 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
   - [Ethereum Test Networks](#ethereum-test-networks)
   - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
 - [Integration With External Tooling](#integration-with-external-tooling)
+- [Community-Maintained Dune Dashboards](#community-maintained-dune-dashboards)
 - [🙏🏼 Acknowledgement](#-acknowledgement)
 
 ## So What on Earth Is a Contract Factory?
@@ -2270,6 +2271,10 @@ A list of external tooling that integrates with [`CreateX`](./src/CreateX.sol):
 - [`createx-forge`](https://github.com/radeksvarz/createx-forge)
 - [`createXcrunch`](https://github.com/HrikB/createXcrunch)
 - [`hardhat-ignition`](https://github.com/NomicFoundation/hardhat-ignition)
+
+## Community-Maintained Dune Dashboards
+
+- [`CreateX` Factory](https://dune.com/patronumlabs/createx)
 
 ## 🙏🏼 Acknowledgement
 

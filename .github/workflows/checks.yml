@@ -95,4 +95,4 @@ jobs:
         run: |
           awesome_bot ./*.md src/*.sol test/**/*.sol test/public/**/*.sol interface/*.md interface/public/*.css interface/src/**/*.css interface/src/**/*.tsx interface/src/**/*.ts interface/src/components/**/*.tsx deployments/*.json \
           --allow-dupe --request-delay 0.4 \
-          --white-list "https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+",https://foundry.paradigm.xyz,https://github.com/pcaversaccio/createx.git,https://x.com
+          --white-list "https://github.com/pcaversaccio/createx/issues/new?assignees=pcaversaccio&labels=new+deployment+%E2%9E%95&projects=&template=deployment_request.yml&title=%5BNew-Deployment-Request%5D%3A+",https://foundry.paradigm.xyz,https://github.com/pcaversaccio/createx.git,https://x.com,https://dune.com
