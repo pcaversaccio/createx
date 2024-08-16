@@ -24,13 +24,13 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
   - [Test Coverage](#test-coverage)
 - [ABI (Application Binary Interface)](#abi-application-binary-interface)
 - [New Deployment(s)](#new-deployments)
-  - [`ethers.js`](#ethersjs)
-  - [`cast`](#cast)
+    - [`ethers.js`](#ethersjs)
+    - [`cast`](#cast)
   - [Contract Verification](#contract-verification)
 - [`CreateX` Deployments](#createx-deployments)
-  - [EVM-Based Production Networks](#evm-based-production-networks)
-  - [Ethereum Test Networks](#ethereum-test-networks)
-  - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
+    - [EVM-Based Production Networks](#evm-based-production-networks)
+    - [Ethereum Test Networks](#ethereum-test-networks)
+    - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
 - [Integration With External Tooling](#integration-with-external-tooling)
 - [Community-Maintained Dune Dashboards](#community-maintained-dune-dashboards)
 - [🙏🏼 Acknowledgement](#-acknowledgement)
@@ -2216,6 +2216,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Rootstock](https://rootstock.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Chiliz](https://chiliscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Taraxa](https://mainnet.explorer.taraxa.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Gravity Alpha Mainnet](https://explorer.gravity.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
@@ -2262,6 +2263,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Rootstock Testnet](https://rootstock-testnet.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Chiliz Testnet (Spicy)](https://testnet.chiliscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Taraxa Testnet](https://testnet.explorer.taraxa.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Gravity Alpha Testnet Sepolia](https://explorer-sepolia.gravity.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 
