@@ -605,17 +605,17 @@ const config: HardhatUserConfig = {
       url: vars.get("TARAXA_MAINNET_URL", "https://rpc.mainnet.taraxa.io"),
       accounts,
     },
-    gravityAlphaMainnet: {
-      chainId: 1625,
-      url: vars.get("GRAVITY_ALPHA_MAINNET_URL", "https://rpc.gravity.xyz"),
-      accounts,
-    },
-    gravityAlphaTestnetSepolia: {
+    gravityAlphaTestnet: {
       chainId: 13505,
       url: vars.get(
-        "GRAVITY_ALPHA_TESTNET_SEPOLIA_URL",
+        "GRAVITY_ALPHA_TESTNET_URL",
         "https://rpc-sepolia.gravity.xyz",
       ),
+      accounts,
+    },
+    gravityAlphaMain: {
+      chainId: 1625,
+      url: vars.get("GRAVITY_ALPHA_MAINNET_URL", "https://rpc.gravity.xyz"),
       accounts,
     },
   },
@@ -779,9 +779,9 @@ const config: HardhatUserConfig = {
       // For Chiliz testnet & mainnet
       chiliz: vars.get("CHILIZ_API_KEY", ""),
       chilizTestnet: vars.get("CHILIZ_API_KEY", ""),
-      // For Gravity Alpha testnet & mainnet - no api key required
-      gravityAlphaMainnet: "",
-      gravityAlphaTestnetSepolia: "",
+      // For Gravity Alpha testnet & mainnet
+      gravityAlpha: vars.get("GRAVITY_ALPHA_API_KEY", ""),
+      gravityAlphaTestnet: vars.get("GRAVITY_ALPHA_API_KEY", ""),
     },
     customChains: [
       {
@@ -1343,7 +1343,7 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        network: "gravityAlphaMainnet",
+        network: "gravityAlpha",
         chainId: 1625,
         urls: {
           apiURL: "https://explorer.gravity.xyz/api",
@@ -1351,7 +1351,7 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        network: "gravityAlphaTestnetSepolia",
+        network: "gravityAlphaTestnet",
         chainId: 13505,
         urls: {
           apiURL: "https://explorer-sepolia.gravity.xyz/api",

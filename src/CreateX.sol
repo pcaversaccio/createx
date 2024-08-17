@@ -267,18 +267,16 @@ contract CreateX {
         // 0x80, which is calculated via 0x80 + 0.
         if (nonce == 0x00) {
             data = abi.encodePacked(bytes1(0xd6), len, deployer, bytes1(0x80));
-        }
-        // A one-byte integer in the [0x00, 0x7f] range uses its own value as a length prefix, there is no
-        // additional "0x80 + length" prefix that precedes it.
-        else if (nonce <= 0x7f) {
+        } else if (nonce <= 0x7f) {
+            // A one-byte integer in the [0x00, 0x7f] range uses its own value as a length prefix, there is no
+            // additional "0x80 + length" prefix that precedes it.
             data = abi.encodePacked(bytes1(0xd6), len, deployer, uint8(nonce));
-        }
-        // In the case of `nonce > 0x7f` and `nonce <= type(uint8).max`, we have the following encoding scheme
-        // (the same calculation can be carried over for higher nonce bytes):
-        // 0xda = 0xc0 (short RLP prefix) + 0x1a (= the bytes length of: 0x94 + address + 0x84 + nonce, in hex),
-        // 0x94 = 0x80 + 0x14 (= the bytes length of an address, 20 bytes, in hex),
-        // 0x84 = 0x80 + 0x04 (= the bytes length of the nonce, 4 bytes, in hex).
-        else if (nonce <= type(uint8).max) {
+        } else if (nonce <= type(uint8).max) {
+            // In the case of `nonce > 0x7f` and `nonce <= type(uint8).max`, we have the following encoding scheme
+            // (the same calculation can be carried over for higher nonce bytes):
+            // 0xda = 0xc0 (short RLP prefix) + 0x1a (= the bytes length of: 0x94 + address + 0x84 + nonce, in hex),
+            // 0x94 = 0x80 + 0x14 (= the bytes length of an address, 20 bytes, in hex),
+            // 0x84 = 0x80 + 0x04 (= the bytes length of the nonce, 4 bytes, in hex).
             data = abi.encodePacked(bytes1(0xd7), len, deployer, bytes1(0x81), uint8(nonce));
         } else if (nonce <= type(uint16).max) {
             data = abi.encodePacked(bytes1(0xd8), len, deployer, bytes1(0x82), uint16(nonce));
