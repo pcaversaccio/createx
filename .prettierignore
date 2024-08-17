@@ -8,3 +8,4 @@ forge-artifacts
 coverage
 bin
 out
+pnpm-lock.yaml
