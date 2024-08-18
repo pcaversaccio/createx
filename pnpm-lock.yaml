@@ -47,8 +47,8 @@ importers:
         specifier: ^3.3.3
         version: 3.3.3
       prettier-plugin-solidity:
-        specifier: ^1.4.0
-        version: 1.4.0(prettier@3.3.3)
+        specifier: ^1.4.1
+        version: 1.4.1(prettier@3.3.3)
       solhint:
         specifier: ^5.0.3
         version: 5.0.3(typescript@5.5.4)
@@ -2602,10 +2602,10 @@ packages:
         integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==,
       }
 
-  electron-to-chromium@1.5.10:
+  electron-to-chromium@1.5.11:
     resolution:
       {
-        integrity: sha512-C3RDERDjrNW262GCRvpoer3a0Ksd66CtgDLxMHhzShQ8fhL4kwnpVXsJPAKg9xJjIROXUbLBrvtOzVAjALMIWA==,
+        integrity: sha512-R1CccCDYqndR25CaXFd6hp/u9RaaMcftMkphmvuepXr5b1vfLkRml6aWVeBhXJ7rbevHkKEMJtz8XqPf7ffmew==,
       }
 
   elliptic@6.5.4:
@@ -4699,10 +4699,10 @@ packages:
       }
     engines: { node: ">= 0.8.0" }
 
-  prettier-plugin-solidity@1.4.0:
+  prettier-plugin-solidity@1.4.1:
     resolution:
       {
-        integrity: sha512-XXEOjKaY4nC0Hjqv+DMo+A7ZNbS70jil0phl1mdMAbKf45pkxfhPXrNBMDSWsTYTldwSX+8JOwsUynO3enVc5A==,
+        integrity: sha512-Mq8EtfacVZ/0+uDKTtHZGW3Aa7vEbX/BNx63hmVg6YTiTXSiuKP0amj0G6pGwjmLaOfymWh3QgXEZkjQbU8QRg==,
       }
     engines: { node: ">=16" }
     peerDependencies:
@@ -7285,7 +7285,7 @@ snapshots:
   browserslist@4.23.3:
     dependencies:
       caniuse-lite: 1.0.30001651
-      electron-to-chromium: 1.5.10
+      electron-to-chromium: 1.5.11
       node-releases: 2.0.18
       update-browserslist-db: 1.1.0(browserslist@4.23.3)
 
@@ -7600,7 +7600,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  electron-to-chromium@1.5.10: {}
+  electron-to-chromium@1.5.11: {}
 
   elliptic@6.5.4:
     dependencies:
@@ -9104,7 +9104,7 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-solidity@1.4.0(prettier@3.3.3):
+  prettier-plugin-solidity@1.4.1(prettier@3.3.3):
     dependencies:
       "@solidity-parser/parser": 0.18.0
       prettier: 3.3.3
