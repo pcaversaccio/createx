@@ -135,6 +135,8 @@
     "deploy:taraxamain": "npx hardhat run --no-compile --network taraxaMain scripts/deploy.ts",
     "deploy:gravityalphatestnet": "npx hardhat run --no-compile --network gravityAlphaTestnet scripts/deploy.ts",
     "deploy:gravityalphamain": "npx hardhat run --no-compile --network gravityAlphaMain scripts/deploy.ts",
+    "deploy:taikotestnet": "npx hardhat run --no-compile --network taikoTestnet scripts/deploy.ts",
+    "deploy:taikomain": "npx hardhat run --no-compile --network taikoMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "cd interface && pnpm prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
