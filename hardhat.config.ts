@@ -618,6 +618,16 @@ const config: HardhatUserConfig = {
       url: vars.get("GRAVITY_ALPHA_MAINNET_URL", "https://rpc.gravity.xyz"),
       accounts,
     },
+    taikoTestnet: {
+      chainId: 167009,
+      url: vars.get("TAIKO_TESTNET_URL", "https://rpc.hekla.taiko.xyz"),
+      accounts,
+    },
+    taikoMain: {
+      chainId: 167000,
+      url: vars.get("TAIKO_MAINNET_URL", "https://rpc.taiko.xyz"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -782,6 +792,9 @@ const config: HardhatUserConfig = {
       // For Gravity Alpha testnet & mainnet
       gravityAlpha: vars.get("GRAVITY_ALPHA_API_KEY", ""),
       gravityAlphaTestnet: vars.get("GRAVITY_ALPHA_API_KEY", ""),
+      // For Taiko testnet & mainnet
+      taiko: vars.get("TAIKO_API_KEY", ""),
+      taikoTestnet: vars.get("TAIKO_API_KEY", ""),
     },
     customChains: [
       {
@@ -1356,6 +1369,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://explorer-sepolia.gravity.xyz/api",
           browserURL: "https://explorer-sepolia.gravity.xyz",
+        },
+      },
+      {
+        network: "taiko",
+        chainId: 167000,
+        urls: {
+          apiURL: "https://api.taikoscan.io/api",
+          browserURL: "https://taikoscan.io",
+        },
+      },
+      {
+        network: "taikoTestnet",
+        chainId: 167009,
+        urls: {
+          apiURL: "https://api-hekla.taikoscan.io/api",
+          browserURL: "https://hekla.taikoscan.io",
         },
       },
     ],
