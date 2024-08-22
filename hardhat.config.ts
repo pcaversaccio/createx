@@ -628,6 +628,16 @@ const config: HardhatUserConfig = {
       url: vars.get("TAIKO_MAINNET_URL", "https://rpc.taiko.xyz"),
       accounts,
     },
+    zetaChainTestnet: {
+      chainId: 7001,
+      url: vars.get("ZETA_CHAIN_TESTNET_URL", "https://7001.rpc.thirdweb.com"),
+      accounts,
+    },
+    zetaChainMain: {
+      chainId: 7000,
+      url: vars.get("ZETA_CHAIN_MAINNET_URL", "https://7000.rpc.thirdweb.com"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -795,6 +805,9 @@ const config: HardhatUserConfig = {
       // For Taiko testnet & mainnet
       taiko: vars.get("TAIKO_API_KEY", ""),
       taikoTestnet: vars.get("TAIKO_API_KEY", ""),
+      // For ZetaChain testnet & mainnet
+      zetaChain: vars.get("ZETA_CHAIN_API_KEY", ""),
+      zetaChainTestnet: vars.get("ZETA_CHAIN_API_KEY", ""),
     },
     customChains: [
       {
@@ -1385,6 +1398,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-hekla.taikoscan.io/api",
           browserURL: "https://hekla.taikoscan.io",
+        },
+      },
+      {
+        network: "zetaChain",
+        chainId: 7000,
+        urls: {
+          apiURL: "https://zetachain.blockscout.com/api",
+          browserURL: "https://zetachain.blockscout.com",
+        },
+      },
+      {
+        network: "zetaChainTestnet",
+        chainId: 7001,
+        urls: {
+          apiURL: "https://zetachain-athens-3.blockscout.com/api",
+          browserURL: "https://zetachain-athens-3.blockscout.com",
         },
       },
     ],
