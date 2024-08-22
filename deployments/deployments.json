@@ -655,7 +655,7 @@
   },
   {
     "name": "ZetaChain Testnet (Athens-3)",
-    "chainId": 7000,
+    "chainId": 7001,
     "urls": [
       "https://athens.explorer.zetachain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/contracts/partial_match/7001/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
