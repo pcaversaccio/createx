@@ -638,6 +638,19 @@ const config: HardhatUserConfig = {
       url: vars.get("ZETA_CHAIN_MAINNET_URL", "https://7000.rpc.thirdweb.com"),
       accounts,
     },
+    "5ireChainTestnet": {
+      chainId: 997,
+      url: vars.get(
+        "5IRE_CHAIN_TESTNET_URL",
+        "https://rpc.testnet.5ire.network",
+      ),
+      accounts,
+    },
+    "5ireChainMain": {
+      chainId: 995,
+      url: vars.get("5IRE_CHAIN_MAINNET_URL", "https://rpc.5ire.network"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -808,6 +821,9 @@ const config: HardhatUserConfig = {
       // For ZetaChain testnet & mainnet
       zetaChain: vars.get("ZETA_CHAIN_API_KEY", ""),
       zetaChainTestnet: vars.get("ZETA_CHAIN_API_KEY", ""),
+      // For 5ireChain testnet & mainnet
+      "5ireChain": vars.get("5IRE_CHAIN_API_KEY", ""),
+      "5ireChainTestnet": vars.get("5IRE_CHAIN_API_KEY", ""),
     },
     customChains: [
       {
@@ -1414,6 +1430,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://zetachain-athens-3.blockscout.com/api",
           browserURL: "https://zetachain-athens-3.blockscout.com",
+        },
+      },
+      {
+        network: "5ireChain",
+        chainId: 995,
+        urls: {
+          apiURL: "https://5irescan.io/api",
+          browserURL: "https://5irescan.io",
+        },
+      },
+      {
+        network: "5ireChainTestnet",
+        chainId: 997,
+        urls: {
+          apiURL: "https://testnet.5irescan.io/api",
+          browserURL: "https://testnet.5irescan.io",
         },
       },
     ],
