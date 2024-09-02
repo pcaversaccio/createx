@@ -139,6 +139,8 @@
     "deploy:taikomain": "npx hardhat run --no-compile --network taikoMain scripts/deploy.ts",
     "deploy:zetachaintestnet": "npx hardhat run --no-compile --network zetaChainTestnet scripts/deploy.ts",
     "deploy:zetachainmain": "npx hardhat run --no-compile --network zetaChainMain scripts/deploy.ts",
+    "deploy:5irechaintestnet": "npx hardhat run --no-compile --network 5ireChainTestnet scripts/deploy.ts",
+    "deploy:5irechainmain": "npx hardhat run --no-compile --network 5ireChainMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "cd interface && pnpm prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",

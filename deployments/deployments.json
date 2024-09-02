@@ -347,6 +347,13 @@
     ]
   },
   {
+    "name": "5ireChain",
+    "chainId": 995,
+    "urls": [
+      "https://5irescan.io/contract/evm/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -659,6 +666,13 @@
     "urls": [
       "https://athens.explorer.zetachain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/contracts/partial_match/7001/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
+  },
+  {
+    "name": "5ireChain Testnet",
+    "chainId": 997,
+    "urls": [
+      "https://testnet.5irescan.io/contract/evm/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
