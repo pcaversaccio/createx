@@ -651,6 +651,14 @@ const config: HardhatUserConfig = {
       url: vars.get("5IRE_CHAIN_MAINNET_URL", "https://rpc.5ire.network"),
       accounts,
     },
+    sapphireMain: {
+      url: 'https://sapphire.oasis.io',
+      chainId: 0x5afe,
+    },
+    sapphireTestnet: {
+      url: 'https://testnet.sapphire.oasis.io',
+      chainId: 0x5aff,
+    }
   },
   contractSizer: {
     alphaSort: true,
