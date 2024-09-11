@@ -69,8 +69,8 @@ importers:
   interface:
     dependencies:
       '@headlessui/react':
-        specifier: ^2.1.6
-        version: 2.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^2.1.7
+        version: 2.1.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@heroicons/react':
         specifier: ^2.1.5
         version: 2.1.5(react@18.3.1)
@@ -352,8 +352,8 @@ packages:
   '@floating-ui/utils@0.2.7':
     resolution: {integrity: sha512-X8R8Oj771YRl/w+c1HqAC1szL8zWQRwFvgDwT129k9ACdBoud/+/rX9V0qiMl6LWUdP9voC2nDVZYPMQQsb6eA==}
 
-  '@headlessui/react@2.1.6':
-    resolution: {integrity: sha512-IkaSHxsMdrSdVZn5n3ClfvqQo5umHeqwjeZfbFUTczykeHoMH+3VOP0nn7zVsbebazjPmOsXh3x9gCy6e2PG5Q==}
+  '@headlessui/react@2.1.7':
+    resolution: {integrity: sha512-3mZkkpFK2lK0Xvl9LcdgyN+mQQQ/bZU7lLhy63isqZ+OaYug7DQGTSPQd/TM0nUayvk+8pHSiaYuSRw/mTHUTg==}
     engines: {node: '>=10'}
     peerDependencies:
       react: ^18
@@ -1626,8 +1626,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  electron-to-chromium@1.5.18:
-    resolution: {integrity: sha512-1OfuVACu+zKlmjsNdcJuVQuVE61sZOLbNM4JAQ1Rvh6EOj0/EUKhMJjRH73InPlXSh8HIJk1cVZ8pyOV/FMdUQ==}
+  electron-to-chromium@1.5.19:
+    resolution: {integrity: sha512-kpLJJi3zxTR1U828P+LIUDZ5ohixyo68/IcYOHLqnbTPr/wdgn4i1ECvmALN9E16JPA6cvCG5UG79gVwVdEK5w==}
 
   elliptic@6.5.4:
     resolution: {integrity: sha512-iLhC6ULemrljPZb+QutR5TQGB+pdW6KGD5RSegS+8sorOZT+rdQFbsQFJgvN3eRqNALqJer4oQ16YvJHlU8hzQ==}
@@ -3915,7 +3915,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.7': {}
 
-  '@headlessui/react@2.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@headlessui/react@2.1.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@floating-ui/react': 0.26.23(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-aria/focus': 3.18.2(react@18.3.1)
@@ -4968,7 +4968,7 @@ snapshots:
   browserslist@4.23.3:
     dependencies:
       caniuse-lite: 1.0.30001660
-      electron-to-chromium: 1.5.18
+      electron-to-chromium: 1.5.19
       node-releases: 2.0.18
       update-browserslist-db: 1.1.0(browserslist@4.23.3)
 
@@ -5283,7 +5283,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  electron-to-chromium@1.5.18: {}
+  electron-to-chromium@1.5.19: {}
 
   elliptic@6.5.4:
     dependencies:
