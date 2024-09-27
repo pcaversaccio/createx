@@ -143,6 +143,8 @@
     "deploy:5irechainmain": "npx hardhat run --no-compile --network 5ireChainMain scripts/deploy.ts",
     "deploy:sapphiretestnet": "npx hardhat run --no-compile --network sapphireTestnet scripts/deploy.ts",
     "deploy:sapphiremain": "npx hardhat run --no-compile --network sapphireMain scripts/deploy.ts",
+    "deploy:worldchaintestnet": "npx hardhat run --no-compile --network worldChainTestnet scripts/deploy.ts",
+    "deploy:worldchainmain": "npx hardhat run --no-compile --network worldChainMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "cd interface && pnpm prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",

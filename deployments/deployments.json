@@ -362,6 +362,13 @@
     ]
   },
   {
+    "name": "World Chain",
+    "chainId": 480,
+    "urls": [
+      "https://worldchain-mainnet.explorer.alchemy.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -689,6 +696,13 @@
     "urls": [
       "https://explorer.oasis.io/testnet/sapphire/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/contracts/partial_match/23295/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
+  },
+  {
+    "name": "World Chain Sepolia Testnet",
+    "chainId": 4801,
+    "urls": [
+      "https://worldchain-sepolia.explorer.alchemy.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
