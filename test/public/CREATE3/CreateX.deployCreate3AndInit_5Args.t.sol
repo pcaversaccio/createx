@@ -76,7 +76,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 msgSender != createXAddr &&
                 msgSender != zeroAddress
         );
-        snapshotId = vm.snapshot();
+        snapshotId = vm.snapshotState();
 
         // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
         if (chainId % 2 == 0) {
@@ -206,7 +206,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 // Foundry does not create a new, clean EVM environment when the `chainId` is changed, and
                 // a deployment of a contract to the same address therefore fails (see issue: https://github.com/foundry-rs/foundry/issues/6008).
                 // To solve this problem, we return to the original snapshot state.
-                vm.revertTo(snapshotId);
+                vm.revertToState(snapshotId);
                 // We record the emitted events to later assert the proxy contract address.
                 vm.recordLogs();
                 (, , , guardedSalt) = parseFuzzerSalt(originalDeployer, salt);
@@ -306,7 +306,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 msgSender != createXAddr &&
                 msgSender != zeroAddress
         );
-        snapshotId = vm.snapshot();
+        snapshotId = vm.snapshotState();
 
         // Helper logic to increase the probability of matching a permissioned deploy protection during fuzzing.
         if (chainId % 2 == 0) {
@@ -444,7 +444,7 @@ contract CreateX_DeployCreate3AndInit_5Args_Public_Test is BaseTest {
                 // Foundry does not create a new, clean EVM environment when the `chainId` is changed, and
                 // a deployment of a contract to the same address therefore fails (see issue: https://github.com/foundry-rs/foundry/issues/6008).
                 // To solve this problem, we return to the original snapshot state.
-                vm.revertTo(snapshotId);
+                vm.revertToState(snapshotId);
                 // We record the emitted events to later assert the proxy contract address.
                 vm.recordLogs();
                 (, , , guardedSalt) = parseFuzzerSalt(originalDeployer, salt);
