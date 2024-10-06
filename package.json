@@ -160,12 +160,12 @@
     "start:interface": "cd interface && pnpm start"
   },
   "devDependencies": {
-    "@eslint/js": "^9.11.1",
+    "@eslint/js": "^9.12.0",
     "@nomicfoundation/hardhat-ethers": "^3.0.8",
     "@nomicfoundation/hardhat-verify": "^2.0.11",
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
-    "eslint": "^9.11.1",
+    "eslint": "^9.12.0",
     "eslint-config-prettier": "^9.1.0",
     "ethers": "^6.13.3",
     "hardhat": "^2.22.12",
