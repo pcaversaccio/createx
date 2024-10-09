@@ -680,6 +680,11 @@ const config: HardhatUserConfig = {
       ),
       accounts,
     },
+    plumeTestnet: {
+      chainId: 98864,
+      url: vars.get("PLUME_TESTNET_URL", "https://test-rpc.plumenetwork.xyz"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -859,6 +864,8 @@ const config: HardhatUserConfig = {
       // For World Chain testnet & mainnet
       worldChain: vars.get("WORLD_CHAIN_API_KEY", ""),
       worldChainTestnet: vars.get("WORLD_CHAIN_API_KEY", ""),
+      // For Plume testnet
+      plumeTestnet: vars.get("PLUME_API_KEY", ""),
     },
     customChains: [
       {
@@ -1513,6 +1520,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://worldchain-sepolia.explorer.alchemy.com/api",
           browserURL: "https://worldchain-sepolia.explorer.alchemy.com",
+        },
+      },
+      {
+        network: "plumeTestnet",
+        chainId: 98864,
+        urls: {
+          apiURL: "https://test-explorer.plumenetwork.xyz/api",
+          browserURL: "https://test-explorer.plumenetwork.xyz",
         },
       },
     ],
