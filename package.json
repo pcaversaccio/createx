@@ -146,6 +146,7 @@
     "deploy:worldchaintestnet": "npx hardhat run --no-compile --network worldChainTestnet scripts/deploy.ts",
     "deploy:worldchainmain": "npx hardhat run --no-compile --network worldChainMain scripts/deploy.ts",
     "deploy:plumetestnet": "npx hardhat run --no-compile --network plumeTestnet scripts/deploy.ts",
+    "deploy:unichaintestnet": "npx hardhat run --no-compile --network unichainTestnet scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "cd interface && pnpm prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
