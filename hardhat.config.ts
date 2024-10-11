@@ -687,7 +687,7 @@ const config: HardhatUserConfig = {
     },
     unichainTestnet: {
       chainId: 1301,
-      url: vars.get("UNICHAIN_TESTNET_URL", "	https://sepolia.unichain.org"),
+      url: vars.get("UNICHAIN_TESTNET_URL", "https://sepolia.unichain.org"),
       accounts,
     },
   },
