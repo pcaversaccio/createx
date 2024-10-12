@@ -62,8 +62,9 @@ export const Footer = () => {
         <div className="col-span-full md:order-2">
           <p className="text-secondary text-center text-sm">
             &copy; {currentYear}{" "}
-            <ExternalLink href={COMPANY_URL} text={COMPANY_NAME} />. Licensed
-            under the <ExternalLink href={LICENSE_URL} text={LICENSE_NAME} />.
+            <ExternalLink href={COMPANY_URL} text={COMPANY_NAME} />. Content
+            licensed under the{" "}
+            <ExternalLink href={LICENSE_URL} text={LICENSE_NAME} />.
           </p>
         </div>
 
