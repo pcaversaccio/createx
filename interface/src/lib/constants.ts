@@ -4,6 +4,9 @@ export const COMPANY_NAME = "pcaversaccio";
 export const COMPANY_URL = "https://pcaversaccio.com";
 export const GITHUB_URL = "https://github.com/pcaversaccio/createx";
 export const X_URL = "https://x.com/pcaversaccio";
+export const LICENSE_NAME = "MIT License";
+export const LICENSE_URL =
+  "https://github.com/mds1/multicall3-frontend/blob/main/LICENSE";
 export const SITE_IMAGE =
   "https://github-production-user-asset-6210df.s3.amazonaws.com/25297591/272914952-38a5989c-0113-427d-9158-47646971b7d8.png";
 

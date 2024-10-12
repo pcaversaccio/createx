@@ -1,6 +1,13 @@
 import { ExternalLink } from "@/components/layout/ExternalLink";
 import { ThemeSwitcher } from "@/components/layout/ThemeSwitcher";
-import { COMPANY_NAME, COMPANY_URL, GITHUB_URL, X_URL } from "@/lib/constants";
+import {
+  COMPANY_NAME,
+  COMPANY_URL,
+  GITHUB_URL,
+  LICENSE_NAME,
+  LICENSE_URL,
+  X_URL,
+} from "@/lib/constants";
 
 const navigation = [
   {
@@ -55,8 +62,8 @@ export const Footer = () => {
         <div className="col-span-full md:order-2">
           <p className="text-secondary text-center text-sm">
             &copy; {currentYear}{" "}
-            <ExternalLink href={COMPANY_URL} text={COMPANY_NAME} />. All rights
-            reserved.
+            <ExternalLink href={COMPANY_URL} text={COMPANY_NAME} />. Licensed
+            under the <ExternalLink href={LICENSE_URL} text={LICENSE_NAME} />.
           </p>
         </div>
 
