@@ -690,6 +690,16 @@ const config: HardhatUserConfig = {
       url: vars.get("UNICHAIN_TESTNET_URL", "https://sepolia.unichain.org"),
       accounts,
     },
+    xdcTestnet: {
+      chainId: 51,
+      url: vars.get("XDC_TESTNET_URL", "https://erpc.apothem.network"),
+      accounts,
+    },
+    xdcMain: {
+      chainId: 50,
+      url: vars.get("XDC_MAINNET_URL", "https://rpc.xinfin.network"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -873,6 +883,9 @@ const config: HardhatUserConfig = {
       plumeTestnet: vars.get("PLUME_API_KEY", ""),
       // For Unichain testnet
       unichainTestnet: vars.get("UNICHAIN_API_KEY", ""),
+      // For XDC testnet & mainnet
+      xdc: vars.get("XDC_API_KEY", ""),
+      xdcTestnet: vars.get("XDC_API_KEY", ""),
     },
     customChains: [
       {
@@ -1543,6 +1556,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-sepolia.uniscan.xyz/api",
           browserURL: "https://sepolia.uniscan.xyz",
+        },
+      },
+      {
+        network: "xdc",
+        chainId: 50,
+        urls: {
+          apiURL: "https://bapi.blocksscan.io",
+          browserURL: "https://xdcscan.io",
+        },
+      },
+      {
+        network: "xdcTestnet",
+        chainId: 51,
+        urls: {
+          apiURL: "https://abapi.blocksscan.io",
+          browserURL: "https://apothem.xdcscan.io",
         },
       },
     ],
