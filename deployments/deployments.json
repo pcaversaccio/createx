@@ -369,6 +369,13 @@
     ]
   },
   {
+    "name": "XDC Network",
+    "chainId": 50,
+    "urls": [
+      "https://xdcscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -717,6 +724,14 @@
     "chainId": 1301,
     "urls": [
       "https://sepolia.uniscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "XDC Network Testnet (Apothem)",
+    "chainId": 51,
+    "urls": [
+      "https://apothem.xdcscan.io/address/0xba5ed099633d3b313e4d5f7bdc1305d3c28ba5ed",
+      "https://repo.sourcify.dev/contracts/partial_match/51/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
     ]
   }
 ]
