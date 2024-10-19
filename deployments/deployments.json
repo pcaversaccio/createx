@@ -730,7 +730,7 @@
     "name": "XDC Network Testnet (Apothem)",
     "chainId": 51,
     "urls": [
-      "https://apothem.xdcscan.io/address/0xba5ed099633d3b313e4d5f7bdc1305d3c28ba5ed",
+      "https://apothem.xdcscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/contracts/partial_match/51/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
     ]
   }
