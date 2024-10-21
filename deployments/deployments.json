@@ -372,7 +372,7 @@
     "name": "XDC Network",
     "chainId": 50,
     "urls": [
-      "https://xdcscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://xdcscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -730,7 +730,7 @@
     "name": "XDC Network Testnet (Apothem)",
     "chainId": 51,
     "urls": [
-      "https://apothem.xdcscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://testnet.xdcscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/contracts/partial_match/51/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
     ]
   }

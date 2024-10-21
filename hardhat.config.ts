@@ -1562,16 +1562,16 @@ const config: HardhatUserConfig = {
         network: "xdc",
         chainId: 50,
         urls: {
-          apiURL: "https://bapi.blocksscan.io",
-          browserURL: "https://xdcscan.io",
+          apiURL: "https://api.xdcscan.com/api",
+          browserURL: "https://xdcscan.com",
         },
       },
       {
         network: "xdcTestnet",
         chainId: 51,
         urls: {
-          apiURL: "https://abapi.blocksscan.io",
-          browserURL: "https://apothem.xdcscan.io",
+          apiURL: "https://api-testnet.xdcscan.com/api",
+          browserURL: "https://testnet.xdcscan.com",
         },
       },
     ],
