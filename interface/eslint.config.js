@@ -1,11 +1,11 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-require-imports */
 const eslint = require("@eslint/js");
 const tseslint = require("typescript-eslint");
 const next = require("@next/eslint-plugin-next");
 const react = require("eslint-plugin-react");
 const reactHooks = require("eslint-plugin-react-hooks");
 const eslintConfigPrettier = require("eslint-config-prettier");
-/* eslint-enable @typescript-eslint/no-var-requires */
+/* eslint-enable @typescript-eslint/no-require-imports */
 
 module.exports = tseslint.config(
   {
