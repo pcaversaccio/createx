@@ -3,7 +3,6 @@ import { Head } from "@/components/layout/Head";
 import { SITE_DESCRIPTION } from "@/lib/constants";
 
 const Home = () => {
-  // eslint-disable-next-line no-console
   console.log(`
 :'######::'########::'########::::'###::::'########:'########:'##::::'##:
 '##... ##: ##.... ##: ##.....::::'## ##:::... ##..:: ##.....::. ##::'##::

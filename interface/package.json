@@ -32,7 +32,7 @@
   "dependencies": {
     "@headlessui/react": "^2.1.10",
     "@heroicons/react": "^2.1.5",
-    "next": "^14.2.15",
+    "next": "^15.0.0",
     "next-themes": "^0.3.0",
     "prismjs": "^1.29.0",
     "react": "^18.3.1",
@@ -41,22 +41,22 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
-    "@next/eslint-plugin-next": "^14.2.15",
+    "@next/eslint-plugin-next": "^15.0.0",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@types/node": "^22.7.7",
+    "@types/node": "^22.7.8",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^14.2.15",
+    "eslint": "^9.13.0",
+    "eslint-config-next": "^15.0.0",
     "eslint-plugin-react": "^7.37.1",
-    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
     "next-seo": "^6.6.0",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^7.18.0"
+    "typescript-eslint": "^8.11.0"
   }
 }
