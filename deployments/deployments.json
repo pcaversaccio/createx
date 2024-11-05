@@ -383,6 +383,20 @@
     ]
   },
   {
+    "name": "Lisk",
+    "chainId": 1135,
+    "urls": [
+      "https://blockscout.lisk.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Metal L2",
+    "chainId": 1750,
+    "urls": [
+      "https://explorer.metall2.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -746,6 +760,27 @@
     "chainId": 79479957,
     "urls": [
       "https://explorerl2.toronto.sx.technology/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Lisk Sepolia Testnet",
+    "chainId": 4202,
+    "urls": [
+      "https://sepolia-blockscout.lisk.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Metal L2 Sepolia Testnet",
+    "chainId": 1740,
+    "urls": [
+      "https://testnet.explorer.metall2.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Superseed Sepolia Testnet",
+    "chainId": 53302,
+    "urls": [
+      "https://sepolia-explorer.superseed.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
