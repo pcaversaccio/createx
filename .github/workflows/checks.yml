@@ -68,6 +68,7 @@ jobs:
         with:
           check_filenames: true
           skip: ./.git,pnpm-lock.yaml
+          ignore_words_list: superseed
 
   validate-links:
     runs-on: ${{ matrix.os }}
