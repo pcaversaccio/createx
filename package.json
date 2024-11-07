@@ -151,6 +151,11 @@
     "deploy:xdcmain": "npx hardhat run --no-compile --network xdcMain scripts/deploy.ts",
     "deploy:sxtestnet": "npx hardhat run --no-compile --network sxTestnet scripts/deploy.ts",
     "deploy:sxmain": "npx hardhat run --no-compile --network sxMain scripts/deploy.ts",
+    "deploy:lisktestnet": "npx hardhat run --no-compile --network liskTestnet scripts/deploy.ts",
+    "deploy:liskmain": "npx hardhat run --no-compile --network liskMain scripts/deploy.ts",
+    "deploy:metall2testnet": "npx hardhat run --no-compile --network metalL2Testnet scripts/deploy.ts",
+    "deploy:metall2main": "npx hardhat run --no-compile --network metalL2Main scripts/deploy.ts",
+    "deploy:superseedtestnet": "npx hardhat run --no-compile --network superseedTestnet scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "cd interface && pnpm prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
@@ -184,6 +189,6 @@
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.12.2"
+    "typescript-eslint": "^8.13.0"
   }
 }

@@ -713,6 +713,31 @@ const config: HardhatUserConfig = {
       url: vars.get("SX_MAINNET_URL", "https://rpc.sx-rollup.gelato.digital"),
       accounts,
     },
+    liskTestnet: {
+      chainId: 4202,
+      url: vars.get("LISK_TESTNET_URL", "https://rpc.sepolia-api.lisk.com"),
+      accounts,
+    },
+    liskMain: {
+      chainId: 1135,
+      url: vars.get("LISK_MAINNET_URL", "https://rpc.api.lisk.com"),
+      accounts,
+    },
+    metalL2Testnet: {
+      chainId: 1740,
+      url: vars.get("METALL2_TESTNET_URL", "https://testnet.rpc.metall2.com"),
+      accounts,
+    },
+    metalL2Main: {
+      chainId: 1750,
+      url: vars.get("METALL2_MAINNET_URL", "https://rpc.metall2.com"),
+      accounts,
+    },
+    superseedTestnet: {
+      chainId: 53302,
+      url: vars.get("SUPERSEED_TESTNET_URL", "https://sepolia.superseed.xyz"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -902,6 +927,14 @@ const config: HardhatUserConfig = {
       // For SX testnet & mainnet
       sx: vars.get("SX_API_KEY", ""),
       sxTestnet: vars.get("SX_API_KEY", ""),
+      // For Lisk testnet & mainnet
+      lisk: vars.get("LISK_API_KEY", ""),
+      liskTestnet: vars.get("LISK_API_KEY", ""),
+      // For Metal L2 testnet & mainnet
+      metalL2: vars.get("METALL2_API_KEY", ""),
+      metalL2Testnet: vars.get("METALL2_API_KEY", ""),
+      // For Superseed testnet
+      superseedTestnet: vars.get("SUPERSEED_API_KEY", ""),
     },
     customChains: [
       {
@@ -1604,6 +1637,46 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://explorerl2.toronto.sx.technology/api",
           browserURL: "https://explorerl2.toronto.sx.technology",
+        },
+      },
+      {
+        network: "lisk",
+        chainId: 1135,
+        urls: {
+          apiURL: "https://blockscout.lisk.com/api",
+          browserURL: "https://blockscout.lisk.com",
+        },
+      },
+      {
+        network: "liskTestnet",
+        chainId: 4202,
+        urls: {
+          apiURL: "https://sepolia-blockscout.lisk.com/api",
+          browserURL: "https://sepolia-blockscout.lisk.com",
+        },
+      },
+      {
+        network: "metalL2",
+        chainId: 1750,
+        urls: {
+          apiURL: "https://explorer.metall2.com/api",
+          browserURL: "https://explorer.metall2.com",
+        },
+      },
+      {
+        network: "metalL2Testnet",
+        chainId: 1740,
+        urls: {
+          apiURL: "https://testnet.explorer.metall2.com/api",
+          browserURL: "https://testnet.explorer.metall2.com",
+        },
+      },
+      {
+        network: "superseedTestnet",
+        chainId: 53302,
+        urls: {
+          apiURL: "https://sepolia-explorer.superseed.xyz/api",
+          browserURL: "https://sepolia-explorer.superseed.xyz",
         },
       },
     ],
