@@ -24,13 +24,13 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
   - [Test Coverage](#test-coverage)
 - [ABI (Application Binary Interface)](#abi-application-binary-interface)
 - [New Deployment(s)](#new-deployments)
-  - [`ethers.js`](#ethersjs)
-  - [`cast`](#cast)
+    - [`ethers.js`](#ethersjs)
+    - [`cast`](#cast)
   - [Contract Verification](#contract-verification)
 - [`CreateX` Deployments](#createx-deployments)
-  - [EVM-Based Production Networks](#evm-based-production-networks)
-  - [Ethereum Test Networks](#ethereum-test-networks)
-  - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
+    - [EVM-Based Production Networks](#evm-based-production-networks)
+    - [Ethereum Test Networks](#ethereum-test-networks)
+    - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
 - [Integration With External Tooling](#integration-with-external-tooling)
 - [Community-Maintained Dune Dashboards](#community-maintained-dune-dashboards)
 - [🙏🏼 Acknowledgement](#-acknowledgement)
@@ -2109,7 +2109,7 @@ You can broadcast the transaction using either [`ethers.js`](https://docs.ethers
 
 #### [`ethers.js`](https://docs.ethers.org/v6/)
 
-It is recommended to install [`pnpm`](https://pnpm.io) through the `npm` package manager, which comes bundled with [Node.js](https://nodejs.org/en) when you install it on your system. It is recommended to use a Node.js version `>= 20.0.0`.
+It is recommended to install [`pnpm`](https://pnpm.io) through the `npm` package manager, which comes bundled with [Node.js](https://nodejs.org/en) when you install it on your system. It is recommended to use a Node.js version `>= 22.0.0`.
 
 Once you have `npm` installed, you can run the following both to install and upgrade `pnpm`:
 

@@ -17,7 +17,7 @@ jobs:
         os:
           - ubuntu-latest
         node_version:
-          - 20
+          - 22
         go_version:
           - 1.23
 
