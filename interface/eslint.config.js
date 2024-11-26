@@ -7,6 +7,7 @@ const reactHooks = require("eslint-plugin-react-hooks");
 const eslintConfigPrettier = require("eslint-config-prettier");
 /* eslint-enable @typescript-eslint/no-require-imports */
 
+/** @type {import('typescript-eslint').TSESLint.FlatConfig.ConfigArray} */
 module.exports = tseslint.config(
   {
     files: ["**/*.{js,ts,tsx}"],
