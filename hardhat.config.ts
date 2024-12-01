@@ -738,6 +738,11 @@ const config: HardhatUserConfig = {
       url: vars.get("SUPERSEED_TESTNET_URL", "https://sepolia.superseed.xyz"),
       accounts,
     },
+    storyTestnet: {
+      chainId: 1516,
+      url: vars.get("STORY_TESTNET_URL", "https://odyssey.storyrpc.io"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -935,6 +940,8 @@ const config: HardhatUserConfig = {
       metalL2Testnet: vars.get("METALL2_API_KEY", ""),
       // For Superseed testnet
       superseedTestnet: vars.get("SUPERSEED_API_KEY", ""),
+      // For Story testnet
+      storyTestnet: vars.get("STORY_API_KEY", ""),
     },
     customChains: [
       {
@@ -1677,6 +1684,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://sepolia-explorer.superseed.xyz/api",
           browserURL: "https://sepolia-explorer.superseed.xyz",
+        },
+      },
+      {
+        network: "storyTestnet",
+        chainId: 1516,
+        urls: {
+          apiURL: "https://odyssey.storyscan.xyz/api",
+          browserURL: "https://odyssey.storyscan.xyz",
         },
       },
     ],

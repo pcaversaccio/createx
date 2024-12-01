@@ -2287,6 +2287,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Lisk Sepolia Testnet](https://sepolia-blockscout.lisk.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Metal L2 Sepolia Testnet](https://testnet.explorer.metall2.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Superseed Sepolia Testnet](https://sepolia-explorer.superseed.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Story Testnet (Odyssey)](https://odyssey.storyscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 

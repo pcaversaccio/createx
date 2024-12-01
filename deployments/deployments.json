@@ -782,5 +782,12 @@
     "urls": [
       "https://sepolia-explorer.superseed.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
+  },
+  {
+    "name": "Story Testnet (Odyssey)",
+    "chainId": 1516,
+    "urls": [
+      "https://odyssey.storyscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   }
 ]

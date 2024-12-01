@@ -156,6 +156,7 @@
     "deploy:metall2testnet": "npx hardhat run --no-compile --network metalL2Testnet scripts/deploy.ts",
     "deploy:metall2main": "npx hardhat run --no-compile --network metalL2Main scripts/deploy.ts",
     "deploy:superseedtestnet": "npx hardhat run --no-compile --network superseedTestnet scripts/deploy.ts",
+    "deploy:storytestnet": "npx hardhat run --no-compile --network storyTestnet scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "cd interface && pnpm prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
