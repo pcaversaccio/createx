@@ -4,7 +4,7 @@
  * @type {import('next').NextConfig}
  **/
 const nextConfig =
-  // Check if running in a Continuous Integration (CI) environment.
+  // Check if running in a continuous integration (CI) environment.
   process.env.CI === "true"
     ? {
         /**
