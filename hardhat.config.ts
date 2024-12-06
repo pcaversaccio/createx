@@ -738,6 +738,11 @@ const config: HardhatUserConfig = {
       url: vars.get("SUPERSEED_TESTNET_URL", "https://sepolia.superseed.xyz"),
       accounts,
     },
+    superseedMain: {
+      chainId: 5330,
+      url: vars.get("SUPERSEED_MAINNET_URL", "https://mainnet.superseed.xyz"),
+      accounts,
+    },
     storyTestnet: {
       chainId: 1516,
       url: vars.get("STORY_TESTNET_URL", "https://odyssey.storyrpc.io"),
@@ -938,7 +943,8 @@ const config: HardhatUserConfig = {
       // For Metal L2 testnet & mainnet
       metalL2: vars.get("METALL2_API_KEY", ""),
       metalL2Testnet: vars.get("METALL2_API_KEY", ""),
-      // For Superseed testnet
+      // For Superseed testnet & mainnet
+      superseed: vars.get("SUPERSEED_API_KEY", ""),
       superseedTestnet: vars.get("SUPERSEED_API_KEY", ""),
       // For Story testnet
       storyTestnet: vars.get("STORY_API_KEY", ""),
@@ -1676,6 +1682,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://testnet.explorer.metall2.com/api",
           browserURL: "https://testnet.explorer.metall2.com",
+        },
+      },
+      {
+        network: "superseed",
+        chainId: 5330,
+        urls: {
+          apiURL: "https://explorer.superseed.xyz/api",
+          browserURL: "https://explorer.superseed.xyz",
         },
       },
       {

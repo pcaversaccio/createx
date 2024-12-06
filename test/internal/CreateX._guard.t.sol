@@ -162,9 +162,9 @@ contract CreateX_Guard_Internal_Test is BaseTest {
     ) {
         increment = bound(increment, 1, type(uint128).max);
         vm.assume(coinbase != zeroAddress && chainId != block.chainid && chainId != 0);
-        vm.roll(block.number + increment);
+        vm.roll(vm.getBlockNumber() + increment);
         vm.coinbase(coinbase);
-        vm.warp(block.timestamp + increment);
+        vm.warp(vm.getBlockTimestamp() + increment);
         vm.prevrandao(keccak256(abi.encode(prevrandao)));
         vm.chainId(chainId);
 

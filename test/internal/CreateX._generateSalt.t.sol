@@ -46,7 +46,7 @@ contract CreateX_GenerateSalt_Internal_Test is BaseTest {
         bytes32 originalSalt = createXHarness.exposed_generateSalt();
 
         // Change block. Block number and hash are coupled, so we can't isolate this.
-        vm.roll(block.number + increment);
+        vm.roll(vm.getBlockNumber() + increment);
         assertNotEq(originalSalt, createXHarness.exposed_generateSalt(), "100");
 
         // Change coinbase.
@@ -60,7 +60,7 @@ contract CreateX_GenerateSalt_Internal_Test is BaseTest {
         vm.revertToState(snapshotId);
         assertEq(createXHarness.exposed_generateSalt(), originalSalt, "400");
 
-        vm.warp(block.timestamp + increment);
+        vm.warp(vm.getBlockTimestamp() + increment);
         assertNotEq(originalSalt, createXHarness.exposed_generateSalt(), "500");
 
         // Change prevrandao.
@@ -98,9 +98,9 @@ contract CreateX_GenerateSalt_Internal_Test is BaseTest {
         uint256 entropy6 = entropy(seed, 6);
 
         // Second, we set the block properties.
-        vm.roll(bound(entropy1, block.number, 1e18));
+        vm.roll(bound(entropy1, vm.getBlockNumber(), 1e18));
         vm.coinbase(address(uint160(entropy2)));
-        vm.warp(bound(entropy3, block.timestamp, 52e4 weeks));
+        vm.warp(bound(entropy3, vm.getBlockTimestamp(), 52e4 weeks));
         vm.prevrandao(bytes32(entropy4));
         vm.chainId(bound(entropy5, 0, type(uint64).max));
 
