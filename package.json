@@ -158,6 +158,8 @@
     "deploy:superseedtestnet": "npx hardhat run --no-compile --network superseedTestnet scripts/deploy.ts",
     "deploy:superseedmain": "npx hardhat run --no-compile --network superseedMain scripts/deploy.ts",
     "deploy:storytestnet": "npx hardhat run --no-compile --network storyTestnet scripts/deploy.ts",
+    "deploy:sonictestnet": "npx hardhat run --no-compile --network sonicTestnet scripts/deploy.ts",
+    "deploy:sonicmain": "npx hardhat run --no-compile --network sonicMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
@@ -191,6 +193,6 @@
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
     "typescript": "^5.7.2",
-    "typescript-eslint": "^8.17.0"
+    "typescript-eslint": "^8.18.0"
   }
 }
