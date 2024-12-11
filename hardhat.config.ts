@@ -748,6 +748,16 @@ const config: HardhatUserConfig = {
       url: vars.get("STORY_TESTNET_URL", "https://odyssey.storyrpc.io"),
       accounts,
     },
+    sonicTestnet: {
+      chainId: 57054,
+      url: vars.get("SONIC_TESTNET_URL", "https://rpc.blaze.soniclabs.com"),
+      accounts,
+    },
+    sonicMain: {
+      chainId: 146,
+      url: vars.get("SONIC_MAINNET_URL", "https://rpc.soniclabs.com"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -948,6 +958,9 @@ const config: HardhatUserConfig = {
       superseedTestnet: vars.get("SUPERSEED_API_KEY", ""),
       // For Story testnet
       storyTestnet: vars.get("STORY_API_KEY", ""),
+      // For Sonic testnet & mainnet
+      sonic: vars.get("SONIC_API_KEY", ""),
+      sonicTestnet: vars.get("SONIC_API_KEY", ""),
     },
     customChains: [
       {
@@ -1706,6 +1719,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://odyssey.storyscan.xyz/api",
           browserURL: "https://odyssey.storyscan.xyz",
+        },
+      },
+      {
+        network: "sonic",
+        chainId: 146,
+        urls: {
+          apiURL: "https://api.sonicscan.org/api",
+          browserURL: "https://sonicscan.org",
+        },
+      },
+      {
+        network: "sonicTestnet",
+        chainId: 57054,
+        urls: {
+          apiURL: "https://api-testnet.sonicscan.org/api",
+          browserURL: "https://testnet.sonicscan.org",
         },
       },
     ],

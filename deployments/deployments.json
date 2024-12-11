@@ -404,6 +404,13 @@
     ]
   },
   {
+    "name": "Sonic",
+    "chainId": 146,
+    "urls": [
+      "https://sonicscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -794,7 +801,15 @@
     "name": "Story Testnet (Odyssey)",
     "chainId": 1516,
     "urls": [
-      "https://odyssey.storyscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://odyssey.storyscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/contracts/partial_match/1516/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
+  },
+  {
+    "name": "Sonic Testnet (Blaze)",
+    "chainId": 57054,
+    "urls": [
+      "https://testnet.sonicscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]

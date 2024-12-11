@@ -1,7 +1,7 @@
 import * as React from "react";
+import type { AppProps } from "next/app";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "next-themes";
-import type { AppProps } from "next/app";
 import { Layout } from "@/components/layout/Layout";
 import "@/styles/globals.css";
 import DefaultSeoProps from "../../next-seo.config";
