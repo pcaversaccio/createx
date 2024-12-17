@@ -155,7 +155,7 @@ jobs:
 
       # See https://github.com/ScopeLift/foundry-template/blob/fd3875d2e99a65dec19431723d6516b4ed76746e/.github/workflows/ci.yml#L49-L78.
       - name: Remove unnecessary `test` directory
-        run: lcov --branch-coverage --remove lcov.info 'test/*' --output-file lcov.info --ignore-errors inconsistent
+        run: lcov --branch-coverage --remove lcov.info 'test/*' --output-file lcov.info --ignore-errors inconsistent,inconsistent
 
       - name: Post coverage report
         # See https://github.com/orgs/community/discussions/26829#discussioncomment-3253575.
@@ -171,4 +171,5 @@ jobs:
         uses: zgosalvez/github-actions-report-lcov@v4
         with:
           coverage-files: ./lcov.info
+          artifact-name: coverage
           minimum-coverage: 100
