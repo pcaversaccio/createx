@@ -171,11 +171,11 @@ jobs:
       - name: Setup LCOV 1.16
         run: |
           wget https://github.com/linux-test-project/lcov/releases/download/v1.16/lcov-1.16.tar.gz
-          tar -xzf v1.16.tar.gz
+          tar -xzf lcov-1.16.tar.gz
           cd lcov-1.16
           sudo make install
           lcov --version
-          sudo rm -rf v1.16.tar.gz lcov-1.16
+          sudo rm -rf lcov-1.16.tar.gz lcov-1.16
 
       - name: Verify minimum coverage
         uses: zgosalvez/github-actions-report-lcov@v4
