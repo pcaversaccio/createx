@@ -178,7 +178,7 @@ jobs:
           lcov --version
           sudo rm -rf lcov-1.16.tar.gz lcov-1.16
 
-      - name: Run coverage using LCOV 1.16
+      - name: Run coverage using LCOV `1.16`
         run: forge coverage --report lcov --lcov-version 1.16
         env:
           FOUNDRY_PROFILE: default
