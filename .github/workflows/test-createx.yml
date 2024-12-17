@@ -169,7 +169,7 @@ jobs:
 
       # The following steps act as a temporary workaround, as LCOV `2.2` is not yet supported
       # in `zgosalvez/github-actions-report-lcov@v4`: https://github.com/zgosalvez/github-actions-report-lcov/issues/168.
-      - name: Setup LCOV 1.16
+      - name: Set up LCOV `1.16`
         run: |
           wget https://github.com/linux-test-project/lcov/releases/download/v1.16/lcov-1.16.tar.gz
           tar -xzf lcov-1.16.tar.gz
