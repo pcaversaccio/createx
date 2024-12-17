@@ -144,21 +144,23 @@ jobs:
           FOUNDRY_PROFILE: default
 
       - name: Run coverage
-        run: NO_COLOR=1 forge coverage --report summary --report lcov >> $GITHUB_STEP_SUMMARY
+        run: NO_COLOR=1 forge coverage --report summary --report lcov --lcov-version 2.2 >> $GITHUB_STEP_SUMMARY
         env:
           FOUNDRY_PROFILE: default
 
       - name: Setup LCOV
         uses: hrishikesh-kadam/setup-lcov@v1
+        with:
+          ref: v2.2
 
       # See https://github.com/ScopeLift/foundry-template/blob/fd3875d2e99a65dec19431723d6516b4ed76746e/.github/workflows/ci.yml#L49-L78.
       - name: Remove unnecessary `test` directory
-        run: lcov --remove lcov.info 'test/*' --output-file lcov.info --rc lcov_branch_coverage=1
+        run: lcov --branch-coverage --remove lcov.info 'test/*' --output-file lcov.info --ignore-errors inconsistent
 
       - name: Post coverage report
         # See https://github.com/orgs/community/discussions/26829#discussioncomment-3253575.
-        if: ${{ (github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request') }}
-        uses: sunsergdev/lcov-reporter-action@v0.3.1-fork
+        if: ${{ (github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request') || (github.event.pull_request.head.repo.full_name != github.repository && github.event_name == 'pull_request_target') }}
+        uses: romeovs/lcov-reporter-action@v0.4.0
         with:
           title: "`CreateX` Test Coverage Report"
           delete-old-comments: true
