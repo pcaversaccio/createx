@@ -26,6 +26,9 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+          # Ensure the pull request's head branch is checked out.
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@v3
