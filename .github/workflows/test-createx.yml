@@ -1,6 +1,6 @@
 name: 🕵️‍♂️ Test CreateX
 
-on: [push, pull_request, pull_request_target, workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -159,7 +159,7 @@ jobs:
 
       - name: Post coverage report
         # See https://github.com/orgs/community/discussions/26829#discussioncomment-3253575.
-        if: ${{ (github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request') || (github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request_target') }}
+        if: ${{ (github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request') }}
         uses: romeovs/lcov-reporter-action@v0.4.0
         with:
           title: "`CreateX` Test Coverage Report"
