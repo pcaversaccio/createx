@@ -149,8 +149,7 @@ jobs:
           ref: v2.2
 
       - name: Run coverage
-        shell: bash
-        run: NO_COLOR=1 forge coverage --report summary --report lcov --lcov-version 2.2 | sed 's/[╭╯|+]/-/g' >> $GITHUB_STEP_SUMMARY
+        run: NO_COLOR=1 forge coverage --report summary --report lcov --lcov-version 2.2 >> $GITHUB_STEP_SUMMARY
         env:
           FOUNDRY_PROFILE: default
 
