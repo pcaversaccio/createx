@@ -146,6 +146,7 @@
     "deploy:worldchaintestnet": "npx hardhat run --no-compile --network worldChainTestnet scripts/deploy.ts",
     "deploy:worldchainmain": "npx hardhat run --no-compile --network worldChainMain scripts/deploy.ts",
     "deploy:plumetestnet": "npx hardhat run --no-compile --network plumeTestnet scripts/deploy.ts",
+    "deploy:plumemain": "npx hardhat run --no-compile --network plumeMain scripts/deploy.ts",
     "deploy:unichaintestnet": "npx hardhat run --no-compile --network unichainTestnet scripts/deploy.ts",
     "deploy:xdctestnet": "npx hardhat run --no-compile --network xdcTestnet scripts/deploy.ts",
     "deploy:xdcmain": "npx hardhat run --no-compile --network xdcMain scripts/deploy.ts",
