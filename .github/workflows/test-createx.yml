@@ -143,15 +143,15 @@ jobs:
         env:
           FOUNDRY_PROFILE: default
 
-      - name: Run coverage
-        run: NO_COLOR=1 forge coverage --report summary --report lcov --lcov-version 2.2 >> $GITHUB_STEP_SUMMARY
-        env:
-          FOUNDRY_PROFILE: default
-
       - name: Set up LCOV
         uses: hrishikesh-kadam/setup-lcov@v1
         with:
           ref: v2.2
+
+      - name: Run coverage
+        run: NO_COLOR=1 forge coverage --report summary --report lcov --lcov-version 2.2 >> $GITHUB_STEP_SUMMARY
+        env:
+          FOUNDRY_PROFILE: default
 
       # See https://github.com/ScopeLift/foundry-template/blob/fd3875d2e99a65dec19431723d6516b4ed76746e/.github/workflows/ci.yml#L49-L78.
       - name: Remove unnecessary `test` directory
