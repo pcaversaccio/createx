@@ -173,6 +173,7 @@ jobs:
         with:
           title: "`CreateX` Test Coverage Report"
           delete-old-comments: true
+          working-directory: ./
           lcov-file: ./lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
