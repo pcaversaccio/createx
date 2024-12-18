@@ -1,6 +1,6 @@
 name: 🕵️‍♂️ Test CreateX
 
-on: [push, pull_request, workflow_dispatch]
+on: [push, pull_request, pull_request_target, workflow_dispatch]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -143,27 +143,49 @@ jobs:
         env:
           FOUNDRY_PROFILE: default
 
+      - name: Set up LCOV
+        uses: hrishikesh-kadam/setup-lcov@v1
+        with:
+          ref: v2.2
+
       - name: Run coverage
-        run: NO_COLOR=1 forge coverage --report summary --report lcov >> $GITHUB_STEP_SUMMARY
+        run: NO_COLOR=1 forge coverage --report summary --report lcov --lcov-version 2.2 >> $GITHUB_STEP_SUMMARY
         env:
           FOUNDRY_PROFILE: default
 
-      - name: Setup LCOV
-        uses: hrishikesh-kadam/setup-lcov@v1
-
       # See https://github.com/ScopeLift/foundry-template/blob/fd3875d2e99a65dec19431723d6516b4ed76746e/.github/workflows/ci.yml#L49-L78.
       - name: Remove unnecessary `test` directory
-        run: lcov --remove lcov.info 'test/*' --output-file lcov.info --rc lcov_branch_coverage=1
+        run: lcov --branch-coverage --remove lcov.info 'test/*' --output-file lcov.info --ignore-errors inconsistent,inconsistent
 
       - name: Post coverage report
         # See https://github.com/orgs/community/discussions/26829#discussioncomment-3253575.
-        if: ${{ (github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request') }}
-        uses: sunsergdev/lcov-reporter-action@v0.3.1-fork
+        if: ${{ (github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request') || (github.event.pull_request.head.repo.full_name != github.repository && github.event_name == 'pull_request_target') }}
+        uses: romeovs/lcov-reporter-action@v0.4.0
         with:
           title: "`CreateX` Test Coverage Report"
           delete-old-comments: true
           lcov-file: ./lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # The following steps act as a temporary workaround, as LCOV `2.2` is not yet supported
+      # in `zgosalvez/github-actions-report-lcov@v4`: https://github.com/zgosalvez/github-actions-report-lcov/issues/168.
+      - name: Set up LCOV `1.16`
+        run: |
+          wget https://github.com/linux-test-project/lcov/releases/download/v1.16/lcov-1.16.tar.gz
+          tar -xzf lcov-1.16.tar.gz
+          cd lcov-1.16
+          sudo make install
+          lcov --version
+          sudo rm -rf lcov-1.16.tar.gz lcov-1.16
+
+      - name: Run coverage using LCOV `1.16`
+        run: forge coverage --report lcov --lcov-version 1.16
+        env:
+          FOUNDRY_PROFILE: default
+
+      # See https://github.com/ScopeLift/foundry-template/blob/fd3875d2e99a65dec19431723d6516b4ed76746e/.github/workflows/ci.yml#L49-L78.
+      - name: Remove unnecessary `test` directory
+        run: lcov --remove lcov.info 'test/*' --output-file lcov.info --rc lcov_branch_coverage=1
 
       - name: Verify minimum coverage
         uses: zgosalvez/github-actions-report-lcov@v4
