@@ -160,6 +160,12 @@ jobs:
       - name: Remove unnecessary `test` directory
         run: lcov --branch-coverage --remove lcov.info 'test/*' --output-file lcov.info --ignore-errors inconsistent,inconsistent
 
+      # Debugging step to confirm file generation and path
+      - name: Debug LCOV file
+        run: |
+          echo "Verifying LCOV file existence:"
+          ls -la ./lcov.info || echo "LCOV file not found"
+
       - name: Post coverage report
         # See https://github.com/orgs/community/discussions/26829#discussioncomment-3253575.
         if: ${{ (github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request') || (github.event.pull_request.head.repo.full_name != github.repository && github.event_name == 'pull_request_target') }}
