@@ -418,6 +418,13 @@
     ]
   },
   {
+    "name": "EVM on Flow",
+    "chainId": 747,
+    "urls": [
+      "https://evm.flowscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -817,6 +824,13 @@
     "chainId": 57054,
     "urls": [
       "https://testnet.sonicscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "EVM on Flow Testnet",
+    "chainId": 545,
+    "urls": [
+      "https://evm-testnet.flowscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]

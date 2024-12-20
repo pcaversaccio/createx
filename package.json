@@ -161,6 +161,8 @@
     "deploy:storytestnet": "npx hardhat run --no-compile --network storyTestnet scripts/deploy.ts",
     "deploy:sonictestnet": "npx hardhat run --no-compile --network sonicTestnet scripts/deploy.ts",
     "deploy:sonicmain": "npx hardhat run --no-compile --network sonicMain scripts/deploy.ts",
+    "deploy:flowtestnet": "npx hardhat run --no-compile --network flowTestnet scripts/deploy.ts",
+    "deploy:flowmain": "npx hardhat run --no-compile --network flowMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
