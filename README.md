@@ -893,7 +893,7 @@ The written tests available in the directory [`test`](./test) achieve a test cov
 ```console
 | File            | % Lines           | % Statements      | % Branches      | % Funcs         |
 |-----------------|-------------------|-------------------|-----------------|-----------------|
-| src/CreateX.sol | 100.00% (149/149) | 100.00% (210/210) | 100.00% (78/78) | 100.00% (31/31) |
+| src/CreateX.sol | 100.00% (206/206) | 100.00% (211/211) | 100.00% (61/61) | 100.00% (31/31) |
 ```
 
 > [!IMPORTANT]
