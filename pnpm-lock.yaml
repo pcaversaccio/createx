@@ -51,8 +51,8 @@ importers:
         specifier: ^1.4.1
         version: 1.4.1(prettier@3.4.2)
       solhint:
-        specifier: ^5.0.3
-        version: 5.0.3(typescript@5.7.2)
+        specifier: ^5.0.4
+        version: 5.0.4(typescript@5.7.2)
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@22.10.2)(typescript@5.7.2)
@@ -2985,8 +2985,8 @@ packages:
     engines: {node: '>=10.0.0'}
     hasBin: true
 
-  solhint@5.0.3:
-    resolution: {integrity: sha512-OLCH6qm/mZTCpplTXzXTJGId1zrtNuDYP5c2e6snIv/hdRVxPfBBz/bAlL91bY/Accavkayp2Zp2BaDSrLVXTQ==}
+  solhint@5.0.4:
+    resolution: {integrity: sha512-GzKBjJ8S2utRsEOCJXhY2H35gwHGmoQY2rQXcPGT4XdDlzwgGYz0Ovo9Xm7cmWYgSo121uF+5tiwrqQT2b+Rtw==}
     hasBin: true
 
   source-map-js@1.2.1:
@@ -6651,9 +6651,9 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  solhint@5.0.3(typescript@5.7.2):
+  solhint@5.0.4(typescript@5.7.2):
     dependencies:
-      '@solidity-parser/parser': 0.18.0
+      '@solidity-parser/parser': 0.19.0
       ajv: 6.12.6
       antlr4: 4.13.2
       ast-parents: 0.0.1
