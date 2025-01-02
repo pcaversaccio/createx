@@ -3,7 +3,7 @@
   "rules": {
     "func-visibility": ["warn", { "ignoreConstructors": true }],
     "one-contract-per-file": "off",
-    "contract-name-camelcase": "off",
+    "contract-name-capwords": "off",
     "func-name-mixedcase": "off",
     "no-empty-blocks": "off",
     "avoid-low-level-calls": "off",
