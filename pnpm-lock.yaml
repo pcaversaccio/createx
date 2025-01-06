@@ -13,16 +13,16 @@ importers:
         version: 9.17.0
       '@nomicfoundation/hardhat-ethers':
         specifier: ^3.0.8
-        version: 3.0.8(ethers@6.13.4)(hardhat@2.22.17(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.7.2))(typescript@5.7.2))
+        version: 3.0.8(ethers@6.13.5)(hardhat@2.22.17(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.7.2))(typescript@5.7.2))
       '@nomicfoundation/hardhat-verify':
         specifier: ^2.0.12
         version: 2.0.12(hardhat@2.22.17(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.7.2))(typescript@5.7.2))
       '@typechain/ethers-v6':
         specifier: ^0.5.1
-        version: 0.5.1(ethers@6.13.4)(typechain@8.3.2(typescript@5.7.2))(typescript@5.7.2)
+        version: 0.5.1(ethers@6.13.5)(typechain@8.3.2(typescript@5.7.2))(typescript@5.7.2)
       '@typechain/hardhat':
         specifier: ^9.1.0
-        version: 9.1.0(@typechain/ethers-v6@0.5.1(ethers@6.13.4)(typechain@8.3.2(typescript@5.7.2))(typescript@5.7.2))(ethers@6.13.4)(hardhat@2.22.17(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.7.2))(typescript@5.7.2))(typechain@8.3.2(typescript@5.7.2))
+        version: 9.1.0(@typechain/ethers-v6@0.5.1(ethers@6.13.5)(typechain@8.3.2(typescript@5.7.2))(typescript@5.7.2))(ethers@6.13.5)(hardhat@2.22.17(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.7.2))(typescript@5.7.2))(typechain@8.3.2(typescript@5.7.2))
       eslint:
         specifier: ^9.17.0
         version: 9.17.0(jiti@2.4.0)
@@ -30,8 +30,8 @@ importers:
         specifier: ^9.1.0
         version: 9.1.0(eslint@9.17.0(jiti@2.4.0))
       ethers:
-        specifier: ^6.13.4
-        version: 6.13.4
+        specifier: ^6.13.5
+        version: 6.13.5
       hardhat:
         specifier: ^2.22.17
         version: 2.22.17(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.7.2))(typescript@5.7.2)
@@ -1695,8 +1695,8 @@ packages:
   ethereumjs-util@6.2.1:
     resolution: {integrity: sha512-W2Ktez4L01Vexijrm5EB6w7dg4n/TgpoYU4avuT5T3Vmnw/eCRtiBrJfQYS/DCSvDIOLn2k57GcHdeBcgVxAqw==}
 
-  ethers@6.13.4:
-    resolution: {integrity: sha512-21YtnZVg4/zKkCQPjrDj38B1r4nQvTZLopUGMLQ1ePU2zV/joCfDC3t3iKQjWRzjjjbzR+mdAIoikeBRNkdllA==}
+  ethers@6.13.5:
+    resolution: {integrity: sha512-+knKNieu5EKRThQJWwqaJ10a6HE9sSehGeqWN65//wE7j47ZpFhKAnHB/JJFibwwg61I/koxaPsXbXpD/skNOQ==}
     engines: {node: '>=14.0.0'}
 
   ethjs-util@0.1.6:
@@ -1726,8 +1726,8 @@ packages:
   fast-levenshtein@2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
 
-  fast-uri@3.0.3:
-    resolution: {integrity: sha512-aLrHthzCjH5He4Z2H9YZ+v6Ujb9ocRuW6ZzkJQOrTxleEijANq4v1TsaPaVG1PZcuurEzrLcWRyYBYXD5cEiaw==}
+  fast-uri@3.0.4:
+    resolution: {integrity: sha512-G3iTQw1DizJQ5eEqj1CbFCWhq+pzum7qepkxU7rS1FGZDqjYKcrguo9XDRbV7EgPnn8CgaPigTq+NEjyioeYZQ==}
 
   fastq@1.18.0:
     resolution: {integrity: sha512-QKHXPW0hD8g4UET03SdOdunzSouc9N4AuHdsX8XNcTsuz+yYFILVNIX4l9yHABMhiEI9Db0JTTIpu0wB+Y1QQw==}
@@ -3956,10 +3956,10 @@ snapshots:
       '@nomicfoundation/ethereumjs-rlp': 5.0.4
       ethereum-cryptography: 0.1.3
 
-  '@nomicfoundation/hardhat-ethers@3.0.8(ethers@6.13.4)(hardhat@2.22.17(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.7.2))(typescript@5.7.2))':
+  '@nomicfoundation/hardhat-ethers@3.0.8(ethers@6.13.5)(hardhat@2.22.17(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.7.2))(typescript@5.7.2))':
     dependencies:
       debug: 4.4.0(supports-color@8.1.1)
-      ethers: 6.13.4
+      ethers: 6.13.5
       hardhat: 2.22.17(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.7.2))(typescript@5.7.2)
       lodash.isequal: 4.5.0
     transitivePeerDependencies:
@@ -4201,18 +4201,18 @@ snapshots:
 
   '@tsconfig/node16@1.0.4': {}
 
-  '@typechain/ethers-v6@0.5.1(ethers@6.13.4)(typechain@8.3.2(typescript@5.7.2))(typescript@5.7.2)':
+  '@typechain/ethers-v6@0.5.1(ethers@6.13.5)(typechain@8.3.2(typescript@5.7.2))(typescript@5.7.2)':
     dependencies:
-      ethers: 6.13.4
+      ethers: 6.13.5
       lodash: 4.17.21
       ts-essentials: 7.0.3(typescript@5.7.2)
       typechain: 8.3.2(typescript@5.7.2)
       typescript: 5.7.2
 
-  '@typechain/hardhat@9.1.0(@typechain/ethers-v6@0.5.1(ethers@6.13.4)(typechain@8.3.2(typescript@5.7.2))(typescript@5.7.2))(ethers@6.13.4)(hardhat@2.22.17(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.7.2))(typescript@5.7.2))(typechain@8.3.2(typescript@5.7.2))':
+  '@typechain/hardhat@9.1.0(@typechain/ethers-v6@0.5.1(ethers@6.13.5)(typechain@8.3.2(typescript@5.7.2))(typescript@5.7.2))(ethers@6.13.5)(hardhat@2.22.17(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.7.2))(typescript@5.7.2))(typechain@8.3.2(typescript@5.7.2))':
     dependencies:
-      '@typechain/ethers-v6': 0.5.1(ethers@6.13.4)(typechain@8.3.2(typescript@5.7.2))(typescript@5.7.2)
-      ethers: 6.13.4
+      '@typechain/ethers-v6': 0.5.1(ethers@6.13.5)(typechain@8.3.2(typescript@5.7.2))(typescript@5.7.2)
+      ethers: 6.13.5
       fs-extra: 9.1.0
       hardhat: 2.22.17(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.7.2))(typescript@5.7.2)
       typechain: 8.3.2(typescript@5.7.2)
@@ -4377,7 +4377,7 @@ snapshots:
   ajv@8.17.1:
     dependencies:
       fast-deep-equal: 3.1.3
-      fast-uri: 3.0.3
+      fast-uri: 3.0.4
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
@@ -5301,7 +5301,7 @@ snapshots:
       ethjs-util: 0.1.6
       rlp: 2.2.7
 
-  ethers@6.13.4:
+  ethers@6.13.5:
     dependencies:
       '@adraffy/ens-normalize': 1.10.1
       '@noble/curves': 1.2.0
@@ -5348,7 +5348,7 @@ snapshots:
 
   fast-levenshtein@2.0.6: {}
 
-  fast-uri@3.0.3: {}
+  fast-uri@3.0.4: {}
 
   fastq@1.18.0:
     dependencies:
