@@ -178,12 +178,12 @@
     "start:interface": "pnpm -C interface start"
   },
   "devDependencies": {
-    "@eslint/js": "^9.17.0",
+    "@eslint/js": "^9.18.0",
     "@nomicfoundation/hardhat-ethers": "^3.0.8",
     "@nomicfoundation/hardhat-verify": "^2.0.12",
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
-    "eslint": "^9.17.0",
+    "eslint": "^9.18.0",
     "eslint-config-prettier": "^9.1.0",
     "ethers": "^6.13.5",
     "hardhat": "^2.22.17",
@@ -191,11 +191,11 @@
     "hardhat-contract-sizer": "^2.10.0",
     "hardhat-gas-reporter": "^2.2.2",
     "prettier": "^3.4.2",
-    "prettier-plugin-solidity": "^1.4.1",
+    "prettier-plugin-solidity": "^1.4.2",
     "solhint": "^5.0.4",
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
-    "typescript": "^5.7.2",
-    "typescript-eslint": "^8.19.0"
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.19.1"
   }
 }
