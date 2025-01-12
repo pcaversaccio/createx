@@ -2233,6 +2233,8 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Superseed](https://explorer.superseed.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Sonic](https://sonicscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [EVM on Flow](https://evm.flowscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Ink](https://explorer.inkonchain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Morph](https://explorer.morphl2.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
@@ -2294,6 +2296,8 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Story Testnet (Odyssey)](https://odyssey.storyscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Sonic Testnet (Blaze)](https://testnet.sonicscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [EVM on Flow Testnet](https://evm-testnet.flowscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Ink Sepolia Testnet](https://explorer-sepolia.inkonchain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Morph Holešky Testnet](https://explorer-holesky.morphl2.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 

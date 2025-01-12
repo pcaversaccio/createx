@@ -425,6 +425,20 @@
     ]
   },
   {
+    "name": "Ink",
+    "chainId": 57073,
+    "urls": [
+      "https://explorer.inkonchain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Morph",
+    "chainId": 2818,
+    "urls": [
+      "https://explorer.morphl2.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -831,6 +845,20 @@
     "chainId": 545,
     "urls": [
       "https://evm-testnet.flowscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Ink Sepolia Testnet",
+    "chainId": 763373,
+    "urls": [
+      "https://explorer-sepolia.inkonchain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Morph Holešky Testnet",
+    "chainId": 2810,
+    "urls": [
+      "https://explorer-holesky.morphl2.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
