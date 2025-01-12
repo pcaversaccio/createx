@@ -773,6 +773,32 @@ const config: HardhatUserConfig = {
       url: vars.get("FLOW_MAINNET_URL", "https://mainnet.evm.nodes.onflow.org"),
       accounts,
     },
+    inkTestnet: {
+      chainId: 763373,
+      url: vars.get(
+        "INK_TESTNET_URL",
+        "https://rpc-gel-sepolia.inkonchain.com",
+      ),
+      accounts,
+    },
+    inkMain: {
+      chainId: 57073,
+      url: vars.get("INK_MAINNET_URL", "https://rpc-gel.inkonchain.com"),
+      accounts,
+    },
+    morphTestnet: {
+      chainId: 2810,
+      url: vars.get(
+        "MORPH_TESTNET_URL",
+        "https://rpc-quicknode-holesky.morphl2.io",
+      ),
+      accounts,
+    },
+    morphMain: {
+      chainId: 2818,
+      url: vars.get("MORPH_MAINNET_URL", "https://rpc-quicknode.morphl2.io"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -980,6 +1006,12 @@ const config: HardhatUserConfig = {
       // For EVM on Flow testnet & mainnet
       flow: vars.get("FLOW_API_KEY", ""),
       flowTestnet: vars.get("FLOW_API_KEY", ""),
+      // For Ink testnet & mainnet
+      ink: vars.get("INK_API_KEY", ""),
+      inkTestnet: vars.get("INK_API_KEY", ""),
+      // For Morph testnet & mainnet
+      morph: vars.get("MORPH_API_KEY", ""),
+      morphTestnet: vars.get("MORPH_API_KEY", ""),
     },
     customChains: [
       {
@@ -1778,6 +1810,38 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://evm-testnet.flowscan.io/api",
           browserURL: "https://evm-testnet.flowscan.io",
+        },
+      },
+      {
+        network: "ink",
+        chainId: 57073,
+        urls: {
+          apiURL: "https://explorer.inkonchain.com/api",
+          browserURL: "https://explorer.inkonchain.com",
+        },
+      },
+      {
+        network: "inkTestnet",
+        chainId: 763373,
+        urls: {
+          apiURL: "https://explorer-sepolia.inkonchain.com/api",
+          browserURL: "https://explorer-sepolia.inkonchain.com",
+        },
+      },
+      {
+        network: "morph",
+        chainId: 2818,
+        urls: {
+          apiURL: "https://explorer.morphl2.io/api",
+          browserURL: "https://explorer.morphl2.io",
+        },
+      },
+      {
+        network: "morphTestnet",
+        chainId: 2810,
+        urls: {
+          apiURL: "https://explorer-holesky.morphl2.io/api",
+          browserURL: "https://explorer-holesky.morphl2.io",
         },
       },
     ],
