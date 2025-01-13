@@ -192,7 +192,7 @@
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
     "eslint": "^9.18.0",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.0.1",
     "ethers": "^6.13.5",
     "hardhat": "^2.22.17",
     "hardhat-abi-exporter": "^2.10.1",
