@@ -799,6 +799,32 @@ const config: HardhatUserConfig = {
       url: vars.get("MORPH_MAINNET_URL", "https://rpc-quicknode.morphl2.io"),
       accounts,
     },
+    shapeTestnet: {
+      chainId: 11011,
+      url: vars.get("SHAPE_TESTNET_URL", "https://sepolia.shape.network"),
+      accounts,
+    },
+    shapeMain: {
+      chainId: 360,
+      url: vars.get("SHAPE_MAINNET_URL", "https://mainnet.shape.network"),
+      accounts,
+    },
+    etherlinkTestnet: {
+      chainId: 128123,
+      url: vars.get(
+        "ETHERLINK_TESTNET_URL",
+        "https://node.ghostnet.etherlink.com",
+      ),
+      accounts,
+    },
+    etherlinkMain: {
+      chainId: 42793,
+      url: vars.get(
+        "ETHERLINK_MAINNET_URL",
+        "https://node.mainnet.etherlink.com",
+      ),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1012,6 +1038,12 @@ const config: HardhatUserConfig = {
       // For Morph testnet & mainnet
       morph: vars.get("MORPH_API_KEY", ""),
       morphTestnet: vars.get("MORPH_API_KEY", ""),
+      // For Shape testnet & mainnet
+      shape: vars.get("SHAPE_API_KEY", ""),
+      shapeTestnet: vars.get("SHAPE_API_KEY", ""),
+      // For Etherlink testnet & mainnet
+      etherlink: vars.get("ETHERLINK_API_KEY", ""),
+      etherlinkTestnet: vars.get("ETHERLINK_API_KEY", ""),
     },
     customChains: [
       {
@@ -1842,6 +1874,38 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://explorer-holesky.morphl2.io/api",
           browserURL: "https://explorer-holesky.morphl2.io",
+        },
+      },
+      {
+        network: "shape",
+        chainId: 360,
+        urls: {
+          apiURL: "https://shapescan.xyz/api",
+          browserURL: "https://shapescan.xyz",
+        },
+      },
+      {
+        network: "shapeTestnet",
+        chainId: 11011,
+        urls: {
+          apiURL: "https://explorer-sepolia.shape.network/api",
+          browserURL: "https://explorer-sepolia.shape.network",
+        },
+      },
+      {
+        network: "etherlink",
+        chainId: 42793,
+        urls: {
+          apiURL: "https://explorer.etherlink.com/api",
+          browserURL: "https://explorer.etherlink.com",
+        },
+      },
+      {
+        network: "etherlinkTestnet",
+        chainId: 128123,
+        urls: {
+          apiURL: "https://testnet.explorer.etherlink.com/api",
+          browserURL: "https://testnet.explorer.etherlink.com",
         },
       },
     ],
