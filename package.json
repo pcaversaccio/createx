@@ -171,6 +171,8 @@
     "deploy:shapemain": "npx hardhat run --no-compile --network shapeMain scripts/deploy.ts",
     "deploy:etherlinktestnet": "npx hardhat run --no-compile --network etherlinkTestnet scripts/deploy.ts",
     "deploy:etherlinkmain": "npx hardhat run --no-compile --network etherlinkMain scripts/deploy.ts",
+    "deploy:soneiumtestnet": "npx hardhat run --no-compile --network soneiumTestnet scripts/deploy.ts",
+    "deploy:soneiummain": "npx hardhat run --no-compile --network soneiumMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
@@ -194,7 +196,7 @@
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "ethers": "^6.13.5",
-    "hardhat": "^2.22.17",
+    "hardhat": "^2.22.18",
     "hardhat-abi-exporter": "^2.10.1",
     "hardhat-contract-sizer": "^2.10.0",
     "hardhat-gas-reporter": "^2.2.2",
@@ -204,6 +206,6 @@
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.19.1"
+    "typescript-eslint": "^8.20.0"
   }
 }

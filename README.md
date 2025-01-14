@@ -2237,6 +2237,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Morph](https://explorer.morphl2.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Shape](https://shapescan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Etherlink](https://explorer.etherlink.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Soneium](https://soneium.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
@@ -2302,6 +2303,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Morph Holešky Testnet](https://explorer-holesky.morphl2.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Shape Sepolia Testnet](https://explorer-sepolia.shape.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Etherlink Testnet (Ghostnet)](https://testnet.explorer.etherlink.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Soneium Sepolia Testnet (Minato)](https://soneium-minato.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 
