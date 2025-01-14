@@ -825,6 +825,16 @@ const config: HardhatUserConfig = {
       ),
       accounts,
     },
+    soneiumTestnet: {
+      chainId: 1946,
+      url: vars.get("SONEIUM_TESTNET_URL", "https://rpc.minato.soneium.org"),
+      accounts,
+    },
+    soneiumMain: {
+      chainId: 1868,
+      url: vars.get("SONEIUM_MAINNET_URL", "https://rpc.soneium.org"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1044,6 +1054,9 @@ const config: HardhatUserConfig = {
       // For Etherlink testnet & mainnet
       etherlink: vars.get("ETHERLINK_API_KEY", ""),
       etherlinkTestnet: vars.get("ETHERLINK_API_KEY", ""),
+      // For Soneium testnet & mainnet
+      soneium: vars.get("SONEIUM_API_KEY", ""),
+      soneiumTestnet: vars.get("SONEIUM_API_KEY", ""),
     },
     customChains: [
       {
@@ -1906,6 +1919,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://testnet.explorer.etherlink.com/api",
           browserURL: "https://testnet.explorer.etherlink.com",
+        },
+      },
+      {
+        network: "soneium",
+        chainId: 1868,
+        urls: {
+          apiURL: "https://soneium.blockscout.com/api",
+          browserURL: "https://soneium.blockscout.com",
+        },
+      },
+      {
+        network: "soneiumTestnet",
+        chainId: 1946,
+        urls: {
+          apiURL: "https://soneium-minato.blockscout.com/api",
+          browserURL: "https://soneium-minato.blockscout.com",
         },
       },
     ],
