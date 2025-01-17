@@ -460,6 +460,13 @@
     ]
   },
   {
+    "name": "Swellchain",
+    "chainId": 1923,
+    "urls": [
+      "https://explorer.swellnetwork.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -901,6 +908,13 @@
     "chainId": 1946,
     "urls": [
       "https://soneium-minato.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Swellchain Sepolia Testnet",
+    "chainId": 1924,
+    "urls": [
+      "https://swell-testnet-explorer.alt.technology/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]

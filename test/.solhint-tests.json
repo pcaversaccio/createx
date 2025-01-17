@@ -1,6 +1,7 @@
 {
   "extends": "solhint:recommended",
   "rules": {
+    "compiler-version": "off",
     "func-visibility": ["warn", { "ignoreConstructors": true }],
     "one-contract-per-file": "off",
     "contract-name-capwords": "off",
