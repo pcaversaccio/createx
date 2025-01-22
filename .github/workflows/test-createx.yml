@@ -63,6 +63,7 @@ jobs:
         run: forge config
         env:
           FOUNDRY_PROFILE: ci
+          FOUNDRY_DISABLE_NIGHTLY_WARNING: "1"
 
       - name: Ensure Solidity version consistency
         run: |
@@ -100,11 +101,13 @@ jobs:
         run: forge config
         env:
           FOUNDRY_PROFILE: default
+          FOUNDRY_DISABLE_NIGHTLY_WARNING: "1"
 
       - name: Run snapshot
         run: NO_COLOR=1 forge snapshot >> $GITHUB_STEP_SUMMARY
         env:
           FOUNDRY_PROFILE: default
+          FOUNDRY_DISABLE_NIGHTLY_WARNING: "1"
 
       - name: Slither static analyser
         uses: crytic/slither-action@v0.4.0
@@ -142,6 +145,7 @@ jobs:
         run: forge config
         env:
           FOUNDRY_PROFILE: default
+          FOUNDRY_DISABLE_NIGHTLY_WARNING: "1"
 
       - name: Set up LCOV
         uses: hrishikesh-kadam/setup-lcov@v1
@@ -155,6 +159,7 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
         env:
           FOUNDRY_PROFILE: default
+          FOUNDRY_DISABLE_NIGHTLY_WARNING: "1"
 
       # See https://github.com/ScopeLift/foundry-template/blob/fd3875d2e99a65dec19431723d6516b4ed76746e/.github/workflows/ci.yml#L49-L78.
       - name: Remove unnecessary `test` directory
@@ -185,6 +190,7 @@ jobs:
         run: forge coverage --report lcov --lcov-version 1.16
         env:
           FOUNDRY_PROFILE: default
+          FOUNDRY_DISABLE_NIGHTLY_WARNING: "1"
 
       # See https://github.com/ScopeLift/foundry-template/blob/fd3875d2e99a65dec19431723d6516b4ed76746e/.github/workflows/ci.yml#L49-L78.
       - name: Remove unnecessary `test` directory
