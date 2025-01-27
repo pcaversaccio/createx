@@ -104,7 +104,7 @@ const Deployments = () => {
         <div className="mt-10 flex items-center justify-center gap-x-6">
           <button
             onClick={() => window.location.reload()}
-            className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500"
+            className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-blue-500"
           >
             Please try again!
           </button>
@@ -146,20 +146,20 @@ const Deployments = () => {
   );
 
   const showDeploymentsDiv = () => (
-    <div className="overflow-hidden rounded-lg shadow ring-1 ring-black ring-opacity-5">
-      <table className="min-w-full divide-y divide-gray-300">
+    <div className="ring-opacity-5 overflow-hidden rounded-lg ring-1 shadow-sm ring-gray-300 dark:ring-gray-700">
+      <table className="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
         <thead className="bg-gray-50 dark:bg-gray-700">
           <tr>
             <th
               scope="col"
-              className="text-primary py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-6"
+              className="text-primary py-3.5 pr-3 pl-4 text-left text-sm font-semibold sm:pl-6"
             >
               <div
-                className="group inline-flex cursor-pointer rounded-md p-1 hover:bg-gray-200 hover:dark:bg-gray-700"
+                className="group inline-flex cursor-pointer rounded-md p-1 hover:bg-gray-200 dark:hover:bg-gray-700"
                 onClick={() => onHeaderClick("name")}
               >
                 Name
-                <span className="text-primary ml-2 flex-none rounded">
+                <span className="text-primary ml-2 flex-none rounded-sm">
                   <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
                 </span>
               </div>
@@ -169,11 +169,11 @@ const Deployments = () => {
               className="text-primary px-3 py-3.5 text-left text-sm font-semibold"
             >
               <div
-                className="group inline-flex cursor-pointer rounded-md p-1 hover:bg-gray-200 hover:dark:bg-gray-700"
+                className="group inline-flex cursor-pointer rounded-md p-1 hover:bg-gray-200 dark:hover:bg-gray-700"
                 onClick={() => onHeaderClick("chainId")}
               >
                 Chain ID
-                <span className="text-primary ml-2 flex-none rounded">
+                <span className="text-primary ml-2 flex-none rounded-sm">
                   <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
                 </span>
               </div>
@@ -183,16 +183,16 @@ const Deployments = () => {
             </th>
           </tr>
         </thead>
-        <tbody className="cursor-pointer divide-y divide-gray-200 bg-white">
+        <tbody className="cursor-pointer divide-y divide-gray-300 bg-white dark:divide-gray-700 dark:bg-gray-800">
           {filteredDeployments.map((deployment) => (
             <tr
               key={`${deployment.chainId}-${deployment.name}`}
-              className="group dark:bg-gray-800"
+              className="group"
               onClick={() =>
                 window.open(deployment.urls[0], "_blank", "noopener,noreferrer")
               }
             >
-              <td className="text-primary flex flex-col whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-6">
+              <td className="text-primary flex flex-col py-4 pr-3 pl-4 text-sm font-medium whitespace-nowrap sm:pl-6">
                 {deployment.name}
                 {deployment.address && (
                   <p className="text-secondary text-xs font-normal">
@@ -203,7 +203,7 @@ const Deployments = () => {
                   </p>
                 )}
               </td>
-              <td className="text-secondary whitespace-nowrap px-3 py-4 text-sm">
+              <td className="text-secondary px-3 py-4 text-sm whitespace-nowrap">
                 {deployment.chainId}
               </td>
               <td className="relative pr-4">
@@ -233,12 +233,12 @@ const Deployments = () => {
   const deploymentsTableDiv = () => (
     <>
       <div className="relative mb-4">
-        <span className="text-secondary pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 transform text-xs opacity-60 dark:opacity-70">
+        <span className="text-secondary pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 transform text-xs opacity-60 dark:opacity-70">
           {modifierKey}K
         </span>
         <input
           type="text"
-          className="block w-full rounded-md border-gray-300 px-4 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          className="block w-full rounded-md border-gray-300 bg-white px-4 py-2 shadow-xs focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800"
           placeholder="Network name or chain ID..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}

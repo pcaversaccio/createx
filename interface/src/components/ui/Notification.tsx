@@ -66,11 +66,11 @@ export const Notification = ({
             leaveTo="opacity-0"
           >
             <div
-              className={`pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 ${bgColor}`}
+              className={`ring-opacity-5 pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg ring-1 shadow-lg ring-black ${bgColor}`}
             >
               <div className="p-4">
                 <div className="flex items-start">
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     <Icon
                       className={`h-6 w-6 ${iconColor}`}
                       aria-hidden="true"
@@ -84,10 +84,10 @@ export const Notification = ({
                       {description}
                     </p>
                   </div>
-                  <div className="ml-4 flex flex-shrink-0">
+                  <div className="ml-4 flex shrink-0">
                     <button
                       type="button"
-                      className={`inline-flex rounded-md ${bgColor} ${titleTextColor} text-hover focus:outline-none`}
+                      className={`inline-flex rounded-md ${bgColor} ${titleTextColor} text-hover focus:outline-hidden`}
                       onClick={() => {
                         setShow(false);
                       }}

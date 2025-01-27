@@ -73,7 +73,7 @@ export const Header = () => {
       </div>
       <div className="flex items-center justify-center">
         <div className="mx-auto h-auto w-auto rounded-full text-center">
-          <p className="text-accent whitespace-nowrap text-xs opacity-80">
+          <p className="text-accent text-xs whitespace-nowrap opacity-80">
             Deployment Address
           </p>
           <div className="flex items-center">

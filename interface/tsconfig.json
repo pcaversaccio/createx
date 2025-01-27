@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2021",
+    "target": "esnext",
     "module": "esnext",
     "allowJs": true,
     "strict": true,
@@ -12,7 +12,7 @@
     "resolveJsonModule": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "noEmit": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
@@ -25,7 +25,13 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["**/*.js", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "**/*.js",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "next.config.mjs"
+  ],
   "files": ["next-env.d.ts", "eslint.config.js"],
   "exclude": ["node_modules"]
 }

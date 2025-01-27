@@ -10,7 +10,7 @@ const eslintConfigPrettier = require("eslint-config-prettier");
 /** @type {import('typescript-eslint').TSESLint.FlatConfig.ConfigArray} */
 module.exports = tseslint.config(
   {
-    files: ["**/*.{js,ts,tsx}"],
+    files: ["**/*.{js,mjs,ts,tsx}"],
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.recommended,

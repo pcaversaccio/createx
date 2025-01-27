@@ -161,7 +161,7 @@ const Abi = () => {
       />
 
       <TabGroup selectedIndex={selectedTab} onChange={onTabChange}>
-        <TabList className="space-x-4 overflow-x-auto whitespace-nowrap border-b border-gray-200 dark:border-gray-700 md:flex md:justify-center md:space-x-8">
+        <TabList className="space-x-4 overflow-x-auto border-b border-gray-200 whitespace-nowrap md:flex md:justify-center md:space-x-8 dark:border-gray-700">
           {tabs.map((tab) => {
             return (
               <Tab key={tab.name} className="focus:outline-0">
@@ -170,7 +170,7 @@ const Abi = () => {
                     className={classNames(
                       "group inline-flex items-center px-1 py-3 text-sm font-medium",
                       selected
-                        ? "text-accent border-b-2 border-b-blue-800 outline-none dark:border-b-blue-300"
+                        ? "text-accent border-b-2 border-b-blue-800 outline-hidden dark:border-b-blue-300"
                         : "text-secondary text-hover",
                     )}
                   >
@@ -205,7 +205,7 @@ const Abi = () => {
                 className="relative mt-4 inline-block max-h-screen max-w-full overflow-x-auto overflow-y-auto text-sm shadow-md"
               >
                 <button
-                  className="absolute right-3 top-4 z-10 mr-10 rounded-md border border-gray-500 p-1 hover:border-black focus:outline-0 dark:border-gray-400 hover:dark:border-gray-200"
+                  className="absolute top-4 right-3 z-10 mr-10 rounded-md border border-gray-500 p-1 hover:border-black focus:outline-0 dark:border-gray-400 dark:hover:border-gray-200"
                   style={{
                     // Blur the background behind the copy button.
                     background: "rgba(0, 0, 0, 0.0)",
@@ -218,7 +218,7 @@ const Abi = () => {
                   <ArrowDownTrayIcon className="h-4 w-4" />
                 </button>
                 <button
-                  className="absolute right-3 top-4 z-10 rounded-md border border-gray-500 p-1 hover:border-black focus:outline-0 dark:border-gray-400 hover:dark:border-gray-200"
+                  className="absolute top-4 right-3 z-10 rounded-md border border-gray-500 p-1 hover:border-black focus:outline-0 dark:border-gray-400 dark:hover:border-gray-200"
                   style={{
                     // Blur the background behind the copy button.
                     background: "rgba(0, 0, 0, 0.0)",
