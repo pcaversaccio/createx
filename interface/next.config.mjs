@@ -33,4 +33,4 @@ const nextConfig =
         distDir: "dist",
       };
 
-export default nextConfig
+export default nextConfig;
