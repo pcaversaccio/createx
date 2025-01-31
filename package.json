@@ -175,6 +175,8 @@
     "deploy:soneiummain": "npx hardhat run --no-compile --network soneiumMain scripts/deploy.ts",
     "deploy:swelltestnet": "npx hardhat run --no-compile --network swellTestnet scripts/deploy.ts",
     "deploy:swellmain": "npx hardhat run --no-compile --network swellMain scripts/deploy.ts",
+    "deploy:hemitestnet": "npx hardhat run --no-compile --network hemiTestnet scripts/deploy.ts",
+    "deploy:hemimain": "npx hardhat run --no-compile --network hemiMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
