@@ -651,7 +651,7 @@
   },
   {
     "name": "Linea Sepolia Testnet",
-    "chainId": 59140,
+    "chainId": 59141,
     "urls": [
       "https://sepolia.lineascan.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
