@@ -861,6 +861,16 @@ const config: HardhatUserConfig = {
       url: vars.get("HEMI_MAINNET_URL", "https://rpc.hemi.network/rpc"),
       accounts,
     },
+    berachainTestnet: {
+      chainId: 80084,
+      url: vars.get("BERACHAIN_TESTNET_URL", "https://bartio.drpc.org"),
+      accounts,
+    },
+    berachainMain: {
+      chainId: 80094,
+      url: vars.get("BERACHAIN_MAINNET_URL", "https://rpc.berachain.com"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1089,6 +1099,9 @@ const config: HardhatUserConfig = {
       // For Hemi testnet & mainnet
       hemi: vars.get("HEMI_API_KEY", ""),
       hemiTestnet: vars.get("HEMI_API_KEY", ""),
+      // For Berachain testnet & mainnet
+      berachain: vars.get("BERACHAIN_API_KEY", ""),
+      berachainTestnet: vars.get("BERACHAIN_API_KEY", ""),
     },
     customChains: [
       {
@@ -1999,6 +2012,23 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://testnet.explorer.hemi.xyz/api",
           browserURL: "https://testnet.explorer.hemi.xyz",
+        },
+      },
+      {
+        network: "berachain",
+        chainId: 80094,
+        urls: {
+          apiURL: "https://api.berascan.com/api",
+          browserURL: "https://berascan.com",
+        },
+      },
+      {
+        network: "berachainTestnet",
+        chainId: 80084,
+        urls: {
+          apiURL:
+            "https://api.routescan.io/v2/network/mainnet/evm/80084/etherscan",
+          browserURL: "https://bartio.beratrail.io",
         },
       },
     ],
