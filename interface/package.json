@@ -20,7 +20,6 @@
   },
   "author": "pcaversaccio (https://pcaversaccio.com), Matt Solomon (https://mattsolomon.dev)",
   "license": "MIT",
-  "packageManager": "pnpm@10.2.0",
   "scripts": {
     "dev": "npx next dev",
     "build": "npx next build",

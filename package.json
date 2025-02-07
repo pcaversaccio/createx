@@ -21,7 +21,7 @@
   },
   "author": "pcaversaccio (https://pcaversaccio.com), Matt Solomon (https://mattsolomon.dev)",
   "license": "AGPL-3.0-only",
-  "packageManager": "pnpm@10.2.0",
+  "packageManager": "pnpm@10.2.1",
   "scripts": {
     "clean": "npx hardhat clean && forge clean",
     "test": "forge test --out forge-artifacts",
@@ -178,6 +178,8 @@
     "deploy:swellmain": "npx hardhat run --no-compile --network swellMain scripts/deploy.ts",
     "deploy:hemitestnet": "npx hardhat run --no-compile --network hemiTestnet scripts/deploy.ts",
     "deploy:hemimain": "npx hardhat run --no-compile --network hemiMain scripts/deploy.ts",
+    "deploy:berachaintestnet": "npx hardhat run --no-compile --network berachainTestnet scripts/deploy.ts",
+    "deploy:berachainmain": "npx hardhat run --no-compile --network berachainMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
@@ -212,5 +214,12 @@
     "typechain": "^8.3.2",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.23.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "keccak",
+      "secp256k1",
+      "sharp"
+    ]
   }
 }
