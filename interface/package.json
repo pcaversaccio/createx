@@ -40,23 +40,23 @@
     "sharp": "^0.33.5"
   },
   "devDependencies": {
-    "@eslint/js": "^9.19.0",
+    "@eslint/js": "^9.20.0",
     "@next/eslint-plugin-next": "^15.1.6",
-    "@tailwindcss/postcss": "^4.0.4",
+    "@tailwindcss/postcss": "^4.0.5",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/node": "^22.13.1",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.19.0",
+    "eslint": "^9.20.0",
     "eslint-config-next": "^15.1.6",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
     "next-seo": "^6.6.0",
     "postcss": "^8.5.1",
-    "prettier": "^3.4.2",
+    "prettier": "^3.5.0",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "tailwindcss": "^4.0.4",
+    "tailwindcss": "^4.0.5",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.23.0"
   }
