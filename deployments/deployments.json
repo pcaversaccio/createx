@@ -376,6 +376,13 @@
     ]
   },
   {
+    "name": "Unichain",
+    "chainId": 130,
+    "urls": [
+      "https://uniscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "XDC Network",
     "chainId": 50,
     "urls": [
@@ -478,6 +485,13 @@
     "chainId": 80094,
     "urls": [
       "https://berascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Corn Maizenet",
+    "chainId": 21000000,
+    "urls": [
+      "https://cornscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -950,6 +964,13 @@
     "chainId": 10143,
     "urls": [
       "https://testnet.monadexplorer.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Corn Sepolia Testnet",
+    "chainId": 21000001,
+    "urls": [
+      "https://testnet.cornscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
