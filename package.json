@@ -21,7 +21,7 @@
   },
   "author": "pcaversaccio (https://pcaversaccio.com), Matt Solomon (https://mattsolomon.dev)",
   "license": "AGPL-3.0-only",
-  "packageManager": "pnpm@10.2.1",
+  "packageManager": "pnpm@10.3.0",
   "scripts": {
     "clean": "npx hardhat clean && forge clean",
     "test": "forge test --out forge-artifacts",
@@ -180,6 +180,7 @@
     "deploy:hemimain": "npx hardhat run --no-compile --network hemiMain scripts/deploy.ts",
     "deploy:berachaintestnet": "npx hardhat run --no-compile --network berachainTestnet scripts/deploy.ts",
     "deploy:berachainmain": "npx hardhat run --no-compile --network berachainMain scripts/deploy.ts",
+    "deploy:monadtestnet": "npx hardhat run --no-compile --network monadTestnet scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
@@ -213,7 +214,7 @@
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
     "typescript": "^5.7.3",
-    "typescript-eslint": "^8.23.0"
+    "typescript-eslint": "^8.24.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

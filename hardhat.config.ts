@@ -871,6 +871,11 @@ const config: HardhatUserConfig = {
       url: vars.get("BERACHAIN_MAINNET_URL", "https://rpc.berachain.com"),
       accounts,
     },
+    monadTestnet: {
+      chainId: 10143,
+      url: vars.get("MONAD_TESTNET_URL", "https://testnet-rpc.monad.xyz"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
