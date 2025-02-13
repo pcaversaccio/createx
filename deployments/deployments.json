@@ -495,6 +495,13 @@
     ]
   },
   {
+    "name": "Arena-Z",
+    "chainId": 7897,
+    "urls": [
+      "https://explorer.arena-z.gg/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -971,6 +978,13 @@
     "chainId": 21000001,
     "urls": [
       "https://testnet.cornscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Arena-Z Sepolia Testnet",
+    "chainId": 9897,
+    "urls": [
+      "https://arena-z.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
