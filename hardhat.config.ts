@@ -2101,8 +2101,8 @@ const config: HardhatUserConfig = {
         network: "arenaz",
         chainId: 7897,
         urls: {
-          apiURL: "https://arena-z.blockscout.com/api",
-          browserURL: "https://arena-z.blockscout.com",
+          apiURL: "https://explorer.arena-z.gg/api",
+          browserURL: "https://explorer.arena-z.gg",
         },
       },
       {
