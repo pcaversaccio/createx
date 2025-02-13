@@ -754,8 +754,8 @@ const config: HardhatUserConfig = {
       accounts,
     },
     storyTestnet: {
-      chainId: 1516,
-      url: vars.get("STORY_TESTNET_URL", "https://odyssey.storyrpc.io"),
+      chainId: 1315,
+      url: vars.get("STORY_TESTNET_URL", "https://aeneid.storyrpc.io"),
       accounts,
     },
     sonicTestnet: {
@@ -1912,10 +1912,10 @@ const config: HardhatUserConfig = {
       },
       {
         network: "storyTestnet",
-        chainId: 1516,
+        chainId: 1315,
         urls: {
-          apiURL: "https://odyssey.storyscan.xyz/api",
-          browserURL: "https://odyssey.storyscan.xyz",
+          apiURL: "https://aeneid.storyscan.xyz/api",
+          browserURL: "https://aeneid.storyscan.xyz",
         },
       },
       {

@@ -889,11 +889,10 @@
     ]
   },
   {
-    "name": "Story Testnet (Odyssey)",
-    "chainId": 1516,
+    "name": "Story Testnet (Aeneid)",
+    "chainId": 1315,
     "urls": [
-      "https://odyssey.storyscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-      "https://repo.sourcify.dev/contracts/partial_match/1516/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+      "https://aeneid.storyscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
