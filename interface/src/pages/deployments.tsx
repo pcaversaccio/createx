@@ -146,7 +146,7 @@ const Deployments = () => {
   );
 
   const showDeploymentsDiv = () => (
-    <div className="ring-opacity-5 overflow-hidden rounded-lg ring-1 shadow-sm ring-gray-300 dark:ring-gray-700">
+    <div className="ring-opacity-5 overflow-hidden rounded-lg shadow-sm ring-1 ring-gray-300 dark:ring-gray-700">
       <table className="min-w-full divide-y divide-gray-300 dark:divide-gray-700">
         <thead className="bg-gray-50 dark:bg-gray-700">
           <tr>

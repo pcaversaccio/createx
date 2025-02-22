@@ -66,7 +66,7 @@ export const Notification = ({
             leaveTo="opacity-0"
           >
             <div
-              className={`pointer-events-auto w-full max-w-4xl overflow-hidden rounded-lg ring-1 shadow-md ring-gray-300 dark:ring-gray-600 ${bgColor}`}
+              className={`pointer-events-auto w-full max-w-4xl overflow-hidden rounded-lg shadow-md ring-1 ring-gray-300 dark:ring-gray-600 ${bgColor}`}
             >
               <div className="px-8 py-4">
                 <div className="flex items-start">
