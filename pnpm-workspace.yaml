@@ -1,2 +1,6 @@
 packages:
-  - "interface"
+  - interface
+onlyBuiltDependencies:
+  - keccak
+  - secp256k1
+  - sharp
