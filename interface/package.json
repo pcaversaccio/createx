@@ -51,7 +51,7 @@
     "eslint": "^9.21.0",
     "eslint-config-next": "^15.2.0",
     "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "next-seo": "^6.6.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.2",
