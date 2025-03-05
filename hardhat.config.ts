@@ -686,8 +686,8 @@ const config: HardhatUserConfig = {
       accounts,
     },
     plumeMain: {
-      chainId: 98865,
-      url: vars.get("PLUME_MAINNET_URL", "https://rpc.plumenetwork.xyz"),
+      chainId: 98866,
+      url: vars.get("PLUME_MAINNET_URL", "https://phoenix-rpc.plumenetwork.xyz"),
       accounts,
     },
     unichainTestnet: {
@@ -1800,10 +1800,10 @@ const config: HardhatUserConfig = {
       },
       {
         network: "plume",
-        chainId: 98865,
+        chainId: 98866,
         urls: {
-          apiURL: "https://explorer.plumenetwork.xyz/api",
-          browserURL: "https://explorer.plumenetwork.xyz",
+          apiURL: "https://phoenix-explorer.plumenetwork.xyz/api",
+          browserURL: "https://phoenix-explorer.plumenetwork.xyz",
         },
       },
       {

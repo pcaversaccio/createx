@@ -370,9 +370,9 @@
   },
   {
     "name": "Plume",
-    "chainId": 98865,
+    "chainId": 98866,
     "urls": [
-      "https://explorer.plumenetwork.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://phoenix-explorer.plumenetwork.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
