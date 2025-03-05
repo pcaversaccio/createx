@@ -2178,8 +2178,8 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 #### EVM-Based Production Networks
 
 - [Ethereum](https://etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Binance Smart Chain](https://bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Optimism](https://optimistic.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [BNB Smart Chain](https://bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [OP (Optimism)](https://optimistic.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Arbitrum One](https://arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Arbitrum Nova](https://nova.arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Polygon](https://polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
@@ -2252,8 +2252,8 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 
 #### Additional EVM-Based Test Networks
 
-- [Binance Smart Chain Testnet](https://testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Optimism Sepolia Testnet](https://sepolia-optimism.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [BNB Smart Chain Testnet](https://testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [OP (Optimism) Sepolia Testnet](https://sepolia-optimism.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Arbitrum Sepolia Testnet](https://sepolia.arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Polygon Sepolia Testnet (Amoy)](https://amoy.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Polygon Testnet (zkEVM)](https://cardona-zkevm.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)

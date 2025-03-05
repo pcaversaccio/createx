@@ -15,7 +15,7 @@ body:
   - attributes:
       label: Chain Name
       description: What is the name of the target chain?
-      placeholder: "Optimism Mainnet"
+      placeholder: "OP (Optimism) Mainnet"
     id: chain-name
     type: input
     validations:

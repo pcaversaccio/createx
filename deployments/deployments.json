@@ -8,7 +8,7 @@
     ]
   },
   {
-    "name": "Binance Smart Chain",
+    "name": "BNB Smart Chain",
     "chainId": 56,
     "urls": [
       "https://bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
@@ -16,7 +16,7 @@
     ]
   },
   {
-    "name": "Optimism",
+    "name": "OP (Optimism)",
     "chainId": 10,
     "urls": [
       "https://optimistic.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
@@ -518,7 +518,7 @@
     ]
   },
   {
-    "name": "Binance Smart Chain Testnet",
+    "name": "BNB Smart Chain Testnet",
     "chainId": 97,
     "urls": [
       "https://testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
@@ -526,7 +526,7 @@
     ]
   },
   {
-    "name": "Optimism Sepolia Testnet",
+    "name": "OP (Optimism) Sepolia Testnet",
     "chainId": 11155420,
     "urls": [
       "https://sepolia-optimism.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
