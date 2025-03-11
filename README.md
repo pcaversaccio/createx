@@ -2244,6 +2244,8 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Berachain](https://berascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Corn Maizenet](https://cornscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Arena-Z](https://explorer.arena-z.gg/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [IoTeX](https://iotexscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [HYCHAIN](https://explorer.hychain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
@@ -2316,6 +2318,8 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Monad Testnet](https://testnet.monadexplorer.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Corn Sepolia Testnet](https://testnet.cornscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Arena-Z Sepolia Testnet](https://arena-z.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [IoTeX Testnet](https://testnet.iotexscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [HYCHAIN Testnet](https://testnet.explorer.hychain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 
