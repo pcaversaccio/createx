@@ -1171,7 +1171,7 @@ const config: HardhatUserConfig = {
       // For IoTeX testnet & mainnet
       iotex: vars.get("IOTEX_API_KEY", ""),
       iotexTestnet: vars.get("IOTEX_API_KEY", ""),
-      // For Hychain testnet & mainnet
+      // For HYCHAIN testnet & mainnet
       hychain: vars.get("HYCHAIN_API_KEY", ""),
       hychainTestnet: vars.get("HYCHAIN_API_KEY", ""),
     },
