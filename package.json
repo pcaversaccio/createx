@@ -186,6 +186,10 @@
     "deploy:cornmain": "npx hardhat run --no-compile --network cornMain scripts/deploy.ts",
     "deploy:arenaztestnet": "npx hardhat run --no-compile --network arenazTestnet scripts/deploy.ts",
     "deploy:arenazmain": "npx hardhat run --no-compile --network arenazMain scripts/deploy.ts",
+    "deploy:iotextestnet": "npx hardhat run --no-compile --network iotexTestnet scripts/deploy.ts",
+    "deploy:iotexmain": "npx hardhat run --no-compile --network iotexMain scripts/deploy.ts",
+    "deploy:hychaintestnet": "npx hardhat run --no-compile --network hychainTestnet scripts/deploy.ts",
+    "deploy:hychainmain": "npx hardhat run --no-compile --network hychainMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
@@ -219,6 +223,6 @@
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.26.0"
+    "typescript-eslint": "^8.26.1"
   }
 }

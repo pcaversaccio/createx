@@ -687,7 +687,10 @@ const config: HardhatUserConfig = {
     },
     plumeMain: {
       chainId: 98866,
-      url: vars.get("PLUME_MAINNET_URL", "https://phoenix-rpc.plumenetwork.xyz"),
+      url: vars.get(
+        "PLUME_MAINNET_URL",
+        "https://phoenix-rpc.plumenetwork.xyz",
+      ),
       accounts,
     },
     unichainTestnet: {
@@ -902,6 +905,29 @@ const config: HardhatUserConfig = {
     arenazMain: {
       chainId: 7897,
       url: vars.get("ARENAZ_MAINNET_URL", "https://rpc.arena-z.gg"),
+      accounts,
+    },
+    iotexTestnet: {
+      chainId: 4690,
+      url: vars.get("IOTEX_TESTNET_URL", "https://babel-api.testnet.iotex.io"),
+      accounts,
+    },
+    iotexMain: {
+      chainId: 4689,
+      url: vars.get("IOTEX_MAINNET_URL", "https://babel-api.mainnet.iotex.io"),
+      accounts,
+    },
+    hychainTestnet: {
+      chainId: 29112,
+      url: vars.get(
+        "HYCHAIN_TESTNET_URL",
+        "https://testnet-rpc.hychain.com/http",
+      ),
+      accounts,
+    },
+    hychainMain: {
+      chainId: 2911,
+      url: vars.get("HYCHAIN_MAINNET_URL", "https://rpc.hychain.com/http"),
       accounts,
     },
   },
@@ -1142,6 +1168,12 @@ const config: HardhatUserConfig = {
       // For Arena-Z testnet & mainnet
       arenaz: vars.get("ARENAZ_API_KEY", ""),
       arenazTestnet: vars.get("ARENAZ_API_KEY", ""),
+      // For IoTeX testnet & mainnet
+      iotex: vars.get("IOTEX_API_KEY", ""),
+      iotexTestnet: vars.get("IOTEX_API_KEY", ""),
+      // For Hychain testnet & mainnet
+      hychain: vars.get("HYCHAIN_API_KEY", ""),
+      hychainTestnet: vars.get("HYCHAIN_API_KEY", ""),
     },
     customChains: [
       {
@@ -2111,6 +2143,38 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://arena-z.blockscout.com/api",
           browserURL: "https://arena-z.blockscout.com",
+        },
+      },
+      {
+        network: "iotex",
+        chainId: 4689,
+        urls: {
+          apiURL: "https://iotexscout.io/api",
+          browserURL: "https://iotexscan.io",
+        },
+      },
+      {
+        network: "iotexTestnet",
+        chainId: 4690,
+        urls: {
+          apiURL: "https://testnet.iotexscan.io/api",
+          browserURL: "https://testnet.iotexscan.io",
+        },
+      },
+      {
+        network: "hychain",
+        chainId: 2911,
+        urls: {
+          apiURL: "https://explorer.hychain.com/api",
+          browserURL: "https://explorer.hychain.com/",
+        },
+      },
+      {
+        network: "hychainTestnet",
+        chainId: 29112,
+        urls: {
+          apiURL: "https://testnet.explorer.hychain.com/api",
+          browserURL: "https://testnet.explorer.hychain.com",
         },
       },
     ],
