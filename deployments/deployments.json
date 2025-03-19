@@ -854,9 +854,9 @@
   },
   {
     "name": "Plume Sepolia Testnet",
-    "chainId": 98864,
+    "chainId": 98867,
     "urls": [
-      "https://test-explorer.plumenetwork.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://testnet-explorer.plumenetwork.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
