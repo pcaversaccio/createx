@@ -21,7 +21,7 @@
   },
   "author": "pcaversaccio (https://pcaversaccio.com), Matt Solomon (https://mattsolomon.dev)",
   "license": "AGPL-3.0-only",
-  "packageManager": "pnpm@10.6.4",
+  "packageManager": "pnpm@10.6.5",
   "scripts": {
     "clean": "npx hardhat clean && forge clean",
     "test": "forge test --out forge-artifacts",
@@ -43,6 +43,7 @@
     "deploy:goerli": "npx hardhat run --no-compile --network goerli scripts/deploy.ts",
     "deploy:sepolia": "npx hardhat run --no-compile --network sepolia scripts/deploy.ts",
     "deploy:holesky": "npx hardhat run --no-compile --network holesky scripts/deploy.ts",
+    "deploy:hoodi": "npx hardhat run --no-compile --network hoodi scripts/deploy.ts",
     "deploy:ethmain": "npx hardhat run --no-compile --network ethMain scripts/deploy.ts",
     "deploy:bsctestnet": "npx hardhat run --no-compile --network bscTestnet scripts/deploy.ts",
     "deploy:bscmain": "npx hardhat run --no-compile --network bscMain scripts/deploy.ts",

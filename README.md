@@ -2251,6 +2251,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 
 - [Sepolia](https://sepolia.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Holešky (Holešovice)](https://holesky.etherscan.io/address/0xba5ed099633d3b313e4d5f7bdc1305d3c28ba5ed)
+- [Hoodi](https://hoodi.cloud.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Additional EVM-Based Test Networks
 

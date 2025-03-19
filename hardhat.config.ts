@@ -93,6 +93,14 @@ const config: HardhatUserConfig = {
       ),
       accounts,
     },
+    hoodi: {
+      chainId: 560048,
+      url: vars.get(
+        "ETH_HOODI_TESTNET_URL",
+        "https://rpc.hoodi.ethpandaops.io",
+      ),
+      accounts,
+    },
     ethMain: {
       chainId: 1,
       url: ethMainnetUrl,
@@ -967,6 +975,7 @@ const config: HardhatUserConfig = {
       goerli: vars.get("ETHERSCAN_API_KEY", ""),
       sepolia: vars.get("ETHERSCAN_API_KEY", ""),
       holesky: vars.get("ETHERSCAN_API_KEY", ""),
+      hoodi: vars.get("ETHERSCAN_API_KEY", ""),
       // For BSC testnet & mainnet
       bsc: vars.get("BSC_API_KEY", ""),
       bscTestnet: vars.get("BSC_API_KEY", ""),
@@ -1185,6 +1194,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-holesky.etherscan.io/api",
           browserURL: "https://holesky.etherscan.io",
+        },
+      },
+      {
+        network: "hoodi",
+        chainId: 560048,
+        urls: {
+          apiURL: "https://hoodi.cloud.blockscout.com/api",
+          browserURL: "https://hoodi.cloud.blockscout.com",
         },
       },
       {

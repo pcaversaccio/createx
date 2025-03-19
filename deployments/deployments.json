@@ -532,6 +532,13 @@
     ]
   },
   {
+    "name": "Hoodi",
+    "chainId": 560048,
+    "urls": [
+      "https://hoodi.cloud.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "BNB Smart Chain Testnet",
     "chainId": 97,
     "urls": [
