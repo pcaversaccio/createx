@@ -683,7 +683,7 @@ const config: HardhatUserConfig = {
     plumeTestnet: {
       chainId: 98867,
       url: vars.get(
-        "PLUME_TESTNET_URL", 
+        "PLUME_TESTNET_URL",
         "https://testnet-rpc.plumenetwork.xyz",
       ),
       accounts,
