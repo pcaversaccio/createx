@@ -681,8 +681,11 @@ const config: HardhatUserConfig = {
       accounts,
     },
     plumeTestnet: {
-      chainId: 98864,
-      url: vars.get("PLUME_TESTNET_URL", "https://test-rpc.plumenetwork.xyz"),
+      chainId: 98867,
+      url: vars.get(
+        "PLUME_TESTNET_URL",
+        "https://testnet-rpc.plumenetwork.xyz",
+      ),
       accounts,
     },
     plumeMain: {
@@ -1840,10 +1843,10 @@ const config: HardhatUserConfig = {
       },
       {
         network: "plumeTestnet",
-        chainId: 98864,
+        chainId: 98867,
         urls: {
-          apiURL: "https://test-explorer.plumenetwork.xyz/api",
-          browserURL: "https://test-explorer.plumenetwork.xyz",
+          apiURL: "https://testnet-explorer.plumenetwork.xyz/api",
+          browserURL: "https://testnet-explorer.plumenetwork.xyz",
         },
       },
       {
