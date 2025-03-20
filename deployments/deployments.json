@@ -516,6 +516,14 @@
     ]
   },
   {
+    "name": "Zircuit",
+    "chainId": 48900,
+    "urls": [
+      "https://explorer.zircuit.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/48900/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1019,6 +1027,13 @@
     "chainId": 29112,
     "urls": [
       "https://testnet.explorer.hychain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Zircuit Sepolia Testnet (Garfield)",
+    "chainId": 48898,
+    "urls": [
+      "https://explorer.garfield-testnet.zircuit.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]

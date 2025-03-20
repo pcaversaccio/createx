@@ -941,6 +941,19 @@ const config: HardhatUserConfig = {
       url: vars.get("HYCHAIN_MAINNET_URL", "https://rpc.hychain.com/http"),
       accounts,
     },
+    zircuitTestnet: {
+      chainId: 48898,
+      url: vars.get(
+        "ZIRCUIT_TESTNET_URL",
+        "https://garfield-testnet.zircuit.com",
+      ),
+      accounts,
+    },
+    zircuitMain: {
+      chainId: 48900,
+      url: vars.get("ZIRCUIT_MAINNET_URL", "https://zircuit-mainnet.drpc.org"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1186,6 +1199,9 @@ const config: HardhatUserConfig = {
       // For HYCHAIN testnet & mainnet
       hychain: vars.get("HYCHAIN_API_KEY", ""),
       hychainTestnet: vars.get("HYCHAIN_API_KEY", ""),
+      // For Zircuit testnet & mainnet
+      zircuit: vars.get("ZIRCUIT_API_KEY", ""),
+      zircuitTestnet: vars.get("ZIRCUIT_API_KEY", ""),
     },
     customChains: [
       {
@@ -2186,7 +2202,7 @@ const config: HardhatUserConfig = {
         chainId: 2911,
         urls: {
           apiURL: "https://explorer.hychain.com/api",
-          browserURL: "https://explorer.hychain.com/",
+          browserURL: "https://explorer.hychain.com",
         },
       },
       {
@@ -2195,6 +2211,23 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://testnet.explorer.hychain.com/api",
           browserURL: "https://testnet.explorer.hychain.com",
+        },
+      },
+      {
+        network: "zircuit",
+        chainId: 48900,
+        urls: {
+          apiURL: "https://explorer.zircuit.com/api/contractVerifyHardhat",
+          browserURL: "https://explorer.zircuit.com",
+        },
+      },
+      {
+        network: "zircuitTestnet",
+        chainId: 48898,
+        urls: {
+          apiURL:
+            "https://explorer.garfield-testnet.zircuit.com/api/contractVerifyHardhat",
+          browserURL: "https://explorer.garfield-testnet.zircuit.com",
         },
       },
     ],
