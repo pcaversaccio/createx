@@ -1982,8 +1982,8 @@ const config: HardhatUserConfig = {
         network: "storyTestnet",
         chainId: 1315,
         urls: {
-          apiURL: "https://aeneid.storyscan.xyz/api",
-          browserURL: "https://aeneid.storyscan.xyz",
+          apiURL: "https://aeneid.storyscan.io/api",
+          browserURL: "https://aeneid.storyscan.io",
         },
       },
       {
