@@ -191,6 +191,8 @@
     "deploy:iotexmain": "npx hardhat run --no-compile --network iotexMain scripts/deploy.ts",
     "deploy:hychaintestnet": "npx hardhat run --no-compile --network hychainTestnet scripts/deploy.ts",
     "deploy:hychainmain": "npx hardhat run --no-compile --network hychainMain scripts/deploy.ts",
+    "deploy:zircuittestnet": "npx hardhat run --no-compile --network zircuitTestnet scripts/deploy.ts",
+    "deploy:zircuitmain": "npx hardhat run --no-compile --network zircuitMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
@@ -224,6 +226,6 @@
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.26.1"
+    "typescript-eslint": "^8.27.0"
   }
 }
