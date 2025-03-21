@@ -1035,5 +1035,12 @@
     "urls": [
       "https://explorer.garfield-testnet.zircuit.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
+  },
+  {
+    "name": "MegaETH Testnet",
+    "chainId": 6342,
+    "urls": [
+      "https://www.megaexplorer.xyz/address/0xba5ed099633d3b313e4d5f7bdc1305d3c28ba5ed"
+    ]
   }
 ]
