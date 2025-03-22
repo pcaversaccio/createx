@@ -193,6 +193,7 @@
     "deploy:hychainmain": "npx hardhat run --no-compile --network hychainMain scripts/deploy.ts",
     "deploy:zircuittestnet": "npx hardhat run --no-compile --network zircuitTestnet scripts/deploy.ts",
     "deploy:zircuitmain": "npx hardhat run --no-compile --network zircuitMain scripts/deploy.ts",
+    "deploy:megaethtestnet": "npx hardhat run --no-compile --network megaETHTestnet scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
@@ -208,12 +209,12 @@
     "start:interface": "pnpm -C interface start"
   },
   "devDependencies": {
-    "@eslint/js": "^9.22.0",
+    "@eslint/js": "^9.23.0",
     "@nomicfoundation/hardhat-ethers": "^3.0.8",
     "@nomicfoundation/hardhat-verify": "^2.0.13",
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
-    "eslint": "^9.22.0",
+    "eslint": "^9.23.0",
     "eslint-config-prettier": "^10.1.1",
     "ethers": "^6.13.5",
     "hardhat": "^2.22.19",

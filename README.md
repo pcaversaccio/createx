@@ -2323,6 +2323,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [IoTeX Testnet](https://testnet.iotexscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [HYCHAIN Testnet](https://testnet.explorer.hychain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Zircuit Sepolia Testnet (Garfield)](https://explorer.garfield-testnet.zircuit.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [MegaETH Testnet](https://www.megaexplorer.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 

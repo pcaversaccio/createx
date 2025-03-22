@@ -954,6 +954,11 @@ const config: HardhatUserConfig = {
       url: vars.get("ZIRCUIT_MAINNET_URL", "https://zircuit-mainnet.drpc.org"),
       accounts,
     },
+    megaETHTestnet: {
+      chainId: 6342,
+      url: vars.get("MEGAETH_TESTNET_URL", "https://carrot.megaeth.com/rpc"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
