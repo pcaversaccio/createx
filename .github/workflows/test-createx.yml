@@ -109,7 +109,7 @@ jobs:
           FOUNDRY_DISABLE_NIGHTLY_WARNING: "1"
 
       - name: Slither static analyser
-        uses: crytic/slither-action@v0.4.0
+        uses: crytic/slither-action@v0.4.1
         id: slither
         with:
           fail-on: config
