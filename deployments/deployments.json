@@ -8,7 +8,7 @@
     ]
   },
   {
-    "name": "Binance Smart Chain",
+    "name": "BNB Smart Chain",
     "chainId": 56,
     "urls": [
       "https://bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
@@ -16,7 +16,7 @@
     ]
   },
   {
-    "name": "Optimism",
+    "name": "OP (Optimism)",
     "chainId": 10,
     "urls": [
       "https://optimistic.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
@@ -370,9 +370,16 @@
   },
   {
     "name": "Plume",
-    "chainId": 98865,
+    "chainId": 98866,
     "urls": [
-      "https://explorer.plumenetwork.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://phoenix-explorer.plumenetwork.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Unichain",
+    "chainId": 130,
+    "urls": [
+      "https://uniscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -467,6 +474,48 @@
     ]
   },
   {
+    "name": "Hemi",
+    "chainId": 43111,
+    "urls": [
+      "https://explorer.hemi.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Berachain",
+    "chainId": 80094,
+    "urls": [
+      "https://berascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Corn Maizenet",
+    "chainId": 21000000,
+    "urls": [
+      "https://cornscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Arena-Z",
+    "chainId": 7897,
+    "urls": [
+      "https://explorer.arena-z.gg/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "IoTeX",
+    "chainId": 4689,
+    "urls": [
+      "https://iotexscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "HYCHAIN",
+    "chainId": 2911,
+    "urls": [
+      "https://explorer.hychain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -483,7 +532,7 @@
     ]
   },
   {
-    "name": "Binance Smart Chain Testnet",
+    "name": "BNB Smart Chain Testnet",
     "chainId": 97,
     "urls": [
       "https://testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
@@ -491,7 +540,7 @@
     ]
   },
   {
-    "name": "Optimism Sepolia Testnet",
+    "name": "OP (Optimism) Sepolia Testnet",
     "chainId": 11155420,
     "urls": [
       "https://sepolia-optimism.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
@@ -644,7 +693,7 @@
   },
   {
     "name": "Linea Sepolia Testnet",
-    "chainId": 59140,
+    "chainId": 59141,
     "urls": [
       "https://sepolia.lineascan.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
@@ -854,11 +903,10 @@
     ]
   },
   {
-    "name": "Story Testnet (Odyssey)",
-    "chainId": 1516,
+    "name": "Story Testnet (Aeneid)",
+    "chainId": 1315,
     "urls": [
-      "https://odyssey.storyscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-      "https://repo.sourcify.dev/contracts/partial_match/1516/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+      "https://aeneid.storyscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -915,6 +963,55 @@
     "chainId": 1924,
     "urls": [
       "https://swell-testnet-explorer.alt.technology/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Hemi Sepolia Testnet",
+    "chainId": 743111,
+    "urls": [
+      "https://testnet.explorer.hemi.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Berachain Testnet (bArtio)",
+    "chainId": 80084,
+    "urls": [
+      "https://bartio.beratrail.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Monad Testnet",
+    "chainId": 10143,
+    "urls": [
+      "https://testnet.monadexplorer.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Corn Sepolia Testnet",
+    "chainId": 21000001,
+    "urls": [
+      "https://testnet.cornscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Arena-Z Sepolia Testnet",
+    "chainId": 9897,
+    "urls": [
+      "https://arena-z.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "IoTeX Testnet",
+    "chainId": 4690,
+    "urls": [
+      "https://testnet.iotexscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "HYCHAIN Testnet",
+    "chainId": 29112,
+    "urls": [
+      "https://testnet.explorer.hychain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]

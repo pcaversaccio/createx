@@ -686,13 +686,21 @@ const config: HardhatUserConfig = {
       accounts,
     },
     plumeMain: {
-      chainId: 98865,
-      url: vars.get("PLUME_MAINNET_URL", "https://rpc.plumenetwork.xyz"),
+      chainId: 98866,
+      url: vars.get(
+        "PLUME_MAINNET_URL",
+        "https://phoenix-rpc.plumenetwork.xyz",
+      ),
       accounts,
     },
     unichainTestnet: {
       chainId: 1301,
       url: vars.get("UNICHAIN_TESTNET_URL", "https://sepolia.unichain.org"),
+      accounts,
+    },
+    unichainMain: {
+      chainId: 130,
+      url: vars.get("UNICHAIN_MAINNET_URL", "https://mainnet.unichain.org"),
       accounts,
     },
     xdcTestnet: {
@@ -749,8 +757,8 @@ const config: HardhatUserConfig = {
       accounts,
     },
     storyTestnet: {
-      chainId: 1516,
-      url: vars.get("STORY_TESTNET_URL", "https://odyssey.storyrpc.io"),
+      chainId: 1315,
+      url: vars.get("STORY_TESTNET_URL", "https://aeneid.storyrpc.io"),
       accounts,
     },
     sonicTestnet: {
@@ -849,6 +857,77 @@ const config: HardhatUserConfig = {
         "SWELL_MAINNET_URL",
         "https://swell-mainnet.alt.technology",
       ),
+      accounts,
+    },
+    hemiTestnet: {
+      chainId: 743111,
+      url: vars.get("HEMI_TESTNET_URL", "https://testnet.rpc.hemi.network/rpc"),
+      accounts,
+    },
+    hemiMain: {
+      chainId: 43111,
+      url: vars.get("HEMI_MAINNET_URL", "https://rpc.hemi.network/rpc"),
+      accounts,
+    },
+    berachainTestnet: {
+      chainId: 80084,
+      url: vars.get("BERACHAIN_TESTNET_URL", "https://bartio.drpc.org"),
+      accounts,
+    },
+    berachainMain: {
+      chainId: 80094,
+      url: vars.get("BERACHAIN_MAINNET_URL", "https://rpc.berachain.com"),
+      accounts,
+    },
+    monadTestnet: {
+      chainId: 10143,
+      url: vars.get("MONAD_TESTNET_URL", "https://testnet-rpc.monad.xyz"),
+      accounts,
+    },
+    cornTestnet: {
+      chainId: 21000001,
+      url: vars.get("CORN_TESTNET_URL", "https://testnet.corn-rpc.com"),
+      accounts,
+    },
+    cornMain: {
+      chainId: 21000000,
+      url: vars.get("CORN_MAINNET_URL", "https://mainnet.corn-rpc.com"),
+      accounts,
+    },
+    arenazTestnet: {
+      chainId: 9897,
+      url: vars.get(
+        "ARENAZ_TESTNET_URL",
+        "https://rpc.arena-z.t.raas.gelato.cloud",
+      ),
+      accounts,
+    },
+    arenazMain: {
+      chainId: 7897,
+      url: vars.get("ARENAZ_MAINNET_URL", "https://rpc.arena-z.gg"),
+      accounts,
+    },
+    iotexTestnet: {
+      chainId: 4690,
+      url: vars.get("IOTEX_TESTNET_URL", "https://babel-api.testnet.iotex.io"),
+      accounts,
+    },
+    iotexMain: {
+      chainId: 4689,
+      url: vars.get("IOTEX_MAINNET_URL", "https://babel-api.mainnet.iotex.io"),
+      accounts,
+    },
+    hychainTestnet: {
+      chainId: 29112,
+      url: vars.get(
+        "HYCHAIN_TESTNET_URL",
+        "https://testnet-rpc.hychain.com/http",
+      ),
+      accounts,
+    },
+    hychainMain: {
+      chainId: 2911,
+      url: vars.get("HYCHAIN_MAINNET_URL", "https://rpc.hychain.com/http"),
       accounts,
     },
   },
@@ -1033,7 +1112,8 @@ const config: HardhatUserConfig = {
       // For Plume testnet & mainnet
       plume: vars.get("PLUME_API_KEY", ""),
       plumeTestnet: vars.get("PLUME_API_KEY", ""),
-      // For Unichain testnet
+      // For Unichain testnet & mainnet
+      unichain: vars.get("UNICHAIN_API_KEY", ""),
       unichainTestnet: vars.get("UNICHAIN_API_KEY", ""),
       // For XDC testnet & mainnet
       xdc: vars.get("XDC_API_KEY", ""),
@@ -1076,6 +1156,24 @@ const config: HardhatUserConfig = {
       // For Swellchain testnet & mainnet
       swell: vars.get("SWELL_API_KEY", ""),
       swellTestnet: vars.get("SWELL_API_KEY", ""),
+      // For Hemi testnet & mainnet
+      hemi: vars.get("HEMI_API_KEY", ""),
+      hemiTestnet: vars.get("HEMI_API_KEY", ""),
+      // For Berachain testnet & mainnet
+      berachain: vars.get("BERACHAIN_API_KEY", ""),
+      berachainTestnet: vars.get("BERACHAIN_API_KEY", ""),
+      // For Corn testnet & mainnet
+      corn: vars.get("CORN_API_KEY", ""),
+      cornTestnet: vars.get("CORN_API_KEY", ""),
+      // For Arena-Z testnet & mainnet
+      arenaz: vars.get("ARENAZ_API_KEY", ""),
+      arenazTestnet: vars.get("ARENAZ_API_KEY", ""),
+      // For IoTeX testnet & mainnet
+      iotex: vars.get("IOTEX_API_KEY", ""),
+      iotexTestnet: vars.get("IOTEX_API_KEY", ""),
+      // For HYCHAIN testnet & mainnet
+      hychain: vars.get("HYCHAIN_API_KEY", ""),
+      hychainTestnet: vars.get("HYCHAIN_API_KEY", ""),
     },
     customChains: [
       {
@@ -1734,10 +1832,10 @@ const config: HardhatUserConfig = {
       },
       {
         network: "plume",
-        chainId: 98865,
+        chainId: 98866,
         urls: {
-          apiURL: "https://explorer.plumenetwork.xyz/api",
-          browserURL: "https://explorer.plumenetwork.xyz",
+          apiURL: "https://phoenix-explorer.plumenetwork.xyz/api",
+          browserURL: "https://phoenix-explorer.plumenetwork.xyz",
         },
       },
       {
@@ -1746,6 +1844,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://test-explorer.plumenetwork.xyz/api",
           browserURL: "https://test-explorer.plumenetwork.xyz",
+        },
+      },
+      {
+        network: "unichain",
+        chainId: 130,
+        urls: {
+          apiURL: "https://api.uniscan.xyz/api",
+          browserURL: "https://uniscan.xyz",
         },
       },
       {
@@ -1838,10 +1944,10 @@ const config: HardhatUserConfig = {
       },
       {
         network: "storyTestnet",
-        chainId: 1516,
+        chainId: 1315,
         urls: {
-          apiURL: "https://odyssey.storyscan.xyz/api",
-          browserURL: "https://odyssey.storyscan.xyz",
+          apiURL: "https://aeneid.storyscan.xyz/api",
+          browserURL: "https://aeneid.storyscan.xyz",
         },
       },
       {
@@ -1970,6 +2076,105 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://swell-testnet-explorer.alt.technology/api",
           browserURL: "https://swell-testnet-explorer.alt.technology",
+        },
+      },
+      {
+        network: "hemi",
+        chainId: 43111,
+        urls: {
+          apiURL: "https://explorer.hemi.xyz/api",
+          browserURL: "https://explorer.hemi.xyz",
+        },
+      },
+      {
+        network: "hemiTestnet",
+        chainId: 743111,
+        urls: {
+          apiURL: "https://testnet.explorer.hemi.xyz/api",
+          browserURL: "https://testnet.explorer.hemi.xyz",
+        },
+      },
+      {
+        network: "berachain",
+        chainId: 80094,
+        urls: {
+          apiURL: "https://api.berascan.com/api",
+          browserURL: "https://berascan.com",
+        },
+      },
+      {
+        network: "berachainTestnet",
+        chainId: 80084,
+        urls: {
+          apiURL:
+            "https://api.routescan.io/v2/network/testnet/evm/80084/etherscan",
+          browserURL: "https://bartio.beratrail.io",
+        },
+      },
+      {
+        network: "corn",
+        chainId: 21000000,
+        urls: {
+          apiURL:
+            "https://api.routescan.io/v2/network/mainnet/evm/21000000/etherscan",
+          browserURL: "https://cornscan.io",
+        },
+      },
+      {
+        network: "cornTestnet",
+        chainId: 21000001,
+        urls: {
+          apiURL:
+            "https://api.routescan.io/v2/network/testnet/evm/21000001/etherscan",
+          browserURL: "https://testnet.cornscan.io",
+        },
+      },
+      {
+        network: "arenaz",
+        chainId: 7897,
+        urls: {
+          apiURL: "https://explorer.arena-z.gg/api",
+          browserURL: "https://explorer.arena-z.gg",
+        },
+      },
+      {
+        network: "arenazTestnet",
+        chainId: 9897,
+        urls: {
+          apiURL: "https://arena-z.blockscout.com/api",
+          browserURL: "https://arena-z.blockscout.com",
+        },
+      },
+      {
+        network: "iotex",
+        chainId: 4689,
+        urls: {
+          apiURL: "https://iotexscout.io/api",
+          browserURL: "https://iotexscan.io",
+        },
+      },
+      {
+        network: "iotexTestnet",
+        chainId: 4690,
+        urls: {
+          apiURL: "https://testnet.iotexscan.io/api",
+          browserURL: "https://testnet.iotexscan.io",
+        },
+      },
+      {
+        network: "hychain",
+        chainId: 2911,
+        urls: {
+          apiURL: "https://explorer.hychain.com/api",
+          browserURL: "https://explorer.hychain.com/",
+        },
+      },
+      {
+        network: "hychainTestnet",
+        chainId: 29112,
+        urls: {
+          apiURL: "https://testnet.explorer.hychain.com/api",
+          browserURL: "https://testnet.explorer.hychain.com",
         },
       },
     ],

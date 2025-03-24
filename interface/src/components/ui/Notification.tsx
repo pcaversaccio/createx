@@ -52,9 +52,9 @@ export const Notification = ({
       {/* Global notification live region, render this permanently at the end of the document */}
       <div
         aria-live="assertive"
-        className="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6"
+        className="pointer-events-none fixed top-0 right-0 z-50 flex translate-x-[2px] items-end px-4 py-6 sm:items-start sm:p-6"
       >
-        <div className="flex w-full flex-col items-center space-y-4 sm:items-end">
+        <div className="flex w-full flex-col items-start space-y-4 sm:items-end">
           {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
           <Transition
             show={show}
@@ -66,25 +66,27 @@ export const Notification = ({
             leaveTo="opacity-0"
           >
             <div
-              className={`pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 ${bgColor}`}
+              className={`pointer-events-auto w-full max-w-4xl overflow-hidden rounded-lg shadow-md ring-1 ring-gray-300 dark:ring-gray-600 ${bgColor}`}
             >
-              <div className="p-4">
+              <div className="px-8 py-4">
                 <div className="flex items-start">
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     <Icon
                       className={`h-6 w-6 ${iconColor}`}
                       aria-hidden="true"
                     />
                   </div>
-                  <div className="ml-3 w-0 flex-1 pt-0.5">
+                  <div className="ml-2 flex-1 pr-14">
                     <p className={`text-sm font-medium ${titleTextColor}`}>
                       {title}
                     </p>
-                    <p className={`mt-1 text-sm ${descriptionTextColor}`}>
-                      {description}
-                    </p>
+                    {description && (
+                      <p className={`mt-1 text-sm ${descriptionTextColor}`}>
+                        {description}
+                      </p>
+                    )}
                   </div>
-                  <div className="ml-4 flex flex-shrink-0">
+                  <div className="ml-4 flex shrink-0">
                     <button
                       type="button"
                       className={`inline-flex rounded-md ${bgColor} ${titleTextColor} text-hover focus:outline-none`}
