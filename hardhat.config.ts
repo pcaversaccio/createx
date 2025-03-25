@@ -1221,8 +1221,8 @@ const config: HardhatUserConfig = {
         network: "hoodi",
         chainId: 560048,
         urls: {
-          apiURL: "https://hoodi.cloud.blockscout.com/api",
-          browserURL: "https://hoodi.cloud.blockscout.com",
+          apiURL: "https://api-hoodi.etherscan.io/api",
+          browserURL: "https://hoodi.etherscan.io",
         },
       },
       {
