@@ -2067,8 +2067,8 @@ const config: HardhatUserConfig = {
         network: "shapeTestnet",
         chainId: 11011,
         urls: {
-          apiURL: "https://explorer-sepolia.shape.network/api",
-          browserURL: "https://explorer-sepolia.shape.network",
+          apiURL: "https://sepolia.shapescan.xyz/api",
+          browserURL: "https://sepolia.shapescan.xyz",
         },
       },
       {

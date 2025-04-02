@@ -957,7 +957,7 @@
     "name": "Shape Sepolia Testnet",
     "chainId": 11011,
     "urls": [
-      "https://explorer-sepolia.shape.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://sepolia.shapescan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
