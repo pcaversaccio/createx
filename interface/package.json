@@ -42,7 +42,7 @@
   "devDependencies": {
     "@eslint/js": "^9.23.0",
     "@next/eslint-plugin-next": "^15.2.4",
-    "@tailwindcss/postcss": "^4.1.1",
+    "@tailwindcss/postcss": "^4.1.2",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/node": "^22.14.0",
     "@types/react": "^19.1.0",
@@ -50,13 +50,13 @@
     "autoprefixer": "^10.4.21",
     "eslint": "^9.23.0",
     "eslint-config-next": "^15.2.4",
-    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "next-seo": "^6.6.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "tailwindcss": "^4.1.1",
+    "tailwindcss": "^4.1.2",
     "typescript": "^5.8.2",
     "typescript-eslint": "^8.29.0"
   }
