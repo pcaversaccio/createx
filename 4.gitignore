@@ -1,0 +1,53 @@
+# Ignore sensitive information files
+*.env
+*.key
+*.pem
+*.cer
+*.crt
+*.p12
+*.pfx
+*.asc
+
+# Ignore log files
+*.log
+
+# Ignore database files
+*.sqlite
+*.db
+
+# Ignore OAuth tokens and other secrets
+*.token
+*.secret
+
+# Ignore configuration files containing sensitive information
+config/*.json
+config/*.yaml
+config/*.yml
+config/*.xml
+config/*.ini
+
+# Ignore build artifacts
+build/
+dist/
+target/
+
+# Ignore dependency directories
+node_modules/
+vendor/
+.venv/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE/editor-specific files
+.vscode/
+.idea/
+*.iml
+
+# Ignore backup files
+*.bak
+*.swp
+*~
+*.tmp
+*.temp
