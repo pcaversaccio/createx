@@ -959,6 +959,29 @@ const config: HardhatUserConfig = {
       url: vars.get("MEGAETH_TESTNET_URL", "https://carrot.megaeth.com/rpc"),
       accounts,
     },
+    bitlayerTestnet: {
+      chainId: 200810,
+      url: vars.get("BITLAYER_TESTNET_URL", "https://testnet-rpc.bitlayer.org"),
+      accounts,
+    },
+    bitlayerMain: {
+      chainId: 200901,
+      url: vars.get("BITLAYER_MAINNET_URL", "https://rpc.bitlayer.org"),
+      accounts,
+    },
+    roninTestnet: {
+      chainId: 2021,
+      url: vars.get(
+        "RONIN_TESTNET_URL",
+        "https://saigon-testnet.roninchain.com/rpc",
+      ),
+      accounts,
+    },
+    roninMain: {
+      chainId: 2020,
+      url: vars.get("RONIN_MAINNET_URL", "https://api.roninchain.com/rpc"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1207,6 +1230,9 @@ const config: HardhatUserConfig = {
       // For Zircuit testnet & mainnet
       zircuit: vars.get("ZIRCUIT_API_KEY", ""),
       zircuitTestnet: vars.get("ZIRCUIT_API_KEY", ""),
+      // For Bitlayer testnet & mainnet
+      bitlayer: vars.get("BITLAYER_API_KEY", ""),
+      bitlayerTestnet: vars.get("BITLAYER_API_KEY", ""),
     },
     customChains: [
       {
@@ -2233,6 +2259,22 @@ const config: HardhatUserConfig = {
           apiURL:
             "https://explorer.garfield-testnet.zircuit.com/api/contractVerifyHardhat",
           browserURL: "https://explorer.garfield-testnet.zircuit.com",
+        },
+      },
+      {
+        network: "bitlayer",
+        chainId: 200901,
+        urls: {
+          apiURL: "https://api.btrscan.com/scan/api",
+          browserURL: "https://www.btrscan.com",
+        },
+      },
+      {
+        network: "bitlayerTestnet",
+        chainId: 200810,
+        urls: {
+          apiURL: "https://api-testnet.btrscan.com/scan/api",
+          browserURL: "https://testnet.btrscan.com",
         },
       },
     ],
