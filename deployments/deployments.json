@@ -524,6 +524,22 @@
     ]
   },
   {
+    "name": "Bitlayer",
+    "chainId": 200901,
+    "urls": [
+      "https://www.btrscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/200901/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Ronin",
+    "chainId": 2020,
+    "urls": [
+      "https://app.roninchain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://sourcify-repo.roninchain.com/contracts/partial_match/2020/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1042,6 +1058,22 @@
     "chainId": 6342,
     "urls": [
       "https://www.megaexplorer.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Bitlayer Testnet",
+    "chainId": 200810,
+    "urls": [
+      "https://testnet-scan.bitlayer.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/200810/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Ronin Testnet (Saigon)",
+    "chainId": 2021,
+    "urls": [
+      "https://saigon-app.roninchain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://sourcify-repo.roninchain.com/contracts/partial_match/2021/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
     ]
   }
 ]
