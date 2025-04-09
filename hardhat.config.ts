@@ -1691,7 +1691,7 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL:
             "https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER",
-          browserURL: "https://www.oklink.com/xlayer",
+          browserURL: "https://www.oklink.com/x-layer",
         },
       },
       {
@@ -1700,7 +1700,7 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL:
             "https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER_TESTNET",
-          browserURL: "https://www.oklink.com/xlayer-test",
+          browserURL: "https://www.oklink.com/x-layer-testnet",
         },
       },
       {
