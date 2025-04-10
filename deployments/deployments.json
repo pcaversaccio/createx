@@ -59,7 +59,7 @@
     "name": "Fantom",
     "chainId": 250,
     "urls": [
-      "https://ftmscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://explorer.fantom.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/250/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
@@ -606,7 +606,7 @@
     "name": "Fantom Testnet",
     "chainId": 4002,
     "urls": [
-      "https://testnet.ftmscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://explorer.testnet.fantom.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
