@@ -228,7 +228,7 @@
     "hardhat-contract-sizer": "^2.10.0",
     "hardhat-gas-reporter": "^2.2.3",
     "prettier": "^3.5.3",
-    "prettier-plugin-solidity": "^1.4.2",
+    "prettier-plugin-solidity": "^1.4.3",
     "solhint": "^5.0.5",
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
