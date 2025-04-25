@@ -149,12 +149,12 @@ jobs:
       - name: Set up LCOV
         uses: hrishikesh-kadam/setup-lcov@v1
         with:
-          ref: v2.3
+          ref: v2.3.1
 
       - name: Run coverage
         run: |
           echo '```' >> $GITHUB_STEP_SUMMARY  
-          NO_COLOR=1 forge coverage --report summary --report lcov --lcov-version 2.3 >> $GITHUB_STEP_SUMMARY
+          NO_COLOR=1 forge coverage --report summary --report lcov --lcov-version 2.3.1 >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
         env:
           FOUNDRY_PROFILE: default
@@ -174,7 +174,7 @@ jobs:
           lcov-file: ./lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      # The following steps act as a temporary workaround, as LCOV `2.3` is not yet supported
+      # The following steps act as a temporary workaround, as LCOV `2.3.1` is not yet supported
       # in `zgosalvez/github-actions-report-lcov@v4`: https://github.com/zgosalvez/github-actions-report-lcov/issues/168.
       - name: Set up LCOV `1.16`
         run: |
