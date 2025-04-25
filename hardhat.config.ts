@@ -535,9 +535,19 @@ const config: HardhatUserConfig = {
       url: vars.get("MODE_MAINNET_URL", "https://mainnet.mode.network"),
       accounts,
     },
-    seiTestnet: {
+    seiDevnet: {
       chainId: 713715,
-      url: vars.get("SEI_TESTNET_URL", "https://evm-rpc-arctic-1.sei-apis.com"),
+      url: vars.get("SEI_DEVNET_URL", "https://evm-rpc-arctic-1.sei-apis.com"),
+      accounts,
+    },
+    seiTestnet: {
+      chainId: 1328,
+      url: vars.get("SEI_TESTNET_URL", "https://evm-rpc-testnet.sei-apis.com"),
+      accounts,
+    },
+    seiMain: {
+      chainId: 1329,
+      url: vars.get("SEI_MAINNET_URL", "https://evm-rpc.sei-apis.com"),
       accounts,
     },
     xlayerTestnet: {
