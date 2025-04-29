@@ -67,7 +67,7 @@
     "name": "Avalanche",
     "chainId": 43114,
     "urls": [
-      "https://snowtrace.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://snowscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/43114/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
@@ -372,7 +372,7 @@
     "name": "World Chain",
     "chainId": 480,
     "urls": [
-      "https://worldchain-mainnet.explorer.alchemy.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://worldscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -620,7 +620,7 @@
     "name": "Avalanche Testnet (Fuji)",
     "chainId": 43113,
     "urls": [
-      "https://testnet.snowtrace.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://testnet.snowscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/43113/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
@@ -895,7 +895,7 @@
     "name": "World Chain Sepolia Testnet",
     "chainId": 4801,
     "urls": [
-      "https://worldchain-sepolia.explorer.alchemy.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://sepolia.worldscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -1019,10 +1019,10 @@
     ]
   },
   {
-    "name": "Berachain Testnet (bArtio)",
-    "chainId": 80084,
+    "name": "Berachain Testnet (Bepolia)",
+    "chainId": 80069,
     "urls": [
-      "https://bartio.beratrail.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://testnet.berascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {

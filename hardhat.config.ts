@@ -891,8 +891,11 @@ const config: HardhatUserConfig = {
       accounts,
     },
     berachainTestnet: {
-      chainId: 80084,
-      url: vars.get("BERACHAIN_TESTNET_URL", "https://bartio.drpc.org"),
+      chainId: 80069,
+      url: vars.get(
+        "BERACHAIN_TESTNET_URL",
+        "https://bepolia.rpc.berachain.com",
+      ),
       accounts,
     },
     berachainMain: {
@@ -1373,6 +1376,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-sepolia.arbiscan.io/api",
           browserURL: "https://sepolia.arbiscan.io",
+        },
+      },
+      {
+        network: "avalanche",
+        chainId: 43114,
+        urls: {
+          apiURL: "https://api.snowscan.xyz/api",
+          browserURL: "https://snowscan.xyz",
+        },
+      },
+      {
+        network: "avalancheFujiTestnet",
+        chainId: 43113,
+        urls: {
+          apiURL: "https://api-testnet.snowscan.xyz/api",
+          browserURL: "https://testnet.snowscan.xyz",
         },
       },
       {
@@ -1895,16 +1914,16 @@ const config: HardhatUserConfig = {
         network: "worldChain",
         chainId: 480,
         urls: {
-          apiURL: "https://worldchain-mainnet.explorer.alchemy.com/api",
-          browserURL: "https://worldchain-mainnet.explorer.alchemy.com",
+          apiURL: "https://api.worldscan.org/api",
+          browserURL: "https://worldscan.org",
         },
       },
       {
         network: "worldChainTestnet",
         chainId: 4801,
         urls: {
-          apiURL: "https://worldchain-sepolia.explorer.alchemy.com/api",
-          browserURL: "https://worldchain-sepolia.explorer.alchemy.com",
+          apiURL: "https://api-sepolia.worldscan.org/api",
+          browserURL: "https://sepolia.worldscan.org",
         },
       },
       {
@@ -2181,11 +2200,10 @@ const config: HardhatUserConfig = {
       },
       {
         network: "berachainTestnet",
-        chainId: 80084,
+        chainId: 80069,
         urls: {
-          apiURL:
-            "https://api.routescan.io/v2/network/testnet/evm/80084/etherscan",
-          browserURL: "https://bartio.beratrail.io",
+          apiURL: "https://api-testnet.berascan.com/api",
+          browserURL: "https://testnet.berascan.com",
         },
       },
       {
