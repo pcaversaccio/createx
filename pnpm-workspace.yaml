@@ -1,6 +1,8 @@
+sharedWorkspaceLockfile: true
 packages:
   - interface
 onlyBuiltDependencies:
   - keccak
   - secp256k1
   - sharp
+  - unrs-resolver
