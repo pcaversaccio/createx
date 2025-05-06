@@ -995,6 +995,16 @@ const config: HardhatUserConfig = {
       url: vars.get("RONIN_MAINNET_URL", "https://api.roninchain.com/rpc"),
       accounts,
     },
+    zkSyncTestnet: {
+      chainId: 300,
+      url: vars.get("ZKSYNC_TESTNET_URL", "https://sepolia.era.zksync.dev"),
+      accounts,
+    },
+    zkSyncMain: {
+      chainId: 324,
+      url: vars.get("ZKSYNC_MAINNET_URL", "https://mainnet.era.zksync.io"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1246,6 +1256,9 @@ const config: HardhatUserConfig = {
       // For Bitlayer testnet & mainnet
       bitlayer: vars.get("BITLAYER_API_KEY", ""),
       bitlayerTestnet: vars.get("BITLAYER_API_KEY", ""),
+      // For ZKsync testnet & mainnet
+      zkSync: vars.get("ZKSYNC_API_KEY", ""),
+      zkSyncTestnet: vars.get("ZKSYNC_API_KEY", ""),
     },
     customChains: [
       {
@@ -2303,6 +2316,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-testnet.btrscan.com/scan/api",
           browserURL: "https://testnet.btrscan.com",
+        },
+      },
+      {
+        network: "zkSync",
+        chainId: 324,
+        urls: {
+          apiURL: "https://api-era.zksync.network/api",
+          browserURL: "https://era.zksync.network",
+        },
+      },
+      {
+        network: "zkSyncTestnet",
+        chainId: 300,
+        urls: {
+          apiURL: "https://api-sepolia-era.zksync.network/api",
+          browserURL: "https://sepolia-era.zksync.network",
         },
       },
     ],

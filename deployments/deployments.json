@@ -547,6 +547,13 @@
     ]
   },
   {
+    "name": "ZKsync Era",
+    "chainId": 324,
+    "urls": [
+      "https://era.zksync.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1088,6 +1095,13 @@
     "urls": [
       "https://saigon-app.roninchain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://sourcify-repo.roninchain.com/contracts/partial_match/2021/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed/"
+    ]
+  },
+  {
+    "name": "ZKsync Era Sepolia Testnet",
+    "chainId": 300,
+    "urls": [
+      "https://sepolia-era.zksync.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
