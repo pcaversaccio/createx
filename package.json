@@ -200,6 +200,8 @@
     "deploy:bitlayermain": "npx hardhat run --no-compile --network bitlayerMain scripts/deploy.ts",
     "deploy:ronintestnet": "npx hardhat run --no-compile --network roninTestnet scripts/deploy.ts",
     "deploy:roninmain": "npx hardhat run --no-compile --network roninMain scripts/deploy.ts",
+    "deploy:zksynctestnet": "npx hardhat run --no-compile --network zkSyncTestnet scripts/deploy.ts",
+    "deploy:zksyncmain": "npx hardhat run --no-compile --network zkSyncMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
@@ -229,10 +231,10 @@
     "hardhat-gas-reporter": "^2.2.3",
     "prettier": "^3.5.3",
     "prettier-plugin-solidity": "^2.0.0",
-    "solhint": "^5.0.5",
+    "solhint": "^5.1.0",
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.31.1"
+    "typescript-eslint": "^8.32.0"
   }
 }
