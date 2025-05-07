@@ -700,18 +700,12 @@ const config: HardhatUserConfig = {
     },
     plumeTestnet: {
       chainId: 98867,
-      url: vars.get(
-        "PLUME_TESTNET_URL",
-        "https://testnet-rpc.plumenetwork.xyz",
-      ),
+      url: vars.get("PLUME_TESTNET_URL", "https://testnet-rpc.plume.org"),
       accounts,
     },
     plumeMain: {
       chainId: 98866,
-      url: vars.get(
-        "PLUME_MAINNET_URL",
-        "https://phoenix-rpc.plumenetwork.xyz",
-      ),
+      url: vars.get("PLUME_MAINNET_URL", "https://rpc.plume.org"),
       accounts,
     },
     unichainTestnet: {
@@ -1943,16 +1937,16 @@ const config: HardhatUserConfig = {
         network: "plume",
         chainId: 98866,
         urls: {
-          apiURL: "https://phoenix-explorer.plumenetwork.xyz/api",
-          browserURL: "https://phoenix-explorer.plumenetwork.xyz",
+          apiURL: "https://explorer.plume.org/api",
+          browserURL: "https://explorer.plume.org",
         },
       },
       {
         network: "plumeTestnet",
         chainId: 98867,
         urls: {
-          apiURL: "https://testnet-explorer.plumenetwork.xyz/api",
-          browserURL: "https://testnet-explorer.plumenetwork.xyz",
+          apiURL: "https://testnet-explorer.plume.org/api",
+          browserURL: "https://testnet-explorer.plume.org",
         },
       },
       {

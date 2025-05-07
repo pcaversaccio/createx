@@ -379,7 +379,7 @@
     "name": "Plume",
     "chainId": 98866,
     "urls": [
-      "https://phoenix-explorer.plumenetwork.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://explorer.plume.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -909,7 +909,7 @@
     "name": "Plume Sepolia Testnet",
     "chainId": 98867,
     "urls": [
-      "https://testnet-explorer.plumenetwork.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://testnet-explorer.plume.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
