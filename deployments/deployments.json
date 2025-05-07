@@ -1103,5 +1103,12 @@
     "urls": [
       "https://sepolia-era.zksync.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
+  },
+  {
+    "name": "Immutable zkEVM",
+    "chainId": "13371",
+    "urls": [
+      "https://explorer.immutable.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   }
 ]
