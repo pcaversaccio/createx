@@ -999,17 +999,17 @@ const config: HardhatUserConfig = {
       url: vars.get("ZKSYNC_MAINNET_URL", "https://mainnet.era.zksync.io"),
       accounts,
     },
-    zkEVMImmutableTestnet: {
+    immutableZkEVMTestnet: {
       chainId: 13473,
       url: vars.get(
-        "ZKEVMIMMUTABLE_TESTNET_URL",
+        "IMMUTABLEZKEVM_TESTNET_URL",
         "https://rpc.testnet.immutable.com",
       ),
       accounts,
     },
-    zkEVMImmutableMain: {
+    immutableZkEVMMain: {
       chainId: 13371,
-      url: vars.get("ZKEVMIMMUTABLE_MAINNET_URL", "https://rpc.immutable.com"),
+      url: vars.get("IMMUTABLEZKEVM_MAINNET_URL", "https://rpc.immutable.com"),
       accounts,
     },
   },
@@ -1266,9 +1266,9 @@ const config: HardhatUserConfig = {
       // For ZKsync testnet & mainnet
       zkSync: vars.get("ZKSYNC_API_KEY", ""),
       zkSyncTestnet: vars.get("ZKSYNC_API_KEY", ""),
-      // For zkEVM Immutable testnet & mainnet
-      zkEVMImmutable: vars.get("ZKEVMIMMUTABLE_API_KEY", ""),
-      zkEVMImmutableTestnet: vars.get("ZKEVMIMMUTABLE_API_KEY", ""),
+      // For Immutable zkEVM testnet & mainnet
+      immutableZkEVM: vars.get("IMMUTABLEZKEVM_API_KEY", ""),
+      immutableZkEVMTestnet: vars.get("IMMUTABLEZKEVM_API_KEY", ""),
     },
     customChains: [
       {
@@ -2345,7 +2345,7 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        network: "zkEVMImmutable",
+        network: "immutableZkEVM",
         chainId: 13371,
         urls: {
           apiURL: "hhttps://explorer.immutable.com/api",
@@ -2353,7 +2353,7 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        network: "zkEVMImmutableTestnet",
+        network: "immutableZkEVMTestnet",
         chainId: 13473,
         urls: {
           apiURL: "https://explorer.testnet.immutable.com/api",
