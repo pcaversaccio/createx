@@ -202,6 +202,8 @@
     "deploy:roninmain": "npx hardhat run --no-compile --network roninMain scripts/deploy.ts",
     "deploy:zksynctestnet": "npx hardhat run --no-compile --network zkSyncTestnet scripts/deploy.ts",
     "deploy:zksyncmain": "npx hardhat run --no-compile --network zkSyncMain scripts/deploy.ts",
+    "deploy:zkevmimmutabletestnet": "npx hardhat run --no-compile --network zkEVMImmutableTestnet scripts/deploy.ts",
+    "deploy:zkevmimmutablemain": "npx hardhat run --no-compile --network zkEVMImmutableMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",

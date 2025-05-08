@@ -16,7 +16,7 @@ const Home = () => {
       id: 1,
       href: "/deployments",
       title: "Deployments",
-      subtitle: "Deployed on 140+ chains",
+      subtitle: "Deployed on 150+ chains",
     },
     { id: 2, href: "/abi", title: "ABI", subtitle: "In any format" },
     {

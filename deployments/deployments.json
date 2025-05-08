@@ -554,6 +554,13 @@
     ]
   },
   {
+    "name": "Immutable zkEVM",
+    "chainId": "13371",
+    "urls": [
+      "https://explorer.immutable.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1105,10 +1112,10 @@
     ]
   },
   {
-    "name": "Immutable zkEVM",
-    "chainId": "13371",
+    "name": "Immutable zkEVM Sepolia Testnet",
+    "chainId": "13473",
     "urls": [
-      "https://explorer.immutable.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://explorer.testnet.immutable.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]

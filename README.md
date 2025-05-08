@@ -24,13 +24,13 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
   - [Test Coverage](#test-coverage)
 - [ABI (Application Binary Interface)](#abi-application-binary-interface)
 - [New Deployment(s)](#new-deployments)
-    - [`ethers.js`](#ethersjs)
-    - [`cast`](#cast)
+  - [`ethers.js`](#ethersjs)
+  - [`cast`](#cast)
   - [Contract Verification](#contract-verification)
 - [`CreateX` Deployments](#createx-deployments)
-    - [EVM-Based Production Networks](#evm-based-production-networks)
-    - [Ethereum Test Networks](#ethereum-test-networks)
-    - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
+  - [EVM-Based Production Networks](#evm-based-production-networks)
+  - [Ethereum Test Networks](#ethereum-test-networks)
+  - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
 - [Integration With External Tooling](#integration-with-external-tooling)
 - [Community-Maintained Dune Dashboards](#community-maintained-dune-dashboards)
 - [🙏🏼 Acknowledgement](#-acknowledgement)
@@ -2333,6 +2333,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Bitlayer Testnet](https://testnet-scan.bitlayer.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Ronin Testnet (Saigon)](https://saigon-app.roninchain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [ZKsync Era Sepolia Testnet](https://sepolia-era.zksync.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Immutable zkEVM Sepolia Testnet](https://explorer.testnet.immutable.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 
