@@ -2348,7 +2348,7 @@ const config: HardhatUserConfig = {
         network: "immutableZkEVM",
         chainId: 13371,
         urls: {
-          apiURL: "hhttps://explorer.immutable.com/api",
+          apiURL: "https://explorer.immutable.com/api",
           browserURL: "https://explorer.immutable.com",
         },
       },
