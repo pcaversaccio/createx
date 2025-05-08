@@ -772,7 +772,7 @@ Please note that when you configure a permissioned deploy protection, you **must
 
 Furthermore, you can configure _only_ cross-chain redeploy protection by setting the first 20 bytes equal to the zero address `0x0000000000000000000000000000000000000000`. The rationale behind this logic is to prevent a pseudo-randomly generated 32 byte salt from inadvertently activating cross-chain redeploy protection. Also in this case, if you don't specify a cross-chain redeploy protection, i.e. the 21st byte is greater than `0x01`, the function reverts. The underlying reason for this logic is as well to enforce developer explicitness.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > When using the read-only functions [`computeCreate2Address(bytes32,bytes32)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L600-L610) or [`computeCreate3Address(bytes32)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L857-L867), it is essential to provide the _guarded_ `salt` value, meaning the value after being processed by the `_guard` function, as the input parameter. This ensures the correct computation of the deployment address. For more details, refer to [this issue](https://github.com/pcaversaccio/createx/issues/140).
 
 ### Pseudo-Random Salt Value
@@ -2251,6 +2251,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Bitlayer](https://www.btrscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Ronin](https://app.roninchain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [ZKsync Era](https://era.zksync.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Immutable zkEVM](https://explorer.immutable.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
@@ -2332,6 +2333,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Bitlayer Testnet](https://testnet-scan.bitlayer.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Ronin Testnet (Saigon)](https://saigon-app.roninchain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [ZKsync Era Sepolia Testnet](https://sepolia-era.zksync.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Immutable zkEVM Sepolia Testnet](https://explorer.testnet.immutable.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 
