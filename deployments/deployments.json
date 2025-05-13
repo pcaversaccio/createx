@@ -561,6 +561,13 @@
     ]
   },
   {
+    "name": "Abstract",
+    "chainId": "2741",
+    "urls": [
+      "https://abscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1116,6 +1123,13 @@
     "chainId": "13473",
     "urls": [
       "https://explorer.testnet.immutable.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Abstract Sepolia Testnet",
+    "chainId": "11124",
+    "urls": [
+      "https://sepolia.abscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
