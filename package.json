@@ -204,6 +204,8 @@
     "deploy:zksyncmain": "npx hardhat run --no-compile --network zkSyncMain scripts/deploy.ts",
     "deploy:immutablezkevmtestnet": "npx hardhat run --no-compile --network immutableZkEVMTestnet scripts/deploy.ts",
     "deploy:immutablezkevmmain": "npx hardhat run --no-compile --network immutableZkEVMMain scripts/deploy.ts",
+    "deploy:abstracttestnet": "npx hardhat run --no-compile --network abstractTestnet scripts/deploy.ts",
+    "deploy:abstractmain": "npx hardhat run --no-compile --network abstractMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
@@ -237,6 +239,6 @@
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.32.0"
+    "typescript-eslint": "^8.32.1"
   }
 }

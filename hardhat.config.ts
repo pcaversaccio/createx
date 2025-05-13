@@ -1012,6 +1012,16 @@ const config: HardhatUserConfig = {
       url: vars.get("IMMUTABLEZKEVM_MAINNET_URL", "https://rpc.immutable.com"),
       accounts,
     },
+    abstractTestnet: {
+      chainId: 11124,
+      url: vars.get("ABSTRACT_TESTNET_URL", "https://api.testnet.abs.xyz"),
+      accounts,
+    },
+    abstractMain: {
+      chainId: 2741,
+      url: vars.get("ABSTRACT_MAINNET_URL", "https://api.mainnet.abs.xyz"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1269,6 +1279,9 @@ const config: HardhatUserConfig = {
       // For Immutable zkEVM testnet & mainnet
       immutableZkEVM: vars.get("IMMUTABLEZKEVM_API_KEY", ""),
       immutableZkEVMTestnet: vars.get("IMMUTABLEZKEVM_API_KEY", ""),
+      // For Abstract testnet & mainnet
+      abstract: vars.get("ABSTRACT_API_KEY", ""),
+      abstractTestnet: vars.get("ABSTRACT_API_KEY", ""),
     },
     customChains: [
       {
@@ -2358,6 +2371,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://explorer.testnet.immutable.com/api",
           browserURL: "https://explorer.testnet.immutable.com",
+        },
+      },
+      {
+        network: "abstract",
+        chainId: 2741,
+        urls: {
+          apiURL: "https://api.abscan.org/api",
+          browserURL: "https://abscan.org",
+        },
+      },
+      {
+        network: "abstractTestnet",
+        chainId: 11124,
+        urls: {
+          apiURL: "https://api-sepolia.abscan.org/api",
+          browserURL: "https://sepolia.abscan.org",
         },
       },
     ],
