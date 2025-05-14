@@ -21,7 +21,7 @@
   },
   "author": "pcaversaccio (https://pcaversaccio.com), Matt Solomon (https://mattsolomon.dev)",
   "license": "AGPL-3.0-only",
-  "packageManager": "pnpm@10.10.0",
+  "packageManager": "pnpm@10.11.0",
   "scripts": {
     "clean": "npx hardhat clean && forge clean",
     "test": "forge test --out forge-artifacts",
@@ -206,6 +206,8 @@
     "deploy:immutablezkevmmain": "npx hardhat run --no-compile --network immutableZkEVMMain scripts/deploy.ts",
     "deploy:abstracttestnet": "npx hardhat run --no-compile --network abstractTestnet scripts/deploy.ts",
     "deploy:abstractmain": "npx hardhat run --no-compile --network abstractMain scripts/deploy.ts",
+    "deploy:hyperevmtestnet": "npx hardhat run --no-compile --network hyperevmTestnet scripts/deploy.ts",
+    "deploy:hyperevmmain": "npx hardhat run --no-compile --network hyperevmMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",

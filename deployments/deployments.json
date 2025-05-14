@@ -568,6 +568,13 @@
     ]
   },
   {
+    "name": "HyperEVM",
+    "chainId": "999",
+    "urls": [
+      "https://purrsec.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1130,6 +1137,13 @@
     "chainId": "11124",
     "urls": [
       "https://sepolia.abscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "HyperEVM Testnet",
+    "chainId": "998",
+    "urls": [
+      "https://testnet.purrsec.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
