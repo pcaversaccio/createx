@@ -1022,6 +1022,19 @@ const config: HardhatUserConfig = {
       url: vars.get("ABSTRACT_MAINNET_URL", "https://api.mainnet.abs.xyz"),
       accounts,
     },
+    hyperevmTestnet: {
+      chainId: 998,
+      url: vars.get(
+        "HYPEREVM_TESTNET_URL",
+        "https://rpc.hyperliquid-testnet.xyz/evm",
+      ),
+      accounts,
+    },
+    hyperevmMain: {
+      chainId: 999,
+      url: vars.get("HYPEREVM_MAINNET_URL", "https://rpc.hyperliquid.xyz/evm"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
