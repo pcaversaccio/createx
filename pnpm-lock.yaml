@@ -130,8 +130,8 @@ importers:
         specifier: ^5.2.0
         version: 5.2.0(eslint@9.27.0(jiti@2.4.2))
       next-seo:
-        specifier: ^6.6.0
-        version: 6.6.0(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: ^6.7.0
+        version: 6.7.0(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       postcss:
         specifier: ^8.5.3
         version: 8.5.3
@@ -2591,8 +2591,8 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  next-seo@6.6.0:
-    resolution: {integrity: sha512-0VSted/W6XNtgAtH3D+BZrMLLudqfm0D5DYNJRXHcDgan/1ZF1tDFIsWrmvQlYngALyphPfZ3ZdOqlKpKdvG6w==}
+  next-seo@6.7.0:
+    resolution: {integrity: sha512-iY0uTNzUOH1+0NDHYmyshwI9w0jtW6QmVZRrpnRRtLETDmD7jguWe8eW8SL78xu8CvsAB3ixbISkJfKgzeBNKA==}
     peerDependencies:
       next: ^8.1.1-canary.54 || >=9.0.0
       react: '>=16.0.0'
@@ -6246,7 +6246,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  next-seo@6.6.0(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  next-seo@6.7.0(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       next: 15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react: 19.1.0
