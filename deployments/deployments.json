@@ -1145,5 +1145,12 @@
     "urls": [
       "https://testnet.purrsec.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
+  },
+  {
+    "name": "Kaia",
+    "chainId": 8217,
+    "urls": [
+      "https://kaiascope.com/account/0xba5ed099633d3b313e4d5f7bdc1305d3c28ba5ed"
+    ]
   }
 ]
