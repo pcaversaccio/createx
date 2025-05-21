@@ -160,7 +160,7 @@ contract CreateX_Guard_Internal_Test is BaseTest {
         string calldata prevrandao,
         uint64 chainId
     ) {
-        increment = bound(increment, 1, type(uint128).max);
+        increment = bound(increment, 1, type(uint64).max - 100);
         vm.assume(coinbase != zeroAddress && chainId != block.chainid && chainId != 0);
         vm.roll(vm.getBlockNumber() + increment);
         vm.coinbase(coinbase);
