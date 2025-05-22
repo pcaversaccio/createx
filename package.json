@@ -208,6 +208,7 @@
     "deploy:abstractmain": "npx hardhat run --no-compile --network abstractMain scripts/deploy.ts",
     "deploy:hyperevmtestnet": "npx hardhat run --no-compile --network hyperevmTestnet scripts/deploy.ts",
     "deploy:hyperevmmain": "npx hardhat run --no-compile --network hyperevmMain scripts/deploy.ts",
+    "deploy:kaiamain": "npx hardhat run --no-compile --network kaiaMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
