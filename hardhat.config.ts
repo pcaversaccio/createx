@@ -1035,6 +1035,11 @@ const config: HardhatUserConfig = {
       url: vars.get("HYPEREVM_MAINNET_URL", "https://rpc.hyperliquid.xyz/evm"),
       accounts,
     },
+    kaiaMain: {
+      chainId: 8217,
+      url: vars.get("KAIA_MAINNET_URL", "https://rpc.ankr.com/kaia"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1295,6 +1300,8 @@ const config: HardhatUserConfig = {
       // For Abstract testnet & mainnet
       abstract: vars.get("ABSTRACT_API_KEY", ""),
       abstractTestnet: vars.get("ABSTRACT_API_KEY", ""),
+      // For Kaia mainnet
+      kaia: vars.get("OKLINK_API_KEY", ""),
     },
     customChains: [
       {
@@ -2400,6 +2407,15 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-sepolia.abscan.org/api",
           browserURL: "https://sepolia.abscan.org",
+        },
+      },
+      {
+        network: "kaia",
+        chainId: 8217,
+        urls: {
+          apiURL:
+            "https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/KAIA",
+          browserURL: "https://www.oklink.com/kaia",
         },
       },
     ],
