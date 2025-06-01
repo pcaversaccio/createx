@@ -876,7 +876,7 @@ CreateX_Guard_Internal_Test
 
 ### Test Coverage
 
-This project repository uses [`forge coverage`](https://book.getfoundry.sh/reference/forge/forge-coverage). Simply run:
+This project repository uses [`forge coverage`](https://book.getfoundry.sh/forge/reference/forge-coverage/). Simply run:
 
 ```console
 forge coverage
