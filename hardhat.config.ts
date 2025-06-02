@@ -1040,6 +1040,22 @@ const config: HardhatUserConfig = {
       url: vars.get("KAIA_MAINNET_URL", "https://rpc.ankr.com/kaia"),
       accounts,
     },
+    apeChainTestnet: {
+      chainId: 33111,
+      url: vars.get(
+        "APECHAIN_TESTNET_URL",
+        "https://curtis.rpc.caldera.xyz/http",
+      ),
+      accounts,
+    },
+    apeChainMain: {
+      chainId: 33139,
+      url: vars.get(
+        "APECHAIN_MAINNET_URL",
+        "https://apechain.calderachain.xyz/http",
+      ),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1302,6 +1318,9 @@ const config: HardhatUserConfig = {
       abstractTestnet: vars.get("ABSTRACT_API_KEY", ""),
       // For Kaia mainnet
       kaia: vars.get("OKLINK_API_KEY", ""),
+      // For ApeChain testnet & mainnet
+      apeChain: vars.get("APECHAIN_API_KEY", ""),
+      apeChainTestnet: vars.get("APECHAIN_API_KEY", ""),
     },
     customChains: [
       {
@@ -2416,6 +2435,22 @@ const config: HardhatUserConfig = {
           apiURL:
             "https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/KAIA",
           browserURL: "https://www.oklink.com/kaia",
+        },
+      },
+      {
+        network: "apeChain",
+        chainId: 33139,
+        urls: {
+          apiURL: "https://api.apescan.io/api",
+          browserURL: "https://apescan.io",
+        },
+      },
+      {
+        network: "apeChainTestnet",
+        chainId: 33111,
+        urls: {
+          apiURL: "https://api-curtis.apescan.io/api",
+          browserURL: "https://curtis.apescan.io",
         },
       },
     ],
