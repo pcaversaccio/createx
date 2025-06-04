@@ -876,7 +876,7 @@ CreateX_Guard_Internal_Test
 
 ### Test Coverage
 
-This project repository uses [`forge coverage`](https://book.getfoundry.sh/forge/reference/forge-coverage/). Simply run:
+This project repository uses [`forge coverage`](https://getfoundry.sh/forge/reference/forge-coverage/). Simply run:
 
 ```console
 forge coverage
@@ -2105,7 +2105,7 @@ We repeat: PLEASE DO NOT BROADCAST ANY PRE-SIGNED TRANSACTION WITHOUT LOCAL TEST
 - _Medium Case:_ `gasLimit = 25_000_000`; [`signed_serialised_transaction_gaslimit_25000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_25000000_.json),
 - _Heavy Case:_ `gasLimit = 45_000_000`; [`signed_serialised_transaction_gaslimit_45000000_.json`](./scripts/presigned-createx-deployment-transactions/signed_serialised_transaction_gaslimit_45000000_.json).
 
-You can broadcast the transaction using either [`ethers.js`](https://docs.ethers.org/v6/) or [`cast`](https://book.getfoundry.sh/cast/overview/):
+You can broadcast the transaction using either [`ethers.js`](https://docs.ethers.org/v6/) or [`cast`](https://getfoundry.sh/cast/overview/):
 
 #### [`ethers.js`](https://docs.ethers.org/v6/)
 
@@ -2133,7 +2133,7 @@ npx hardhat run --no-compile --network <NETWORK_NAME> scripts/deploy.ts
 
 The [`deploy.ts`](./scripts/deploy.ts) script ensures that [`CreateX`](./src/CreateX.sol) is automatically verified if you have configured the `etherscan` property accordingly. The current script broadcasts the _default_ pre-signed transaction, which has a gas limit of 3,000,000 gas. If you want to use a different pre-signed transaction, you must change the import of the pre-signed transaction in the [`deploy.ts`](./scripts/deploy.ts) script.
 
-#### [`cast`](https://book.getfoundry.sh/cast/overview/)
+#### [`cast`](https://getfoundry.sh/cast/overview/)
 
 It is recommended to install [Foundry](https://github.com/foundry-rs/foundry) via:
 
