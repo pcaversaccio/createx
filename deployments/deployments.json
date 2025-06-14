@@ -590,6 +590,13 @@
     ]
   },
   {
+    "name": "Botanix",
+    "chainId": 3637,
+    "urls": [
+      "https://botanixscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1167,6 +1174,13 @@
     "urls": [
       "https://curtis.apescan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/33111/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Botanix Testnet",
+    "chainId": 3636,
+    "urls": [
+      "https://testnet.botanixscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
