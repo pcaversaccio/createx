@@ -2256,6 +2256,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [HyperEVM](https://purrsec.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Kaia](https://kaiascope.com/account/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [ApeChain](https://apescan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Botanix](https://botanixscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
@@ -2341,6 +2342,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Abstract Sepolia Testnet](https://sepolia.abscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [HyperEVM Testnet](https://testnet.purrsec.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [ApeChain Sepolia Testnet (Curtis)](https://curtis.apescan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Botanix Testnet](https://testnet.botanixscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 

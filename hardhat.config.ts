@@ -1056,6 +1056,19 @@ const config: HardhatUserConfig = {
       ),
       accounts,
     },
+    botanixTestnet: {
+      chainId: 3636,
+      url: vars.get(
+        "BOTANIX_TESTNET_URL",
+        "https://rpc.ankr.com/botanix_testnet",
+      ),
+      accounts,
+    },
+    botanixMain: {
+      chainId: 3637,
+      url: vars.get("BOTANIX_MAINNET_URL", "https://rpc.botanixlabs.com"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1321,6 +1334,9 @@ const config: HardhatUserConfig = {
       // For ApeChain testnet & mainnet
       apeChain: vars.get("APECHAIN_API_KEY", ""),
       apeChainTestnet: vars.get("APECHAIN_API_KEY", ""),
+      // For Botanix testnet & mainnet
+      botanix: vars.get("BOTANIX_API_KEY", ""),
+      botanixTestnet: vars.get("BOTANIX_API_KEY", ""),
     },
     customChains: [
       {
@@ -2451,6 +2467,24 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-curtis.apescan.io/api",
           browserURL: "https://curtis.apescan.io",
+        },
+      },
+      {
+        network: "botanix",
+        chainId: 3637,
+        urls: {
+          apiURL:
+            "https://api.routescan.io/v2/network/mainnet/evm/3637/etherscan/api",
+          browserURL: "https://botanixscan.io",
+        },
+      },
+      {
+        network: "botanixTestnet",
+        chainId: 3636,
+        urls: {
+          apiURL:
+            "https://api.routescan.io/v2/network/testnet/evm/3636/etherscan/api",
+          browserURL: "https://testnet.botanixscan.io",
         },
       },
     ],
