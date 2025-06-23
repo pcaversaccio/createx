@@ -836,7 +836,6 @@ Generally, for security issues, see our [Security Policy](./SECURITY.md). Furthe
 
 - Several functions allow for reentrancy, however we refrain from adding a mutex lock to keep it as use-case agnostic as possible. Please ensure at the protocol level that potentially malicious reentrant calls do not affect your smart contract system.
 - In the functions:
-
   - [`deployCreate3(bytes32,bytes)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L616-L646),
   - [`deployCreate3AndInit(bytes32,bytes,bytes,tuple(uint256,uint256))`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L725-L760), and
   - [`deployCreate3AndInit(bytes32,bytes,bytes,tuple(uint256,uint256),address)`](https://github.com/pcaversaccio/createx/blob/main/src/CreateX.sol#L665-L723)
