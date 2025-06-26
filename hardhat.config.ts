@@ -1069,6 +1069,29 @@ const config: HardhatUserConfig = {
       url: vars.get("BOTANIX_MAINNET_URL", "https://rpc.botanixlabs.com"),
       accounts,
     },
+    tacTestnet: {
+      chainId: 2391,
+      url: vars.get("TAC_TESTNET_URL", "https://spb.rpc.tac.build"),
+      accounts,
+    },
+    tacMain: {
+      chainId: 239,
+      url: vars.get("TAC_MAINNET_URL", "https://rpc.tac.build"),
+      accounts,
+    },
+    neonTestnet: {
+      chainId: 245022926,
+      url: vars.get("NEON_TESTNET_URL", "https://devnet.neonevm.org"),
+      accounts,
+    },
+    neonMain: {
+      chainId: 245022934,
+      url: vars.get(
+        "NEON_MAINNET_URL",
+        "https://neon-proxy-mainnet.solana.p2p.org",
+      ),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1337,6 +1360,12 @@ const config: HardhatUserConfig = {
       // For Botanix testnet & mainnet
       botanix: vars.get("BOTANIX_API_KEY", ""),
       botanixTestnet: vars.get("BOTANIX_API_KEY", ""),
+      // For TAC testnet & mainnet
+      tac: vars.get("TAC_API_KEY", ""),
+      tacTestnet: vars.get("TAC_API_KEY", ""),
+      // For Neon EVM testnet & mainnet
+      neon: vars.get("NEON_API_KEY", ""),
+      neonTestnet: vars.get("NEON_API_KEY", ""),
     },
     customChains: [
       {
@@ -2485,6 +2514,38 @@ const config: HardhatUserConfig = {
           apiURL:
             "https://api.routescan.io/v2/network/testnet/evm/3636/etherscan/api",
           browserURL: "https://testnet.botanixscan.io",
+        },
+      },
+      {
+        network: "tac",
+        chainId: 239,
+        urls: {
+          apiURL: "https://explorer.tac.build/api",
+          browserURL: "https://explorer.tac.build",
+        },
+      },
+      {
+        network: "tacTestnet",
+        chainId: 2391,
+        urls: {
+          apiURL: "https://spb.explorer.tac.build/api",
+          browserURL: "https://spb.explorer.tac.build",
+        },
+      },
+      {
+        network: "neon",
+        chainId: 245022934,
+        urls: {
+          apiURL: "https://api.neonscan.org/hardhat/verify",
+          browserURL: "https://neonscan.org",
+        },
+      },
+      {
+        network: "neonTestnet",
+        chainId: 245022926,
+        urls: {
+          apiURL: "https://devnet-api.neonscan.org/hardhat/verify",
+          browserURL: "https://devnet.neonscan.org",
         },
       },
     ],
