@@ -597,6 +597,13 @@
     ]
   },
   {
+    "name": "TAC",
+    "chainId": 239,
+    "urls": [
+      "https://explorer.tac.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1181,6 +1188,13 @@
     "chainId": 3636,
     "urls": [
       "https://testnet.botanixscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "TAC Testnet (Saint Petersburg)",
+    "chainId": 2391,
+    "urls": [
+      "https://spb.explorer.tac.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
