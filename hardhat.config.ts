@@ -1092,6 +1092,11 @@ const config: HardhatUserConfig = {
       ),
       accounts,
     },
+    katanaMain: {
+      chainId: 747474,
+      url: vars.get("KATANA_MAINNET_URL", "https://rpc.katana.network"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1366,6 +1371,8 @@ const config: HardhatUserConfig = {
       // For Neon EVM testnet & mainnet
       neon: vars.get("NEON_API_KEY", ""),
       neonTestnet: vars.get("NEON_API_KEY", ""),
+      // For Katana mainnet
+      katana: vars.get("KATANA_API_KEY", ""),
     },
     customChains: [
       {
@@ -2546,6 +2553,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://devnet-api.neonscan.org/hardhat/verify",
           browserURL: "https://devnet.neonscan.org",
+        },
+      },
+      {
+        network: "katana",
+        chainId: 747474,
+        urls: {
+          apiURL: "https://explorer.katanarpc.com/api",
+          browserURL: "https://explorer.katanarpc.com",
         },
       },
     ],
