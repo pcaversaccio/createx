@@ -36,7 +36,7 @@ contract CreateXHarness is CreateX {
 
     function exposed_requireSuccessfulContractInitialisation(
         bool success,
-        bytes memory returnData,
+        bytes calldata returnData,
         address implementation
     ) external view {
         _requireSuccessfulContractInitialisation(success, returnData, implementation);

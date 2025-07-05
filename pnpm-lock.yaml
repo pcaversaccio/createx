@@ -51,8 +51,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(prettier@3.6.2)
       solhint:
-        specifier: ^5.2.0
-        version: 5.2.0(typescript@5.8.3)
+        specifier: ^6.0.0
+        version: 6.0.0(typescript@5.8.3)
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@types/node@24.0.10)(typescript@5.8.3)
@@ -3167,8 +3167,8 @@ packages:
     engines: {node: '>=10.0.0'}
     hasBin: true
 
-  solhint@5.2.0:
-    resolution: {integrity: sha512-9NZC1zt+O2K7zEZOhTT9rFeB6GdxC6qTX5pWX70RaQoflR9RejJQUC+/19LNi+e7K9Ptb4k7XAWO9wY5mkprHg==}
+  solhint@6.0.0:
+    resolution: {integrity: sha512-PQGfwFqfeYdebi2tEG1fhVfMjqSzbW3Noz+LYf8UusKe5nkikCghdgEjYQPcGfFZj4snlVyJQt//AaxkubOtVQ==}
     hasBin: true
 
   source-map-js@1.2.1:
@@ -3483,8 +3483,8 @@ packages:
   v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
 
-  viem@2.31.6:
-    resolution: {integrity: sha512-2PPbXL/8bHQxUzaLFDk4R6WHifTcXxAqMC8/j6RBgXl/OexQ1HU8r9OukwfDTqrFoHtWWiYz5fktHATy7+U9nQ==}
+  viem@2.31.7:
+    resolution: {integrity: sha512-mpB8Hp6xK77E/b/yJmpAIQcxcOfpbrwWNItjnXaIA8lxZYt4JS433Pge2gg6Hp3PwyFtaUMh01j5L8EXnLTjQQ==}
     peerDependencies:
       typescript: '>=5.0.4'
     peerDependenciesMeta:
@@ -5817,7 +5817,7 @@ snapshots:
       lodash: 4.17.21
       markdown-table: 2.0.0
       sha1: 1.1.1
-      viem: 2.31.6(typescript@5.8.3)(zod@3.24.4)
+      viem: 2.31.7(typescript@5.8.3)(zod@3.24.4)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -6884,7 +6884,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  solhint@5.2.0(typescript@5.8.3):
+  solhint@6.0.0(typescript@5.8.3):
     dependencies:
       '@solidity-parser/parser': 0.20.1
       ajv: 6.12.6
@@ -7272,7 +7272,7 @@ snapshots:
 
   v8-compile-cache-lib@3.0.1: {}
 
-  viem@2.31.6(typescript@5.8.3)(zod@3.24.4):
+  viem@2.31.7(typescript@5.8.3)(zod@3.24.4):
     dependencies:
       '@noble/curves': 1.9.2
       '@noble/hashes': 1.8.0

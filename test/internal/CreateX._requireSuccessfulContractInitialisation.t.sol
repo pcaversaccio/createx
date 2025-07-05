@@ -14,7 +14,7 @@ contract CreateX_RequireSuccessfulContractInitialisation_Internal_Test is BaseTe
     }
 
     function testFuzz_WhenTheSuccessBooleanIsFalse(
-        bytes memory returnData,
+        bytes calldata returnData,
         address implementation
     ) external whenTheSuccessBooleanIsFalse {
         // It should revert.
@@ -43,7 +43,7 @@ contract CreateX_RequireSuccessfulContractInitialisation_Internal_Test is BaseTe
     }
 
     function testFuzz_WhenTheImplementationAddressHasNoCode(
-        bytes memory returnData,
+        bytes calldata returnData,
         address implementation
     ) external whenTheSuccessBooleanIsTrue whenTheImplementationAddressHasNoCode(implementation) {
         // It should revert.
@@ -67,7 +67,7 @@ contract CreateX_RequireSuccessfulContractInitialisation_Internal_Test is BaseTe
     }
 
     function testFuzz_WhenTheImplementationAddressHasCode(
-        bytes memory returnData,
+        bytes calldata returnData,
         address implementation
     ) external whenTheSuccessBooleanIsTrue whenTheImplementationAddressHasCode(implementation) {
         // It should never revert.

@@ -10,6 +10,10 @@
     "avoid-low-level-calls": "off",
     "no-inline-assembly": "off",
     "max-states-count": "off",
-    "import-path-check": "off"
+    "import-path-check": "off",
+    "gas-strict-inequalities": "off",
+    "function-max-lines": "off",
+    "gas-small-strings": "off",
+    "use-natspec": "off"
   }
 }

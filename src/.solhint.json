@@ -4,6 +4,8 @@
     "compiler-version": "off",
     "func-visibility": ["warn", { "ignoreConstructors": true }],
     "avoid-low-level-calls": "off",
-    "no-inline-assembly": "off"
+    "no-inline-assembly": "off",
+    "gas-strict-inequalities": "off",
+    "use-natspec": "off"
   }
 }
