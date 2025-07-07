@@ -2252,7 +2252,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [ZKsync Era](https://era.zksync.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Immutable zkEVM](https://explorer.immutable.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Abstract](https://abscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [HyperEVM](https://purrsec.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [HyperEVM](https://hyperevmscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Kaia](https://kaiascope.com/account/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [ApeChain](https://apescan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Botanix](https://botanixscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
