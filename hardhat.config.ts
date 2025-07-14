@@ -776,6 +776,11 @@ const config: HardhatUserConfig = {
       url: vars.get("STORY_TESTNET_URL", "https://aeneid.storyrpc.io"),
       accounts,
     },
+    storyMain: {
+      chainId: 1514,
+      url: vars.get("STORY_MAINNET_URL", "https://mainnet.storyrpc.io"),
+      accounts,
+    },
     sonicTestnet: {
       chainId: 57054,
       url: vars.get("SONIC_TESTNET_URL", "https://rpc.blaze.soniclabs.com"),
@@ -1298,7 +1303,8 @@ const config: HardhatUserConfig = {
       // For Superseed testnet & mainnet
       superseed: vars.get("SUPERSEED_API_KEY", ""),
       superseedTestnet: vars.get("SUPERSEED_API_KEY", ""),
-      // For Story testnet
+      // For Story testnet & mainnet
+      story: vars.get("STORY_API_KEY", ""),
       storyTestnet: vars.get("STORY_API_KEY", ""),
       // For Sonic testnet & mainnet
       sonic: vars.get("SONIC_API_KEY", ""),
@@ -2163,6 +2169,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://sepolia-explorer.superseed.xyz/api",
           browserURL: "https://sepolia-explorer.superseed.xyz",
+        },
+      },
+      {
+        network: "story",
+        chainId: 1514,
+        urls: {
+          apiURL: "https://www.storyscan.io/api",
+          browserURL: "https://www.storyscan.io",
         },
       },
       {

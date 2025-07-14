@@ -164,6 +164,7 @@
     "deploy:superseedtestnet": "npx hardhat run --no-compile --network superseedTestnet scripts/deploy.ts",
     "deploy:superseedmain": "npx hardhat run --no-compile --network superseedMain scripts/deploy.ts",
     "deploy:storytestnet": "npx hardhat run --no-compile --network storyTestnet scripts/deploy.ts",
+    "deploy:storymain": "npx hardhat run --no-compile --network storyMain scripts/deploy.ts",
     "deploy:sonictestnet": "npx hardhat run --no-compile --network sonicTestnet scripts/deploy.ts",
     "deploy:sonicmain": "npx hardhat run --no-compile --network sonicMain scripts/deploy.ts",
     "deploy:flowtestnet": "npx hardhat run --no-compile --network flowTestnet scripts/deploy.ts",
@@ -251,6 +252,6 @@
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.36.0"
+    "typescript-eslint": "^8.37.0"
   }
 }
