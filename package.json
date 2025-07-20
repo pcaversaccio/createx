@@ -240,7 +240,7 @@
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
     "eslint": "^9.31.0",
-    "eslint-config-prettier": "^10.1.5",
+    "eslint-config-prettier": "^10.1.8",
     "ethers": "^6.15.0",
     "hardhat": "^2.26.0",
     "hardhat-abi-exporter": "^2.11.0",
