@@ -130,8 +130,8 @@ importers:
         specifier: ^5.2.0
         version: 5.2.0(eslint@9.33.0(jiti@2.5.1))
       next-seo:
-        specifier: 7.0.0-alpha.0
-        version: 7.0.0-alpha.0(next@15.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1)
+        specifier: ^6.8.0
+        version: 6.8.0(next@15.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       postcss:
         specifier: ^8.5.6
         version: 8.5.6
@@ -2647,11 +2647,12 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  next-seo@7.0.0-alpha.0:
-    resolution: {integrity: sha512-IxyzIJXCokbmrazOLOJpYKsbnglIeStJXc5FK6Sqfgh9T83txAmjRQACglYvVfmmDG+1g/TBIypKBKLPtLDDZA==}
+  next-seo@6.8.0:
+    resolution: {integrity: sha512-zcxaV67PFXCSf8e6SXxbxPaOTgc8St/esxfsYXfQXMM24UESUVSXFm7f2A9HMkAwa0Gqn4s64HxYZAGfdF4Vhg==}
     peerDependencies:
-      next: '>=13.4.0'
-      react: '>=18.2.0'
+      next: ^8.1.1-canary.54 || >=9.0.0
+      react: '>=16.0.0'
+      react-dom: '>=16.0.0'
 
   next-themes@0.4.6:
     resolution: {integrity: sha512-pZvgD5L0IEvX5/9GWyHMf3m8BKiVQwsCMHfoFosXtXBMnaS0ZnIJ9ST4b4NqLVKDEm8QBxoNNGNaBv2JNF6XNA==}
@@ -6359,10 +6360,11 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  next-seo@7.0.0-alpha.0(next@15.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react@19.1.1):
+  next-seo@6.8.0(next@15.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1))(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
     dependencies:
       next: 15.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
 
   next-themes@0.4.6(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
     dependencies:
