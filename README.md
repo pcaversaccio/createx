@@ -842,7 +842,7 @@ Generally, for security issues, see our [Security Policy](./SECURITY.md). Furthe
 
   we strongly recommend implementing a permissioned deploy protection by setting the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun proxy deployments on other chains.
 
-- The target EVM version for compilation is set to [`paris`](https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/paris.md), i.e. neither the contract creation bytecode of [`CreateX`](./src/CreateX.sol) nor the returned runtime bytecode contains a [`PUSH0`](https://www.evm.codes/#5f?fork=shanghai) instruction.
+- The target EVM version for compilation is set to [`paris`](https://github.com/ethereum/execution-specs/blob/forks/osaka/network-upgrades/mainnet-upgrades/paris.md), i.e. neither the contract creation bytecode of [`CreateX`](./src/CreateX.sol) nor the returned runtime bytecode contains a [`PUSH0`](https://www.evm.codes/#5f?fork=shanghai) instruction.
 - Please refer to our comment in the discussion [here](https://github.com/pcaversaccio/createx/discussions/61#discussioncomment-7937359) for background information on the risks of our private-key-based deployment approach. We recommend verifying prior to interacting with [`CreateX`](./src/CreateX.sol) on any chain, that the `keccak256` hash of the broadcasted contract creation bytecode is `0x12ec861579b63a3ab9db3b5a23c57d56402ad3061475b088f17054e2f2daf22f` or of the deployed runtime bytecode is `0xbd8a7ea8cfca7b4e5f5041d7d4b17bc317c5ce42cfbc42066a00cf26b43eb53f`.
 
 ## Tests
