@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -46,7 +46,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ matrix.node_version }}
 
@@ -57,7 +57,7 @@ jobs:
         run: pnpm build:interface
 
       - name: Upload artifacts
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: "interface/dist"
 
