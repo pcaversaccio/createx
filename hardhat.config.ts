@@ -1102,6 +1102,16 @@ const config: HardhatUserConfig = {
       url: vars.get("KATANA_MAINNET_URL", "https://rpc.katana.network"),
       accounts,
     },
+    plasmaTestnet: {
+      chainId: 9746,
+      url: vars.get("PLASMA_TESTNET_URL", "https://testnet-rpc.plasma.to"),
+      accounts,
+    },
+    plasmaMain: {
+      chainId: 9745,
+      url: vars.get("PLASMA_MAINNET_URL", "https://rpc.plasma.to"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1379,6 +1389,9 @@ const config: HardhatUserConfig = {
       neonTestnet: vars.get("NEON_API_KEY", ""),
       // For Katana mainnet
       katana: vars.get("KATANA_API_KEY", ""),
+      // For Plasma testnet & mainnet
+      plasma: vars.get("PLASMA_API_KEY", ""),
+      plasmaTestnet: vars.get("PLASMA_API_KEY", ""),
     },
     customChains: [
       {
@@ -2575,6 +2588,24 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://explorer.katanarpc.com/api",
           browserURL: "https://explorer.katanarpc.com",
+        },
+      },
+      {
+        network: "plasma",
+        chainId: 9745,
+        urls: {
+          apiURL:
+            "https://api.routescan.io/v2/network/mainnet/evm/9745/etherscan",
+          browserURL: "https://plasmascan.to",
+        },
+      },
+      {
+        network: "plasmaTestnet",
+        chainId: 9746,
+        urls: {
+          apiURL:
+            "https://api.routescan.io/v2/network/mainnet/evm/9746/etherscan",
+          browserURL: "https://testnet.plasmascan.to",
         },
       },
     ],
