@@ -2259,6 +2259,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Botanix](https://botanixscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [TAC](https://explorer.tac.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Katana](https://explorer.katanarpc.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Plasma](https://plasmascan.to/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
@@ -2346,6 +2347,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [ApeChain Sepolia Testnet (Curtis)](https://curtis.apescan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Botanix Testnet](https://testnet.botanixscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [TAC Testnet (Saint Petersburg)](https://spb.explorer.tac.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Plasma Testnet](https://testnet.plasmascan.to/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 

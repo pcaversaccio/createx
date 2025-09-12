@@ -219,6 +219,8 @@
     "deploy:neontestnet": "npx hardhat run --no-compile --network neonTestnet scripts/deploy.ts",
     "deploy:neonmain": "npx hardhat run --no-compile --network neonMain scripts/deploy.ts",
     "deploy:katanamain": "npx hardhat run --no-compile --network katanaMain scripts/deploy.ts",
+    "deploy:plasmatestnet": "npx hardhat run --no-compile --network plasmaTestnet scripts/deploy.ts",
+    "deploy:plasmamain": "npx hardhat run --no-compile --network plasmaMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
