@@ -842,7 +842,7 @@ Generally, for security issues, see our [Security Policy](./SECURITY.md). Furthe
 
   we strongly recommend implementing a permissioned deploy protection by setting the first 20 bytes equal to `msg.sender` in the `salt` to prevent maliciously intended frontrun proxy deployments on other chains.
 
-- The target EVM version for compilation is set to [`paris`](https://github.com/ethereum/execution-specs/blob/forks/osaka/network-upgrades/mainnet-upgrades/paris.md), i.e. neither the contract creation bytecode of [`CreateX`](./src/CreateX.sol) nor the returned runtime bytecode contains a [`PUSH0`](https://www.evm.codes/#5f?fork=shanghai) instruction.
+- The target EVM version for compilation is set to [`paris`](https://github.com/ethereum/execution-specs/blob/forks/osaka/src/ethereum/forks/paris/__init__.py), i.e. neither the contract creation bytecode of [`CreateX`](./src/CreateX.sol) nor the returned runtime bytecode contains a [`PUSH0`](https://www.evm.codes/#5f?fork=shanghai) instruction.
 - Please refer to our comment in the discussion [here](https://github.com/pcaversaccio/createx/discussions/61#discussioncomment-7937359) for background information on the risks of our private-key-based deployment approach. We recommend verifying prior to interacting with [`CreateX`](./src/CreateX.sol) on any chain, that the `keccak256` hash of the broadcasted contract creation bytecode is `0x12ec861579b63a3ab9db3b5a23c57d56402ad3061475b088f17054e2f2daf22f` or of the deployed runtime bytecode is `0xbd8a7ea8cfca7b4e5f5041d7d4b17bc317c5ce42cfbc42066a00cf26b43eb53f`.
 
 ## Tests
@@ -2309,7 +2309,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Chiliz Testnet (Spicy)](https://testnet.chiliscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Taraxa Testnet](https://testnet.explorer.taraxa.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Taiko Holešky Testnet](https://hekla.taikoscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [ZetaChain Testnet (Athens-3)](https://athens.explorer.zetachain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [ZetaChain Testnet (Athens-3)](https://testnet.zetascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [5ireChain Testnet](https://testnet.5irescan.io/contract/evm/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Oasis Sapphire Testnet](https://explorer.oasis.io/testnet/sapphire/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [World Chain Sepolia Testnet](https://sepolia.worldscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
