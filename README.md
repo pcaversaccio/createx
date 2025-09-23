@@ -2221,7 +2221,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Taraxa](https://mainnet.explorer.taraxa.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Gravity Alpha](https://explorer.gravity.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Taiko](https://taikoscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [ZetaChain](https://explorer.zetachain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [ZetaChain](https://zetascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [5ireChain](https://5irescan.io/contract/evm/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Oasis Sapphire](https://explorer.oasis.io/mainnet/sapphire/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [World Chain](https://worldscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)

@@ -349,7 +349,7 @@
     "name": "ZetaChain",
     "chainId": 7000,
     "urls": [
-      "https://explorer.zetachain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://zetascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/7000/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },

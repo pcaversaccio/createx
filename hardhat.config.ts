@@ -2012,16 +2012,16 @@ const config: HardhatUserConfig = {
         network: "zetaChain",
         chainId: 7000,
         urls: {
-          apiURL: "https://zetachain.blockscout.com/api",
-          browserURL: "https://zetachain.blockscout.com",
+          apiURL: "https://zetascan.com/api",
+          browserURL: "https://zetascan.com",
         },
       },
       {
         network: "zetaChainTestnet",
         chainId: 7001,
         urls: {
-          apiURL: "https://zetachain-athens-3.blockscout.com/api",
-          browserURL: "https://zetachain-athens-3.blockscout.com",
+          apiURL: "https://testnet.zetascan.com/api",
+          browserURL: "https://testnet.zetascan.com",
         },
       },
       {
