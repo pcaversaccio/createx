@@ -95,6 +95,7 @@ jobs:
         run: pnpm test
         env:
           FOUNDRY_PROFILE: ci
+          FOUNDRY_DISABLE_NIGHTLY_WARNING: "1"
 
       - name: Show the Foundry default config
         run: forge config
