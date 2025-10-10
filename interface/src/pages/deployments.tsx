@@ -24,7 +24,6 @@ const Deployments = () => {
     "https://raw.githubusercontent.com/pcaversaccio/createx/main/deployments/deployments.json";
 
   useEffect(() => {
-    setIsLoading(true);
     fetch(deploymentsUrlsRaw)
       .then((response) => response.json())
       .then((data: Deployment[]) =>

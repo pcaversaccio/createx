@@ -6,26 +6,31 @@ import { Notification } from "@/components/ui/Notification";
 import { COMPANY_NAME, CREATEX_ADDRESS, SITE_NAME } from "@/lib/constants";
 import { copyToClipboard } from "@/lib/utils";
 
-export const Header = () => {
-  // -------- Navigation --------
-  const currentPath = useRouter().pathname;
+const NavLink = ({
+  path,
+  label,
+  currentPath,
+  className,
+}: {
+  path: string;
+  label: string;
+  currentPath: string;
+  className?: string;
+}) => {
+  const activeClass = path === currentPath ? "font-bold" : "";
+  return (
+    <Link
+      href={path}
+      className={`text-secondary text-base ${activeClass} ${className}`}
+      target={path.startsWith("http") ? "_blank" : undefined}
+    >
+      {label}
+    </Link>
+  );
+};
 
-  const NavLink = (props: {
-    path: string;
-    label: string;
-    className?: string;
-  }) => {
-    const activeClass = props.path === currentPath ? "font-bold" : "";
-    return (
-      <Link
-        href={props.path}
-        className={`text-secondary text-base ${activeClass} ${props.className}`}
-        target={props.path.startsWith("http") ? "_blank" : undefined}
-      >
-        {props.label}
-      </Link>
-    );
-  };
+export const Header = () => {
+  const currentPath = useRouter().pathname;
 
   // -------- Copy Address to Clipboard --------
   const [showNotification, setShowNotification] = useState(false);
@@ -61,12 +66,19 @@ export const Header = () => {
               path="/deployments"
               label="Deployments"
               className="text-hover mr-4"
+              currentPath={currentPath}
             />
-            <NavLink path="/abi" label="ABI" className="text-hover mr-4" />
+            <NavLink
+              path="/abi"
+              label="ABI"
+              className="text-hover mr-4"
+              currentPath={currentPath}
+            />
             <NavLink
               path="https://github.com/pcaversaccio/createx"
-              className="text-hover"
               label="Documentation"
+              className="text-hover"
+              currentPath={currentPath}
             />
           </div>
         </div>
