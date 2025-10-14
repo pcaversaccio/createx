@@ -21,7 +21,7 @@
   },
   "author": "pcaversaccio (https://pcaversaccio.com), Matt Solomon (https://mattsolomon.dev)",
   "license": "AGPL-3.0-only",
-  "packageManager": "pnpm@10.18.2",
+  "packageManager": "pnpm@10.18.3",
   "scripts": {
     "clean": "npx hardhat clean && forge clean",
     "test": "forge test --out forge-artifacts",
@@ -254,6 +254,6 @@
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.0"
+    "typescript-eslint": "^8.46.1"
   }
 }
