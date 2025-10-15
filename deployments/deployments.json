@@ -719,11 +719,10 @@
     ]
   },
   {
-    "name": "Celo Testnet (Alfajores)",
-    "chainId": 44787,
+    "name": "Celo Sepolia Testnet",
+    "chainId": 11142220,
     "urls": [
-      "https://alfajores.celoscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-      "https://repo.sourcify.dev/44787/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://sepolia.celoscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {

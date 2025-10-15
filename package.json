@@ -67,7 +67,7 @@
     "deploy:moonbasealpha": "npx hardhat run --no-compile --network moonbaseAlpha scripts/deploy.ts",
     "deploy:moonriver": "npx hardhat run --no-compile --network moonriver scripts/deploy.ts",
     "deploy:moonbeam": "npx hardhat run --no-compile --network moonbeam scripts/deploy.ts",
-    "deploy:alfajores": "npx hardhat run --no-compile --network alfajores scripts/deploy.ts",
+    "deploy:celotestnet": "npx hardhat run --no-compile --network celoTestnet scripts/deploy.ts",
     "deploy:celo": "npx hardhat run --no-compile --network celo scripts/deploy.ts",
     "deploy:auroratestnet": "npx hardhat run --no-compile --network auroraTestnet scripts/deploy.ts",
     "deploy:auroramain": "npx hardhat run --no-compile --network auroraMain scripts/deploy.ts",

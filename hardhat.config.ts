@@ -243,11 +243,11 @@ const config: HardhatUserConfig = {
       ),
       accounts,
     },
-    alfajores: {
-      chainId: 44787,
+    celoTestnet: {
+      chainId: 11142220,
       url: vars.get(
         "CELO_TESTNET_URL",
-        "https://alfajores-forno.celo-testnet.org",
+        "https://forno.celo-sepolia.celo-testnet.org",
       ),
       accounts,
     },
@@ -1177,7 +1177,7 @@ const config: HardhatUserConfig = {
       moonbaseAlpha: vars.get("MOONBEAM_API_KEY", ""),
       // For Celo testnet & mainnet
       celo: vars.get("CELO_API_KEY", ""),
-      alfajores: vars.get("CELO_API_KEY", ""),
+      celoTestnet: vars.get("CELO_API_KEY", ""),
       // For Harmony testnet & mainnet
       harmony: vars.get("HARMONY_API_KEY", ""),
       harmonyTestnet: vars.get("HARMONY_API_KEY", ""),
@@ -1435,11 +1435,11 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        network: "alfajores",
-        chainId: 44787,
+        network: "celoTestnet",
+        chainId: 11142220,
         urls: {
-          apiURL: "https://api-alfajores.celoscan.io/api",
-          browserURL: "https://alfajores.celoscan.io",
+          apiURL: "https://api-sepolia.celoscan.io/api",
+          browserURL: "https://sepolia.celoscan.io",
         },
       },
       {

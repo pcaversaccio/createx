@@ -2278,7 +2278,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Avalanche Testnet (Fuji)](https://testnet.snowscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Gnosis Chain Testnet (Chiado)](https://gnosis-chiado.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Moonbeam Testnet (Moonbase Alpha)](https://moonbase.moonscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Celo Testnet (Alfajores)](https://alfajores.celoscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Celo Sepolia Testnet](https://sepolia.celoscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Aurora Testnet](https://explorer.testnet.aurora.dev/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Harmony Testnet](https://explorer.testnet.harmony.one/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Fuse Network Testnet (Spark)](https://explorer.fusespark.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
