@@ -1,6 +1,7 @@
 import * as React from "react";
 import type { AppProps } from "next/app";
-import { DefaultSeo } from "next-seo";
+import Head from "next/head";
+import { generateDefaultSeo } from "next-seo/pages";
 import { ThemeProvider } from "next-themes";
 import { Layout } from "@/components/layout/Layout";
 import "@/styles/globals.css";
@@ -11,12 +12,10 @@ function App({ Component, pageProps }: AppProps) {
   React.useEffect(() => setMounted(true), []);
   return (
     <ThemeProvider attribute="class">
-      <DefaultSeo {...DefaultSeoProps} />
+      <Head>{generateDefaultSeo(DefaultSeoProps)}</Head>
       {mounted && (
         <Layout>
-          <>
-            <Component {...pageProps} />
-          </>
+          <Component {...pageProps} />
         </Layout>
       )}
     </ThemeProvider>

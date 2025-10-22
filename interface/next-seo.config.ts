@@ -1,4 +1,4 @@
-import { DefaultSeoProps } from "next-seo";
+import type { DefaultSeoProps } from "next-seo/pages";
 import { SITE_DESCRIPTION, SITE_IMAGE, SITE_NAME } from "@/lib/constants";
 
 const config: DefaultSeoProps = {
