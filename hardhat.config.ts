@@ -1112,6 +1112,16 @@ const config: HardhatUserConfig = {
       url: vars.get("PLASMA_MAINNET_URL", "https://rpc.plasma.to"),
       accounts,
     },
+    sophonTestnet: {
+      chainId: 531050104,
+      url: vars.get("SOPHON_TESTNET_URL", "https://rpc.testnet.sophon.xyz"),
+      accounts,
+    },
+    sophonMain: {
+      chainId: 50104,
+      url: vars.get("SOPHON_MAINNET_URL", "https://rpc.sophon.xyz"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1392,6 +1402,9 @@ const config: HardhatUserConfig = {
       // For Plasma testnet & mainnet
       plasma: vars.get("PLASMA_API_KEY", ""),
       plasmaTestnet: vars.get("PLASMA_API_KEY", ""),
+      // For Sophon testnet & mainnet
+      sophon: vars.get("SOPHON_API_KEY", ""),
+      sophonTestnet: vars.get("SOPHON_API_KEY", ""),
     },
     customChains: [
       {
@@ -2606,6 +2619,22 @@ const config: HardhatUserConfig = {
           apiURL:
             "https://api.routescan.io/v2/network/mainnet/evm/9746/etherscan",
           browserURL: "https://testnet.plasmascan.to",
+        },
+      },
+      {
+        network: "sophon",
+        chainId: 50104,
+        urls: {
+          apiURL: "https://api.sophscan.xyz/api",
+          browserURL: "https://sophscan.xyz",
+        },
+      },
+      {
+        network: "sophonTestnet",
+        chainId: 531050104,
+        urls: {
+          apiURL: "https://api-testnet.sophscan.xyz/api",
+          browserURL: "https://testnet.sophscan.xyz",
         },
       },
     ],
