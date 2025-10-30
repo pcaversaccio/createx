@@ -1122,6 +1122,19 @@ const config: HardhatUserConfig = {
       url: vars.get("SOPHON_MAINNET_URL", "https://rpc.sophon.xyz"),
       accounts,
     },
+    jovayTestnet: {
+      chainId: 2019775,
+      url: vars.get(
+        "JOVAY_TESTNET_URL",
+        "https://api.zan.top/public/jovay-testnet",
+      ),
+      accounts,
+    },
+    jovayMain: {
+      chainId: 5734951,
+      url: vars.get("JOVAY_MAINNET_URL", "https://rpc.jovay.io"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,

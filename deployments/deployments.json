@@ -632,6 +632,13 @@
     ]
   },
   {
+    "name": "Jovay",
+    "chainId": 5734951,
+    "urls": [
+      "https://explorer.jovay.io/l2/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1236,6 +1243,13 @@
     "chainId": 531050104,
     "urls": [
       "https://testnet.sophscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Jovay Sepolia Testnet",
+    "chainId": 2019775,
+    "urls": [
+      "https://sepolia-explorer.jovay.io/l2/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
