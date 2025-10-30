@@ -2261,6 +2261,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Katana](https://explorer.katanarpc.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Plasma](https://plasmascan.to/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Sophon](https://sophscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Jovay](https://explorer.jovay.io/l2/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
@@ -2350,6 +2351,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [TAC Testnet (Saint Petersburg)](https://spb.explorer.tac.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Plasma Testnet](https://testnet.plasmascan.to/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Sophon Sepolia Testnet](https://testnet.sophscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Jovay Sepolia Testnet](https://sepolia-explorer.jovay.io/l2/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 
