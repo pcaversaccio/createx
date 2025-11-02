@@ -1135,6 +1135,19 @@ const config: HardhatUserConfig = {
       url: vars.get("JOVAY_MAINNET_URL", "https://rpc.jovay.io"),
       accounts,
     },
+    intuitionTestnet: {
+      chainId: 13579,
+      url: vars.get(
+        "INTUITION_TESTNET_URL",
+        "https://testnet.rpc.intuition.systems",
+      ),
+      accounts,
+    },
+    intuitionMain: {
+      chainId: 1155,
+      url: vars.get("INTUITION_MAINNET_URL", "https://rpc.intuition.systems"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1418,6 +1431,9 @@ const config: HardhatUserConfig = {
       // For Sophon testnet & mainnet
       sophon: vars.get("SOPHON_API_KEY", ""),
       sophonTestnet: vars.get("SOPHON_API_KEY", ""),
+      // For Intuition testnet & mainnet
+      intuition: vars.get("INTUITION_API_KEY", ""),
+      intuitionTestnet: vars.get("INTUITION_API_KEY", ""),
     },
     customChains: [
       {
@@ -2648,6 +2664,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-testnet.sophscan.xyz/api",
           browserURL: "https://testnet.sophscan.xyz",
+        },
+      },
+      {
+        network: "intuition",
+        chainId: 1155,
+        urls: {
+          apiURL: "https://explorer.intuition.systems/api",
+          browserURL: "https://explorer.intuition.systems",
+        },
+      },
+      {
+        network: "intuitionTestnet",
+        chainId: 13579,
+        urls: {
+          apiURL: "https://testnet.explorer.intuition.systems/api",
+          browserURL: "https://testnet.explorer.intuition.systems",
         },
       },
     ],

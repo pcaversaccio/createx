@@ -2262,7 +2262,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Plasma](https://plasmascan.to/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Sophon](https://sophscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Jovay](https://explorer.jovay.io/l2/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Intuition](https://explorer.intuition.systems/address/0xeD456e05CaAb11d66C4c797dD6c1D6f9A7F352b5)
+- [Intuition](https://explorer.intuition.systems/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
@@ -2353,6 +2353,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Plasma Testnet](https://testnet.plasmascan.to/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Sophon Sepolia Testnet](https://testnet.sophscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Jovay Sepolia Testnet](https://sepolia-explorer.jovay.io/l2/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Intuition Sepolia Testnet](https://testnet.explorer.intuition.systems/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 
