@@ -225,6 +225,8 @@
     "deploy:sophonmain": "npx hardhat run --no-compile --network sophonMain scripts/deploy.ts",
     "deploy:jovaytestnet": "npx hardhat run --no-compile --network jovayTestnet scripts/deploy.ts",
     "deploy:jovaymain": "npx hardhat run --no-compile --network jovayMain scripts/deploy.ts",
+    "deploy:intuitiontestnet": "npx hardhat run --no-compile --network intuitionTestnet scripts/deploy.ts",
+    "deploy:intuitionmain": "npx hardhat run --no-compile --network intuitionMain scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",

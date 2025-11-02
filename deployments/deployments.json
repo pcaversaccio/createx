@@ -639,6 +639,13 @@
     ]
   },
   {
+    "name": "Intuition",
+    "chainId": 1155,
+    "urls": [
+      "https://explorer.intuition.systems/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1250,6 +1257,13 @@
     "chainId": 2019775,
     "urls": [
       "https://sepolia-explorer.jovay.io/l2/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Intuition Sepolia Testnet",
+    "chainId": 13579,
+    "urls": [
+      "https://testnet.explorer.intuition.systems/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
