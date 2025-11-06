@@ -2365,6 +2365,7 @@ A list of external tooling that integrates with [`CreateX`](./src/CreateX.sol):
 - [`hardhat-ignition`](https://github.com/NomicFoundation/hardhat-ignition)
 - [`vanity-miner`](https://github.com/lumosimmo/vanity-miner)
 - [Safe `1.4.1` Deployment via `CreateX`](https://gist.github.com/pcaversaccio/0411f521eb923dd1159ed483e2d7d564)
+- [`createx-py`](https://github.com/ApeWorX/createx-py)
 
 ## Community-Maintained Dune Dashboards
 
