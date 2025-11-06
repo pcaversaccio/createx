@@ -2362,7 +2362,7 @@ A list of external tooling that integrates with [`CreateX`](./src/CreateX.sol):
 - [`xdeployer`](https://github.com/pcaversaccio/xdeployer)
 - [`createx-forge`](https://github.com/radeksvarz/createx-forge)
 - [`createXcrunch`](https://github.com/HrikB/createXcrunch)
-- [`hardhat-ignition`](https://github.com/NomicFoundation/hardhat-ignition)
+- [`hardhat-ignition`](https://hardhat.org/ignition/docs/guides/create2)
 - [`vanity-miner`](https://github.com/lumosimmo/vanity-miner)
 - [Safe `1.4.1` Deployment via `CreateX`](https://gist.github.com/pcaversaccio/0411f521eb923dd1159ed483e2d7d564)
 - [`createx-py`](https://github.com/ApeWorX/createx-py)
