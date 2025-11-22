@@ -2267,7 +2267,6 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 #### Ethereum Test Networks
 
 - [Sepolia](https://sepolia.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Holešky (Holešovice)](https://holesky.etherscan.io/address/0xba5ed099633d3b313e4d5f7bdc1305d3c28ba5ed)
 - [Hoodi](https://hoodi.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Additional EVM-Based Test Networks
@@ -2334,7 +2333,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Swellchain Sepolia Testnet](https://swell-testnet-explorer.alt.technology/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Hemi Sepolia Testnet](https://testnet.explorer.hemi.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Berachain Testnet (Bepolia)](https://testnet.berascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Monad Testnet](https://testnet.monvision.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Monad Testnet](https://testnet.monadvision.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Corn Sepolia Testnet](https://testnet.cornscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Arena-Z Sepolia Testnet](https://arena-z.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [IoTeX Testnet](https://testnet.iotexscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)

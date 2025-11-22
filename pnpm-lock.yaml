@@ -684,36 +684,36 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
-  '@nomicfoundation/edr-darwin-arm64@0.12.0-next.15':
-    resolution: {integrity: sha512-y/Z7fOaPxLzYTFDwWE/s4TIxvgq2cQhs6HKKh7+aJSQ6RxKrja5iKQEWg3D71jtgwizhGQpFQHtYXxmzWAjwyw==}
+  '@nomicfoundation/edr-darwin-arm64@0.12.0-next.16':
+    resolution: {integrity: sha512-no/8BPVBzVxDGGbDba0zsAxQmVNIq6SLjKzzhCxVKt4tatArXa6+24mr4jXJEmhVBvTNpQsNBO+MMpuEDVaTzQ==}
     engines: {node: '>= 20'}
 
-  '@nomicfoundation/edr-darwin-x64@0.12.0-next.15':
-    resolution: {integrity: sha512-hLDkDmtxOyUnlf1Mem6S8TKjCZh6yiWSA8kasqq7HSDa1/QmJou5eY1zFbw2xBky3StEUx5vfn3NpgBHTOCSBQ==}
+  '@nomicfoundation/edr-darwin-x64@0.12.0-next.16':
+    resolution: {integrity: sha512-tf36YbcC6po3XYRbi+v0gjwzqg1MvyRqVUujNMXPHgjNWATXNRNOLyjwt2qDn+RD15qtzk70SHVnz9n9mPWzwg==}
     engines: {node: '>= 20'}
 
-  '@nomicfoundation/edr-linux-arm64-gnu@0.12.0-next.15':
-    resolution: {integrity: sha512-+cHxrjLG3ILNj4+bRQ4uRBVfeCEhYYIqteZjiyryB2UXzyUJHaEqCRVxxJpiqzpsXTpTgVAsEuwYwERgT/1a5Q==}
+  '@nomicfoundation/edr-linux-arm64-gnu@0.12.0-next.16':
+    resolution: {integrity: sha512-Kr6t9icKSaKtPVbb0TjUcbn3XHqXOGIn+KjKKSSpm6542OkL0HyOi06amh6/8CNke9Gf6Lwion8UJ0aGQhnFwA==}
     engines: {node: '>= 20'}
 
-  '@nomicfoundation/edr-linux-arm64-musl@0.12.0-next.15':
-    resolution: {integrity: sha512-ppGDxVbGofWYkiFw8NrE+JlhNE39FTCXzvE586ZBaUqV3TMDcwnTkDltxzbl5YPmhNp3Qne3pJfJ0NB330Js+Q==}
+  '@nomicfoundation/edr-linux-arm64-musl@0.12.0-next.16':
+    resolution: {integrity: sha512-HaStgfxctSg5PYF+6ooDICL1O59KrgM4XEUsIqoRrjrQax9HnMBXcB8eAj+0O52FWiO9FlchBni2dzh4RjQR2g==}
     engines: {node: '>= 20'}
 
-  '@nomicfoundation/edr-linux-x64-gnu@0.12.0-next.15':
-    resolution: {integrity: sha512-ifOr9sAuBbnJpZtGYtFkEkwTXBsM9pT9tq7KXT3eOYBWw3TJIsP3DfnTgYF+pZObxBFyBtMJnyy0j1ItL+s9rg==}
+  '@nomicfoundation/edr-linux-x64-gnu@0.12.0-next.16':
+    resolution: {integrity: sha512-8JPTxEZkwOPTgnN4uTWut9ze9R8rp7+T4IfmsKK9i+lDtdbJIxkrFY275YHG2BEYLd7Y5jTa/I4nC74ZpTAvpA==}
     engines: {node: '>= 20'}
 
-  '@nomicfoundation/edr-linux-x64-musl@0.12.0-next.15':
-    resolution: {integrity: sha512-Jc0HZZOJAcPjxj3FbgtWQQGe6OmI6xiblFBAmXUGothxTZ3rn1YZeHqXews9MEjL8MCvHvfAjfLRkafSyyXX2Q==}
+  '@nomicfoundation/edr-linux-x64-musl@0.12.0-next.16':
+    resolution: {integrity: sha512-KugTrq3iHukbG64DuCYg8uPgiBtrrtX4oZSLba5sjocp0Ul6WWI1FeP1Qule+vClUrHSpJ+wR1G6SE7G0lyS/Q==}
     engines: {node: '>= 20'}
 
-  '@nomicfoundation/edr-win32-x64-msvc@0.12.0-next.15':
-    resolution: {integrity: sha512-TFbhcY1J+IRB4nVwXAvw/a5gy3o7+AQ83vfxT3Sk/z4Kk6v3c6Xkizy6IY6vTtpSWWmiuAh998QYq8D7LHIc3g==}
+  '@nomicfoundation/edr-win32-x64-msvc@0.12.0-next.16':
+    resolution: {integrity: sha512-Idy0ZjurxElfSmepUKXh6QdptLbW5vUNeIaydvqNogWoTbkJIM6miqZd9lXUy1TYxY7G4Rx5O50c52xc4pFwXQ==}
     engines: {node: '>= 20'}
 
-  '@nomicfoundation/edr@0.12.0-next.15':
-    resolution: {integrity: sha512-JMLvnro2cxSq1h/A2WYo018o5R4ns7ut/A6WoiBfXKDj/OSN8mRnEpDaICIrk6fopbAfMi6MmP8TQefDs+lKAg==}
+  '@nomicfoundation/edr@0.12.0-next.16':
+    resolution: {integrity: sha512-bBL/nHmQwL1WCveALwg01VhJcpVVklJyunG1d/bhJbHgbjzAn6kohVJc7A6gFZegw+Rx38vdxpBkeCDjAEprzw==}
     engines: {node: '>= 20'}
 
   '@nomicfoundation/hardhat-ethers@3.1.2':
@@ -1402,8 +1402,8 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  baseline-browser-mapping@2.8.29:
-    resolution: {integrity: sha512-sXdt2elaVnhpDNRDz+1BDx1JQoJRuNk7oVlAlbGiFkLikHCAQiccexF/9e91zVi6RCgqspl04aP+6Cnl9zRLrA==}
+  baseline-browser-mapping@2.8.30:
+    resolution: {integrity: sha512-aTUKW4ptQhS64+v2d6IkPzymEzzhw+G0bA1g3uBRV3+ntkH+svttKseW5IOR4Ed6NUVKqnY7qT3dKvzQ7io4AA==}
     hasBin: true
 
   better-ajv-errors@2.0.2:
@@ -1485,8 +1485,8 @@ packages:
     resolution: {integrity: sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==}
     engines: {node: '>=10'}
 
-  caniuse-lite@1.0.30001755:
-    resolution: {integrity: sha512-44V+Jm6ctPj7R52Na4TLi3Zri4dWUljJd+RDm+j8LtNCc/ihLCT+X1TzoOAkRETEWqjuLnh9581Tl80FvK7jVA==}
+  caniuse-lite@1.0.30001756:
+    resolution: {integrity: sha512-4HnCNKbMLkLdhJz3TToeVWHSnfJvPaq6vu/eRP0Ahub/07n484XHhBF5AJoSGHdVrS8tKFauUQz8Bp9P7LVx7A==}
 
   cbor@8.1.0:
     resolution: {integrity: sha512-DwGjNW9omn6EwP70aXsn7FQJx5kO12tX0bZkaTjzdVFM6/7nhA4t0EENocKGx6D2Bch9PE2KzCUf5SceBdeijg==}
@@ -1702,8 +1702,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  electron-to-chromium@1.5.255:
-    resolution: {integrity: sha512-Z9oIp4HrFF/cZkDPMpz2XSuVpc1THDpT4dlmATFlJUIBVCy9Vap5/rIXsASP1CscBacBqhabwh8vLctqBwEerQ==}
+  electron-to-chromium@1.5.259:
+    resolution: {integrity: sha512-I+oLXgpEJzD6Cwuwt1gYjxsDmu/S/Kd41mmLA3O+/uH2pFRO/DvOjUyGozL8j3KeLV6WyZ7ssPwELMsXCcsJAQ==}
 
   elliptic@6.6.1:
     resolution: {integrity: sha512-RaddvvMatK2LJHqFJ+YA4WysVN5Ita9E35botqIYspQ4TkRAlCicdzKOjlyv/1Za5RyTNn7di//eEV0uTAfe3g==}
@@ -3518,8 +3518,8 @@ packages:
   v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==}
 
-  viem@2.39.2:
-    resolution: {integrity: sha512-EJPt+T0AkMxKvBRPFHYMLMuvcHiIhoYItkioHRGCkkm6LBSwlK6l9DNzoKA9S09LP003BiMeYddVjVso+lg2Og==}
+  viem@2.39.3:
+    resolution: {integrity: sha512-s11rPQRvUEdc5qHK3xT4fIk4qvgPAaLwaTFq+EbFlcJJD+Xn3R4mc9H6B6fquEiHl/mdsdbG/uKCnYpoNtHNHw==}
     peerDependencies:
       typescript: '>=5.0.4'
     peerDependenciesMeta:
@@ -4224,29 +4224,29 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@nomicfoundation/edr-darwin-arm64@0.12.0-next.15': {}
+  '@nomicfoundation/edr-darwin-arm64@0.12.0-next.16': {}
 
-  '@nomicfoundation/edr-darwin-x64@0.12.0-next.15': {}
+  '@nomicfoundation/edr-darwin-x64@0.12.0-next.16': {}
 
-  '@nomicfoundation/edr-linux-arm64-gnu@0.12.0-next.15': {}
+  '@nomicfoundation/edr-linux-arm64-gnu@0.12.0-next.16': {}
 
-  '@nomicfoundation/edr-linux-arm64-musl@0.12.0-next.15': {}
+  '@nomicfoundation/edr-linux-arm64-musl@0.12.0-next.16': {}
 
-  '@nomicfoundation/edr-linux-x64-gnu@0.12.0-next.15': {}
+  '@nomicfoundation/edr-linux-x64-gnu@0.12.0-next.16': {}
 
-  '@nomicfoundation/edr-linux-x64-musl@0.12.0-next.15': {}
+  '@nomicfoundation/edr-linux-x64-musl@0.12.0-next.16': {}
 
-  '@nomicfoundation/edr-win32-x64-msvc@0.12.0-next.15': {}
+  '@nomicfoundation/edr-win32-x64-msvc@0.12.0-next.16': {}
 
-  '@nomicfoundation/edr@0.12.0-next.15':
+  '@nomicfoundation/edr@0.12.0-next.16':
     dependencies:
-      '@nomicfoundation/edr-darwin-arm64': 0.12.0-next.15
-      '@nomicfoundation/edr-darwin-x64': 0.12.0-next.15
-      '@nomicfoundation/edr-linux-arm64-gnu': 0.12.0-next.15
-      '@nomicfoundation/edr-linux-arm64-musl': 0.12.0-next.15
-      '@nomicfoundation/edr-linux-x64-gnu': 0.12.0-next.15
-      '@nomicfoundation/edr-linux-x64-musl': 0.12.0-next.15
-      '@nomicfoundation/edr-win32-x64-msvc': 0.12.0-next.15
+      '@nomicfoundation/edr-darwin-arm64': 0.12.0-next.16
+      '@nomicfoundation/edr-darwin-x64': 0.12.0-next.16
+      '@nomicfoundation/edr-linux-arm64-gnu': 0.12.0-next.16
+      '@nomicfoundation/edr-linux-arm64-musl': 0.12.0-next.16
+      '@nomicfoundation/edr-linux-x64-gnu': 0.12.0-next.16
+      '@nomicfoundation/edr-linux-x64-musl': 0.12.0-next.16
+      '@nomicfoundation/edr-win32-x64-msvc': 0.12.0-next.16
 
   '@nomicfoundation/hardhat-ethers@3.1.2(ethers@6.15.0)(hardhat@2.27.0(ts-node@10.9.2(@types/node@24.10.1)(typescript@5.9.3))(typescript@5.9.3))':
     dependencies:
@@ -4944,7 +4944,7 @@ snapshots:
   autoprefixer@10.4.22(postcss@8.5.6):
     dependencies:
       browserslist: 4.28.0
-      caniuse-lite: 1.0.30001755
+      caniuse-lite: 1.0.30001756
       fraction.js: 5.3.4
       normalize-range: 0.1.2
       picocolors: 1.1.1
@@ -4969,7 +4969,7 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  baseline-browser-mapping@2.8.29: {}
+  baseline-browser-mapping@2.8.30: {}
 
   better-ajv-errors@2.0.2(ajv@6.12.6):
     dependencies:
@@ -5018,9 +5018,9 @@ snapshots:
 
   browserslist@4.28.0:
     dependencies:
-      baseline-browser-mapping: 2.8.29
-      caniuse-lite: 1.0.30001755
-      electron-to-chromium: 1.5.255
+      baseline-browser-mapping: 2.8.30
+      caniuse-lite: 1.0.30001756
+      electron-to-chromium: 1.5.259
       node-releases: 2.0.27
       update-browserslist-db: 1.1.4(browserslist@4.28.0)
 
@@ -5061,7 +5061,7 @@ snapshots:
 
   camelcase@6.3.0: {}
 
-  caniuse-lite@1.0.30001755: {}
+  caniuse-lite@1.0.30001756: {}
 
   cbor@8.1.0:
     dependencies:
@@ -5269,7 +5269,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  electron-to-chromium@1.5.255: {}
+  electron-to-chromium@1.5.259: {}
 
   elliptic@6.6.1:
     dependencies:
@@ -5902,7 +5902,7 @@ snapshots:
       lodash: 4.17.21
       markdown-table: 2.0.0
       sha1: 1.1.1
-      viem: 2.39.2(typescript@5.9.3)(zod@4.1.12)
+      viem: 2.39.3(typescript@5.9.3)(zod@4.1.12)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -5914,7 +5914,7 @@ snapshots:
     dependencies:
       '@ethereumjs/util': 9.1.0
       '@ethersproject/abi': 5.8.0
-      '@nomicfoundation/edr': 0.12.0-next.15
+      '@nomicfoundation/edr': 0.12.0-next.16
       '@nomicfoundation/solidity-analyzer': 0.1.2
       '@sentry/node': 5.30.0
       adm-zip: 0.4.16
@@ -6489,7 +6489,7 @@ snapshots:
     dependencies:
       '@next/env': 16.0.3
       '@swc/helpers': 0.5.15
-      caniuse-lite: 1.0.30001755
+      caniuse-lite: 1.0.30001756
       postcss: 8.4.31
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
@@ -7358,7 +7358,7 @@ snapshots:
 
   v8-compile-cache-lib@3.0.1: {}
 
-  viem@2.39.2(typescript@5.9.3)(zod@4.1.12):
+  viem@2.39.3(typescript@5.9.3)(zod@4.1.12):
     dependencies:
       '@noble/curves': 1.9.1
       '@noble/hashes': 1.8.0
