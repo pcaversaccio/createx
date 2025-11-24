@@ -502,6 +502,13 @@
     ]
   },
   {
+    "name": "Monad",
+    "chainId": 143,
+    "urls": [
+      "https://monadscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Corn Maizenet",
     "chainId": 21000000,
     "urls": [
@@ -1119,7 +1126,7 @@
     "name": "Monad Testnet",
     "chainId": 10143,
     "urls": [
-      "https://testnet.monadvision.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://testnet.monadscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {

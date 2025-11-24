@@ -907,6 +907,11 @@ const config: HardhatUserConfig = {
       url: vars.get("MONAD_TESTNET_URL", "https://testnet-rpc.monad.xyz"),
       accounts,
     },
+    monadMain: {
+      chainId: 143,
+      url: vars.get("MONAD_MAINNET_URL", "https://rpc.monad.xyz"),
+      accounts,
+    },
     cornTestnet: {
       chainId: 21000001,
       url: vars.get("CORN_TESTNET_URL", "https://testnet.corn-rpc.com"),
@@ -1382,6 +1387,9 @@ const config: HardhatUserConfig = {
       // For Berachain testnet & mainnet
       berachain: vars.get("BERACHAIN_API_KEY", ""),
       berachainTestnet: vars.get("BERACHAIN_API_KEY", ""),
+      // For Monad testnet & mainnet
+      monad: vars.get("MONAD_API_KEY", ""),
+      monadTestnet: vars.get("MONAD_API_KEY", ""),
       // For Corn testnet & mainnet
       corn: vars.get("CORN_API_KEY", ""),
       cornTestnet: vars.get("CORN_API_KEY", ""),
@@ -2400,6 +2408,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-testnet.berascan.com/api",
           browserURL: "https://testnet.berascan.com",
+        },
+      },
+      {
+        network: "monad",
+        chainId: 143,
+        urls: {
+          apiURL: "https://api.monadscan.com/api",
+          browserURL: "https://monadscan.com",
+        },
+      },
+      {
+        network: "monadTestnet",
+        chainId: 10143,
+        urls: {
+          apiURL: "https://api-testnet.monadscan.com/api",
+          browserURL: "https://testnet.monadscan.com",
         },
       },
       {
