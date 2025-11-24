@@ -186,6 +186,7 @@
     "deploy:berachaintestnet": "npx hardhat run --no-compile --network berachainTestnet scripts/deploy.ts",
     "deploy:berachainmain": "npx hardhat run --no-compile --network berachainMain scripts/deploy.ts",
     "deploy:monadtestnet": "npx hardhat run --no-compile --network monadTestnet scripts/deploy.ts",
+    "deploy:monadmain": "npx hardhat run --no-compile --network monadMain scripts/deploy.ts",
     "deploy:corntestnet": "npx hardhat run --no-compile --network cornTestnet scripts/deploy.ts",
     "deploy:cornmain": "npx hardhat run --no-compile --network cornMain scripts/deploy.ts",
     "deploy:arenaztestnet": "npx hardhat run --no-compile --network arenazTestnet scripts/deploy.ts",
@@ -260,6 +261,6 @@
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.47.0"
+    "typescript-eslint": "^8.48.0"
   }
 }
