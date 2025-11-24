@@ -635,7 +635,7 @@
     "name": "Sophon",
     "chainId": 50104,
     "urls": [
-      "https://sophscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://explorer.sophon.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -1248,7 +1248,7 @@
     "name": "Sophon Sepolia Testnet",
     "chainId": 531050104,
     "urls": [
-      "https://testnet.sophscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://explorer.testnet.sophon.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {

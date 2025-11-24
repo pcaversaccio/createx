@@ -2261,7 +2261,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [TAC](https://explorer.tac.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Katana](https://explorer.katanarpc.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Plasma](https://plasmascan.to/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Sophon](https://sophscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Sophon](https://explorer.sophon.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Jovay](https://explorer.jovay.io/l2/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Intuition](https://explorer.intuition.systems/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
@@ -2351,7 +2351,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Botanix Testnet](https://testnet.botanixscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [TAC Testnet (Saint Petersburg)](https://spb.explorer.tac.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Plasma Testnet](https://testnet.plasmascan.to/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Sophon Sepolia Testnet](https://testnet.sophscan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Sophon Sepolia Testnet](https://explorer.testnet.sophon.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Jovay Sepolia Testnet](https://sepolia-explorer.jovay.io/l2/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Intuition Sepolia Testnet](https://testnet.explorer.intuition.systems/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
