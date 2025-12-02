@@ -1153,6 +1153,35 @@ const config: HardhatUserConfig = {
       url: vars.get("INTUITION_MAINNET_URL", "https://rpc.intuition.systems"),
       accounts,
     },
+    memecoreTestnet: {
+      chainId: 43522,
+      url: vars.get(
+        "MEMECORE_TESTNET_URL",
+        "https://rpc.insectarium.memecore.net",
+      ),
+      accounts,
+    },
+    memecoreMain: {
+      chainId: 4352,
+      url: vars.get("MEMECORE_MAINNET_URL", "https://rpc.memecore.net"),
+      accounts,
+    },
+    lightlinkTestnet: {
+      chainId: 1891,
+      url: vars.get(
+        "LIGHTLINK_TESTNET_URL",
+        "https://replicator.pegasus.lightlink.io/rpc/v1",
+      ),
+      accounts,
+    },
+    lightlinkMain: {
+      chainId: 1890,
+      url: vars.get(
+        "LIGHTLINK_MAINNET_URL",
+        "https://replicator.phoenix.lightlink.io/rpc/v1",
+      ),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1442,6 +1471,12 @@ const config: HardhatUserConfig = {
       // For Intuition testnet & mainnet
       intuition: vars.get("INTUITION_API_KEY", ""),
       intuitionTestnet: vars.get("INTUITION_API_KEY", ""),
+      // For MemeCore testnet & mainnet
+      memecore: vars.get("MEMECORE_API_KEY", ""),
+      memecoreTestnet: vars.get("MEMECORE_API_KEY", ""),
+      // For LightLink testnet & mainnet
+      lightlink: vars.get("LIGHTLINK_API_KEY", ""),
+      lightlinkTestnet: vars.get("LIGHTLINK_API_KEY", ""),
     },
     customChains: [
       {
@@ -2704,6 +2739,38 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://testnet.explorer.intuition.systems/api",
           browserURL: "https://testnet.explorer.intuition.systems",
+        },
+      },
+      {
+        network: "memecore",
+        chainId: 4352,
+        urls: {
+          apiURL: "https://api.memecorescan.io/api",
+          browserURL: "https://memecorescan.io",
+        },
+      },
+      {
+        network: "memecoreTestnet",
+        chainId: 43522,
+        urls: {
+          apiURL: "https://insectarium.blockscout.memecore.com/api",
+          browserURL: "https://insectarium.blockscout.memecore.com",
+        },
+      },
+      {
+        network: "lightlink",
+        chainId: 1890,
+        urls: {
+          apiURL: "https://phoenix.lightlink.io/api",
+          browserURL: "https://phoenix.lightlink.io",
+        },
+      },
+      {
+        network: "lightlinkTestnet",
+        chainId: 1891,
+        urls: {
+          apiURL: "https://pegasus.lightlink.io/api",
+          browserURL: "https://pegasus.lightlink.io",
         },
       },
     ],
