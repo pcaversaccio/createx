@@ -646,6 +646,21 @@
     ]
   },
   {
+    "name": "MemeCore",
+    "chainId": 4352,
+    "urls": [
+      "https://explorer.intuition.systems/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "LightLink Phoenix",
+    "chainId": 1890,
+    "urls": [
+      "https://phoenix.lightlink.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/1890/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Intuition",
     "chainId": 1155,
     "urls": [
@@ -1263,6 +1278,21 @@
     "chainId": 13579,
     "urls": [
       "https://testnet.explorer.intuition.systems/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "MemeCore Testnet (Insectarium)",
+    "chainId": 43522,
+    "urls": [
+      "https://insectarium.blockscout.memecore.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "LightLink Testnet (Pegasus)",
+    "chainId": 1891,
+    "urls": [
+      "https://pegasus.lightlink.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/1891/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
