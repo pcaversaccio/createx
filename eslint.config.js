@@ -2,10 +2,11 @@
 const eslint = require("@eslint/js");
 const tseslint = require("typescript-eslint");
 const eslintConfigPrettier = require("eslint-config-prettier");
+const globals = require("globals");
+const { defineConfig } = require("eslint/config");
 /* eslint-enable @typescript-eslint/no-require-imports */
 
-/** @type {import('typescript-eslint').TSESLint.FlatConfig.ConfigArray} */
-module.exports = tseslint.config(
+module.exports = defineConfig(
   {
     files: ["**/*.{js,ts}"],
     extends: [
@@ -20,6 +21,9 @@ module.exports = tseslint.config(
     languageOptions: {
       ecmaVersion: "latest",
       parser: tseslint.parser,
+      globals: {
+        ...globals.node,
+      },
       parserOptions: {
         project: true,
         tsconfigRootDir: __dirname,
