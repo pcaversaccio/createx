@@ -130,7 +130,7 @@
     "name": "Cronos",
     "chainId": 25,
     "urls": [
-      "https://cronoscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://explorer.cronos.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/25/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },

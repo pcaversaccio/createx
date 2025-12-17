@@ -1531,16 +1531,16 @@ const config: HardhatUserConfig = {
         network: "cronos",
         chainId: 25,
         urls: {
-          apiURL: "https://api.cronoscan.com/api",
-          browserURL: "https://cronoscan.com",
+          apiURL: "https://explorer-api.cronos.org/mainnet/api/v2",
+          browserURL: "https://explorer.cronos.org",
         },
       },
       {
         network: "cronosTestnet",
         chainId: 338,
         urls: {
-          apiURL: "https://cronos.org/explorer/testnet3/api",
-          browserURL: "https://cronos.org/explorer/testnet3",
+          apiURL: "https://explorer-api.cronos.org/testnet/api/v2",
+          browserURL: "https://explorer.cronos.org/testnet",
         },
       },
       {

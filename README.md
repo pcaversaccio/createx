@@ -2192,7 +2192,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Aurora](https://explorer.mainnet.aurora.dev/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Harmony](https://explorer.harmony.one/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Fuse Network](https://explorer.fuse.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Cronos](https://cronoscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Cronos](https://explorer.cronos.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Evmos](https://www.mintscan.io/evmos/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Boba Network](https://bobascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Canto](https://tuber.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
