@@ -14,7 +14,7 @@
   "lib/solady": {
     "branch": {
       "name": "main",
-      "rev": "cbcfe0009477aa329574f17e8db0a05703bb8bdd"
+      "rev": "95408a3d3b433eee4ad63752b0700e97fc7dbb7d"
     }
   }
 }
