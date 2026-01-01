@@ -21,7 +21,7 @@
   },
   "author": "pcaversaccio (https://pcaversaccio.com), Matt Solomon (https://mattsolomon.dev)",
   "license": "AGPL-3.0-only",
-  "packageManager": "pnpm@10.26.2",
+  "packageManager": "pnpm@10.27.0",
   "scripts": {
     "clean": "npx hardhat clean && forge clean",
     "test": "forge test --out forge-artifacts",
@@ -256,7 +256,7 @@
     "eslint-config-prettier": "^10.1.8",
     "ethers": "^6.16.0",
     "globals": "^16.5.0",
-    "hardhat": "^2.28.1",
+    "hardhat": "^2.28.2",
     "hardhat-abi-exporter": "^2.11.0",
     "hardhat-contract-sizer": "^2.10.1",
     "hardhat-gas-reporter": "^2.3.0",
