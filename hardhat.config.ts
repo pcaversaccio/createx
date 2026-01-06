@@ -838,10 +838,10 @@ const config: HardhatUserConfig = {
       accounts,
     },
     etherlinkTestnet: {
-      chainId: 128123,
+      chainId: 127823,
       url: vars.get(
         "ETHERLINK_TESTNET_URL",
-        "https://node.ghostnet.etherlink.com",
+        "https://node.shadownet.etherlink.com",
       ),
       accounts,
     },
@@ -2375,10 +2375,10 @@ const config: HardhatUserConfig = {
       },
       {
         network: "etherlinkTestnet",
-        chainId: 128123,
+        chainId: 127823,
         urls: {
-          apiURL: "https://testnet.explorer.etherlink.com/api",
-          browserURL: "https://testnet.explorer.etherlink.com",
+          apiURL: "https://shadownet.explorer.etherlink.com/api",
+          browserURL: "https://shadownet.explorer.etherlink.com",
         },
       },
       {
