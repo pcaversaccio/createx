@@ -16,6 +16,13 @@
     ]
   },
   {
+    "name": "opBNB",
+    "chainId": 204,
+    "urls": [
+      "https://opbnb.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "OP (Optimism)",
     "chainId": 10,
     "urls": [
@@ -692,6 +699,13 @@
     ]
   },
   {
+    "name": "opBNB Testnet",
+    "chainId": 5611,
+    "urls": [
+      "https://opbnb-testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "OP (Optimism) Sepolia Testnet",
     "chainId": 11155420,
     "urls": [
@@ -798,8 +812,8 @@
     ]
   },
   {
-    "name": "Boba Network Testnet",
-    "chainId": 2888,
+    "name": "Boba Network Sepolia Testnet",
+    "chainId": 28882,
     "urls": [
       "https://testnet.bobascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]

@@ -47,6 +47,8 @@
     "deploy:ethmain": "npx hardhat run --no-compile --network ethMain scripts/deploy.ts",
     "deploy:bsctestnet": "npx hardhat run --no-compile --network bscTestnet scripts/deploy.ts",
     "deploy:bscmain": "npx hardhat run --no-compile --network bscMain scripts/deploy.ts",
+    "deploy:opbnbtestnet": "npx hardhat run --no-compile --network opbnbTestnet scripts/deploy.ts",
+    "deploy:opbnbmain": "npx hardhat run --no-compile --network opbnbMain scripts/deploy.ts",
     "deploy:optimismtestnet": "npx hardhat run --no-compile --network optimismTestnet scripts/deploy.ts",
     "deploy:optimismsepolia": "npx hardhat run --no-compile --network optimismSepolia scripts/deploy.ts",
     "deploy:optimismmain": "npx hardhat run --no-compile --network optimismMain scripts/deploy.ts",
