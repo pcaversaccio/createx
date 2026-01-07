@@ -2178,6 +2178,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 
 - [Ethereum](https://etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [BNB Smart Chain](https://bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [opBNB](https://opbnb.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [OP (Optimism)](https://optimistic.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Arbitrum One](https://arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Arbitrum Nova](https://nova.arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
@@ -2275,6 +2276,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 #### Additional EVM-Based Test Networks
 
 - [BNB Smart Chain Testnet](https://testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [opBNB Testnet](https://opbnb-testnet.bscscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [OP (Optimism) Sepolia Testnet](https://sepolia-optimism.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Arbitrum Sepolia Testnet](https://sepolia.arbiscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Polygon Sepolia Testnet (Amoy)](https://amoy.polygonscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
@@ -2289,7 +2291,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Fuse Network Testnet (Spark)](https://explorer.fusespark.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Cronos Testnet](https://explorer.cronos.org/testnet/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Evmos Testnet](https://www.mintscan.io/evmos-testnet/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Boba Network Testnet](https://testnet.bobascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Boba Network Sepolia Testnet](https://testnet.bobascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Canto Testnet](https://testnet.tuber.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Base Sepolia Testnet](https://sepolia.basescan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Mantle Sepolia Testnet](https://sepolia.mantlescan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)

@@ -119,6 +119,22 @@ const config: HardhatUserConfig = {
       url: vars.get("BSC_MAINNET_URL", "https://bsc-dataseed1.binance.org"),
       accounts,
     },
+    opbnbTestnet: {
+      chainId: 5611,
+      url: vars.get(
+        "OPBNB_TESTNET_URL",
+        "https://opbnb-testnet-rpc.bnbchain.org",
+      ),
+      accounts,
+    },
+    opbnbMain: {
+      chainId: 204,
+      url: vars.get(
+        "OPBNB_MAINNET_URL",
+        "https://opbnb-mainnet-rpc.bnbchain.org",
+      ),
+      accounts,
+    },
     optimismTestnet: {
       chainId: 420,
       url: vars.get("OPTIMISM_TESTNET_URL", "https://goerli.optimism.io"),
@@ -307,13 +323,13 @@ const config: HardhatUserConfig = {
       accounts,
     },
     bobaTestnet: {
-      chainId: 2888,
-      url: vars.get("BOBA_TESTNET_URL", "https://goerli.boba.network"),
+      chainId: 28882,
+      url: vars.get("BOBA_TESTNET_URL", "https://sepolia.boba.network"),
       accounts,
     },
     bobaMain: {
       chainId: 288,
-      url: vars.get("BOBA_MAINNET_URL", "https://replica.boba.network"),
+      url: vars.get("BOBA_MAINNET_URL", "https://mainnet.boba.network"),
       accounts,
     },
     cantoTestnet: {
@@ -1220,6 +1236,9 @@ const config: HardhatUserConfig = {
       // For BSC testnet & mainnet
       bsc: vars.get("BSC_API_KEY", ""),
       bscTestnet: vars.get("BSC_API_KEY", ""),
+      // For opBNB testnet & mainnet
+      opbnb: vars.get("OPBNB_API_KEY", ""),
+      opbnbTestnet: vars.get("OPBNB_API_KEY", ""),
       // For Heco mainnet
       heco: vars.get("HECO_API_KEY", ""),
       // For Fantom testnet & mainnet
@@ -1496,6 +1515,22 @@ const config: HardhatUserConfig = {
         },
       },
       {
+        network: "opbnb",
+        chainId: 204,
+        urls: {
+          apiURL: "https://api-opbnb.bscscan.com/api",
+          browserURL: "https://opbnb.bscscan.com",
+        },
+      },
+      {
+        network: "opbnbTestnet",
+        chainId: 5611,
+        urls: {
+          apiURL: "https://api-opbnb-testnet.bscscan.com/api",
+          browserURL: "https://opbnb-testnet.bscscan.com/",
+        },
+      },
+      {
         network: "optimisticSepolia",
         chainId: 11155420,
         urls: {
@@ -1586,10 +1621,10 @@ const config: HardhatUserConfig = {
       },
       {
         network: "bobaTestnet",
-        chainId: 2888,
+        chainId: 28882,
         urls: {
           apiURL:
-            "https://api.routescan.io/v2/network/testnet/evm/2888/etherscan",
+            "https://api.routescan.io/v2/network/testnet/evm/28882/etherscan",
           browserURL: "https://testnet.bobascan.com",
         },
       },
