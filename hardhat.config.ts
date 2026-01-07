@@ -1527,7 +1527,7 @@ const config: HardhatUserConfig = {
         chainId: 5611,
         urls: {
           apiURL: "https://api-opbnb-testnet.bscscan.com/api",
-          browserURL: "https://opbnb-testnet.bscscan.com/",
+          browserURL: "https://opbnb-testnet.bscscan.com",
         },
       },
       {
