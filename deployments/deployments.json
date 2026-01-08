@@ -346,7 +346,7 @@
     ]
   },
   {
-    "name": "Taiko",
+    "name": "Taiko Alethia",
     "chainId": 167000,
     "urls": [
       "https://taikoscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
@@ -900,11 +900,10 @@
     ]
   },
   {
-    "name": "Fraxtal Holešky Testnet",
-    "chainId": 2522,
+    "name": "Fraxtal Hoodi Testnet",
+    "chainId": 2523,
     "urls": [
-      "https://holesky.fraxscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
-      "https://repo.sourcify.dev/2522/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://hoodi.fraxscan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -988,10 +987,10 @@
     ]
   },
   {
-    "name": "Taiko Holešky Testnet",
-    "chainId": 167009,
+    "name": "Taiko Hoodi Testnet",
+    "chainId": 167013,
     "urls": [
-      "https://hekla.taikoscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://hoodi.taikoscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {

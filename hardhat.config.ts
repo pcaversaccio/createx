@@ -514,8 +514,11 @@ const config: HardhatUserConfig = {
       accounts,
     },
     fraxtalTestnet: {
-      chainId: 2522,
-      url: vars.get("FRAXTAL_TESTNET_URL", "https://rpc.testnet.frax.com"),
+      chainId: 2523,
+      url: vars.get(
+        "FRAXTAL_TESTNET_URL",
+        "https://fraxtal-hoodi-rpc.publicnode.com",
+      ),
       accounts,
     },
     fraxtalMain: {
@@ -653,8 +656,8 @@ const config: HardhatUserConfig = {
       accounts,
     },
     taikoTestnet: {
-      chainId: 167009,
-      url: vars.get("TAIKO_TESTNET_URL", "https://rpc.hekla.taiko.xyz"),
+      chainId: 167013,
+      url: vars.get("TAIKO_TESTNET_URL", "https://rpc.hoodi.taiko.xyz"),
       accounts,
     },
     taikoMain: {
@@ -1931,10 +1934,10 @@ const config: HardhatUserConfig = {
       },
       {
         network: "fraxtalTestnet",
-        chainId: 2522,
+        chainId: 2523,
         urls: {
-          apiURL: "https://api-holesky.fraxscan.com/api",
-          browserURL: "https://holesky.fraxscan.com",
+          apiURL: "https://api-hoodi.fraxscan.com/api",
+          browserURL: "https://hoodi.fraxscan.com",
         },
       },
       {
@@ -2111,10 +2114,10 @@ const config: HardhatUserConfig = {
       },
       {
         network: "taiko",
-        chainId: 167000,
+        chainId: 167013,
         urls: {
           apiURL: "https://api.taikoscan.io/api",
-          browserURL: "https://taikoscan.io",
+          browserURL: "https://hoodi.taikoscan.io",
         },
       },
       {
