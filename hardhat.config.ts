@@ -2114,18 +2114,18 @@ const config: HardhatUserConfig = {
       },
       {
         network: "taiko",
-        chainId: 167013,
+        chainId: 167000,
         urls: {
           apiURL: "https://api.taikoscan.io/api",
-          browserURL: "https://hoodi.taikoscan.io",
+          browserURL: "https://taikoscan.io",
         },
       },
       {
         network: "taikoTestnet",
-        chainId: 167009,
+        chainId: 167013,
         urls: {
-          apiURL: "https://api-hekla.taikoscan.io/api",
-          browserURL: "https://hekla.taikoscan.io",
+          apiURL: "https://api-hoodi.taikoscan.io/api",
+          browserURL: "https://hoodi.taikoscan.io",
         },
       },
       {
