@@ -463,7 +463,7 @@
     "name": "Morph",
     "chainId": 2818,
     "urls": [
-      "https://explorer.morphl2.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://explorer.morph.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -1103,10 +1103,10 @@
     ]
   },
   {
-    "name": "Morph Holešky Testnet",
-    "chainId": 2810,
+    "name": "Morph Hoodi Testnet",
+    "chainId": 2910,
     "urls": [
-      "https://explorer-holesky.morphl2.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://explorer-hoodi.morph.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {

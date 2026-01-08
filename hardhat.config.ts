@@ -831,16 +831,13 @@ const config: HardhatUserConfig = {
       accounts,
     },
     morphTestnet: {
-      chainId: 2810,
-      url: vars.get(
-        "MORPH_TESTNET_URL",
-        "https://rpc-quicknode-holesky.morphl2.io",
-      ),
+      chainId: 2910,
+      url: vars.get("MORPH_TESTNET_URL", "https://rpc-hoodi.morph.network"),
       accounts,
     },
     morphMain: {
       chainId: 2818,
-      url: vars.get("MORPH_MAINNET_URL", "https://rpc-quicknode.morphl2.io"),
+      url: vars.get("MORPH_MAINNET_URL", "https://rpc-quicknode.morph.network"),
       accounts,
     },
     shapeTestnet: {
@@ -2372,16 +2369,16 @@ const config: HardhatUserConfig = {
         network: "morph",
         chainId: 2818,
         urls: {
-          apiURL: "https://explorer.morphl2.io/api",
-          browserURL: "https://explorer.morphl2.io",
+          apiURL: "https://explorer-api.morph.network/api",
+          browserURL: "https://explorer.morph.network",
         },
       },
       {
         network: "morphTestnet",
-        chainId: 2810,
+        chainId: 2910,
         urls: {
-          apiURL: "https://explorer-holesky.morphl2.io/api",
-          browserURL: "https://explorer-holesky.morphl2.io",
+          apiURL: "https://explorer-api-hoodi.morph.network/api",
+          browserURL: "https://explorer-hoodi.morph.network",
         },
       },
       {
