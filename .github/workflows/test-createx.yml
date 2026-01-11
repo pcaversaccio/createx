@@ -176,7 +176,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       # The following steps act as a temporary workaround, as LCOV `2.4` is not yet supported
-      # in `zgosalvez/github-actions-report-lcov@v5`: https://github.com/zgosalvez/github-actions-report-lcov/issues/168.
+      # in `zgosalvez/github-actions-report-lcov@v6`: https://github.com/zgosalvez/github-actions-report-lcov/issues/168.
       - name: Set up LCOV `1.16`
         run: |
           wget https://github.com/linux-test-project/lcov/releases/download/v1.16/lcov-1.16.tar.gz
@@ -197,7 +197,7 @@ jobs:
         run: lcov --remove lcov.info 'test/*' --output-file lcov.info --rc lcov_branch_coverage=1
 
       - name: Verify minimum coverage
-        uses: zgosalvez/github-actions-report-lcov@v5
+        uses: zgosalvez/github-actions-report-lcov@v6
         with:
           coverage-files: ./lcov.info
           minimum-coverage: 100
