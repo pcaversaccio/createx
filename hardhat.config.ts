@@ -1120,7 +1120,7 @@ const config: HardhatUserConfig = {
     },
     katanaTestnet: {
       chainId: 737373,
-      url: vars.get("KATANA_TESTNET_URL", "	https://rpc-bokuto.katanarpc.com"),
+      url: vars.get("KATANA_TESTNET_URL", "https://rpc-bokuto.katanarpc.com"),
       accounts,
     },
     katanaMain: {
