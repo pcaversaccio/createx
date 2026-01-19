@@ -1118,6 +1118,11 @@ const config: HardhatUserConfig = {
       ),
       accounts,
     },
+    katanaTestnet: {
+      chainId: 737373,
+      url: vars.get("KATANA_TESTNET_URL", "	https://rpc-bokuto.katanarpc.com"),
+      accounts,
+    },
     katanaMain: {
       chainId: 747474,
       url: vars.get("KATANA_MAINNET_URL", "https://rpc.katana.network"),
@@ -1479,8 +1484,9 @@ const config: HardhatUserConfig = {
       // For Neon EVM testnet & mainnet
       neon: vars.get("NEON_API_KEY", ""),
       neonTestnet: vars.get("NEON_API_KEY", ""),
-      // For Katana mainnet
+      // For Katana testnet & mainnet
       katana: vars.get("KATANA_API_KEY", ""),
+      katanaTestnet: vars.get("KATANA_API_KEY", ""),
       // For Plasma testnet & mainnet
       plasma: vars.get("PLASMA_API_KEY", ""),
       plasmaTestnet: vars.get("PLASMA_API_KEY", ""),
@@ -2722,8 +2728,16 @@ const config: HardhatUserConfig = {
         network: "katana",
         chainId: 747474,
         urls: {
-          apiURL: "https://explorer.katanarpc.com/api",
-          browserURL: "https://explorer.katanarpc.com",
+          apiURL: "https://api.katanascan.com/api",
+          browserURL: "https://katanascan.com",
+        },
+      },
+      {
+        network: "katanaTestnet",
+        chainId: 737373,
+        urls: {
+          apiURL: "https://api-bokuto.katanascan.com/api",
+          browserURL: "https://bokuto.katanascan.com",
         },
       },
       {

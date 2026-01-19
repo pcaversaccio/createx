@@ -628,7 +628,7 @@
     "name": "Katana",
     "chainId": 747474,
     "urls": [
-      "https://explorer.katanarpc.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://katanascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -1263,6 +1263,13 @@
     "chainId": 2391,
     "urls": [
       "https://spb.explorer.tac.build/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Katana Sepolia Testnet (Bokuto)",
+    "chainId": 737373,
+    "urls": [
+      "https://bokuto.katanascan.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
