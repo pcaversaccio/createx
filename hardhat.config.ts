@@ -1203,6 +1203,16 @@ const config: HardhatUserConfig = {
       ),
       accounts,
     },
+    xrplEVMTestnet: {
+      chainId: 1449000,
+      url: vars.get("XRPLEVM_TESTNET_URL", "https://rpc.testnet.xrplevm.org"),
+      accounts,
+    },
+    xrplEVMMain: {
+      chainId: 1440000,
+      url: vars.get("XRPLEVM_MAINNET_URL", "https://rpc.xrplevm.org"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1502,6 +1512,9 @@ const config: HardhatUserConfig = {
       // For LightLink testnet & mainnet
       lightlink: vars.get("LIGHTLINK_API_KEY", ""),
       lightlinkTestnet: vars.get("LIGHTLINK_API_KEY", ""),
+      // For XRPL EVM testnet & mainnet
+      xrplEVM: vars.get("XRPLEVM_API_KEY", ""),
+      xrplEVMTestnet: vars.get("XRPLEVM_API_KEY", ""),
     },
     customChains: [
       {
@@ -2820,6 +2833,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://pegasus.lightlink.io/api",
           browserURL: "https://pegasus.lightlink.io",
+        },
+      },
+      {
+        network: "xrplEVM",
+        chainId: 1440000,
+        urls: {
+          apiURL: "https://explorer.xrplevm.org/api",
+          browserURL: "https://explorer.xrplevm.org",
+        },
+      },
+      {
+        network: "xrplEVMTestnet",
+        chainId: 1449000,
+        urls: {
+          apiURL: "https://explorer.testnet.xrplevm.org/api",
+          browserURL: "https://explorer.testnet.xrplevm.org",
         },
       },
     ],
