@@ -2267,6 +2267,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Intuition](https://explorer.intuition.systems/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [MemeCore](https://memecorescan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [LightLink Phoenix](https://phoenix.lightlink.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [XRPL EVM](https://explorer.xrplevm.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
@@ -2361,6 +2362,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Intuition Sepolia Testnet](https://testnet.explorer.intuition.systems/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [MemeCore Testnet (Insectarium)](https://insectarium.blockscout.memecore.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [LightLink Testnet (Pegasus)](https://pegasus.lightlink.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [XRPL EVM Testnet](https://explorer.testnet.xrplevm.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 

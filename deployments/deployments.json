@@ -675,6 +675,13 @@
     ]
   },
   {
+    "name": "XRPL EVM",
+    "chainId": 1440000,
+    "urls": [
+      "https://explorer.xrplevm.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1313,6 +1320,13 @@
     "urls": [
       "https://pegasus.lightlink.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/1891/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "XRPL EVM Testnet",
+    "chainId": 1449000,
+    "urls": [
+      "https://explorer.testnet.xrplevm.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
