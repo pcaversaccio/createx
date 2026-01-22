@@ -1213,6 +1213,11 @@ const config: HardhatUserConfig = {
       url: vars.get("XRPLEVM_MAINNET_URL", "https://rpc.xrplevm.org"),
       accounts,
     },
+    arcTestnet: {
+      chainId: 5042002,
+      url: vars.get("ARC_TESTNET_URL", "https://rpc.testnet.arc.network"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1515,6 +1520,8 @@ const config: HardhatUserConfig = {
       // For XRPL EVM testnet & mainnet
       xrplEVM: vars.get("XRPLEVM_API_KEY", ""),
       xrplEVMTestnet: vars.get("XRPLEVM_API_KEY", ""),
+      // For Arc testnet
+      arcTestnet: vars.get("ARC_API_KEY", ""),
     },
     customChains: [
       {
@@ -2849,6 +2856,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://explorer.testnet.xrplevm.org/api",
           browserURL: "https://explorer.testnet.xrplevm.org",
+        },
+      },
+      {
+        network: "arcTestnet",
+        chainId: 5042002,
+        urls: {
+          apiURL: "https://testnet.arcscan.app/api",
+          browserURL: "https://testnet.arcscan.app",
         },
       },
     ],

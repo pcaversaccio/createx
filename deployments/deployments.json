@@ -1328,5 +1328,13 @@
     "urls": [
       "https://explorer.testnet.xrplevm.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
+  },
+  {
+    "name": "Arc Testnet",
+    "chainId": 5042002,
+    "urls": [
+      "https://testnet.arcscan.app/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/5042002/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   }
 ]

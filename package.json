@@ -237,6 +237,7 @@
     "deploy:lightlinkmain": "npx hardhat run --no-compile --network lightlinkMain scripts/deploy.ts",
     "deploy:xrplevmtestnet": "npx hardhat run --no-compile --network xrplEVMTestnet scripts/deploy.ts",
     "deploy:xrplevmmain": "npx hardhat run --no-compile --network xrplEVMMain scripts/deploy.ts",
+    "deploy:arctestnet": "npx hardhat run --no-compile --network arcTestnet scripts/deploy.ts",
     "prettier:check": "npx prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
