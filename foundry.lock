@@ -2,7 +2,7 @@
   "lib/forge-std": {
     "branch": {
       "name": "master",
-      "rev": "f61e4dd133379a4536a54ee57a808c9c00019b60"
+      "rev": "bee11e72a6764a40ec9272635d5bb46744be352d"
     }
   },
   "lib/openzeppelin-contracts": {
