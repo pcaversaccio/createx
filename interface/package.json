@@ -44,7 +44,7 @@
     "@next/eslint-plugin-next": "^16.1.6",
     "@tailwindcss/postcss": "^4.1.18",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-    "@types/node": "^25.0.10",
+    "@types/node": "^25.1.0",
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.23",
