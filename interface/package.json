@@ -21,13 +21,13 @@
   "author": "pcaversaccio (https://pcaversaccio.com), Matt Solomon (https://mattsolomon.dev)",
   "license": "MIT",
   "scripts": {
-    "dev": "npx next dev",
-    "build": "npx next build",
-    "start": "pnpm build && npx next start",
-    "prettier:check": "npx prettier -c \"**/*.{js,mjs,ts,tsx,css,md,json,yml,yaml}\"",
-    "prettier:fix": "npx prettier -w \"**/*.{js,mjs,ts,tsx,css,md,json,yml,yaml}\"",
-    "lint:check": "pnpm prettier:check && npx eslint .",
-    "lint:fix": "pnpm prettier:fix && npx eslint . --fix"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "pnpm build && next start",
+    "prettier:check": "prettier -c \"**/*.{js,mjs,ts,tsx,css,md,json,yml,yaml}\"",
+    "prettier:fix": "prettier -w \"**/*.{js,mjs,ts,tsx,css,md,json,yml,yaml}\"",
+    "lint:check": "pnpm prettier:check && eslint .",
+    "lint:fix": "pnpm prettier:fix && eslint . --fix"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.9",
@@ -44,7 +44,7 @@
     "@next/eslint-plugin-next": "^16.1.6",
     "@tailwindcss/postcss": "^4.1.18",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-    "@types/node": "^25.2.1",
+    "@types/node": "^25.2.2",
     "@types/react": "^19.2.13",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.24",
