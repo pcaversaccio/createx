@@ -988,8 +988,13 @@ const config: HardhatUserConfig = {
       accounts,
     },
     megaETHTestnet: {
-      chainId: 6342,
+      chainId: 6343,
       url: vars.get("MEGAETH_TESTNET_URL", "https://carrot.megaeth.com/rpc"),
+      accounts,
+    },
+    megaETHMain: {
+      chainId: 4326,
+      url: vars.get("MEGAETH_MAINNET_URL", "https://mainnet.megaeth.com/rpc"),
       accounts,
     },
     bitlayerTestnet: {
@@ -1473,6 +1478,9 @@ const config: HardhatUserConfig = {
       // For Zircuit testnet & mainnet
       zircuit: vars.get("ZIRCUIT_API_KEY", ""),
       zircuitTestnet: vars.get("ZIRCUIT_API_KEY", ""),
+      // For MegaETH testnet & mainnet
+      megaETH: vars.get("MEGAETH_API_KEY", ""),
+      megaETHTestnet: vars.get("MEGAETH_API_KEY", ""),
       // For Bitlayer testnet & mainnet
       bitlayer: vars.get("BITLAYER_API_KEY", ""),
       bitlayerTestnet: vars.get("BITLAYER_API_KEY", ""),
@@ -2603,6 +2611,22 @@ const config: HardhatUserConfig = {
           apiURL:
             "https://explorer.garfield-testnet.zircuit.com/api/contractVerifyHardhat",
           browserURL: "https://explorer.garfield-testnet.zircuit.com",
+        },
+      },
+      {
+        network: "megaETH",
+        chainId: 4326,
+        urls: {
+          apiURL: "http://api-mega.etherscan.io/api",
+          browserURL: "https://mega.etherscan.io",
+        },
+      },
+      {
+        network: "megaETHTestnet",
+        chainId: 6343,
+        urls: {
+          apiURL: "https://api-testnet-mega.etherscan.io/api",
+          browserURL: "https://testnet-mega.etherscan.io",
         },
       },
       {
