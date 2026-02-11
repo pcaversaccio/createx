@@ -1223,6 +1223,16 @@ const config: HardhatUserConfig = {
       url: vars.get("ARC_TESTNET_URL", "https://rpc.testnet.arc.network"),
       accounts,
     },
+    dmdTestnet: {
+      chainId: 37373,
+      url: vars.get("DMD_TESTNET_URL", "https://testnet-rpc.bit.diamonds"),
+      accounts,
+    },
+    dmdMain: {
+      chainId: 17771,
+      url: vars.get("DMD_MAINNET_URL", "https://rpc.bit.diamonds"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1530,6 +1540,9 @@ const config: HardhatUserConfig = {
       xrplEVMTestnet: vars.get("XRPLEVM_API_KEY", ""),
       // For Arc testnet
       arcTestnet: vars.get("ARC_API_KEY", ""),
+      // For DMD Diamond testnet & mainnet
+      dmd: vars.get("DMD_API_KEY", ""),
+      dmdTestnet: vars.get("DMD_API_KEY", ""),
     },
     customChains: [
       {
@@ -2888,6 +2901,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://testnet.arcscan.app/api",
           browserURL: "https://testnet.arcscan.app",
+        },
+      },
+      {
+        network: "dmd",
+        chainId: 17771,
+        urls: {
+          apiURL: "https://explorer.bit.diamonds/api",
+          browserURL: "https://explorer.bit.diamonds",
+        },
+      },
+      {
+        network: "dmdTestnet",
+        chainId: 37373,
+        urls: {
+          apiURL: "https://testnet-explorer.bit.diamonds/api",
+          browserURL: "https://testnet-explorer.bit.diamonds",
         },
       },
     ],
