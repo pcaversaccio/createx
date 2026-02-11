@@ -238,6 +238,8 @@
     "deploy:xrplevmtestnet": "hardhat run --no-compile --network xrplEVMTestnet scripts/deploy.ts",
     "deploy:xrplevmmain": "hardhat run --no-compile --network xrplEVMMain scripts/deploy.ts",
     "deploy:arctestnet": "hardhat run --no-compile --network arcTestnet scripts/deploy.ts",
+    "deploy:dmdtestnet": "npx hardhat run --no-compile --network dmdTestnet scripts/deploy.ts",
+    "deploy:dmdmain": "npx hardhat run --no-compile --network dmdMain scripts/deploy.ts",
     "prettier:check": "prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
