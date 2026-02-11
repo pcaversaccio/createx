@@ -552,6 +552,13 @@
     ]
   },
   {
+    "name": "MegaETH",
+    "chainId": 4326,
+    "urls": [
+      "https://mega.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Bitlayer",
     "chainId": 200901,
     "urls": [
@@ -1208,9 +1215,9 @@
   },
   {
     "name": "MegaETH Testnet",
-    "chainId": 6342,
+    "chainId": 6343,
     "urls": [
-      "https://www.megaexplorer.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://testnet-mega.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {

@@ -8,7 +8,7 @@
   "lib/openzeppelin-contracts": {
     "branch": {
       "name": "master",
-      "rev": "8614ef7a24d476e37db66054e5237faaf7f43717"
+      "rev": "becf082688e4ac5ee6aab641a1c9090a1d0d5c64"
     }
   },
   "lib/solady": {
