@@ -1374,7 +1374,7 @@
     ]
   },
   {
-    "name": "Tempo Testnet",
+    "name": "Tempo Testnet (Moderato)",
     "chainId": 42431,
     "urls": [
       "https://explore.tempo.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
