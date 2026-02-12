@@ -696,6 +696,13 @@
     ]
   },
   {
+    "name": "Citrea",
+    "chainId": 4114,
+    "urls": [
+      "https://explorer.mainnet.citrea.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1356,6 +1363,22 @@
     "chainId": 37373,
     "urls": [
       "https://testnet-explorer.bit.diamonds/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Citrea Testnet",
+    "chainId": 5115,
+    "urls": [
+      "https://explorer.testnet.citrea.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/5115/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Tempo Testnet",
+    "chainId": 42431,
+    "urls": [
+      "https://explore.tempo.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/42431/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
