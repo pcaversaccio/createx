@@ -1233,6 +1233,21 @@ const config: HardhatUserConfig = {
       url: vars.get("DMD_MAINNET_URL", "https://rpc.bit.diamonds"),
       accounts,
     },
+    citreaTestnet: {
+      chainId: 5115,
+      url: vars.get("CITREA_TESTNET_URL", "https://rpc.testnet.citrea.xyz"),
+      accounts,
+    },
+    citreaMain: {
+      chainId: 4114,
+      url: vars.get("CITREA_MAINNET_URL", "https://rpc.mainnet.citrea.xyz"),
+      accounts,
+    },
+    tempoTestnet: {
+      chainId: 42431,
+      url: vars.get("TEMPO_TESTNET_URL", "https://rpc.moderato.tempo.xyz"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1543,6 +1558,11 @@ const config: HardhatUserConfig = {
       // For DMD Diamond testnet & mainnet
       dmd: vars.get("DMD_API_KEY", ""),
       dmdTestnet: vars.get("DMD_API_KEY", ""),
+      // For Citrea testnet & mainnet
+      citrea: vars.get("CITREA_API_KEY", ""),
+      citreaTestnet: vars.get("CITREA_API_KEY", ""),
+      // For Tempo testnet
+      tempoTestnet: vars.get("TEMPO_API_KEY", ""),
     },
     customChains: [
       {
@@ -2917,6 +2937,30 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://testnet-explorer.bit.diamonds/api",
           browserURL: "https://testnet-explorer.bit.diamonds",
+        },
+      },
+      {
+        network: "citrea",
+        chainId: 4114,
+        urls: {
+          apiURL: "https://explorer.mainnet.citrea.xyz/api",
+          browserURL: "https://explorer.mainnet.citrea.xyz",
+        },
+      },
+      {
+        network: "citreaTestnet",
+        chainId: 5115,
+        urls: {
+          apiURL: "https://explorer.testnet.citrea.xyz/api",
+          browserURL: "https://explorer.testnet.citrea.xyz",
+        },
+      },
+      {
+        network: "tempoTestnet",
+        chainId: 42431,
+        urls: {
+          apiURL: "https://contracts.tempo.xyz/v2/verify/42431",
+          browserURL: "https://explore.tempo.xyz",
         },
       },
     ],
