@@ -2,13 +2,13 @@
   "lib/forge-std": {
     "branch": {
       "name": "master",
-      "rev": "0844d7e1fc5e60d77b68e469bff60265f236c398"
+      "rev": "722afcc99a78706335b5a2ece83a4f0de4bc083d"
     }
   },
   "lib/openzeppelin-contracts": {
     "branch": {
       "name": "master",
-      "rev": "6b55a93ee9bf4c412de1a03536701de33dfccb87"
+      "rev": "c1edd06131cf989cf3e0c72c089cbead127384e6"
     }
   },
   "lib/solady": {
