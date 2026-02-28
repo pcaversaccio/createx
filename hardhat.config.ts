@@ -1250,7 +1250,7 @@ const config: HardhatUserConfig = {
     },
     lensTestnet: {
       chainId: 37111,
-      url: vars.get("LENS_TESTNET_URL", "https://rpc.testnet.lens.dev"),
+      url: vars.get("LENS_TESTNET_URL", "https://rpc.testnet.lens.xyz"),
       accounts,
     },
     lensMain: {
