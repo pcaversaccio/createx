@@ -21,7 +21,7 @@
   },
   "author": "pcaversaccio (https://pcaversaccio.com), Matt Solomon (https://mattsolomon.dev)",
   "license": "AGPL-3.0-only",
-  "packageManager": "pnpm@10.30.2",
+  "packageManager": "pnpm@10.30.3",
   "scripts": {
     "clean": "hardhat clean && forge clean",
     "test": "forge test --out forge-artifacts",
@@ -244,6 +244,8 @@
     "deploy:citreatestnet": "npx hardhat run --no-compile --network citreaTestnet scripts/deploy.ts",
     "deploy:citreamain": "npx hardhat run --no-compile --network citreaMain scripts/deploy.ts",
     "deploy:tempotestnet": "npx hardhat run --no-compile --network tempoTestnet scripts/deploy.ts",
+    "deploy:lenstestnet": "npx hardhat run --no-compile --network lensTestnet scripts/deploy.ts",
+    "deploy:lensmain": "npx hardhat run --no-compile --network lensMain scripts/deploy.ts",
     "prettier:check": "prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
