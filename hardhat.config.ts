@@ -1248,6 +1248,16 @@ const config: HardhatUserConfig = {
       url: vars.get("TEMPO_TESTNET_URL", "https://rpc.moderato.tempo.xyz"),
       accounts,
     },
+    lensTestnet: {
+      chainId: 37111,
+      url: vars.get("LENS_TESTNET_URL", "https://rpc.testnet.lens.dev"),
+      accounts,
+    },
+    lensMain: {
+      chainId: 232,
+      url: vars.get("LENS_MAINNET_URL", "https://rpc.lens.xyz"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1563,6 +1573,9 @@ const config: HardhatUserConfig = {
       citreaTestnet: vars.get("CITREA_API_KEY", ""),
       // For Tempo testnet
       tempoTestnet: vars.get("TEMPO_API_KEY", ""),
+      // For Lens testnet & mainnet
+      lens: vars.get("LENS_API_KEY", ""),
+      lensTestnet: vars.get("LENS_API_KEY", ""),
     },
     customChains: [
       {
@@ -2961,6 +2974,23 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://contracts.tempo.xyz/v2/verify/42431",
           browserURL: "https://explore.tempo.xyz",
+        },
+      },
+      {
+        network: "lens",
+        chainId: 232,
+        urls: {
+          apiURL: "https://verify.lens.xyz/contract_verification",
+          browserURL: "https://explorer.lens.xyz",
+        },
+      },
+      {
+        network: "lensTestnet",
+        chainId: 37111,
+        urls: {
+          apiURL:
+            "https://block-explorer-verify.testnet.lens.xyz/contract_verification",
+          browserURL: "https://explorer.testnet.lens.xyz",
         },
       },
     ],
