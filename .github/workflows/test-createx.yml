@@ -19,7 +19,7 @@ jobs:
         node_version:
           - 24
         go_version:
-          - 1.25
+          - 1.26
 
     steps:
       - name: Checkout
