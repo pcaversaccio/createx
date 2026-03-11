@@ -761,9 +761,8 @@ function _guard(bytes32 salt) internal view returns (bytes32 guardedSalt) {
   } else {
     // For the non-pseudo-random cases, the salt value `salt` is hashed to prevent the safeguard mechanisms
     // from being bypassed. Otherwise, the salt value `salt` is not modified.
-    guardedSalt = (salt != _generateSalt())
-      ? keccak256(abi.encode(salt))
-      : salt;
+    guardedSalt =
+      (salt != _generateSalt()) ? keccak256(abi.encode(salt)) : salt;
   }
 }
 ```

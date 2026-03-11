@@ -12,14 +12,13 @@ contract CreateX_DeployCreate2Clone_2Args_Public_Test is BaseTest {
 
     ImplementationContract internal implementationContract = new ImplementationContract();
     address internal implementation = address(implementationContract);
-    bytes32 internal codeHash =
-        keccak256(
-            abi.encodePacked(
-                hex"36_3d_3d_37_3d_3d_3d_36_3d_73",
-                implementation,
-                hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3"
-            )
-        );
+    bytes32 internal codeHash = keccak256(
+        abi.encodePacked(
+            hex"36_3d_3d_37_3d_3d_3d_36_3d_73",
+            implementation,
+            hex"5a_f4_3d_82_80_3e_90_3d_91_60_2b_57_fd_5b_f3"
+        )
+    );
 
     /*´:°•.°+.*•´.*:˚.°*.˚•´.°:°•.°•.*•´.*:˚.°*.˚•´.°:°•.°+.*•´.*:*/
     /*                            TESTS                           */

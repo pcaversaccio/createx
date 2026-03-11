@@ -13,8 +13,9 @@ contract CreateX_DeployCreate3_2Args_Public_Test is BaseTest {
     /*.•°:°.´+˚.*°.˚:*.´•*.+°.•°:´*.´•*.•°.•°:°.´:•˚°.*°.˚:*.´+°.•*/
 
     // The `keccak256`-hashed `CREATE3` proxy contract creation bytecode.
-    bytes32 internal proxyInitCodeHash =
-        keccak256(abi.encodePacked(hex"67_36_3d_3d_37_36_3d_34_f0_3d_52_60_08_60_18_f3"));
+    bytes32 internal proxyInitCodeHash = keccak256(
+        abi.encodePacked(hex"67_36_3d_3d_37_36_3d_34_f0_3d_52_60_08_60_18_f3")
+    );
 
     // To avoid any stack-too-deep errors, we use `internal` state variables for the precomputed `CREATE3` address
     // and some further contract deployment addresses and variables.
