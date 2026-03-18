@@ -1248,6 +1248,11 @@ const config: HardhatUserConfig = {
       url: vars.get("TEMPO_TESTNET_URL", "https://rpc.moderato.tempo.xyz"),
       accounts,
     },
+    tempoMain: {
+      chainId: 4217,
+      url: vars.get("TEMPO_MAINNET_URL", "https://rpc.tempo.xyz"),
+      accounts,
+    },
     lensTestnet: {
       chainId: 37111,
       url: vars.get("LENS_TESTNET_URL", "https://rpc.testnet.lens.xyz"),
@@ -1571,7 +1576,8 @@ const config: HardhatUserConfig = {
       // For Citrea testnet & mainnet
       citrea: vars.get("CITREA_API_KEY", ""),
       citreaTestnet: vars.get("CITREA_API_KEY", ""),
-      // For Tempo testnet
+      // For Tempo testnet & mainnet
+      tempo: vars.get("TEMPO_API_KEY", ""),
       tempoTestnet: vars.get("TEMPO_API_KEY", ""),
       // For Lens testnet & mainnet
       lens: vars.get("LENS_API_KEY", ""),
@@ -2969,11 +2975,19 @@ const config: HardhatUserConfig = {
         },
       },
       {
+        network: "tempo",
+        chainId: 4217,
+        urls: {
+          apiURL: "https://contracts.tempo.xyz/v2/verify/4217",
+          browserURL: "https://explore.tempo.xyz",
+        },
+      },
+      {
         network: "tempoTestnet",
         chainId: 42431,
         urls: {
           apiURL: "https://contracts.tempo.xyz/v2/verify/42431",
-          browserURL: "https://explore.tempo.xyz",
+          browserURL: "https://explore.testnet.tempo.xyz",
         },
       },
       {
