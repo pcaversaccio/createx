@@ -2270,6 +2270,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [XRPL EVM](https://explorer.xrplevm.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [DMD Diamond](https://explorer.bit.diamonds/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Citrea](https://explorer.mainnet.citrea.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Tempo](https://explore.tempo.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Lens](https://explorer.lens.xyz/addresses/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
@@ -2369,7 +2370,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Arc Testnet](https://testnet.arcscan.app/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [DMD Diamond Testnet](https://testnet-explorer.bit.diamonds/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Citrea Testnet](https://explorer.testnet.citrea.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Tempo Testnet (Moderato)](https://explore.tempo.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Tempo Testnet (Moderato)](https://explore.testnet.tempo.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Lens Sepolia Testnet](https://explorer.testnet.lens.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
