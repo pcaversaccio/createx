@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2024",
+    "target": "es2025",
     "module": "commonjs",
     "allowJs": true,
     "strict": true,
@@ -9,7 +9,8 @@
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "rootDir": "."
   },
   "include": ["./scripts", "./typechain-types"],
   "files": ["./hardhat.config.ts", "eslint.config.js"]
