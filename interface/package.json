@@ -52,7 +52,7 @@
     "eslint-config-next": "^16.2.3",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "globals": "^17.4.0",
+    "globals": "^17.5.0",
     "next-seo": "^7.2.0",
     "postcss": "^8.5.9",
     "prettier": "^3.8.2",
