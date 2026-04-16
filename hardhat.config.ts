@@ -1263,6 +1263,16 @@ const config: HardhatUserConfig = {
       url: vars.get("LENS_MAINNET_URL", "https://rpc.lens.xyz"),
       accounts,
     },
+    pulseTestnet: {
+      chainId: 943,
+      url: vars.get("PULSE_TESTNET_URL", "https://rpc.v4.testnet.pulsechain.com"),
+      accounts,
+    },
+    pulseMain: {
+      chainId: 369,
+      url: vars.get("PULSE_MAINNET_URL", "https://rpc.pulsechain.com"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1582,6 +1592,10 @@ const config: HardhatUserConfig = {
       // For Lens testnet & mainnet
       lens: vars.get("LENS_API_KEY", ""),
       lensTestnet: vars.get("LENS_API_KEY", ""),
+      // For PulseChain testnet & mainnet (Blockscout — no key required,
+      // empty string is fine)
+      pulseMain: vars.get("PULSE_API_KEY", ""),
+      pulseTestnet: vars.get("PULSE_API_KEY", ""),
     },
     customChains: [
       {
@@ -3005,6 +3019,24 @@ const config: HardhatUserConfig = {
           apiURL:
             "https://block-explorer-verify.testnet.lens.xyz/contract_verification",
           browserURL: "https://explorer.testnet.lens.xyz",
+        },
+      },
+      {
+        network: "pulseMain",
+        chainId: 369,
+        urls: {
+          // PulseChain runs Blockscout. No Etherscan-style API key required —
+          // the `apiKey: ""` entry above keeps hardhat-verify happy.
+          apiURL: "https://api.scan.pulsechain.com/api",
+          browserURL: "https://scan.pulsechain.com",
+        },
+      },
+      {
+        network: "pulseTestnet",
+        chainId: 943,
+        urls: {
+          apiURL: "https://api.scan.v4.testnet.pulsechain.com/api",
+          browserURL: "https://scan.v4.testnet.pulsechain.com",
         },
       },
     ],
