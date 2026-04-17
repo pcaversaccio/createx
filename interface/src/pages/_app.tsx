@@ -9,6 +9,7 @@ import DefaultSeoProps from "../../next-seo.config";
 
 function App({ Component, pageProps }: AppProps) {
   const [mounted, setMounted] = React.useState(false);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   React.useEffect(() => setMounted(true), []);
   return (
     <ThemeProvider attribute="class">
