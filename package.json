@@ -247,6 +247,8 @@
     "deploy:tempomain": "npx hardhat run --no-compile --network tempoMain scripts/deploy.ts",
     "deploy:lenstestnet": "npx hardhat run --no-compile --network lensTestnet scripts/deploy.ts",
     "deploy:lensmain": "npx hardhat run --no-compile --network lensMain scripts/deploy.ts",
+    "deploy:pulsechaintestnet": "npx hardhat run --no-compile --network pulsechainTestnet scripts/deploy.ts",
+    "deploy:pulsechainmain": "npx hardhat run --no-compile --network pulsechainMain scripts/deploy.ts",
     "prettier:check": "prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
@@ -280,7 +282,7 @@
     "solhint": "^6.2.1",
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
-    "typescript": "^6.0.2",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.58.2"
   }
 }
