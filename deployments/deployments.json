@@ -718,6 +718,14 @@
     ]
   },
   {
+    "name": "PulseChain",
+    "chainId": 369,
+    "urls": [
+      "https://scan.mypinata.cloud/ipfs/bafybeienxyoyrhn5tswclvd3gdjy5mtkkwmu37aqtml6onbf7xnb3o22pe/#/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/369/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1401,6 +1409,13 @@
     "chainId": 37111,
     "urls": [
       "https://explorer.testnet.lens.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "PulseChain Testnet (Testnet-V4)",
+    "chainId": 943,
+    "urls": [
+      "https://scan.v4.testnet.pulsechain.com/#/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
