@@ -272,7 +272,7 @@
     "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.1.8",
     "ethers": "^6.16.0",
-    "globals": "^17.5.0",
+    "globals": "^17.6.0",
     "hardhat": "^2.28.6",
     "hardhat-abi-exporter": "^2.11.0",
     "hardhat-contract-sizer": "^2.10.1",
