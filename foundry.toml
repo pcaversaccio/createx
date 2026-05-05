@@ -15,6 +15,7 @@ via_ir = false                                            # Prevent the compilat
 bytecode_hash = "none"                                    # Remove the metadata hash from the bytecode.
 verbosity = 3                                             # Set the verbosity level for the tests.
 fs_permissions = [{ access = "read-write", path = "./" }] # Configure read-write access to the project root.
+lint = { lint_on_build = false }                          # Do not run automatic linting during builds.
 fuzz = { runs = 256 }                                     # Configure the number of fuzz runs for the tests.
 invariant = { runs = 256, depth = 15 }                    # Configure the number of runs and calls (executed in one run) for each invariant test group.
 

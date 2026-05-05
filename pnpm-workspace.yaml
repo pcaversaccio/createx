@@ -1,9 +1,11 @@
 sharedWorkspaceLockfile: true
+minimumReleaseAge: 720 # Only install package versions that have been published for at least 12 hours.
+minimumReleaseAgeStrict: true
 packages:
   - interface
-onlyBuiltDependencies:
-  - "@tailwindcss/oxide"
-  - keccak
-  - secp256k1
-  - sharp
-  - unrs-resolver
+allowBuilds:
+  "@tailwindcss/oxide": true
+  keccak: true
+  secp256k1: true
+  sharp: true
+  unrs-resolver: true
