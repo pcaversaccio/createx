@@ -1,5 +1,5 @@
 sharedWorkspaceLockfile: true
-minimumReleaseAge: 720 # Only install package versions that have been published for at least 12 hours.
+minimumReleaseAge: 10080 # Only install package versions that have been published for at least 7 days.
 minimumReleaseAgeStrict: true
 packages:
   - interface
@@ -9,3 +9,4 @@ allowBuilds:
   secp256k1: true
   sharp: true
   unrs-resolver: true
+
