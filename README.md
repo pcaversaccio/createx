@@ -2212,7 +2212,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Metis Andromeda](https://andromeda-explorer.metis.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Mode](https://explorer.mode.network/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Sei](https://seitrace.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed?chain=pacific-1)
-- [X Layer](https://www.oklink.com/x-layer/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [X Layer](https://www.oklink.com/x-layer/evm/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [BOB](https://explorer.gobob.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Core](https://scan.coredao.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Telos](https://www.teloscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
