@@ -1669,7 +1669,7 @@ const config: HardhatUserConfig = {
         chainId: 25,
         urls: {
           apiURL: "https://explorer-api.cronos.org/mainnet/api/v2",
-          browserURL: "https://explorer.cronos.org",
+          browserURL: "https://explorer.cronos.com",
         },
       },
       {
@@ -1677,7 +1677,7 @@ const config: HardhatUserConfig = {
         chainId: 338,
         urls: {
           apiURL: "https://explorer-api.cronos.org/testnet/api/v2",
-          browserURL: "https://explorer.cronos.org/testnet",
+          browserURL: "https://explorer.cronos.com/testnet",
         },
       },
       {
