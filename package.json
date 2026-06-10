@@ -249,6 +249,7 @@
     "deploy:lensmain": "npx hardhat run --no-compile --network lensMain scripts/deploy.ts",
     "deploy:pulsechaintestnet": "npx hardhat run --no-compile --network pulsechainTestnet scripts/deploy.ts",
     "deploy:pulsechainmain": "npx hardhat run --no-compile --network pulsechainMain scripts/deploy.ts",
+    "deploy:robinhoodchaintestnet": "npx hardhat run --no-compile --network robinhoodChainTestnet scripts/deploy.ts",
     "prettier:check": "prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
