@@ -2374,6 +2374,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Tempo Testnet (Moderato)](https://explore.testnet.tempo.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Lens Sepolia Testnet](https://explorer.testnet.lens.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [PulseChain Testnet (Testnet-V4)](https://scan.v4.testnet.pulsechain.com/#/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Robinhood Chain Testnet](https://explorer.testnet.chain.robinhood.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 

@@ -1276,6 +1276,14 @@ const config: HardhatUserConfig = {
       url: vars.get("PULSECHAIN_MAINNET_URL", "https://rpc.pulsechain.com"),
       accounts,
     },
+    robinhoodChainTestnet: {
+      chainId: 46630,
+      url: vars.get(
+        "ROBINHOOD_CHAIN_TESTNET_URL",
+        "https://rpc.testnet.chain.robinhood.com",
+      ),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1598,6 +1606,8 @@ const config: HardhatUserConfig = {
       // For PulseChain testnet & mainnet
       pulsechain: vars.get("PULSECHAIN_API_KEY", ""),
       pulsechainTestnet: vars.get("PULSECHAIN_API_KEY", ""),
+      // For Robinhood Chain testnet
+      robinhoodChainTestnet: vars.get("ROBINHOOD_CHAIN_API_KEY", ""),
     },
     customChains: [
       {
@@ -3037,6 +3047,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api.scan.v4.testnet.pulsechain.com/api",
           browserURL: "https://scan.v4.testnet.pulsechain.com",
+        },
+      },
+      {
+        network: "robinhoodChainTestnet",
+        chainId: 46630,
+        urls: {
+          apiURL: "https://explorer.testnet.chain.robinhood.com/api",
+          browserURL: "https://explorer.testnet.chain.robinhood.com",
         },
       },
     ],
