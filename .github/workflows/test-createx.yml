@@ -198,7 +198,7 @@ jobs:
         run: |
           set -Eeuo pipefail
           wget -q https://github.com/linux-test-project/lcov/releases/download/v1.16/lcov-1.16.tar.gz
-          echo "3457825c6b2fe4ef77c782b82a23875c84a3c955243823f05d8f2dec0d455820 lcov-1.16.tar.gz" | sha256sum -c -
+          echo "987031ad5528c8a746d4b52b380bc1bffe412de1f2b9c2ba5224995668e3240b lcov-1.16.tar.gz" | sha256sum -c -
           tar -xzf lcov-1.16.tar.gz
           sudo make -C lcov-1.16 install
           lcov --version
