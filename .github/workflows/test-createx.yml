@@ -88,7 +88,14 @@ jobs:
           cache: False
 
       - name: Install `jd` CLI
-        run: go install github.com/josephburnett/jd@e37eef06c8638ac7a223d21fe3ff14082c5c0700 # v2.5.0
+        run: |
+          set -Eeuo pipefail
+          git clone https://github.com/josephburnett/jd.git
+          cd jd
+          git checkout e37eef06c8638ac7a223d21fe3ff14082c5c0700 # v2.5.0
+          go install .
+          cd ..
+          rm -rf jd
 
       - name: Ensure correctness of the `ICreateX` interface
         run: |
