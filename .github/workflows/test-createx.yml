@@ -159,7 +159,7 @@ jobs:
       - name: Set up LCOV
         uses: hrishikesh-kadam/setup-lcov@6c1aa0cc9e1c02f9f58f01ac599f1064ccc83470 # v1.1.0
         with:
-          ref: 04663cac36f031cb86f25a62ad0ff0c4ce528c2d # v2.4.0
+          ref: v2.4
 
       - name: Run coverage
         run: |
