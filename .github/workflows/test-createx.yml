@@ -6,9 +6,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions: {}
+
 jobs:
   tests:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
     permissions:
       contents: read
       security-events: write
@@ -23,12 +26,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           submodules: recursive
+          persist-credentials: false
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
         with:
           run_install: false
 
@@ -37,16 +41,15 @@ jobs:
         run: echo "dir=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
 
       - name: Restore pnpm cache
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         id: pnpm-cache
         with:
           path: ${{ steps.pnpm-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          restore-keys: ${{ runner.os }}-pnpm-store-
 
       - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: ${{ matrix.node_version }}
 
@@ -54,7 +57,7 @@ jobs:
         run: pnpm install --prefer-offline --frozen-lockfile
 
       - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@v1
+        uses: foundry-rs/foundry-toolchain@c7450ba673e133f5ee30098b3b54f444d3a2ca2d # v1.8.0
         with:
           version: nightly
 
@@ -66,27 +69,30 @@ jobs:
 
       - name: Ensure Solidity version consistency
         run: |
+          set -Eeuo pipefail
           version_foundry=$(forge config --json | jq -r ".solc")
           version_hh=$(npx hardhat solc)
           if [[ $version_foundry != "0.8.23" ]] || [[ $version_foundry != $version_hh ]]; then exit 1; fi
 
       - name: Ensure `paris` as EVM version
         run: |
+          set -Eeuo pipefail
           version_foundry=$(forge config --json | jq -r ".evm_version")
           version_hh=$(npx hardhat evm)
           if [[ $version_foundry != "paris" ]] || [[ $version_foundry != $version_hh ]]; then exit 1; fi
 
       - name: Set up Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6.5.0
         with:
           go-version: ${{ matrix.go_version }}
           cache: False
 
       - name: Install `jd` CLI
-        run: go install github.com/josephburnett/jd@latest
+        run: go install github.com/josephburnett/jd@e37eef06c8638ac7a223d21fe3ff14082c5c0700 # v2.5.0
 
       - name: Ensure correctness of the `ICreateX` interface
         run: |
+          set -Eeuo pipefail
           pnpm abi
           diff=$(jd -set abis/src/CreateX.sol/CreateX.json abis/src/ICreateX.sol/ICreateX.json)
           if [[ -n $diff ]]; then exit 1; fi
@@ -110,20 +116,22 @@ jobs:
           FOUNDRY_DISABLE_NIGHTLY_WARNING: "1"
 
       - name: Slither static analyser
-        uses: crytic/slither-action@v0.4.2
+        uses: crytic/slither-action@b52cc1cbfee9ca3e8722dd5224299d16c9a6b80f # v0.4.2
         id: slither
         with:
           fail-on: config
           sarif: results.sarif
 
       - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v4
+        uses: github/codeql-action/upload-sarif@8aad20d150bbac5944a9f9d289da16a4b0d87c1e # v4.36.2
         with:
           sarif_file: ${{ steps.slither.outputs.sarif }}
 
   coverage:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
     permissions:
+      contents: read
       pull-requests: write
     strategy:
       matrix:
@@ -132,12 +140,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           submodules: recursive
+          persist-credentials: false
 
       - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@v1
+        uses: foundry-rs/foundry-toolchain@c7450ba673e133f5ee30098b3b54f444d3a2ca2d # v1.8.0
         with:
           version: nightly
 
@@ -148,13 +157,14 @@ jobs:
           FOUNDRY_DISABLE_NIGHTLY_WARNING: "1"
 
       - name: Set up LCOV
-        uses: hrishikesh-kadam/setup-lcov@v1
+        uses: hrishikesh-kadam/setup-lcov@6c1aa0cc9e1c02f9f58f01ac599f1064ccc83470 # v1.1.0
         with:
-          ref: v2.4
+          ref: 04663cac36f031cb86f25a62ad0ff0c4ce528c2d # v2.4.0
 
       - name: Run coverage
         run: |
-          echo '```' >> $GITHUB_STEP_SUMMARY  
+          set -Eeuo pipefail
+          echo '```' >> $GITHUB_STEP_SUMMARY
           NO_COLOR=1 forge coverage --report summary --report lcov --lcov-version 2.4 >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
         env:
@@ -168,7 +178,7 @@ jobs:
       - name: Post coverage report
         # See https://github.com/orgs/community/discussions/26829#discussioncomment-3253575.
         if: ${{ (github.event.pull_request.head.repo.full_name == github.repository && github.event_name == 'pull_request') }}
-        uses: romeovs/lcov-reporter-action@v0.4.0
+        uses: romeovs/lcov-reporter-action@87a815f34ec27a5826abba44ce09bbc688da58fd # v0.4.0
         with:
           title: "`CreateX` Test Coverage Report"
           delete-old-comments: true
@@ -179,12 +189,13 @@ jobs:
       # in `zgosalvez/github-actions-report-lcov@v7`: https://github.com/zgosalvez/github-actions-report-lcov/issues/168.
       - name: Set up LCOV `1.16`
         run: |
-          wget https://github.com/linux-test-project/lcov/releases/download/v1.16/lcov-1.16.tar.gz
+          set -Eeuo pipefail
+          wget -q https://github.com/linux-test-project/lcov/releases/download/v1.16/lcov-1.16.tar.gz
+          echo "3457825c6b2fe4ef77c782b82a23875c84a3c955243823f05d8f2dec0d455820 lcov-1.16.tar.gz" | sha256sum -c -
           tar -xzf lcov-1.16.tar.gz
-          cd lcov-1.16
-          sudo make install
+          sudo make -C lcov-1.16 install
           lcov --version
-          sudo rm -rf lcov-1.16.tar.gz lcov-1.16
+          rm -rf lcov-1.16.tar.gz lcov-1.16
 
       - name: Run coverage using LCOV `1.16`
         run: forge coverage --report lcov --lcov-version 1.16
@@ -197,7 +208,7 @@ jobs:
         run: lcov --remove lcov.info 'test/*' --output-file lcov.info --rc lcov_branch_coverage=1
 
       - name: Verify minimum coverage
-        uses: zgosalvez/github-actions-report-lcov@v7
+        uses: zgosalvez/github-actions-report-lcov@84f16a83ae03e846a4c697bd75cae3f94fa9f426 # v7.0.12
         with:
           coverage-files: ./lcov.info
           minimum-coverage: 100

@@ -6,9 +6,14 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions: {}
+
 jobs:
   prettify-n-lint:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    permissions:
+      contents: read
     strategy:
       matrix:
         os:
@@ -18,10 +23,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v6
+        uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
         with:
           run_install: false
 
@@ -30,16 +37,15 @@ jobs:
         run: echo "dir=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
 
       - name: Restore pnpm cache
-        uses: actions/cache@v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         id: pnpm-cache
         with:
           path: ${{ steps.pnpm-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          restore-keys: ${{ runner.os }}-pnpm-store-
 
       - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: ${{ matrix.node_version }}
 
@@ -53,6 +59,9 @@ jobs:
 
   codespell:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    permissions:
+      contents: read
     strategy:
       matrix:
         os:
@@ -60,10 +69,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
 
       - name: Run codespell
-        uses: codespell-project/actions-codespell@v2
+        uses: codespell-project/actions-codespell@8f01853be192eb0f849a5c7d721450e7a467c579 # v2.2.0
         with:
           check_filenames: true
           skip: ./.git,pnpm-lock.yaml
@@ -71,6 +82,9 @@ jobs:
 
   validate-links:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    permissions:
+      contents: read
     strategy:
       matrix:
         os:
@@ -80,16 +94,18 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
 
       - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@0dafeac902942906541bc140009cdbf32665b601 # v1.315.0
         with:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
 
       - name: Install awesome_bot
-        run: gem install awesome_bot
+        run: gem install awesome_bot -v 1.20.0
 
       - name: Validate URLs
         run: |
