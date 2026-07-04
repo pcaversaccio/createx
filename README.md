@@ -24,13 +24,13 @@ Factory smart contract to make easier and safer usage of the [`CREATE`](https://
   - [Test Coverage](#test-coverage)
 - [ABI (Application Binary Interface)](#abi-application-binary-interface)
 - [New Deployment(s)](#new-deployments)
-  - [`ethers.js`](#ethersjs)
-  - [`cast`](#cast)
+    - [`ethers.js`](#ethersjs)
+    - [`cast`](#cast)
   - [Contract Verification](#contract-verification)
 - [`CreateX` Deployments](#createx-deployments)
-  - [EVM-Based Production Networks](#evm-based-production-networks)
-  - [Ethereum Test Networks](#ethereum-test-networks)
-  - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
+    - [EVM-Based Production Networks](#evm-based-production-networks)
+    - [Ethereum Test Networks](#ethereum-test-networks)
+    - [Additional EVM-Based Test Networks](#additional-evm-based-test-networks)
 - [Integration With External Tooling](#integration-with-external-tooling)
 - [Community-Maintained Dune Dashboards](#community-maintained-dune-dashboards)
 - [🙏🏼 Acknowledgement](#-acknowledgement)
@@ -2273,7 +2273,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Tempo](https://explore.tempo.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Lens](https://explorer.lens.xyz/addresses/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [PulseChain](https://scan.mypinata.cloud/ipfs/bafybeienxyoyrhn5tswclvd3gdjy5mtkkwmu37aqtml6onbf7xnb3o22pe/#/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Robinhood Chain Testnet](https://robinhoodchain.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Robinhood Chain](https://robinhoodchain.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
