@@ -790,14 +790,14 @@ const config: HardhatUserConfig = {
       url: vars.get("SUPERSEED_MAINNET_URL", "https://mainnet.superseed.xyz"),
       accounts,
     },
-    storyTestnet: {
+    dataNetworkTestnet: {
       chainId: 1315,
-      url: vars.get("STORY_TESTNET_URL", "https://aeneid.storyrpc.io"),
+      url: vars.get("DATA_NETWORK_TESTNET_URL", "https://aeneid.datarpc.io"),
       accounts,
     },
-    storyMain: {
+    dataNetworkMain: {
       chainId: 1514,
-      url: vars.get("STORY_MAINNET_URL", "https://mainnet.storyrpc.io"),
+      url: vars.get("DATA_NETWORK_MAINNET_URL", "https://mainnet.datarpc.io"),
       accounts,
     },
     sonicTestnet: {
@@ -1496,9 +1496,9 @@ const config: HardhatUserConfig = {
       // For Superseed testnet & mainnet
       superseed: vars.get("SUPERSEED_API_KEY", ""),
       superseedTestnet: vars.get("SUPERSEED_API_KEY", ""),
-      // For Story testnet & mainnet
-      story: vars.get("STORY_API_KEY", ""),
-      storyTestnet: vars.get("STORY_API_KEY", ""),
+      // For DATA Network testnet & mainnet
+      dataNetwork: vars.get("DATA_NETWORK_API_KEY", ""),
+      dataNetworkTestnet: vars.get("DATA_NETWORK_API_KEY", ""),
       // For Sonic testnet & mainnet
       sonic: vars.get("SONIC_API_KEY", ""),
       sonicTestnet: vars.get("SONIC_API_KEY", ""),
@@ -2426,19 +2426,19 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        network: "story",
+        network: "dataNetwork",
         chainId: 1514,
         urls: {
-          apiURL: "https://www.storyscan.io/api",
-          browserURL: "https://www.storyscan.io",
+          apiURL: "https://datanetscan.io/api",
+          browserURL: "https://datanetscan.io",
         },
       },
       {
-        network: "storyTestnet",
+        network: "dataNetworkTestnet",
         chainId: 1315,
         urls: {
-          apiURL: "https://aeneid.storyscan.io/api",
-          browserURL: "https://aeneid.storyscan.io",
+          apiURL: "https://aeneid.datanetscan.io/api",
+          browserURL: "https://aeneid.datanetscan.io",
         },
       },
       {

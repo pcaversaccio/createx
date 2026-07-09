@@ -432,10 +432,10 @@
     ]
   },
   {
-    "name": "Story",
+    "name": "DATA Network",
     "chainId": 1514,
     "urls": [
-      "https://www.storyscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://datanetscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -714,7 +714,7 @@
     "name": "Lens",
     "chainId": 232,
     "urls": [
-      "https://explorer.lens.xyz/addresses/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://explorer.lens.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {
@@ -1133,10 +1133,10 @@
     ]
   },
   {
-    "name": "Story Testnet (Aeneid)",
+    "name": "DATA Network Testnet (Aeneid)",
     "chainId": 1315,
     "urls": [
-      "https://aeneid.storyscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+      "https://aeneid.datanetscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
   {

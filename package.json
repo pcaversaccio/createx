@@ -21,7 +21,7 @@
   },
   "author": "pcaversaccio (https://pcaversaccio.com), Matt Solomon (https://mattsolomon.dev)",
   "license": "AGPL-3.0-only",
-  "packageManager": "pnpm@11.9.0",
+  "packageManager": "pnpm@11.10.0",
   "scripts": {
     "clean": "hardhat clean && forge clean",
     "test": "forge test --out forge-artifacts",
@@ -165,8 +165,8 @@
     "deploy:metall2main": "hardhat run --no-compile --network metalL2Main scripts/deploy.ts",
     "deploy:superseedtestnet": "hardhat run --no-compile --network superseedTestnet scripts/deploy.ts",
     "deploy:superseedmain": "hardhat run --no-compile --network superseedMain scripts/deploy.ts",
-    "deploy:storytestnet": "hardhat run --no-compile --network storyTestnet scripts/deploy.ts",
-    "deploy:storymain": "hardhat run --no-compile --network storyMain scripts/deploy.ts",
+    "deploy:datanetworktestnet": "hardhat run --no-compile --network dataNetworkTestnet scripts/deploy.ts",
+    "deploy:datanetworkmain": "hardhat run --no-compile --network dataNetworkMain scripts/deploy.ts",
     "deploy:sonictestnet": "hardhat run --no-compile --network sonicTestnet scripts/deploy.ts",
     "deploy:sonicmain": "hardhat run --no-compile --network sonicMain scripts/deploy.ts",
     "deploy:flowtestnet": "hardhat run --no-compile --network flowTestnet scripts/deploy.ts",
@@ -279,12 +279,12 @@
     "hardhat-abi-exporter": "2.11.0",
     "hardhat-contract-sizer": "2.10.1",
     "hardhat-gas-reporter": "2.3.0",
-    "prettier": "3.8.5",
+    "prettier": "3.9.4",
     "prettier-plugin-solidity": "2.3.1",
     "solhint": "6.2.3",
     "ts-node": "10.9.2",
     "typechain": "8.3.2",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.62.0"
+    "typescript-eslint": "8.62.1"
   }
 }

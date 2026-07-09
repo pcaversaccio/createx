@@ -6,7 +6,7 @@
 [![🚀 UI deployment](https://github.com/pcaversaccio/createx/actions/workflows/deploy.yml/badge.svg)](https://github.com/pcaversaccio/createx/actions/workflows/deploy.yml)
 [![License: AGPL-3.0-only](https://img.shields.io/badge/License-AGPL--3.0--only-blue)](https://www.gnu.org/licenses/agpl-3.0)
 
-<img src=https://github-production-user-asset-6210df.s3.amazonaws.com/25297591/272914952-38a5989c-0113-427d-9158-47646971b7d8.png  width="1050"/>
+<img src=https://github-production-user-asset-6210df.s3.amazonaws.com/25297591/272914952-38a5989c-0113-427d-9158-47646971b7d8.png width="1050"/>
 
 Factory smart contract to make easier and safer usage of the [`CREATE`](https://www.evm.codes/#f0?fork=shanghai) and [`CREATE2`](https://www.evm.codes/#f5?fork=shanghai) EVM opcodes as well as of [`CREATE3`](https://github.com/ethereum/EIPs/pull/3171)-based (i.e. without an initcode factor) contract creations.
 
@@ -2232,7 +2232,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Lisk](https://blockscout.lisk.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Metal L2](https://explorer.metall2.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Superseed](https://explorer.superseed.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Story](https://www.storyscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [DATA Network](https://datanetscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Sonic](https://sonicscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [EVM on Flow](https://evm.flowscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Ink](https://explorer.inkonchain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
@@ -2271,7 +2271,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [DMD Diamond](https://explorer.bit.diamonds/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Citrea](https://explorer.mainnet.citrea.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Tempo](https://explore.tempo.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Lens](https://explorer.lens.xyz/addresses/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Lens](https://explorer.lens.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [PulseChain](https://scan.mypinata.cloud/ipfs/bafybeienxyoyrhn5tswclvd3gdjy5mtkkwmu37aqtml6onbf7xnb3o22pe/#/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Robinhood Chain](https://robinhoodchain.blockscout.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
@@ -2334,7 +2334,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Lisk Sepolia Testnet](https://sepolia-blockscout.lisk.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Metal L2 Sepolia Testnet](https://testnet.explorer.metall2.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Superseed Sepolia Testnet](https://sepolia-explorer.superseed.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Story Testnet (Aeneid)](https://aeneid.storyscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [DATA Network Testnet (Aeneid)](https://aeneid.datanetscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Sonic Testnet (Blaze)](https://testnet.sonicscan.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [EVM on Flow Testnet](https://evm-testnet.flowscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Ink Sepolia Testnet](https://explorer-sepolia.inkonchain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
