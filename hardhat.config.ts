@@ -2429,8 +2429,8 @@ const config: HardhatUserConfig = {
         network: "dataNetwork",
         chainId: 1514,
         urls: {
-          apiURL: "https://datanetscan.io/api",
-          browserURL: "https://datanetscan.io",
+          apiURL: "https://www.datanetscan.io/api",
+          browserURL: "https://www.datanetscan.io",
         },
       },
       {
@@ -2696,8 +2696,8 @@ const config: HardhatUserConfig = {
         chainId: 48898,
         urls: {
           apiURL:
-            "https://explorer.garfield-testnet.zircuit.com/api/contractVerifyHardhat",
-          browserURL: "https://explorer.garfield-testnet.zircuit.com",
+            "https://exp.garfield-testnet.zircuit.com/api/contractVerifyHardhat",
+          browserURL: "https://exp.garfield-testnet.zircuit.com",
         },
       },
       {
