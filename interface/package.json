@@ -54,11 +54,11 @@
     "eslint-plugin-react-hooks": "7.1.1",
     "globals": "17.7.0",
     "next-seo": "7.2.0",
-    "postcss": "8.5.18",
+    "postcss": "8.5.19",
     "prettier": "3.9.5",
     "prettier-plugin-tailwindcss": "0.8.0",
     "tailwindcss": "4.3.2",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.63.0"
+    "typescript-eslint": "8.64.0"
   }
 }
