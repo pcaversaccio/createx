@@ -251,6 +251,8 @@
     "deploy:pulsechainmain": "npx hardhat run --no-compile --network pulsechainMain scripts/deploy.ts",
     "deploy:robinhoodchaintestnet": "npx hardhat run --no-compile --network robinhoodChainTestnet scripts/deploy.ts",
     "deploy:robinhoodchainmain": "npx hardhat run --no-compile --network robinhoodChainMain scripts/deploy.ts",
+    "deploy:stabletestnet": "npx hardhat run --no-compile --network stableTestnet scripts/deploy.ts",
+    "deploy:stablemain": "npx hardhat run --no-compile --network stableMain scripts/deploy.ts",
     "prettier:check": "prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",

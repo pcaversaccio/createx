@@ -734,6 +734,14 @@
     ]
   },
   {
+    "name": "Stable Mainnet",
+    "chainId": 988,
+    "urls": [
+      "https://stablescan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/988/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1432,6 +1440,14 @@
     "urls": [
       "https://explorer.testnet.chain.robinhood.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/46630/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
+    "name": "Stable Testnet",
+    "chainId": 2201,
+    "urls": [
+      "https://testnet.stablescan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/2201/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
