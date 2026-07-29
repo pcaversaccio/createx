@@ -277,7 +277,7 @@
     "eslint-config-prettier": "10.1.8",
     "ethers": "6.17.0",
     "globals": "17.7.0",
-    "hardhat": "2.28.6",
+    "hardhat": "2.29.0",
     "hardhat-abi-exporter": "2.11.0",
     "hardhat-contract-sizer": "2.10.1",
     "hardhat-gas-reporter": "2.3.0",
