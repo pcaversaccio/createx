@@ -1292,6 +1292,16 @@ const config: HardhatUserConfig = {
       ),
       accounts,
     },
+    stableTestnet: {
+      chainId: 2201,
+      url: vars.get("STABLE_TESTNET_URL", "https://rpc.testnet.stable.xyz"),
+      accounts,
+    },
+    stableMain: {
+      chainId: 988,
+      url: vars.get("STABLE_MAINNET_URL", "https://rpc.stable.xyz"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1617,6 +1627,9 @@ const config: HardhatUserConfig = {
       // For Robinhood Chain testnet & mainnet
       robinhoodChain: vars.get("ROBINHOOD_CHAIN_API_KEY", ""),
       robinhoodChainTestnet: vars.get("ROBINHOOD_CHAIN_API_KEY", ""),
+      // For Stable testnet & mainnet
+      stable: vars.get("STABLE_API_KEY", ""),
+      stableTestnet: vars.get("STABLE_API_KEY", ""),
     },
     customChains: [
       {
@@ -2461,16 +2474,16 @@ const config: HardhatUserConfig = {
         network: "flow",
         chainId: 747,
         urls: {
-          apiURL: "https://evm.flowscan.io/api",
-          browserURL: "https://evm.flowscan.io",
+          apiURL: "https://evm.flow.com/api",
+          browserURL: "https://evm.flow.com",
         },
       },
       {
         network: "flowTestnet",
         chainId: 545,
         urls: {
-          apiURL: "https://evm-testnet.flowscan.io/api",
-          browserURL: "https://evm-testnet.flowscan.io",
+          apiURL: "https://testnet.evm.flow.com/api",
+          browserURL: "https://testnet.evm.flow.com",
         },
       },
       {
@@ -3072,6 +3085,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://explorer.testnet.chain.robinhood.com/api",
           browserURL: "https://explorer.testnet.chain.robinhood.com",
+        },
+      },
+      {
+        network: "stable",
+        chainId: 988,
+        urls: {
+          apiURL: "https://api.stablescan.xyz/api",
+          browserURL: "https://stablescan.xyz",
+        },
+      },
+      {
+        network: "stableTestnet",
+        chainId: 2201,
+        urls: {
+          apiURL: "https://api-testnet.stablescan.xyz/api",
+          browserURL: "https://testnet.stablescan.xyz",
         },
       },
     ],
