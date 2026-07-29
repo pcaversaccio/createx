@@ -1294,18 +1294,12 @@ const config: HardhatUserConfig = {
     },
     stableTestnet: {
       chainId: 2201,
-      url: vars.get(
-        "STABLE_TESTNET_URL",
-        "https://rpc.testnet.stable.xyz",
-      ),
+      url: vars.get("STABLE_TESTNET_URL", "https://rpc.testnet.stable.xyz"),
       accounts,
     },
     stableMain: {
       chainId: 988,
-      url: vars.get(
-        "STABLE_MAINNET_URL",
-        "https://stable-mainnet.rpc.sentio.xyz",
-      ),
+      url: vars.get("STABLE_MAINNET_URL", "https://rpc.stable.xyz"),
       accounts,
     },
   },
@@ -2480,16 +2474,16 @@ const config: HardhatUserConfig = {
         network: "flow",
         chainId: 747,
         urls: {
-          apiURL: "https://evm.flowscan.io/api",
-          browserURL: "https://evm.flowscan.io",
+          apiURL: "https://evm.flow.com/api",
+          browserURL: "https://evm.flow.com",
         },
       },
       {
         network: "flowTestnet",
         chainId: 545,
         urls: {
-          apiURL: "https://evm-testnet.flowscan.io/api",
-          browserURL: "https://evm-testnet.flowscan.io",
+          apiURL: "https://testnet.evm.flow.com/api",
+          browserURL: "https://testnet.evm.flow.com",
         },
       },
       {
@@ -3102,10 +3096,10 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        network: "robinhoodChainTestnet",
+        network: "stableTestnet",
         chainId: 2201,
         urls: {
-          apiURL: "https://api.testnet.stablescan.xyz/api",
+          apiURL: "https://api-testnet.stablescan.xyz/api",
           browserURL: "https://testnet.stablescan.xyz",
         },
       },
