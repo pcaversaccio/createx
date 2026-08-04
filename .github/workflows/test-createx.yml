@@ -37,7 +37,7 @@ jobs:
             - args: [--prefer-offline, --frozen-lockfile]
 
       - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@b00af27efadbc7b4ca8b82abbd903b17cc874d2a # v1.9.0
+        uses: foundry-rs/foundry-toolchain@908c540300062bd5a7e473851cdb4282204cee09 # v1.9.1
         with:
           version: nightly
 
@@ -110,7 +110,7 @@ jobs:
           sarif: results.sarif
 
       - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@7188fc363630916deb702c7fdcf4e481b751f97a # v4.37.1
+        uses: github/codeql-action/upload-sarif@e4fba868fa4b1b91e1fdab776edc8cfbe6e9fb81 # v4.37.3
         with:
           sarif_file: ${{ steps.slither.outputs.sarif }}
 
@@ -133,7 +133,7 @@ jobs:
           persist-credentials: false
 
       - name: Install Foundry
-        uses: foundry-rs/foundry-toolchain@b00af27efadbc7b4ca8b82abbd903b17cc874d2a # v1.9.0
+        uses: foundry-rs/foundry-toolchain@908c540300062bd5a7e473851cdb4282204cee09 # v1.9.1
         with:
           version: nightly
 
