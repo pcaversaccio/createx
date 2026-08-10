@@ -269,15 +269,15 @@
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
-    "@nomicfoundation/hardhat-ethers": "3.1.3",
-    "@nomicfoundation/hardhat-verify": "2.1.3",
+    "@nomicfoundation/hardhat-ethers": "4.0.15",
+    "@nomicfoundation/hardhat-verify": "3.0.22",
     "@typechain/ethers-v6": "0.5.1",
     "@typechain/hardhat": "9.1.0",
     "eslint": "10.8.0",
     "eslint-config-prettier": "10.1.8",
     "ethers": "6.17.0",
     "globals": "17.9.0",
-    "hardhat": "2.29.0",
+    "hardhat": "3.12.0",
     "hardhat-abi-exporter": "2.11.0",
     "hardhat-contract-sizer": "2.10.1",
     "hardhat-gas-reporter": "2.3.0",
@@ -286,7 +286,7 @@
     "solhint": "6.2.3",
     "ts-node": "10.9.2",
     "typechain": "8.3.2",
-    "typescript": "6.0.3",
-    "typescript-eslint": "8.65.0"
+    "typescript": "7.0.2",
+    "typescript-eslint": "8.66.0"
   }
 }
