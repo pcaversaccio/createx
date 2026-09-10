@@ -1449,5 +1449,12 @@
       "https://testnet.stablescan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/2201/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
+  },
+  {
+    "name": "Tezos X Testnet (Previewnet)",
+    "chainId": 128064,
+    "urls": [
+      "https://blockscout.previewnet.tezosx.nomadic-labs.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
   }
 ]

@@ -2378,6 +2378,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [PulseChain Testnet (Testnet-V4)](https://scan.v4.testnet.pulsechain.com/#/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Robinhood Chain Testnet](https://explorer.testnet.chain.robinhood.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Stable Sepolia Testnet](https://testnet.stablescan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Tezos X Testnet (Previewnet)](https://blockscout.previewnet.tezosx.nomadic-labs.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 
