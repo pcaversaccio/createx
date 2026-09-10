@@ -253,6 +253,7 @@
     "deploy:robinhoodchainmain": "hardhat run --no-compile --network robinhoodChainMain scripts/deploy.ts",
     "deploy:stabletestnet": "hardhat run --no-compile --network stableTestnet scripts/deploy.ts",
     "deploy:stablemain": "hardhat run --no-compile --network stableMain scripts/deploy.ts",
+    "deploy:tezosxtestnet": "hardhat run --no-compile --network tezosXTestnet scripts/deploy.ts",
     "prettier:check": "prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",

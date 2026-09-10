@@ -1302,6 +1302,14 @@ const config: HardhatUserConfig = {
       url: vars.get("STABLE_MAINNET_URL", "https://rpc.stable.xyz"),
       accounts,
     },
+    tezosXTestnet: {
+      chainId: 128064,
+      url: vars.get(
+        "TEZOSX_TESTNET_URL",
+        "https://evm.previewnet.tezosx.nomadic-labs.com",
+      ),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1630,6 +1638,8 @@ const config: HardhatUserConfig = {
       // For Stable testnet & mainnet
       stable: vars.get("STABLE_API_KEY", ""),
       stableTestnet: vars.get("STABLE_API_KEY", ""),
+      // For Tezos X testnet
+      tezosXTestnet: vars.get("TEZOSX_API_KEY", ""),
     },
     customChains: [
       {
@@ -3101,6 +3111,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-testnet.stablescan.xyz/api",
           browserURL: "https://testnet.stablescan.xyz",
+        },
+      },
+      {
+        network: "tezosXTestnet",
+        chainId: 128064,
+        urls: {
+          apiURL: "https://blockscout.previewnet.tezosx.nomadic-labs.com/api",
+          browserURL: "https://blockscout.previewnet.tezosx.nomadic-labs.com",
         },
       },
     ],
