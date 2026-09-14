@@ -3085,8 +3085,8 @@ const config: HardhatUserConfig = {
         network: "robinhoodChain",
         chainId: 4663,
         urls: {
-          apiURL: "https://robinhoodchain.blockscout.com/api",
-          browserURL: "https://robinhoodchain.blockscout.com",
+          apiURL: "https://api-robin.etherscan.io/api",
+          browserURL: "https://robin.etherscan.io",
         },
       },
       {
