@@ -1220,7 +1220,12 @@ const config: HardhatUserConfig = {
     },
     arcTestnet: {
       chainId: 5042002,
-      url: vars.get("ARC_TESTNET_URL", "https://rpc.testnet.arc.network"),
+      url: vars.get("ARC_TESTNET_URL", "https://rpc.testnet.arc.io"),
+      accounts,
+    },
+    arcMain: {
+      chainId: 5042,
+      url: vars.get("ARC_MAINNET_URL", "https://rpc.mainnet.arc.io"),
       accounts,
     },
     dmdTestnet: {
@@ -1615,7 +1620,8 @@ const config: HardhatUserConfig = {
       // For XRPL EVM testnet & mainnet
       xrplEVM: vars.get("XRPLEVM_API_KEY", ""),
       xrplEVMTestnet: vars.get("XRPLEVM_API_KEY", ""),
-      // For Arc testnet
+      // For Arc testnet & mainnet
+      arc: vars.get("ARC_API_KEY", ""),
       arcTestnet: vars.get("ARC_API_KEY", ""),
       // For DMD Diamond testnet & mainnet
       dmd: vars.get("DMD_API_KEY", ""),
@@ -2993,11 +2999,19 @@ const config: HardhatUserConfig = {
         },
       },
       {
+        network: "arc",
+        chainId: 5042,
+        urls: {
+          apiURL: "https://explorer.arc.io/api",
+          browserURL: "https://explorer.arc.io",
+        },
+      },
+      {
         network: "arcTestnet",
         chainId: 5042002,
         urls: {
-          apiURL: "https://testnet.arcscan.app/api",
-          browserURL: "https://testnet.arcscan.app",
+          apiURL: "https://explorer.testnet.arc.io/api",
+          browserURL: "https://explorer.testnet.arc.io",
         },
       },
       {
