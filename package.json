@@ -21,7 +21,7 @@
   },
   "author": "pcaversaccio (https://pcaversaccio.com), Matt Solomon (https://mattsolomon.dev)",
   "license": "AGPL-3.0-only",
-  "packageManager": "pnpm@12.3.4",
+  "packageManager": "pnpm@12.4.2",
   "scripts": {
     "clean": "hardhat clean && forge clean",
     "test": "forge test --out forge-artifacts",
@@ -239,6 +239,7 @@
     "deploy:xrplevmtestnet": "hardhat run --no-compile --network xrplEVMTestnet scripts/deploy.ts",
     "deploy:xrplevmmain": "hardhat run --no-compile --network xrplEVMMain scripts/deploy.ts",
     "deploy:arctestnet": "hardhat run --no-compile --network arcTestnet scripts/deploy.ts",
+    "deploy:arcmain": "hardhat run --no-compile --network arcMain scripts/deploy.ts",
     "deploy:dmdtestnet": "hardhat run --no-compile --network dmdTestnet scripts/deploy.ts",
     "deploy:dmdmain": "hardhat run --no-compile --network dmdMain scripts/deploy.ts",
     "deploy:citreatestnet": "hardhat run --no-compile --network citreaTestnet scripts/deploy.ts",
@@ -288,6 +289,6 @@
     "ts-node": "10.9.2",
     "typechain": "8.3.2",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.69.0"
+    "typescript-eslint": "8.70.0"
   }
 }

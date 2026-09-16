@@ -689,6 +689,14 @@
     ]
   },
   {
+    "name": "Arc",
+    "chainId": 5042,
+    "urls": [
+      "https://explorer.arc.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://repo.sourcify.dev/5042/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "DMD Diamond",
     "chainId": 17771,
     "urls": [
@@ -1393,7 +1401,7 @@
     "name": "Arc Testnet",
     "chainId": 5042002,
     "urls": [
-      "https://testnet.arcscan.app/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://explorer.testnet.arc.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/5042002/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
