@@ -3002,8 +3002,8 @@ const config: HardhatUserConfig = {
         network: "arc",
         chainId: 5042,
         urls: {
-          apiURL: "https://explorer.arc.io/api",
-          browserURL: "https://explorer.arc.io",
+          apiURL: "https://api-arc.etherscan.io/api",
+          browserURL: "https://arc.etherscan.io",
         },
       },
       {

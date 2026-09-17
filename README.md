@@ -2268,7 +2268,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [MemeCore](https://memecorescan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [LightLink Phoenix](https://phoenix.lightlink.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [XRPL EVM](https://explorer.xrplevm.org/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
-- [Arc](https://explorer.arc.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Arc](https://arc.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [DMD Diamond](https://explorer.bit.diamonds/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Citrea](https://explorer.mainnet.citrea.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Tempo](https://explore.tempo.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
