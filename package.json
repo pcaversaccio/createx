@@ -283,7 +283,7 @@
     "hardhat-abi-exporter": "2.11.0",
     "hardhat-contract-sizer": "2.10.1",
     "hardhat-gas-reporter": "2.3.0",
-    "prettier": "3.9.6",
+    "prettier": "3.9.8",
     "prettier-plugin-solidity": "2.4.1",
     "solhint": "6.2.4",
     "ts-node": "10.9.2",
