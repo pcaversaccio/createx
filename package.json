@@ -21,7 +21,7 @@
   },
   "author": "pcaversaccio (https://pcaversaccio.com), Matt Solomon (https://mattsolomon.dev)",
   "license": "AGPL-3.0-only",
-  "packageManager": "pnpm@12.5.1",
+  "packageManager": "pnpm@12.6.0",
   "scripts": {
     "clean": "hardhat clean && forge clean",
     "test": "forge test --out forge-artifacts",
@@ -283,12 +283,12 @@
     "hardhat-abi-exporter": "2.11.0",
     "hardhat-contract-sizer": "2.10.1",
     "hardhat-gas-reporter": "2.3.0",
-    "prettier": "3.9.8",
+    "prettier": "3.9.9",
     "prettier-plugin-solidity": "2.4.1",
     "solhint": "6.2.4",
     "ts-node": "10.9.2",
     "typechain": "8.3.2",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.70.0"
+    "typescript-eslint": "8.70.1"
   }
 }
