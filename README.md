@@ -2276,6 +2276,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [PulseChain](https://scan.mypinata.cloud/ipfs/bafybeienxyoyrhn5tswclvd3gdjy5mtkkwmu37aqtml6onbf7xnb3o22pe/#/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Robinhood Chain](https://robin.etherscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Stable](https://stablescan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Shibarium](https://shibariumscan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 #### Ethereum Test Networks
 
@@ -2380,6 +2381,7 @@ To verify a deployed [`CreateX`](./src/CreateX.sol) contract on a block explorer
 - [Robinhood Chain Testnet](https://explorer.testnet.chain.robinhood.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Stable Sepolia Testnet](https://testnet.stablescan.xyz/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 - [Tezos X Testnet (Previewnet)](https://blockscout.previewnet.tezosx.nomadic-labs.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
+- [Shibarium Sepolia Testnet (Puppynet)](https://puppyscan.shib.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed)
 
 ## Integration With External Tooling
 
