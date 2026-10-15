@@ -287,7 +287,7 @@
     "hardhat-gas-reporter": "2.3.0",
     "prettier": "3.9.9",
     "prettier-plugin-solidity": "2.4.1",
-    "solhint": "6.2.4",
+    "solhint": "6.2.5",
     "ts-node": "10.9.2",
     "typechain": "8.3.2",
     "typescript": "6.0.3",
