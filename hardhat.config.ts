@@ -1315,6 +1315,16 @@ const config: HardhatUserConfig = {
       ),
       accounts,
     },
+    shibariumTestnet: {
+      chainId: 157,
+      url: vars.get("SHIBARIUM_TESTNET_URL", "https://rpc.puppynet.shib.io"),
+      accounts,
+    },
+    shibariumMain: {
+      chainId: 109,
+      url: vars.get("SHIBARIUM_MAINNET_URL", "https://rpc.shibarium.shib.io"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1646,6 +1656,9 @@ const config: HardhatUserConfig = {
       stableTestnet: vars.get("STABLE_API_KEY", ""),
       // For Tezos X testnet
       tezosXTestnet: vars.get("TEZOSX_API_KEY", ""),
+      // For Shibarium testnet & mainnet
+      shibarium: vars.get("SHIBARIUM_API_KEY", ""),
+      shibariumTestnet: vars.get("SHIBARIUM_API_KEY", ""),
     },
     customChains: [
       {
@@ -3133,6 +3146,22 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://blockscout.previewnet.tezosx.nomadic-labs.com/api",
           browserURL: "https://blockscout.previewnet.tezosx.nomadic-labs.com",
+        },
+      },
+      {
+        network: "shibarium",
+        chainId: 109,
+        urls: {
+          apiURL: "https://shibariumscan.io/api",
+          browserURL: "https://shibariumscan.io",
+        },
+      },
+      {
+        network: "shibariumTestnet",
+        chainId: 157,
+        urls: {
+          apiURL: "https://puppyscan.shib.io/api",
+          browserURL: "https://puppyscan.shib.io",
         },
       },
     ],

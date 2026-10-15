@@ -21,7 +21,7 @@
   },
   "author": "pcaversaccio (https://pcaversaccio.com), Matt Solomon (https://mattsolomon.dev)",
   "license": "AGPL-3.0-only",
-  "packageManager": "pnpm@12.8.1",
+  "packageManager": "pnpm@12.10.1",
   "scripts": {
     "clean": "hardhat clean && forge clean",
     "test": "forge test --out forge-artifacts",
@@ -255,6 +255,8 @@
     "deploy:stabletestnet": "hardhat run --no-compile --network stableTestnet scripts/deploy.ts",
     "deploy:stablemain": "hardhat run --no-compile --network stableMain scripts/deploy.ts",
     "deploy:tezosxtestnet": "hardhat run --no-compile --network tezosXTestnet scripts/deploy.ts",
+    "deploy:shibariumtestnet": "hardhat run --no-compile --network shibariumTestnet scripts/deploy.ts",
+    "deploy:shibariummain": "hardhat run --no-compile --network shibariumMain scripts/deploy.ts",
     "prettier:check": "prettier -c \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
     "prettier:check:interface": "pnpm -C interface prettier:check",
     "prettier:fix": "prettier -w \"**/*.{js,ts,md,sol,json,yml,yaml}\"",
@@ -275,10 +277,10 @@
     "@nomicfoundation/hardhat-verify": "2.1.3",
     "@typechain/ethers-v6": "0.5.1",
     "@typechain/hardhat": "9.1.0",
-    "eslint": "10.11.0",
+    "eslint": "10.12.0",
     "eslint-config-prettier": "10.1.8",
     "ethers": "6.17.0",
-    "globals": "17.12.0",
+    "globals": "17.13.0",
     "hardhat": "2.29.1",
     "hardhat-abi-exporter": "2.11.0",
     "hardhat-contract-sizer": "2.10.1",
@@ -289,6 +291,6 @@
     "ts-node": "10.9.2",
     "typechain": "8.3.2",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.71.0"
+    "typescript-eslint": "8.71.1"
   }
 }
