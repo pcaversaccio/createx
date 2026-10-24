@@ -3175,7 +3175,7 @@ const config: HardhatUserConfig = {
         network: "dotOne",
         chainId: 505,
         urls: {
-          apiURL: "https://dotscan.one//api",
+          apiURL: "https://dotscan.one/api",
           browserURL: "https://dotscan.one",
         },
       },
