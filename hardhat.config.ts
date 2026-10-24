@@ -1327,7 +1327,7 @@ const config: HardhatUserConfig = {
     },
     dotOneMain: {
       chainId: 505,
-      url: vars.get("DOTONE_MAINNET_URL", "https://rpc.dotone.network"),
+      url: vars.get("DOTONE_MAINNET_URL", "https://rpc.dotone.online"),
       accounts,
     },
   },
