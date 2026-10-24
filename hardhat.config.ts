@@ -2850,8 +2850,8 @@ const config: HardhatUserConfig = {
         network: "apeChainTestnet",
         chainId: 33111,
         urls: {
-          apiURL: "https://api-curtis.apescan.io/api",
-          browserURL: "https://curtis.apescan.io",
+          apiURL: "https://curtis.apechain.com/api",
+          browserURL: "https://curtis.apechain.com",
         },
       },
       {

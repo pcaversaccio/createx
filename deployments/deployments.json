@@ -1337,7 +1337,7 @@
     "name": "ApeChain Sepolia Testnet (Curtis)",
     "chainId": 33111,
     "urls": [
-      "https://curtis.apescan.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
+      "https://curtis.apechain.com/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed",
       "https://repo.sourcify.dev/33111/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   },
