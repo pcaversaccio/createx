@@ -1325,6 +1325,11 @@ const config: HardhatUserConfig = {
       url: vars.get("SHIBARIUM_MAINNET_URL", "https://rpc.shibarium.shib.io"),
       accounts,
     },
+    dotOneMain: {
+      chainId: 505,
+      url: vars.get("DOTONE_MAINNET_URL", "https://rpc.dotone.network"),
+      accounts,
+    },
   },
   contractSizer: {
     alphaSort: true,
@@ -1659,6 +1664,8 @@ const config: HardhatUserConfig = {
       // For Shibarium testnet & mainnet
       shibarium: vars.get("SHIBARIUM_API_KEY", ""),
       shibariumTestnet: vars.get("SHIBARIUM_API_KEY", ""),
+      // For DotOne Smart Chain mainnet
+      dotOne: vars.get("DOTONE_API_KEY", ""),
     },
     customChains: [
       {
@@ -3162,6 +3169,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://puppyscan.shib.io/api",
           browserURL: "https://puppyscan.shib.io",
+        },
+      },
+      {
+        network: "dotOne",
+        chainId: 505,
+        urls: {
+          apiURL: "https://dotscan.one//api",
+          browserURL: "https://dotscan.one",
         },
       },
     ],

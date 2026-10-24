@@ -758,6 +758,13 @@
     ]
   },
   {
+    "name": "DotOne Smart Chain",
+    "chainId": 505,
+    "urls": [
+      "https://dotscan.one/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
+    ]
+  },
+  {
     "name": "Sepolia",
     "chainId": 11155111,
     "urls": [
@@ -1478,13 +1485,6 @@
     "chainId": 157,
     "urls": [
       "https://puppyscan.shib.io/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
-    ]
-  },
-  {
-    "name": "DotOne Smart Chain",
-    "chainId": 505,
-    "urls": [
-      "https://dotscan.one/address/0xba5Ed099633D3B313e4D5F7bdc1305d3c28ba5Ed"
     ]
   }
 ]
