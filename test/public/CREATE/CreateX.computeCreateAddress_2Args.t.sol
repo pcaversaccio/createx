@@ -28,6 +28,8 @@ contract CreateX_ComputeCreateAddress_2Args_Public_Test is BaseTest {
         address deployer,
         uint64 nonce
     ) external whenTheNonceValueDoesNotExceed18446744073709551614(deployer, nonce) {
+        address expectedAddress = vm.computeCreateAddress(deployer, nonce);
+        vm.assume(expectedAddress.code.length == 0 && vm.getNonce(expectedAddress) == 0);
         vm.startPrank(deployer);
         address createAddressComputedOnChain = address(new CreateX());
         vm.stopPrank();
