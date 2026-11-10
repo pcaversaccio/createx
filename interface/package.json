@@ -42,7 +42,7 @@
   "devDependencies": {
     "@eslint/js": "9.39.5",
     "@next/eslint-plugin-next": "16.4.4",
-    "@tailwindcss/postcss": "4.3.3",
+    "@tailwindcss/postcss": "4.3.4",
     "@trivago/prettier-plugin-sort-imports": "6.0.2",
     "@types/node": "26.6.6",
     "@types/react": "19.3.0",
@@ -57,7 +57,7 @@
     "postcss": "8.5.32",
     "prettier": "3.9.10",
     "prettier-plugin-tailwindcss": "0.8.1",
-    "tailwindcss": "4.3.3",
+    "tailwindcss": "4.3.4",
     "typescript": "6.0.3",
     "typescript-eslint": "8.72.1"
   }
