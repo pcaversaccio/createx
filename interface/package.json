@@ -55,7 +55,7 @@
     "globals": "17.14.0",
     "next-seo": "7.3.0",
     "postcss": "8.5.32",
-    "prettier": "3.9.10",
+    "prettier": "3.10.1",
     "prettier-plugin-tailwindcss": "0.8.1",
     "tailwindcss": "4.3.5",
     "typescript": "6.0.3",
